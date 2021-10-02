@@ -42,6 +42,10 @@ function Dashboard(props) {
         <ListItem button key='Products'>
           <ListItemIcon><ShoppingBasketOutlined/></ListItemIcon> <ListItemText primary='Products'/>
         </ListItem></Link>
+        <Link to='/ingredients'>
+        <ListItem button key='Ingredients'>
+          <ListItemIcon><ShoppingBasketOutlined/></ListItemIcon> <ListItemText primary='Ingredients'/>
+        </ListItem></Link>
         <Link to='/supplier'>
         <ListItem button key='Supplier'>
           <ListItemIcon><ShoppingBasketOutlined/></ListItemIcon> <ListItemText primary='Supplier'/>
