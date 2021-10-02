@@ -1,10 +1,18 @@
-import React from 'react'
+import React from "react";
+import Sidebar from "../components/Sidebar";
+import Box from "@mui/material/Box";
+import { Toolbar } from "@mui/material";
 
-const Products = () =>  {
-    return (
-        <div>
-            
-        </div>
-    )
-}
-export default Products
+const Products = (props) => {
+  const { window } = props;
+  return (
+    <Box sx={{ display: "flex" }}>
+      <Sidebar window={window} name="Products" />
+      <Box>
+        <Toolbar />
+        <Box pt={1}>content here</Box>
+      </Box>
+    </Box>
+  );
+};
+export default Products;
