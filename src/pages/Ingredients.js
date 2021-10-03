@@ -1,5 +1,8 @@
 import {ButtonGroup } from "@mui/material";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Sidebar from "../components/Sidebar";
+import {Container, Toolbar } from "@mui/material";
 import { makeStyles} from "@material-ui/styles";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Provider } from 'react-redux';
@@ -9,11 +12,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddIngredientForm from "../components/forms/AddIngredientForm";
 import store from "../components/forms/store";
-import { borderRadius } from "@mui/system";
 import showResult from "../components/forms/showResult";
 
 const useStyles = makeStyles({
   root: {
+    letterSpacing: 0,
     "& .MuiDataGrid-root": {
       border: "2px solid gray",
     },
@@ -66,7 +69,8 @@ const useStyles = makeStyles({
 });
 
 
-const Ingredients = () => {
+const Ingredients = (props) => {
+  const {window} = props;
   const classes = useStyles();
 
   const columns = [
@@ -156,7 +160,12 @@ const Ingredients = () => {
   }
 
   return (
-    <div style={{ height: 500, width: "100%" }} className={classes.root}>
+    <Box sx={{ display: "flex" }} >
+      <Sidebar window={window} name="Products" />
+      <Container className={classes.root}>
+        <Toolbar />
+        <Container >
+        <div style={{ height: 420, width: "100%" }} className={classes.root}>
       <DataGrid
         checkboxSelection
         rows={rows}
@@ -218,6 +227,10 @@ const Ingredients = () => {
       </Provider>
       
     </div>
+        </Container>
+      </Container>
+    </Box>
+    
   );
 };
 

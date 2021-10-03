@@ -69,7 +69,7 @@ const Sidebar = ({ window, name }) => {
       <Toolbar />
       <Divider />
       <List className={classes.root}>
-        {["dashboard", "products", "ingredient", "supplier", "customer"].map(
+        {["dashboard", "products", "ingredients", "supplier", "customer"].map(
           (item, idx) => (
             <Link to={`/${item}`}>
               <ListItem button>
