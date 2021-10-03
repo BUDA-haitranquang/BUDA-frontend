@@ -1,22 +1,18 @@
-import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
+import React from "react";
+import Sidebar from "../components/Sidebar";
+import Box from "@mui/material/Box";
+import { Toolbar } from "@mui/material";
 
-const Products = () => {
-  const { data } = useDemoData({
-    dataSet: 'Commodity',
-    rowLength: 40,
-    maxColumns: 8,
-  });
-
+const Products = (props) => {
+  const { window } = props;
   return (
-    <div style={{ height: 500, width: '100%' }}>
-      <div style={{ display: 'flex', height: '100%' }}>
-        <div style={{ flexGrow: 1 }}>
-          <DataGrid {...data} />
-        </div>
-      </div>
-    </div>
+    <Box sx={{ display: "flex" }}>
+      <Sidebar window={window} name="Products" />
+      <Box>
+        <Toolbar />
+        <Box pt={1}>content here</Box>
+      </Box>
+    </Box>
   );
-}
-export default Products
+};
+export default Products;
