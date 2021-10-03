@@ -17,14 +17,17 @@ import { ShoppingBasketOutlined } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import InboxIcon from "@mui/icons-material/Inbox";
-import MailIcon from "@mui/icons-material/Mail";
+import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const useStyle = makeStyles({
   root: {
     "& a:link": {
       textDecoration: "none",
+      color: "black",
+    },
+    "& a:visited": {
       color: "black",
     },
   },
@@ -40,51 +43,46 @@ const Sidebar = ({ window, name }) => {
     window !== undefined ? () => window().document.body : undefined;
   const classes = useStyle();
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  const itemRender = (i) => {
+    switch (i) {
+      case 0:
+        return <DashboardIcon />;
+      case 1:
+        return <ShoppingBasketOutlined />;
+      case 2:
+        return <ShoppingBasketOutlined />;
+      case 3:
+        return <ShoppingCartIcon />;
+      case 4:
+        return <GroupsIcon />;
+      default:
+        break;
+    }
+  };
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List className={classes.root}>
-        <Link to="/">
-          <ListItem button key="Dashboard">
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>{" "}
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-        </Link>
-        <Link to="/products">
-          <ListItem button key="Products">
-            <ListItemIcon>
-              <ShoppingBasketOutlined />
-            </ListItemIcon>{" "}
-            <ListItemText primary="Products" />
-          </ListItem>
-        </Link>
-        <Link to="/supplier">
-          <ListItem button key="Supplier">
-            <ListItemIcon>
-              <ShoppingBasketOutlined />
-            </ListItemIcon>{" "}
-            <ListItemText primary="Supplier" />
-          </ListItem>
-        </Link>
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {["dashboard", "products", "ingredient", "supplier", "customer"].map(
+          (item, idx) => (
+            <Link to={`/${item}`}>
+              <ListItem button>
+                <ListItemIcon>{itemRender(idx)}</ListItemIcon>
+                <ListItemText primary={capitalizeFirstLetter(item)} />
+              </ListItem>
+            </Link>
+          )
+        )}
       </List>
     </div>
   );
 
-  console.log(name);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
