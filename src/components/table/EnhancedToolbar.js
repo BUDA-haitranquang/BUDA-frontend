@@ -1,10 +1,10 @@
 import React from "react";
-import { Toolbar, Typography, Tooltip, IconButton } from "@mui/material";
+import { Toolbar, Typography, Tooltip, IconButton, Box } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
-
-const EnhancedToolbar = ({ numSelected }) => {
+import AddIcon from "@mui/icons-material/Add";
+const EnhancedToolbar = ({ numSelected, handleOpen }) => {
   return (
     <Toolbar
       sx={{
@@ -46,11 +46,18 @@ const EnhancedToolbar = ({ numSelected }) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+        <Box display="flex" flexDirection="row">
+          <Tooltip title="Add Customer">
+            <IconButton onClick={handleOpen}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Filter list">
+            <IconButton>
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>
       )}
     </Toolbar>
   );
