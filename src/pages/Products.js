@@ -6,7 +6,7 @@ import { Toolbar } from "@mui/material";
 const Products = (props) => {
   const { window } = props;
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <Sidebar window={window} name="Products" />
       <Box>
         <Toolbar />

@@ -10,10 +10,17 @@ const Products = (props) => {
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Customer" />
-      <Box width="100%">
+
+      <Box
+        mt={5}
+        width="100%"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
         <Toolbar />
-        TableName
-        <Box display="flex" justifyContent="center">
+        <Box>{}</Box>
+        <Box width="80%">
           <CombinedTable />
         </Box>
       </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TableBody, TableRow, TableCell, Checkbox } from "@mui/material";
 import data from "../../assets/data";
 import { getComparator, stableSort } from "../../utils/tableUtils";
@@ -12,7 +12,6 @@ const EnhancedTableBody = ({
   setSelected,
 }) => {
   const handleClick = (e, name) => {
-    console.log(typeof selected);
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
     if (selectedIndex === -1) {
@@ -44,6 +43,7 @@ const EnhancedTableBody = ({
           const labelId = `enhanced-table-checkbox-${idx}`;
           return (
             <TableRow
+              sx={{ cursor: "pointer" }}
               hover
               onClick={(e) => handleClick(e, row.name)}
               role="checkbox"
@@ -64,7 +64,7 @@ const EnhancedTableBody = ({
                 {row.name}
               </TableCell>
 
-              <TableCell align="right">{row.phoneNumber}</TableCell>
+              <TableCell align="left">{row.phoneNumber}</TableCell>
               <TableCell align="left">{row.address}</TableCell>
             </TableRow>
           );
