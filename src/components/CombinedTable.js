@@ -2,18 +2,31 @@ import React, { useState } from "react";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 import EnhancedTableBody from "./table/EnhancedTableBody";
-import { Box, Paper, TableContainer, Table } from "@mui/material";
-import data from "../assets/data";
+import {
+  Box,
+  Paper,
+  TableContainer,
+  Table,
+  TablePagination,
+} from "@mui/material";
 import AddCustomerModal from "./modal/AddCustomerModal";
 
-const CombinedTable = () => {
+const CombinedTable = ({ data, headCells }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowPerPage, setRowPerPage] = useState(30);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isOpen, setIsOpen] = useState(false);
+  const displayData = data.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
+  const handlePageChange = (e, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(e.target.value);
+    setPage(0);
+  };
   const handleRequestSort = (e, props) => {
     const isAsc = orderBy === props && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -35,6 +48,7 @@ const CombinedTable = () => {
     }
     setSelected([]);
   };
+  console.log(displayData);
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
@@ -51,18 +65,29 @@ const CombinedTable = () => {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={data.length}
+              headCells={headCells}
             />
             <EnhancedTableBody
               order={order}
               orderBy={orderBy}
               selected={selected}
               page={page}
-              rowPerPage={rowPerPage}
+              rowPerPage={rowsPerPage}
               setSelected={setSelected}
+              data={displayData}
             />
             <AddCustomerModal isOpen={isOpen} handleClose={handleClose} />
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 20, 30]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+        />
       </Paper>
     </Box>
   );

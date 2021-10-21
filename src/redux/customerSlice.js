@@ -22,6 +22,7 @@ const customerSlice = createSlice({
     },
     fetchData: (state, action) => {
       state.customers = data;
+      console.log("fetch customers");
     },
   },
 });
