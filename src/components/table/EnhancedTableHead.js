@@ -9,33 +9,6 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 
-const headCells = [
-  {
-    id: "ID",
-    numeric: true,
-    disablePadding: false,
-    label: "ID",
-  },
-  {
-    id: "fullname",
-    numeric: false,
-    disablePadding: true,
-    label: "Fullname",
-  },
-  {
-    id: "phone",
-    numeric: false,
-    disablePadding: true,
-    label: "Phone",
-  },
-  {
-    id: "address",
-    numeric: false,
-    disablePadding: true,
-    label: "Address",
-  },
-];
-
 const EnhancedTableHead = ({
   onSelectAllClick,
   order,
@@ -43,6 +16,7 @@ const EnhancedTableHead = ({
   numSelected,
   rowCount,
   onRequestSort,
+  headCells,
 }) => {
   const createSortHandler = (props) => (event) => {
     onRequestSort(event, props);
