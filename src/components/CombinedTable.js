@@ -10,6 +10,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import AddCustomerModal from "./modal/AddCustomerModal";
+import AddProductModal from "./modal/AddProductModal";
 
 const CombinedTable = ({ data, headCells }) => {
   const [order, setOrder] = useState("asc");
@@ -76,7 +77,8 @@ const CombinedTable = ({ data, headCells }) => {
               setSelected={setSelected}
               data={displayData}
             />
-            <AddCustomerModal isOpen={isOpen} handleClose={handleClose} />
+            {/* <AddCustomerModal isOpen={isOpen} handleClose={handleClose} /> */}
+            <AddProductModal isOpen={isOpen} handleClose={handleClose}/>
           </Table>
         </TableContainer>
         <TablePagination

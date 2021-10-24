@@ -47,7 +47,7 @@ const EnhancedToolbar = ({ numSelected, handleOpen }) => {
         </Tooltip>
       ) : (
         <Box display="flex" flexDirection="row">
-          <Tooltip title="Add Customer">
+          <Tooltip title="Add">
             <IconButton onClick={handleOpen}>
               <AddIcon />
             </IconButton>
