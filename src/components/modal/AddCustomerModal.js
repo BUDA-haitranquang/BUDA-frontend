@@ -45,7 +45,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           label="Name"
           variant="outlined"
           value={name}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <TextField
           fullWidth
@@ -53,7 +53,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           label="Phone Number"
           variant="outlined"
           value={phoneNumber}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <TextField
           fullWidth

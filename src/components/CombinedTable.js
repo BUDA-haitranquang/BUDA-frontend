@@ -42,13 +42,14 @@ const CombinedTable = ({ data, headCells }) => {
 
   const handleSelectAllClick = (e) => {
     if (e.target.checked) {
-      const newSelecteds = data.map((n) => n.name);
+      const newSelecteds = displayData.map((n) => {
+        return n.name;
+      });
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
-  console.log(displayData);
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
