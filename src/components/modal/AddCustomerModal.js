@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Modal, TextField, Typography, IconButton } from "@mui/material";
+import { Box, Modal, TextField, Typography, IconButton, Button } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
@@ -45,7 +45,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           label="Name"
           variant="outlined"
           value={name}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <TextField
           fullWidth
@@ -53,7 +53,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           label="Phone Number"
           variant="outlined"
           value={phoneNumber}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <TextField
           fullWidth
@@ -63,6 +63,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
+        <Button variant="contained">Add Customer</Button>
       </Box>
     </Modal>
   );

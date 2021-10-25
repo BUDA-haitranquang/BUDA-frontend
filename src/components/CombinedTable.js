@@ -12,7 +12,7 @@ import {
 import AddCustomerModal from "./modal/AddCustomerModal";
 import AddProductModal from "./modal/AddProductModal";
 
-const CombinedTable = ({ data, headCells }) => {
+const CombinedTable = ({ data, headCells, Modal }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -78,7 +78,7 @@ const CombinedTable = ({ data, headCells }) => {
               data={displayData}
             />
             {/* <AddCustomerModal isOpen={isOpen} handleClose={handleClose} /> */}
-            <AddProductModal isOpen={isOpen} handleClose={handleClose}/>
+            <Modal isOpen={isOpen} handleClose={handleClose}/>
           </Table>
         </TableContainer>
         <TablePagination

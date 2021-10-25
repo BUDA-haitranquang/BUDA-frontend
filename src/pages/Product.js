@@ -5,6 +5,7 @@ import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../redux/productSlice";
+import AddProductModal from "../components/modal/AddProductModal";
 
 const headCells = [
   {
@@ -71,7 +72,7 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={products} headCells={headCells} />
+          <CombinedTable data={products} headCells={headCells} Modal={AddProductModal}/>
         </Box>
       </Box>
     </Box>
