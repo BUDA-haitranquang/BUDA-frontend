@@ -26,13 +26,18 @@ const useStyle = makeStyles({
     "& a:link": {
       textDecoration: "none",
       color: "black",
+      "&:hover":{
+        color: "grey",
+        fontStyle: "italic",
+        fontWeight: "600"
+      }
     },
     "& a:visited": {
       color: "black",
     },
   },
 });
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const Sidebar = ({ window, name }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -65,7 +70,7 @@ const Sidebar = ({ window, name }) => {
   };
 
   const drawer = (
-    <div>
+    <div style={{backgroundColor: "aliceblue", flexGrow: 1}}>
       <Toolbar />
       <Divider />
       <List className={classes.root}>
@@ -74,7 +79,7 @@ const Sidebar = ({ window, name }) => {
             <Link to={`/${item}`}>
               <ListItem button>
                 <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-                <ListItemText primary={capitalizeFirstLetter(item)} />
+                <ListItemText primary={capitalizeFirstLetter(item)}/>
               </ListItem>
             </Link>
           )

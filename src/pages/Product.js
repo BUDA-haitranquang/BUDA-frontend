@@ -63,7 +63,6 @@ const Product = (props) => {
     <Box sx={{display: "flex"}}>
       <Sidebar window={window} name="Product" />
       <Box
-        mt={3}
         width="100%"
         display="flex"
         flexDirection="column"

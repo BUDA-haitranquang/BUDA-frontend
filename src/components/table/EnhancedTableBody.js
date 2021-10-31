@@ -60,6 +60,7 @@ const EnhancedTableBody = ({
               <Link to={{
                 pathname: `product/${row.id}`, 
                 state: {data: row}}}
+                style={{textDecoration: "none", color: "blue"}}
               >
                 {row.name}
               </Link>

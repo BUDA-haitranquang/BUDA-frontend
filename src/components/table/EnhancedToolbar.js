@@ -32,12 +32,12 @@ const EnhancedToolbar = ({ numSelected, handleOpen }) => {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{ flex: "1 1 100%", fontWeight: "600", color: "#1c6cb3" }}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          Customer
+          DATA
         </Typography>
       )}
 
