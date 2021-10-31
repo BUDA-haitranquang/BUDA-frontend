@@ -6,17 +6,35 @@ import {
   Typography,
   IconButton,
   Button,
+  getTextFieldUtilityClass,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/productSlice";
 const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [amountLeft, setAmountLeft] = useState("");
-  const [cost, setCost] = useState("");
+  const [price, setPrice] = useState(0);
+  const [amountLeft, setAmountLeft] = useState(0);
+  const [cost, setCost] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
+
+  const isFormValid = () => {
+    const isValid = (name !== "") 
+                    && (!isNaN(price) && price >= 0)
+                    && (!isNaN(amountLeft) && amountLeft >= 0)
+                    && (!isNaN(cost) && cost >= 0);
+    return isValid;
+  }
+
+  const handleSubmit = (e) => {
+    if(isFormValid()) {
+      const arr = {name, price, amountLeft, cost, group, description};
+      dp(addProduct(arr));
+      handleClose();
+    }
+    else alert("Invalid input");
+  }
 
   const dp = useDispatch();
 
@@ -59,6 +77,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             </IconButton>
           </Box>
           <TextField
+            required
             fullWidth
             id="outlined-basic"
             label="Name"
@@ -66,29 +85,33 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <div style={{width: "100%", display: "flex", justifyContent: "space-between"}}>
+            <TextField
+              required
+              id="outlined-basic"
+              label="Price"
+              variant="outlined"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <TextField
+              required
+              id="outlined-basic"
+              label="Cost"
+              variant="outlined"
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+            />
+          </div>
+          
           <TextField
             fullWidth
-            id="outlined-basic"
-            label="Price"
-            variant="outlined"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-          <TextField
-            fullWidth
+            required
             id="outlined-basic"
             label="Amount Left"
             variant="outlined"
             value={amountLeft}
             onChange={(e) => setAmountLeft(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Cost"
-            variant="outlined"
-            value={cost}
-            onChange={(e) => setCost(e.target.value)}
           />
           <TextField
             fullWidth
@@ -101,17 +124,17 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Amount Left"
+            label="Description"
             variant="outlined"
+            multiline
+            rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
           <Button 
             variant="contained" 
             onClick={()=>{
-              const arr = {name, price, amountLeft, cost, group, description};
-              dp(addProduct(arr));
-              handleClose();
+              handleSubmit();
             }}>
             Add Product
           </Button>
@@ -121,4 +144,5 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
     </Modal>
   );
 };
+
 export default AddCustomerModal;
