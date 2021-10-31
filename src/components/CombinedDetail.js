@@ -28,7 +28,7 @@ function CombinedDetail(props) {
                     <MainImage source={images[selectedImage]}/>
                 </Grid>
                 <Grid item sm={7}>
-                    <Information/>
+                    <Information data={props.data}/>
                 </Grid>
             </Grid>
         </div>

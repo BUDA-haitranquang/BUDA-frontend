@@ -4,7 +4,9 @@ import { alpha } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import AddIcon from "@mui/icons-material/Add";
+import { useDispatch } from "react-redux";
 const EnhancedToolbar = ({ numSelected, handleOpen }) => {
+  const dp = useDispatch();
   return (
     <Toolbar
       sx={{
@@ -42,7 +44,7 @@ const EnhancedToolbar = ({ numSelected, handleOpen }) => {
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
-            <DeleteIcon />
+            <DeleteIcon/>
           </IconButton>
         </Tooltip>
       ) : (

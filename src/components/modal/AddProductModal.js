@@ -8,6 +8,8 @@ import {
   Button,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/productSlice";
 const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -15,6 +17,8 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [cost, setCost] = useState("");
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
+
+  const dp = useDispatch();
 
   return (
     <Modal
@@ -102,7 +106,15 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <Button variant="contained">Add Product</Button>
+          <Button 
+            variant="contained" 
+            onClick={()=>{
+              const arr = {name, price, amountLeft, cost, group, description};
+              dp(addProduct(arr));
+              handleClose();
+            }}>
+            Add Product
+          </Button>
         </Box>
         
       </div>

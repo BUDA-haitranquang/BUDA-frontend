@@ -8,7 +8,7 @@ for (let i = 0; i < 100; i++) {
     price: fakerStatic.commerce.price(),
     amount: fakerStatic.datatype.number(),
     cost: fakerStatic.commerce.price(),
-    group: fakerStatic.finance.transactionType(),
+    category: fakerStatic.finance.transactionType(),
     description: fakerStatic.commerce.productDescription(),
   });
 }

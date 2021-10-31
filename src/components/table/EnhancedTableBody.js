@@ -57,7 +57,12 @@ const EnhancedTableBody = ({
             </TableCell>
             <TableCell align="right">{row.id}</TableCell>
             <TableCell component="th" id={labelId} scope="row" padding="none">
-              <Link to={`product/${row.id}`}>{row.name}</Link>
+              <Link to={{
+                pathname: `product/${row.id}`, 
+                state: {data: row}}}
+              >
+                {row.name}
+              </Link>
             </TableCell>
 
             <TableCell align="right">{row.price}</TableCell>

@@ -6,13 +6,14 @@ import CombinedDetail from "../components/CombinedDetail";
 
 const ProductDetail = (props) => {
   const { window } = props;
+  const {data} = props.location.state;
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Product Detail" />
       <Box>
         <Toolbar />
         <Box pt={1}>
-            <CombinedDetail/>
+            <CombinedDetail data={data}/>
         </Box>
       </Box>
     </Box>
