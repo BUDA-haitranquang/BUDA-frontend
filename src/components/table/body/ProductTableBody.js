@@ -15,15 +15,6 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const useStyle = makeStyles({
     root: {
-      "& a:link": {
-        textDecoration: "none",
-        color: "black",
-        "&:hover":{
-          color: "grey",
-          fontStyle: "italic",
-          fontWeight: "600"
-        }
-      },
       "& MuiTableCell-root":{
           padding: 0
       }
@@ -85,7 +76,7 @@ const ProductTableBody = ({
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </TableCell>
-              <TableCell align="right">{row.id}</TableCell>
+              {/* <TableCell align="right">{row.id}</TableCell> */}
               <TableCell component="th" id={labelId} scope="row" padding="none">
                 <Link
                   to={{

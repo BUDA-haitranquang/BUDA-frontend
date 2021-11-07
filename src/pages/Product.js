@@ -9,12 +9,12 @@ import AddProductModal from "../components/modal/AddProductModal";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 
 const headCells = [
-  {
-    id: "ID",
-    numeric: true,
-    disablePadding: false,
-    label: "ID",
-  },
+  // {
+  //   id: "ID",
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: "ID",
+  // },
   {
     id: "name",
     numeric: false,
@@ -62,6 +62,7 @@ const Product = (props) => {
         display="flex"
         flexDirection="column"
         alignItems="center"
+        justifyContent="center"
       >
         <Toolbar />
         <Box>{}</Box>

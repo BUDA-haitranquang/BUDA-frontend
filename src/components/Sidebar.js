@@ -20,6 +20,11 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import StoreIcon from '@mui/icons-material/Store';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import PaymentIcon from '@mui/icons-material/Payment';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import AccountMenu from "./AccountMenu";
 
 const useStyle = makeStyles({
   root: {
@@ -59,11 +64,16 @@ const Sidebar = ({ window, name }) => {
       case 1:
         return <ShoppingBasketOutlined />;
       case 2:
-        return <ShoppingBasketOutlined />;
+        return <StoreIcon />;
       case 3:
         return <ShoppingCartIcon />;
       case 4:
         return <GroupsIcon />;
+      case 5:
+        return <AssignmentIndIcon />;
+      case 6:
+        return <MonetizationOnIcon />;
+      
       default:
         break;
     }
@@ -74,7 +84,7 @@ const Sidebar = ({ window, name }) => {
       <Toolbar />
       <Divider />
       <List className={classes.root}>
-        {["dashboard", "product", "ingredient", "supplier", "customer"].map(
+        {["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost"].map(
           (item, idx) => (
             <Link to={`/${item}`}>
               <ListItem button>
@@ -96,21 +106,23 @@ const Sidebar = ({ window, name }) => {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          // ml: 0
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{justifyContent: "space-between"}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2}}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" style={{textTranform: "uppercase"}}>
             {name}
           </Typography>
+          <AccountMenu/>
         </Toolbar>
       </AppBar>
       <Box
@@ -128,7 +140,7 @@ const Sidebar = ({ window, name }) => {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block"},
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -140,7 +152,7 @@ const Sidebar = ({ window, name }) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
