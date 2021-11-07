@@ -6,6 +6,7 @@ import CombinedTable from "../components/CombinedTable";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../redux/productSlice";
 import AddProductModal from "../components/modal/AddProductModal";
+import ProductTableBody from "../components/table/body/ProductTableBody";
 
 const headCells = [
   {
@@ -44,12 +45,6 @@ const headCells = [
     disablePadding: true,
     label: "Group",
   },
-  {
-    id: "description",
-    numeric: false,
-    disablePadding: true,
-    label: "Description",
-  },
 ];
 
 const Product = (props) => {
@@ -71,7 +66,7 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={products} headCells={headCells} Modal={AddProductModal}/>
+          <CombinedTable data={products} headCells={headCells} Modal={AddProductModal} Body={ProductTableBody}/>
         </Box>
       </Box>
     </Box>

@@ -7,7 +7,7 @@ import EnhancedTableBody from "./table/EnhancedTableBody";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 
-const CombinedTable = ({ data, headCells, Modal }) => {
+const CombinedTable = ({ data, headCells, Modal, Body }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -63,7 +63,7 @@ const CombinedTable = ({ data, headCells, Modal }) => {
               rowCount={data.length}
               headCells={headCells}
             />
-            <EnhancedTableBody
+            <Body
               order={order}
               orderBy={orderBy}
               selected={selected}

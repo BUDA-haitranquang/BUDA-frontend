@@ -88,6 +88,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           <div style={{width: "100%", display: "flex", justifyContent: "space-between"}}>
             <TextField
               required
+              type="number"
               id="outlined-basic"
               label="Price"
               variant="outlined"
@@ -96,6 +97,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             />
             <TextField
               required
+              type="number"
               id="outlined-basic"
               label="Cost"
               variant="outlined"
