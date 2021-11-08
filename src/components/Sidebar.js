@@ -106,7 +106,6 @@ const Sidebar = ({ window, name }) => {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          // ml: 0
         }}
       >
         <Toolbar sx={{justifyContent: "space-between"}}>
@@ -115,7 +114,7 @@ const Sidebar = ({ window, name }) => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2}}
+            sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -140,7 +139,7 @@ const Sidebar = ({ window, name }) => {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block"},
+            display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -152,7 +151,7 @@ const Sidebar = ({ window, name }) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { sm: "block" },
+            display: {xs: "none", sm: "block"},
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

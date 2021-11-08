@@ -109,6 +109,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             required
+            type="number"
             id="outlined-basic"
             label="Amount Left"
             variant="outlined"
