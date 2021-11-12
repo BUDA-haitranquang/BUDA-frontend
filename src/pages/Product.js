@@ -46,14 +46,42 @@ const headCells = [
     label: "Group",
   },
 ];
-
+const data =[{
+  id:1,
+  name: 'huyanh',
+  price:"",
+  left:"",
+  cost:"" 
+},
+{
+  id:2,
+  name: 'huanh',
+  price:"",
+  left:"",
+  cost:"" 
+},
+{
+  id:3,
+  name: 'huyanh',
+  price:"",
+  left:"",
+  cost:"" 
+},
+{
+  id:4,
+  name: 'yanh',
+  price:"",
+  left:"",
+  cost:"" 
+},
+]
 const Product = (props) => {
   const { window } = props;
-  const products = useSelector((state) => state.product.products);
+  const products = data;//useSelector((state) => state.product.products);
   const dp = useDispatch();
-  useEffect(() => {
-    dp(fetchData());
-  }, []);
+  // useEffect(() => {
+  //   dp(fetchData());
+  // }, []);
   return (
     <Box sx={{display: "flex"}}>
       <Sidebar window={window} name="Product" />

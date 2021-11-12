@@ -1,9 +1,10 @@
+//import { SettingsOverscanOutlined } from "@mui/icons-material";
 import {
   Box,
   Paper, Table, TableContainer, TablePagination
 } from "@mui/material";
-import React, { useState } from "react";
-import EnhancedTableBody from "./table/EnhancedTableBody";
+import React, { useState,useEffect } from "react";
+//import EnhancedTableBody from "./table/EnhancedTableBody";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 
@@ -14,7 +15,10 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isOpen, setIsOpen] = useState(false);
-  const displayData = data.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
+  const [display,setDisplay]  = useState(data);
+  const [search,setSearch] = useState("");
+  const displayData = display.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
+
   const handlePageChange = (e, newPage) => {
     setPage(newPage);
   };
@@ -44,14 +48,19 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
     }
     setSelected([]);
   };
-  console.log(displayData);
-  return (
+
+  useEffect((()=>{
+    !search? setDisplay(data) : setDisplay(data.filter( item => item.name.toLowerCase()===search.toLowerCase()))
+  }),[search])
+
+   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
         <TableContainer>
           <EnhancedToolbar
             numSelected={selected.length}
             handleOpen={handleOpen}
+            handleSearch={(val)=>setSearch(val)}
           />
           <Table sx={{ minWidth: 1000 }}>
             <EnhancedTableHead

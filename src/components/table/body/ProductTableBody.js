@@ -51,7 +51,7 @@ const ProductTableBody = ({
   const classes = useStyle();
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  console.log(data);
+  // console.log(data);
   return (
     <TableBody className={classes.root}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
