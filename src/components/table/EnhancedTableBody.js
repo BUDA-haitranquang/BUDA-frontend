@@ -1,6 +1,7 @@
 import React from "react";
 import { TableBody, TableRow, TableCell, Checkbox } from "@mui/material";
 import { getComparator, stableSort } from "../../utils/tableUtils";
+import { Link } from "react-router-dom";
 
 const EnhancedTableBody = ({
   order,
@@ -56,11 +57,20 @@ const EnhancedTableBody = ({
             </TableCell>
             <TableCell align="right">{row.id}</TableCell>
             <TableCell component="th" id={labelId} scope="row" padding="none">
-              {row.name}
+              <Link to={{
+                pathname: `product/${row.id}`, 
+                state: {data: row}}}
+                style={{textDecoration: "none", color: "blue"}}
+              >
+                {row.name}
+              </Link>
             </TableCell>
 
-            <TableCell align="left">{row.phoneNumber}</TableCell>
-            <TableCell align="left">{row.address}</TableCell>
+            <TableCell align="right" sx = {{padding: 0}}>{row.price}</TableCell>
+            <TableCell align="right">{row.amount}</TableCell>
+            <TableCell align="right">{row.cost}</TableCell>
+            <TableCell align="left">{row.group}</TableCell>
+            <TableCell align="left">{row.description}</TableCell>
           </TableRow>
         );
       })}

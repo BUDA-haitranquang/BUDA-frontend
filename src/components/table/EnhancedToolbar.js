@@ -4,7 +4,9 @@ import { alpha } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import AddIcon from "@mui/icons-material/Add";
+import { useDispatch } from "react-redux";
 const EnhancedToolbar = ({ numSelected, handleOpen }) => {
+  const dp = useDispatch();
   return (
     <Toolbar
       sx={{
@@ -30,24 +32,24 @@ const EnhancedToolbar = ({ numSelected, handleOpen }) => {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{ flex: "1 1 100%", fontWeight: "600", color: "#1c6cb3" }}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          Customer
+          DATA
         </Typography>
       )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
-            <DeleteIcon />
+            <DeleteIcon/>
           </IconButton>
         </Tooltip>
       ) : (
         <Box display="flex" flexDirection="row">
-          <Tooltip title="Add Customer">
+          <Tooltip title="Add">
             <IconButton onClick={handleOpen}>
               <AddIcon />
             </IconButton>

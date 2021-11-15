@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CombinedTable from "../components/CombinedTable";
 import { Toolbar } from "@mui/material";
 import { fetchData } from "../redux/customerSlice";
+import AddCustomerModal from "../components/modal/AddCustomerModal";
 
 const headCells = [
   {
@@ -56,7 +57,7 @@ const Products = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box width="80%">
-          <CombinedTable data={customers} headCells={headCells} />
+          <CombinedTable data={customers} headCells={headCells} Modal={AddCustomerModal}/>
         </Box>
       </Box>
     </Box>

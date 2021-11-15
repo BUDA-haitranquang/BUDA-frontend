@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import EnhancedTableHead from "./table/EnhancedTableHead";
-import EnhancedToolbar from "./table/EnhancedToolbar";
-import EnhancedTableBody from "./table/EnhancedTableBody";
 import {
   Box,
-  Paper,
-  TableContainer,
-  Table,
-  TablePagination,
+  Paper, Table, TableContainer, TablePagination
 } from "@mui/material";
-import AddCustomerModal from "./modal/AddCustomerModal";
+import React, { useState } from "react";
+import EnhancedTableBody from "./table/EnhancedTableBody";
+import EnhancedTableHead from "./table/EnhancedTableHead";
+import EnhancedToolbar from "./table/EnhancedToolbar";
 
-const CombinedTable = ({ data, headCells }) => {
+const CombinedTable = ({ data, headCells, Modal, Body }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -68,7 +64,7 @@ const CombinedTable = ({ data, headCells }) => {
               rowCount={data.length}
               headCells={headCells}
             />
-            <EnhancedTableBody
+            <Body
               order={order}
               orderBy={orderBy}
               selected={selected}
@@ -77,7 +73,8 @@ const CombinedTable = ({ data, headCells }) => {
               setSelected={setSelected}
               data={displayData}
             />
-            <AddCustomerModal isOpen={isOpen} handleClose={handleClose} />
+            {/* <AddCustomerModal isOpen={isOpen} handleClose={handleClose} /> */}
+            <Modal isOpen={isOpen} handleClose={handleClose}/>
           </Table>
         </TableContainer>
         <TablePagination
