@@ -15,7 +15,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const useStyle = makeStyles({
     root: {
-      "& MuiTableCell-root":{
+      "& .MuiTableCell-root":{
           padding: 0
       }
     },

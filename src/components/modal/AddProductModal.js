@@ -94,6 +94,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
               variant="outlined"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              style={{width: "48%"}}
             />
             <TextField
               required
@@ -103,6 +104,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
               variant="outlined"
               value={cost}
               onChange={(e) => setCost(e.target.value)}
+              style={{width: "48%"}}
             />
           </div>
           

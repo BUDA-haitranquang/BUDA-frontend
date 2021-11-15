@@ -66,7 +66,7 @@ const EnhancedTableBody = ({
               </Link>
             </TableCell>
 
-            <TableCell align="right">{row.price}</TableCell>
+            <TableCell align="right" sx = {{padding: 0}}>{row.price}</TableCell>
             <TableCell align="right">{row.amount}</TableCell>
             <TableCell align="right">{row.cost}</TableCell>
             <TableCell align="left">{row.group}</TableCell>

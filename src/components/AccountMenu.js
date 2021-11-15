@@ -19,14 +19,15 @@ export default function AccountMenu() {
     <div>
       <Button
         id="basic-button"
+        variant="text"
         aria-controls="basic-menu"
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        style={{backgroundColor: "white"}}
+        style={{color: "white"}}
       >
         <AccountCircleIcon sx={{paddingRight: "4px", fontSize: "2rem"}} />
-        Account
+        Username
       </Button>
       <Menu
         id="basic-menu"
