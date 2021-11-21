@@ -50,6 +50,7 @@ const headCells = [
 const Product = (props) => {
   const { window } = props;
   const products = useSelector((state) => state.product.products);
+  if(products) console.log(products);
   const dp = useDispatch();
   useEffect(() => {
     dp(fetchData());
