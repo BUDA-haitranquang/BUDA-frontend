@@ -6,19 +6,19 @@ import CombinedTable from "../components/CombinedTable";
 import { Toolbar } from "@mui/material";
 import { fetchData } from "../redux/customerSlice";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
-
+import CustomerTableBody from '../components/table/body/CustomerTableBody';
 const headCells = [
+  // {
+  //   id: "ID",
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: "#",
+  // },
   {
-    id: "ID",
-    numeric: true,
-    disablePadding: false,
-    label: "#",
-  },
-  {
-    id: "fullname",
+    id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Fullname",
+    label: "Name",
   },
   {
     id: "phone",
@@ -32,35 +32,50 @@ const headCells = [
     disablePadding: true,
     label: "Address",
   },
+  {
+    id: "email",
+    numeric: false,
+    disablePadding: true,
+    label: "Email",
+  },
 ];
 
-const Products = (props) => {
+const Customer = (props) => {
   const { window } = props;
-  const customers = useSelector((state) => state.customer.customers);
-  const dp = useDispatch();
-  useEffect(() => {
-    dp(fetchData());
-    console.log(customers);
-  }, []);
+  const customers = [
+    {
+      name:'hanh',
+      phone:'3490239',
+      address:'daoisda',
+      email:'asdhas',
+    }
+  ];
+  // const customers = useSelector((state) => state.customer.customers);
+  // const dp = useDispatch();
+  // useEffect(() => {
+  //   dp(fetchData());
+  //   console.log(customers);
+  // }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Customer" />
 
       <Box
-        mt={5}
+        //mt={5}
         width="100%"
         display="flex"
         flexDirection="column"
         alignItems="center"
+        justifyContent = 'center'
       >
         <Toolbar />
         <Box>{}</Box>
-        <Box width="80%">
-          <CombinedTable data={customers} headCells={headCells} Modal={AddCustomerModal}/>
+        <Box >
+          <CombinedTable data={customers} headCells={headCells} Modal={AddCustomerModal} Body={CustomerTableBody}/>
         </Box>
       </Box>
     </Box>
   );
 };
-export default Products;
+export default Customer;

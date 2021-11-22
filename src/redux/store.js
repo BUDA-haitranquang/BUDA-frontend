@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import customerReducer from "./customerSlice";
 import productReducer from "./productSlice";
+import ingredientReducer from './ingredientSlice';
+import supplierReducer from './supplierSlice';
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
@@ -15,6 +17,8 @@ const persistConfig = {
 const reducer = combineReducers({
   customer: customerReducer,
   product: productReducer,
+  ingredient: ingredientReducer,
+  supplier:supplierReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

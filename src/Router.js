@@ -14,6 +14,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { setContext } from '@apollo/client/link/context';
+import Ingredient from './pages/Ingredient';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail";
 import GetProducts from "./api/GetProducts";

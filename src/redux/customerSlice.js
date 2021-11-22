@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import customerData from "../assets/customerData";
+//import customerData from "../assets/customerData";
 const customerSlice = createSlice({
   name: "customer",
   initialState: {
@@ -21,8 +21,7 @@ const customerSlice = createSlice({
       state.customers.push(action.payload);
     },
     fetchData: (state, action) => {
-      state.customers = customerData;
-      console.log("fetch customers");
+      // state.customers = customerData;
     },
   },
 });

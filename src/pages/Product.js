@@ -52,14 +52,10 @@ const Product = (props) => {
   const [products, setProducts] = useState([]);
   const {error, loading, data} = useQuery(LOAD_PRODUCTS);
 
-  setTimeout(()=>{
-    console.log(data);
-  }, 2000)
-
   useEffect(() => {
     console.log(data);
     if(data){
-      console.log("THERE");
+      console.log("Hello");
       setProducts(data.productsByUser);
     } 
   }, [data]);
