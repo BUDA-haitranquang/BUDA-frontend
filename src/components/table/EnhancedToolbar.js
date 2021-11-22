@@ -1,20 +1,23 @@
 import React from "react";
-import {InputBase, Toolbar, Typography, Tooltip, IconButton, Box } from "@mui/material";
+import {OutlinedInput,InputAdornment, Toolbar, Typography, Tooltip, IconButton, Box,FormControl, InputLabel } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from "@mui/icons-material/FilterList";
 import AddIcon from "@mui/icons-material/Add";
-import { useDispatch } from "react-redux";
-import {useRef,useState} from'react';
-const EnhancedToolbar = ({ numSelected, handleOpen,handleSearch }) => {
-  //const dp = useDispatch();
-  const search = useRef();
+//import { useDispatch } from "react-redux";
+import {useState} from'react';
+import  { makeStyles } from '@mui/styles';
+import SplitButton from './SplitButton';
+import FilterPopup from './FilterPopup';
+
+const EnhancedToolbar = ({headCells, numSelected, handleOpen,handleSearch,searchBy }) => {
   const [value,setValue]=useState("");
   return (
     <Toolbar
       sx={{
         pl: { sm: 2 },
+        paddingTop:'10px',  
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
@@ -36,7 +39,7 @@ const EnhancedToolbar = ({ numSelected, handleOpen,handleSearch }) => {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 100%", fontWeight: "600", color: "#1c6cb3" }}
+          sx={{ flex: "1 1 60%", fontWeight: "600", color: "#1c6cb3" }}
           variant="h6"
           id="tableTitle"
           component="div"
@@ -46,13 +49,29 @@ const EnhancedToolbar = ({ numSelected, handleOpen,handleSearch }) => {
       )}
 
       {numSelected === 0 && 
-      <Box  sx={{display:'flex',border:'none',borderColour:'blue'}} >
-        <InputBase placeholder="Search " value={value} onChange={(e)=>setValue(e.target.value)} />
-        <IconButton type ='submit' onClick={(e) => handleSearch(value)} >
+      <FormControl  variant="outlined">
+        <InputLabel>Search</InputLabel>
+        <OutlinedInput  label= 'Search'  value={value} onChange={(e)=>setValue(e.target.value)}
+          endAdornment ={
+            <InputAdornment position = 'end'>
+            <IconButton type ='submit' onClick={(e) => handleSearch(value)} >
             <SearchIcon/>
-        </IconButton>
-      </Box>
+         </IconButton> 
+            </InputAdornment>
+          }
+          startAdornment={
+            <InputAdornment position = 'start'>
+              <SplitButton options = {headCells} searchBy={(val)=>searchBy(val)}/>
+            </InputAdornment>
+          }
+          onKeyPress={(e)=>{
+            if (e.key === 'Enter') handleSearch(value);
+          }}
+        />
+      </FormControl>
       }
+
+      {/* {numSelected ===0 && <SplitButton options = {headCells} searchBy={(val)=>searchBy(val)}/>} */}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -62,16 +81,15 @@ const EnhancedToolbar = ({ numSelected, handleOpen,handleSearch }) => {
         </Tooltip>
       ) : (
         <Box display="flex" flexDirection="row">
+          <Tooltip title="Filter list">
+           <FilterPopup list ={headCells}/>
+          </Tooltip>
           <Tooltip title="Add">
             <IconButton onClick={handleOpen}>
               <AddIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Filter list">
-            <IconButton>
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+  
         </Box>
       )}
     </Toolbar>

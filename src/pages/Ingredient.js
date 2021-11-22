@@ -4,9 +4,9 @@ import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../redux/productSlice";
-import AddProductModal from "../components/modal/AddProductModal";
-import ProductTableBody from "../components/table/body/ProductTableBody";
+import { fetchData } from "../redux/ingredientSlice";
+import AddIngredientModal from "../components/modal/AddIngredientModal";
+import IngredientTableBody from "../components/table/body/IngredientTableBody";
 
 const headCells = [
   // {
@@ -78,10 +78,11 @@ const data =[{
   group:"" 
 },
 ]
-const Product = (props) => {
+const Ingredient = (props) => {
   const { window } = props;
-  const products = data;//useSelector((state) => state.product.products);
-  const dp = useDispatch();
+  const ingredient = data;
+  //const ingredient = useSelector((state) => state.ingredient.ingredients;
+  //const dp = useDispatch();
   // useEffect(() => {
   //   dp(fetchData());
   // }, []);
@@ -98,10 +99,10 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={products} headCells={headCells} Modal={AddProductModal} Body={ProductTableBody}/>
+          <CombinedTable data={ingredient} headCells={headCells} Modal={AddIngredientModal} Body={IngredientTableBody}/>
         </Box>
       </Box>
     </Box>
   );
 };
-export default Product;
+export default Ingredient;

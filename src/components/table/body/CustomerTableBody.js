@@ -21,7 +21,7 @@ const useStyle = makeStyles({
     },
   });
 
-const IngredientTableBody = ({
+const CustomerTableBody = ({
   order,
   orderBy,
   selected,
@@ -78,21 +78,13 @@ const IngredientTableBody = ({
               </TableCell>
               {/* <TableCell align="right">{row.id}</TableCell> */}
               <TableCell component="th" id={labelId} scope="row" padding="none">
-                <Link
-                  to={{
-                    pathname: `product/${row.id}`,
-                    state: { data: row },
-                  }}
-                  style={{ textDecoration: "none", color: "blue" }}
-                >
-                  {row.name}
-                </Link>
+                {row.name}
               </TableCell>
 
-              <TableCell align="right">{row.price}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-              <TableCell align="right">{row.cost}</TableCell>
-              <TableCell align="left">{row.group}</TableCell>
+              <TableCell align="left">{row.address}</TableCell>
+              <TableCell align="left">{row.phone}</TableCell>
+              <TableCell align="left">{row.email}</TableCell>
+   
             </TableRow>
           </CustomWidthTooltip>
         );
@@ -101,4 +93,4 @@ const IngredientTableBody = ({
   );
 };
 
-export default IngredientTableBody;
+export default CustomerTableBody;
