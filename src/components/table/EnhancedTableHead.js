@@ -38,6 +38,7 @@ const EnhancedTableHead = ({
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
+            sx={{fontWeight: "600"}}
           >
             <TableSortLabel
               active={orderBy === headCell.id}

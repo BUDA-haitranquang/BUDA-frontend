@@ -47,7 +47,7 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
-        <TableContainer sx={{paddingLeft: "10px"}}>
+        <TableContainer sx={{paddingRight: "10px"}}>
           <EnhancedToolbar
             numSelected={selected.length}
             handleOpen={handleOpen}

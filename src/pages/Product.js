@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData, setProduct } from "../redux/productSlice";
 import AddProductModal from "../components/modal/AddProductModal";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { useQuery } from "@apollo/client";
@@ -51,14 +49,19 @@ const headCells = [
 
 const Product = (props) => {
   const { window } = props;
-  const products = useSelector((state) => state.product.products);
-  const dp = useDispatch();
+  const [products, setProducts] = useState([]);
   const {error, loading, data} = useQuery(LOAD_PRODUCTS);
 
+  setTimeout(()=>{
+    console.log(data);
+  }, 2000)
 
   useEffect(() => {
     console.log(data);
-    if(data) dp(setProduct(data.productsByUser));
+    if(data){
+      console.log("THERE");
+      setProducts(data.productsByUser);
+    } 
   }, [data]);
 
   return (
