@@ -77,7 +77,7 @@ const IngredientTableBody = ({
                 />
               </TableCell>
               {/* <TableCell align="right">{row.id}</TableCell> */}
-              <TableCell component="th" id={labelId} scope="row" padding="none">
+              <TableCell component="th" id={labelId} scope="row" >
                 <Link
                   to={{
                     pathname: `product/${row.id}`,

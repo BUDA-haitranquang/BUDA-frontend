@@ -5,7 +5,7 @@ import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../redux/supplierSlice";
-import AddSupplierModal from '../components/modal/AddProductModal';
+import AddSupplierModal from '../components/modal/AddSupplierModal';
 import SupplierTableBody from "../components/table/body/SupplierTableBody"; 
 const headCells = [
   // {

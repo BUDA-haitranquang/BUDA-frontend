@@ -49,33 +49,35 @@ const headCells = [
 const data =[{
   id:1,
   name: 'huyanh',
-  price:"",
-  left:"",
-  cost:"" ,
-  group:""
+  price:"100",
+  amount:'2840',
+  left:"100",
+  cost:"100" ,
+  group:"ádhfo8asfasofs"
 },
 {
   id:2,
   name: 'huanh',
-  price:"",
-  left:"",
-  cost:"" ,
-  group:"",
+  price:"100",
+  amount:'1204',
+  left:"1023",
+  cost:"1923" ,
+  group:"ádhoisd",
 },
 {
   id:3,
   name: 'huyanh',
-  price:"",
-  left:"",
-  group:"" ,
+  price:"1940",
+  left:"1023",
+  group:"ádhioasd" ,
   
 },
 {
   id:4,
   name: 'yanh',
-  price:"",
-  left:"",
-  group:"" 
+  price:"1230",
+  left:"4230",
+  group:"ádiaspd", 
 },
 ]
 const Ingredient = (props) => {
@@ -88,7 +90,7 @@ const Ingredient = (props) => {
   // }, []);
   return (
     <Box sx={{display: "flex"}}>
-      <Sidebar window={window} name="Product" />
+      <Sidebar window={window} name="Ingredient" />
       <Box
         width="100%"
         display="flex"
