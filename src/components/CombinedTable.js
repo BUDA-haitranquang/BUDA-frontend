@@ -44,11 +44,10 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
     }
     setSelected([]);
   };
-  console.log(displayData);
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
-        <TableContainer>
+        <TableContainer sx={{paddingLeft: "10px"}}>
           <EnhancedToolbar
             numSelected={selected.length}
             handleOpen={handleOpen}

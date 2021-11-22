@@ -51,7 +51,7 @@ const ProductTableBody = ({
   const classes = useStyle();
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  console.log(data);
+
   return (
     <TableBody className={classes.root}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
@@ -89,10 +89,10 @@ const ProductTableBody = ({
                 </Link>
               </TableCell>
 
-              <TableCell align="right">{row.price}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-              <TableCell align="right">{row.cost}</TableCell>
-              <TableCell align="left">{row.group}</TableCell>
+              <TableCell align="right">{row.sellingPrice}</TableCell>
+              <TableCell align="right">{row.amountLeft}</TableCell>
+              <TableCell align="right">{row.alertAmount}</TableCell>
+              <TableCell align="right">{row.costPerUnit}</TableCell>
             </TableRow>
           </CustomWidthTooltip>
         );

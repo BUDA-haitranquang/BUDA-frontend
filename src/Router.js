@@ -51,7 +51,7 @@ const client = new ApolloClient({
 const AppRouter = () => {
   return (
     <ApolloProvider client={client}>
-      {/* <Router>
+      <Router>
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/product" component={Product} />
@@ -62,8 +62,8 @@ const AppRouter = () => {
           <Route exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />
         </Switch>
-      </Router> */}
-      <GetProducts />
+      </Router>
+      {/* <GetProducts /> */}
     </ApolloProvider>
   );
 };
