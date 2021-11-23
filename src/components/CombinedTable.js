@@ -51,8 +51,9 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   };
 
   useEffect(()=>{
-    !search? setDisplay(data) : setDisplay(data.filter( item => item[searchBy].toLowerCase().includes(search.toLowerCase())))
-  },[search,searchBy])
+    !search? setDisplay(data) : setDisplay(data.filter( item => item[searchBy].toLowerCase().includes(search.toLowerCase())));
+    setDisplay(data)
+  },[search,searchBy, data])
 
    return (
     <Box sx={{ width: "100%" }}>

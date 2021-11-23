@@ -6,7 +6,7 @@ import CombinedTable from "../components/CombinedTable";
 import AddProductModal from "../components/modal/AddProductModal";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { useQuery } from "@apollo/client";
-import { LOAD_PRODUCTS } from "../graphQl/queries";
+import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 
 const headCells = [
   // {
@@ -50,18 +50,26 @@ const headCells = [
 const Product = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
-  const {error, loading, data} = useQuery(LOAD_PRODUCTS);
+  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
 
   useEffect(() => {
-    console.log(data);
+    // async function fetchData() {
+    //   console.log(data);
+    //   if (data) {
+    //     const tmp = [...products];
+    //     await tmp.push(data.productsByUser);
+    //     await setProducts(tmp);
+    //   }
+    // }
+    // fetchData();
+
     if(data){
-      console.log("Hello");
       setProducts(data.productsByUser);
-    } 
+    }
   }, [data]);
 
   return (
-    <Box sx={{display: "flex"}}>
+    <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Product" />
       <Box
         width="100%"
@@ -73,7 +81,13 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={products} headCells={headCells} Modal={AddProductModal} Body={ProductTableBody}/>
+          {console.log(products)}
+          <CombinedTable
+            data={products}
+            headCells={headCells}
+            Modal={AddProductModal}
+            Body={ProductTableBody}
+          />
         </Box>
       </Box>
     </Box>
