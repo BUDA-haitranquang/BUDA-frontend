@@ -10,6 +10,9 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/productSlice";
+import { useMutation } from "@apollo/client";
+import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
+
 const AddProductModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -17,6 +20,20 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [cost, setCost] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
+
+  
+  const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
+
+  const addProduct = () => {
+    newProduct({
+      variables:{
+        name: name,
+        description: description,
+        amountLeft: amountLeft,
+        sellingPrice: price
+      }
+    });
+  }
 
   const isFormValid = () => {
     const isValid = (name !== "") 
@@ -29,7 +46,8 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const handleSubmit = () => {
     if(isFormValid()) {
       const arr = {name, price, amountLeft, cost, group, description};
-      dp(addProduct(arr));
+      // dp(addProduct(arr));
+      addProduct();
       handleClose();
     }
     else alert("Invalid input");
