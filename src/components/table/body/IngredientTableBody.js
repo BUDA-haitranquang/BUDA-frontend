@@ -90,9 +90,9 @@ const IngredientTableBody = ({
               </TableCell>
 
               <TableCell align="right">{row.price}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-              <TableCell align="right">{row.cost}</TableCell>
-              <TableCell align="left">{row.group}</TableCell>
+              <TableCell align="right">{row.amountLeft}</TableCell>
+              <TableCell align="right">{row.alertAmountLeft}</TableCell>
+              <TableCell align="left">{row.description}</TableCell>
             </TableRow>
           </CustomWidthTooltip>
         );

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
-import { useDispatch, useSelector } from "react-redux";
 import CombinedTable from "../components/CombinedTable";
 import { Toolbar } from "@mui/material";
-import { fetchData } from "../redux/customerSlice";
+import {useQuery} from "@apollo/client";
+import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
 import CustomerTableBody from '../components/table/body/CustomerTableBody';
 const headCells = [
@@ -21,7 +21,7 @@ const headCells = [
     label: "Name",
   },
   {
-    id: "phone",
+    id: "phoneNumber",
     numeric: false,
     disablePadding: true,
     label: "Phone",
@@ -33,29 +33,33 @@ const headCells = [
     label: "Address",
   },
   {
-    id: "email",
+    id: "gender",
     numeric: false,
     disablePadding: true,
-    label: "Email",
+    label: "Gender",
   },
+  {
+    id: "ageGroup",
+    numeric: false,
+    disablePadding: true,
+    label: "Group",
+  },
+  {
+    id: "totalSpend",
+    numeric: false,
+    disablePadding: true,
+    label: "Spend",
+  },
+
 ];
 
 const Customer = (props) => {
   const { window } = props;
-  const customers = [
-    {
-      name:'hanh',
-      phone:'3490239',
-      address:'daoisda',
-      email:'asdhas',
-    }
-  ];
-  // const customers = useSelector((state) => state.customer.customers);
-  // const dp = useDispatch();
-  // useEffect(() => {
-  //   dp(fetchData());
-  //   console.log(customers);
-  // }, []);
+  const [customers,setCustomers] = useState([]);
+  const {error,loading,data} = useQuery(LOAD_CUSTOMERS);
+  useEffect(()=>{
+    if(data) setCustomers(data.customersByUser)
+  },[data])
 
   return (
     <Box sx={{ display: "flex" }}>

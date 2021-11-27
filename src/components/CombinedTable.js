@@ -17,7 +17,7 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [display,setDisplay]  = useState(data);
   const [search,setSearch] = useState("");
-  const [searchBy,setSearchBy] = useState('name');
+  const [searchBy,setSearchBy] = useState("name");
   const displayData = display.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
 
   const handlePageChange = (e, newPage) => {
@@ -51,8 +51,7 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   };
 
   useEffect(()=>{
-    !search? setDisplay(data) : setDisplay(data.filter( item => item[searchBy].toLowerCase().includes(search.toLowerCase())));
-    setDisplay(data)
+      !search? setDisplay(data) : setDisplay(data.filter( item => item[searchBy].toString().toUpperCase().includes(search.toString().toUpperCase())));
   },[search,searchBy, data])
 
    return (
@@ -63,7 +62,7 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
             numSelected={selected.length}
             handleOpen={handleOpen}
             handleSearch={(val)=>setSearch(val)}
-            headCells ={Array.from(headCells,item=>item.id)}
+            headCells ={headCells}
             searchBy = {(val)=>setSearchBy(val)}
           />
           <Table sx={{ minWidth: 1000 }}>

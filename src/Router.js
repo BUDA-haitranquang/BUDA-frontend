@@ -37,7 +37,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidWRhdGVzdGVyQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJleHAiOjE2Mzc3NjEzMjgsInVzZXJJRCI6MiwiaWF0IjoxNjM3NTg4NTI4fQ.CmASHythJusQGeLJq1hC-Dbi7Oih5yF5b8Myl4wR5raUmsEq_45LR2XmM--0ixsoyWcVHUQNHSEFBUrIWrDERA`,
+      authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidWRhdGVzdGVyQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJleHAiOjE2MzgwMDgzOTMsInVzZXJJRCI6MiwiaWF0IjoxNjM3ODM1NTkzfQ.uzyuRkjd24xO7pksAmN5ios6YYh4b5v4ywcUmKo0INDqAWJVskKY7cQs1mEO-B9cg2oImPkZ4e46VBH93Da9Vw`,
     }
   }
 });
@@ -59,6 +59,7 @@ const AppRouter = () => {
           <Route exact path="/supplier" component={Supplier} />
           <Route exact path="/customer" component={Customer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path ='/ingredient' component={Ingredient}/>
           <Route exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />
         </Switch>

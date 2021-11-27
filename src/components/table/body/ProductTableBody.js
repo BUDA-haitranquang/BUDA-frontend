@@ -16,7 +16,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 const useStyle = makeStyles({
     root: {
       "& .MuiTableCell-root":{
-          padding: 0
+        
       }
     },
   });
@@ -92,6 +92,7 @@ const IngredientTableBody = ({
               <TableCell align="right">{row.amountLeft}</TableCell>
               <TableCell align="right">{row.alertAmount}</TableCell>
               <TableCell align="right">{row.costPerUnit}</TableCell>
+              <TableCell align="left">{row.description}</TableCell>
             </TableRow>
           </CustomWidthTooltip>
         );
