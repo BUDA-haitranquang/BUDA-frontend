@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../redux/supplierSlice";
 import AddSupplierModal from '../components/modal/AddSupplierModal';
+import { useQuery } from "@apollo/client";
+import { LOAD_SUPPLIERS } from "../graphQl/suppliers/suppliersQueries";
 import SupplierTableBody from "../components/table/body/SupplierTableBody"; 
 const headCells = [
   // {
@@ -21,7 +21,7 @@ const headCells = [
     label: "Name",
   },
   {
-    id: "phone",
+    id: "phoneNumber",
     numeric: false,
     disablePadding: true,
     label: "Phone",
@@ -42,12 +42,12 @@ const headCells = [
 
 const Supplier = (props) => {
   const { window } = props;
-  const  supplier =[];
-  //const supplier = useSelector((state) => state.product.products);
-  const dp = useDispatch();
-  // useEffect(() => {
-  //   dp(fetchData());
-  // }, []);
+  const  [suppliers,setSuppliers] = useState([]);
+  const {error,loading,data} = useQuery(LOAD_SUPPLIERS);
+
+  useEffect(()=>{
+    if(data) setSuppliers(data.suppliersByUser);
+  },[data]);
   return (
     <Box sx={{display: "flex"}}>
       <Sidebar window={window} name="Supplier" />
@@ -56,12 +56,12 @@ const Supplier = (props) => {
         display="flex"
         flexDirection="column"
         alignItems="center"
-        justifyContent="center"
+        justifyContent="center" 
       >
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={supplier} headCells={headCells} Modal={AddSupplierModal} Body={SupplierTableBody}/>
+          <CombinedTable data={suppliers} headCells={headCells} Modal={AddSupplierModal} Body={SupplierTableBody}/>
         </Box>
       </Box>
     </Box>

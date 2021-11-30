@@ -16,7 +16,7 @@ ReactDOM.render(
           justifyContent: "space-between",
           minHeight: "100vh"}}>
           <AppRouter />
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </PersistGate>
     </Provider>

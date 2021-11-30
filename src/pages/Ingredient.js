@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../redux/ingredientSlice";
 import AddIngredientModal from "../components/modal/AddIngredientModal";
 import IngredientTableBody from "../components/table/body/IngredientTableBody";
-
+import { useQuery } from "@apollo/client";
+import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 const headCells = [
   // {
   //   id: "ID",
@@ -28,66 +27,32 @@ const headCells = [
     label: "Price",
   },
   {
-    id: "amount",
+    id: "amountLeft",
     numeric: true,
     disablePadding: true,
     label: "Left",
   },
   {
-    id: "cost",
+    id: "alertAmountLeft",
     numeric: true,
     disablePadding: true,
-    label: "Cost",
+    label: "Alert",
   },
   {
-    id: "group",
+    id: "description",
     numeric: false,
     disablePadding: true,
-    label: "Group",
+    label: "Description",
   },
 ];
-const data =[{
-  id:1,
-  name: 'huyanh',
-  price:"100",
-  amount:'2840',
-  left:"100",
-  cost:"100" ,
-  group:"ádhfo8asfasofs"
-},
-{
-  id:2,
-  name: 'huanh',
-  price:"100",
-  amount:'1204',
-  left:"1023",
-  cost:"1923" ,
-  group:"ádhoisd",
-},
-{
-  id:3,
-  name: 'huyanh',
-  price:"1940",
-  left:"1023",
-  group:"ádhioasd" ,
-  
-},
-{
-  id:4,
-  name: 'yanh',
-  price:"1230",
-  left:"4230",
-  group:"ádiaspd", 
-},
-]
+
 const Ingredient = (props) => {
   const { window } = props;
-  const ingredient = data;
-  //const ingredient = useSelector((state) => state.ingredient.ingredients;
-  //const dp = useDispatch();
-  // useEffect(() => {
-  //   dp(fetchData());
-  // }, []);
+  const [ingredients,setIngredients] = useState([]);
+  const {error,loading,data} = useQuery(LOAD_INGREDIENTS);
+  useEffect(()=>{
+    if (data) setIngredients(data.ingredientsByUser);
+  },[data]);
   return (
     <Box sx={{display: "flex"}}>
       <Sidebar window={window} name="Ingredient" />
@@ -101,7 +66,7 @@ const Ingredient = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={ingredient} headCells={headCells} Modal={AddIngredientModal} Body={IngredientTableBody}/>
+          <CombinedTable data={ingredients} headCells={headCells} Modal={AddIngredientModal} Body={IngredientTableBody}/>
         </Box>
       </Box>
     </Box>

@@ -13,6 +13,7 @@ import FilterPopup from './FilterPopup';
 
 const EnhancedToolbar = ({headCells, numSelected, handleOpen,handleSearch,searchBy }) => {
   const [value,setValue]=useState("");
+  const li = Array.from(headCells,item=>item.label);
   return (
     <Toolbar
       sx={{
@@ -82,7 +83,7 @@ const EnhancedToolbar = ({headCells, numSelected, handleOpen,handleSearch,search
       ) : (
         <Box display="flex" flexDirection="row">
           <Tooltip title="Filter list">
-           <FilterPopup list ={headCells}/>
+           <FilterPopup list ={li}/>
           </Tooltip>
           <Tooltip title="Add">
             <IconButton onClick={handleOpen}>

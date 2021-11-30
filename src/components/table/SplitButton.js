@@ -18,14 +18,14 @@ export default function SplitButton({options,searchBy}) {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
- 
+  const list = Array.from(options,item=>item.label);
 //   const handleClick = () => {
 // //    console.info(`You clicked ${options[selectedIndex]}`);
 //   };
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
-    searchBy(options[index]);
+    searchBy(options[index].id);
     setOpen(false);
   };
 
@@ -43,7 +43,7 @@ export default function SplitButton({options,searchBy}) {
   return (
     <React.Fragment>
       <ButtonGroup variant="text" ref={anchorRef} aria-label="split button">
-        <Button  >{options[selectedIndex]}</Button>
+        <Button  >{list[selectedIndex]}</Button>
         <Button
           size="small"
           aria-controls={open ? 'split-button-menu' : undefined}
@@ -68,7 +68,7 @@ export default function SplitButton({options,searchBy}) {
         transition 
         disablePortal
       >
-     {options.map((option, index) => (
+     {list.map((option, index) => (
                     <MenuItem
                       key={option}
                       disabled={index === selectedIndex}

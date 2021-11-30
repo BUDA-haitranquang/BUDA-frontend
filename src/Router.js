@@ -13,8 +13,8 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import { setContext } from '@apollo/client/link/context';
-import Ingredient from './pages/Ingredient';
+import { setContext } from "@apollo/client/link/context";
+import Ingredient from "./pages/Ingredient";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail";
 import { useSelector } from "react-redux";
@@ -60,6 +60,7 @@ const AppRouter = () => {
           <Route exact path="/supplier" component={Supplier} />
           <Route exact path="/customer" component={Customer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/ingredient" component={Ingredient} />
           <Route exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />
         </Switch>

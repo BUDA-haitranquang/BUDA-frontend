@@ -22,28 +22,34 @@ const headCells = [
     label: "Name",
   },
   {
-    id: "price",
+    id: "sellingPrice",
     numeric: true,
     disablePadding: true,
     label: "Price",
   },
   {
-    id: "amount",
+    id: "amountLeft",
     numeric: true,
     disablePadding: true,
     label: "Left",
   },
   {
-    id: "alert",
+    id: "alertAmount",
     numeric: true,
     disablePadding: true,
     label: "Alert",
   },
   {
-    id: "cost",
+    id: "costPerUnit",
     numeric: true,
     disablePadding: true,
     label: "Cost",
+  },
+  {
+    id: "description",
+    numeric: true,
+    disablePadding: true,
+    label: "Description",
   },
 ];
 
@@ -62,7 +68,6 @@ const Product = (props) => {
     //   }
     // }
     // fetchData();
-
     if(data){
       setProducts(data.productsByUser);
     }

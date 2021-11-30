@@ -81,8 +81,8 @@ const SupplierTableBody = ({
                 {row.name}
               </TableCell>
 
+              <TableCell align="left">{row.phoneNumber}</TableCell>
               <TableCell align="left">{row.address}</TableCell>
-              <TableCell align="left">{row.phone}</TableCell>
               <TableCell align="left">{row.email}</TableCell>
    
             </TableRow>
