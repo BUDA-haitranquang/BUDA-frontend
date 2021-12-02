@@ -5,6 +5,7 @@ import Supplier from "./pages/Supplier";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
+import SignUp from "./pages/SignUp";
 import {
   ApolloClient,
   InMemoryCache,
@@ -61,6 +62,7 @@ const AppRouter = () => {
           <Route exact path="/supplier" component={Supplier} />
           <Route exact path="/customer" component={Customer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/ingredient" component={Ingredient} />
           <Route exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />

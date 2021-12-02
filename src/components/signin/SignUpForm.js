@@ -11,7 +11,10 @@ import {
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
-
+import SignUpStepper from './SignUpStepper';
+import EmailIcon from '@mui/icons-material/Email';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import  NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 const useStyle = makeStyles({
   wrapper: {
     display: "flex",
@@ -44,9 +47,6 @@ const useStyle = makeStyles({
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
     },
-    "& input":{
-      padding:'15px'
-    }
   },
   checkboxWrapper: { marginLeft: "15%" },
   buttonWrapper: {
@@ -67,10 +67,11 @@ const useStyle = makeStyles({
     },
   },
 });
-const SignInForm = () => {
+const SignUpForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [checkBox,setCheckBox] = useState(false);
+  const [email,setEmail] = useState("");
+  const [stepper,setStepper] = useState(0);
   const classes = useStyle();
   return (
     <>
@@ -82,24 +83,37 @@ const SignInForm = () => {
             flexDirection: "column",
           }}
         >
-          <Box className={classes.headlineText}>Welcome!</Box>
+          <Box className={classes.headlineText}>Sign Up</Box>
           <Box className={classes.formContainer} pt={2}>
-            <OutlinedInput
+            { stepper === 0 && <OutlinedInput
               className={classes.outlinedInput}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               id="username-input"
               type="text"
               placeholder="Username"
-              
               startAdornment={
                 <InputAdornment position="start">
                   <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
-            />
-            <Box py={2}></Box>
-            <OutlinedInput
+            />}
+
+            {stepper===1 && <OutlinedInput
+              className={classes.outlinedInput}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email-input"
+              type="text"
+              placeholder="Email"
+              startAdornment={
+                <InputAdornment position="start">
+                  <EmailIcon style={{ opacity: 0.5 }} />
+                </InputAdornment>
+              }
+            />}
+
+            {stepper === 2 &&  <OutlinedInput
               className={classes.outlinedInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -111,15 +125,11 @@ const SignInForm = () => {
                   <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
-            />
+            />}
             <Box py={1}></Box>
+
           </Box>
-          <Box className={classes.checkboxWrapper}>
-            <FormControlLabel
-              control={<Checkbox color="success" onChange={()=> setCheckBox(val => !val)} />}
-              label="Remember password"
-            />
-          </Box>
+
           <Box
             className={classes.buttonWrapper}
             display="flex"
@@ -127,25 +137,32 @@ const SignInForm = () => {
             py={2}
           >
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6} display="flex" justifyContent="center">
+              <Grid item xs={12} md={6} display="flex" justifyContent="left">
                 <Button
                   variant="outlined"
                   color="secondary"
+                  onClick ={()=>setStepper(stepper -1)}
                   className={classes.button}
+                  disabled={stepper === 0}
                 >
-                  Sign up
+                  <NavigateBeforeIcon/>
                 </Button>
               </Grid>
-              <Grid item xs={12} md={6} display="flex" justifyContent="center">
+              <Grid item xs={12} md={6} display="flex" justifyContent="right">
                 <Button
                   variant="outlined"
                   color="secondary"
+                  onClick = {() => setStepper(stepper+1)}
                   className={classes.button}
                 >
-                  Log in
+                  {stepper===2?"Submit":<NavigateNextIcon/>}
                 </Button>
               </Grid>
             </Grid>
+          </Box>
+
+          <Box>
+             <SignUpStepper stepper = {stepper}/> 
           </Box>
         </Box>
       </Box>
@@ -153,4 +170,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;
