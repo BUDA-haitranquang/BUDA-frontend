@@ -14,7 +14,11 @@ import { makeStyles } from "@mui/styles";
 import { useMutation, useQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../redux/tokenSlice";
-import { LOGIN_USER, REGISTER_USER } from "../../graphQl/authentication/authMutations";
+import {
+  LOGIN_USER,
+  REGISTER_USER,
+} from "../../graphQl/authentication/authMutations";
+import { useHistory } from "react-router";
 
 const useStyle = makeStyles({
   wrapper: {
@@ -68,32 +72,42 @@ const useStyle = makeStyles({
     },
   },
 });
+
 const SignInForm = () => {
+  let history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyle();
   const dispatch = useDispatch();
 
-  const [userLogin, {loading, error}] = useMutation(LOGIN_USER);
-  if (loading) return 'Signing in...';
+  const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  if (loading) return "Signing in...";
   if (error) return `Sign in error! ${error.message}`;
 
   const login = () => {
     userLogin({
-      variables: { 
-        email: email, 
+      variables: {
+        email: email,
         password: password,
-      }
+      },
     })
-    .then((res) => {
-      const{accessToken, refreshToken} = res.data.userLogin;
-      dispatch(addToken(accessToken));
-    });
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data.userLogin;
+        dispatch(addToken(accessToken));
+      })
+      .then(() => {
+        history.push("/dashboard")
+      })
+      .catch((error) => {
+        //TODO: handle login errors
+        alert(error);
+      });
   };
 
   const handleSubmit = () => {
     login();
-  }
+  };
 
   return (
     <>

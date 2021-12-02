@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import Customer from "./pages/Customer";
 import Supplier from "./pages/Supplier";
@@ -15,7 +15,7 @@ import {
 import { onError } from "@apollo/client/link/error";
 import { setContext } from "@apollo/client/link/context";
 import Ingredient from "./pages/Ingredient";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Switch, Route } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail";
 import { useSelector } from "react-redux";
 
@@ -49,19 +49,31 @@ const AppRouter = () => {
     cache: new InMemoryCache(),
     link: authLink.concat(link)
   });
+
+  const {isAuth} = useSelector((state) => state.token);
+
+  const PrivateRoute = ({authed, ...routeProps }) => (
+    authed === true
+      ? <Route {...routeProps} />
+      : <Redirect to="/login"/>
+  )
+
+  useEffect(()=>{
+    console.log(isAuth);
+  }, [isAuth])
   
   return (
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/product" component={Product} />
-          <Route exact path="/product/:id" children={ProductDetail} />
-          <Route exact path="/supplier" component={Supplier} />
-          <Route exact path="/customer" component={Customer} />
+          <PrivateRoute authed={isAuth} exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute authed={isAuth} exact path="/product" component={Product} />
+          <PrivateRoute authed={isAuth} exact path="/product/:id" children={ProductDetail} />
+          <PrivateRoute authed={isAuth} exact path="/ingredient" component={Ingredient} />
+          <PrivateRoute authed={isAuth} exact path="/supplier" component={Supplier} />
+          <PrivateRoute authed={isAuth} exact path="/customer" component={Customer} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/ingredient" component={Ingredient} />
-          <Route exact path="/" component={Dashboard} />
+          <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />
         </Switch>
       </Router>
