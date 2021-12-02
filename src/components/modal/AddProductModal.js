@@ -8,8 +8,6 @@ import {
   Button,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/productSlice";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 
@@ -52,8 +50,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     }
     else alert("Invalid input");
   }
-
-  const dp = useDispatch();
 
   return (
     <Modal
