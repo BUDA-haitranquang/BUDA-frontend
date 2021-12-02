@@ -56,22 +56,18 @@ const headCells = [
 const Product = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+  const [reload, setReload] = useState(false);
+  const { error, loading, data, refetch } = useQuery(LOAD_PRODUCTS);
 
   useEffect(() => {
-    // async function fetchData() {
-    //   console.log(data);
-    //   if (data) {
-    //     const tmp = [...products];
-    //     await tmp.push(data.productsByUser);
-    //     await setProducts(tmp);
-    //   }
-    // }
-    // fetchData();
-    if(data){
-      setProducts(data.productsByUser);
+    async function fetchData() {
+      await refetch();
+      if (data) {
+        setProducts(data.productsByUser);
+      }
     }
-  }, [data]);
+    fetchData();
+  }, [data, reload, refetch, products]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -92,6 +88,7 @@ const Product = (props) => {
             headCells={headCells}
             Modal={AddProductModal}
             Body={ProductTableBody}
+            setReloadToggle={setReload}
           />
         </Box>
       </Box>

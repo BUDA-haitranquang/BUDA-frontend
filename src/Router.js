@@ -57,10 +57,6 @@ const AppRouter = () => {
       ? <Route {...routeProps} />
       : <Redirect to="/login"/>
   )
-
-  useEffect(()=>{
-    console.log(isAuth);
-  }, [isAuth])
   
   return (
     <ApolloProvider client={client}>
