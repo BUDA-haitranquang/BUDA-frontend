@@ -40,13 +40,13 @@ const CombinedTable = ({ data, headCells, Modal, Body, setReloadToggle }) => {
     setOrderBy(props);
   };
 
-  const handleOpen = async () => {
-    await setReloadToggle(false);
-    await setIsOpen(true);
+  const handleOpen = () => {
+    setReloadToggle(false);
+    setIsOpen(true);
   };
   const handleClose = async () => {
-    await setReloadToggle(true);
-    await setIsOpen(false);
+    setReloadToggle(true);
+    setIsOpen(false);
   };
 
   const handleSelectAllClick = (e) => {

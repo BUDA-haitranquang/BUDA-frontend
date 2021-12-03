@@ -59,15 +59,16 @@ const Product = (props) => {
   const [reload, setReload] = useState(false);
   const { error, loading, data, refetch } = useQuery(LOAD_PRODUCTS);
 
+  console.log(reload);
+
   useEffect(() => {
-    async function fetchData() {
-      await refetch();
-      if (data) {
+    refetch();
+    if (data) {
+      setTimeout(() => {
         setProducts(data.productsByUser);
-      }
+      }, 500);
     }
-    fetchData();
-  }, [data, reload, refetch, products]);
+  }, [data, reload]);
 
   return (
     <Box sx={{ display: "flex" }}>
