@@ -62,12 +62,13 @@ const Product = (props) => {
   console.log(reload);
 
   useEffect(() => {
-    refetch();
-    if (data) {
-      setTimeout(() => {
-        setProducts(data.productsByUser);
-      }, 500);
+    async function fetchData(){
+      await refetch();
+      if(data) setProducts(data.productsByUser);
     }
+    
+    fetchData();
+      
   }, [data, reload]);
 
   return (
@@ -83,7 +84,7 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          {console.log(products)}
+          {console.log(data)}
           <CombinedTable
             data={products}
             headCells={headCells}
