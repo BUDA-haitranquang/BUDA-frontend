@@ -44,7 +44,7 @@ const CombinedTable = ({ data, headCells, Modal, Body, setReloadToggle }) => {
     setReloadToggle(false);
     setIsOpen(true);
   };
-  const handleClose = async () => {
+  const handleClose = () => {
     setReloadToggle(true);
     setIsOpen(false);
   };
