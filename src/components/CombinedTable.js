@@ -11,12 +11,12 @@ import React, { useState, useEffect } from "react";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 
-const CombinedTable = ({ data, headCells, Modal, Body, setReloadToggle }) => {
+const CombinedTable = ({ data, headCells, Modal, Body }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [isOpen, setIsOpen] = useState(false);
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
@@ -41,11 +41,9 @@ const CombinedTable = ({ data, headCells, Modal, Body, setReloadToggle }) => {
   };
 
   const handleOpen = () => {
-    setReloadToggle(false);
     setIsOpen(true);
   };
   const handleClose = () => {
-    setReloadToggle(true);
     setIsOpen(false);
   };
 

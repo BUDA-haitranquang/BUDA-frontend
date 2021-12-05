@@ -10,6 +10,7 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
+import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
@@ -29,7 +30,8 @@ const AddProductModal = ({ isOpen, handleClose }) => {
         description: description,
         amountLeft: amountLeft,
         sellingPrice: price
-      }
+      },
+      refetchQueries: [{query: LOAD_PRODUCTS}]
     });
   }
 
@@ -43,8 +45,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
 
   const handleSubmit = () => {
     if(isFormValid()) {
-      const arr = {name, price, amountLeft, cost, group, description};
-      // dp(addProduct(arr));
       addProduct();
       handleClose();
     }
