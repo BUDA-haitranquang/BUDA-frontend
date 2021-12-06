@@ -15,8 +15,8 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const useStyle = makeStyles({
     root: {
-      "& .MuiTableCell-root":{
-        
+      "& MuiTableCell-root":{
+          padding: 0
       }
     },
   });
@@ -51,6 +51,7 @@ const IngredientTableBody = ({
   const classes = useStyle();
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
+  // console.log(data);
   return (
     <TableBody className={classes.root}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
@@ -77,21 +78,20 @@ const IngredientTableBody = ({
               </TableCell>
               {/* <TableCell align="right">{row.id}</TableCell> */}
               <TableCell component="th" id={labelId} scope="row" >
-                <Link
-                  to={{
-                    pathname: `product/${row.id}`,
-                    state: { data: row },
-                  }}
-                  style={{ textDecoration: "none", color: "blue" }}
-                >
+                {/* <Link
+                //   to={{
+                //     pathname: `product/${row.id}`,
+                //     state: { data: row },
+                //   }}
+                //   style={{ textDecoration: "none", color: "blue" }}
+                > */}
                   {row.name}
-                </Link>
+                {/* </Link> */}
               </TableCell>
 
-              <TableCell align="right">{row.sellingPrice}</TableCell>
+              <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.amountLeft}</TableCell>
-              <TableCell align="right">{row.alertAmount}</TableCell>
-              <TableCell align="right">{row.costPerUnit}</TableCell>
+              <TableCell align="right">{row.alertAmountLeft}</TableCell>
               <TableCell align="left">{row.description}</TableCell>
             </TableRow>
           </CustomWidthTooltip>

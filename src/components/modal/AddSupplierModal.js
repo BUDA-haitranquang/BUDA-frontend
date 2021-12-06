@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Box, Modal, TextField, Typography, IconButton, Button } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useDispatch } from "react-redux";
-import { addCustomer } from "../../redux/customerSlice";
-const AddCustomerModal = ({ isOpen, handleClose }) => {
+import { addSupplier } from "../../redux/supplierSlice";
+const AddSupplierModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [email,setEmail] = useState("");
   const dp = useDispatch(); 
   const handleSubmit = ()=>{
-    dp(addCustomer({name,phoneNumber,address,email}));
+    dp(addSupplier({name,phoneNumber,address,email}));
     handleClose();
   }
   return (
@@ -39,7 +39,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
       >
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box mt={1}>
-            <Typography align="center">Add Customer</Typography>
+            <Typography align="center">Add Supplier</Typography>
           </Box>
 
           <IconButton onClick={handleClose}>
@@ -84,4 +84,4 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
     </Modal>
   );
 };
-export default AddCustomerModal;
+export default AddSupplierModal;

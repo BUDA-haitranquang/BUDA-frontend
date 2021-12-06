@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../redux/productSlice";
 import AddProductModal from "../components/modal/AddProductModal";
 import ProductTableBody from "../components/table/body/ProductTableBody";
+import { useQuery } from "@apollo/client";
+import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 
 const headCells = [
   // {
@@ -22,40 +22,59 @@ const headCells = [
     label: "Name",
   },
   {
-    id: "price",
+    id: "sellingPrice",
     numeric: true,
     disablePadding: true,
     label: "Price",
   },
   {
-    id: "amount",
+    id: "amountLeft",
     numeric: true,
     disablePadding: true,
     label: "Left",
   },
   {
-    id: "cost",
+    id: "alertAmount",
+    numeric: true,
+    disablePadding: true,
+    label: "Alert",
+  },
+  {
+    id: "costPerUnit",
     numeric: true,
     disablePadding: true,
     label: "Cost",
   },
   {
-    id: "group",
-    numeric: false,
+    id: "description",
+    numeric: true,
     disablePadding: true,
-    label: "Group",
+    label: "Description",
   },
 ];
 
 const Product = (props) => {
   const { window } = props;
-  const products = useSelector((state) => state.product.products);
-  const dp = useDispatch();
+  const [products, setProducts] = useState([]);
+  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+
   useEffect(() => {
-    dp(fetchData());
-  }, []);
+    // async function fetchData() {
+    //   console.log(data);
+    //   if (data) {
+    //     const tmp = [...products];
+    //     await tmp.push(data.productsByUser);
+    //     await setProducts(tmp);
+    //   }
+    // }
+    // fetchData();
+    if(data){
+      setProducts(data.productsByUser);
+    }
+  }, [data]);
+
   return (
-    <Box sx={{display: "flex"}}>
+    <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Product" />
       <Box
         width="100%"
@@ -67,7 +86,13 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={products} headCells={headCells} Modal={AddProductModal} Body={ProductTableBody}/>
+          {console.log(products)}
+          <CombinedTable
+            data={products}
+            headCells={headCells}
+            Modal={AddProductModal}
+            Body={ProductTableBody}
+          />
         </Box>
       </Box>
     </Box>

@@ -6,18 +6,20 @@ import {
   Typography,
   IconButton,
   Button,
+  getTextFieldUtilityClass,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/productSlice";
-const AddProductModal = ({ isOpen, handleClose }) => {
+import { addIngredient } from "../../redux/ingredientSlice";
+const AddIngredientModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
   const [cost, setCost] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
-
+  const dp = useDispatch();
+  
   const isFormValid = () => {
     const isValid = (name !== "") 
                     && (!isNaN(price) && price >= 0)
@@ -29,13 +31,13 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const handleSubmit = () => {
     if(isFormValid()) {
       const arr = {name, price, amountLeft, cost, group, description};
-      dp(addProduct(arr));
+      dp(addIngredient(arr));
       handleClose();
     }
     else alert("Invalid input");
   }
 
-  const dp = useDispatch();
+
 
   return (
     <Modal
@@ -68,7 +70,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             justifyContent="space-between"
           >
             <Box mt={1}>
-              <Typography align="center">Add</Typography>
+              <Typography align="center">Add Ingredient</Typography>
             </Box>
 
             <IconButton onClick={handleClose}>
@@ -93,7 +95,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               variant="outlined"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              style={{width: "48%"}}
             />
             <TextField
               required
@@ -103,7 +104,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               variant="outlined"
               value={cost}
               onChange={(e) => setCost(e.target.value)}
-              style={{width: "48%"}}
             />
           </div>
           
@@ -137,9 +137,10 @@ const AddProductModal = ({ isOpen, handleClose }) => {
           />
           <Button 
             variant="contained" 
-            onClick={handleSubmit}
-          >
-            Add Product
+            onClick={()=>{
+              handleSubmit();
+            }}>
+            Add 
           </Button>
         </Box>
         
@@ -148,4 +149,4 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   );
 };
 
-export default AddProductModal;
+export default AddIngredientModal;
