@@ -56,21 +56,15 @@ const headCells = [
 const Product = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
-
+  const { error, loading, data, refetch } = useQuery(LOAD_PRODUCTS);
   useEffect(() => {
-    // async function fetchData() {
-    //   console.log(data);
-    //   if (data) {
-    //     const tmp = [...products];
-    //     await tmp.push(data.productsByUser);
-    //     await setProducts(tmp);
-    //   }
-    // }
-    // fetchData();
-    if(data){
-      setProducts(data.productsByUser);
+    async function fetchData(){
+      await refetch();
+      if(data) setProducts(data.productsByUser);
     }
+    
+    fetchData();
+      
   }, [data]);
 
   return (
@@ -86,7 +80,7 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          {console.log(products)}
+          {console.log(data)}
           <CombinedTable
             data={products}
             headCells={headCells}

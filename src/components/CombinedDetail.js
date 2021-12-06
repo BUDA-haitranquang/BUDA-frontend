@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Grid } from '@mui/material';
 import ImageGrid from './detail/ImageGrid';
 import MainImage from './detail/MainImage';
@@ -18,6 +17,7 @@ const images = [
 
 function CombinedDetail(props) {
     const [selectedImage, setSelectedImage] = useState(0);
+    console.log(props.data);
     return (
         <div>
             <Grid container spacing={1} style={{width: '900px' , margin: '0 auto'}}>

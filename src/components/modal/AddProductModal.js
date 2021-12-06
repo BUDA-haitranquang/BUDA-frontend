@@ -8,34 +8,46 @@ import {
   Button,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/productSlice";
+import { useMutation } from "@apollo/client";
+import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
+import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+
 const AddProductModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
-  const [cost, setCost] = useState(0);
+  const [costPerUnit, setCostPerUnit] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
 
+  
+  const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
+
+  const addProduct = () => {
+    newProduct({
+      variables:{
+        name: name,
+        description: description,
+        costPerUnit: parseFloat(costPerUnit),
+        amountLeft: parseInt(amountLeft),
+        sellingPrice: parseFloat(price)
+      },
+      refetchQueries: [{query: LOAD_PRODUCTS}]
+    });
+  }
+
   const isFormValid = () => {
-    const isValid = (name !== "") 
-                    && (!isNaN(price) && price >= 0)
-                    && (!isNaN(amountLeft) && amountLeft >= 0)
-                    && (!isNaN(cost) && cost >= 0);
+    const isValid = (name !== "") && (price >= 0) && (amountLeft >= 0) && (costPerUnit >= 0);
     return isValid;
   }
 
   const handleSubmit = () => {
     if(isFormValid()) {
-      const arr = {name, price, amountLeft, cost, group, description};
-      dp(addProduct(arr));
+      addProduct();
       handleClose();
     }
     else alert("Invalid input");
   }
-
-  const dp = useDispatch();
 
   return (
     <Modal
@@ -101,8 +113,8 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               id="outlined-basic"
               label="Cost"
               variant="outlined"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
+              value={costPerUnit}
+              onChange={(e) => setCostPerUnit(e.target.value)}
               style={{width: "48%"}}
             />
           </div>

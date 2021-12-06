@@ -4,6 +4,7 @@ import customerReducer from "./customerSlice";
 import productReducer from "./productSlice";
 import ingredientReducer from './ingredientSlice';
 import supplierReducer from './supplierSlice';
+import tokenReducer from './tokenSlice';
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   product: productReducer,
   ingredient: ingredientReducer,
   supplier:supplierReducer,
+  token: tokenReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

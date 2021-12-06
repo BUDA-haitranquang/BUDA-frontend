@@ -11,6 +11,14 @@ import {
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
+import { useMutation, useQuery } from "@apollo/client";
+import { useDispatch } from "react-redux";
+import { addToken } from "../../redux/tokenSlice";
+import {
+  LOGIN_USER,
+  REGISTER_USER,
+} from "../../graphQl/authentication/authMutations";
+import { useHistory } from "react-router";
 
 const useStyle = makeStyles({
   wrapper: {
@@ -64,10 +72,43 @@ const useStyle = makeStyles({
     },
   },
 });
+
 const SignInForm = () => {
-  const [userName, setUserName] = useState("");
+  let history = useHistory();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyle();
+  const dispatch = useDispatch();
+
+  const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  if (loading) return "Signing in...";
+  if (error) return `Sign in error! ${error.message}`;
+
+  const login = () => {
+    userLogin({
+      variables: {
+        email: email,
+        password: password,
+      },
+    })
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data.userLogin;
+        dispatch(addToken(accessToken));
+      })
+      .then(() => {
+        history.push("/dashboard")
+      })
+      .catch((error) => {
+        //TODO: handle login errors
+        alert(error);
+      });
+  };
+
+  const handleSubmit = () => {
+    login();
+  };
+
   return (
     <>
       <Box mx={10} className={classes.wrapper}>
@@ -82,11 +123,11 @@ const SignInForm = () => {
           <Box className={classes.formContainer} pt={2}>
             <OutlinedInput
               className={classes.outlinedInput}
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              id="username-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email-input"
               type="text"
-              placeholder="Username"
+              placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
                   <PersonIcon style={{ opacity: 0.5 }} />
@@ -136,6 +177,7 @@ const SignInForm = () => {
                   variant="outlined"
                   color="secondary"
                   className={classes.button}
+                  onClick={handleSubmit}
                 >
                   Log in
                 </Button>

@@ -34,6 +34,7 @@ const Login = () => {
         <Grid item lg={6} xs={0}>
           <Box style={{ width: "100%", height: "100%" }}>
             <img
+              alt=""
               className={classes.imgWrapper}
               src={LogInPic}
               width="100%"
