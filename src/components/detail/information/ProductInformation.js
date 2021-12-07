@@ -1,10 +1,8 @@
-import { Button, Divider, Grid, Typography } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-export default function Information({data}) {
+export default function ProductInformation({data}) {
   const {name, sellingPrice, amountLeft, alertAmount, costPerUnit, description} = data.product;
   return (
     <Grid container 
@@ -20,11 +18,6 @@ export default function Information({data}) {
       </Box>
 
       <Divider />
-
-      <Grid container style={{ width: "40%", justifyContent: "space-between" }}>
-        <Button variant="contained" color="primary" startIcon={<EditIcon/>}>Edit</Button>
-        <Button variant="contained" color="error" endIcon={<DeleteIcon/>}>Delete</Button>
-      </Grid>
       
     </Grid>
   );
