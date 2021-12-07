@@ -18,6 +18,26 @@ export const ADD_PRODUCT_MUTATION = gql`
       }
     )
     {productID}
-  }
-    
+  } 
 `;
+
+export const UPDATE_PRODUCT_MUTATION = gql`
+mutation updateProduct(
+  $name: String!
+  $amountLeft: Int!
+  $costPerUnit: Float!
+  $sellingPrice: Float!
+  $description: String
+){
+  updateProduct(
+    productInput:{
+      name: $name
+      amountLeft: $amountLeft
+      costPerUnit: $costPerUnit
+      sellingPrice: $sellingPrice
+      description: $description
+    }
+  )
+  {productID}
+} 
+`
