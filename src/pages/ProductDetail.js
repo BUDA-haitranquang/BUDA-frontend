@@ -6,6 +6,8 @@ import CombinedDetail from "../components/CombinedDetail";
 import { useParams } from "react-router";
 import { useQuery } from "@apollo/client";
 import { LOAD_PRODUCT } from "../graphQl/products/productQueries";
+import EditProductModal from "../components/modal/EditProductModal";
+import ProductInformation from "../components/detail/information/ProductInformation";
 
 const ProductDetail = (props) => {
   const { window } = props;
@@ -28,7 +30,7 @@ const ProductDetail = (props) => {
       <Box>
         <Toolbar />
         <Box pt={1}>
-            {product === null ? <div></div> : <CombinedDetail data={product}/> }
+            {product === null ? <div></div> : <CombinedDetail data={product} Modal={EditProductModal} Information={ProductInformation} />}
         </Box>
       </Box>
     </Box>
