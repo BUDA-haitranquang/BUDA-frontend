@@ -27,10 +27,4 @@ export const LOAD_PRODUCT = gql`
   }
 `;
 
-export const HIDE_PRODUCT = gql`
-  query hideProduct($productID: Int!) {
-    hideProduct(productID: $productID) {
-      productID
-    }
-  }
-`;
+
