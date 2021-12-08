@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Modal,
-  TextField,
-  Typography,
-  IconButton,
-  Button,
-} from "@mui/material";
+import { useMutation } from "@apollo/client";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { useMutation, useQuery } from "@apollo/client";
+import {
+  Box, Button, IconButton, Modal,
+  TextField,
+  Typography
+} from "@mui/material";
+import React, { useState } from "react";
 import { UPDATE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
-import { HIDE_PRODUCT, LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const EditProductModal = ({data, isOpen, handleClose }) => {
   const product = data.product;
   const [name, setName] = useState(product.name);
-  const [price, setPrice] = useState(product.price);
+  const [price, setPrice] = useState(product.sellingPrice);
   const [amountLeft, setAmountLeft] = useState(product.amountLeft);
   const [costPerUnit, setCostPerUnit] = useState(product.costPerUnit);
   const [group, setGroup] = useState(product.group);

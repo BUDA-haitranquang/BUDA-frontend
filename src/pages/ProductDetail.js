@@ -3,26 +3,46 @@ import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import CombinedDetail from "../components/CombinedDetail";
-import { useParams } from "react-router";
-import { useQuery } from "@apollo/client";
-import { LOAD_PRODUCT } from "../graphQl/products/productQueries";
+import { useHistory, useParams } from "react-router";
+import { useMutation, useQuery } from "@apollo/client";
+import { LOAD_PRODUCT, LOAD_PRODUCTS } from "../graphQl/products/productQueries";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch,
+  Route,
+} from "react-router-dom";
 import EditProductModal from "../components/modal/EditProductModal";
 import ProductInformation from "../components/detail/information/ProductInformation";
+import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 
 const ProductDetail = (props) => {
   const { window } = props;
-  const {id} = useParams();
+  const { id } = useParams();
+  const history = useHistory();
   console.log(id);
 
-  const [product, setProduct] = useState(null)
+  const [product, setProduct] = useState(null);
 
   const { error, loading, data, refetch } = useQuery(LOAD_PRODUCT, {
-    variables: {productID: parseInt(id)},
+    variables: { productID: parseInt(id) },
   });
 
-  useEffect(()=>{
-    if(data) setProduct(data);
-  }, [data])
+  const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
+
+  const handleDeleteProduct = () => {
+    hideProduct({
+      variables:{productID: parseInt(id) },
+      refetchQueries: [{query: LOAD_PRODUCTS}]
+    })
+    .then(history.push('/product'))
+  }
+
+  useEffect(() => {
+    if (data) setProduct(data);
+  }, [data]);
+
+  if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -30,7 +50,16 @@ const ProductDetail = (props) => {
       <Box>
         <Toolbar />
         <Box pt={1}>
-            {product === null ? <div></div> : <CombinedDetail data={product} Modal={EditProductModal} Information={ProductInformation} />}
+          {product === null ? (
+            <div></div>
+          ) : (
+            <CombinedDetail
+              data={product}
+              Modal={EditProductModal}
+              Information={ProductInformation}
+              handleDelete={handleDeleteProduct}
+            />
+          )}
         </Box>
       </Box>
     </Box>

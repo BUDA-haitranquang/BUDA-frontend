@@ -16,7 +16,7 @@ const images = [
 ];
 
 function CombinedDetail(props) {
-  const {data, Modal, Information} = props
+  const {data, Modal, Information, handleDelete} = props
   const [selectedImage, setSelectedImage] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,11 +26,6 @@ function CombinedDetail(props) {
   const handleClose = () => {
     setIsOpen(false);
   };
-
-  const handleDelete = () => {
-    // delete product
-    console.log("Product delete");
-  }
 
   console.log(data);
   return (
