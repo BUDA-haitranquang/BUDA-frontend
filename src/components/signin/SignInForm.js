@@ -28,7 +28,7 @@ const useStyle = makeStyles({
   },
   headlineText: {
     paddingTop: "15%",
-    paddingBottom: "15%",
+    paddingBottom: "10%",
     fontSize: 70,
     color: "#fff",
     fontFamily: "Poppins",
@@ -38,14 +38,16 @@ const useStyle = makeStyles({
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "#fff",
-      borderRadius: "25px",
-      width: "70%",
+      borderRadius: "50px",
+      width: "75%",
+      height:'60px',
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
     },
     "& input":{
-      padding:'15px'
+      padding:'15px',
+      height:'30px'
     }
   },
   checkboxWrapper: { marginLeft: "15%" },
@@ -53,15 +55,28 @@ const useStyle = makeStyles({
     marginLeft: "15%",
     width: "70%",
   },
-  button: {
+  button1: {
     "&.MuiButton-root": {
       color: "#fff",
-      width: "80%",
+      width: "100%",
       borderRadius: 20,
       border: "1px solid #fff",
-      height: 40,
+      height: 55,
       "&:hover": {
         backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+        border: "none",
+      },
+    },
+  },
+  button2: {
+    "&.MuiButton-root": {
+      color: "#fff",
+      width: "100%",
+      borderRadius: 20,
+      border: "1px solid #fff",
+      height: 50,
+      "&:hover": {
+        backgroundImage: "linear-gradient(120deg, #C9FFBF 0%, #FFAFBD 100%)",
         border: "none",
       },
     },
@@ -72,6 +87,10 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
   const [checkBox,setCheckBox] = useState(false);
   const classes = useStyle();
+  
+  const handleSubmit = (e)=>{
+    e.preventDeafault();
+  }
   return (
     <>
       <Box mx={10} className={classes.wrapper}>
@@ -126,23 +145,34 @@ const SignInForm = () => {
             justifyContent="space-evenly"
             py={2}
           >
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} display="flex" justifyContent="center">
+            <Grid container spacing={3} display='column' flexDirection='column'>
+              <Grid item xs justifyContent="center">
                 <Button
                   variant="outlined"
                   color="secondary"
-                  className={classes.button}
+                  className={classes.button1}
                 >
-                  Sign up
+                  LOG IN
                 </Button>
               </Grid>
-              <Grid item xs={12} md={6} display="flex" justifyContent="center">
+
+              <Grid  item xs display='flex' justifyContent='center' >
+                <Box
+                  sx={{
+                    width : '70%',
+                    height : '1px',
+                    backgroundColor:'black',
+                    borderRadius:'25px',
+                  }}></Box>
+              </Grid>
+
+              <Grid item xs justifyContent="center">
                 <Button
                   variant="outlined"
                   color="secondary"
-                  className={classes.button}
+                  className={classes.button2}
                 >
-                  Log in
+                  SIGN UP
                 </Button>
               </Grid>
             </Grid>
