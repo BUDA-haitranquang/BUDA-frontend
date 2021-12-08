@@ -15,7 +15,7 @@ const MainDashBoard =()=>{
                     </Box>
                     <Box>
                         <Button 
-                            sx={{height:'100%',marginTop:'10px'}}
+                            sx={{height:'100%',margin:'10px 20px 0 0'}}
                             onClick={e=>  setChart(chart + 1)}>
                             {chart%2===0?'Line Chart': 'Bar Chart'}
                         </Button>
