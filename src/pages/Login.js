@@ -8,7 +8,7 @@ import { makeStyles } from "@mui/styles";
 const Login = () => {
   return (
     <>
-      <Grid container spacing={0}>
+      <Grid container sx={{height:'100vh'}} spacing={0}>
         <Grid item lg={6} xs={0}>
           <Box style={{ width: "100%", height: "100%"}}>
             <Hidden only={['xs','sm','md']}>

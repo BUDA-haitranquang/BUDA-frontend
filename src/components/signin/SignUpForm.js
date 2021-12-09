@@ -15,6 +15,8 @@ import SignUpStepper from './SignUpStepper';
 import EmailIcon from '@mui/icons-material/Email';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import  NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import PhoneIcon from '@mui/icons-material/Phone';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 const useStyle = makeStyles({
   wrapper: {
     display: "flex",
@@ -41,12 +43,18 @@ const useStyle = makeStyles({
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "#fff",
-      borderRadius: "25px",
+      borderRadius: "35px",
       width: "70%",
+      height:'60px'
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
     },
+    "& input":{
+
+      padding:'15px',
+      height:'30px'
+    }
   },
   checkboxWrapper: { marginLeft: "15%" },
   buttonWrapper: {
@@ -67,12 +75,21 @@ const useStyle = makeStyles({
     },
   },
 });
+
 const SignUpForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email,setEmail] = useState("");
+  const [firstName,setFirstName] = useState("");
+  const [lastName,setLastName] = useState("");
+  const [phone,setPhone] = useState("");
+  const [confirmPassword,setConfirmPassword] = useState("");
   const [stepper,setStepper] = useState(0);
+  const [visibility,setVisibility] = useState(false);
   const classes = useStyle();
+
+  const handleSubmit = () =>{}
+  // const handleVisibility = () => setVisibility(!visibility); 
   return (
     <>
       <Box mx={10} className={classes.wrapper}>
@@ -84,22 +101,37 @@ const SignUpForm = () => {
           }}
         >
           <Box className={classes.headlineText}>Sign Up</Box>
+          {stepper===0 &&
           <Box className={classes.formContainer} pt={2}>
-            { stepper === 0 && <OutlinedInput
+            <OutlinedInput
               className={classes.outlinedInput}
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              id="username-input"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              id="firstname-input"
               type="text"
-              placeholder="Username"
+              placeholder="First Name"
               startAdornment={
                 <InputAdornment position="start">
                   <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
-            />}
-
-            {stepper===1 && <OutlinedInput
+            />
+              <Box py={1}></Box>
+              <OutlinedInput
+              className={classes.outlinedInput}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              id="lastname-input"
+              type="text"
+              placeholder="Last Name"
+              startAdornment={
+                <InputAdornment position="start">
+                  <PersonIcon style={{ opacity: 0.5 }} />
+                </InputAdornment>
+              }
+            />
+              <Box py={1}></Box>
+            <OutlinedInput
               className={classes.outlinedInput}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -111,25 +143,75 @@ const SignUpForm = () => {
                   <EmailIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
-            />}
-
-            {stepper === 2 &&  <OutlinedInput
+            />
+            <Box py={1}></Box>
+            <OutlinedInput
               className={classes.outlinedInput}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              id="phone-input"
+              type="text"
+              placeholder="Phone Number"
+              startAdornment={
+                <InputAdornment position="start">
+                  <PhoneIcon style={{ opacity: 0.5 }} />
+                </InputAdornment>
+              }
+            />
+            <Box py={1}></Box>
+          </Box>
+          }
+          {stepper===1 &&
+          <Box className={classes.formContainer} pt={2}>
+            <OutlinedInput
+              className={classes.outlinedInput}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              id="username-input"
+              type="text"
+              placeholder=" Username"
+              startAdornment={
+                <InputAdornment position="start">
+                  <PersonIcon style={{ opacity: 0.5 }} />
+                </InputAdornment>
+              }
+            />
+            <Box py={1}></Box> 
+            <OutlinedInput
+              className = {classes.outlinedInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              id="password-input"
-              type="password"
+              id="email-input"
+              type={visibility?'text':'password'}
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
                   <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
-            />}
+              endAdornment = {
+                <InputAdornment position='end'>
+                  <Button onCLick ={() => setVisibility(!visibility)}> <VisibilityIcon style={{opacity:0.5}}/></Button>
+                </InputAdornment>
+              }
+            />
             <Box py={1}></Box>
-
+            <OutlinedInput
+              className={classes.outlinedInput}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              id="confirm-password-input"
+              type="password"
+              placeholder="Confirm Password"
+              startAdornment={
+                <InputAdornment position="start">
+                  <LockIcon style={{ opacity: 0.5 }} />
+                </InputAdornment>
+              }
+            />
+            <Box py={1}></Box>
           </Box>
-
+          }
           <Box
             className={classes.buttonWrapper}
             display="flex"
@@ -137,7 +219,7 @@ const SignUpForm = () => {
             py={2}
           >
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6} display="flex" justifyContent="left">
+              <Grid item xs={6} display="flex" justifyContent="left">
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -148,11 +230,11 @@ const SignUpForm = () => {
                   <NavigateBeforeIcon/>
                 </Button>
               </Grid>
-              <Grid item xs={12} md={6} display="flex" justifyContent="right">
+              <Grid item xs={6} display="flex" justifyContent="right">
                 <Button
                   variant="outlined"
                   color="secondary"
-                  onClick = {() => setStepper(stepper+1)}
+                  onClick = {() =>stepper===2? handleSubmit():setStepper(stepper+1)}
                   className={classes.button}
                 >
                   {stepper===2?"Submit":<NavigateNextIcon/>}
@@ -161,9 +243,9 @@ const SignUpForm = () => {
             </Grid>
           </Box>
 
-          <Box>
+          {/* <Box>
              <SignUpStepper stepper = {stepper}/> 
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </>
