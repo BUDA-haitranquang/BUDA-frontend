@@ -12,6 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
+  Collapse,
 } from "@mui/material";
 import { ShoppingBasketOutlined } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
@@ -20,26 +21,35 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StoreIcon from '@mui/icons-material/Store';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import PaymentIcon from '@mui/icons-material/Payment';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import StoreIcon from "@mui/icons-material/Store";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import PaymentIcon from "@mui/icons-material/Payment";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import AccountMenu from "./AccountMenu";
+import { TransitionGroup } from "react-transition-group";
 
 const useStyle = makeStyles({
   root: {
     "& a:link": {
       textDecoration: "none",
       color: "black",
-      "&:hover":{
+      "&:hover": {
         color: "grey",
-        fontStyle: "italic",
-        fontWeight: "600"
-      }
+        fontWeight: "600",
+      },
     },
     "& a:visited": {
       color: "black",
     },
+  },
+  logo: {
+    width: "100%",
+    fontSize: "40px",
+    fontWeight: "800",
+    display: "flex",
+    justifyContent: "center",
+    textDecoration: "none",
+    color: "black",
   },
 });
 const drawerWidth = 200;
@@ -73,27 +83,40 @@ const Sidebar = ({ window, name }) => {
         return <AssignmentIndIcon />;
       case 6:
         return <MonetizationOnIcon />;
-      
+
       default:
         break;
     }
   };
+  const logo = (
+    <>
+      <Box className={classes.logo} component={Link} to="/dashboard">
+        BUDA
+      </Box>
+    </>
+  );
 
   const drawer = (
-    <div style={{backgroundColor: "aliceblue", flexGrow: 1}}>
-      <Toolbar />
+    <div style={{ backgroundColor: "aliceblue", flexGrow: 1 }}>
+      <Toolbar children={logo} />
       <Divider />
       <List className={classes.root}>
-        {["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost"].map(
-          (item, idx) => (
-            <Link to={`/${item}`}>
-              <ListItem button>
-                <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-                <ListItemText primary={capitalizeFirstLetter(item)}/>
-              </ListItem>
-            </Link>
-          )
-        )}
+        {[
+          "dashboard",
+          "product",
+          "ingredient",
+          "supplier",
+          "customer",
+          "staff",
+          "cost",
+        ].map((item, idx) => (
+          <Link to={`/${item}`}>
+            <ListItem button>
+              <ListItemIcon>{itemRender(idx)}</ListItemIcon>
+              <ListItemText primary={capitalizeFirstLetter(item)} />
+            </ListItem>
+          </Link>
+        ))}
       </List>
     </div>
   );
@@ -108,7 +131,7 @@ const Sidebar = ({ window, name }) => {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar sx={{justifyContent: "space-between"}}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -118,10 +141,15 @@ const Sidebar = ({ window, name }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" style={{textTranform: "uppercase"}}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            style={{ textTranform: "uppercase" }}
+          >
             {name}
           </Typography>
-          <AccountMenu/>
+          <AccountMenu />
         </Toolbar>
       </AppBar>
       <Box
@@ -151,7 +179,7 @@ const Sidebar = ({ window, name }) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: {xs: "none", sm: "block"},
+            display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
