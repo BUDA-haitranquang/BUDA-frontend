@@ -17,6 +17,7 @@ export const LOAD_PRODUCTS = gql`
 export const LOAD_PRODUCT = gql`
   query product($productID: Int!) {
     product(productID: $productID) {
+      productID
       name
       description
       amountLeft

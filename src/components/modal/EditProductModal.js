@@ -11,6 +11,7 @@ import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const EditProductModal = ({data, isOpen, handleClose }) => {
   const product = data.product;
+  console.log(product);
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.sellingPrice);
   const [amountLeft, setAmountLeft] = useState(product.amountLeft);
@@ -19,12 +20,13 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
   const [description, setDescription] = useState(product.description);
 
   
-  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
+  const [editProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
 //   const data = useQuery(HIDE_PRODUCT);
 
-  const editProduct = () => {
-    updateProduct({
+  const updateProduct = () => {
+    editProduct({
       variables:{
+        productID: product.productID,
         name: name,
         description: description,
         costPerUnit: parseFloat(costPerUnit),
@@ -50,7 +52,7 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
 
   const handleSubmit = () => {
     if(isFormValid()) {
-      editProduct();
+      updateProduct();
       handleClose();
     }
     else alert("Invalid input");
@@ -158,7 +160,7 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
             variant="contained" 
             onClick={handleSubmit}
           >
-            Add Product
+            Edit Product
           </Button>
         </Box>
         
