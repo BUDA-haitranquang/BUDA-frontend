@@ -39,7 +39,12 @@ const ProductDetail = (props) => {
   }
 
   useEffect(() => {
-    if (data) setProduct(data);
+    async function fetchData(){
+      if(data) setProduct(data);
+    }
+    
+    fetchData();
+    console.log("abc");
   }, [data]);
 
   if (error) return <Redirect to="/login" />;

@@ -22,7 +22,7 @@ export const ADD_PRODUCT_MUTATION = gql`
 `;
 
 export const UPDATE_PRODUCT_MUTATION = gql`
-mutation editProduct(
+mutation updateProduct(
   $productID: Int!
   $name: String!
   $amountLeft: Int!
@@ -30,7 +30,7 @@ mutation editProduct(
   $sellingPrice: Float!
   $description: String
 ){
-  editProduct(
+  updateProduct(
     productID: $productID
     product:{
       name: $name

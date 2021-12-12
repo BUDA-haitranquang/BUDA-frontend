@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { UPDATE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
-import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import { LOAD_PRODUCT } from "../../graphQl/products/productQueries";
 
 const EditProductModal = ({data, isOpen, handleClose }) => {
   const product = data.product;
@@ -20,11 +20,11 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
   const [description, setDescription] = useState(product.description);
 
   
-  const [editProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
 //   const data = useQuery(HIDE_PRODUCT);
 
-  const updateProduct = () => {
-    editProduct({
+  const editProduct = () => {
+    updateProduct({
       variables:{
         productID: product.productID,
         name: name,
@@ -33,7 +33,12 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
         amountLeft: parseInt(amountLeft),
         sellingPrice: parseFloat(price)
       },
-      refetchQueries: [{query: LOAD_PRODUCTS}]
+      refetchQueries: [{
+        query: LOAD_PRODUCT, 
+        variables:{
+          productID: product.productID
+        }
+      }]
     });
   }
 
@@ -52,7 +57,7 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
 
   const handleSubmit = () => {
     if(isFormValid()) {
-      updateProduct();
+      editProduct();
       handleClose();
     }
     else alert("Invalid input");

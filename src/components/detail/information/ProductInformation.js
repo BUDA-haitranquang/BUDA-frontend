@@ -15,6 +15,16 @@ export default function ProductInformation({data}) {
         <Typography variant="h3" style={{marginBottom: "3%"}}>{name}</Typography>
         <Typography variant="subtitle3" style={{fontStyle: "italic"}}>{description}</Typography>
         <Typography variant="h4">{sellingPrice} $</Typography>
+        <Divider/>
+        <Box style={{
+          marginTop: "40px",
+          display: "flex", 
+          justifyContent: "space-between",
+        }}>
+          <Typography variant="subtitle3" style={{}}>Cost: {costPerUnit}</Typography>
+          <Typography variant="subtitle3" style={{}}>Amount Left: {amountLeft}</Typography>
+          <Typography variant="subtitle3" style={{}}>Alert Amount: {alertAmount}</Typography>
+        </Box>
       </Box>
 
       <Divider />
