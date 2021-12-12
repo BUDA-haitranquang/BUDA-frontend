@@ -42,7 +42,7 @@ const useStyle = makeStyles({
     fontSize: 70,
     color: "#fff",
     fontFamily: "Poppins",
-    fontWeight: 800,
+    fontWeight: 800,  
     marginLeft: "15%",
   },
   outlinedInput: {

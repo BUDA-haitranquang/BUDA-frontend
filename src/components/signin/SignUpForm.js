@@ -129,7 +129,7 @@ const SignUpForm = () => {
             flexDirection: "column",
           }}
         >
-          <Box className={classes.headlineText}>Sign Up</Box>
+          <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
             <Box className={classes.nameWrapper}>
             <OutlinedInput
@@ -238,7 +238,7 @@ const SignUpForm = () => {
             />
             
             <Box py={1}></Box>
-            <Button className={classes.button} onClick={handleSubmit}>submit</Button>
+            <Button className={classes.button} onClick={handleSubmit}>Sign up</Button>
           </Box>
         </Box>
       </Box>
