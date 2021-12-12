@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
-  Grid,
   OutlinedInput,
   InputAdornment,
   FormControlLabel,
@@ -18,6 +17,34 @@ import  NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import PhoneIcon from '@mui/icons-material/Phone';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 const useStyle = makeStyles({
+  outlinedInputName: {
+    "&.MuiOutlinedInput-root": {
+      backgroundColor: "#fff",
+      borderRadius: "10px",
+      width: "35%",
+      height:'40px',
+    },
+    'label + &': {
+      marginTop: '15px',
+    },
+    "& input":{
+      padding:'15px',
+      height:'10px'
+    }
+  },
+  label:{
+    '&.MuiInputLabel-root':{
+    '&.Mui-focused':{color:'black'},
+    }
+  }  ,
+  nameWrapper:{
+    width:'100%',
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    paddingLeft:'50%',
+    paddingRight:'50%'
+  },
   wrapper: {
     display: "flex",
     flexDirection: "column",
@@ -33,7 +60,7 @@ const useStyle = makeStyles({
   },
   headlineText: {
     paddingTop: "15%",
-    paddingBottom: "15%",
+    paddingBottom: "10%",
     fontSize: 70,
     color: "#fff",
     fontFamily: "Poppins",
@@ -43,17 +70,16 @@ const useStyle = makeStyles({
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "#fff",
-      borderRadius: "35px",
-      width: "70%",
-      height:'60px'
+      borderRadius: "10px",
+      width: "75%",
+      height:'40px',
     },
-    "&.MuiOutlinedInput-inputAdornedStart": {
-      opacity: 0.5,
+    'label + &': {
+      marginTop: '15px',
     },
     "& input":{
-
       padding:'15px',
-      height:'30px'
+      height:'10px'
     }
   },
   checkboxWrapper: { marginLeft: "15%" },
@@ -64,12 +90,13 @@ const useStyle = makeStyles({
   button: {
     "&.MuiButton-root": {
       color: "#fff",
-      width: "80%",
-      borderRadius: 20,
-      border: "1px solid #fff",
+      width: "75%",
+      borderRadius: 10,
+      //border: "1px solid #fff",
+      backgroundColor:'#42B72A',
       height: 40,
       "&:hover": {
-        backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+        backgroundImage: "linear-gradient(120deg, #C9FFBF 0%, #FFAFBD 100%)",
         border: "none",
       },
     },
@@ -84,12 +111,14 @@ const SignUpForm = () => {
   const [lastName,setLastName] = useState("");
   const [phone,setPhone] = useState("");
   const [confirmPassword,setConfirmPassword] = useState("");
-  const [stepper,setStepper] = useState(0);
-  const [visibility,setVisibility] = useState(false);
+  const [visibility,setVisibility] =useState(false);  
   const classes = useStyle();
 
-  const handleSubmit = () =>{}
-  // const handleVisibility = () => setVisibility(!visibility); 
+  const handleSubmit = (e) =>{e.preventDefault()}
+  const handleVisibility = (e) => {
+    setVisibility(!visibility) ;
+};
+  //useEffect(()=> console.log(visibility),[visibility]) 
   return (
     <>
       <Box mx={10} className={classes.wrapper}>
@@ -101,10 +130,10 @@ const SignUpForm = () => {
           }}
         >
           <Box className={classes.headlineText}>Sign Up</Box>
-          {stepper===0 &&
           <Box className={classes.formContainer} pt={2}>
+            <Box className={classes.nameWrapper}>
             <OutlinedInput
-              className={classes.outlinedInput}
+              className={classes.outlinedInputName}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               id="firstname-input"
@@ -116,9 +145,9 @@ const SignUpForm = () => {
                 </InputAdornment>
               }
             />
-              <Box py={1}></Box>
+              <Box px={2}></Box>
               <OutlinedInput
-              className={classes.outlinedInput}
+              className={classes.outlinedInputName}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               id="lastname-input"
@@ -130,6 +159,7 @@ const SignUpForm = () => {
                 </InputAdornment>
               }
             />
+            </Box>
               <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
@@ -159,10 +189,7 @@ const SignUpForm = () => {
               }
             />
             <Box py={1}></Box>
-          </Box>
-          }
-          {stepper===1 &&
-          <Box className={classes.formContainer} pt={2}>
+          
             <OutlinedInput
               className={classes.outlinedInput}
               value={userName}
@@ -191,7 +218,7 @@ const SignUpForm = () => {
               }
               endAdornment = {
                 <InputAdornment position='end'>
-                  <Button onCLick ={() => setVisibility(!visibility)}> <VisibilityIcon style={{opacity:0.5}}/></Button>
+                  <Button onClick ={handleVisibility}> <VisibilityIcon style={{opacity:0.5}}/></Button>
                 </InputAdornment>
               }
             />
@@ -209,43 +236,10 @@ const SignUpForm = () => {
                 </InputAdornment>
               }
             />
+            
             <Box py={1}></Box>
+            <Button className={classes.button} onClick={handleSubmit}>submit</Button>
           </Box>
-          }
-          <Box
-            className={classes.buttonWrapper}
-            display="flex"
-            justifyContent="space-evenly"
-            py={2}
-          >
-            <Grid container spacing={3}>
-              <Grid item xs={6} display="flex" justifyContent="left">
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick ={()=>setStepper(stepper -1)}
-                  className={classes.button}
-                  disabled={stepper === 0}
-                >
-                  <NavigateBeforeIcon/>
-                </Button>
-              </Grid>
-              <Grid item xs={6} display="flex" justifyContent="right">
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick = {() =>stepper===2? handleSubmit():setStepper(stepper+1)}
-                  className={classes.button}
-                >
-                  {stepper===2?"Submit":<NavigateNextIcon/>}
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-
-          {/* <Box>
-             <SignUpStepper stepper = {stepper}/> 
-          </Box> */}
         </Box>
       </Box>
     </>

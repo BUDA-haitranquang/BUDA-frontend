@@ -7,12 +7,22 @@ import {
   InputAdornment,
   FormControlLabel,
     Checkbox,
+    InputLabel,
+    FormControl
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 
 const useStyle = makeStyles({
+  label:{
+    '&.MuiInputLabel-root':{
+    fontFamily:'Poppins',
+    color:'black',  
+    fontSize:'25px',
+    '&.Mui-focused':{color:'black'},
+    }
+  }  ,
   wrapper: {
     display: "flex",
     flexDirection: "column",
@@ -38,16 +48,19 @@ const useStyle = makeStyles({
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "#fff",
-      borderRadius: "50px",
+      borderRadius: "10px",
       width: "75%",
-      height:'60px',
+      height:'40px',
+    },
+    'label + &': {
+      marginTop: '16px',
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
     },
     "& input":{
       padding:'15px',
-      height:'30px'
+      height:'10px'
     }
   },
   checkboxWrapper: { marginLeft: "15%" },
@@ -59,9 +72,11 @@ const useStyle = makeStyles({
     "&.MuiButton-root": {
       color: "#fff",
       width: "100%",
-      borderRadius: 20,
+      borderRadius: 10,
       border: "1px solid #fff",
-      height: 55,
+      
+      height: 40,
+     
       "&:hover": {
         backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
         border: "none",
@@ -71,10 +86,11 @@ const useStyle = makeStyles({
   button2: {
     "&.MuiButton-root": {
       color: "#fff",
-      width: "100%",
-      borderRadius: 20,
-      border: "1px solid #fff",
-      height: 50,
+      width: "50%",
+      borderRadius: 10,
+      //border: "1px solid #fff",
+      backgroundColor:'#42B72A',
+      height: 40,
       "&:hover": {
         backgroundImage: "linear-gradient(120deg, #C9FFBF 0%, #FFAFBD 100%)",
         border: "none",
@@ -103,21 +119,27 @@ const SignInForm = () => {
         >
           <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
-            <OutlinedInput
+           <FormControl sx={{width:'100%',marginLeft:'25%'}} >
+             <InputLabel className={classes.label}  htmlFor='username-input'>Username</InputLabel>            
+             <OutlinedInput
               className={classes.outlinedInput}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               id="username-input"
               type="text"
               placeholder="Username"
-              
+             
               startAdornment={
                 <InputAdornment position="start">
                   <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
             />
+            </FormControl >
+
             <Box py={2}></Box>
+            <FormControl sx={{width:'100%',marginLeft:'25%'}}>
+            <InputLabel className={classes.label} for='password-input' >Password</InputLabel>
             <OutlinedInput
               className={classes.outlinedInput}
               value={password}
@@ -132,12 +154,14 @@ const SignInForm = () => {
               }
             />
             <Box py={1}></Box>
+            </FormControl>
           </Box>
           <Box className={classes.checkboxWrapper}>
             <FormControlLabel
               control={<Checkbox color="success" onChange={()=> setCheckBox(val => !val)} />}
               label="Remember password"
             />
+            
           </Box>
           <Box
             className={classes.buttonWrapper}
@@ -160,13 +184,13 @@ const SignInForm = () => {
                 <Box
                   sx={{
                     width : '70%',
-                    height : '1px',
-                    backgroundColor:'black',
+                    height : '0.5px',
+                    backgroundColor:'rgba(0, 0, 0, 0.6)',
                     borderRadius:'25px',
                   }}></Box>
               </Grid>
 
-              <Grid item xs justifyContent="center">
+              <Grid item xs display='flex'justifyContent="center" alignItems='center'>
                 <Button
                   variant="outlined"
                   color="secondary"
