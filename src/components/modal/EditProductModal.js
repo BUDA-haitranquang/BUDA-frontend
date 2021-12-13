@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { UPDATE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
-import { LOAD_PRODUCT } from "../../graphQl/products/productQueries";
+import { LOAD_PRODUCT, LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const EditProductModal = ({data, isOpen, handleClose }) => {
   const product = data.product;
@@ -40,6 +40,8 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
         variables:{
           productID: product.productID
         }
+      },{
+        query: LOAD_PRODUCTS
       }]
     });
   }
