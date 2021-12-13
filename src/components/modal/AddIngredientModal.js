@@ -9,32 +9,45 @@ import {
   getTextFieldUtilityClass,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { useDispatch } from "react-redux";
-import { addIngredient } from "../../redux/ingredientSlice";
+import { useMutation } from "@apollo/client";
+import { ADD_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
+import { LOAD_INGREDIENTS } from "../../graphQl/ingredients/ingredientQueries";
 const AddIngredientModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
-  const [cost, setCost] = useState(0);
+  // const [cost, setCost] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
-  const dp = useDispatch();
-  
+  const [newIngredient,{error}] = useMutation(ADD_INGREDIENT_MUTATION);
+   
+  const addIngredient = ()=>{
+    newIngredient({
+      variables:{
+        name: name,
+        description:description,
+        price:parseFloat(price),
+        amountLeft:parseInt(amountLeft)
+      },
+      refetchQueries:[{query: LOAD_INGREDIENTS}]
+    });
+  }
+
+
   const isFormValid = () => {
     const isValid = (name !== "") 
                     && (!isNaN(price) && price >= 0)
-                    && (!isNaN(amountLeft) && amountLeft >= 0)
-                    && (!isNaN(cost) && cost >= 0);
+                    && (!isNaN(amountLeft) && amountLeft >= 0);
+                    // && (!isNaN(cost) && cost >= 0);
     return isValid;
   }
 
   const handleSubmit = () => {
     if(isFormValid()) {
-      const arr = {name, price, amountLeft, cost, group, description};
-      dp(addIngredient(arr));
-      handleClose();
-    }
-    else alert("Invalid input");
+        addIngredient()
+        handleClose()
+      } 
+      else alert('InvalidInput');
   }
 
 
@@ -86,9 +99,10 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <div style={{width: "100%", display: "flex", justifyContent: "space-between"}}>
+          
             <TextField
               required
+              fullWidth
               type="number"
               id="outlined-basic"
               label="Price"
@@ -96,17 +110,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-            <TextField
-              required
-              type="number"
-              id="outlined-basic"
-              label="Cost"
-              variant="outlined"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
-            />
-          </div>
-          
+            
           <TextField
             fullWidth
             required

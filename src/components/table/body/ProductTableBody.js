@@ -21,7 +21,7 @@ const useStyle = makeStyles({
     },
   });
 
-const IngredientTableBody = ({
+const ProductTableBody = ({
   order,
   orderBy,
   selected,
@@ -101,4 +101,4 @@ const IngredientTableBody = ({
   );
 };
 
-export default IngredientTableBody;
+export default ProductTableBody;

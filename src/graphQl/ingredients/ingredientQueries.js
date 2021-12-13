@@ -11,3 +11,4 @@ export const LOAD_INGREDIENTS = gql`
     }
   }
 `;
+
