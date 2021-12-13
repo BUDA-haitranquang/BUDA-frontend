@@ -16,6 +16,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
+  const [alertAmount, setAlertAmount] = useState(0);
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
@@ -30,6 +31,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
         description: description,
         costPerUnit: parseFloat(costPerUnit),
         amountLeft: parseInt(amountLeft),
+        alertAmount: parseInt(alertAmount),
         sellingPrice: parseFloat(price)
       },
       refetchQueries: [{query: LOAD_PRODUCTS}]
@@ -128,6 +130,16 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             variant="outlined"
             value={amountLeft}
             onChange={(e) => setAmountLeft(e.target.value)}
+          />
+          <TextField
+            fullWidth
+            required
+            type="number"
+            id="outlined-basic"
+            label="Alert Amount"
+            variant="outlined"
+            value={alertAmount}
+            onChange={(e) => setAlertAmount(e.target.value)}
           />
           <TextField
             fullWidth

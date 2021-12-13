@@ -44,7 +44,6 @@ const ProductDetail = (props) => {
     }
     
     fetchData();
-    console.log("abc");
   }, [data]);
 
   if (error) return <Redirect to="/login" />;

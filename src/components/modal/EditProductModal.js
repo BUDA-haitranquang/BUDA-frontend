@@ -15,6 +15,7 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.sellingPrice);
   const [amountLeft, setAmountLeft] = useState(product.amountLeft);
+  const [alertAmount, setAlertAmount] = useState(product.alertAmount);
   const [costPerUnit, setCostPerUnit] = useState(product.costPerUnit);
   const [group, setGroup] = useState(product.group);
   const [description, setDescription] = useState(product.description);
@@ -31,6 +32,7 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
         description: description,
         costPerUnit: parseFloat(costPerUnit),
         amountLeft: parseInt(amountLeft),
+        alertAmount: parseInt(alertAmount),
         sellingPrice: parseFloat(price)
       },
       refetchQueries: [{
@@ -94,7 +96,7 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
             justifyContent="space-between"
           >
             <Box mt={1}>
-              <Typography align="center">Add</Typography>
+              <Typography align="center">Edit</Typography>
             </Box>
 
             <IconButton onClick={handleClose}>
@@ -142,6 +144,16 @@ const EditProductModal = ({data, isOpen, handleClose }) => {
             variant="outlined"
             value={amountLeft}
             onChange={(e) => setAmountLeft(e.target.value)}
+          />
+          <TextField
+            fullWidth
+            required
+            type="number"
+            id="outlined-basic"
+            label="Alert Amount"
+            variant="outlined"
+            value={alertAmount}
+            onChange={(e) => setAlertAmount(e.target.value)}
           />
           <TextField
             fullWidth
