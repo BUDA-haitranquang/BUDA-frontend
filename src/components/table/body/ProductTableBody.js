@@ -30,11 +30,11 @@ const ProductTableBody = ({
   setSelected,
   data,
 }) => {
-  const handleClick = (e, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (e, id) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected,id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -50,18 +50,18 @@ const ProductTableBody = ({
 
   const classes = useStyle();
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
   return (
     <TableBody className={classes.root}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
-        const isItemSelected = isSelected(row.name);
+        const isItemSelected = isSelected(row.productID);
         const labelId = `enhanced-table-checkbox-${idx}`;
         return (
-          <CustomWidthTooltip title={row.description}>
+          <CustomWidthTooltip title={row.description}> 
             <TableRow 
               sx={{ cursor: "pointer" }}
               hover
-              onClick={(e) => handleClick(e, row.name)}
+              onClick={(e) => handleClick(e, row.productID)}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}

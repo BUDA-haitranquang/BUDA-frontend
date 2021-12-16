@@ -17,3 +17,8 @@ export const ADD_INGREDIENT_MUTATION = gql`
         )
         {ingredientID}
     }`;
+
+export const HIDE_INGREDIENT_MUTATION = gql`
+    mutation hideIngredient($ingredientID: Int!){
+        hideIngredient(ingredientID: $ingredientID){ingredientID}
+    }`

@@ -4,7 +4,7 @@ export const ADD_CUSTOMER_MUTATION = gql`
     mutation newCustomer(
       $name: String!
       $phoneNumber: String!
-      $address: String  
+      $address: String!
     ){
         newCustomer(
             customerInput:{

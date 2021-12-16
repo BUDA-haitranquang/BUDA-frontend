@@ -11,7 +11,13 @@ import  { makeStyles } from '@mui/styles';
 import SplitButton from './SplitButton';
 import FilterPopup from './FilterPopup';
 
-const EnhancedToolbar = ({headCells, numSelected, handleOpen,handleSearch,searchBy }) => {
+const EnhancedToolbar = ({
+  headCells, 
+  numSelected, 
+  handleOpen,
+  handleSearch,
+  searchBy, 
+  deleteItem}) => {
   const [value,setValue]=useState("");
   const li = Array.from(headCells,item=>item.label);
   return (
@@ -72,11 +78,11 @@ const EnhancedToolbar = ({headCells, numSelected, handleOpen,handleSearch,search
       </FormControl>
       }
 
-      {/* {numSelected ===0 && <SplitButton options = {headCells} searchBy={(val)=>searchBy(val)}/>} */}
+     
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={deleteItem}>
             <DeleteIcon/>
           </IconButton>
         </Tooltip>

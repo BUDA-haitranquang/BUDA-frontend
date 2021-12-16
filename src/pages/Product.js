@@ -8,7 +8,8 @@ import AddProductModal from "../components/modal/AddProductModal";
 import Sidebar from "../components/Sidebar";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
-
+import { useMutation } from "@apollo/client";
+import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 const headCells = [
   // {
   //   id: "ID",
@@ -58,6 +59,19 @@ const Product = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
   const { error, loading, data} = useQuery(LOAD_PRODUCTS);
+  const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
+  
+  const handleDelete = (selected) =>{
+      if (selected===[]) return 
+      selected.forEach(
+        (item)=>{
+          hideProduct({
+            variables:{productID: parseInt(item)},
+            refetchQueries: [{query: LOAD_PRODUCTS}]
+          })
+        }
+      )
+  }
 
   useEffect(() => {
     async function fetchData(){
@@ -65,8 +79,7 @@ const Product = (props) => {
     }
     
     fetchData();
-      
-  }, [data]);
+  }, [data]); 
 
   if(error) return <Redirect to="/login"/>;
 
@@ -83,12 +96,13 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          {console.log(data)}
           <CombinedTable
+            deleteItems={handleDelete}
             data={products}
             headCells={headCells}
             Modal={AddProductModal}
             Body={ProductTableBody}
+            type='productID'
           />
         </Box>
       </Box>

@@ -5,7 +5,7 @@ export const ADD_SUPPLIER_MUTATION = gql`
         $name: String!
         $address: String!
         $phoneNumber: String!
-        $email: String
+        $email: String!
     ){
         newSupplier(
             supplierInput:{
