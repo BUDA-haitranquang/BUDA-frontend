@@ -59,7 +59,7 @@ const Ingredient = (props) => {
     selected.forEach(
       (item)=>{
         hideIngredient({
-          variables:{productID: parseInt(item)},
+          variables:{ingredientID: parseInt(item)},
           refetchQueries: [{query: LOAD_INGREDIENTS}]
         })
       }
