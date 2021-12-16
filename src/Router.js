@@ -5,6 +5,7 @@ import Supplier from "./pages/Supplier";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
+import SignUp from "./pages/SignUp";
 import {
   ApolloClient,
   InMemoryCache,
