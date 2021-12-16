@@ -8,7 +8,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-
+import tokenReducer from './tokenSlice'
 const persistConfig = {
   key: "root",
   storage,
@@ -19,6 +19,7 @@ const reducer = combineReducers({
   product: productReducer,
   ingredient: ingredientReducer,
   supplier:supplierReducer,
+  token:tokenReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

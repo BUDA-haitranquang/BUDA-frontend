@@ -7,22 +7,12 @@ import {
   InputAdornment,
   FormControlLabel,
     Checkbox,
-    InputLabel,
-    FormControl
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 
 const useStyle = makeStyles({
-  label:{
-    '&.MuiInputLabel-root':{
-    fontFamily:'Poppins',
-    color:'black',  
-    fontSize:'25px',
-    '&.Mui-focused':{color:'black'},
-    }
-  }  ,
   wrapper: {
     display: "flex",
     flexDirection: "column",
@@ -51,9 +41,6 @@ const useStyle = makeStyles({
       borderRadius: "10px",
       width: "75%",
       height:'40px',
-    },
-    'label + &': {
-      marginTop: '16px',
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
@@ -119,8 +106,6 @@ const SignInForm = () => {
         >
           <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
-           <FormControl sx={{width:'100%',marginLeft:'25%'}} >
-             <InputLabel className={classes.label}  htmlFor='username-input'>Username</InputLabel>            
              <OutlinedInput
               className={classes.outlinedInput}
               value={userName}
@@ -128,19 +113,15 @@ const SignInForm = () => {
               id="username-input"
               type="text"
               placeholder="Username"
-             
               startAdornment={
                 <InputAdornment position="start">
                   <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
             />
-            </FormControl >
 
             <Box py={2}></Box>
-            <FormControl sx={{width:'100%',marginLeft:'25%'}}>
-            <InputLabel className={classes.label} for='password-input' >Password</InputLabel>
-            <OutlinedInput
+              <OutlinedInput
               className={classes.outlinedInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -154,7 +135,7 @@ const SignInForm = () => {
               }
             />
             <Box py={1}></Box>
-            </FormControl>
+           
           </Box>
           <Box className={classes.checkboxWrapper}>
             <FormControlLabel
