@@ -70,6 +70,7 @@ const AppRouter = () => {
           <PrivateRoute authed={isAuth} exact path="/supplier" component={Supplier} />
           <PrivateRoute authed={isAuth} exact path="/customer" component={Customer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />
         </Switch>

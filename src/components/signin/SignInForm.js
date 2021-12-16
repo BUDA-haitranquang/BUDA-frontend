@@ -105,7 +105,7 @@ const SignInForm = () => {
 
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
   if (loading) return "Signing in...";
-  if (error) return `Sign in error! ${error.message}`;
+  //if (error) return `Sign in error! ${error.message}`;
 
   const login = () => {
     userLogin({
@@ -122,12 +122,11 @@ const SignInForm = () => {
         history.push("/dashboard")
       })
       .catch((error) => {
-        //TODO: handle login errors
-        alert(error);
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     login();
   };
 
@@ -143,6 +142,14 @@ const SignInForm = () => {
         >
           <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
+            
+            {error && 
+                <h5 style={{
+                color:'red',
+                fontFamily:'Poppins',
+                fontSize:'20px',
+              }}>Wrong username or password</h5>
+            }
              <OutlinedInput
               className={classes.outlinedInput}
               value={email}
@@ -189,10 +196,12 @@ const SignInForm = () => {
           >
             <Grid container spacing={3} display='column' flexDirection='column'>
               <Grid item xs justifyContent="center">
+      
                 <Button
                   variant="outlined"
                   color="secondary"
                   className={classes.button1}
+                  onClick={handleSubmit}
                 >
                   LOG IN
                 </Button>
@@ -213,7 +222,7 @@ const SignInForm = () => {
                   variant="outlined"
                   color="secondary"
                   className={classes.button2}
-                  onClick={handleSubmit}
+                  onClick={(e)=>{history.push('/signup')}}
                 >
                   SIGN UP
                 </Button>
