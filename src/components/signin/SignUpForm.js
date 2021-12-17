@@ -4,18 +4,20 @@ import {
   Button,
   OutlinedInput,
   InputAdornment,
-  FormControlLabel,
-    Checkbox,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
-import SignUpStepper from './SignUpStepper';
 import EmailIcon from '@mui/icons-material/Email';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import  NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import PhoneIcon from '@mui/icons-material/Phone';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import {useHistory} from 'react-router';
+import { useMutation } from "@apollo/client";
+import { useDispatch } from "react-redux";
+import { addToken } from "../../redux/tokenSlice";
+import {
+  REGISTER_USER
+} from "../../graphQl/authentication/authMutations";
 const useStyle = makeStyles({
   outlinedInputName: {
     "&.MuiOutlinedInput-root": {
@@ -42,8 +44,6 @@ const useStyle = makeStyles({
     display:'flex',
     flexDirection:'row',
     justifyContent:'center',
-    paddingLeft:'50%',
-    paddingRight:'50%'
   },
   wrapper: {
     display: "flex",
@@ -104,6 +104,9 @@ const useStyle = makeStyles({
 });
 
 const SignUpForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+ 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email,setEmail] = useState("");
@@ -111,14 +114,51 @@ const SignUpForm = () => {
   const [lastName,setLastName] = useState("");
   const [phone,setPhone] = useState("");
   const [confirmPassword,setConfirmPassword] = useState("");
+  //const [error,setError] = useState('');
   const [visibility,setVisibility] =useState(false);  
+  const [registerUser,{loading,error}] = useMutation(REGISTER_USER);
+  if (loading) return 'Loading';
+  
   const classes = useStyle();
-
-  const handleSubmit = (e) =>{e.preventDefault()}
+  
   const handleVisibility = (e) => {
     setVisibility(!visibility) ;
 };
-  //useEffect(()=> console.log(visibility),[visibility]) 
+ const register = ()=>{
+   registerUser({
+     variables:{
+       username: userName,
+       firstName: firstName,
+       lastName:lastName,
+       phoneNumber: phone,
+       email:email,
+       password: password
+     }
+   }).then(res=>{
+     const {accessToken,refreshToken} = res.data.userRegister;
+     dispatch(addToken(accessToken));
+   }).then(()=>history.push('/dashboard')) 
+ } 
+
+const validate = ()=>{
+  if (!userName) return false;
+  if(!password) return false;
+  if(!firstName) return false;
+  if(!lastName) return false;
+  if(!email) return false;
+  if(password.length<8) return false;
+  if(password != confirmPassword) return false;
+  return true; 
+}
+
+ const handleSubmit=(e)=>{
+   e.preventDefault();
+   if(!validate()) {
+    console.log('error') 
+    return ;
+   } 
+  register();
+ }
   return (
     <>
       <Box mx={10} className={classes.wrapper}>

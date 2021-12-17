@@ -11,12 +11,11 @@ import {
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../redux/tokenSlice";
 import {
   LOGIN_USER,
-  REGISTER_USER,
 } from "../../graphQl/authentication/authMutations";
 import { useHistory } from "react-router";
 
