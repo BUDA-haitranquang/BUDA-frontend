@@ -36,7 +36,7 @@ export default function AccountMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        style={{color: "white"}}
+        style={{color: "white", fontWeight: "600"}}
       >
         <AccountCircleIcon sx={{paddingRight: "4px", fontSize: "2rem"}} />
         Username
