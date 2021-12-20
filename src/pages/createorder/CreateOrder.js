@@ -1,14 +1,10 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React from "react";
-import { makeStyles } from "@mui/styles";
+import CustomerGrid from "./customer/CustomerGrid";
 import Navbar from "./Navbar";
-import OrderProducts from "./order/itemspane/OrderProducts";
-import SearchProductBar from "./order/itemspane/SearchProductBar";
-import Services from "./order/others/services/Services";
-import Shipping from "./order/others/Shipping";
-import EditableMoneyBox from "./EditableMoneyBox";
-import UneditableMoneyBox from "./UneditableMoneyBox";
+import MainOrderGrid from "./order/MainOrderGrid";
 
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
@@ -37,32 +33,9 @@ export default function CreateOrder() {
   return (
     <Box className={classes.root}>
       <Navbar />
-      <Grid container sx={{ margin: "10px" }}>
-        <Grid item xs={8} className="order">
-          <SearchProductBar />
-          <Box className="itemsPane">
-            <OrderProducts />
-            <Grid container className="others">
-              <Services />
-              <Shipping />
-            </Grid>
-          </Box>
-          <Grid
-            container
-            className="costPane"
-            justifyContent="space-evenly"
-            sx={{ marginTop: "10px" }}
-          >
-            <UneditableMoneyBox xs={4} title="Total" />
-            <EditableMoneyBox xs={4} title="Discount" />
-            <UneditableMoneyBox xs={4} title="Final" />
-          </Grid>
-        </Grid>
-        <Grid item xs={4} className="customer">
-          <Box className={classes.searchCustomerBar}></Box>
-          <Box className={classes.customerPane}></Box>
-          <Box className={classes.customerPayment}></Box>
-        </Grid>
+      <Grid container sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
+        <MainOrderGrid />
+        <CustomerGrid />
       </Grid>
     </Box>
   );

@@ -1,11 +1,5 @@
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  OutlinedInput,
-  Typography,
-} from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+import { FormControl, IconButton, InputAdornment, OutlinedInput, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -16,12 +10,12 @@ const useStyle = makeStyles(() => ({
     "& .MuiOutlinedInput-input": {
       paddingTop: "10px",
       paddingBottom: "10px",
-      color: "black",
+      color: "black"
     },
   },
 }));
 
-export default function SearchProductBar() {
+export default function SearchCustomerBar() {
   const classes = useStyle();
   const [value, setValue] = useState("");
   const handleSearch = () => {};
@@ -29,7 +23,7 @@ export default function SearchProductBar() {
     <Box className={classes.root}>
       <FormControl variant="outlined" fullWidth>
         <OutlinedInput
-          placeholder="Search Product"
+          placeholder="Search Customer"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           endAdornment={
