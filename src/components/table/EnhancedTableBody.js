@@ -1,3 +1,4 @@
+// REDUNDANT FILE, JUST KEEP FOR BACKUP LATER
 import React from "react";
 import { TableBody, TableRow, TableCell, Checkbox } from "@mui/material";
 import { getComparator, stableSort } from "../../utils/tableUtils";
@@ -45,7 +46,7 @@ const EnhancedTableBody = ({
             role="checkbox"
             aria-checked={isItemSelected}
             tabIndex={-1}
-            key={row.name}
+            key={row.id}
             selected={isItemSelected}
           >
             <TableCell align="center" padding="checkbox">
@@ -57,9 +58,8 @@ const EnhancedTableBody = ({
             </TableCell>
             <TableCell align="right">{row.id}</TableCell>
             <TableCell component="th" id={labelId} scope="row" padding="none">
-              <Link to={{
-                pathname: `product/${row.id}`, 
-                state: {data: row}}}
+              <Link 
+                to={{pathname: `product/${row.id}`}}
                 style={{textDecoration: "none", color: "blue"}}
               >
                 {row.name}
