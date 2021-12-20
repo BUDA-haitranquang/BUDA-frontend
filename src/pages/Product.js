@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Box from "@mui/material/Box";
+import { useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
+import Box from "@mui/material/Box";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import CombinedTable from "../components/CombinedTable";
 import AddProductModal from "../components/modal/AddProductModal";
+import Sidebar from "../components/Sidebar";
 import ProductTableBody from "../components/table/body/ProductTableBody";
-import { useQuery } from "@apollo/client";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 
 const headCells = [
@@ -56,16 +57,18 @@ const headCells = [
 const Product = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
-  const { error, loading, data, refetch } = useQuery(LOAD_PRODUCTS);
+  const { error, loading, data} = useQuery(LOAD_PRODUCTS);
+
   useEffect(() => {
     async function fetchData(){
-      await refetch();
       if(data) setProducts(data.productsByUser);
     }
     
     fetchData();
       
   }, [data]);
+
+  if(error) return <Redirect to="/login"/>;
 
   return (
     <Box sx={{ display: "flex" }}>

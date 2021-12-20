@@ -17,6 +17,7 @@ export const LOAD_PRODUCTS = gql`
 export const LOAD_PRODUCT = gql`
   query product($productID: Int!) {
     product(productID: $productID) {
+      productID
       name
       description
       amountLeft
@@ -27,10 +28,4 @@ export const LOAD_PRODUCT = gql`
   }
 `;
 
-export const HIDE_PRODUCT = gql`
-  query hideProduct($productID: Int!) {
-    hideProduct(productID: $productID) {
-      productID
-    }
-  }
-`;
+
