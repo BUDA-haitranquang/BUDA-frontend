@@ -16,15 +16,6 @@ const useStyle = makeStyles(() => ({
     backgroundColor: `${color1}`,
     height: "100vh",
     overflow: "hidden",
-    "& .others": {
-      "& .MuiGrid-root": {
-        height: "26vh",
-        backgroundColor: `${color4}`,
-        border: "2px solid gray",
-        padding: "6px",
-        overflow: "hidden",
-      },
-    },
   },
 }));
 
