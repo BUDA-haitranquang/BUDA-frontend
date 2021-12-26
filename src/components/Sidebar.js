@@ -17,6 +17,7 @@ import {
 import { ShoppingBasketOutlined } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -83,7 +84,8 @@ const Sidebar = ({ window, name }) => {
         return <AssignmentIndIcon />;
       case 6:
         return <MonetizationOnIcon />;
-
+      case 7:
+        return  <BarChartIcon/>
       default:
         break;
     }
@@ -101,22 +103,16 @@ const Sidebar = ({ window, name }) => {
       <Toolbar children={logo} />
       <Divider />
       <List className={classes.root}>
-        {[
-          "dashboard",
-          "product",
-          "ingredient",
-          "supplier",
-          "customer",
-          "staff",
-          "cost",
-        ].map((item, idx) => (
-          <Link to={`/${item}`}>
-            <ListItem button>
-              <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-              <ListItemText primary={capitalizeFirstLetter(item)} />
-            </ListItem>
-          </Link>
-        ))}
+        {["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"].map(
+          (item, idx) => (
+            <Link to={`/${item}`}>
+              <ListItem button>
+                <ListItemIcon>{itemRender(idx)}</ListItemIcon>
+                <ListItemText primary={capitalizeFirstLetter(item)}/>
+              </ListItem>
+            </Link>
+          )
+        )}
       </List>
     </div>
   );

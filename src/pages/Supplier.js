@@ -46,8 +46,12 @@ const Supplier = (props) => {
   const {error,loading,data} = useQuery(LOAD_SUPPLIERS);
 
   useEffect(()=>{
-    if(data) setSuppliers(data.suppliersByUser);
-  },[data]);
+    async function fetchData(){
+      if(data) setSuppliers(data.suppliersByUser);
+    }
+    fetchData();
+    console.log(suppliers);
+    },[data]);
   return (
     <Box sx={{display: "flex"}}>
       <Sidebar window={window} name="Supplier" />
@@ -61,7 +65,12 @@ const Supplier = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={suppliers} headCells={headCells} Modal={AddSupplierModal} Body={SupplierTableBody}/>
+          <CombinedTable 
+            type = 'supplierID'
+            data={suppliers} 
+            headCells={headCells}   
+            Modal={AddSupplierModal} 
+            Body={SupplierTableBody}/>
         </Box>
       </Box>
     </Box>

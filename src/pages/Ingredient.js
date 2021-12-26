@@ -5,6 +5,8 @@ import { Toolbar } from "@mui/material";
 import CombinedTable from "../components/CombinedTable";
 import AddIngredientModal from "../components/modal/AddIngredientModal";
 import IngredientTableBody from "../components/table/body/IngredientTableBody";
+import { useMutation } from "@apollo/client";
+import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutation";
 import { useQuery } from "@apollo/client";
 import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 const headCells = [
@@ -50,9 +52,27 @@ const Ingredient = (props) => {
   const { window } = props;
   const [ingredients,setIngredients] = useState([]);
   const {error,loading,data} = useQuery(LOAD_INGREDIENTS);
+  const [hideIngredient] = useMutation(HIDE_INGREDIENT_MUTATION);
+  
+  const handleDelete = (selected) =>{
+    if (selected===[]) return 
+    selected.forEach(
+      (item)=>{
+        hideIngredient({
+          variables:{ingredientID: parseInt(item)},
+          refetchQueries: [{query: LOAD_INGREDIENTS}]
+        })
+      }
+    )
+}
+
   useEffect(()=>{
-    if (data) setIngredients(data.ingredientsByUser);
+    async function fetchData(){
+      if (data) setIngredients(data.ingredientsByUser);
+    }
+    fetchData(); 
   },[data]);
+
   return (
     <Box sx={{display: "flex"}}>
       <Sidebar window={window} name="Ingredient" />
@@ -66,7 +86,13 @@ const Ingredient = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable data={ingredients} headCells={headCells} Modal={AddIngredientModal} Body={IngredientTableBody}/>
+          <CombinedTable 
+            deleteItems={handleDelete}
+            type = 'ingredientID' 
+            data={ingredients} 
+            headCells={headCells} 
+            Modal={AddIngredientModal} 
+            Body={IngredientTableBody}/>
         </Box>
       </Box>
     </Box>

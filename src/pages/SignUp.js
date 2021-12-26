@@ -1,19 +1,27 @@
 import React from "react";
-import SignInForm from "../components/signin/SignInForm";
+import SignUpForm from "../components/signin/SignUpForm";
 import LogInPic from "../assets/login.jpg";
-import { Grid, Box,Hidden } from "@mui/material";
+import { Grid, Box ,Hidden} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
+const useStyle = makeStyles((theme) => ({
+  imgWrapper: {
+    width: "100%",
+    height: "100%",
+  },
+}));
 
-const Login = () => {
+const SignUp = () => {
+   const classes = useStyle();
   return (
     <>
-      <Grid container sx={{height:'100vh'}} spacing={0}>
+      <Grid container sx ={{height:'100vh'}}spacing={0}>
         <Grid item lg={6} xs={0}>
-          <Box style={{ width: "100%", height: "100%"}}>
+          <Box style={{ width: "100%", height: "100%" }}>
             <Hidden only={['xs','sm','md']}>
             <img
-              alt = 'some_img'
+              alt = 'someimg'
+              className={classes.imgWrapper}
               src={LogInPic}
               width="100%"
               height="100%"
@@ -29,7 +37,7 @@ const Login = () => {
               height: "100%",
             }}
           >
-            <SignInForm />
+              <SignUpForm/>
           </Box>
         </Grid>
       </Grid>
@@ -37,4 +45,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
