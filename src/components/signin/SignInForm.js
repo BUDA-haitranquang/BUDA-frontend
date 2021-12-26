@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import {
   Box,
   Button,
@@ -101,8 +101,24 @@ const SignInForm = () => {
   const [checkBox,setCheckBox] = useState(false);
   const classes = useStyle();
   const dispatch = useDispatch();
-
+  const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  
+  useEffect(() => {
+    const listener = event => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        btn.current.click();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
+
+
   if (loading) return "Signing in...";
   //if (error) return `Sign in error! ${error.message}`;
 
@@ -129,6 +145,8 @@ const SignInForm = () => {
     login();
   };
 
+  
+  
   return (
     <>
       <Box mx={10} className={classes.wrapper}>
@@ -201,6 +219,7 @@ const SignInForm = () => {
                   color="secondary"
                   className={classes.button1}
                   onClick={handleSubmit}
+                  ref = {btn}
                 >
                   LOG IN
                 </Button>

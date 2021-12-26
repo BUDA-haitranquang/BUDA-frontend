@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {
   Box,
   Button,
@@ -106,7 +106,7 @@ const useStyle = makeStyles({
 const SignUpForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
- 
+  const btn = useRef(null)
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email,setEmail] = useState("");
@@ -114,12 +114,26 @@ const SignUpForm = () => {
   const [lastName,setLastName] = useState("");
   const [phone,setPhone] = useState("");
   const [confirmPassword,setConfirmPassword] = useState("");
-  //const [error,setError] = useState('');
+  const classes = useStyle();;
   const [visibility,setVisibility] =useState(false);  
+  
   const [registerUser,{loading,error}] = useMutation(REGISTER_USER);
+  useEffect(() => {
+    const listener = event => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        btn.current.click();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
   if (loading) return 'Loading';
   
-  const classes = useStyle();
+  
   
   const handleVisibility = (e) => {
     setVisibility(!visibility) ;
@@ -137,17 +151,18 @@ const SignUpForm = () => {
    }).then(res=>{
      const {accessToken,refreshToken} = res.data.userRegister;
      dispatch(addToken(accessToken));
-   }).then(()=>history.push('/dashboard')) 
+   }).then(()=>history.push('/dashboard'))
+   .catch(e=>{console.log(e)}) 
  } 
 
 const validate = ()=>{
   if (!userName) return false;
   if(!password) return false;
-  if(!firstName) return false;
-  if(!lastName) return false;
-  if(!email) return false;
-  if(password.length<8) return false;
-  if(password != confirmPassword) return false;
+  // if(!firstName) return false;
+  // if(!lastName) return false;
+  // if(!email) return false;
+  // if(password.length<8) return false;
+  // if(password != confirmPassword) return false;
   return true; 
 }
 
@@ -176,7 +191,6 @@ const validate = ()=>{
               className={classes.outlinedInputName}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              id="firstname-input"
               type="text"
               placeholder="First Name"
               startAdornment={
@@ -190,7 +204,6 @@ const validate = ()=>{
               className={classes.outlinedInputName}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              id="lastname-input"
               type="text"
               placeholder="Last Name"
               startAdornment={
@@ -205,7 +218,6 @@ const validate = ()=>{
               className={classes.outlinedInput}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              id="email-input"
               type="text"
               placeholder="Email"
               startAdornment={
@@ -219,7 +231,6 @@ const validate = ()=>{
               className={classes.outlinedInput}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              id="phone-input"
               type="text"
               placeholder="Phone Number"
               startAdornment={
@@ -234,7 +245,6 @@ const validate = ()=>{
               className={classes.outlinedInput}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              id="username-input"
               type="text"
               placeholder=" Username"
               startAdornment={
@@ -248,7 +258,6 @@ const validate = ()=>{
               className = {classes.outlinedInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              id="email-input"
               type={visibility?'text':'password'}
               placeholder="Password"
               startAdornment={
@@ -267,7 +276,6 @@ const validate = ()=>{
               className={classes.outlinedInput}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              id="confirm-password-input"
               type="password"
               placeholder="Confirm Password"
               startAdornment={
@@ -278,7 +286,10 @@ const validate = ()=>{
             />
             
             <Box py={1}></Box>
-            <Button className={classes.button} onClick={handleSubmit}>Sign up</Button>
+            <Button 
+              className={classes.button} 
+              onClick={handleSubmit} 
+              ref = {btn}>Sign up</Button>
           </Box>
         </Box>
       </Box>
