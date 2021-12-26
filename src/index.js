@@ -1,15 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Dashboard from './pages/Dashboard';
-import AppRouter from './Router'
+import React from "react";
+import ReactDOM from "react-dom";
+import AppRouter from "./Router";
+import { Provider } from "react-redux";
+import store, { persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import Footer from "./components/Footer";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AppRouter/>
-  </React.StrictMode>,
-  document.getElementById('root')
+  <React.Fragment>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div style={{
+          display:"flex", 
+          flexDirection:"column", 
+          justifyContent: "space-between",
+          minHeight: "100vh"}}>
+          <AppRouter />
+          {/* <Footer /> */}
+        </div>
+      </PersistGate>
+    </Provider>
+  </React.Fragment>,
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
