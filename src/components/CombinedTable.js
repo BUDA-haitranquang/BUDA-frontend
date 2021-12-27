@@ -1,4 +1,3 @@
-//import { SettingsOverscanOutlined } from "@mui/icons-material";
 import {
   Box,
   Paper,
@@ -7,11 +6,11 @@ import {
   TablePagination,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-//import EnhancedTableBody from "./table/EnhancedTableBody";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 
-const CombinedTable = ({ data, headCells, Modal, Body }) => {
+
+const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -21,6 +20,8 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState("name");
+  
+ 
   const displayData = display.slice(
     page * rowsPerPage,
     (page + 1) * rowsPerPage
@@ -49,9 +50,7 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
 
   const handleSelectAllClick = (e) => {
     if (e.target.checked) {
-      const newSelecteds = displayData.map((n) => {
-        return n.name;
-      });
+      const newSelecteds = data.map((n) => n[type]);
       setSelected(newSelecteds);
       return;
     }
@@ -73,6 +72,7 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
+    
         <TableContainer sx={{ paddingRight: "10px" }}>
           <EnhancedToolbar
             numSelected={selected.length}
@@ -80,6 +80,10 @@ const CombinedTable = ({ data, headCells, Modal, Body }) => {
             handleSearch={(val) => setSearch(val)}
             headCells={headCells}
             searchBy={(val) => setSearchBy(val)}
+            deleteItem={()=>{
+              deleteItems(selected);
+              setSelected([]);
+          }}
           />
           <Table sx={{ minWidth: 1000 }}>
             <EnhancedTableHead

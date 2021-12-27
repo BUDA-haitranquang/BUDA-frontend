@@ -5,6 +5,8 @@ import Supplier from "./pages/Supplier";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
+import SignUp from "./pages/SignUp";
+import Statistic from "./pages/Statistic";
 import {
   ApolloClient,
   InMemoryCache,
@@ -67,8 +69,10 @@ const AppRouter = () => {
           <PrivateRoute authed={isAuth} exact path="/product/:id" component={ProductDetail} />
           <PrivateRoute authed={isAuth} exact path="/ingredient" component={Ingredient} />
           <PrivateRoute authed={isAuth} exact path="/supplier" component={Supplier} />
+          <PrivateRoute authed={isAuth} exact path="/statistic" component={Statistic} />
           <PrivateRoute authed={isAuth} exact path="/customer" component={Customer} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />
           <Route path="*" component={Error} />
         </Switch>

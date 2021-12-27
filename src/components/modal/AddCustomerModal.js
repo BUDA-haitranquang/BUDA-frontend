@@ -1,17 +1,34 @@
 import React, { useState } from "react";
 import { Box, Modal, TextField, Typography, IconButton, Button } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { useDispatch } from "react-redux";
-import { addCustomer } from "../../redux/customerSlice";
+import { useMutation } from "@apollo/client";
+import { ADD_CUSTOMER_MUTATION } from "../../graphQl/customers/customersMutations";
+import { LOAD_CUSTOMERS } from "../../graphQl/customers/customersQueries";
+
 const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [email,setEmail] = useState("");
-  const dp = useDispatch(); 
+  const [newCustomer,{error}] = useMutation(ADD_CUSTOMER_MUTATION);
+  
+  const addCustomer = ()=>{
+      newCustomer({
+        variables:{
+          name:name,
+          phoneNumber:phoneNumber.replace,
+          address:address
+        },
+        refetchQueries:[{query:LOAD_CUSTOMERS}]
+      });
+  }
+  const isValid=()=>{return true}
   const handleSubmit = ()=>{
-    dp(addCustomer({name,phoneNumber,address,email}));
-    handleClose();
+    if(isValid()){
+      addCustomer();
+      handleClose();
+    } 
+    else alert("Invalid")
   }
   return (
     <Modal

@@ -58,8 +58,11 @@ const Customer = (props) => {
   const [customers,setCustomers] = useState([]);
   const {error,loading,data} = useQuery(LOAD_CUSTOMERS);
   useEffect(()=>{
-    if(data) setCustomers(data.customersByUser)
-  },[data])
+    async function fetchData(){
+      if(data) setCustomers(data.customersByUser)
+    }
+    fetchData();
+    },[data])
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -76,7 +79,12 @@ const Customer = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box >
-          <CombinedTable data={customers} headCells={headCells} Modal={AddCustomerModal} Body={CustomerTableBody}/>
+          <CombinedTable 
+            data={customers} 
+            headCells={headCells} 
+            Modal={AddCustomerModal} 
+            Body={CustomerTableBody} 
+            type = 'customerID'/>
         </Box>
       </Box>
     </Box>

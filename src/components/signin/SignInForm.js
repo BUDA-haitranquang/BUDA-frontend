@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import {
   Box,
   Button,
@@ -6,17 +6,16 @@ import {
   OutlinedInput,
   InputAdornment,
   FormControlLabel,
-  Checkbox,
+    Checkbox,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../redux/tokenSlice";
 import {
   LOGIN_USER,
-  REGISTER_USER,
 } from "../../graphQl/authentication/authMutations";
 import { useHistory } from "react-router";
 
@@ -36,37 +35,58 @@ const useStyle = makeStyles({
   },
   headlineText: {
     paddingTop: "15%",
-    paddingBottom: "15%",
+    paddingBottom: "10%",
     fontSize: 70,
     color: "#fff",
     fontFamily: "Poppins",
-    fontWeight: 800,
+    fontWeight: 800,  
     marginLeft: "15%",
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "#fff",
-      borderRadius: "25px",
-      width: "70%",
+      borderRadius: "10px",
+      width: "75%",
+      height:'40px',
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
     },
+    "& input":{
+      padding:'15px',
+      height:'10px'
+    }
   },
   checkboxWrapper: { marginLeft: "15%" },
   buttonWrapper: {
     marginLeft: "15%",
     width: "70%",
   },
-  button: {
+  button1: {
     "&.MuiButton-root": {
       color: "#fff",
-      width: "80%",
-      borderRadius: 20,
+      width: "100%",
+      borderRadius: 10,
       border: "1px solid #fff",
+      
       height: 40,
+     
       "&:hover": {
         backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+        border: "none",
+      },
+    },
+  },
+  button2: {
+    "&.MuiButton-root": {
+      color: "#fff",
+      width: "50%",
+      borderRadius: 10,
+      //border: "1px solid #fff",
+      backgroundColor:'#42B72A',
+      height: 40,
+      "&:hover": {
+        backgroundImage: "linear-gradient(120deg, #C9FFBF 0%, #FFAFBD 100%)",
         border: "none",
       },
     },
@@ -78,12 +98,29 @@ const SignInForm = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checkBox,setCheckBox] = useState(false);
   const classes = useStyle();
   const dispatch = useDispatch();
-
+  const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  
+  useEffect(() => {
+    const listener = event => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        btn.current.click();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
+
+
   if (loading) return "Signing in...";
-  if (error) return `Sign in error! ${error.message}`;
+  //if (error) return `Sign in error! ${error.message}`;
 
   const login = () => {
     userLogin({
@@ -100,15 +137,16 @@ const SignInForm = () => {
         history.push("/dashboard")
       })
       .catch((error) => {
-        //TODO: handle login errors
-        alert(error);
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     login();
   };
 
+  
+  
   return (
     <>
       <Box mx={10} className={classes.wrapper}>
@@ -121,7 +159,15 @@ const SignInForm = () => {
         >
           <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
-            <OutlinedInput
+            
+            {error && 
+                <h5 style={{
+                color:'red',
+                fontFamily:'Poppins',
+                fontSize:'20px',
+              }}>Wrong username or password</h5>
+            }
+             <OutlinedInput
               className={classes.outlinedInput}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -134,8 +180,9 @@ const SignInForm = () => {
                 </InputAdornment>
               }
             />
+
             <Box py={2}></Box>
-            <OutlinedInput
+              <OutlinedInput
               className={classes.outlinedInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -149,12 +196,14 @@ const SignInForm = () => {
               }
             />
             <Box py={1}></Box>
+           
           </Box>
           <Box className={classes.checkboxWrapper}>
             <FormControlLabel
-              control={<Checkbox color="success" />}
+              control={<Checkbox color="success" onChange={()=> setCheckBox(val => !val)} />}
               label="Remember password"
             />
+            
           </Box>
           <Box
             className={classes.buttonWrapper}
@@ -162,24 +211,38 @@ const SignInForm = () => {
             justifyContent="space-evenly"
             py={2}
           >
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} display="flex" justifyContent="center">
+            <Grid container spacing={3} display='column' flexDirection='column'>
+              <Grid item xs justifyContent="center">
+      
                 <Button
                   variant="outlined"
                   color="secondary"
-                  className={classes.button}
+                  className={classes.button1}
+                  onClick={handleSubmit}
+                  ref = {btn}
                 >
-                  Sign up
+                  LOG IN
                 </Button>
               </Grid>
-              <Grid item xs={12} md={6} display="flex" justifyContent="center">
+
+              <Grid  item xs display='flex' justifyContent='center' >
+                <Box
+                  sx={{
+                    width : '70%',
+                    height : '0.5px',
+                    backgroundColor:'rgba(0, 0, 0, 0.6)',
+                    borderRadius:'25px',
+                  }}></Box>
+              </Grid>
+
+              <Grid item xs display='flex'justifyContent="center" alignItems='center'>
                 <Button
                   variant="outlined"
                   color="secondary"
-                  className={classes.button}
-                  onClick={handleSubmit}
+                  className={classes.button2}
+                  onClick={(e)=>{history.push('/signup')}}
                 >
-                  Log in
+                  SIGN UP
                 </Button>
               </Grid>
             </Grid>
