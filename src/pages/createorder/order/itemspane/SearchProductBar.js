@@ -1,14 +1,18 @@
+import { useQuery } from "@apollo/client";
 import SearchIcon from "@mui/icons-material/Search";
 import {
+  Autocomplete,
   FormControl,
   IconButton,
   InputAdornment,
   OutlinedInput,
+  TextField,
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { LOAD_PRODUCTS } from "../../../../graphQl/products/productQueries";
 
 const useStyle = makeStyles(() => ({
   root: {
@@ -23,11 +27,20 @@ const useStyle = makeStyles(() => ({
 
 export default function SearchProductBar() {
   const classes = useStyle();
-  const [value, setValue] = useState("");
-  const handleSearch = () => {};
+  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (data) setProducts(data.productsByUser);
+      console.log(data);
+    }
+
+    fetchData();
+  }, [data]);
   return (
     <Box className={classes.root}>
-      <FormControl variant="outlined" fullWidth>
+      {/* <FormControl variant="outlined" fullWidth>
         <OutlinedInput
           placeholder="Search Product"
           value={value}
@@ -43,7 +56,16 @@ export default function SearchProductBar() {
             if (e.key === "Enter") handleSearch(value);
           }}
         />
-      </FormControl>
+      </FormControl> */}
+      <Autocomplete
+        disablePortal
+        options={products.map((product) => product.description)}
+        fullWidth
+        renderInput={(params) => {
+          console.log(params);
+          return <TextField {...params} label="Search Product"></TextField>;
+        }}
+      />
     </Box>
   );
 }

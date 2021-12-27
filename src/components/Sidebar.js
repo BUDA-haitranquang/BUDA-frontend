@@ -24,6 +24,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import PaymentIcon from '@mui/icons-material/Payment';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountMenu from "./AccountMenu";
 
 const useStyle = makeStyles({
@@ -60,7 +61,7 @@ const Sidebar = ({ window, name }) => {
   const itemRender = (i) => {
     switch (i) {
       case 0:
-        return <DashboardIcon />;
+        return <AddShoppingCartIcon />;
       case 1:
         return <ShoppingBasketOutlined />;
       case 2:
@@ -73,6 +74,8 @@ const Sidebar = ({ window, name }) => {
         return <AssignmentIndIcon />;
       case 6:
         return <MonetizationOnIcon />;
+      case 7:
+        return <DashboardIcon />;;
       
       default:
         break;
@@ -84,7 +87,7 @@ const Sidebar = ({ window, name }) => {
       <Toolbar />
       <Divider />
       <List className={classes.root}>
-        {["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost"].map(
+        {["create-order", "product", "ingredient", "supplier", "customer", "staff", "cost", "dashboard"].map(
           (item, idx) => (
             <Link to={`/${item}`}>
               <ListItem button>

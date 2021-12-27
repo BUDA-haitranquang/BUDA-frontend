@@ -1,7 +1,9 @@
+import { useQuery } from "@apollo/client";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import CustomerGrid from "./customer/CustomerGrid";
 import Navbar from "./Navbar";
 import MainOrderGrid from "./order/MainOrderGrid";
@@ -20,7 +22,9 @@ const useStyle = makeStyles(() => ({
 }));
 
 export default function CreateOrder() {
+
   const classes = useStyle();
+
   return (
     <Box className={classes.root}>
       <Navbar />
