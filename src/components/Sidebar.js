@@ -28,7 +28,8 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import AccountMenu from "./AccountMenu";
 import { TransitionGroup } from "react-transition-group";
-
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const useStyle = makeStyles({
   root: {
     "& a:link": {
@@ -55,7 +56,17 @@ const useStyle = makeStyles({
 });
 const drawerWidth = 200;
 
+const title = ["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"];
+const sidebarItems = [['A','B'],
+                  ['A','B'],
+                  ['A','B'],
+                  ['A','B'],
+                  ['A','B'],
+                  ['A','B'],
+                  ['A','B'],
+                  ['A','B'],]
 const Sidebar = ({ window, name }) => {
+  const [focus,setFocus] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -103,14 +114,20 @@ const Sidebar = ({ window, name }) => {
       <Toolbar children={logo} />
       <Divider />
       <List className={classes.root}>
-        {["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"].map(
+        {title.map(
           (item, idx) => (
-            <Link to={`/${item}`}>
-              <ListItem button>
-                <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-                <ListItemText primary={capitalizeFirstLetter(item)}/>
+              <ListItem button 
+                onClick={()=>{
+                let value = focus===item? '':item;
+                setFocus(value);}}>
+                  <ListItemIcon>{itemRender(idx)}</ListItemIcon>
+                  <ListItemText primary={capitalizeFirstLetter(item)}/>
+                  <ListItemIcon sx={{marginLeft:'60%'}}>{focus===item?<ExpandLessIcon/>: <ExpandMoreIcon/>} </ListItemIcon>                  
               </ListItem>
-            </Link>
+              // <Collapse>
+              // </Collapse>
+              // <Link to={`/${item}`}>
+              // </Link>
           )
         )}
       </List>

@@ -36,10 +36,10 @@ const MainDashBoard = () => {
               {chart % 2 === 0 ? "Line Chart" : "Bar Chart"}
             </Button> */}
             <ButtonGroup>
-              <Button>
+              <Button onClick={()=>setChart(1)}>
                 <BarChartIcon />
               </Button>
-              <Button>
+              <Button onClick={()=>setChart(0)}>
                 <ShowChartIcon />
               </Button>
             </ButtonGroup>
