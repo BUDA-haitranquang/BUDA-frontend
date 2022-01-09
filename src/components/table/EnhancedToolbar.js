@@ -3,15 +3,16 @@ import {OutlinedInput,InputAdornment, Toolbar, Typography, Tooltip, IconButton, 
 import { alpha } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchIcon from '@mui/icons-material/Search';
-import FilterListIcon from "@mui/icons-material/FilterList";
+//import FilterListIcon from "@mui/icons-material/FilterList";
 import AddIcon from "@mui/icons-material/Add";
 //import { useDispatch } from "react-redux";
 import {useState} from'react';
 import  { makeStyles } from '@mui/styles';
 import SplitButton from './SplitButton';
-import FilterPopup from './FilterPopup';
-
+// import FilterPopup from './FilterPopup';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 const EnhancedToolbar = ({
+  handleSelectAllClick,
   headCells, 
   numSelected, 
   handleOpen,
@@ -19,7 +20,7 @@ const EnhancedToolbar = ({
   searchBy, 
   deleteItem}) => {
   const [value,setValue]=useState("");
-  const li = Array.from(headCells,item=>item.label);
+ // const li = Array.from(headCells,item=>item.label);
   return (
     <Toolbar
       sx={{
@@ -88,8 +89,11 @@ const EnhancedToolbar = ({
         </Tooltip>
       ) : (
         <Box display="flex" flexDirection="row">
-          <Tooltip title="Filter list">
-           <FilterPopup list ={li}/>
+          <Tooltip title="Select Page">
+           {/* <FilterPopup list ={li}/> */}
+           <IconButton onClick={handleSelectAllClick}>
+           <CheckBoxIcon/>
+           </IconButton>
           </Tooltip>
           <Tooltip title="Add">
             <IconButton onClick={handleOpen}>

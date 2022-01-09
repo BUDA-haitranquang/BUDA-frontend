@@ -49,13 +49,28 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
   };
 
   const handleSelectAllClick = (e) => {
-    if (e.target.checked) {
+    if (selected.length === 0) {
       const newSelecteds = data.map((n) => n[type]);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
+
+  const handleSelectPage = (e) =>{
+    if(e.target.checked) {
+      const newSelecteds = displayData.map((n) => n[type]);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  }
+
+  const handleDelete = () => {
+    deleteItems(selected);
+    setSelected([]);
+}
+
   useEffect(() => {
     !search
       ? setDisplay(data)
@@ -69,6 +84,8 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
         );
   }, [search, searchBy, data]);
 
+
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
@@ -79,18 +96,16 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
             handleOpen={handleOpen}
             handleSearch={(val) => setSearch(val)}
             headCells={headCells}
+            handleSelectAllClick={handleSelectAllClick}
             searchBy={(val) => setSearchBy(val)}
-            deleteItem={()=>{
-              deleteItems(selected);
-              setSelected([]);
-          }}
+            deleteItem={handleDelete}
           />
           <Table sx={{ minWidth: 1000 }}>
             <EnhancedTableHead
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
+              onSelectPage={handleSelectPage}
               onRequestSort={handleRequestSort}
               rowCount={data.length}
               headCells={headCells}

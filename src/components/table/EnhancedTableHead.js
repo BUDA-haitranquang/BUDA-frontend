@@ -10,7 +10,7 @@ import {
 import { visuallyHidden } from "@mui/utils";
 
 const EnhancedTableHead = ({
-  onSelectAllClick,
+  onSelectPage,
   order,
   orderBy,
   numSelected,
@@ -28,8 +28,8 @@ const EnhancedTableHead = ({
         <TableCell padding="checkbox">
           <Checkbox
             color="primary"
-            checked={rowCount > 0 && numSelected < rowCount && numSelected > 0}
-            onChange={onSelectAllClick}
+            checked={rowCount > 0 && numSelected <= rowCount && numSelected > 0}
+            onChange={onSelectPage}
             inputProps={{ "aria-label": "'select all customer" }}
           />
         </TableCell>
