@@ -10,9 +10,11 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import sidebarReducer from "./sidebarSlice";
+import productCartSlice from "./productCartSlice";
 const persistConfig = {
   key: "root",
   storage,
+  timeout: null,
 };
 
 const reducer = combineReducers({
@@ -22,6 +24,7 @@ const reducer = combineReducers({
   supplier:supplierReducer,
   token: tokenReducer,
   sidebar: sidebarReducer,
+  productCart: productCartSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

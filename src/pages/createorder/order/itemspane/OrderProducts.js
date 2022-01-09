@@ -5,11 +5,12 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { color4 } from "../../CreateOrder";
+import { useDispatch, useSelector } from "react-redux";
 import OrderProductItem from "./OrderProductItem";
 
 const useStyle = makeStyles(() => ({
@@ -87,37 +88,49 @@ const headCells = [
 
 const initData = [
   {
-    id: 1,
+    productID: 1,
     no: 1,
     sku: "abc",
     name: "Cúp trong lòng người hâm",
     qty: 10,
-    price: 8250,
+    sellingPrice: 8250,
     total: 82500,
   },
   {
-    id: 2,
+    productID: 2,
     no: 2,
     sku: "HAICULES",
     name: "Hải fan Barca",
     qty: 1,
-    price: 20000,
+    sellingPrice: 20000,
     total: 20000,
   },
   {
-    id: 3,
+    productID: 3,
     no: 3,
     sku: "2021C2",
     name: "Làm gì có cup",
     qty: 0,
-    price: 0,
+    sellingPrice: 0,
     total: 0,
   },
 ];
 
 export default function OrderProducts() {
-  const [rows, setRows] = useState(initData);
   const classes = useStyle();
+  const dispatch = useDispatch();
+  const [rows, setRows] = useState([]);
+  const {productCart} = useSelector((state) => state.productCart);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (productCart)
+        setRows(productCart);
+    }
+
+    fetchData();
+  }, [productCart]);
+
   return (
     <Paper className={classes.root}>
       <TableContainer>
