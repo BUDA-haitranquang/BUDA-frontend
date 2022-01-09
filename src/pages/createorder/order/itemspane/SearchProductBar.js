@@ -31,6 +31,7 @@ export default function SearchProductBar() {
   const classes = useStyle();
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
   const [products, setProducts] = useState([]);
+  const [searchProductValue, setSearchProductValue] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,8 +44,9 @@ export default function SearchProductBar() {
   }, [data]);
 
   const handleAddProductToList = (value) => {
-    console.log(value);
-    if(value) dispatch(addProductCart(value));
+    if(value){
+      dispatch(addProductCart(value));
+    } 
   };
 
   return (
@@ -52,7 +54,7 @@ export default function SearchProductBar() {
       <Button
         variant="contained"
         color="primary"
-        sx={{ width: "15%", padding: "2px", height: "80%" }}
+        sx={{ width: "15%", padding: "2px"}}
         onClick={() => {}}
       >
         NEW PRODUCT
@@ -64,6 +66,11 @@ export default function SearchProductBar() {
         sx={{ width: "68%" }}
         autoHighlight
         getOptionLabel={(option) => option.name}
+        inputValue={searchProductValue}
+        onInputChange={(event, newInputValue, reason) => {
+          if(reason === "reset") setSearchProductValue("");
+          else setSearchProductValue(newInputValue);
+        }}
         renderOption={(props, option) => (
           <Box {...props}>
             <Grid container>
@@ -91,7 +98,7 @@ export default function SearchProductBar() {
       <Button
         variant="contained"
         color="error"
-        sx={{ width: "15%", padding: "2px", height: "80%" }}
+        sx={{ width: "15%", padding: "2px"}}
         onClick={() => dispatch(clearProductCart())}
         loadingIndicator="Clearing..."
       >
