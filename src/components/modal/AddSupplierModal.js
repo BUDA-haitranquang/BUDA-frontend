@@ -1,18 +1,45 @@
 import React, { useState } from "react";
 import { Box, Modal, TextField, Typography, IconButton, Button } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { useDispatch } from "react-redux";
-import { addSupplier } from "../../redux/supplierSlice";
+import { useMutation } from "@apollo/client";
+import { ADD_SUPPLIER_MUTATION } from "../../graphQl/suppliers/suppliersMutations";
+ import {LOAD_SUPPLIERS} from '../../graphQl/suppliers/suppliersQueries';
 const AddSupplierModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [email,setEmail] = useState("");
-  const dp = useDispatch(); 
-  const handleSubmit = ()=>{
-    dp(addSupplier({name,phoneNumber,address,email}));
-    handleClose();
+  const [newSupplier,{error}] = useMutation(ADD_SUPPLIER_MUTATION);
+  
+  const isValid = () =>{
+    if(name==="") return false;
+    if(phoneNumber==="") return false;
+    if(!Number(phoneNumber)) return false;
+    if(address==="") return false;
+    if( email ==="" ) return false;
+    return true;
   }
+
+  const addSupplier = () =>{
+    newSupplier({
+      variables:{
+        name:name,
+        address:address,
+        phoneNumber:phoneNumber,
+        email:email,
+      },
+       refetchQueries:[{query:LOAD_SUPPLIERS}]
+    })
+  }
+
+  const handleSubmit = ()=>{
+    if(isValid()) {
+      addSupplier();
+      handleClose();
+    }  
+    else alert('Invalid input');
+   }
+
   return (
     <Modal
       open={isOpen}
