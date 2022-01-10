@@ -61,13 +61,17 @@ const LChart = () =>  {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid 
+          //strokeDasharray="3 3" 
+          opacity={0.5}
+          vertical={false}
+          />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="linear" dataKey="pv" stroke="#CD201F" activeDot={{ r: 8 }} name = 'Chi phí'/>
-          <Line type="linear" dataKey="uv" stroke="#82ca9d" name='Doanh thu' />
+          <Line type="linear" dataKey="pv" stroke="#CD201F" activeDot={{ r: 5 }} name = 'Chi phí' strokeWidth={1.5}/>
+          <Line type="linear" dataKey="uv" stroke="#82ca9d" name='Doanh thu' strokeWidth={1.5} />
         </LineChart>
       </ResponsiveContainer>
     );

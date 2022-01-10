@@ -60,13 +60,17 @@ const BChart=()=> {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid 
+          //strokeDasharray="3 3" 
+          opacity={0.5}
+          vertical={false}
+          />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
           <Bar dataKey="pv" fill="#CD201F" name = 'Chi phí'/>
-          <Bar dataKey="uv" fill="#82ca9d"name ='Doanh thu' />
+          <Bar dataKey="uv" fill="#82ca9d" name ='Doanh thu' />
         </BarChart>
       </ResponsiveContainer>
     );
