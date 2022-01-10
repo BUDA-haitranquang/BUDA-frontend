@@ -152,7 +152,7 @@ export default function OrderProducts() {
           </TableHead>
           <TableBody>
             {rows.map((row) => {
-              return <OrderProductItem row={row} />;
+              return <OrderProductItem row={row} serial={rows.indexOf(row) + 1}/>;
             })}
           </TableBody>
         </Table>

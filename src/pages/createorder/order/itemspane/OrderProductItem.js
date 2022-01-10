@@ -6,15 +6,13 @@ import Input from "@material-ui/core/Input";
 import { useDispatch } from "react-redux";
 import { deleteProductCart } from "../../../../redux/productCartSlice";
 
-export default function OrderProductItem({ row }) {
+export default function OrderProductItem({ row, serial }) {
   const dispatch = useDispatch();
   return (
     <TableRow sx={{ cursor: "pointer" }} hover key={row.productID}>
-      <TableCell align="left">1</TableCell>
+      <TableCell align="left">{serial}</TableCell>
       <TableCell align="left">{row.productID}</TableCell>
       <TableCell align="left">{row.name}</TableCell>
-      <TableCell align="right">{row.sellingPrice}</TableCell>
-      <TableCell align="right">1</TableCell>
       <TableCell align="right">
         <Input
           inputProps={{
@@ -24,13 +22,33 @@ export default function OrderProductItem({ row }) {
           name="total"
         />
       </TableCell>
-      <IconButton color="error" component="span">
-        <DeleteIcon
-          onClick={() => {
-            console.log(row);
-            dispatch(deleteProductCart(row));
+      <TableCell align="right">
+        <Input
+          inputProps={{
+            style: { textAlign: "right" },
           }}
+          value={row.sellingPrice}
+          name="total"
         />
+      </TableCell>
+      <TableCell align="right">
+        <Input
+          inputProps={{
+            style: { textAlign: "right" },
+          }}
+          value={row.sellingPrice}
+          name="total"
+        />
+      </TableCell>
+      <IconButton
+        color="error"
+        component="span"
+        onClick={() => {
+          console.log(row);
+          dispatch(deleteProductCart(row));
+        }}
+      >
+        <DeleteIcon />
       </IconButton>
     </TableRow>
   );

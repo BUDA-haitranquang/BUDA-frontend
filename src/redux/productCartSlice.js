@@ -15,13 +15,19 @@ const productCartSlice = createSlice({
       state.productCart = [];
     },
     addProductCart: (state, action) => {
+      console.log(action.payload);
       state.productCart.push(action.payload);
+      //TODO: increase quantity if product already exists
     },
     deleteProductCart: (state, action) => ({
       ...state,
       productCart: state.productCart.filter((item) => item.productID !== action.payload.productID),
     //   productCart: state.productCart.filter((val, i) => i !== action.payload),
     }),
+    // deleteProductCart: (state, action) => {
+    //   const deleteProductId = action.payload;
+    //   state.productCart = state.productCart.filter(item => item.productID !== deleteProductId);
+    // },
     fetchData: (state, action) => {
       state.productCart = productData;
     },

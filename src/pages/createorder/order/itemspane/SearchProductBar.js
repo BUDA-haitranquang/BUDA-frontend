@@ -10,6 +10,7 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import AddProductModal from "../../../../components/modal/AddProductModal";
 import { LOAD_PRODUCTS } from "../../../../graphQl/products/productQueries";
 import {
   addProductCart,
@@ -31,7 +32,9 @@ export default function SearchProductBar() {
   const classes = useStyle();
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
   const [products, setProducts] = useState([]);
+  const [chosenProductValue, setChosenProductValue] = useState("");
   const [searchProductValue, setSearchProductValue] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,10 +47,19 @@ export default function SearchProductBar() {
   }, [data]);
 
   const handleAddProductToList = (value) => {
+    console.log(value);
     if(value){
       dispatch(addProductCart(value));
+      setChosenProductValue("");
     } 
   };
+
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  }
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  }
 
   return (
     <Box className={classes.root} display="flex" justifyContent="space-between">
@@ -55,12 +67,13 @@ export default function SearchProductBar() {
         variant="contained"
         color="primary"
         sx={{ width: "15%", padding: "2px"}}
-        onClick={() => {}}
+        onClick={handleOpenModal}
       >
         NEW PRODUCT
       </Button>
       <Autocomplete
         id="product-select"
+        value={chosenProductValue}
         onChange={(event, value) => handleAddProductToList(value)}
         options={products}
         sx={{ width: "68%" }}
@@ -104,6 +117,8 @@ export default function SearchProductBar() {
       >
         CLEAR CART
       </Button>
+
+      <AddProductModal isOpen={isOpenModal} handleClose={handleCloseModal}/>
     </Box>
   );
 }
