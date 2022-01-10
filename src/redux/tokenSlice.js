@@ -4,11 +4,15 @@ const tokenSlice = createSlice({
   initialState: {
     isAuth: false,
     jwt: "",
+    refreshJwt: "",
   },
   reducers: {
     addToken: (state, action) => {
       state.isAuth = true;
       state.jwt = action.payload;
+    },
+    addRefreshToken: (state, action) => {
+      state.refreshJwt = action.payload;
     },
     removeToken: (state) => {
       state.isAuth = false;
@@ -17,5 +21,5 @@ const tokenSlice = createSlice({
   },
 });
 
-export const { addToken, removeToken } = tokenSlice.actions;
+export const { addToken, addRefreshToken, removeToken } = tokenSlice.actions;
 export default tokenSlice.reducer;
