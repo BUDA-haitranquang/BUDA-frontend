@@ -15,9 +15,16 @@ const productCartSlice = createSlice({
       state.productCart = [];
     },
     addProductCart: (state, action) => {
-      console.log(action.payload);
-      state.productCart.push(action.payload);
-      //TODO: increase quantity if product already exists
+      const duplicateIndex = state.productCart.findIndex((item) => item.productID === action.payload.productID);
+      if(duplicateIndex !== -1) state.productCart[duplicateIndex].quantity ++;
+      else {
+        const newProduct = {...action.payload, quantity: 1};
+        state.productCart.push(newProduct);
+      } 
+    },
+    changePriceProductCart: (state, action) => {
+      const index = state.productCart.findIndex((item) => item.productID === action.payload.productID);
+      state.productCart[index].sellingPrice = action.payload.price;
     },
     deleteProductCart: (state, action) => ({
       ...state,
@@ -38,6 +45,7 @@ export const {
   setProductCart,
   clearProductCart,
   addProductCart,
+  changePriceProductCart,
   deleteProductCart,
   fetchData,
 } = productCartSlice.actions;

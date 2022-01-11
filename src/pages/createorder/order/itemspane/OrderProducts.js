@@ -120,12 +120,11 @@ export default function OrderProducts() {
   const classes = useStyle();
   const dispatch = useDispatch();
   const [rows, setRows] = useState([]);
-  const {productCart} = useSelector((state) => state.productCart);
+  const { productCart } = useSelector((state) => state.productCart);
 
   useEffect(() => {
     async function fetchData() {
-      if (productCart)
-        setRows(productCart);
+      if (productCart) setRows(productCart);
     }
 
     fetchData();
@@ -151,8 +150,10 @@ export default function OrderProducts() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
-              return <OrderProductItem row={row} serial={rows.indexOf(row) + 1}/>;
+            {productCart.map((row) => {
+              return (
+                <OrderProductItem row={row} serial={productCart.indexOf(row) + 1} />
+              );
             })}
           </TableBody>
         </Table>

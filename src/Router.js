@@ -89,7 +89,12 @@ const AppRouter = () => {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/dashboard"
+            component={Dashboard}
+          />
           <PrivateRoute
             authed={isAuth}
             exact
