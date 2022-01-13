@@ -17,7 +17,7 @@ export default function UneditableMoneyBox({ title, value }) {
       >
         {title}
       </Typography>
-      <TextField disabled fullWidth variant="outlined" defaultValue={value} />
+      <TextField disabled fullWidth variant="outlined" value={value} />
     </Grid>
   );
 }

@@ -1,10 +1,10 @@
-import { TableCell, TableRow } from "@mui/material";
-import React, { useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Input from "@material-ui/core/Input";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { TableCell, TableRow } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteProductCart, changePriceProductCart, changeProductCartItem } from "../../../../redux/productCartSlice";
+import { changeProductCartItem, deleteProductCart } from "../../../../redux/productCartSlice";
 
 export default function OrderProductItem({ row, serial }) {
   const [sellingPrice, setSellingPrice] = useState(row.sellingPrice);
@@ -14,13 +14,15 @@ export default function OrderProductItem({ row, serial }) {
   const handlePriceChange = (e) => {
     const price = e.target.value;
     setSellingPrice(price);
-    const data = {row, price};
+    let data = {...row};
+    data.sellingPrice = price;
     dispatch(changeProductCartItem(data));
   }
   const handleQuantityChange = (e) => {
-    const newQuantity = e.target.value;
-    setQuantity(newQuantity);
-    const data = {row, quantity};
+    const quantity = e.target.value;
+    setQuantity(quantity);
+    let data = {...row};
+    data.quantity = quantity;
     dispatch(changeProductCartItem(data));
   }
 
