@@ -26,6 +26,10 @@ const productCartSlice = createSlice({
       const index = state.productCart.findIndex((item) => item.productID === action.payload.productID);
       state.productCart[index].sellingPrice = action.payload.price;
     },
+    changeProductCartItem: (state, action) => {
+      const index = state.productCart.findIndex((item) => item.productID === action.payload.productID);
+      state.productCart[index] = action.payload;
+    },
     deleteProductCart: (state, action) => ({
       ...state,
       productCart: state.productCart.filter((item) => item.productID !== action.payload.productID),
@@ -46,6 +50,7 @@ export const {
   clearProductCart,
   addProductCart,
   changePriceProductCart,
+  changeProductCartItem,
   deleteProductCart,
   fetchData,
 } = productCartSlice.actions;

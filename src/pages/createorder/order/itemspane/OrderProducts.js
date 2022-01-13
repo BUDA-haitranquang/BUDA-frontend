@@ -86,35 +86,7 @@ const headCells = [
   },
 ];
 
-const initData = [
-  {
-    productID: 1,
-    no: 1,
-    sku: "abc",
-    name: "Cúp trong lòng người hâm",
-    qty: 10,
-    sellingPrice: 8250,
-    total: 82500,
-  },
-  {
-    productID: 2,
-    no: 2,
-    sku: "HAICULES",
-    name: "Hải fan Barca",
-    qty: 1,
-    sellingPrice: 20000,
-    total: 20000,
-  },
-  {
-    productID: 3,
-    no: 3,
-    sku: "2021C2",
-    name: "Làm gì có cup",
-    qty: 0,
-    sellingPrice: 0,
-    total: 0,
-  },
-];
+const initData = [];
 
 export default function OrderProducts() {
   const classes = useStyle();
@@ -152,7 +124,10 @@ export default function OrderProducts() {
           <TableBody>
             {productCart.map((row) => {
               return (
-                <OrderProductItem row={row} serial={productCart.indexOf(row) + 1} />
+                <OrderProductItem
+                  row={row}
+                  serial={productCart.indexOf(row) + 1}
+                />
               );
             })}
           </TableBody>
