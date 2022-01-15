@@ -2,7 +2,7 @@ import Input from "@material-ui/core/Input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { TableCell, TableRow } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeProductCartItem, deleteProductCart } from "../../../../redux/productCartSlice";
 
@@ -10,6 +10,11 @@ export default function OrderProductItem({ row, serial }) {
   const [sellingPrice, setSellingPrice] = useState(row.sellingPrice);
   const [quantity, setQuantity] = useState(row.quantity);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    setSellingPrice(row.sellingPrice);
+    setQuantity(row.quantity);
+  }, [row])
   
   const handlePriceChange = (e) => {
     const price = e.target.value;

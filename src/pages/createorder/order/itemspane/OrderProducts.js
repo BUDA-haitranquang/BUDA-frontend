@@ -122,11 +122,11 @@ export default function OrderProducts() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {productCart.map((row) => {
+            {rows.map((row) => {
               return (
                 <OrderProductItem
                   row={row}
-                  serial={productCart.indexOf(row) + 1}
+                  serial={rows.indexOf(row) + 1}
                 />
               );
             })}
