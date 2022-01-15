@@ -15,9 +15,9 @@ export default function CustomerPayment() {
   }, [totalPrice, discount])
 
   const handleCustomerGiveChange = (e) => {
-    const finalPaymentTmp = totalPrice - discount;
-    const tmp = e.target.value > finalPaymentTmp ? e.target.value : finalPaymentTmp;
-    setCustomerGiveAmount(tmp);
+    // const finalPaymentTmp = totalPrice - discount;
+    // const tmp = e.target.value > finalPaymentTmp ? e.target.value : finalPaymentTmp;
+    setCustomerGiveAmount(e.target.value);
   }
   return (
     <Grid
