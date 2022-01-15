@@ -1,12 +1,12 @@
 import { Grid, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { useState } from "react";
 
 const useStyle = makeStyles(() => ({
   root: {},
 }));
 
-export default function EditableMoneyBox({ title }) {
+export default function EditableMoneyBox({ title, value, onChange }) {
   const classes = useStyle();
   return (
     <Grid className={classes.root}>
@@ -23,6 +23,8 @@ export default function EditableMoneyBox({ title }) {
         }}
         fullWidth
         variant="outlined"
+        value={value}
+        onChange={onChange}
       />
     </Grid>
   );

@@ -6,6 +6,7 @@ const productCartSlice = createSlice({
   initialState: {
     productCart: [],
     totalPrice: 0,
+    discount: 0,
   },
   reducers: {
     setProductCart: (state, action) => {
@@ -19,6 +20,9 @@ const productCartSlice = createSlice({
       };
       data.forEach(calculateSum);
       state.totalPrice = total;
+    },
+    calculateTotalDiscount: (state, action) => {
+      state.discount = action.payload;
     },
     clearProductCart: (state, action) => {
       state.productCart = [];
@@ -59,6 +63,7 @@ export const {
   addProductCart,
   changeProductCartItem,
   calculateTotalPrice,
+  calculateTotalDiscount,
   deleteProductCart,
   fetchData,
 } = productCartSlice.actions;
