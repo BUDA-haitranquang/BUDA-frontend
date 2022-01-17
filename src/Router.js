@@ -20,6 +20,7 @@ import Ingredient from "./pages/Ingredient";
 import { BrowserRouter as Router, Redirect, Switch, Route } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail";
 import { useSelector } from "react-redux";
+import Staff from "./pages/Staff";
 
 
 const AppRouter = () => {
@@ -71,6 +72,7 @@ const AppRouter = () => {
           <PrivateRoute authed={isAuth} exact path="/supplier" component={Supplier} />
           <PrivateRoute authed={isAuth} exact path="/statistic" component={Statistic} />
           <PrivateRoute authed={isAuth} exact path="/customer" component={Customer} />
+          <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />
