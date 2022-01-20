@@ -54,19 +54,19 @@ const Staff = (props) => {
   const { window } = props;
   const [staffs, setStaffs] = useState([]);
   const { error, loading, data} = useQuery(LOAD_STAFFS);
-  // const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
+  const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
 
-  // const handleDelete = (selected) =>{
-  //     if (selected===[]) return 
-  //     selected.forEach(
-  //       (item)=>{
-  //         deleteStaff({
-  //           variables:{productID: parseInt(item)},
-  //           refetchQueries: [{query: LOAD_STAFFS}]
-  //         })
-  //       }
-  //     )
-  // }
+  const handleDelete = (selected) =>{
+      if (selected===[]) return 
+      selected.forEach(
+        (item)=>{
+          deleteStaff({
+            variables:{staffID: parseInt(item)},
+            refetchQueries: [{query: LOAD_STAFFS}]
+          })
+        }
+      )
+  }
 
   useEffect(() => {
     async function fetchData(){
@@ -92,10 +92,10 @@ const Staff = (props) => {
         <Box>{}</Box>
         <Box>
           <CombinedTable
-            // deleteItems={handleDelete}
+            deleteItems={handleDelete}
             data={staffs}
             headCells={headCells}
-            // Modal={AddProductModal}
+            Modal={AddProductModal}
             Body={StaffTableBody}
             type='staffID'
           />
