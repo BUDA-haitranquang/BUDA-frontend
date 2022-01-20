@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import CombinedTable from "../components/CombinedTable";
-import AddProductModal from "../components/modal/AddProductModal";
+import AddStaffModal from "../components/modal/AddStaffModal";
 import Sidebar from "../components/Sidebar";
 import StaffTableBody from "../components/table/body/StaffTableBody";
 import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
@@ -95,7 +95,7 @@ const Staff = (props) => {
             deleteItems={handleDelete}
             data={staffs}
             headCells={headCells}
-            Modal={AddProductModal}
+            Modal={AddStaffModal}
             Body={StaffTableBody}
             type='staffID'
           />
