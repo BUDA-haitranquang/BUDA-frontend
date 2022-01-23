@@ -24,12 +24,13 @@ import Dashboard from "./pages/Dashboard";
 import Error from "./pages/Error";
 import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
-import Product from "./pages/Product";
-import ProductDetail from "./pages/ProductDetail";
+import Product from "./pages/product/Product";
+import ProductDetail from "./pages/product/ProductDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
-
+import ProductInventory from './pages/product/ProductInventory';
+import ProductDelete from './pages/product/ProductDelete.js'
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -98,8 +99,20 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product"
+            path="/product/huybo"
+            component={ProductDelete}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/crud"
             component={Product}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/kiemke"
+            component={ProductInventory}
           />
           <PrivateRoute
             authed={isAuth}

@@ -46,16 +46,28 @@ const useStyle = makeStyles({
   },
 });
 const drawerWidth = 200;
-
+function createData(name,link){
+  return {name : name ,link : link};
+}
 const title = ["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"];
-const sidebarItems = [['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],]
+const sidebarItems = [
+  [createData('1',''),createData('B','')],
+  [createData('crud','crud'),createData('Kiểm kê','kiemke'),createData('Hủy bỏ','huybo')],
+  [createData('3',''),createData('B','')],
+  [createData('4',''),createData('B','')],
+  [createData('5',''),createData('B','')],
+  [createData('6',''),createData('B','')],
+  [createData('7',''),createData('B','')],
+  [createData('7',''),createData('B','')],
+]
+// const sidebarItems = [['A','B'],
+//                   ['A','B'],
+//                   ['A','B'],
+//                   ['A','B'],
+//                   ['A','B'],
+//                   ['A','B'],
+//                   ['A','B'],
+//                   ['A','B'],]
 const Sidebar = ({ window, name }) => {
   //const [focus,setFocus] = useState('');
   //const focus = useRef('');
@@ -115,26 +127,28 @@ const Sidebar = ({ window, name }) => {
               <>
               <ListItem button 
                 onClick={()=>{
-                let value = focus===item?'':item;
+                let value = focus === item ? '' : item;
                 setFocusSideBar(value);
               }}>
                   <ListItemIcon>{itemRender(idx)}</ListItemIcon>
                   <ListItemText primary={capitalizeFirstLetter(item)}/>
                   <ListItemIcon sx={{marginLeft:'60%'}}>{focus===item?<ExpandLessIcon/>: <ExpandMoreIcon/>} </ListItemIcon>                  
               </ListItem>
-                <Collapse in={focus === item}>
+                <Collapse in = {focus === item}>
                   {sidebarItems[idx].map((component)=>{
                      return(
-                      <Link to = {`/${item}`}>
+                      <Link to = {`/${item}/${component.link}`}>
                      <ListItem button>
-                        <ListItemText primary={capitalizeFirstLetter(component)}/>
+                        <ListItemText primary={capitalizeFirstLetter(component.name)}/>
                      </ListItem>
                      </Link>
                      )
                   })}
-                {/* <Link to={`/${item}`}>
-                </Link> */}
+              
                 </Collapse>
+                {/* {console.log(focus)}
+                {console.log(sidebarItems[idx])} */}
+      
               </>
           )
         )}
