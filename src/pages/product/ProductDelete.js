@@ -10,6 +10,7 @@ import ProductDeleteTableBody from "../../components/table/body/ProductDeleteBod
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
 import { HIDE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
+
 const headCells = [
   // {
   //   id: "ID",

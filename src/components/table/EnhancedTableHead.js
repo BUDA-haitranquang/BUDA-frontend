@@ -8,6 +8,19 @@ import {
   Box,
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
+import { makeStyles, styled } from "@mui/styles";
+
+const useStyle = makeStyles({
+  root: {
+    "& .MuiButtonBase-root-MuiTableSortLabel-root":{
+      align:"center"
+    },
+    "& .MuiSvgIcon-root-MuiTableSortLabel-icon":{
+        align:"center"
+    }
+  },
+});
+
 
 const EnhancedTableHead = ({
   onSelectAllClick,
@@ -21,28 +34,37 @@ const EnhancedTableHead = ({
   const createSortHandler = (props) => (event) => {
     onRequestSort(event, props);
   };
-
+  const classes = useStyle();
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             color="primary"
             checked={rowCount > 0 && numSelected < rowCount && numSelected > 0}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "'select all customer" }}
           />
-        </TableCell>
+        </TableCell> */}
         {headCells.map((headCell) => (
-          <TableCell
+          <TableCell 
+          
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            sx={{fontWeight: "600"}}
+            //align={headCell.numeric ? "right" : "left"}
+            // align="center"
+            align={headCell.label==="Name" ? "left" : "center"}
+            sx={{
+              fontWeight: "600",
+              align : "center"
+            }}
           >
             <TableSortLabel
+              className={classes.root}
+              sx = {headCell.label==="Name" ? {pl : 2} : {pl : 3}}
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
+              
             >
               {headCell.label}
               {orderBy === headCell.id ? (
