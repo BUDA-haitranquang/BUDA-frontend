@@ -3,7 +3,7 @@ import { Button, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { React } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { NEW_SELL_ORDER_MUTATION } from "../../graphQl/sellOrder/newSellOrderMutation";
 import CustomerGrid from "./customer/CustomerGrid";
@@ -14,6 +14,7 @@ import SearchProductBar from "./order/itemspane/SearchProductBar";
 import Services from "./order/others/services/Services";
 import Shipping from "./order/others/Shipping";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import { clearProductCart } from "../../redux/productCartSlice";
 
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
@@ -41,6 +42,7 @@ const useStyle = makeStyles(() => ({
 
 export default function CreateOrder() {
   const classes = useStyle();
+  const dispatch = useDispatch();
   const { productCart, totalPrice, discount } = useSelector(
     (state) => state.productCart
   );
@@ -86,7 +88,7 @@ export default function CreateOrder() {
       refetchQueries: [{ query: LOAD_PRODUCTS }],
     });
 
-
+    dispatch(clearProductCart());
   };
 
   return (
