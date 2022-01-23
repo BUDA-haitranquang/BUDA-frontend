@@ -46,15 +46,28 @@ export default function CreateOrder() {
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);
 
+  // hàm này xử lý khá là phức tạp
+  // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
+  // #tatcataiTranQuangHai
   const createNewOrder = () => {
     console.log(productCart);
+
+    // Cái _ là lodash nhé (nôm na thì lodash là một thư viện chứa các utilities khá là mạnh)
+    // Tại sao phải dùng clone ở đây ?
+    // Từ từ nhé, đọc chậm thôi này:
+    // Khi gửi request tạo newSellOrder đến phía server (cụ thể là GraphQL),
+    // Ta không thể truyền productCart, mà phải truyền theo yêu cầu API
+    // -> ta chỉ lọc lấy 1 vài thuộc tính (và đổi tên nếu cần)
+    // Nếu thao tác trực tiếp trên productCart, khi mutate dữ liệu, làm ảnh hưởng đến các component khác
+    // cũng như tính đúng đắn (vd: let a = b. Khi a thay đổi thì b cũng bị thay đổi)
+    // --> clone (giống pass by value)
     const sellOrderInfo = _.clone(productCart);
-    // const sellOrderInfo = _.pick(productCart, ['productID', 'quantity', 'sellingPrice']);
+    
     const sellOrderInfoMapped = sellOrderInfo.map((item) => {
       return {
         productID: item.productID,
         quantity: item.quantity,
-        pricePerUnit: item.sellingPrice
+        pricePerUnit: item.sellingPrice 
       };
     });
     
@@ -64,6 +77,7 @@ export default function CreateOrder() {
     // });
     console.log(sellOrderInfoMapped);
 
+    // mutation này nếu không hiểu thì xem comment trong newSellOrderMutation.js
     newSellOrder({
       variables: {
         sellOrderItemDTOs: sellOrderInfoMapped,
