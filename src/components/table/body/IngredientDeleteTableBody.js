@@ -29,7 +29,7 @@ const useStyle = makeStyles({
       }
   });
 
-const ProductDeleteTableBody = ({
+const IngredientDeleteTableBody = ({
   order,
   orderBy,
   selected,
@@ -139,7 +139,7 @@ const ProductDeleteTableBody = ({
   );
 };
 
-export default ProductDeleteTableBody;
+export default IngredientDeleteTableBody;
  
 
 const TableItem = (row) =>{
@@ -162,7 +162,7 @@ const TableItem = (row) =>{
               InputLabelProps={{
                   shrink: true,
               }}
-              placeholder = {value?value:0}
+              placeholder = {value?value:'0'}
               onChange={(e) => setValue(e.target.value)}
           />
       </TableCell>

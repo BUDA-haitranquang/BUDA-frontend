@@ -53,7 +53,7 @@ const title = ["dashboard", "product", "ingredient", "supplier", "customer", "st
 const sidebarItems = [
   [createData('1',''),createData('B','')],
   [createData('crud','crud'),createData('Kiểm kê','kiemke'),createData('Hủy bỏ','huybo')],
-  [createData('3',''),createData('B','')],
+  [createData('crud','crud'),createData('Kiểm kê','kiemke'),createData('Hủy bỏ','huybo')],
   [createData('4',''),createData('B','')],
   [createData('5',''),createData('B','')],
   [createData('6',''),createData('B','')],

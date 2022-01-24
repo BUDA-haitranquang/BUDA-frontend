@@ -1,14 +1,14 @@
 import React, { useEffect,useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
-import CombinedTable from "../components/CombinedTable";
-import AddIngredientModal from "../components/modal/AddIngredientModal";
-import IngredientTableBody from "../components/table/body/IngredientTableBody";
+import CombinedTable from "../../components/CombinedTable";
+import AddIngredientModal from "../../components/modal/AddIngredientModal";
+import IngredientTableBody from "../../components/table/body/IngredientTableBody";
 import { useMutation } from "@apollo/client";
-import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutation";
+import { HIDE_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
 import { useQuery } from "@apollo/client";
-import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
+import { LOAD_INGREDIENTS } from "../../graphQl/ingredients/ingredientQueries";
 const headCells = [
   // {
   //   id: "ID",

@@ -41,6 +41,7 @@ const useStyle = makeStyles({
     fontFamily: "Poppins",
     fontWeight: 800,  
     marginLeft: "15%",
+  
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
@@ -48,13 +49,14 @@ const useStyle = makeStyles({
       borderRadius: "10px",
       width: "75%",
       height:'40px',
+    
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
     },
     "& input":{
       padding:'15px',
-      height:'10px'
+      height:'10px', 
     }
   },
   checkboxWrapper: { marginLeft: "15%" },
@@ -98,15 +100,16 @@ const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkBox,setCheckBox] = useState(false);
-  const classes = useStyle();
   const dispatch = useDispatch();
   const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
   const [newAccessToken] = useMutation(NEW_ACCESS_TOKEN);
   const {refreshJwt} = useSelector((state) => state.token);
-  
+  const classes = useStyle();
+  console.log(error)
   useEffect(() => {
     const listener = event => {
+      if (loading) return;
       if (event.keyCode === 13) {
         event.preventDefault();
         btn.current.click();
@@ -178,13 +181,14 @@ const SignInForm = () => {
           <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
             
-            {error && 
+            {/* {error && 
                 <h5 style={{
                 color:'red',
                 fontFamily:'Poppins',
                 fontSize:'20px',
+                marginTop:'0'
               }}>Wrong username or password</h5>
-            }
+            } */}
              <OutlinedInput
               className={classes.outlinedInput}
               value={email}

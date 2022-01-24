@@ -101,6 +101,21 @@ const useStyle = makeStyles({
       },
     },
   },
+  button1: {
+    "&.MuiButton-root": {
+      color: "#fff",
+      width: "30%",
+      borderRadius: 10,
+      border: "1px solid #fff",
+      
+      height: 40,
+     
+      "&:hover": {
+        backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+        border: "none",
+      },
+    },
+  },
 });
 
 const SignUpForm = () => {
@@ -290,6 +305,24 @@ const validate = ()=>{
               className={classes.button} 
               onClick={handleSubmit} 
               ref = {btn}>Sign up</Button>
+
+             <Box
+                  my ={3}
+                  sx={{
+                    width : '70%',
+                    height : '0.5px',
+                    backgroundColor:'rgba(0, 0, 0, 0.6)',
+                    borderRadius:'25px',
+                  }}></Box>
+
+            <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.button1}
+                  onClick={(e)=>{history.goBack()}}
+                >
+                  Back to log in
+                </Button>
           </Box>
         </Box>
       </Box>

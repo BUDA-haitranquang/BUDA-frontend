@@ -22,7 +22,7 @@ import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
 import Error from "./pages/Error";
-import Ingredient from "./pages/Ingredient";
+import Ingredient from "./pages/ingredient/Ingredient";
 import Login from "./pages/Login";
 import Product from "./pages/product/Product";
 import ProductDetail from "./pages/product/ProductDetail";
@@ -31,6 +31,8 @@ import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
 import ProductInventory from './pages/product/ProductInventory';
 import ProductDelete from './pages/product/ProductDelete.js'
+import IngredientInventory from "./pages/ingredient/IngredientInventory";
+import IngredientDelete from "./pages/ingredient/IngredientDelete";
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -123,8 +125,20 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/ingredient"
+            path="/ingredient/crud"
             component={Ingredient}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/ingredient/kiemke"
+            component={IngredientInventory}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/ingredient/huybo"
+            component={IngredientDelete}
           />
           <PrivateRoute
             authed={isAuth}
