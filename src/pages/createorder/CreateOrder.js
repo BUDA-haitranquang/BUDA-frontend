@@ -2,19 +2,21 @@ import { useMutation } from "@apollo/client";
 import { Button, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
+import _ from "lodash";
 import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import _ from "lodash";
+import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import { NEW_SELL_ORDER_MUTATION } from "../../graphQl/sellOrder/newSellOrderMutation";
-import CustomerGrid from "./customer/CustomerGrid";
+import { clearProductCart } from "../../redux/productCartSlice";
+import CustomerInfo from "./customer/customerInfoPane/CustomerInfo";
+import SearchCustomerBar from "./customer/customerInfoPane/SearchCustomerBar";
+import CustomerPayment from "./customer/customerPayment/CustomerPayment";
 import Navbar from "./Navbar";
 import CostGrid from "./order/costpane/CostGrid";
 import OrderProducts from "./order/itemspane/OrderProducts";
 import SearchProductBar from "./order/itemspane/SearchProductBar";
 import Services from "./order/others/services/Services";
 import Shipping from "./order/others/Shipping";
-import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
-import { clearProductCart } from "../../redux/productCartSlice";
 
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
@@ -51,8 +53,7 @@ export default function CreateOrder() {
   // hàm này xử lý khá là phức tạp
   // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
   // #tatcataiTranQuangHai
-  const createNewOrder = async() => {
-    console.log(productCart);
+  const createNewOrder = async () => {
 
     // Cái _ là lodash nhé (nôm na thì lodash là một thư viện chứa các utilities khá là mạnh)
     // Tại sao phải dùng clone ở đây ?
@@ -64,36 +65,34 @@ export default function CreateOrder() {
     // cũng như tính đúng đắn (vd: let a = b. Khi a thay đổi thì b cũng bị thay đổi)
     // --> clone (giống pass by value)
     const sellOrderInfo = _.clone(productCart);
-    
+
     const sellOrderInfoMapped = sellOrderInfo.map((item) => {
       return {
         productID: item.productID,
         quantity: item.quantity,
-        pricePerUnit: item.sellingPrice 
+        pricePerUnit: item.sellingPrice,
       };
     });
-    
+
     // const sellOrderInfoMapped = sellOrderInfo.map((item) => {
     //   const { sellingPrice: pricePerUnit, ...rest } = item;
     //   return { pricePerUnit, ...rest };
     // });
-    console.log(sellOrderInfoMapped);
 
     // mutation này nếu không hiểu thì xem comment trong newSellOrderMutation.js
-    try{
+    try {
       const response = await newSellOrder({
         variables: {
           sellOrderItemDTOs: sellOrderInfoMapped,
           // discountID: 3
         },
-        refetchQueries: [{ query: LOAD_PRODUCTS }]
+        refetchQueries: [{ query: LOAD_PRODUCTS }],
       });
-    }
-    catch(e){
+      console.log(response);
+    } catch (e) {
       alert(e.graphQLErrors[0].extensions.response.body);
       // alert(e.message);
     }
-    
 
     dispatch(clearProductCart());
   };
@@ -113,8 +112,21 @@ export default function CreateOrder() {
           </Box>
           <CostGrid />
         </Grid>
-        <CustomerGrid />
-        <Button onClick={createNewOrder} variant="contained">
+        <Grid
+          item
+          xs={4}
+          className="customer"
+          sx={{ paddingLeft: "10px", paddingRight: "10px" }}
+        >
+          <SearchCustomerBar />
+          <CustomerInfo />
+          <CustomerPayment />
+        </Grid>
+        <Button
+          onClick={createNewOrder}
+          variant="contained"
+          disabled={productCart.length > 0 ? false : true}
+        >
           DONE
         </Button>
       </Grid>
