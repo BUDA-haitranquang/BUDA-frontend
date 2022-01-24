@@ -70,7 +70,7 @@ const Staff = (props) => {
 
   useEffect(() => {
     async function fetchData(){
-      if(data) setStaffs(data.staffsByUser);
+      if(data) setStaffs(data.staffsByUser.slice().sort((a, b) => b.staffID - a.staffID));
     }
     
     fetchData();
