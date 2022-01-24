@@ -21,6 +21,7 @@ import { BrowserRouter as Router, Redirect, Switch, Route } from "react-router-d
 import ProductDetail from "./pages/ProductDetail";
 import { useSelector } from "react-redux";
 import Staff from "./pages/Staff";
+import StaffDetail from "./pages/StaffDetail";
 
 
 const AppRouter = () => {
@@ -73,6 +74,7 @@ const AppRouter = () => {
           <PrivateRoute authed={isAuth} exact path="/statistic" component={Statistic} />
           <PrivateRoute authed={isAuth} exact path="/customer" component={Customer} />
           <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
+          <PrivateRoute authed={isAuth} exact path="/staff/:id" component={StaffDetail} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />

@@ -17,3 +17,21 @@ export const LOAD_STAFFS = gql`
 	}
   }
 `;
+
+export const LOAD_STAFF = gql`
+	query staffById($staffID:Int) {
+		staff(staffID:$staffID) {
+			staffID
+			name
+			phoneNumber
+			password
+			address
+			userID
+			staffPosition
+			staffUUID
+			salary
+			account
+			email
+		}
+	}
+`;
