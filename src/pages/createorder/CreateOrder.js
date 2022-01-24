@@ -51,7 +51,7 @@ export default function CreateOrder() {
   // hàm này xử lý khá là phức tạp
   // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
   // #tatcataiTranQuangHai
-  const createNewOrder = () => {
+  const createNewOrder = async() => {
     console.log(productCart);
 
     // Cái _ là lodash nhé (nôm na thì lodash là một thư viện chứa các utilities khá là mạnh)
@@ -80,13 +80,20 @@ export default function CreateOrder() {
     console.log(sellOrderInfoMapped);
 
     // mutation này nếu không hiểu thì xem comment trong newSellOrderMutation.js
-    newSellOrder({
-      variables: {
-        sellOrderItemDTOs: sellOrderInfoMapped,
-        // discountID: 3
-      },
-      refetchQueries: [{ query: LOAD_PRODUCTS }],
-    });
+    try{
+      const response = await newSellOrder({
+        variables: {
+          sellOrderItemDTOs: sellOrderInfoMapped,
+          // discountID: 3
+        },
+        refetchQueries: [{ query: LOAD_PRODUCTS }]
+      });
+    }
+    catch(e){
+      alert(e.graphQLErrors[0].extensions.response.body);
+      // alert(e.message);
+    }
+    
 
     dispatch(clearProductCart());
   };
