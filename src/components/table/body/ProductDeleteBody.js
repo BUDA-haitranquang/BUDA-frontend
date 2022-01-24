@@ -27,7 +27,7 @@ const useStyle = makeStyles({
       },
       
     },
-    ".MuiButtonBase-root-MuiButton-root":{
+    des:{
         align : "left",
       }
   });
@@ -77,6 +77,7 @@ const ProductDeleteTableBody = ({
     const changeOpen = () => {setOpen(true)};
     const changeClose = () => {setOpen(false)};
     const isSelected = (id) => selected.indexOf(id) !== -1;
+    const [value,setValue] = React.useState(0);
 
   return (
     <TableBody>
@@ -117,13 +118,16 @@ const ProductDeleteTableBody = ({
                   style={{ textDecoration: "none", color: "blue" }}
                   sx = {{pl : 2}}
                 >
-                  {row.name}
+                  <Typography> {row.name} </Typography> 
                 </Link>
               </TableCell>
-
-              
-              <TableCell align="center"  sx={{padding: "6px 16px 6px 16px"}}>{row.amountLeft}</TableCell>
-              <TableCell align="center"  sx={{padding: "6px 16px 6px 16px"}}>{row.alertAmount}</TableCell>
+              <TableCell align="center"  sx={{padding: "6px 16px 6px 16px"}}><Typography>{row.amountLeft}</Typography></TableCell>
+              <TableCell align="center"  sx={{padding: "6px 16px 6px 16px"}}>
+                <Typography>
+                 {/* {row.alertAmount} */}
+                  {row.amountLeft - value} 
+                </Typography>
+              </TableCell>
               <TableCell align="center">
                     <TextField
                         sx={{
@@ -132,8 +136,9 @@ const ProductDeleteTableBody = ({
                         size="small" 
                         type="number"
                         InputLabelProps={{
-                        shrink: true,
+                            shrink: true,
                         }}
+                        onChange={(e) => setValue(e.target.value)}
                     />
                 </TableCell>
                <TableCell align="center">
@@ -149,9 +154,10 @@ const ProductDeleteTableBody = ({
                                 Title
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                Noi dung : Dm huy anh
+                                <p>Noi dung : Dm huy anh</p>
+                                <p>Noi dung 2 : Dm huy anh 2</p>
                             </Typography>
-                            <Button className="MuiButtonBase-root-MuiButton-root" sx = {{width : 336 , height : 60}} onClick={changeClose}>Close</Button>
+                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
                         </Box>
                     </Modal>
                </TableCell> 

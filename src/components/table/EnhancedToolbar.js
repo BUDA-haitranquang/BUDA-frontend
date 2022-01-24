@@ -24,7 +24,8 @@ const EnhancedToolbar = ({
     <Toolbar
       sx={{
         pl: { sm: 2 },
-        paddingTop:'10px',  
+        paddingTop:'10px',
+        paddingBottom  : '2px',
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
@@ -46,7 +47,7 @@ const EnhancedToolbar = ({
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 60%", fontWeight: "600", color: "#1c6cb3" }}
+          sx={{ flex: "1 1 60%", fontWeight: "600", color: "#1c6cb3" , pl : 1.5 }}
           variant="h6"
           id="tableTitle"
           component="div"
