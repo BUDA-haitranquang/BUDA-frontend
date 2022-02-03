@@ -1,5 +1,20 @@
 import { gql } from "@apollo/client";
 
+export const LOGIN_USER = gql`
+  mutation userLogin(
+    $email: String!
+    $password: String!
+  ){
+    userLogin(
+      email: $email
+      password: $password
+    ){
+      accessToken
+      refreshToken
+    }
+  }
+`;
+
 export const REGISTER_USER = gql`
   mutation newUser(
     $username: String!
@@ -23,17 +38,15 @@ export const REGISTER_USER = gql`
   }
 `
 
-export const LOGIN_USER = gql`
-  mutation userLogin(
-    $email: String!
-    $password: String!
+export const NEW_ACCESS_TOKEN = gql`
+  mutation newAccessToken(
+    $token: String!
   ){
-    userLogin(
-      email: $email
-      password: $password
-    ){
-      accessToken
-      refreshToken
-    }
+    newAccessToken(
+      jwtSimple:{
+        token: $token
+      }
+    )
+    {accessToken, refreshToken}
   }
-`;
+`

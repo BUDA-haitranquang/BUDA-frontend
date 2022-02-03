@@ -1,37 +1,26 @@
-import React, { useState,useRef } from "react";
-import {
-  Typography,
-  Box,
-  Drawer,
-  AppBar,
-  CssBaseline,
-  Toolbar,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Collapse,
-} from "@mui/material";
 import { ShoppingBasketOutlined } from "@mui/icons-material";
-import { makeStyles } from "@mui/styles";
-import { Link } from "react-router-dom";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import GroupsIcon from "@mui/icons-material/Groups";
-import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StoreIcon from "@mui/icons-material/Store";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import PaymentIcon from "@mui/icons-material/Payment";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import AccountMenu from "./AccountMenu";
-import { TransitionGroup } from "react-transition-group";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import GroupsIcon from "@mui/icons-material/Groups";
+import MenuIcon from "@mui/icons-material/Menu";
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import StoreIcon from '@mui/icons-material/Store';
+import {
+  AppBar, Box, Collapse, CssBaseline, Divider, Drawer, IconButton, List,
+  ListItem,
+  ListItemIcon,
+  ListItemText, Toolbar, Typography
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { setFocus } from "../redux/sidebarSlice";
-import { useSelector,useDispatch } from "react-redux";
+import AccountMenu from "./AccountMenu";
 const useStyle = makeStyles({
   root: {
     "& a:link": {
@@ -88,7 +77,7 @@ const Sidebar = ({ window, name }) => {
   const itemRender = (i) => {
     switch (i) {
       case 0:
-        return <DashboardIcon />;
+        return <AddShoppingCartIcon />;
       case 1:
         return <ShoppingBasketOutlined />;
       case 2:

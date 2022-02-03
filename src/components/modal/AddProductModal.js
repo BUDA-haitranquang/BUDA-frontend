@@ -82,7 +82,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             justifyContent="space-between"
           >
             <Box mt={1}>
-              <Typography align="center">Add</Typography>
+              <Typography align="center">New Product</Typography>
             </Box>
 
             <IconButton onClick={handleClose}>

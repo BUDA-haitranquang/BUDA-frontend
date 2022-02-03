@@ -12,10 +12,10 @@ import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 import { useMutation } from "@apollo/client";
-import { useDispatch } from "react-redux";
-import { addToken } from "../../redux/tokenSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToken, addRefreshToken } from "../../redux/tokenSlice";
 import {
-  LOGIN_USER,
+  LOGIN_USER, NEW_ACCESS_TOKEN
 } from "../../graphQl/authentication/authMutations";
 import { useHistory } from "react-router";
 
@@ -95,7 +95,6 @@ const useStyle = makeStyles({
 
 const SignInForm = () => {
   let history = useHistory();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkBox,setCheckBox] = useState(false);
@@ -103,6 +102,8 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  const [newAccessToken] = useMutation(NEW_ACCESS_TOKEN);
+  const {refreshJwt} = useSelector((state) => state.token);
   
   useEffect(() => {
     const listener = event => {
@@ -132,6 +133,7 @@ const SignInForm = () => {
       .then((res) => {
         const { accessToken, refreshToken } = res.data.userLogin;
         dispatch(addToken(accessToken));
+        dispatch(addRefreshToken(refreshToken));
       })
       .then(() => {
         history.push("/dashboard")
@@ -139,6 +141,22 @@ const SignInForm = () => {
       .catch((error) => {
       });
   };
+
+  // const getNewAccessToken = () => {
+  //   newAccessToken({
+  //     variables: {
+  //       token: refreshJwt,
+  //     }
+  //   }).then(res=>{
+  //     const {accessToken,refreshToken} = res.data.newAccessToken;
+  //     dispatch(addToken(accessToken));
+  //     dispatch(addRefreshToken(refreshToken));
+  //   }).catch(e=>{console.log(e)}) 
+  // }
+
+  // const getNewAccessTokenLoop = () => {
+  //   setTimeout(getNewAccessTokenLoop, 60);
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
