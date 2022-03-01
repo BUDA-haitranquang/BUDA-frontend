@@ -26,6 +26,9 @@ import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
+import Staff from "./pages/Staff";
+import StaffDetail from "./pages/StaffDetail";
+
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
@@ -89,6 +92,16 @@ const AppRouter = () => {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
+          <PrivateRoute
+            authed={isAuth}
+            exact path="/staff"
+            component={Staff}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact path="/staff/:id"
+            component={StaffDetail}
+          />
           <PrivateRoute
             authed={isAuth}
             exact
