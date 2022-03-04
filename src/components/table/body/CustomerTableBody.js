@@ -60,32 +60,35 @@ const CustomerTableBody = ({
         return (
           <CustomWidthTooltip title={row.description}>
             <TableRow 
-              sx={{ cursor: "pointer" }}
+              sx={{ 
+                cursor: "pointer" ,
+                height : 50
+              }}
               hover
-              onClick={(e) => handleClick(e, row.customerID)}
+              //onClick={(e) => handleClick(e, row.customerID)}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
               key={row.name}
               selected={isItemSelected}
             >
-              <TableCell align="center" padding="checkbox">
+              {/* <TableCell align="center" padding="checkbox">
                 <Checkbox
                   color="primary"
                   checked={isItemSelected}
                   inputProps={{ "aria-labelledby": labelId }}
                 />
-              </TableCell>
+              </TableCell> */}
               {/* <TableCell align="right">{row.id}</TableCell> */}
-              <TableCell component="th" id={labelId} scope="row" >
+              <TableCell component="th" id={labelId} scope="row" align="left" sx={{padding: "6px 16px 6px 32px"}}>
                 {row.name}
               </TableCell>
 
-              <TableCell align="left">{row.phoneNumber}</TableCell>
-              <TableCell align="left">{row.address}</TableCell>
-              <TableCell align="left">{row.gender}</TableCell>
-              <TableCell align="left">{row.ageGroup}</TableCell>
-              <TableCell align="left">{row.totalSpend}</TableCell>
+              <TableCell align="center" >{row.phoneNumber}</TableCell>
+              <TableCell align="center">{row.address}</TableCell>
+              <TableCell align="center">{row.gender}</TableCell>
+              <TableCell align="center">{row.ageGroup}</TableCell>
+              <TableCell align="center">{row.totalSpend}</TableCell>
    
             </TableRow>
           </CustomWidthTooltip>

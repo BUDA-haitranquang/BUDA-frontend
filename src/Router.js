@@ -31,6 +31,7 @@ import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
 import ProductInventory from './pages/product/ProductInventory';
 import ProductDelete from './pages/product/ProductDelete.js'
+import Cost from './pages/Cost'
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -149,6 +150,12 @@ const AppRouter = () => {
             exact
             path="/create-order"
             component={CreateOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/cost"
+            component={Cost}
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
