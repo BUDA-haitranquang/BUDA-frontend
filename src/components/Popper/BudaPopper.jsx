@@ -39,20 +39,20 @@ function BudaPopper(props) {
         padding: 8,
       },
     },
-    // {
-    //   name: "preventOverflow",
-    //   enabled: true,
-    //   options: {
-    //     altAxis: true,
-    //     altBoundary: true,
-    //     tether: true,
-    //     rootBoundary: "document",
-    //     padding: 8,
-    //   },
-    // },
+    {
+      name: "preventOverflow",
+      enabled: true,
+      options: {
+        altAxis: true,
+        altBoundary: true,
+        tether: true,
+        rootBoundary: "document",
+        padding: 8,
+      },
+    },
     {
       name: "arrow",
-      enabled: { arrow },
+      enabled: arrow,
       options: {
         element: arrowRef,
       },
@@ -79,6 +79,7 @@ function BudaPopper(props) {
 				elevation={3}
 				ref={setPopperElement}
 				style={{ width: widthPopper, ...styles.popper }}
+				{...attributes.popper}
 			>
 				<Fragment>
 					{arrow ? <span ref={setArrowRef} /> : null}
