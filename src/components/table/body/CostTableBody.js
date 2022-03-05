@@ -82,8 +82,10 @@ const CostTableBody = ({
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </TableCell> */}
-              {/* <TableCell align="right">{row.id}</TableCell> */}
-              <TableCell component="th" id={labelId} scope="row" align="left" sx={{padding: "6px 16px 6px 32px"}}>
+              <TableCell align="center">{row.fixedCostID}</TableCell>
+              <TableCell component="th" id={labelId} scope="row" align="center" 
+              // sx={{padding: "6px 16px 6px 16px"}}
+              >
                 {row.name}
               </TableCell>
 

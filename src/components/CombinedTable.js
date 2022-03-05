@@ -19,9 +19,8 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
-  const [searchBy, setSearchBy] = useState("name");
+  const [searchBy, setSearchBy] = useState(headCells[0].id);
   
- 
   const displayData = display.slice(
     page * rowsPerPage,
     (page + 1) * rowsPerPage
@@ -57,8 +56,9 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
     setSelected([]);
   };
   useEffect(() => {
-    !search
-      ? setDisplay(data)
+     {console.log(searchBy)}
+     {console.log(search)}
+    !search ? setDisplay(data)
       : setDisplay(
           data.filter((item) =>
             item[searchBy]
@@ -72,7 +72,6 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
-    
         <TableContainer sx={{ paddingRight: "10px" }}>
           <EnhancedToolbar
             numSelected={selected.length}

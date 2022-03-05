@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import CombinedTable from "../components/CombinedTable";
 import { Toolbar } from "@mui/material";
 import {useQuery} from "@apollo/client";
-import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
-import AddCustomerModal from "../components/modal/AddCustomerModal";
+//import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
+//import AddCustomerModal from "../components/modal/AddCustomerModal";
 import AddCostModal from "../components/modal/AddCostModal";
-import CustomerTableBody from '../components/table/body/CustomerTableBody';
+// import CustomerTableBody from '../components/table/body/CustomerTableBody';
 import CostTableBody from '../components/table/body/CostTableBody';
 import { LOAD_COST } from "../graphQl/cost/costQueries";
 const headCells = [
@@ -27,7 +27,7 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Name",
+    label: "costName",
   },
   {
     id: "description",
@@ -64,7 +64,7 @@ const Cost = (props) => {
 const {error,loading,data} = useQuery(LOAD_COST);
   useEffect(()=>{
     async function fetchData(){
-      if(data) setCost(data.costsByUser)
+      if(data) setCost(data.fixedCostsByUser)
     }
     fetchData();
     },[data])
@@ -90,6 +90,7 @@ const {error,loading,data} = useQuery(LOAD_COST);
             Modal={AddCostModal} 
             Body={CostTableBody} 
             type = 'costID'/>
+       
         </Box>
       </Box>
     </Box>

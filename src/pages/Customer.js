@@ -24,7 +24,7 @@ const headCells = [
     id: "phoneNumber",
     numeric: false,
     disablePadding: true,
-    label: "Phone",
+    label: "phoneNumber",
   },
   {
     id: "address",
@@ -36,19 +36,19 @@ const headCells = [
     id: "gender",
     numeric: false,
     disablePadding: true,
-    label: "Gender",
+    label: "gender",
   },
   {
     id: "ageGroup",
     numeric: false,
     disablePadding: true,
-    label: "Group",
+    label: "ageGroup",
   },
   {
     id: "totalSpend",
     numeric: false,
     disablePadding: true,
-    label: "Spend",
+    label: "totalSpend",
   },
 
 ];

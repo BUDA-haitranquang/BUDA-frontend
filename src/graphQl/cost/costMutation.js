@@ -1,16 +1,18 @@
 import {gql} from '@apollo/client';
 
 export const ADD_COST_MUTATION = gql`
-    mutation newCost(
-      $name: String!
-      $fixedCostID: Int!
-      $moneyAmount: Float!
+    mutation newFixedCost(
+      $name: String
+      $description: String
+      $period: Int
+      $moneyAmount: Float
     ){
-        newCost(
-            costInput:{
+        newFixedCost(
+            fixedCostInput:{
                 name: $name
-                fixedCostID: $fixedCostID
+                description: $description
+                period: $period
                 moneyAmount: $moneyAmount
             })
-        {userID}
+        {fixedCostID}
     }`;
