@@ -41,9 +41,6 @@ function LiveSearch(props) {
   };
 
   const handleClosePopper = (e) => {
-    if (!popperOpen) {
-      return;
-    }
     setPopperOpen(false);
     setQuery("");
   };
@@ -53,6 +50,7 @@ function LiveSearch(props) {
       <SearchBox
         query={query}
         placeholder={placeholder}
+				onChange={handleQueryChange}
         removeable
         inputProps={{
           ...inputProps,

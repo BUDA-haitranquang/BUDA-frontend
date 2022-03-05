@@ -2,11 +2,14 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { ClickAwayListener, Paper, Popper } from "@material-ui/core";
 import { useState } from "react";
+import { width } from "@mui/system";
+import { usePopper } from "react-popper"
 
 BudaPopper.propTypes = {
   open: PropTypes.bool,
   referenceElement: PropTypes.any,
-	children: PropTypes.any,
+  width: PropTypes.number,
+  children: PropTypes.any,
   onClose: PropTypes.func,
   placement: PropTypes.string,
   arrow: PropTypes.bool,
@@ -16,6 +19,7 @@ function BudaPopper(props) {
   const {
     open,
     referenceElement,
+    width,
     onClose,
     placement = "bottom-start",
     arrow = false,
@@ -23,6 +27,7 @@ function BudaPopper(props) {
   } = props;
 
   const [arrowRef, setArrowRef] = useState(null);
+	const [popperElement, setPopperElement] = useState(null);
 
   let modifiersDefault = [
     {
@@ -54,18 +59,32 @@ function BudaPopper(props) {
     },
   ];
 
+	const { styles, attributes } = usePopper(referenceElement, popperElement, {
+		placement: placement,
+		modifiers: [ ...modifiersDefault ]
+	})
+
+  let widthPopper = width || referenceElement?.offsetWidth || 0;
+
   const renderPopper = () => (
-    <ClickAwayListener onClickAway={onClose} mouseEvent="onMouseDown">
-      <Popper
-        open={open}
-        anchorEl={referenceElement}
-        disablePortal
-        placement={placement}
-        modifiers={modifiersDefault}
-      >
-        {arrow ? <span ref={setArrowRef} /> : null}
-        {children}
-      </Popper>
+    <ClickAwayListener
+      onClickAway={(e) => {
+        if (!referenceElement.contains(e.target)) {
+          onClose();
+        }
+      }}
+      mouseEvent="onMouseDown"
+    >
+			<Paper
+				elevation={3}
+				ref={setPopperElement}
+				style={{ width: widthPopper, ...styles.popper }}
+			>
+				<Fragment>
+					{arrow ? <span ref={setArrowRef} /> : null}
+					{children}
+				</Fragment>
+			</Paper>
     </ClickAwayListener>
   );
 
