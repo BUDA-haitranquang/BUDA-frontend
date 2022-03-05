@@ -24,8 +24,8 @@ import Dashboard from "./pages/Dashboard";
 import Error from "./pages/Error";
 import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
-import Product from "./pages/Product";
-import ProductDetail from "./pages/ProductDetail";
+import Product from "./pages/product/Product";
+import ProductDetail from "./pages/product/ProductDetail";
 import Staff from "./pages/Staff";
 import StaffDetail from "./pages/StaffDetail";
 
@@ -113,7 +113,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product/huybo"
+            path="/product/delete"
             component={ProductDelete}
           />
           <PrivateRoute
@@ -125,7 +125,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product/kiemke"
+            path="/product/inventory"
             component={ProductInventory}
           />
           <PrivateRoute

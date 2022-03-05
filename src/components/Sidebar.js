@@ -52,7 +52,7 @@ function createData(name,link){
 const title = ["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"];
 const sidebarItems = [
   [createData('1',''),createData('B','')],
-  [createData('crud','crud'),createData('Kiểm kê','kiemke'),createData('Hủy bỏ','huybo')],
+  [createData('crud','crud'),createData('Kiểm kê','inventory'),createData('Hủy bỏ','delete')],
   [createData('3',''),createData('B','')],
   [createData('4',''),createData('B','')],
   [createData('5',''),createData('B','')],
