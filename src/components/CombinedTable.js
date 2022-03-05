@@ -9,8 +9,7 @@ import React, { useState, useEffect } from "react";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 
-
-const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
+const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -20,7 +19,7 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState(headCells[0].id);
-  
+
   const displayData = display.slice(
     page * rowsPerPage,
     (page + 1) * rowsPerPage
@@ -56,16 +55,21 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
     setSelected([]);
   };
   useEffect(() => {
-     {console.log(searchBy)}
-     {console.log(search)}
-    !search ? setDisplay(data)
+    !search
+      ? setDisplay(data)
       : setDisplay(
-          data.filter((item) =>
-            item[searchBy]
+          data.filter((item) => {
+            {
+              console.log(item[searchBy]);
+            }
+            {
+              console.log(search.toString());
+            }
+            return (item[searchBy] || "")
               .toString()
               .toUpperCase()
-              .includes(search.toString().toUpperCase())
-          )
+              .includes(search.toString().toUpperCase());
+          })
         );
   }, [search, searchBy, data]);
 
@@ -79,10 +83,10 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
             handleSearch={(val) => setSearch(val)}
             headCells={headCells}
             searchBy={(val) => setSearchBy(val)}
-            deleteItem={()=>{
+            deleteItem={() => {
               deleteItems(selected);
               setSelected([]);
-          }}
+            }}
           />
           <Table sx={{ minWidth: 1000 }}>
             <EnhancedTableHead
