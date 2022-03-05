@@ -17,17 +17,17 @@ export default function OrderProductItem({ row, serial }) {
   }, [row])
   
   const handlePriceChange = (e) => {
-    const price = e.target.value;
+    const price = e.target.value || 0;
     setSellingPrice(price);
     let data = {...row};
-    data.sellingPrice = price;
+    data.sellingPrice = parseFloat(price);
     dispatch(changeProductCartItem(data));
   }
   const handleQuantityChange = (e) => {
-    const quantity = e.target.value;
+    const quantity = e.target.value || 0;
     setQuantity(quantity);
     let data = {...row};
-    data.quantity = quantity;
+    data.quantity = parseInt(quantity);
     dispatch(changeProductCartItem(data));
   }
 
