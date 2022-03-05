@@ -3,8 +3,6 @@ import SignInForm from "../components/signin/SignInForm";
 import LogInPic from "../assets/login.jpg";
 import { Grid, Box,Hidden } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
-
 const Login = () => {
   return (
     <>

@@ -78,7 +78,7 @@ export default function SearchProductBar() {
         options={products}
         sx={{ width: "68%" }}
         autoHighlight
-        getOptionLabel={(option) => option.name || ""}
+        getOptionLabel={(option) => option.name}
         inputValue={searchProductValue}
         onInputChange={(event, newInputValue, reason) => {
           if(reason === "reset") setSearchProductValue("");

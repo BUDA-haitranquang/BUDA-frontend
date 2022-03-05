@@ -24,15 +24,12 @@ import Dashboard from "./pages/Dashboard";
 import Error from "./pages/Error";
 import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
-import Product from "./pages/Product";
-import ProductDetail from "./pages/ProductDetail";
-import Staff from "./pages/Staff";
-import StaffDetail from "./pages/StaffDetail";
-
+import Product from "./pages/product/Product";
+import ProductDetail from "./pages/product/ProductDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
-
+import Discount from "./pages/product/Discount";
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -94,16 +91,6 @@ const AppRouter = () => {
         <Switch>
           <PrivateRoute
             authed={isAuth}
-            exact path="/staff"
-            component={Staff}
-          />
-          <PrivateRoute
-            authed={isAuth}
-            exact path="/staff/:id"
-            component={StaffDetail}
-          />
-          <PrivateRoute
-            authed={isAuth}
             exact
             path="/dashboard"
             component={Dashboard}
@@ -111,8 +98,14 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product"
+            path="/product/crud"
             component={Product}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/discount"
+            component={Discount}
           />
           <PrivateRoute
             authed={isAuth}
@@ -120,6 +113,7 @@ const AppRouter = () => {
             path="/product/:id"
             component={ProductDetail}
           />
+        
           <PrivateRoute
             authed={isAuth}
             exact

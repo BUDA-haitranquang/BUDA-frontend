@@ -1,13 +1,9 @@
 import { Grid, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { useState } from "react";
 
 const useStyle = makeStyles(() => ({
-  root: {
-    "& .MuiOutlinedInput-input":{
-      padding: "3px 5px 3px 3px"
-    }
-  },
+  root: {},
 }));
 
 export default function EditableMoneyBox({ title, value, onChange }) {
@@ -23,7 +19,7 @@ export default function EditableMoneyBox({ title, value, onChange }) {
       </Typography>
       <TextField
         inputProps={{
-          style: { textAlign: "center" },
+          style: { textAlign: "right" },
         }}
         fullWidth
         variant="outlined"

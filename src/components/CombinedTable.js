@@ -70,7 +70,7 @@ const CombinedTable = ({ data, headCells, Modal, Body,type,deleteItems }) => {
   }, [search, searchBy, data]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%",boxShadow:'40px' }}>
       <Paper>
     
         <TableContainer sx={{ paddingRight: "10px" }}>

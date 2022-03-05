@@ -3,13 +3,13 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import CombinedTable from "../components/CombinedTable";
-import AddProductModal from "../components/modal/AddProductModal";
-import Sidebar from "../components/Sidebar";
-import ProductTableBody from "../components/table/body/ProductTableBody";
-import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
+import CombinedTable from "../../components/CombinedTable";
+import AddProductModal from "../../components/modal/AddProductModal";
+import Sidebar from "../../components/Sidebar";
+import ProductTableBody from "../../components/table/body/ProductTableBody";
+import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
-import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import { HIDE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 const headCells = [
   // {
   //   id: "ID",

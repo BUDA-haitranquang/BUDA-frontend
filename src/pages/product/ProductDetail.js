@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
-import CombinedDetail from "../components/CombinedDetail";
+import CombinedDetail from "../../components/CombinedDetail";
 import { useHistory, useParams } from "react-router";
 import { useMutation, useQuery } from "@apollo/client";
-import { LOAD_PRODUCT, LOAD_PRODUCTS } from "../graphQl/products/productQueries";
+import { LOAD_PRODUCT, LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import {
   BrowserRouter as Router,
   Redirect,
   Switch,
   Route,
 } from "react-router-dom";
-import EditProductModal from "../components/modal/EditProductModal";
-import ProductInformation from "../components/detail/information/ProductInformation";
-import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import EditProductModal from "../../components/modal/EditProductModal";
+import ProductInformation from "../../components/detail/information/ProductInformation";
+import { HIDE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 
 const ProductDetail = (props) => {
   const { window } = props;
   const { id } = useParams();
   const history = useHistory();
-  console.log(id);
 
   const [product, setProduct] = useState(null);
 

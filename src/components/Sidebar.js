@@ -46,16 +46,16 @@ const useStyle = makeStyles({
   },
 });
 const drawerWidth = 200;
-
+const createData = (name,link) => {return {name: name,link: link}};
 const title = ["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"];
-const sidebarItems = [['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],]
+const sidebarItems = [[createData('A',''),createData('B','')],
+                      [createData('crud','crud'),createData('Discount','discount')],
+                      [createData('A',''),createData('B','')],
+                      [createData('A',''),createData('B','')],
+                      [createData('A',''),createData('B','')],
+                      [createData('A',''),createData('B','')],
+                      [createData('A',''),createData('B','')],
+                      [createData('A',''),createData('B','')]]
 const Sidebar = ({ window, name }) => {
   //const [focus,setFocus] = useState('');
   //const focus = useRef('');
@@ -120,14 +120,14 @@ const Sidebar = ({ window, name }) => {
               }}>
                   <ListItemIcon>{itemRender(idx)}</ListItemIcon>
                   <ListItemText primary={capitalizeFirstLetter(item)}/>
-                  <ListItemIcon sx={{marginLeft:'60%'}}>{focus===item?<ExpandLessIcon/>: <ExpandMoreIcon/>} </ListItemIcon>                  
+                  <Box sx={{marginLeft:'60%'}}>{focus===item?<ExpandLessIcon/>: <ExpandMoreIcon/>} </Box>                  
               </ListItem>
                 <Collapse in={focus === item}>
                   {sidebarItems[idx].map((component)=>{
                      return(
-                      <Link to = {`/${item}`}>
+                      <Link to = {`/${item}/${component.link}`}>
                      <ListItem button>
-                        <ListItemText primary={capitalizeFirstLetter(component)}/>
+                        <ListItemText primary={capitalizeFirstLetter(component.name)}/>
                      </ListItem>
                      </Link>
                      )
