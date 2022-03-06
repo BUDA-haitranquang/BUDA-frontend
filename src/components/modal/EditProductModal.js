@@ -2,7 +2,10 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
-import { AlertErrorProp } from "../../buda-components/alert/BudaNoti";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { UPDATE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import {
@@ -47,7 +50,12 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           query: LOAD_PRODUCTS,
         },
       ],
-    });
+    })
+      .then((res) => {
+        handleClose();
+        enqueueSnackbar("Save product successfully", AlertSuccessProp);
+      })
+      .catch((e) => enqueueSnackbar("Error", AlertErrorProp));
   };
 
   const isFormValid = () => {
