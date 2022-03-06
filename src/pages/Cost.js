@@ -4,30 +4,28 @@ import Box from "@mui/material/Box";
 import CombinedTable from "../components/CombinedTable";
 import { Toolbar } from "@mui/material";
 import {useQuery} from "@apollo/client";
-//import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
-//import AddCustomerModal from "../components/modal/AddCustomerModal";
 import AddCostModal from "../components/modal/AddCostModal";
-// import CustomerTableBody from '../components/table/body/CustomerTableBody';
 import CostTableBody from '../components/table/body/CostTableBody';
 import { LOAD_COST } from "../graphQl/cost/costQueries";
 const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "#",
-  // },
+  
+  {
+    id: "check",
+    numeric: false,
+    disablePadding: true,
+    label: "Selected",
+  },
   {
     id: "fixedCostID",
     numeric: false,
     disablePadding: true,
-    label: "fixedCostID",
+    label: "Fixed Cost ID",
   },
   {
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "costName",
+    label: "Cost Name",
   },
   {
     id: "description",
@@ -39,19 +37,19 @@ const headCells = [
     id: "moneyAmount",
     numeric: false,
     disablePadding: true,
-    label: "moneyAmount",
+    label: "Money Amount",
   },
   {
     id: "period",
     numeric: false,
     disablePadding: true,
-    label: "period",
+    label: "Reriod",
   },
   {
     id: "userID",
     numeric: false,
     disablePadding: true,
-    label: "userID",
+    label: "User ID",
   },
 
 ];
@@ -59,8 +57,6 @@ const headCells = [
 const Cost = (props) => {
   const { window } = props;
   const [cost,setCost] = useState([]);
-  //const [customers,setCustomers] = useState([]);
-  //const {error,loading,data} = useQuery(LOAD_CUSTOMERS);
 const {error,loading,data} = useQuery(LOAD_COST);
   useEffect(()=>{
     async function fetchData(){

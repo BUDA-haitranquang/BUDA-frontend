@@ -8,12 +8,12 @@ import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
 import CustomerTableBody from '../components/table/body/CustomerTableBody';
 const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "#",
-  // },
+  {
+    id: "check_box",
+    numeric : false,
+    disablePadding: true,
+    label: "Selected",
+  },
   {
     id: "name",
     numeric: false,
@@ -24,7 +24,7 @@ const headCells = [
     id: "phoneNumber",
     numeric: false,
     disablePadding: true,
-    label: "phoneNumber",
+    label: "Phone",
   },
   {
     id: "address",
@@ -36,19 +36,19 @@ const headCells = [
     id: "gender",
     numeric: false,
     disablePadding: true,
-    label: "gender",
+    label: "Gender",
   },
   {
     id: "ageGroup",
     numeric: false,
     disablePadding: true,
-    label: "ageGroup",
+    label: "Age Group",
   },
   {
     id: "totalSpend",
     numeric: false,
     disablePadding: true,
-    label: "totalSpend",
+    label: "Total Spend",
   },
 
 ];
@@ -69,7 +69,7 @@ const Customer = (props) => {
       <Sidebar window={window} name="Customer" />
 
       <Box
-        //mt={5}
+  
         width="100%"
         display="flex"
         flexDirection="column"

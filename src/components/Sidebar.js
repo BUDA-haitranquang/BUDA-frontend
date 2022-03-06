@@ -55,22 +55,12 @@ const sidebarItems = [
   [createData('crud','crud'),createData('Kiểm kê','inventory'),createData('Hủy bỏ','delete')],
   [createData('3',''),createData('B','')],
   [createData('4',''),createData('B','')],
-  [createData('5',''),createData('B','')],
+  [createData('Customer','customer'),createData('B','')],
   [createData('6',''),createData('B','')],
   [createData('7',''),createData('B','')],
   [createData('7',''),createData('B','')],
 ]
-// const sidebarItems = [['A','B'],
-//                   ['A','B'],
-//                   ['A','B'],
-//                   ['A','B'],
-//                   ['A','B'],
-//                   ['A','B'],
-//                   ['A','B'],
-//                   ['A','B'],]
 const Sidebar = ({ window, name }) => {
-  //const [focus,setFocus] = useState('');
-  //const focus = useRef('');
   const  focus = useSelector(state=> state.sidebar.focus);
   const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -85,7 +75,6 @@ const Sidebar = ({ window, name }) => {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  //const setFocus = (val)=>{focus.current = val;}
   const itemRender = (i) => {
     switch (i) {
       case 0:
@@ -146,8 +135,7 @@ const Sidebar = ({ window, name }) => {
                   })}
               
                 </Collapse>
-                {/* {console.log(focus)}
-                {console.log(sidebarItems[idx])} */}
+       
       
               </>
           )
@@ -192,14 +180,14 @@ const Sidebar = ({ window, name }) => {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, 
           }}
           sx={{
             display: { xs: "block", sm: "none" },

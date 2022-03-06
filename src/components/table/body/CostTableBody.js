@@ -16,7 +16,8 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 const useStyle = makeStyles({
     root: {
       "& MuiTableCell-root":{
-          padding: 0
+          padding: 0,
+          height: 50,
       }
     },
   });
@@ -68,33 +69,31 @@ const CostTableBody = ({
                 height : 50
               }}
               hover
-              //onClick={(e) => handleClick(e, row.customerID)}
+              onClick={(e) => handleClick(e, row.fixedCostID)}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
               key={row.name}
               selected={isItemSelected}
+              size="small"
             >
-              {/* <TableCell align="center" padding="checkbox">
+              <TableCell align="center" padding="checkbox">
                 <Checkbox
                   color="primary"
                   checked={isItemSelected}
                   inputProps={{ "aria-labelledby": labelId }}
                 />
-              </TableCell> */}
+              </TableCell>
               <TableCell align="center">{row.fixedCostID}</TableCell>
               <TableCell component="th" id={labelId} scope="row" align="center" 
               // sx={{padding: "6px 16px 6px 16px"}}
               >
                 {row.name}
               </TableCell>
-
               <TableCell align="center" >{row.description}</TableCell>
               <TableCell align="center">{row.moneyAmount}</TableCell>
               <TableCell align="center">{row.period}</TableCell>
               <TableCell align="center">{row.userID}</TableCell>
-              {/* <TableCell align="center">{row.totalSpend}</TableCell> */}
-   
             </TableRow>
           </CustomWidthTooltip>
         );

@@ -155,7 +155,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/customer"
+            path="/customer/customer"
             component={Customer}
           />
           <PrivateRoute
@@ -170,6 +170,7 @@ const AppRouter = () => {
             path="/cost"
             component={Cost}
           />
+          
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />

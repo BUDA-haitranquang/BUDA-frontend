@@ -63,20 +63,20 @@ const CustomerTableBody = ({
             <TableRow 
               sx={{ cursor: "pointer" }}
               hover
-              //onClick={(e) => handleClick(e, row.productID)}
+              onClick={(e) => handleClick(e, row.customerID)}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
               key={row.name}
               selected={isItemSelected}
             >
-              {/* <TableCell align="center" padding="checkbox">
+              <TableCell align="center" padding="checkbox">
                 <Checkbox
                   color="primary"
                   checked={isItemSelected}
                   inputProps={{ "aria-labelledby": labelId }}
                 />
-              </TableCell> */}
+              </TableCell>
               {/* <TableCell align="right">{row.id}</TableCell> */}
               <TableCell component="th" id={labelId} scope="row" >
                 {/* <Link

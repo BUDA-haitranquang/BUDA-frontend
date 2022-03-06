@@ -40,7 +40,7 @@ const headCells = [
     id: "numberDelete",
     numeric: true,
     disablePadding: true,
-    label: "numberDelete",
+    label: "Number Delete",
   },
   {
     id: "description",

@@ -10,12 +10,13 @@ import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutat
 import { useQuery } from "@apollo/client";
 import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "ID",
-  // },
+
+  {
+    id: "check",
+    numeric: true,
+    disablePadding: false,
+    label: "Check",
+  },
   {
     id: "name",
     numeric: false,

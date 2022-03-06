@@ -154,8 +154,8 @@ const ProductDeleteTableBody = ({
                                 Title
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <p>Noi dung : Dm huy anh</p>
-                                <p>Noi dung 2 : Dm huy anh 2</p>
+                                <p>Noi dung : Noi dung 1</p>
+                                <p>Noi dung 2 :Noi dung 2</p>
                             </Typography>
                             <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
                         </Box>
