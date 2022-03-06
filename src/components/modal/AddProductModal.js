@@ -1,16 +1,18 @@
 import { useMutation } from "@apollo/client";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import {
   AlertErrorProp,
-  AlertSuccessProp,
+  AlertSuccessProp
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
@@ -18,8 +20,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
-
-  const { enqueueSnackbar } = useSnackbar();
 
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
 

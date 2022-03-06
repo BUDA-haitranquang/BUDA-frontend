@@ -20,6 +20,7 @@ const ModalAction = (props) => {
     isNotShowCloseButton,
     isNotShowActionButton,
     disabledOk,
+    okButtonType, // primary | secondary | success | error
     renderActions: Component,
     ...remainProps
   } = props;
@@ -43,7 +44,7 @@ const ModalAction = (props) => {
           {onOk && !isNotShowActionButton ? (
             <Button
               variant="contained"
-              color="primary"
+              color={okButtonType ? okButtonType : "primary"}
               size="small"
               style={{ marginLeft: "16px" }}
               onClick={() => onOk()}
