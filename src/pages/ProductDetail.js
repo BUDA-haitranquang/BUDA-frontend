@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Box from "@mui/material/Box";
-import { Toolbar } from "@mui/material";
-import CombinedDetail from "../components/CombinedDetail";
-import { useHistory, useParams } from "react-router";
 import { useMutation, useQuery } from "@apollo/client";
-import { LOAD_PRODUCT, LOAD_PRODUCTS } from "../graphQl/products/productQueries";
+import { Toolbar } from "@mui/material";
+import Box from "@mui/material/Box";
+import { useSnackbar } from "notistack";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
+import { Redirect } from "react-router-dom";
 import {
-  BrowserRouter as Router,
-  Redirect,
-  Switch,
-  Route,
-} from "react-router-dom";
-import EditProductModal from "../components/modal/EditProductModal";
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
+import CombinedDetail from "../components/CombinedDetail";
 import ProductInformation from "../components/detail/information/ProductInformation";
+import EditProductModal from "../components/modal/EditProductModal";
+import Sidebar from "../components/Sidebar";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import {
+  LOAD_PRODUCT,
+  LOAD_PRODUCTS,
+} from "../graphQl/products/productQueries";
 
 const ProductDetail = (props) => {
+  const { enqueueSnackbar } = useSnackbar();
   const { window } = props;
   const { id } = useParams();
   const history = useHistory();
@@ -32,17 +36,21 @@ const ProductDetail = (props) => {
 
   const handleDeleteProduct = () => {
     hideProduct({
-      variables:{productID: parseInt(id) },
-      refetchQueries: [{query: LOAD_PRODUCTS}]
+      variables: { productID: parseInt(id) },
+      refetchQueries: [{ query: LOAD_PRODUCTS }],
     })
-    .then(history.push('/product'))
-  }
+      .then(history.push("/product"))
+      .then((res) => {
+        enqueueSnackbar("Product deleted", AlertSuccessProp);
+      })
+      .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp));
+  };
 
   useEffect(() => {
-    async function fetchData(){
-      if(data) setProduct(data);
+    async function fetchData() {
+      if (data) setProduct(data);
     }
-    
+
     fetchData();
   }, [data]);
 
