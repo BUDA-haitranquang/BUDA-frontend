@@ -11,6 +11,11 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import { useSnackbar } from "notistack";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/BudaNoti";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
@@ -21,35 +26,44 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
 
-  
+  const { enqueueSnackbar } = useSnackbar();
+
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
 
   const addProduct = () => {
     newProduct({
-      variables:{
+      variables: {
         name: name,
         description: description,
         costPerUnit: parseFloat(costPerUnit),
         amountLeft: parseInt(amountLeft),
         alertAmount: parseInt(alertAmount),
-        sellingPrice: parseFloat(price)
+        sellingPrice: parseFloat(price),
       },
-      refetchQueries: [{query: LOAD_PRODUCTS}]
-    });
-  }
+      refetchQueries: [{ query: LOAD_PRODUCTS }],
+    })
+      .then((res) => {
+        handleClose();
+        enqueueSnackbar("Add new product successfully", AlertSuccessProp);
+      })
+      .catch((e) => enqueueSnackbar("Error", AlertErrorProp));
+  };
 
   const isFormValid = () => {
-    const isValid = (name !== "") && (price >= 0) && (amountLeft >= 0) && (costPerUnit >= 0);
+    // TODO: thông báo chi tiết cho từng lỗi
+    const isValid =
+      name !== "" &&
+      price >= 0 &&
+      amountLeft >= 0 &&
+      costPerUnit >= 0 &&
+      alertAmount >= 0;
     return isValid;
-  }
+  };
 
   const handleSubmit = () => {
-    if(isFormValid()) {
-      addProduct();
-      handleClose();
-    }
-    else alert("Invalid input");
-  }
+    if (isFormValid()) addProduct();
+    else enqueueSnackbar("Invalid input", AlertErrorProp);
+  };
 
   return (
     <Modal
@@ -98,7 +112,13 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <div style={{width: "100%", display: "flex", justifyContent: "space-between"}}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <TextField
               required
               type="number"
@@ -107,7 +127,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               variant="outlined"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              style={{width: "48%"}}
+              style={{ width: "48%" }}
             />
             <TextField
               required
@@ -117,10 +137,10 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               variant="outlined"
               value={costPerUnit}
               onChange={(e) => setCostPerUnit(e.target.value)}
-              style={{width: "48%"}}
+              style={{ width: "48%" }}
             />
           </div>
-          
+
           <TextField
             fullWidth
             required
@@ -159,14 +179,10 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <Button 
-            variant="contained" 
-            onClick={handleSubmit}
-          >
+          <Button variant="contained" onClick={handleSubmit}>
             Add Product
           </Button>
         </Box>
-        
       </div>
     </Modal>
   );
