@@ -28,7 +28,20 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const resetForm = () => {
+    setName("");
+    setPrice(0);
+    setAmountLeft(0);
+    setAlertAmount(0);
+    setCostPerUnit(0);
+    setGroup("");
+    setDescription("");
+  }
+
   const editProduct = () => {
+    setIsLoading(true);
     updateProduct({
       variables: {
         productID: product.productID,
@@ -55,7 +68,8 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
         handleClose();
         enqueueSnackbar("Save product successfully", AlertSuccessProp);
       })
-      .catch((e) => enqueueSnackbar("Error", AlertErrorProp));
+      .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp))
+      .finally(setIsLoading(false));
   };
 
   const isFormValid = () => {
@@ -82,6 +96,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
       open={isOpen}
       onClose={handleClose}
       onOk={handleSubmit}
+      isLoading={isLoading}
       children={
         <Box
           component="form"

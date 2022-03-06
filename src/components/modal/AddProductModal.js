@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import {
   AlertErrorProp,
-  AlertSuccessProp
+  AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
@@ -22,8 +22,20 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [description, setDescription] = useState("");
 
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const resetForm = () => {
+    setName("");
+    setPrice(0);
+    setAmountLeft(0);
+    setAlertAmount(0);
+    setCostPerUnit(0);
+    setGroup("");
+    setDescription("");
+  }
 
   const addProduct = () => {
+    setIsLoading(true);
     newProduct({
       variables: {
         name: name,
@@ -39,7 +51,9 @@ const AddProductModal = ({ isOpen, handleClose }) => {
         handleClose();
         enqueueSnackbar("Add new product successfully", AlertSuccessProp);
       })
-      .catch((e) => enqueueSnackbar("Error", AlertErrorProp));
+      .then(resetForm())
+      .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp))
+      .finally(setIsLoading(false));
   };
 
   const isFormValid = () => {
@@ -65,6 +79,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
       onClose={handleClose}
       textOk="Save"
       onOk={handleSubmit}
+      isLoading={isLoading}
       children={
         <Box
           component="form"
