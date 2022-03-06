@@ -15,7 +15,7 @@ import { useSnackbar } from "notistack";
 import {
   AlertErrorProp,
   AlertSuccessProp,
-} from "../../buda-components/BudaNoti";
+} from "../../buda-components/alert/BudaNoti";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const [name, setName] = useState("");
@@ -50,7 +50,8 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   };
 
   const isFormValid = () => {
-    // TODO: thông báo chi tiết cho từng lỗi
+    // TODO: check định dạng (price, cost, ... phải là number)
+    // + thông báo chi tiết cho từng lỗi, hiện tại đang báo chung lỗi "Invalid input"
     const isValid =
       name !== "" &&
       price >= 0 &&
