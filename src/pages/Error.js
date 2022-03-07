@@ -1,35 +1,19 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import { StyledEngineProvider } from '@mui/material/styles';
-
+import { Box } from '@mui/material';
+import BUDADatePicker from '../components/BUDADatePicker/BUDADatePicker';
 const Error = () => {
+
     return (
         <div>
-            <StyledEngineProvider injectFirst>
-                <BasicDatePicker/>
-            </StyledEngineProvider>
-            
+          <Box px ={{width:'150px'}}>
+          <BUDADatePicker onlyDate={true} label = 'test' />
+          </Box>
+          
+          <Box px ={1}>
+          <BUDADatePicker onlyDate={false} label = 'test'/>
+          </Box>
         </div>
     )
 }
 export default Error;
 
-const BasicDatePicker= () => {
-  const [value, setValue] = React.useState(null);
-
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker
-        label="Basic example"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider>
-  );
-}
