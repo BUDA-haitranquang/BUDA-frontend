@@ -17,7 +17,7 @@ import React, { useState } from "react";
 import FilterPopup from "./FilterPopup";
 import SplitButton from "./SplitButton";
 
-const EnhancedToolbar = ({
+const BudaTableToolbar = ({
   headCells,
   numSelected,
   handleOpen,
@@ -113,4 +113,4 @@ const EnhancedToolbar = ({
   );
 };
 
-export default EnhancedToolbar;
+export default BudaTableToolbar;

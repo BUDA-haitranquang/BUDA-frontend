@@ -5,11 +5,27 @@ import {
   TableContainer,
   TablePagination,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import EnhancedTableHead from "./table/EnhancedTableHead";
-import EnhancedToolbar from "./table/EnhancedToolbar";
+import React, { useEffect, useState } from "react";
+import ProductTableBody from "../../components/table/body/ProductTableBody";
+import BudaTableBody from "./BudaTableBody";
+import BudaTableHead from "./BudaTableHead";
+import BudaTableToolbar from "./BudaTableToolbar";
+const BudaTable = (props) => {
+  const {
+    tableChildren,
+    modalChildren,
+    data,
+    headCells,
+    Modal,
+    type,
+    deleteItems,
+    children,
+    stickyHeader = true,
+    padding,
+    size,
+    ...remainProps
+  } = props;
 
-const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -71,7 +87,7 @@ const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
     <Box sx={{ width: "100%" }}>
       <Paper>
         <TableContainer sx={{ paddingRight: "10px" }}>
-          <EnhancedToolbar
+          <BudaTableToolbar
             numSelected={selected.length}
             handleOpen={handleOpen}
             handleSearch={(val) => setSearch(val)}
@@ -82,8 +98,12 @@ const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
               setSelected([]);
             }}
           />
-          <Table sx={{ minWidth: 1000 }}>
-            <EnhancedTableHead
+          <Table
+            sx={{ minWidth: 1000 }}
+            stickyHeader={stickyHeader}
+            {...remainProps}
+          >
+            <BudaTableHead
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -92,7 +112,7 @@ const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
               rowCount={data.length}
               headCells={headCells}
             />
-            <Body
+            <BudaTableBody
               order={order}
               orderBy={orderBy}
               selected={selected}
@@ -100,12 +120,14 @@ const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
               rowPerPage={rowsPerPage}
               setSelected={setSelected}
               data={displayData}
+              DetailTableBody={ProductTableBody}
             />
             <Modal isOpen={isOpen} handleClose={handleClose} />
+            {tableChildren}
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 20, 50, 100]}
+          rowsPerPageOptions={[20, 50, 100]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}
@@ -118,4 +140,4 @@ const CombinedTable = ({ data, headCells, Modal, Body, type, deleteItems }) => {
   );
 };
 
-export default CombinedTable;
+export default BudaTable;
