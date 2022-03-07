@@ -32,7 +32,6 @@ const EnhancedTableBody = ({
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  // console.log(data);
   return (
     <TableBody>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
