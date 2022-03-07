@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import SearchBox from "../SearchBox/SearchBox";
+import SearchBox from "../searchbox/BudaSearchBox";
 import { useState } from "react";
 import { useRef } from "react";
-import BudaPopper from "../Popper/BudaPopper";
+import BudaPopper from "../popper/BudaPopper";
 import { Box, CircularProgress, Typography } from "@material-ui/core";
 import { Button } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
