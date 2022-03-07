@@ -1,14 +1,7 @@
-import {
-  DialogContent,
-  DialogTitle,
-  Modal,
-  Box,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { Box, IconButton, Modal, Typography } from "@mui/material";
 import React from "react";
 import ModalAction from "./ModalAction";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const BudaModal = (props) => {
   const {
