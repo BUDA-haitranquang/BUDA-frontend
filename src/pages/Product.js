@@ -10,6 +10,7 @@ import ProductTableBody from "../components/table/body/ProductTableBody";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import BudaTable from "../buda-components/table/BudaTable";
 const headCells = [
   // {
   //   id: "ID",
@@ -96,13 +97,13 @@ const Product = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable
+          <BudaTable
             deleteItems={handleDelete}
             data={products}
             headCells={headCells}
             Modal={AddProductModal}
-            Body={ProductTableBody}
             type='productID'
+            DetailTableBody={ProductTableBody}
           />
         </Box>
       </Box>
