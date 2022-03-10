@@ -8,10 +8,12 @@ import { Box, CircularProgress, Typography } from "@material-ui/core";
 import { Button } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import InfiniteScroll from "react-infinite-scroll-component";
+import useStyles from "./BudaLiveSearch.styles";
 
 LiveSearch.propTypes = {
   handleRender: PropTypes.func,
   fetchData: PropTypes.func,
+  onChooseItem: PropTypes.func,
   placeholder: PropTypes.string,
   createable: PropTypes.bool,
   textCreate: PropTypes.string,
@@ -25,6 +27,7 @@ function LiveSearch(props) {
   const {
     handleRender,
     fetchData,
+    onChooseItem,
     placeholder,
     createable,
     textCreate,
@@ -33,6 +36,8 @@ function LiveSearch(props) {
     height,
     maxHeight,
   } = props;
+
+  const classes = useStyles();
 
   const [options, setOptions] = useState([]);
   const [query, setQuery] = useState("");
@@ -51,20 +56,20 @@ function LiveSearch(props) {
     }
   };
 
-  const handleOpenPopper = (e) => {
+  const handleOpenPopper = () => {
     if (popperOpen) {
       return;
     }
     setPopperOpen(true);
   };
 
-  const handleClosePopper = (e) => {
+  const handleClosePopper = () => {
     setPopperOpen(false);
     setQuery("");
   };
 
   return (
-    <div ref={refInput}>
+    <div className={classes.root} ref={refInput}>
       <SearchBox
         query={query}
         placeholder={placeholder}
@@ -80,12 +85,13 @@ function LiveSearch(props) {
         open={popperOpen}
         onClose={handleClosePopper}
       >
-        <Box>
+        <Box className={classes.content}>
           {popperOpen && createable && (
             <Button
+              className="BudaLiveSearch-btnCreate"
               startIcon={<AddCircleOutlineIcon color="primary" />}
               onClick={onClickCreate}
-              sx={{ textTransform: "none" }}
+              sx={{ textTransform: "none", width: "100%" }}
             >
               <Typography variant="subtitle1" color="primary">
                 {textCreate}
@@ -108,7 +114,19 @@ function LiveSearch(props) {
               height={height || "auto"}
               style={{ maxHeight: maxHeight }}
             >
-              {options.map((option, idx) => handleRender(option))}
+              {options.map((option, idx) => (
+                <Box
+                  className="BudaLiveSearch-option"
+                  onClick={() => {
+                    onChooseItem(option);
+                    handleClosePopper();
+                  }}
+                  key-event="true"
+                  tabIndex={0}
+                >
+                  {handleRender(option)}
+                </Box>
+              ))}
             </InfiniteScroll>
           ) : (
             <div></div>

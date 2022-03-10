@@ -74,4 +74,9 @@ export const colorOrange = {
   },
 };
 
+export const colorHovering = {
+  primary: "#F2F9FF",
+  secondary: "",
+}
+
 export default defaultPalette;
