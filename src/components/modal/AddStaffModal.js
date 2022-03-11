@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Modal,
-  TextField,
-  Typography,
-  IconButton,
-  Button,
-} from "@mui/material";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { Box, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { LOAD_STAFFS } from "../../graphQl/staff/staffQueries";
 import { ADD_STAFF_MUTATION } from "../../graphQl/staff/staffMutation";
+import { useSnackbar } from "notistack";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import BudaModal from "../../buda-components/modal/BudaModal";
 
-const AddStaffModal = ({ isOpen, handleClose }) => {
+const AddStaffModal = (props) => {
+  const { isOpen, handleClose } = props;
+  const { enqueueSnackbar } = useSnackbar();
+
   const [name, setName] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
@@ -23,8 +21,21 @@ const AddStaffModal = ({ isOpen, handleClose }) => {
   const [salary, setSalary] = useState(0.0);
   
   const [newStaff, { error }] = useMutation(ADD_STAFF_MUTATION);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const resetForm = () => {
+    setName("");
+    setAccount("");
+    setPassword("");
+    setEmail("");
+    setPhoneNumber("");
+    setAddress("");
+    setStaffPosition("");
+    setSalary(0);
+  }
 
   const addStaff = () => {
+    setIsLoading(true);
     newStaff({
       variables: {
         name: name,
@@ -37,7 +48,14 @@ const AddStaffModal = ({ isOpen, handleClose }) => {
         salary: parseFloat(salary)
       },
       refetchQueries: [{query: LOAD_STAFFS}]
-    });
+    })
+      .then((result) => {
+        handleClose();
+        enqueueSnackbar("Added new staff successfuly", AlertSuccessProp);
+      })
+      .then(() => resetForm())
+      .catch((e) => enqueueSnackbar(e.message, AlertErrorProp))
+      .finally(() => setIsLoading(false));
   }
 
   const isFormValid = () => {
@@ -48,49 +66,26 @@ const AddStaffModal = ({ isOpen, handleClose }) => {
   const handleSubmit = () => {
     if(isFormValid()) {
       addStaff();
-      handleClose();
     }
-    else alert("Invalid input");
+    else enqueueSnackbar("Invalid input", AlertErrorProp);
   }
 
   return (
-    <Modal
+    <BudaModal
       open={isOpen}
       onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      onOk={handleSubmit}
+      title="New staff"
+      isLoading={isLoading}
     >
       <Box
         component="form"
         autoComplete="off"
         sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 500,
-          bgcolor: "background.paper",
-          border: "1px solid #000",
-          boxShadow: 24,
-          p: 5,
-          outline: 0,
+          width: "480px",
           "& > :not(style)": { m: 1 },
         }}
       >
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-        >
-          <Box mt={1}>
-            <Typography align="center">Add</Typography>
-          </Box>
-
-          <IconButton onClick={handleClose}>
-            <CloseRoundedIcon />
-          </IconButton>
-        </Box>
-
         <TextField
           required
           fullWidth
@@ -116,6 +111,7 @@ const AddStaffModal = ({ isOpen, handleClose }) => {
           required
           id="outlined-basic"
           label="Password"
+          type="password"
           variant="outlined"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -170,16 +166,8 @@ const AddStaffModal = ({ isOpen, handleClose }) => {
           value={salary}
           onChange={(e) => setSalary(e.target.value)}
         />
-
-        <Button 
-          variant="contained" 
-          onClick={handleSubmit}
-        >
-          Add Staff
-        </Button>
-
       </Box>
-    </Modal>
+    </BudaModal>
   );
 };
 
