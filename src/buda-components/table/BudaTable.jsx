@@ -6,7 +6,6 @@ import {
   TablePagination,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ProductTableBody from "../../components/table/body/ProductTableBody";
 import BudaTableBody from "./BudaTableBody";
 import BudaTableHead from "./BudaTableHead";
 import BudaTableToolbar from "./BudaTableToolbar";
@@ -17,6 +16,7 @@ const BudaTable = (props) => {
     data,
     headCells,
     Modal,
+    DetailTableBody,
     type,
     deleteItems,
     children,
@@ -120,7 +120,7 @@ const BudaTable = (props) => {
               rowPerPage={rowsPerPage}
               setSelected={setSelected}
               data={displayData}
-              DetailTableBody={ProductTableBody}
+              DetailTableBody={DetailTableBody}
             />
             <Modal isOpen={isOpen} handleClose={handleClose} />
             {tableChildren}
