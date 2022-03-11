@@ -1,15 +1,14 @@
-
 import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import CombinedTable from "../components/CombinedTable";
 import AddStaffModal from "../components/modal/AddStaffModal";
 import Sidebar from "../components/Sidebar";
 import StaffTableBody from "../components/table/body/StaffTableBody";
 import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFFS } from "../graphQl/staff/staffQueries";
+import BudaTable from "../buda-components/table/BudaTable";
 
 const headCells = [
   // {
@@ -91,12 +90,12 @@ const Staff = (props) => {
         <Toolbar />
         <Box>{}</Box>
         <Box>
-          <CombinedTable
+          <BudaTable
             deleteItems={handleDelete}
             data={staffs}
             headCells={headCells}
             Modal={AddStaffModal}
-            Body={StaffTableBody}
+            DetailTableBody={StaffTableBody}
             type='staffID'
           />
         </Box>
