@@ -1,9 +1,10 @@
 import * as React from 'react';
+import BudaDatePicker from '../buda-components/datepicker/BudaDatePicker';
 const Error = () => {
 
     return (
         <div>
-          error
+          <BudaDatePicker onlyDate={false} label = 'test'/>
         </div>
     )
 }

@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BudaDatePicker = ({ onlyDate, label, getDateTime }) => {
+const BudaDatePicker = ({ onlyDate, label }) => {
   const classes = useStyles();
   const [timeValue, setTimeValue] = useState(new Date(0, 0, 0, 0, 0, 0));
 

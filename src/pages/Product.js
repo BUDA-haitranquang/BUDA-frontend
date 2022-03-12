@@ -3,7 +3,6 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import CombinedTable from "../components/CombinedTable";
 import AddProductModal from "../components/modal/AddProductModal";
 import Sidebar from "../components/Sidebar";
 import ProductTableBody from "../components/table/body/ProductTableBody";
@@ -50,7 +49,7 @@ const headCells = [
   },
   {
     id: "description",
-    numeric: true,
+    numeric: false,
     disablePadding: true,
     label: "Description",
   },
@@ -66,6 +65,7 @@ const Product = (props) => {
       if (selected===[]) return 
       selected.forEach(
         (item)=>{
+          console.log(item)
           hideProduct({
             variables:{productID: parseInt(item)},
             refetchQueries: [{query: LOAD_PRODUCTS}]
