@@ -28,7 +28,7 @@ const EnhancedTableHead = ({
         <TableCell padding="checkbox">
           <Checkbox
             color="primary"
-            checked={rowCount > 0 && numSelected < rowCount && numSelected > 0}
+            checked={rowCount > 0 && numSelected <= rowCount && numSelected > 0}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "select all" }}
           />

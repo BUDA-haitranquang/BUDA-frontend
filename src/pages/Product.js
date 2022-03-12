@@ -10,6 +10,11 @@ import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import BudaTable from "../buda-components/table/BudaTable";
+// import { useSnackbar } from "notistack";
+// import {
+//   AlertErrorProp,
+//   AlertSuccessProp,
+// } from "../buda-components/alert/BudaNoti";
 const headCells = [
   // {
   //   id: "ID",
@@ -60,18 +65,28 @@ const Product = (props) => {
   const [products, setProducts] = useState([]);
   const { error, loading, data} = useQuery(LOAD_PRODUCTS);
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
-  
+  // const {enquenceSnackBar} = useSnackbar();
+  // const [Isloading,setIsLoading] = useState(false);
   const handleDelete = (selected) =>{
-      if (selected===[]) return 
-      selected.forEach(
-        (item)=>{
-          console.log(item)
-          hideProduct({
-            variables:{productID: parseInt(item)},
-            refetchQueries: [{query: LOAD_PRODUCTS}]
-          })
-        }
-      )
+      if (selected===[]) return;
+      // setIsLoading(true); 
+      // try{
+        selected.forEach(
+          (item)=>{
+            hideProduct({
+              variables:{productID: parseInt(item)},
+              refetchQueries: [{query: LOAD_PRODUCTS}]
+            })
+          }
+        );
+      //  enquenceSnackBar("Succesfully",AlertSuccessProp);
+      // }  
+      // catch(e){
+      //   enquenceSnackBar("An error occured",AlertErrorProp);
+      // }
+      // finally{
+      //   setIsLoading(false);
+      // }
   }
 
   useEffect(() => {

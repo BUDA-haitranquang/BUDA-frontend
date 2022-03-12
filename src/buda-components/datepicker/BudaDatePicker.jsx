@@ -26,40 +26,39 @@ const useStyles = makeStyles({
   },
 });
 
-const BudaDatePicker = ({ onlyDate, label }) => {
+const BudaDatePicker = ({
+  onlyDate,
+  label,
+  initialDate = new Date(0, 0, 0, 0, 0, 0),
+}) => {
   const classes = useStyles();
-  const [timeValue, setTimeValue] = useState(new Date(0, 0, 0, 0, 0, 0));
+  const [timeValue, setTimeValue] = useState(initialDate);
 
   return (
     <>
       <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <Typography variant="h6">{label}</Typography>
-        {onlyDate ? (
-          <Box className={classes.dateTimeContainer}>
+
+        <Box className={classes.dateTimeContainer}>
+          <Box width="180px">
             <CustomizeDatePicker
               setTimeValue={(val) => setTimeValue(val)}
               timeValue={timeValue}
             />
           </Box>
-        ) : (
-          <Box className={classes.dateTimeContainer}>
-            <Box width="180px">
-              <CustomizeDatePicker
-                setTimeValue={(val) => setTimeValue(val)}
-                timeValue={timeValue}
-              />
-            </Box>
+          {!onlyDate && (
+            <>
+              <Box px={1}></Box>
 
-            <Box px={1}></Box>
-
-            <Box width="120px">
-              <CustomizeTimePicker
-                setTimeValue={(val) => setTimeValue(val)}
-                timeValue={timeValue}
-              />
-            </Box>
-          </Box>
-        )}
+              <Box width="120px">
+                <CustomizeTimePicker
+                  setTimeValue={(val) => setTimeValue(val)}
+                  timeValue={timeValue}
+                />
+              </Box>
+            </>
+          )}
+        </Box>
       </Box>
     </>
   );

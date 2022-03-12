@@ -99,9 +99,9 @@ const BudaTableToolbar = ({
         </Tooltip>
       ) : (
         <Box display="flex" flexDirection="row">
-          <Tooltip title="Filter list">
+          {/* <Tooltip title="Filter list">
             <FilterPopup list={li} />
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Add">
             <IconButton onClick={handleOpen}>
               <AddIcon />

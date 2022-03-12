@@ -3,13 +3,8 @@ import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 
-import ProductTableBody from "../components/table/body/ProductTableBody";
-import AddProductModal from "../components/modal/AddProductModal";
-
-import CombinedTable from "../components/CombinedTable";
 import AddIngredientModal from "../components/modal/AddIngredientModal";
 import IngredientTableBody from "../components/table/body/IngredientTableBody";
-
 import { useMutation } from "@apollo/client";
 import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutation";
 import { useQuery } from "@apollo/client";
@@ -96,38 +91,13 @@ const Ingredient = (props) => {
             deleteItems={handleDelete}
             data={ingredients}
             headCells={headCells}
-            Modal={AddProductModal}
+            Modal={AddIngredientModal}
             type='ingredientID'
-            DetailTableBody={ProductTableBody}
+            DetailTableBody={IngredientTableBody}
           />
         </Box>
       </Box>
     </Box>
-
-
-    // <Box sx={{display: "flex"}}>
-    //   <Sidebar window={window} name="Ingredient" />
-    //   <Box
-    //     width="100%"
-    //     display="flex"
-    //     flexDirection="column"
-    //     alignItems="center"
-    //     justifyContent="center"
-    //   >
-    //     <Toolbar />
-    //     <Box>{}</Box>
-    //     <Box>
-    //       <BudaTable/>
-    //       <CombinedTable 
-    //         deleteItems={handleDelete}
-    //         type = 'ingredientID' 
-    //         data={ingredients} 
-    //         headCells={headCells} 
-    //         Modal={AddIngredientModal} 
-    //         Body={IngredientTableBody}/>
-    //     </Box>
-    //   </Box>
-    // </Box>
   );
 };
 export default Ingredient;
