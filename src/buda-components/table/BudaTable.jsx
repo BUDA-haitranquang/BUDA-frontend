@@ -34,7 +34,7 @@ const BudaTable = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
-  const [searchBy, setSearchBy] = useState("name");
+  const [searchBy, setSearchBy] = useState(headCells[0].id);
 
   const displayData = display.slice(
     page * rowsPerPage,
@@ -64,7 +64,7 @@ const BudaTable = (props) => {
 
   const handleSelectAllClick = (e) => {
     if (e.target.checked) {
-      const newSelecteds = data.map((n) => n[type]);
+      const newSelecteds = display.map((n) => n[type]);
       setSelected(newSelecteds);
       return;
     }
@@ -109,7 +109,7 @@ const BudaTable = (props) => {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={data.length}
+              rowCount={display.length}
               headCells={headCells}
             />
             <BudaTableBody
@@ -121,6 +121,7 @@ const BudaTable = (props) => {
               setSelected={setSelected}
               data={displayData}
               DetailTableBody={DetailTableBody}
+              type = {type}
             />
             <Modal isOpen={isOpen} handleClose={handleClose} />
             {tableChildren}
@@ -129,7 +130,7 @@ const BudaTable = (props) => {
         <TablePagination
           rowsPerPageOptions={[20, 50, 100]}
           component="div"
-          count={data.length}
+          count={display.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handlePageChange}
