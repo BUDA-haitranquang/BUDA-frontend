@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
+
 const BudaDatePicker = ({
   onlyDate,
   label,
@@ -33,7 +34,7 @@ const BudaDatePicker = ({
 }) => {
   const classes = useStyles();
   const [timeValue, setTimeValue] = useState(initialDate);
-
+  console.log(timeValue);
   return (
     <>
       <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
@@ -66,14 +67,21 @@ const BudaDatePicker = ({
 
 export default BudaDatePicker;
 
+const initializeDate= (timeValue) => {
+  const INITIALDATE = new Date(0,0,0,0,0,0);
+  if (!(timeValue instanceof Date) || isNaN(timeValue)) return null;
+  return timeValue.getFullYear() !== INITIALDATE.getFullYear() 
+        || timeValue.getMonth() !== INITIALDATE.getMonth()
+        || timeValue.getDate() !== INITIALDATE.getDate() ? timeValue : null;
+}
+
 const CustomizeDatePicker = ({ setTimeValue, timeValue }) => {
   const classes = useStyles();
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(initializeDate(timeValue));
 
   useEffect(() => {
-    let day = new Date();
+    let day = new Date(0,0,0,0,0,0);
     if (!(date instanceof Date) || isNaN(date)) return;
-
     day.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
     day.setHours(timeValue.getHours());
     day.setMinutes(timeValue.getMinutes());
@@ -85,17 +93,22 @@ const CustomizeDatePicker = ({ setTimeValue, timeValue }) => {
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={viLocale}>
         <DesktopDatePicker
           label="Date"
-          value={date}
+          value={date}  
+          inputFormat='dd/MM/yyyy'
           onChange={(newValue) => {
             setDate(newValue);
           }}
           renderInput={(params) => (
             <TextField
-              InputLabelProps={{
-                shrink: true,
-              }}
-              className={classes.timeInput}
               {...params}
+              InputLabelProps={{
+                ...params.InputProps,
+                shrink: true,
+                placeholder:'dd/mm/yyyy'
+              }}
+            
+              className={classes.timeInput}
+         
             />
           )}
         />
