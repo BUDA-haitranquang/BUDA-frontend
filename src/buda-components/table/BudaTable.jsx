@@ -64,7 +64,7 @@ const BudaTable = (props) => {
 
   const handleSelectAllClick = (e) => {
     if (e.target.checked) {
-      const newSelecteds = data.map((n) => n[type]);
+      const newSelecteds = display.map((n) => n[type]);
       setSelected(newSelecteds);
       return;
     }
@@ -109,7 +109,7 @@ const BudaTable = (props) => {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={data.length}
+              rowCount={display.length}
               headCells={headCells}
             />
             <BudaTableBody

@@ -15,6 +15,11 @@ import {useHistory} from 'react-router';
 import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../redux/tokenSlice";
+import {useSnackbar} from 'notistack';
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from '../../buda-components/alert/BudaNoti'; 
 import {
   REGISTER_USER
 } from "../../graphQl/authentication/authMutations";
@@ -116,7 +121,7 @@ const SignUpForm = () => {
   const [confirmPassword,setConfirmPassword] = useState("");
   const classes = useStyle();;
   const [visibility,setVisibility] =useState(false);  
-  
+  const {enqueueSnackbar} = useSnackbar();
   const [registerUser,{loading,error}] = useMutation(REGISTER_USER);
   useEffect(() => {
     const listener = event => {
@@ -151,25 +156,32 @@ const SignUpForm = () => {
    }).then(res=>{
      const {accessToken,refreshToken} = res.data.userRegister;
      dispatch(addToken(accessToken));
-   }).then(()=>history.push('/dashboard'))
-   .catch(e=>{console.log(e)}) 
+   })
+   .then(()=>{
+    history.push('/login');
+    enqueueSnackbar("Please check your email",AlertSuccessProp);
+    })
+   .catch(e=> 
+    {enqueueSnackbar('Error',AlertErrorProp);
+      console.log(error);
+  }); 
  } 
 
 const validate = ()=>{
   if (!userName) return false;
   if(!password) return false;
-  // if(!firstName) return false;
-  // if(!lastName) return false;
-  // if(!email) return false;
-  // if(password.length<8) return false;
-  // if(password != confirmPassword) return false;
+  if(!firstName) return false;
+  if(!lastName) return false;
+  if(!email) return false;
+  if(password.length<8) return false;
+  if(password !== confirmPassword) return false;
   return true; 
 }
 
  const handleSubmit=(e)=>{
    e.preventDefault();
    if(!validate()) {
-    console.log('error') 
+    enqueueSnackbar('Invalid input',AlertErrorProp);
     return ;
    } 
   register();

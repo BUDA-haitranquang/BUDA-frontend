@@ -18,10 +18,10 @@ export const LOGIN_USER = gql`
 export const REGISTER_USER = gql`
   mutation newUser(
     $username: String!
-    $phoneNumber: String
-    $email: String
-    $firstName: String
-    $lastName: String
+    $phoneNumber: String!
+    $email: String!
+    $firstName: String!
+    $lastName: String!
     $password: String!
   ){
     newUser(

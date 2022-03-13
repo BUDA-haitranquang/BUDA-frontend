@@ -5,8 +5,6 @@ import {
   Grid,
   OutlinedInput,
   InputAdornment,
-  FormControlLabel,
-    Checkbox,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
@@ -18,7 +16,11 @@ import {
   LOGIN_USER, NEW_ACCESS_TOKEN
 } from "../../graphQl/authentication/authMutations";
 import { useHistory } from "react-router";
-
+import {useSnackbar} from 'notistack';
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from '../../buda-components/alert/BudaNoti';
 const useStyle = makeStyles({
   wrapper: {
     display: "flex",
@@ -97,13 +99,14 @@ const SignInForm = () => {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [checkBox,setCheckBox] = useState(false);
+  // const [checkBox,setCheckBox] = useState(false);
   const classes = useStyle();
   const dispatch = useDispatch();
   const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
   const [newAccessToken] = useMutation(NEW_ACCESS_TOKEN);
   const {refreshJwt} = useSelector((state) => state.token);
+  const {enqueueSnackbar} = useSnackbar();
   
   useEffect(() => {
     const listener = event => {
@@ -136,9 +139,11 @@ const SignInForm = () => {
         dispatch(addRefreshToken(refreshToken));
       })
       .then(() => {
-        history.push("/dashboard")
+        history.push("/dashboard");
+        enqueueSnackbar('Login successfully',AlertSuccessProp);
       })
       .catch((error) => {
+        enqueueSnackbar("Error",AlertErrorProp)
       });
   };
 
@@ -178,13 +183,13 @@ const SignInForm = () => {
           <Box className={classes.headlineText}>Welcome!</Box>
           <Box className={classes.formContainer} pt={2}>
             
-            {error && 
+            {/* {error && 
                 <h5 style={{
                 color:'red',
                 fontFamily:'Poppins',
                 fontSize:'20px',
               }}>Wrong username or password</h5>
-            }
+            } */}
              <OutlinedInput
               className={classes.outlinedInput}
               value={email}
@@ -216,13 +221,13 @@ const SignInForm = () => {
             <Box py={1}></Box>
            
           </Box>
-          <Box className={classes.checkboxWrapper}>
+          {/* <Box className={classes.checkboxWrapper}>
             <FormControlLabel
               control={<Checkbox color="success" onChange={()=> setCheckBox(val => !val)} />}
               label="Remember password"
-            />
+            /> 
             
-          </Box>
+            </Box>*/}
           <Box
             className={classes.buttonWrapper}
             display="flex"

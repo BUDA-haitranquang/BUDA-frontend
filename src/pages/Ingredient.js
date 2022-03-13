@@ -1,8 +1,7 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
-
 import AddIngredientModal from "../components/modal/AddIngredientModal";
 import IngredientTableBody from "../components/table/body/IngredientTableBody";
 import { useMutation } from "@apollo/client";
@@ -10,6 +9,11 @@ import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutat
 import { useQuery } from "@apollo/client";
 import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 import BudaTable from "../buda-components/table/BudaTable";
+import { useSnackbar } from "notistack";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
 const headCells = [
   // {
   //   id: "ID",
@@ -51,28 +55,36 @@ const headCells = [
 
 const Ingredient = (props) => {
   const { window } = props;
-  const [ingredients,setIngredients] = useState([]);
-  const {error,loading,data} = useQuery(LOAD_INGREDIENTS);
+  const [ingredients, setIngredients] = useState([]);
+  const { error, loading, data } = useQuery(LOAD_INGREDIENTS);
   const [hideIngredient] = useMutation(HIDE_INGREDIENT_MUTATION);
-  
-  const handleDelete = (selected) =>{
-    if (selected===[]) return 
-    selected.forEach(
-      (item)=>{
+  const [isLoading, setIsLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const handleDelete = (selected) => {
+    if (selected === []) return;
+    setIsLoading(true);
+    try {
+      selected.forEach((item) => {
         hideIngredient({
-          variables:{ingredientID: parseInt(item)},
-          refetchQueries: [{query: LOAD_INGREDIENTS}]
-        })
-      }
-    )
-}
+          variables: { ingredientID: parseInt(item) },
+          refetchQueries: [{ query: LOAD_INGREDIENTS }],
+        });
+      });
+      enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
+    } catch (e) {
+      enqueueSnackbar("An error occured", AlertErrorProp);
+    } finally {
+      setIsLoading(false);
 
-  useEffect(()=>{
-    async function fetchData(){
+    }
+  };
+
+  useEffect(() => {
+    async function fetchData() {
       if (data) setIngredients(data.ingredientsByUser);
     }
-    fetchData(); 
-  },[data]);
+    fetchData();
+  }, [data]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -92,7 +104,7 @@ const Ingredient = (props) => {
             data={ingredients}
             headCells={headCells}
             Modal={AddIngredientModal}
-            type='ingredientID'
+            type="ingredientID"
             DetailTableBody={IngredientTableBody}
           />
         </Box>
