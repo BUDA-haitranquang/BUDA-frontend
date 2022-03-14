@@ -13,8 +13,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import {useHistory} from 'react-router';
 import { useMutation } from "@apollo/client";
-import { useDispatch } from "react-redux";
-import { addToken } from "../../redux/tokenSlice";
 import {useSnackbar} from 'notistack';
 import {
   AlertErrorProp,
@@ -110,7 +108,6 @@ const useStyle = makeStyles({
 
 const SignUpForm = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const btn = useRef(null)
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -153,15 +150,12 @@ const SignUpForm = () => {
        email:email,
        password: password
      }
-   }).then(res=>{
-     const {accessToken,refreshToken} = res.data.userRegister;
-     dispatch(addToken(accessToken));
    })
    .then(()=>{
     history.push('/login');
     enqueueSnackbar("Please check your email",AlertSuccessProp);
     })
-   .catch(e=> 
+   .catch(e => 
     {enqueueSnackbar('Error',AlertErrorProp);
       console.log(error);
   }); 
