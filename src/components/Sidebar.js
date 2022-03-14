@@ -1,19 +1,29 @@
 import { ShoppingBasketOutlined } from "@mui/icons-material";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StoreIcon from '@mui/icons-material/Store';
+import StoreIcon from "@mui/icons-material/Store";
+import { useHistory } from "react-router-dom";
 import {
-  AppBar, Box, Collapse, CssBaseline, Divider, Drawer, IconButton, List,
+  AppBar,
+  Box,
+  Collapse,
+  CssBaseline,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
   ListItem,
   ListItemIcon,
-  ListItemText, Toolbar, Typography
+  ListItemText,
+  Toolbar,
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -47,33 +57,46 @@ const useStyle = makeStyles({
 });
 const drawerWidth = 200;
 
-const title = ["dashboard", "product", "ingredient", "supplier", "customer", "staff", "cost","statistic"];
-const sidebarItems = [['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],
-                  ['A','B'],]
+const title = [
+  "dashboard",
+  "product",
+  "ingredient",
+  "supplier",
+  "customer",
+  "staff",
+  "cost",
+  "statistic",
+];
+function createData(name,link){
+  return {name : name ,link : link};
+}
+const sidebarItems = [
+  [createData('Dashboard','')],
+  [createData('Product',''),createData('Collation','collation'),createData('Delete','delete')],
+  [createData('Ingredient','')],
+  [createData('Supplier','supplier')],
+  [createData('Customer','customer')],
+  [createData('Staff','')],
+  [createData('Fixed','fixedcost'),createData('Fixed Cost Bill','fixedcostBill')],
+  [createData('Statistic','')],
+]
 const Sidebar = ({ window, name }) => {
-  //const [focus,setFocus] = useState('');
-  //const focus = useRef('');
-  const  focus = useSelector(state=> state.sidebar.focus);
+  const history = useHistory();
+  const focus = useSelector((state) => state.sidebar.focus);
   const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const setFocusSideBar = (val)=>{dispatch(setFocus(val))}
+  const setFocusSideBar = (val) => {
+    dispatch(setFocus(val));
+  };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const classes = useStyle();
-
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  //const setFocus = (val)=>{focus.current = val;}
   const itemRender = (i) => {
     switch (i) {
       case 0:
@@ -91,7 +114,7 @@ const Sidebar = ({ window, name }) => {
       case 6:
         return <MonetizationOnIcon />;
       case 7:
-        return  <BarChartIcon/>
+        return <BarChartIcon />;
       default:
         break;
     }
@@ -103,41 +126,46 @@ const Sidebar = ({ window, name }) => {
       </Box>
     </>
   );
-
   const drawer = (
     <div style={{ backgroundColor: "aliceblue", flexGrow: 1 }}>
       <Toolbar children={logo} />
-     
+
       <Divider />
       <List className={classes.root}>
-        {title.map(
-          (item, idx) => (
-              <>
-              <ListItem button 
-                onClick={()=>{
-                let value = focus===item?'':item;
+        {title.map((item, idx) => (
+          <>
+            <ListItem
+              button
+              onClick={() => {
+                let value = focus === item ? "" : item;
                 setFocusSideBar(value);
-              }}>
-                  <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-                  <ListItemText primary={capitalizeFirstLetter(item)}/>
-                  <ListItemIcon sx={{marginLeft:'60%'}}>{focus===item?<ExpandLessIcon/>: <ExpandMoreIcon/>} </ListItemIcon>                  
-              </ListItem>
-                <Collapse in={focus === item}>
-                  {sidebarItems[idx].map((component)=>{
-                     return(
-                      <Link to = {`/${item}`}>
-                     <ListItem button>
-                        <ListItemText primary={capitalizeFirstLetter(component)}/>
-                     </ListItem>
-                     </Link>
-                     )
-                  })}
-                {/* <Link to={`/${item}`}>
-                </Link> */}
-                </Collapse>
-              </>
-          )
-        )}
+                if(sidebarItems[idx].length === 1) history.push(`/${title[idx]}`)
+              }}
+            >
+              <ListItemIcon>{itemRender(idx)}</ListItemIcon>
+              <ListItemText primary={capitalizeFirstLetter(item)} />
+                {sidebarItems[idx].length-1 ? ( focus === item ? <ExpandLessIcon /> : <ExpandMoreIcon />) : ""}
+                {" "}
+            </ListItem>
+            {sidebarItems[idx].length-1 ? 
+            <Collapse in={focus === item}>
+              {sidebarItems[idx].map((component) => {
+                return (
+                  <Link to= {`/${item}/${component.link}`}>
+                    <ListItem button>
+                      <ListItemText
+                        primary={capitalizeFirstLetter(component.name)}
+                      />
+                    </ListItem>
+                  </Link>
+                );
+              })}
+            </Collapse>
+            :
+            console.log(12)
+            }
+          </>
+        ))}
       </List>
     </div>
   );
@@ -178,14 +206,14 @@ const Sidebar = ({ window, name }) => {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, 
           }}
           sx={{
             display: { xs: "block", sm: "none" },

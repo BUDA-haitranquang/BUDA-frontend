@@ -6,18 +6,12 @@ import { Redirect } from "react-router-dom";
 import CombinedTable from "../components/CombinedTable";
 import AddProductModal from "../components/modal/AddProductModal";
 import Sidebar from "../components/Sidebar";
-import ProductTableBody from "../components/table/body/ProductTableBody";
+import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
-import BudaTable from "../buda-components/table/BudaTable";
+import BudaTable from "../buda-components/table/CollationTable";
 const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "ID",
-  // },
   {
     id: "name",
     numeric: false,
@@ -37,26 +31,20 @@ const headCells = [
     label: "Left",
   },
   {
-    id: "alertAmount",
+    id: "differce",
+    numeric: true,
+    disablePadding: true,
+    label: "Diff",
+  },
+  {
+    id: "Alert",
     numeric: true,
     disablePadding: true,
     label: "Alert",
   },
-  {
-    id: "costPerUnit",
-    numeric: true,
-    disablePadding: true,
-    label: "Cost",
-  },
-  {
-    id: "description",
-    numeric: true,
-    disablePadding: true,
-    label: "Description",
-  },
 ];
 
-const Product = (props) => {
+const Collation = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
   const { error, loading, data} = useQuery(LOAD_PRODUCTS);
@@ -104,11 +92,11 @@ const Product = (props) => {
             headCells={headCells}
             Modal={AddProductModal}
             type='productID'
-            DetailTableBody={ProductTableBody}
+            DetailTableBody={CollationTableBody}
           />
         </Box>
       </Box>
     </Box>
   );
 };
-export default Product;
+export default Collation;

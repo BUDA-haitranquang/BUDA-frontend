@@ -28,11 +28,12 @@ import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
 import StaffDetail from "./pages/StaffDetail";
-
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
-
+import FixCost from "./pages/FixedCost";
+import FixCostBill from "./pages/FixedCostBill";
+import Collation from "./pages/Collation";
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -111,7 +112,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product"
+            path="/product/"
             component={Product}
           />
           <PrivateRoute
@@ -119,6 +120,18 @@ const AppRouter = () => {
             exact
             path="/product/:id"
             component={ProductDetail}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/collation"
+            component={Statistic}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/delete"
+            component={Statistic}
           />
           <PrivateRoute
             authed={isAuth}
@@ -149,6 +162,18 @@ const AppRouter = () => {
             exact
             path="/create-order"
             component={CreateOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/cost/fixedCost"
+            component={FixCost}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/cost/fixedcostBill"
+            component={FixCostBill}
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />

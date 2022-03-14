@@ -3,12 +3,11 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-
+import AddFixedCostModal from "../components/modal/AddFixedCostModal";
 import Sidebar from "../components/Sidebar";
-import AddSupplierModal from "../components/modal/AddSupplierModal";
-import SupplierTableBody from "../components/table/body/SupplierTableBody";
-import SupplierTable from "../buda-components/table/SupplierTable";
-import { LOAD_SUPPLIERS } from "../graphQl/suppliers/suppliersQueries";
+import FixedCostTableBody from "../components/table/body/FixedCostTableBody";
+import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
+import FixedCostTable from "../buda-components/table/FixedCostTable";
 const headCells =[ 
     {
         id: "name",
@@ -17,33 +16,33 @@ const headCells =[
         label: "Name",
     },
     {
-        id: "phoneNumber",
+        id: "description",
         numeric: false,
         disablePadding: false,
-        label: "Phone Number",
+        label: "Description",
     },
     {
-        id: "address",
+        id: "period",
         numeric: true,
         disablePadding: false,
-        label: "Address",
+        label: "Period",
     },
     {
-        id: "email",
+        id: "moneyamount",
         numeric: true,
         disablePadding: false,
-        label: "Email",
+        label: "Money Amount",
     },
 ];
 
 const FixCost = (props) =>{
     const { window } = props;
-    const [ supplier,setSupplier ] = useState([]);
-    const { error, loading, data } = useQuery(LOAD_SUPPLIERS);
+    const [ fixcosts,setFixCosts ] = useState([]);
+    const { error, loading, data } = useQuery(LOAD_FIXED_COST);
 
     useEffect(() => {
         async function fetchData(){
-            if(data) setSupplier(data.suppliersByUser);
+            if(data) setFixCosts(data.fixedCostsByUser);
         }
         fetchData();
         console.log(data);
@@ -64,12 +63,12 @@ const FixCost = (props) =>{
             <Toolbar />
             <Box>{}</Box>
             <Box>
-            <SupplierTable
-                data={supplier}
+            <FixedCostTable
+                data={fixcosts}
                 headCells={headCells}
-                Modal={AddSupplierModal}
+                Modal={AddFixedCostModal}
                 type='fixedCostID'
-                DetailTableBody={SupplierTableBody}
+                DetailTableBody={FixedCostTableBody}
             />
             </Box>
         </Box>

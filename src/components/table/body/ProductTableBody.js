@@ -8,10 +8,7 @@ const ProductTableBody = (props) => {
       {/* <TableCell align="right">{row.id}</TableCell> */}
       <TableCell component="th" id={labelId} scope="row">
         <Link
-          to={{
-            pathname: `product/${row.productID}`,
-            // state: { data: row },
-          }}
+          to={{ pathname: `${row.productID}`,}}
           style={{ textDecoration: "none", color: "blue" }}
         >
           {row.name}

@@ -3,12 +3,11 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-
 import Sidebar from "../components/Sidebar";
-import AddSupplierModal from "../components/modal/AddSupplierModal";
-import SupplierTableBody from "../components/table/body/SupplierTableBody";
-import SupplierTable from "../buda-components/table/SupplierTable";
-import { LOAD_SUPPLIERS } from "../graphQl/suppliers/suppliersQueries";
+import { LOAD_FIXED_COST_BILL } from "../graphQl/cost/fixedCostBill/fixedCostBillQueries";
+import BillTable  from "../buda-components/table/FixedCostBillTable";
+import AddFixedCostBillModal from "../components/modal/AddFixedCostBillModal";
+import FixedCostBillTableBody from "../components/table/body/FixedCostBIllTableBody";
 const headCells =[ 
     {
         id: "name",
@@ -17,33 +16,33 @@ const headCells =[
         label: "Name",
     },
     {
-        id: "phoneNumber",
+        id: "description",
         numeric: false,
         disablePadding: false,
-        label: "Phone Number",
+        label: "Description",
     },
     {
-        id: "address",
+        id: "period",
         numeric: true,
         disablePadding: false,
-        label: "Address",
+        label: "Period",
     },
     {
-        id: "email",
+        id: "moneyamount",
         numeric: true,
         disablePadding: false,
-        label: "Email",
+        label: "Money Amount",
     },
 ];
 
-const FixCost = (props) =>{
+const FixCostBill = (props) =>{
     const { window } = props;
-    const [ supplier,setSupplier ] = useState([]);
-    const { error, loading, data } = useQuery(LOAD_SUPPLIERS);
+    const [ fixcosts,setFixCosts ] = useState([]);
+    const { error, loading, data } = useQuery(LOAD_FIXED_COST_BILL);
 
     useEffect(() => {
         async function fetchData(){
-            if(data) setSupplier(data.suppliersByUser);
+            if(data) setFixCosts(data.fixedCostBillsByUser);
         }
         fetchData();
         console.log(data);
@@ -64,12 +63,12 @@ const FixCost = (props) =>{
             <Toolbar />
             <Box>{}</Box>
             <Box>
-            <SupplierTable
-                data={supplier}
+            <BillTable
+                data={fixcosts}
                 headCells={headCells}
-                Modal={AddSupplierModal}
-                type='fixedCostID'
-                DetailTableBody={SupplierTableBody}
+                Modal={AddFixedCostBillModal}
+                type='fixedCostBillID'
+                DetailTableBody={FixedCostBillTableBody}
             />
             </Box>
         </Box>
@@ -77,4 +76,4 @@ const FixCost = (props) =>{
     );
 };
 
-export default FixCost;
+export default FixCostBill;
