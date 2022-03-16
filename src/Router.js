@@ -118,20 +118,20 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product/:id"
-            component={ProductDetail}
-          />
-          <PrivateRoute
-            authed={isAuth}
-            exact
             path="/product/collation"
-            component={Statistic}
+            component={Collation}
           />
           <PrivateRoute
             authed={isAuth}
             exact
             path="/product/delete"
             component={Statistic}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/:id"
+            component={ProductDetail}
           />
           <PrivateRoute
             authed={isAuth}
