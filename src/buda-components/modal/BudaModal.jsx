@@ -48,7 +48,7 @@ const BudaModal = (props) => {
           mb={2}
         >
           <Typography align="center" variant="h5">
-            New Product
+            {title || ""}
           </Typography>
           {showCloseBtnTitle ? (
             <IconButton onClick={onClose}>
