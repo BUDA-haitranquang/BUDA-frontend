@@ -133,6 +133,7 @@ const AppRouter = () => {
             path="/product/:id"
             component={ProductDetail}
           />
+       
           <PrivateRoute
             authed={isAuth}
             exact
