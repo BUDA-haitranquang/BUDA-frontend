@@ -23,6 +23,7 @@ const BudaTableBody = (props) => {
     setSelected,
     data,
     isNotShowCheckbox = false,
+    type,
     ...remainProps
   } = props;
 
@@ -43,19 +44,20 @@ const BudaTableBody = (props) => {
     }
     setSelected(newSelected);
   };
+  
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <TableBody {...remainProps}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
-        const isItemSelected = isSelected(row.name);
+        const isItemSelected = isSelected(row[type]);
         const labelId = `enhanced-table-checkbox-${idx}`;
         return (
           <CustomWidthTooltip title={row.description || ""}>
             <TableRow
               sx={{ cursor: "pointer" }}
               hover
-              onClick={(e) => handleClick(e, row.name)}
+              onClick={(e) => handleClick(e, row[type])}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
