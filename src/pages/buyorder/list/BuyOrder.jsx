@@ -8,7 +8,6 @@ import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import Sidebar from "../../../components/Sidebar";
 import BuyOrderTableBody from "./components/BuyOrderTableBody";
 import { LOAD_BUY_ORDERS } from "../../../graphQl/buyorders/BuyOrderQueries";
-import AddStaffModal from "../../../components/modal/AddStaffModal";
 
 const headCells = [
   {
@@ -89,9 +88,8 @@ const BuyOrder = (props) => {
             deleteItems={handleDelete}
             data={buyOrders}
             headCells={headCells}
-            Modal={AddStaffModal}
             DetailTableBody={BuyOrderTableBody}
-            type="staffID"
+            type="buyOrderID"
           />
         </Box>
       </Box>

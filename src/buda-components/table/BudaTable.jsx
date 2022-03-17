@@ -123,7 +123,7 @@ const BudaTable = (props) => {
               DetailTableBody={DetailTableBody}
               type = {type}
             />
-            <Modal isOpen={isOpen} handleClose={handleClose} />
+            {Modal && <Modal isOpen={isOpen} handleClose={handleClose} />}
             {tableChildren}
           </Table>
         </TableContainer>
