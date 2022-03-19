@@ -44,6 +44,7 @@ function BoxSupplier(props) {
           display="flex"
           flexDirection="column"
           justifyContent="space-between"
+          py={1}
         >
           <Typography>{option.name}</Typography>
           <Typography fontWeight="bold">{option.phoneNumber}</Typography>
@@ -83,7 +84,7 @@ function BoxSupplier(props) {
                 {chosenSupplier.phoneNumber}
               </Typography>
               <CancelOutlinedIcon
-                sx={{ paddingLeft: 2 }}
+                sx={{ paddingLeft: 2, cursor: "pointer" }}
                 onClick={() => setChosenSupplier(null)}
               />
             </Box>

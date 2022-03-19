@@ -2,8 +2,6 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
-    // backgroundColor: "#e5e5e5",
-
     "& .BoxSupplier-main": {
       padding: 16,
       display: "flex",
@@ -17,7 +15,7 @@ const useStyles = makeStyles(() => ({
         flexDirection: "column",
         rowGap: 16,
 
-        borderBottom: "1px solid #F3F4F5",
+        paddingBottom: 16,
 
         "& .BoxSupplier-header-chosen-supplier": {
           display: "flex",
