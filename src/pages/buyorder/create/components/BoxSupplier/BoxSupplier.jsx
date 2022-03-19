@@ -28,8 +28,13 @@ function BoxSupplier(props) {
 
   const filterSupplier = (filter) => {
     return suppliers.filter(
-      (supplier) =>
-        supplier.name.include(filter) || supplier.phoneNumber.include(filter)
+      (supplier) => {
+        let name = supplier.name.toLowerCase();
+        let phoneNumber = supplier.phoneNumber.toLowerCase();
+        return name.includes(filter.toLowerCase()) ||
+          phoneNumber.toLowerCase().includes(filter.toLowerCase())
+      }
+
     );
   };
 
@@ -65,11 +70,10 @@ function BoxSupplier(props) {
               createable
               textCreate="Add a new supplier"
               onClickCreate={() => setOpenCreateSupplier(true)}
-              height={200}
               maxHeight={200}
-              onChooseItem={(item) => onChooseSupplier(item)}
-              fetchData={(filterRequest) => filterSupplier(filterRequest)}
-              handleRender={(option) => renderRowSupplier(option)}
+              onChooseItem={onChooseSupplier}
+              fetchData={filterSupplier}
+              handleRender={renderRowSupplier}
             />
           ) : (
             <Box>
@@ -80,7 +84,10 @@ function BoxSupplier(props) {
               <Typography color="black">
                 {chosenSupplier.phoneNumber}
               </Typography>
-              <CancelOutlinedIcon sx={{ paddingLeft: 16 }} />
+              <CancelOutlinedIcon
+                sx={{ paddingLeft: 16 }}
+                onClick={() => setChosenSupplier(null)}
+              />
             </Box>
           )}
         </Box>
