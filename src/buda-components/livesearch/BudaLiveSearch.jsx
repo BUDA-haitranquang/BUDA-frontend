@@ -117,6 +117,7 @@ function LiveSearch(props) {
               {options.map((option, idx) => (
                 <Box
                   className="BudaLiveSearch-option"
+                  key={idx}
                   onClick={() => {
                     onChooseItem(option);
                     handleClosePopper();

@@ -13,17 +13,20 @@ function SupplierDetail(props) {
   const classes = useStyles();
 
   return supplier ? (
-    <Grid className={classes.root} container xs={12} md={4} spacing={3}>
-      <Box display="flex" justifyContent="space-between">
-        <Typography color="#747C87">Address</Typography>
-        <Typography>{supplier.address || ""}</Typography>
-      </Box>
+    <Grid container spacing={2}>
+      <Grid className={classes.root} item xs={12} md={3}>
+        <Box className="SupplierDetail-info">
+          <Typography className="SupplierDetail-info-field">Address</Typography>
+          <Typography>{supplier.address || ""}</Typography>
+        </Box>
 
-      <Box display="flex" justifyContent="space-between">
-        <Typography color="#747C87">Email</Typography>
-        <Typography>{supplier.email || ""}</Typography>
-      </Box>
+        <Box className="SupplierDetail-info">
+          <Typography className="SupplierDetail-info-field">Email</Typography>
+          <Typography>{supplier.email || ""}</Typography>
+        </Box>
+      </Grid>
     </Grid>
+
   ) : (
     <></>
   );

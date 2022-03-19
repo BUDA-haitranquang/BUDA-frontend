@@ -27,15 +27,14 @@ function BoxSupplier(props) {
   }, [data]);
 
   const filterSupplier = (filter) => {
-    return suppliers.filter(
-      (supplier) => {
-        let name = supplier.name.toLowerCase();
-        let phoneNumber = supplier.phoneNumber.toLowerCase();
-        return name.includes(filter.toLowerCase()) ||
-          phoneNumber.toLowerCase().includes(filter.toLowerCase())
-      }
-
-    );
+    return suppliers.filter((supplier) => {
+      let name = supplier.name.toLowerCase();
+      let phoneNumber = supplier.phoneNumber.toLowerCase();
+      return (
+        name.includes(filter.toLowerCase()) ||
+        phoneNumber.toLowerCase().includes(filter.toLowerCase())
+      );
+    });
   };
 
   const renderRowSupplier = (option) => {
@@ -61,9 +60,7 @@ function BoxSupplier(props) {
     <div className={classes.root}>
       <Box className="BoxSupplier-main">
         <Box className="BoxSupplier-header">
-          <Typography variant="subtitle1" paddingBottom={24}>
-            Supplier detail info.
-          </Typography>
+          <Typography variant="h6">Supplier detail info.</Typography>
           {!chosenSupplier ? (
             <LiveSearch
               placeholder="Search for a supplier"
@@ -76,16 +73,17 @@ function BoxSupplier(props) {
               handleRender={renderRowSupplier}
             />
           ) : (
-            <Box>
-              <AccountCircleIcon sx={{ paddingRight: 16 }} />
-              <Typography variant="subtitle1" color="#08f">
+            <Box className="BoxSupplier-header-chosen-supplier">
+              <AccountCircleIcon sx={{ paddingRight: 2 }} />
+              <Typography color="#08f" variant="h6">
                 {chosenSupplier.name}
               </Typography>
-              <Typography color="black">
+              <Typography variant="h6">
+                &nbsp; - &nbsp;
                 {chosenSupplier.phoneNumber}
               </Typography>
               <CancelOutlinedIcon
-                sx={{ paddingLeft: 16 }}
+                sx={{ paddingLeft: 2 }}
                 onClick={() => setChosenSupplier(null)}
               />
             </Box>
