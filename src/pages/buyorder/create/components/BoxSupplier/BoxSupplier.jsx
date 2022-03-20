@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import LiveSearch from "../../../../../buda-components/livesearch/BudaLiveSearch";
 import AddSupplierModal from "../../../../../components/modal/AddSupplierModal";
 import SupplierDetail from "./SupplierDetail/SupplierDetail";
@@ -58,7 +58,7 @@ function BoxSupplier(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <Paper className={classes.root}>
       <Box className="BoxSupplier-main">
         <Box className="BoxSupplier-header">
           <Typography variant="h6">Supplier detail info.</Typography>
@@ -68,7 +68,7 @@ function BoxSupplier(props) {
               createable
               textCreate="Add a new supplier"
               onClickCreate={() => setOpenCreateSupplier(true)}
-              maxHeight={200}
+              maxHeight={300}
               onChooseItem={onChooseSupplier}
               fetchData={filterSupplier}
               handleRender={renderRowSupplier}
@@ -98,7 +98,7 @@ function BoxSupplier(props) {
           handleClose={() => setOpenCreateSupplier(false)}
         />
       </Box>
-    </div>
+    </Paper>
   );
 }
 
