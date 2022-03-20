@@ -55,7 +55,7 @@ function TableBuyOrderItem(props) {
           {buyOrderItems.map((item, index) => (
             <BuyOrderItem
               item={item}
-              index={buyOrderItems.length - index}
+              index={index + 1}
               key={item.ingredient.ingredientID}
             />
           ))}

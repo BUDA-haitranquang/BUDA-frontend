@@ -93,14 +93,10 @@ function BoxIngredient(props) {
     } else {
       setBuyOrderItems(
         buyOrderItems.map((buyOrderItem) => {
-          let quantity = 0;
           if (buyOrderItem.ingredient.ingredientID === ingredient.ingredientID) {
-            quantity = buyOrderItem.quantity + 1;
+            buyOrderItem.quantity += 1;
           }
-          return {
-            ...buyOrderItem,
-            quantity: quantity,
-          };
+          return buyOrderItem;
         })
       );
     }
