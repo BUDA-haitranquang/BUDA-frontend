@@ -24,7 +24,6 @@ const ProductDetail = (props) => {
   const { window } = props;
   const { id } = useParams();
   const history = useHistory();
-  console.log(id);
 
   const [product, setProduct] = useState(null);
 

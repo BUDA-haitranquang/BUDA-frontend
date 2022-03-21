@@ -27,7 +27,6 @@ function CombinedDetail(props) {
     setIsOpen(false);
   };
 
-  console.log(data);
   return (
     <div>
       <Grid container spacing={1} style={{ width: "900px", margin: "0 auto" }}>

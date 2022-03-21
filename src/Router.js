@@ -2,9 +2,9 @@ import {
   ApolloClient,
   ApolloProvider,
   from,
+  gql,
   HttpLink,
   InMemoryCache,
-  useMutation,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
@@ -17,7 +17,6 @@ import {
   Switch,
 } from "react-router-dom";
 import { addRefreshToken, addToken } from "../src/redux/tokenSlice";
-import { NEW_ACCESS_TOKEN } from "./graphQl/authentication/authMutations";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
@@ -26,29 +25,22 @@ import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
+import SignUp from "./pages/SignUp";
 import Staff from "./pages/Staff";
 import StaffDetail from "./pages/StaffDetail";
-
-import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
 
 const AppRouter = () => {
-  const errorLink = onError(({ graphqlErrors, networkError }) => {
-    if (graphqlErrors) {
-      graphqlErrors.map(({ message, location, path }) => {
-        alert(`Graphql error ${message}`);
-      });
-    }
-  });
-
-  const link = from([
-    errorLink,
-    new HttpLink({ uri: "http://143.198.194.24:4000/" }),
-  ]);
+  // const errorLink = onError(({ graphqlErrors, networkError }) => {
+  //   if (graphqlErrors) {
+  //     graphqlErrors.map(({ message, location, path }) => {
+  //       alert(`Graphql error ${message}`);
+  //     });
+  //   }
+  // });
 
   const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
-  // const [newAccessToken] = useMutation(NEW_ACCESS_TOKEN);
   const dispatch = useDispatch();
 
   const authLink = setContext((_, { headers }) => {
@@ -60,46 +52,68 @@ const AppRouter = () => {
     };
   });
 
+  const errorLink = onError(
+    ({ graphQLErrors, networkError, operation, forward }) => {
+      if (graphQLErrors) {
+        for (let err of graphQLErrors) {
+          if (err.extensions.code === "UNAUTHENTICATED") {
+            getNewAccessToken();
+          }
+        }
+      }
+    }
+  );
+
+  const link = from([
+    errorLink,
+    new HttpLink({ uri: "http://143.198.194.24:4000/" }),
+  ]);
+
+  const PrivateRoute = ({ authed, ...routeProps }) =>{
+    console.log(authed);
+    return authed === true ? <Route {...routeProps} /> : <Redirect to="/login" />;
+  }
+    
+
+  const getNewAccessToken = async () => {
+    return client
+      .mutate({
+        mutation: gql`
+          mutation newAccessToken($token: String!) {
+            newAccessToken(jwtSimple: { token: $token }) {
+              accessToken
+              refreshToken
+            }
+          }
+        `,
+        variables: { token: refreshJwt },
+      })
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data.newAccessToken;
+        // return accessToken;
+        dispatch(addToken(accessToken));
+        // dispatch(addRefreshToken(refreshToken));
+      })
+      .then(() => console.log("new access token generated"))
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: authLink.concat(link),
   });
 
-  const PrivateRoute = ({ authed, ...routeProps }) =>
-    authed === true ? <Route {...routeProps} /> : <Redirect to="/login" />;
-
-  // const getNewAccessToken = () => {
-  //   newAccessToken({
-  //     variables: {
-  //       token: refreshJwt,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       const { accessToken, refreshToken } = res.data.newAccessToken;
-  //       dispatch(addToken(accessToken));
-  //       dispatch(addRefreshToken(refreshToken));
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-
-  //   setTimeout(getNewAccessToken, 60 * 2);
-  // };
-
-  // getNewAccessToken();
-
   return (
     <ApolloProvider client={client}>
       <Router>
         <Switch>
+          <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
           <PrivateRoute
             authed={isAuth}
-            exact path="/staff"
-            component={Staff}
-          />
-          <PrivateRoute
-            authed={isAuth}
-            exact path="/staff/:id"
+            exact
+            path="/staff/:id"
             component={StaffDetail}
           />
           <PrivateRoute
