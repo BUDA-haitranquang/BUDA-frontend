@@ -97,6 +97,7 @@ const BudaTable = (props) => {
               deleteItems(selected);
               setSelected([]);
             }}
+            checkModal = {Modal ? true : false}
           />
           <Table
             sx={{ minWidth: 1000 }}
@@ -123,7 +124,7 @@ const BudaTable = (props) => {
               DetailTableBody={DetailTableBody}
               type = {type}
             />
-            <Modal isOpen={isOpen} handleClose={handleClose} />
+            {Modal && <Modal isOpen={isOpen} handleClose={handleClose} />}
             {tableChildren}
           </Table>
         </TableContainer>
