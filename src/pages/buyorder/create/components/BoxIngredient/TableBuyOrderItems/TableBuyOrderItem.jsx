@@ -27,7 +27,7 @@ function TableBuyOrderItem(props) {
         style={{ borderCollapse: "inherit" }}
       >
         <TableHead>
-          <TableRow>
+          <TableRow sx={{ backgroundColor: "#f0f2f5" }}>
             <TableCell align="center" style={{ width: "55px" }}>
               No.
             </TableCell>

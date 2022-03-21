@@ -5,12 +5,15 @@ import { useQuery } from "@apollo/client";
 import { LOAD_INGREDIENTS } from "../../../../../graphQl/ingredients/ingredientQueries";
 import AddIngredientModal from "../../../../../components/modal/AddIngredientModal";
 import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
+import useStyles from "./BoxIngredient.styles";
 
 function BoxIngredient(props) {
   const [openCreateIngredient, setOpenCreateIngredient] = useState(false);
   const [buyOrderItems, setBuyOrderItems] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const { data } = useQuery(LOAD_INGREDIENTS);
+
+  const classes = useStyles();
 
   useEffect(() => {
     async function fetchData() {
@@ -103,7 +106,7 @@ function BoxIngredient(props) {
   };
 
   return (
-    <Paper>
+    <Paper className={classes.root}>
       <Box className="BoxIngredient-main">
         <Box className="BoxIngredient-header">
           <Typography variant="h6">Ingredient list</Typography>

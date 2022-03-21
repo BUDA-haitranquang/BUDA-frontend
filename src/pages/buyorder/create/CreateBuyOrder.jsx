@@ -24,7 +24,7 @@ function CreateBuyOrder(props) {
       >
         <Toolbar />
         <Box padding={3} width="100%">
-          <Grid container spacing={3} height={300}>
+          <Grid container spacing={3} height={300} bgcolor="#f0f2f5">
             <Grid item sm={12} md={9} maxHeight={300}>
               <BoxSupplier />
             </Grid>
