@@ -1,9 +1,59 @@
 import { Grid, Box, Button, ButtonGroup } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
-import LChart from "./Charts/LineCharts";
-import BChart from "./Charts/BarCharts";
-import react, { useState } from "react";
+
+import { useState } from "react";
+import BudaLineChart from "../../buda-components/charts/BudaLineChart";
+import BudaBarChart from "../../buda-components/charts/BudaBarChart";
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: "Page E",
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
+
+const lines = [
+  { name: "Chi phí", colors: "#CD201F", dataKey: "uv" },
+  { name: "Doanh thu", colors: "#82ca9d", dataKey: "pv" },
+];
 const MainDashBoard = () => {
   const [chart, setChart] = useState(0);
   return (
@@ -29,23 +79,21 @@ const MainDashBoard = () => {
             </h1>
           </Box>
           <Box pt={1}>
-            {/* <Button
-              sx={{ height: "100%", margin: "10px 20px 0 0" }}
-              onClick={(e) => setChart(chart + 1)}
-            >
-              {chart % 2 === 0 ? "Line Chart" : "Bar Chart"}
-            </Button> */}
             <ButtonGroup>
-              <Button onClick={()=>setChart(1)}>
+              <Button onClick={() => setChart(1)}>
                 <BarChartIcon />
               </Button>
-              <Button onClick={()=>setChart(0)}>
+              <Button onClick={() => setChart(0)}>
                 <ShowChartIcon />
               </Button>
             </ButtonGroup>
           </Box>
         </Box>
-        {chart % 2 === 0 ? <LChart /> : <BChart />}
+        {chart % 2 === 0 ? (
+          <BudaLineChart data={data} xAxis="name" lines={lines} />
+        ) : (
+          <BudaBarChart data={data} xAxis="name" bars={lines} />
+        )}
       </Grid>
       <Grid item display="flex" flexDirection="column" rowSpacing={2}>
         <Box width="100%">

@@ -32,7 +32,7 @@ import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
-
+import SellOrder from "./pages/SellOrder";
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -149,6 +149,12 @@ const AppRouter = () => {
             exact
             path="/create-order"
             component={CreateOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/sell-order-statistic"
+            component={SellOrder}
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
