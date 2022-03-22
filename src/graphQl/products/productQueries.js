@@ -24,6 +24,9 @@ export const LOAD_PRODUCT = gql`
       alertAmount
       costPerUnit
       sellingPrice
+      picture{
+        pictureLink
+      }
     }
   }
 `;
