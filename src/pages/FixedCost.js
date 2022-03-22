@@ -3,18 +3,17 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import AddFixedCostModal from "../components/modal/AddFixedCostModal";
 import Sidebar from "../components/Sidebar";
-import AddSupplierModal from "../components/modal/AddSupplierModal";
-import SupplierTableBody from "../components/table/body/SupplierTableBody";
-// import SupplierTable from "../buda-components/table/SupplierTable";
-import BudaTable from "../buda-components/table/BudaTable";
-import { LOAD_SUPPLIERS } from "../graphQl/suppliers/suppliersQueries";
-import { HIDE_SUPPLIER_MUTATION } from "../graphQl/suppliers/suppliersMutations";
+import FixedCostTableBody from "../components/table/body/FixedCostTableBody";
+import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
+import { HIDE_FIXED_COST_MUTATION } from "../graphQl/cost/fixedCost/fixedCostMutation";
 import { useSnackbar } from "notistack";
 import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+    AlertErrorProp,
+    AlertSuccessProp,
+  } from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
 const headCells =[ 
     {
         id: "name",
@@ -23,40 +22,40 @@ const headCells =[
         label: "Name",
     },
     {
-        id: "phoneNumber",
+        id: "description",
         numeric: false,
         disablePadding: false,
-        label: "Phone Number",
+        label: "Description",
     },
     {
-        id: "address",
+        id: "period",
         numeric: true,
         disablePadding: false,
-        label: "Address",
+        label: "Period",
     },
     {
-        id: "email",
+        id: "moneyamount",
         numeric: true,
         disablePadding: false,
-        label: "Email",
+        label: "Money Amount",
     },
 ];
 
-const Supplier = (props) =>{
+const FixCost = (props) =>{
     const { window } = props;
-    const [ supplier,setSupplier ] = useState([]);
-    const { error, loading, data } = useQuery(LOAD_SUPPLIERS);
+    const [ fixcosts,setFixCosts ] = useState([]);
+    const { error, loading, data } = useQuery(LOAD_FIXED_COST);
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(false);
-    const [ hideSupplier ] = useMutation(HIDE_SUPPLIER_MUTATION);
+    const [ hideFixedCost ] = useMutation(HIDE_FIXED_COST_MUTATION);
     const handleDelete = (selected) => {
         if (selected === []) return;
         setIsLoading(true);
         try {
           selected.forEach((item) => {
-            hideSupplier({
-              variables: { supplierID: parseInt(item) },
-              refetchQueries: [{ query: LOAD_SUPPLIERS }],
+            hideFixedCost({
+              variables: { fixedCostID: parseInt(item) },
+              refetchQueries: [{ query: LOAD_FIXED_COST }],
             });
           });
           enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -67,9 +66,11 @@ const Supplier = (props) =>{
     
         }
       };
+    
+
     useEffect(() => {
         async function fetchData(){
-            if(data) setSupplier(data.suppliersByUser);
+            if(data) setFixCosts(data.fixedCostsByUser);
         }
         fetchData();
         console.log(data);
@@ -79,7 +80,7 @@ const Supplier = (props) =>{
 
     return (
         <Box sx={{ display: "flex" }}>
-        <Sidebar window={window} name="Supplier" />
+        <Sidebar window={window} name="Cost" />
         <Box
             width="100%"
             display="flex"
@@ -92,11 +93,11 @@ const Supplier = (props) =>{
             <Box>
             <BudaTable
                 deleteItems={handleDelete}
-                data={supplier}
+                data={fixcosts}
                 headCells={headCells}
-                Modal={AddSupplierModal}
-                type='supplierID'
-                DetailTableBody={SupplierTableBody}
+                Modal={AddFixedCostModal}
+                type='fixedCostID'
+                DetailTableBody={FixedCostTableBody}
             />
             </Box>
         </Box>
@@ -104,4 +105,4 @@ const Supplier = (props) =>{
     );
 };
 
-export default Supplier;
+export default FixCost;

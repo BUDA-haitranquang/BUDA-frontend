@@ -28,11 +28,13 @@ import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
 import StaffDetail from "./pages/StaffDetail";
-
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
-
+import FixCost from "./pages/FixedCost";
+import FixCostBill from "./pages/FixedCostBill";
+import Collation from "./pages/Collation";
+import OtherCost from "./pages/OtherCost";
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
@@ -99,20 +101,32 @@ const AppRouter = () => {
           />
           <PrivateRoute
             authed={isAuth}
-            exact path="/staff/:id"
+            exact path="/staff/note/:id"
             component={StaffDetail}
           />
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/dashboard"
+            path="/dashboard/buy"
             component={Dashboard}
           />
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/product"
+            path="/product/"
             component={Product}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/collation"
+            component={Collation}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/product/delete"
+            component={Statistic}
           />
           <PrivateRoute
             authed={isAuth}
@@ -120,6 +134,7 @@ const AppRouter = () => {
             path="/product/:id"
             component={ProductDetail}
           />
+       
           <PrivateRoute
             authed={isAuth}
             exact
@@ -135,7 +150,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/statistic"
+            path="/statistic/business"
             component={Statistic}
           />
           <PrivateRoute
@@ -149,6 +164,24 @@ const AppRouter = () => {
             exact
             path="/create-order"
             component={CreateOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/cost/fixedCost"
+            component={FixCost}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/cost/fixedcostBill"
+            component={FixCostBill}
+          />
+           <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/cost/othercost"
+            component={OtherCost}
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
