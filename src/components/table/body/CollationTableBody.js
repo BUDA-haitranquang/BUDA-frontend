@@ -5,12 +5,21 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { display, flexbox } from "@mui/system";
+import { CenterFocusStrong } from "@mui/icons-material";
 const CollationTableBody = (props) => {
 const { row, labelId } = props;
 const [ value,setValue ] = React.useState(0);
-const [open,setOpen] = React.useState(false);
+const [ open,setOpen ] = React.useState(false);
+const [ isEditing,setIsEditing ] = React.useState(false); 
 const changeOpen = () => {setOpen(true)};
 const changeClose = () => {setOpen(false)};
+
+const handleSubmit = (e) =>{
+  e.preventDefault();
+  console.log("YES");
+}
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -21,8 +30,13 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: "20px",
-    align : "left"
+    align : 'center',
   };
+const inputStyle = {
+    align: "center"
+}
+
+
   return (
     <>
       <TableCell component="th" id={labelId} scope="row">
@@ -65,6 +79,15 @@ const style = {
                                 <p>Noi dung 2 : Khong biet ghi gi 2</p>
                             </Typography>
                             <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
+                            <div style = {{
+                                display : 'flex',
+                                justifyContent : 'center'
+                            }}
+                            >
+                              <input type ="text" placeholder="placee holder" align="center"/>
+                              <button type='submit' width={100}>addd</button>
+                            </div>
+                           
                         </Box>
                     </Modal>
                </TableCell> 

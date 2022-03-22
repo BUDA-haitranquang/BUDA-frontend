@@ -67,18 +67,18 @@ const title = [
   "cost",
   "statistic",
 ];
-function createData(name,link){
-  return {name : name ,link : link};
+function createData(name,link,check){
+  return {name : name ,link : link,check : check};
 }
 const sidebarItems = [
-  [createData('Dashboard','')],
-  [createData('Product',''),createData('Collation','collation'),createData('Delete','delete')],
-  [createData('Ingredient','')],
-  [createData('Supplier','supplier')],
-  [createData('Customer','customer')],
-  [createData('Staff','')],
-  [createData('Fixed','fixedcost'),createData('Fixed Cost Bill','fixedcostBill')],
-  [createData('Statistic','')],
+  [createData('Buy','buy',''),createData('Sell','sell','')],
+  [createData('Product','',''),createData('Collation','collation',''),createData('Delete','delete','')],
+  [createData('Ingredient','','')],
+  [createData('Supplier','supplier','')],
+  [createData('Customer','customer','')],
+  [createData('Note','note','')],
+  [createData('Fixed','fixedcost',''),createData('Fixed Cost Bill','fixedcostBill',''),createData('Other Cost','othercost','')],
+  [createData('Business','business',''),createData('Customer','customer',''),createData('Product','product','')],
 ]
 const Sidebar = ({ window, name }) => {
   const history = useHistory();
@@ -121,7 +121,7 @@ const Sidebar = ({ window, name }) => {
   };
   const logo = (
     <>
-      <Box className={classes.logo} component={Link} to="/dashboard">
+      <Box className={classes.logo} component={Link} to="/dashboard/buy">
         BUDA
       </Box>
     </>
@@ -154,7 +154,7 @@ const Sidebar = ({ window, name }) => {
                   <Link to= {`/${item}/${component.link}`}>
                     <ListItem button>
                       <ListItemText
-                        primary={capitalizeFirstLetter(component.name)}
+                        primary={component.name}
                       />
                     </ListItem>
                   </Link>

@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
@@ -7,7 +7,13 @@ import AddFixedCostModal from "../components/modal/AddFixedCostModal";
 import Sidebar from "../components/Sidebar";
 import FixedCostTableBody from "../components/table/body/FixedCostTableBody";
 import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
-import FixedCostTable from "../buda-components/table/FixedCostTable";
+import { HIDE_FIXED_COST_MUTATION } from "../graphQl/cost/fixedCost/fixedCostMutation";
+import { useSnackbar } from "notistack";
+import {
+    AlertErrorProp,
+    AlertSuccessProp,
+  } from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
 const headCells =[ 
     {
         id: "name",
@@ -39,6 +45,28 @@ const FixCost = (props) =>{
     const { window } = props;
     const [ fixcosts,setFixCosts ] = useState([]);
     const { error, loading, data } = useQuery(LOAD_FIXED_COST);
+    const { enqueueSnackbar } = useSnackbar();
+    const [isLoading, setIsLoading] = useState(false);
+    const [ hideFixedCost ] = useMutation(HIDE_FIXED_COST_MUTATION);
+    const handleDelete = (selected) => {
+        if (selected === []) return;
+        setIsLoading(true);
+        try {
+          selected.forEach((item) => {
+            hideFixedCost({
+              variables: { fixedCostID: parseInt(item) },
+              refetchQueries: [{ query: LOAD_FIXED_COST }],
+            });
+          });
+          enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
+        } catch (e) {
+          enqueueSnackbar("An error occured", AlertErrorProp);
+        } finally {
+          setIsLoading(false);
+    
+        }
+      };
+    
 
     useEffect(() => {
         async function fetchData(){
@@ -63,7 +91,8 @@ const FixCost = (props) =>{
             <Toolbar />
             <Box>{}</Box>
             <Box>
-            <FixedCostTable
+            <BudaTable
+                deleteItems={handleDelete}
                 data={fixcosts}
                 headCells={headCells}
                 Modal={AddFixedCostModal}

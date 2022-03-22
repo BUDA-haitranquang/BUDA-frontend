@@ -3,18 +3,17 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import AddOtherCostModal from "../components/modal/AddOtherCostModal";
 import Sidebar from "../components/Sidebar";
-import AddSupplierModal from "../components/modal/AddSupplierModal";
-import SupplierTableBody from "../components/table/body/SupplierTableBody";
-// import SupplierTable from "../buda-components/table/SupplierTable";
-import BudaTable from "../buda-components/table/BudaTable";
-import { LOAD_SUPPLIERS } from "../graphQl/suppliers/suppliersQueries";
-import { HIDE_SUPPLIER_MUTATION } from "../graphQl/suppliers/suppliersMutations";
+import { LOAD_OTHER_COST } from "../graphQl/cost/otherCost/otherCostQueries";
+import { HIDE_OTHER_COST } from "../graphQl/cost/otherCost/otherCostMutation";
+import OtherCostTableBody from "../components/table/body/OtherCostTableBody";
 import { useSnackbar } from "notistack";
 import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+    AlertErrorProp,
+    AlertSuccessProp,
+  } from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
 const headCells =[ 
     {
         id: "name",
@@ -23,40 +22,46 @@ const headCells =[
         label: "Name",
     },
     {
-        id: "phoneNumber",
+        id: "totalCost",
         numeric: false,
         disablePadding: false,
-        label: "Phone Number",
+        label: "Total Cost",
     },
     {
-        id: "address",
+        id: "creationTime",
         numeric: true,
         disablePadding: false,
-        label: "Address",
+        label: "Creation Time",
     },
     {
-        id: "email",
+        id: "status",
         numeric: true,
         disablePadding: false,
-        label: "Email",
+        label: "Status",
+    },
+    {
+        id: "description",
+        numeric: true,
+        disablePadding: false,
+        label: "Description",
     },
 ];
 
-const Supplier = (props) =>{
+const OtherCost = (props) =>{
     const { window } = props;
-    const [ supplier,setSupplier ] = useState([]);
-    const { error, loading, data } = useQuery(LOAD_SUPPLIERS);
+    const [ fixcosts,setFixCosts ] = useState([]);
+    const { error, loading, data } = useQuery(LOAD_OTHER_COST);
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(false);
-    const [ hideSupplier ] = useMutation(HIDE_SUPPLIER_MUTATION);
+    const [ hideOtherCost ] = useMutation(HIDE_OTHER_COST);
     const handleDelete = (selected) => {
         if (selected === []) return;
         setIsLoading(true);
         try {
           selected.forEach((item) => {
-            hideSupplier({
-              variables: { supplierID: parseInt(item) },
-              refetchQueries: [{ query: LOAD_SUPPLIERS }],
+            hideOtherCost({
+              variables: { fixedCostID: parseInt(item) },
+              refetchQueries: [{ query: LOAD_OTHER_COST }],
             });
           });
           enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -67,9 +72,11 @@ const Supplier = (props) =>{
     
         }
       };
+    
+
     useEffect(() => {
         async function fetchData(){
-            if(data) setSupplier(data.suppliersByUser);
+            if(data) setFixCosts(data.otherCostsByUser);
         }
         fetchData();
         console.log(data);
@@ -79,7 +86,7 @@ const Supplier = (props) =>{
 
     return (
         <Box sx={{ display: "flex" }}>
-        <Sidebar window={window} name="Supplier" />
+        <Sidebar window={window} name="Other Cost" />
         <Box
             width="100%"
             display="flex"
@@ -92,11 +99,11 @@ const Supplier = (props) =>{
             <Box>
             <BudaTable
                 deleteItems={handleDelete}
-                data={supplier}
+                data={fixcosts}
                 headCells={headCells}
-                Modal={AddSupplierModal}
-                type='supplierID'
-                DetailTableBody={SupplierTableBody}
+                Modal={AddOtherCostModal}
+                type='otherCostID'
+                DetailTableBody={OtherCostTableBody}
             />
             </Box>
         </Box>
@@ -104,4 +111,4 @@ const Supplier = (props) =>{
     );
 };
 
-export default Supplier;
+export default OtherCost;

@@ -10,7 +10,7 @@ import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
-import BudaTable from "../buda-components/table/CollationTable";
+import BudaTable from "../buda-components/table/BudaTable";
 const headCells = [
   {
     id: "name",

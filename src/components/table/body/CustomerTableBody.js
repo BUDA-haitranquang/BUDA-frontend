@@ -1,6 +1,6 @@
 import { TableCell } from "@mui/material";
 import React from "react";
-const CustomerTableBody2 = (props) => {
+const CustomerTableBody = (props) => {
     const { row,labelId } = props;
     return (
        <>
@@ -16,4 +16,4 @@ const CustomerTableBody2 = (props) => {
     );
 };
 
-export default CustomerTableBody2;
+export default CustomerTableBody;

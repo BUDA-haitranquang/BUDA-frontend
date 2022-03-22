@@ -17,3 +17,12 @@ export const ADD_CUSTOMER_MUTATION = gql`
         {customerID}
     }
 `;
+
+export const HIDE_CUSTOMER_MUTATION = gql`
+    mutation hideCustomer($customerID: Int!){
+        hideCustomer(customerID: $customerID){
+            customerID
+        }
+    }
+    
+`

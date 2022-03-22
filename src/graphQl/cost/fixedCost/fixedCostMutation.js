@@ -39,3 +39,11 @@ export const UPDATE_FIXED_COST_MUTATION = gql `
         {fixedCostID}
     }
 `;
+
+export const HIDE_FIXED_COST_MUTATION = gql`
+    mutation hideFixedCost($fixedCostID: Int!){
+        hideFixedCost(fixedCostID : $fixedCostID){
+            fixedCostID
+        }
+    }
+`

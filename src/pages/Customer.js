@@ -1,13 +1,19 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
 import Sidebar from "../components/Sidebar";
-import CustomerTableBody2 from "../components/table/body/FixedCostTableBody";
+import CustomerTableBody from "../components/table/body/CustomerTableBody";
 import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
-import CustomerTable from "../buda-components/table/CustomerTable";
+import BudaTable from "../buda-components/table/BudaTable";
+import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
+import { useSnackbar } from "notistack";
+import {
+    AlertErrorProp,
+    AlertSuccessProp,
+  } from "../buda-components/alert/BudaNoti";
 const headCells =[ 
     {
         id: "name",
@@ -51,6 +57,31 @@ const Customer = (props) =>{
     const { window } = props;
     const [ customer,setCustomer ] = useState([]);
     const { error, loading, data } = useQuery(LOAD_CUSTOMERS);
+    const [ isLoading, setIsLoading] = useState(false);
+    const [ hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
+    const { enqueueSnackbar } = useSnackbar();
+
+
+    const handleDelete = (selected) => {
+        if(selected === []) return;
+        setIsLoading(true);
+        try {
+            selected.forEach((item) => {
+                hideCustomer({
+                    variables: { customerID: parseInt(item)},
+                    refetchQueries: [{ query: LOAD_CUSTOMERS}],
+                });
+                
+            })
+            enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
+        }
+        catch (e) {
+                enqueueSnackbar("An error occured", AlertErrorProp);
+        } 
+        finally {
+                setIsLoading(false);    
+        }
+    };
 
     useEffect(() => {
         async function fetchData(){
@@ -75,12 +106,13 @@ const Customer = (props) =>{
             <Toolbar />
             <Box>{}</Box>
             <Box>
-            <CustomerTable
+            <BudaTable
+                deleteItems={handleDelete}
                 data={customer}
                 headCells={headCells}
                 Modal={AddCustomerModal}
                 type='customerID'
-                DetailTableBody={CustomerTableBody2}
+                DetailTableBody={CustomerTableBody}
             />
             </Box>
         </Box>

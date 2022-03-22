@@ -90,6 +90,8 @@ const Product = (props) => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser);
     }
+    fetchData();
+  },[data])
 
   // if(error) return <Redirect to="/login"/>;
 
@@ -120,4 +122,5 @@ const Product = (props) => {
     </Box>
   );
 };
+
 export default Product;

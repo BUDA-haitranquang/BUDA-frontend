@@ -5,7 +5,8 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { LOAD_FIXED_COST_BILL } from "../graphQl/cost/fixedCostBill/fixedCostBillQueries";
-import BillTable  from "../buda-components/table/FixedCostBillTable";
+import BudaTable from "../buda-components/table/BudaTable";
+// import BillTable  from "../buda-components/table/FixedCostBillTable";
 import AddFixedCostBillModal from "../components/modal/AddFixedCostBillModal";
 import FixedCostBillTableBody from "../components/table/body/FixedCostBIllTableBody";
 const headCells =[ 
@@ -52,7 +53,7 @@ const FixCostBill = (props) =>{
 
     return (
         <Box sx={{ display: "flex" }}>
-        <Sidebar window={window} name="Cost" />
+        <Sidebar window={window} name="Bill Cost" />
         <Box
             width="100%"
             display="flex"
@@ -63,7 +64,7 @@ const FixCostBill = (props) =>{
             <Toolbar />
             <Box>{}</Box>
             <Box>
-            <BillTable
+            <BudaTable
                 data={fixcosts}
                 headCells={headCells}
                 Modal={AddFixedCostBillModal}
