@@ -17,3 +17,11 @@ export const ADD_SUPPLIER_MUTATION = gql`
         )
         {supplierID}
     }`;
+
+export const HIDE_SUPPLIER_MUTATION =gql`
+    mutation hideSupplier($supplierID: Int!){
+        hideSupplier(supplierID: $supplierID){
+            supplierID
+        }
+    }
+`
