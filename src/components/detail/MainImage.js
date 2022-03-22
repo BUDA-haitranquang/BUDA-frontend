@@ -7,7 +7,7 @@ export default function MainImage({source}) {
         <Box
             sx={{
                 width: "100%",
-                height: 300,
+                height: 260,
                 padding: "10px",
                 border: "2px solid #47719d",
                 display: "flex",

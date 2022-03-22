@@ -49,11 +49,11 @@ const BudaTableBody = (props) => {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <TableBody {...remainProps}>
-      {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
+      {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {      
         const isItemSelected = isSelected(row[type]);
         const labelId = `enhanced-table-checkbox-${idx}`;
         return (
-          <CustomWidthTooltip title={row.description || ""}>
+          <CustomWidthTooltip title={row.description || ""} >
             <TableRow
               sx={{ cursor: "pointer" }}
               hover
