@@ -27,6 +27,9 @@ const MainDashBoard = () => {
   const { error: daysThisMonthError, data: daysThisMonthData } = useQuery(
     LOAD_REVENUE_DAYS_THIS_MONTH
   );
+  const { error: weekdaysError, data: weekdaysData } = useQuery(
+    LOAD_REVENUE_WEEKDAYS
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -35,10 +38,14 @@ const MainDashBoard = () => {
         return;
       }
       if (timeSelected === 1) {
-        setData(weeklyData.revenueWeekly);
+        setData(weekdaysData.revenueWeekdays);
         return;
       }
       if (timeSelected === 2) {
+        setData(weeklyData.revenueWeekly);
+        return;
+      }
+      if (timeSelected === 3) {
         setData(monthlyData.revenueMonthly);
         return;
       }
@@ -63,7 +70,15 @@ const MainDashBoard = () => {
         }}
       >
         {data.length === 0 ? (
-          <Box sx={{ textAlign: "center",paddingTop:'25%',paddingBottom:'25%' }}><h1>No data</h1></Box>
+          <Box
+            sx={{
+              textAlign: "center",
+              paddingTop: "25%",
+              paddingBottom: "25%",
+            }}
+          >
+            <h1>No data</h1>
+          </Box>
         ) : (
           <>
             <Box
@@ -119,11 +134,11 @@ const MainDashBoard = () => {
             </Grid>
             <Grid item xs={12}>
               <Button
-                sx={{ width: "100%", height: "55px" }}
                 variant={timeSelected === 1 ? "contained" : "outlined"}
+                sx={{ width: "100%", height: "55px" }}
                 onClick={() => handleChooseDate(1)}
               >
-                Weekly
+                Weekdays
               </Button>
               <Box py={2}></Box>
             </Grid>
@@ -132,6 +147,16 @@ const MainDashBoard = () => {
                 sx={{ width: "100%", height: "55px" }}
                 variant={timeSelected === 2 ? "contained" : "outlined"}
                 onClick={() => handleChooseDate(2)}
+              >
+                Weekly
+              </Button>
+              <Box py={2}></Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                sx={{ width: "100%", height: "55px" }}
+                variant={timeSelected === 3 ? "contained" : "outlined"}
+                onClick={() => handleChooseDate(3)}
               >
                 Monthly
               </Button>
@@ -157,7 +182,7 @@ const MainDashBoard = () => {
               <Button
                 sx={{ width: "100%", height: "40px" }}
                 variant="outlined"
-                onClick={() => handleChooseDate(3)}
+                onClick={() => handleChooseDate(4)}
               >
                 {" "}
                 Submit{" "}
