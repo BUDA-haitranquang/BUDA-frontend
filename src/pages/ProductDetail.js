@@ -19,6 +19,7 @@ import {
   LOAD_PRODUCT,
   LOAD_PRODUCTS,
   LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT,
+  LOAD_PRODUCT_GROUP_BY_PRODUCT,
 } from "../graphQl/products/productQueries";
 
 const ProductDetail = (props) => {
@@ -29,12 +30,17 @@ const ProductDetail = (props) => {
 
   const [product, setProduct] = useState(null);
   const [productCombo, setProductCombo] = useState(null);
+  const [productGroup, setProductGroup] = useState(null);
 
   const productDetail = useQuery(LOAD_PRODUCT, {
     variables: { productID: parseInt(id) },
   });
 
   const productComboData = useQuery(LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT, {
+    variables: { productID: parseInt(id) },
+  });
+
+  const productGroupData = useQuery(LOAD_PRODUCT_GROUP_BY_PRODUCT, {
     variables: { productID: parseInt(id) },
   });
 
@@ -62,12 +68,20 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     async function fetchComboData() {
-      console.log(productComboData)
       if (productComboData.data) setProductCombo(productComboData.data);
     }
 
     fetchComboData();
   }, [productComboData.data]);
+
+  useEffect(() => {
+    async function fetchGroupData() {
+      console.log(productGroupData)
+      if (productGroupData.data) setProductGroup(productGroupData.data);
+    }
+
+    fetchGroupData();
+  }, [productGroupData.data]);
 
   if (productDetail.error) return <Redirect to="/login" />;
 
@@ -81,7 +95,7 @@ const ProductDetail = (props) => {
             <div></div>
           ) : (
             <CombinedDetail
-              data={{product, productCombo}}
+              data={{product, productCombo, productGroup}}
               Modal={EditProductModal}
               Information={ProductInformation}
               handleDelete={handleDeleteProduct}

@@ -48,31 +48,29 @@ export const LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT = gql`
 `;
 
 // // Find Components by ProductId
-// export const LOAD_COMPONENTS_BY_PRODUCT = gql`
-//   query {
-//     productsByUser {
-//       productID
-//       name
-//       sellingPrice
-//       amountLeft
-//       alertAmount
-//       costPerUnit
-//       description
-//     }
-//   }
-// `;
+export const LOAD_COMPONENTS_BY_PRODUCT = gql`
+  query componentsByProduct($productID: Int) {
+    componentsByProduct(productID: $productID) {
+      productComponentID
+      ingredient {
+        ingredientSKU
+        name
+      }
+      product {
+        productSKU
+        name
+      }
+      requiredQuantity
+      totalCost
+    }
+  }
+`;
 
 // // Find Group by ProductId
-// export const LOAD_PRODUCT_GROUP_BY_PRODUCT = gql`
-//   query {
-//     productsByUser {
-//       productID
-//       name
-//       sellingPrice
-//       amountLeft
-//       alertAmount
-//       costPerUnit
-//       description
-//     }
-//   }
-// `;
+export const LOAD_PRODUCT_GROUP_BY_PRODUCT = gql`
+  query productGroupByProduct($productID: Int) {
+    productGroupByProduct(productID: $productID) {
+      name
+    }
+  }
+`;
