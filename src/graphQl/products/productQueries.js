@@ -24,11 +24,55 @@ export const LOAD_PRODUCT = gql`
       alertAmount
       costPerUnit
       sellingPrice
-      picture{
+      picture {
         pictureLink
       }
     }
   }
 `;
 
+// Find Combo by ProductId
+export const LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT = gql`
+  query productComboIncludeProduct($productID: Int) {
+    productComboIncludeProduct(productID: $productID) {
+      productComboID
+      name
+      description
+      productComboItems {
+        productCombo {
+          name
+        }
+      }
+    }
+  }
+`;
 
+// // Find Components by ProductId
+// export const LOAD_COMPONENTS_BY_PRODUCT = gql`
+//   query {
+//     productsByUser {
+//       productID
+//       name
+//       sellingPrice
+//       amountLeft
+//       alertAmount
+//       costPerUnit
+//       description
+//     }
+//   }
+// `;
+
+// // Find Group by ProductId
+// export const LOAD_PRODUCT_GROUP_BY_PRODUCT = gql`
+//   query {
+//     productsByUser {
+//       productID
+//       name
+//       sellingPrice
+//       amountLeft
+//       alertAmount
+//       costPerUnit
+//       description
+//     }
+//   }
+// `;

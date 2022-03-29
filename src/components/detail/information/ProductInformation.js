@@ -4,6 +4,7 @@ import React from "react";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
+  console.log(data);
   const {
     name,
     sellingPrice,
@@ -12,7 +13,7 @@ export default function ProductInformation({ data }) {
     costPerUnit,
     description,
     picture,
-  } = data.product;
+  } = data.product.product;
   return (
     <Grid container direction="row">
       <Grid item xs={3} style={{ height: "100%" }}>
