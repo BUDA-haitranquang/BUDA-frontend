@@ -62,7 +62,8 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     async function fetchComboData() {
-      if (productComboData.data) setProductCombo(productDetail.data);
+      console.log(productComboData)
+      if (productComboData.data) setProductCombo(productComboData.data);
     }
 
     fetchComboData();

@@ -14,6 +14,9 @@ export default function ProductInformation({ data }) {
     description,
     picture,
   } = data.product.product;
+
+  const productCombo = data.productCombo.productComboIncludeProduct;
+
   return (
     <Grid container direction="row">
       <Grid item xs={3} style={{ height: "100%" }}>
@@ -60,7 +63,13 @@ export default function ProductInformation({ data }) {
             </Typography>
           </Box>
         </Box>
-
+        <Divider />
+        <Box>
+          {console.log(productCombo)}
+          {productCombo.map((combo) => (
+            <Typography>{combo.name}</Typography>
+          ))}
+        </Box>
         <Divider />
       </Grid>
     </Grid>
