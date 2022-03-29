@@ -22,3 +22,26 @@ export const HIDE_INGREDIENT_MUTATION = gql`
     mutation hideIngredient($ingredientID: Int!){
         hideIngredient(ingredientID: $ingredientID){ingredientID}
     }`
+
+export const UPDATE_INGREDIENT_MUTATION = gql`
+    mutation editIngredient(
+        $ingredientID: Int!
+        $name: String!
+        $description: String!
+        $amountLeft: Int!
+        $price: Float!
+        $alertAmountLeft: Int!
+    ){
+        editIngredient(
+            ingredientID: $ingredientID
+            ingredient:{
+                name: $name
+                amountLeft: $amountLeft
+                description: $description
+                price: $price
+                alertAmountLeft: $alertAmountLeft
+            }
+        )
+        {ingredientID}
+    }
+`

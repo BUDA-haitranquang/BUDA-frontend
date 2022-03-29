@@ -11,15 +11,15 @@ const CollationTableBody = (props) => {
 const { row, labelId } = props;
 const [ value,setValue ] = React.useState(0);
 const [ open,setOpen ] = React.useState(false);
-const [ isEditing,setIsEditing ] = React.useState(false); 
+const [ textValue,setTextValue ] = React.useState('');
+const [ status,setStatus ] = React.useState(false)
 const changeOpen = () => {setOpen(true)};
 const changeClose = () => {setOpen(false)};
-
+const changeStatus = () =>{setStatus(true)};
 const handleSubmit = (e) =>{
   e.preventDefault();
   console.log("YES");
 }
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -71,23 +71,47 @@ const inputStyle = {
                         onClose={changeClose}
                     >
                        <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                            {/* <Typography id="modal-modal-title" variant="h6" component="h2">
                                 Title
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                                 <p>Noi dung : Khong biet ghi gi</p>
                                 <p>Noi dung 2 : Khong biet ghi gi 2</p>
                             </Typography>
-                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
+                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button> */}
                             <div style = {{
                                 display : 'flex',
-                                justifyContent : 'center'
+                                justifyContent : 'center',
+                                height: 30,
                             }}
                             >
-                              <input type ="text" placeholder="placee holder" align="center"/>
-                              <button type='submit' width={100}>addd</button>
+                              <input style={{
+                                padding: 0.25,
+                                paddingLeft: 1,
+                                flex: '1 0 auto',
+                                borderColor: 'transparent',
+                                color: 'hsl(210, 22%, 49%)',
+                                background: 'hsl(210, 36%, 96%)',
+                                borderTopLeftRadius: 0.25,
+                                borderBottomLeftRadius: 0.25,
+                              
+                              }} type ="text" placeholder="  placee holder"
+                                onChange={(e) => {setTextValue(e.target.value)}}
+                              />
+                              <button type='submit' style={{
+                                flex: '0 0 5rem',
+                                display: 'grid',
+                                alignItems: 'center',
+                                cursor: 'pointer',
+                                height: 30,
+                                borderTopLeftRadius: 0.25,
+                                borderBottomLeftRadius: 0.25,
+                                background: 'hsl(205, 86%, 81%)',
+                              }}
+                              onClick={changeStatus}>addd</button>
                             </div>
-                           
+                            <div style={{paddingTop: 7}}> {status == true ? `- ${textValue}` : ``}</div>
+                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
                         </Box>
                     </Modal>
                </TableCell> 
