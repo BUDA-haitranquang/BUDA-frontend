@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
-import { useHistory } from "react-router-dom";
 import {
   AppBar,
   Box,
@@ -23,12 +22,12 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { setFocus } from "../redux/sidebarSlice";
 import AccountMenu from "./AccountMenu";
 const useStyle = makeStyles({
@@ -67,19 +66,31 @@ const title = [
   "cost",
   "statistic",
 ];
-function createData(name,link,check){
-  return {name : name ,link : link,check : check};
+function createData(name, link, check) {
+  return { name: name, link: link, check: check };
 }
 const sidebarItems = [
-  [createData('Buy','buy',''),createData('Sell','sell','')],
-  [createData('Product','',''),createData('Collation','collation',''),createData('Delete','delete','')],
-  [createData('Ingredient','','')],
-  [createData('Supplier','supplier','')],
-  [createData('Customer','customer','')],
-  [createData('Note','note','')],
-  [createData('Fixed','fixedcost',''),createData('Fixed Cost Bill','fixedcostBill',''),createData('Other Cost','othercost','')],
-  [createData('Business','business',''),createData('Customer','customer',''),createData('Product','product','')],
-]
+  [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
+  [
+    createData("Product", "", ""),
+    createData("Collation", "collation", ""),
+    createData("Delete", "delete", ""),
+  ],
+  [createData("Ingredient", "", "")],
+  [createData("Supplier", "supplier", "")],
+  [createData("Customer", "customer", "")],
+  [createData("Note", "note", "")],
+  [
+    createData("Fixed", "fixedcost", ""),
+    createData("Fixed Cost Bill", "fixedcostBill", ""),
+    createData("Other Cost", "othercost", ""),
+  ],
+  [
+    createData("Business", "business", ""),
+    createData("Customer", "customer", ""),
+    createData("Product", "product", ""),
+  ],
+];
 const Sidebar = ({ window, name }) => {
   const history = useHistory();
   const focus = useSelector((state) => state.sidebar.focus);
@@ -139,31 +150,37 @@ const Sidebar = ({ window, name }) => {
               onClick={() => {
                 let value = focus === item ? "" : item;
                 setFocusSideBar(value);
-                if(sidebarItems[idx].length === 1) history.push(`/${title[idx]}`)
+                if (sidebarItems[idx].length === 1)
+                  history.push(`/${title[idx]}`);
               }}
             >
               <ListItemIcon>{itemRender(idx)}</ListItemIcon>
               <ListItemText primary={capitalizeFirstLetter(item)} />
-                {sidebarItems[idx].length-1 ? ( focus === item ? <ExpandLessIcon /> : <ExpandMoreIcon />) : ""}
-                {" "}
+              {sidebarItems[idx].length - 1 ? (
+                focus === item ? (
+                  <ExpandLessIcon />
+                ) : (
+                  <ExpandMoreIcon />
+                )
+              ) : (
+                ""
+              )}{" "}
             </ListItem>
-            {sidebarItems[idx].length-1 ? 
-            <Collapse in={focus === item}>
-              {sidebarItems[idx].map((component) => {
-                return (
-                  <Link to= {`/${item}/${component.link}`}>
-                    <ListItem button>
-                      <ListItemText
-                        primary={component.name}
-                      />
-                    </ListItem>
-                  </Link>
-                );
-              })}
-            </Collapse>
-            :
-            console.log(12)
-            }
+            {sidebarItems[idx].length - 1 ? (
+              <Collapse in={focus === item}>
+                {sidebarItems[idx].map((component) => {
+                  return (
+                    <Link to={`/${item}/${component.link}`}>
+                      <ListItem button>
+                        <ListItemText primary={component.name} />
+                      </ListItem>
+                    </Link>
+                  );
+                })}
+              </Collapse>
+            ) : (
+              <></>
+            )}
           </>
         ))}
       </List>
@@ -206,14 +223,13 @@ const Sidebar = ({ window, name }) => {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, 
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
