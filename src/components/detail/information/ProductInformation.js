@@ -17,6 +17,7 @@ export default function ProductInformation({ data }) {
 
   const productCombo = data?.productCombo?.productComboIncludeProduct;
   const productGroup = data?.productGroup?.productGroupByProduct;
+  const productComponent = data?.productComponent?.productGroupByProduct;
 
   return (
     <Grid container direction="row">
@@ -84,7 +85,7 @@ export default function ProductInformation({ data }) {
         <Box>
           {console.log(productGroup)}
           {productGroup?.map((group) => (
-            <Typography width="50%">Combo: {group?.name}</Typography>
+            <Typography width="50%">Group: {group?.name}</Typography>
           ))}
         </Box>
         <Divider />

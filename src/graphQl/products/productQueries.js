@@ -39,7 +39,7 @@ export const LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT = gql`
       name
       description
       productComboItems {
-        productCombo {
+        product {
           name
         }
       }
@@ -54,10 +54,6 @@ export const LOAD_COMPONENTS_BY_PRODUCT = gql`
       productComponentID
       ingredient {
         ingredientSKU
-        name
-      }
-      product {
-        productSKU
         name
       }
       requiredQuantity
