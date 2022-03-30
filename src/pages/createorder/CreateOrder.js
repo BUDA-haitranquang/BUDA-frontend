@@ -84,14 +84,16 @@ export default function CreateOrder() {
       const response = await newSellOrder({
         variables: {
           sellOrderItemDTOs: sellOrderInfoMapped,
+          status: "FINISHED"
           // discountID: 3
         },
         refetchQueries: [{ query: LOAD_PRODUCTS }],
       });
       console.log(response);
     } catch (e) {
-      alert(e.graphQLErrors[0].extensions.response.body);
-      // alert(e.message);
+      console.table(e);
+      // alert(e.graphQLErrors[0].extensions.response.body);
+      alert(e.message);
     }
 
     dispatch(clearProductCart());
@@ -125,7 +127,7 @@ export default function CreateOrder() {
         <Button
           onClick={createNewOrder}
           variant="contained"
-          disabled={productCart.length > 0 ? false : true}
+          disabled={productCart.length <= 0}
         >
           DONE
         </Button>
