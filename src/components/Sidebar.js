@@ -30,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { setFocus } from "../redux/sidebarSlice";
 import AccountMenu from "./AccountMenu";
+
 const useStyle = makeStyles({
   root: {
     "& a:link": {
@@ -37,12 +38,12 @@ const useStyle = makeStyles({
       color: "black",
       "&:hover": {
         color: "grey",
-        fontWeight: "600",
-      },
+        fontWeight: "600"
+      }
     },
     "& a:visited": {
-      color: "black",
-    },
+      color: "black"
+    }
   },
   logo: {
     width: "100%",
@@ -51,8 +52,8 @@ const useStyle = makeStyles({
     display: "flex",
     justifyContent: "center",
     textDecoration: "none",
-    color: "black",
-  },
+    color: "black"
+  }
 });
 const drawerWidth = 200;
 
@@ -64,17 +65,19 @@ const title = [
   "customer",
   "staff",
   "cost",
-  "statistic",
+  "statistic"
 ];
+
 function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
+
 const sidebarItems = [
   [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
   [
     createData("Product", "", ""),
     createData("Collation", "collation", ""),
-    createData("Delete", "delete", ""),
+    createData("Delete", "delete", "")
   ],
   [createData("Ingredient", "", "")],
   [createData("Supplier", "supplier", "")],
@@ -83,13 +86,13 @@ const sidebarItems = [
   [
     createData("Fixed", "fixedcost", ""),
     createData("Fixed Cost Bill", "fixedcostBill", ""),
-    createData("Other Cost", "othercost", ""),
+    createData("Other Cost", "othercost", "")
   ],
   [
     createData("Business", "business", ""),
     createData("Customer", "customer", ""),
-    createData("Product", "product", ""),
-  ],
+    createData("Product", "product", "")
+  ]
 ];
 const Sidebar = ({ window, name }) => {
   const history = useHistory();
@@ -105,9 +108,11 @@ const Sidebar = ({ window, name }) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const classes = useStyle();
+
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
   const itemRender = (i) => {
     switch (i) {
       case 0:
@@ -194,7 +199,7 @@ const Sidebar = ({ window, name }) => {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          ml: { sm: `${drawerWidth}px` }
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -229,14 +234,14 @@ const Sidebar = ({ window, name }) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true
           }}
           sx={{
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
         >
           {drawer}
@@ -247,8 +252,8 @@ const Sidebar = ({ window, name }) => {
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
           open
         >
