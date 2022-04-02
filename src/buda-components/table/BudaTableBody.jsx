@@ -1,9 +1,8 @@
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/styles";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { getComparator, stableSort } from "../../utils/tableUtils";
-
 
 const BudaTableBody = (props) => {
   const {
@@ -19,8 +18,6 @@ const BudaTableBody = (props) => {
     type,
     ...remainProps
   } = props;
-
- 
 
   const handleClick = (e, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -39,9 +36,8 @@ const BudaTableBody = (props) => {
     }
     setSelected(newSelected);
   };
-  
-  
-  const CustomWidthTooltip = styled(({className, ...props }) => (
+
+  const CustomWidthTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
   ))({
     [`& .${tooltipClasses.tooltip}`]: {
@@ -51,18 +47,18 @@ const BudaTableBody = (props) => {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <TableBody {...remainProps}>
-      {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {      
+      {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
         const isItemSelected = isSelected(row[type]);
         const labelId = `enhanced-table-checkbox-${idx}`;
         return (
-          <CustomWidthTooltip title={row.description || ""} >
+          <CustomWidthTooltip title={row.description || ""}>
             <TableRow
               sx={{ cursor: "pointer" }}
               hover
               onClick={(e) => {
-                  if (isNotShowCheckbox) return ;
-                  return handleClick(e, row[type]);
-                }}
+                if (isNotShowCheckbox) return;
+                return handleClick(e, row[type]);
+              }}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
@@ -80,7 +76,7 @@ const BudaTableBody = (props) => {
                   />
                 </TableCell>
               )}
-              <DetailTableBody row={row} labelId={labelId}  />
+              <DetailTableBody row={row} labelId={labelId} />
             </TableRow>
           </CustomWidthTooltip>
         );

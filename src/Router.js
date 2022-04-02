@@ -190,6 +190,10 @@ const AppRouter = () => {
             exact
             path="/sell-order-statistic"
             component={SellOrder}
+          />
+           <PrivateRoute
+            authed={isAuth}
+            exact
             path="/cost/fixedCost"
             component={FixCost}
           />
