@@ -93,6 +93,7 @@ const Collation = (props) => {
             Modal={AddProductModal}
             type='productID'
             DetailTableBody={CollationTableBody}
+            isNotShowCheckBox = {true}
           />
         </Box>
       </Box>

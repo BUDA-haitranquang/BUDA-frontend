@@ -4,21 +4,20 @@ import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import { display, flexbox } from "@mui/system";
 import { CenterFocusStrong } from "@mui/icons-material";
+import CollationModal from "../../modal/CollationModal";
 const CollationTableBody = (props) => {
 const { row, labelId } = props;
 const [ value,setValue ] = React.useState(0);
 const [ open,setOpen ] = React.useState(false);
-const [ isEditing,setIsEditing ] = React.useState(false); 
-const changeOpen = () => {setOpen(true)};
-const changeClose = () => {setOpen(false)};
 
-const handleSubmit = (e) =>{
-  e.preventDefault();
-  console.log("YES");
-}
+const changeOpen = () => {
+  setOpen(true);
+};
+const changeClose = () => {
+    setOpen(false);
+  };
 
 const style = {
     position: 'absolute',
@@ -35,10 +34,11 @@ const style = {
 const inputStyle = {
     align: "center"
 }
-
+console.log(open)
 
   return (
     <>
+   
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{ pathname: `${row.productID}`,}}
@@ -66,7 +66,9 @@ const inputStyle = {
                 </TableCell>
                <TableCell align="center">
                     <Button onClick={changeOpen}> Details</Button>
-                    <Modal
+               </TableCell> 
+  
+               {/* <Modal
                         open = {open}
                         onClose={changeClose}
                     >
@@ -89,8 +91,8 @@ const inputStyle = {
                             </div>
                            
                         </Box>
-                    </Modal>
-               </TableCell> 
+                    </Modal> */}
+                    <CollationModal isOpen={open} handleClose={changeClose}/>
 
     </>
   );
