@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import LiveSearch from "../../../../../buda-components/livesearch/BudaLiveSearch";
 import { useQuery } from "@apollo/client";
@@ -6,12 +6,15 @@ import { LOAD_INGREDIENTS } from "../../../../../graphQl/ingredients/ingredientQ
 import AddIngredientModal from "../../../../../components/modal/AddIngredientModal";
 import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";
+import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
 
 function BoxIngredient(props) {
   const [openCreateIngredient, setOpenCreateIngredient] = useState(false);
   const [buyOrderItems, setBuyOrderItems] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const { data } = useQuery(LOAD_INGREDIENTS);
+
+  const { setBuyOrderRequest } = useContext(CreateBuyOrderContext)
 
   const classes = useStyles();
 
@@ -57,8 +60,8 @@ function BoxIngredient(props) {
                 height: 64,
                 width: 64,
               }}
-              alt={option.name}
-              src={option.picture.link}
+              alt={option.name ? option.name : ""}
+              src={option.picture && option.picture.link ? option.picture.link : ""}
             />
             <Box
               display="flex"
@@ -80,7 +83,7 @@ function BoxIngredient(props) {
     );
   };
 
-  const onChooseIngredient = (ingredient) => {
+  const onChooseIngredient = async (ingredient) => {
     const index = buyOrderItems.findIndex(
       (item) => item.ingredient.ingredientID === ingredient.ingredientID
     );
@@ -103,6 +106,10 @@ function BoxIngredient(props) {
         })
       );
     }
+    setBuyOrderRequest((prevBuyOrderRequest) => ({
+      ...prevBuyOrderRequest,
+      buyOrderItemDTOs: buyOrderItems,
+    }));
   };
 
   return (
