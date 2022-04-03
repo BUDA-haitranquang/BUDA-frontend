@@ -83,6 +83,14 @@ function BoxIngredient(props) {
     );
   };
 
+  /// Update context after choosing an ingredient
+  useEffect(() => {
+    setBuyOrderRequest((prevBuyOrderRequest) => ({
+      ...prevBuyOrderRequest,
+      buyOrderItemDTOs: buyOrderItems,
+    }));
+  }, [buyOrderItems])
+
   const onChooseIngredient = async (ingredient) => {
     const index = buyOrderItems.findIndex(
       (item) => item.ingredient.ingredientID === ingredient.ingredientID
@@ -106,10 +114,6 @@ function BoxIngredient(props) {
         })
       );
     }
-    setBuyOrderRequest((prevBuyOrderRequest) => ({
-      ...prevBuyOrderRequest,
-      buyOrderItemDTOs: buyOrderItems,
-    }));
   };
 
   return (

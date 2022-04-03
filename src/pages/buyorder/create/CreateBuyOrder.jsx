@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import BoxSupplier from "./components/BoxSupplier/BoxSupplier";
 import { Box, Button, Grid, Toolbar } from "@mui/material";
 import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
@@ -17,10 +16,6 @@ function CreateBuyOrder(props) {
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
 
   const handleCreateBuyOrder = async () => {
-    setBuyOrderRequest((prevBuyOrderRequest) => ({
-      ...prevBuyOrderRequest,
-      status: "RECEIVING",
-    }));
     try {
       await newBuyOrder({
         variables: {
