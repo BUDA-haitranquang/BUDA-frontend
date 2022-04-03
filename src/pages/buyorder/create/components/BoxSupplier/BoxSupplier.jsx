@@ -75,15 +75,14 @@ function BoxSupplier(props) {
               createable
               textCreate="Add a new supplier"
               onClickCreate={() => setOpenCreateSupplier(true)}
-              maxHeight={300}
+              maxHeight={150}
               onChooseItem={onChooseSupplier}
               fetchData={filterSupplier}
               handleRender={renderRowSupplier}
-              style={{ zIndex: 99999 }}
             />
           ) : (
             <Box className="BoxSupplier-header-chosen-supplier">
-              <AccountCircleIcon sx={{ paddingRight: 2 }} />
+              <AccountCircleIcon className="icon" sx={{ paddingRight: 2 }} />
               <Typography color="#08f" variant="h6">
                 {chosenSupplier.name}
               </Typography>
@@ -92,6 +91,7 @@ function BoxSupplier(props) {
                 {chosenSupplier.phoneNumber}
               </Typography>
               <CancelOutlinedIcon
+                className="icon"
                 sx={{ paddingLeft: 2, cursor: "pointer" }}
                 onClick={() => setChosenSupplier(null)}
               />

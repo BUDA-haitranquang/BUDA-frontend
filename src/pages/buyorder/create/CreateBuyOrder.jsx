@@ -48,13 +48,13 @@ function CreateBuyOrder(props) {
         justifyContent="center"
       >
         <Toolbar />
-        <Box padding={3} width="100%">
+        <Box padding={3} width="100%" bgcolor="#f0f2f5">
           <CreateBuyOrderContext.Provider value={{ buyOrderRequest, setBuyOrderRequest }}>
-            <Grid container spacing={3} bgcolor="#f0f2f5">
-              <Grid item sm={12} md={9} maxHeight={300}>
+            <Grid container spacing={3}>
+              <Grid item sm={12} md={9}>
                 <BoxSupplier />
               </Grid>
-              <Grid item sm={12} md={3} maxHeight={300}>
+              <Grid item sm={12} md={3}>
                 <BoxAdditionalInfo />
               </Grid>
               <Grid item xs={12}>

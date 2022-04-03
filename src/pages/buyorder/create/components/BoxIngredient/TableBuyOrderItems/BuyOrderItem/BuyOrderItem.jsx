@@ -1,14 +1,16 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Box, TableCell, TableRow } from "@mui/material";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 BuyOrderItem.propTypes = {
   item: PropTypes.object,
   index: PropTypes.number,
+  onRemove: PropTypes.func,
 };
 
 function BuyOrderItem(props) {
-  const { item, index } = props;
+  const { item, index, onRemove } = props;
 
   const CellImage = useMemo(() => {
     return <TableCell align="center" style={{ width: "60px" }}>
@@ -54,6 +56,15 @@ function BuyOrderItem(props) {
     </TableCell>
   }, [item.quantity, item.pricePerUnit]);
 
+  const CellRemove = useMemo(() => {
+    return <TableCell align="center" style={{ width: "95px" }}>
+      <CancelOutlinedIcon
+        sx={{ cursor: "pointer" }}
+        onClick={() => onRemove(item)}
+      />
+    </TableCell>
+  }, []);
+
   return (
     <TableRow>
       <TableCell align="center" style={{ width: "55px" }}>{index}</TableCell>
@@ -63,6 +74,7 @@ function BuyOrderItem(props) {
       {CellQuantity}
       {CellPrice}
       {CellAmount}
+      {CellRemove}
     </TableRow>
   );
 }

@@ -116,6 +116,15 @@ function BoxIngredient(props) {
     }
   };
 
+  const handleRemoveIngredient = (item) => {
+    const newBuyOrderItems = [...buyOrderItems];
+    const index = newBuyOrderItems.findIndex((buyOrderItem) => buyOrderItem.ingredient.ingredientID === item.ingredient.ingredientID);
+    if(index > -1) {
+      newBuyOrderItems.splice(index, 1);
+    }
+    setBuyOrderItems(newBuyOrderItems);
+  }
+
   return (
     <Paper className={classes.root}>
       <Box className="BoxIngredient-main">
@@ -133,7 +142,7 @@ function BoxIngredient(props) {
           />
         </Box>
 
-        <TableBuyOrderItem buyOrderItems={buyOrderItems} />
+        <TableBuyOrderItem buyOrderItems={buyOrderItems} onRemoveIngredient={handleRemoveIngredient} />
 
         <AddIngredientModal
           isOpen={openCreateIngredient}

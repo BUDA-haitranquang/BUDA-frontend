@@ -25,6 +25,10 @@ const useStyles = makeStyles(() => ({
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
+
+          "& .icon": {
+            width: 40,
+          }
         }
       }
     }

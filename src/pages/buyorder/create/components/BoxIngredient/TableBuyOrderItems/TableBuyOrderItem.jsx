@@ -12,17 +12,17 @@ import BuyOrderItem from "./BuyOrderItem/BuyOrderItem";
 
 TableBuyOrderItem.propTypes = {
   buyOrderItems: PropTypes.array,
+  onRemoveIngredient: PropTypes.func,
 };
 
 function TableBuyOrderItem(props) {
-  const { buyOrderItems } = props;
+  const { buyOrderItems, onRemoveIngredient } = props;
 
   const classes = useStyles();
 
   return (
     <TableContainer className={classes.root}>
       <Table
-
         aria-label="simple table"
         style={{ borderCollapse: "inherit" }}
       >
@@ -49,14 +49,17 @@ function TableBuyOrderItem(props) {
             <TableCell align="right" style={{ width: "115px" }}>
               Amount
             </TableCell>
+            <TableCell align="right" style={{ width: "95px" }}>
+            </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody className="TableBuyOrderItem-Body">
           {buyOrderItems.map((item, index) => (
             <BuyOrderItem
               item={item}
               index={index + 1}
               key={item.ingredient.ingredientID}
+              onRemove={onRemoveIngredient}
             />
           ))}
         </TableBody>
