@@ -107,10 +107,10 @@ export default function CreateOrder() {
           <SearchProductBar />
           <Box className="itemsPane">
             <OrderProducts />
-            <Grid container className="others">
-              <Services />
+            {/* <Grid container className="others"> tạm thời chưa deploy tính năng này
+              <Services /> 
               <Shipping />
-            </Grid>
+            </Grid> */}
           </Box>
           <CostGrid />
         </Grid>

@@ -40,7 +40,6 @@ export default function SearchProductBar() {
   useEffect(() => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser);
-      console.log(data);
     }
 
     fetchData();

@@ -15,5 +15,7 @@ const useStyle = makeStyles(() => ({
 
 export default function CustomerInfo() {
   const classes = useStyle();
-  return <Paper className={classes.root}></Paper>;
+  return <Paper className={classes.root}>
+    abc
+  </Paper>;
 }
