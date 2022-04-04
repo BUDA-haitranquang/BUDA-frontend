@@ -30,6 +30,7 @@ import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
+import SellOrder from "./pages/SellOrder";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
@@ -185,6 +186,12 @@ const AppRouter = () => {
             component={CreateOrder}
           />
           <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/sell-order-statistic"
+            component={SellOrder}
+          />
+           <PrivateRoute
             authed={isAuth}
             exact
             path="/cost/fixedCost"

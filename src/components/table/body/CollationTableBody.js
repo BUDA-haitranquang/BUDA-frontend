@@ -1,47 +1,46 @@
-import { TableCell,TextField } from "@mui/material";
+import { TableCell, TextField } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import { display, flexbox } from "@mui/system";
 import { CenterFocusStrong } from "@mui/icons-material";
+import CollationModal from "../../modal/CollationModal";
 const CollationTableBody = (props) => {
-const { row, labelId } = props;
-const [ value,setValue ] = React.useState(0);
-const [ open,setOpen ] = React.useState(false);
-const [ isEditing,setIsEditing ] = React.useState(false); 
-const changeOpen = () => {setOpen(true)};
-const changeClose = () => {setOpen(false)};
+  const { row, labelId } = props;
+  const [value, setValue] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
 
-const handleSubmit = (e) =>{
-  e.preventDefault();
-  console.log("YES");
-}
+  const changeOpen = () => {
+    setOpen(true);
+  };
+  const changeClose = () => {
+    setOpen(false);
+  };
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: "20px",
-    align : 'center',
+    align: "center",
   };
-const inputStyle = {
-    align: "center"
-}
-
+  const inputStyle = {
+    align: "center",
+  };
+  console.log(open);
 
   return (
     <>
       <TableCell component="th" id={labelId} scope="row">
         <Link
-          to={{ pathname: `${row.productID}`,}}
+          to={{ pathname: `${row.productID}` }}
           style={{ textDecoration: "none", color: "blue" }}
         >
           {row.name}
@@ -49,24 +48,26 @@ const inputStyle = {
       </TableCell>
 
       <TableCell align="right">{row.amountLeft}</TableCell>
-      <TableCell align="right">{row.amountLeft-value}</TableCell>
+      <TableCell align="right">{row.amountLeft - value}</TableCell>
 
       <TableCell align="center">
-                    <TextField
-                        sx={{
-                            width : 100,
-                        }}
-                        size="small" 
-                        type="number"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        onChange={(e) => setValue(e.target.value)}
-                    />
-                </TableCell>
-               <TableCell align="center">
-                    <Button onClick={changeOpen}> Details</Button>
-                    <Modal
+        <TextField
+          sx={{
+            width: 100,
+          }}
+          size="small"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </TableCell>
+      <TableCell align="center">
+        <Button onClick={changeOpen}> Details</Button>
+      </TableCell>
+
+      {/* <Modal
                         open = {open}
                         onClose={changeClose}
                     >
@@ -89,9 +90,8 @@ const inputStyle = {
                             </div>
                            
                         </Box>
-                    </Modal>
-               </TableCell> 
-
+                    </Modal> */}
+      <CollationModal isOpen={open} handleClose={changeClose} />
     </>
   );
 };

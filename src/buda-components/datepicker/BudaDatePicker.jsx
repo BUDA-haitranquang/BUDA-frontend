@@ -31,17 +31,20 @@ const BudaDatePicker = ({
   onlyDate,
   label,
   initialDate = new Date(0, 0, 0, 0, 0, 0),
+  setValue
 }) => {
   const classes = useStyles();
   const [timeValue, setTimeValue] = useState(initialDate);
-  console.log(timeValue);
+
+  useEffect(()=>{setValue(timeValue)},[timeValue]);
+  
   return (
     <>
       <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        <Typography variant="h6">{label}</Typography>
+        {label && <Typography variant="h6">{label}</Typography>}
 
         <Box className={classes.dateTimeContainer}>
-          <Box width="180px">
+          <Box width={onlyDate ? '100%':'80px'}>
             <CustomizeDatePicker
               setTimeValue={(val) => setTimeValue(val)}
               timeValue={timeValue}

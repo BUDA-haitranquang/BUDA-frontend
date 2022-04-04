@@ -23,6 +23,7 @@ const BudaTable = (props) => {
     stickyHeader = true,
     padding,
     size,
+    isNotShowCheckBox = false,
     ...remainProps
   } = props;
 
@@ -112,6 +113,7 @@ const BudaTable = (props) => {
               onRequestSort={handleRequestSort}
               rowCount={display.length}
               headCells={headCells}
+              isNotShowCheckbox = {isNotShowCheckBox}
             />
             <BudaTableBody
               order={order}
@@ -123,7 +125,9 @@ const BudaTable = (props) => {
               data={displayData}
               DetailTableBody={DetailTableBody}
               type = {type}
+              isNotShowCheckbox = {isNotShowCheckBox}
             />
+            {console.log(isNotShowCheckBox)}
             {Modal && <Modal isOpen={isOpen} handleClose={handleClose} />}
             {tableChildren}
           </Table>
