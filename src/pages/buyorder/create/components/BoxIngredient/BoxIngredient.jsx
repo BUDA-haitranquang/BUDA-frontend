@@ -7,6 +7,7 @@ import AddIngredientModal from "../../../../../components/modal/AddIngredientMod
 import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";
 import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
+import _ from "lodash";
 
 function BoxIngredient(props) {
   const [openCreateIngredient, setOpenCreateIngredient] = useState(false);
@@ -14,7 +15,7 @@ function BoxIngredient(props) {
   const [ingredients, setIngredients] = useState([]);
   const { data } = useQuery(LOAD_INGREDIENTS);
 
-  const { setBuyOrderRequest } = useContext(CreateBuyOrderContext)
+  const { setBuyOrderRequest } = useContext(CreateBuyOrderContext);
 
   const classes = useStyles();
 
@@ -61,7 +62,9 @@ function BoxIngredient(props) {
                 width: 64,
               }}
               alt={option.name ? option.name : ""}
-              src={option.picture && option.picture.link ? option.picture.link : ""}
+              src={
+                option.picture && option.picture.link ? option.picture.link : ""
+              }
             />
             <Box
               display="flex"
@@ -89,25 +92,44 @@ function BoxIngredient(props) {
       ...prevBuyOrderRequest,
       buyOrderItemDTOs: buyOrderItems,
     }));
-  }, [buyOrderItems])
+  }, [buyOrderItems]);
 
   const onChooseIngredient = async (ingredient) => {
     const index = buyOrderItems.findIndex(
       (item) => item.ingredient.ingredientID === ingredient.ingredientID
     );
     if (index < 0) {
-      setBuyOrderItems([
-        ...buyOrderItems,
-        {
-          ingredient: ingredient,
-          quantity: 1,
-          pricePerUnit: ingredient.price,
-        },
-      ]);
+      // setBuyOrderItems([
+      //   ...buyOrderItems,
+      //   {
+      //     ingredient: ingredient,
+      //     quantity: 1,
+      //     pricePerUnit: ingredient.price,
+      //   },
+      // ]);
+
+      const newItem = {
+        ingredient: ingredient,
+        quantity: 1,
+        pricePerUnit: ingredient.price,
+      };
+
+      /// Cach 1
+      // const newState = [...buyOrderItems];
+      // newState.push(newItem);
+      // setBuyOrderItems(newState);
+
+      /// Cach 2
+      setBuyOrderItems((prevState) => {
+        prevState.push(newItem);
+        return prevState;
+      });
     } else {
       setBuyOrderItems(
         buyOrderItems.map((buyOrderItem) => {
-          if (buyOrderItem.ingredient.ingredientID === ingredient.ingredientID) {
+          if (
+            buyOrderItem.ingredient.ingredientID === ingredient.ingredientID
+          ) {
             buyOrderItem.quantity += 1;
           }
           return buyOrderItem;
@@ -117,13 +139,17 @@ function BoxIngredient(props) {
   };
 
   const handleRemoveIngredient = (item) => {
-    const newBuyOrderItems = [...buyOrderItems];
-    const index = newBuyOrderItems.findIndex((buyOrderItem) => buyOrderItem.ingredient.ingredientID === item.ingredient.ingredientID);
-    if(index > -1) {
-      newBuyOrderItems.splice(index, 1);
+    const index = buyOrderItems.findIndex(
+      (buyOrderItem) =>
+        buyOrderItem.ingredient.ingredientID === item.ingredient.ingredientID
+    );
+    if (index < 0) {
+      return;
     }
+    const newBuyOrderItems = [...buyOrderItems];
+    newBuyOrderItems.splice(index, 1);
     setBuyOrderItems(newBuyOrderItems);
-  }
+  };
 
   return (
     <Paper className={classes.root}>
@@ -142,7 +168,10 @@ function BoxIngredient(props) {
           />
         </Box>
 
-        <TableBuyOrderItem buyOrderItems={buyOrderItems} onRemoveIngredient={handleRemoveIngredient} />
+        <TableBuyOrderItem
+          buyOrderItems={buyOrderItems}
+          onRemoveIngredient={handleRemoveIngredient}
+        />
 
         <AddIngredientModal
           isOpen={openCreateIngredient}

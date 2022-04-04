@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import {
-  Table, TableBody,
+  Table,
+  TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
 } from "@mui/material";
 import useStyles from "./TableBuyOrderItems.styles";
 import BuyOrderItem from "./BuyOrderItem/BuyOrderItem";
@@ -20,12 +21,11 @@ function TableBuyOrderItem(props) {
 
   const classes = useStyles();
 
+  useEffect(() => {}, []);
+
   return (
     <TableContainer className={classes.root}>
-      <Table
-        aria-label="simple table"
-        style={{ borderCollapse: "inherit" }}
-      >
+      <Table aria-label="simple table" style={{ borderCollapse: "inherit" }}>
         <TableHead>
           <TableRow sx={{ backgroundColor: "#f0f2f5" }}>
             <TableCell align="center" style={{ width: "55px" }}>
@@ -34,12 +34,10 @@ function TableBuyOrderItem(props) {
             <TableCell align="center" style={{ width: "60px" }}>
               Image
             </TableCell>
-            <TableCell align="left" style={{ width: "200px"}}>
+            <TableCell align="left" style={{ width: "200px" }}>
               SKU
             </TableCell>
-            <TableCell align="left">
-              Name
-            </TableCell>
+            <TableCell align="left">Name</TableCell>
             <TableCell align="center" style={{ width: "105px" }}>
               Quantity
             </TableCell>
@@ -49,8 +47,7 @@ function TableBuyOrderItem(props) {
             <TableCell align="right" style={{ width: "115px" }}>
               Amount
             </TableCell>
-            <TableCell align="right" style={{ width: "95px" }}>
-            </TableCell>
+            <TableCell align="right" style={{ width: "95px" }}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody className="TableBuyOrderItem-Body">
