@@ -21,18 +21,19 @@ const useStyle = makeStyles((theme) => ({
       color: `${color1}`,
       fontSize: 24,
     },
-    "& .tabs": {
-      borderRight: "2px solid gray",
-      "& .tab": {
-        border: "2px solid grey",
-        borderRadius: "15px 15px 0 0",
-        width: "125px",
-        justifyContent: "center",
-        "& .MuiButton-root": {
-            width: "100%"
-        }
-      },
-    },
+    // "& .tabs": {
+    //   borderRight: "2px solid gray",
+    //   "& .tab": {
+    //     border: "2px solid grey",
+    //     borderRadius: "15px 15px 0 0",
+    //     width: "125px",
+    //     justifyContent: "center",
+    //     "& .MuiButton-root": {
+    //         width: "100%"
+    //     }
+    //   },
+    // },
+    justifyContent: "flex-end",
     "& .navigation": {
       justifyContent: "space-evenly",
     },
@@ -43,7 +44,7 @@ export default function Navbar() {
   const classes = useStyle();
   return (
     <Grid container className={classes.root}>
-      <Grid container xs={10} className="tabs">
+      {/* <Grid container xs={10} className="tabs">
         <Box className="tab" component="span">
           <Button>
             <Typography>Order 1</Typography>
@@ -60,7 +61,7 @@ export default function Navbar() {
           </Button>
         </Box>
         <AddBoxIcon sx={{marginLeft: "20px", fontSize: 40 }}/>
-      </Grid>
+      </Grid> */}
       <Grid container xs={2} className="navigation">
         <HomeIcon sx={{ fontSize: 40 }}></HomeIcon>
         <AccountMenu />
