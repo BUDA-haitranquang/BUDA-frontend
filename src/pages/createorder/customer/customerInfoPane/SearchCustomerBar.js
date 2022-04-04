@@ -1,8 +1,12 @@
+import { useQuery } from '@apollo/client';
 import SearchIcon from '@mui/icons-material/Search';
-import { FormControl, IconButton, InputAdornment, OutlinedInput, Typography } from "@mui/material";
+import { Autocomplete, FormControl, Grid, IconButton, InputAdornment, OutlinedInput, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { LOAD_CUSTOMERS } from '../../../../graphQl/customers/customersQueries';
+import { addCustomer } from '../../../../redux/productCartSlice';
 
 const useStyle = makeStyles(() => ({
   root: {
@@ -17,27 +21,62 @@ const useStyle = makeStyles(() => ({
 
 export default function SearchCustomerBar() {
   const classes = useStyle();
+  const dispatch = useDispatch();
+
   const [value, setValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [customers, setCustomers] = useState([]);
+  const {data} = useQuery(LOAD_CUSTOMERS);
   const handleSearch = () => {};
+
+  useEffect(() => {
+    async function fetchData() {
+      if (data) setCustomers(data.customersByUser);
+    }
+
+    fetchData();
+  }, [data]);
+
+  const handleAddCustomer = (value) => {
+    if(value){
+      dispatch(addCustomer(value));
+      setValue("");
+    }
+  }
+  
   return (
     <Box className={classes.root}>
-      <FormControl variant="outlined" fullWidth>
-        <OutlinedInput
-          placeholder="Search Customer"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton type="submit" onClick={(e) => handleSearch(value)}>
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          }
-          onKeyPress={(e) => {
-            if (e.key === "Enter") handleSearch(value);
-          }}
-        />
-      </FormControl>
+      <Autocomplete
+        id="customer-select"
+        value={value}
+        onChange={(event, value) => handleAddCustomer(value)}
+        options={customers}
+        sx={{ width: "68%" }}
+        autoHighlight
+        getOptionLabel={(option) => option.name || ""}
+        inputValue={searchValue}
+        onInputChange={(event, newInputValue, reason) => {
+          if(reason === "reset") setSearchValue("");
+          else setSearchValue(newInputValue);
+        }}
+        renderOption={(props, option) => (
+          <Box {...props}>
+            <Grid container>
+              <Grid item xs={8}>
+                {option.name}
+              </Grid>
+            </Grid>
+          </Box>
+        )}
+        renderInput={(params) => {
+          return (
+            <TextField
+              {...params}
+              label="Search Customer"
+            ></TextField>
+          );
+        }}
+      />
     </Box>
   );
 }

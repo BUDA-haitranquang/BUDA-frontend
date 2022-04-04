@@ -45,7 +45,7 @@ const useStyle = makeStyles(() => ({
 export default function CreateOrder() {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const { productCart, totalPrice, discount } = useSelector(
+  const { productCart, totalPrice, discount, customer } = useSelector(
     (state) => state.productCart
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);
@@ -54,7 +54,6 @@ export default function CreateOrder() {
   // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
   // #tatcataiTranQuangHai
   const createNewOrder = async () => {
-
     // Cái _ là lodash nhé (nôm na thì lodash là một thư viện chứa các utilities khá là mạnh)
     // Tại sao phải dùng clone ở đây ?
     // Từ từ nhé, đọc chậm thôi này:
@@ -84,8 +83,8 @@ export default function CreateOrder() {
       const response = await newSellOrder({
         variables: {
           sellOrderItemDTOs: sellOrderInfoMapped,
-          status: "FINISHED"
-          // discountID: 3
+          status: "FINISHED",
+          phoneNumber: customer.phoneNumber,
         },
         refetchQueries: [{ query: LOAD_PRODUCTS }],
       });

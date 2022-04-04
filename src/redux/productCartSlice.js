@@ -7,6 +7,7 @@ const productCartSlice = createSlice({
     productCart: [],
     totalPrice: 0,
     discount: 0,
+    customer: {},
   },
   reducers: {
     setProductCart: (state, action) => {
@@ -50,7 +51,9 @@ const productCartSlice = createSlice({
       ),
       //   productCart: state.productCart.filter((val, i) => i !== action.payload),
     }),
-
+    addCustomer: (state, action) => {
+      state.customer = action.payload;
+    },
     fetchData: (state, action) => {
       state.productCart = productData;
     },
@@ -66,6 +69,7 @@ export const {
   calculateTotalDiscount,
   deleteProductCart,
   fetchData,
+  addCustomer,
 } = productCartSlice.actions;
 
 export default productCartSlice.reducer;
