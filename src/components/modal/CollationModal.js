@@ -8,7 +8,7 @@ import BudaModal from "../../buda-components/modal/BudaModal";
 const CollationModal = ({ isOpen, handleClose,title }) => {
   const [comment, setComment] = useState("");
   const today = new Date();
-  const [amount,setAmount] = useState(0);
+  const [amount,setAmount] = useState();
   const resetForm = () => {};
   const isValid = () => {};
   const handleSubmit = () => {};

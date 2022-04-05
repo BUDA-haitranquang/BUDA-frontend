@@ -32,10 +32,15 @@ const CollationTableBody = (props) => {
       <TableCell align="right">{row.amountLeft}</TableCell>
       <TableCell align="right">{row.amountLeft}</TableCell>
       <TableCell align="center">
-        <Button onClick={changeOpen}> Note</Button>
+        <Button onClick={changeOpen}> Edit</Button>
       </TableCell>
 
-      <CollationModal title={row.name} isOpen={open} handleClose={changeClose} />
+      <CollationModal
+        title={row.name}
+        isOpen={open}
+        handleClose={changeClose}
+        style={{ zIndex: 9999 }}
+      />
     </>
   );
 };
