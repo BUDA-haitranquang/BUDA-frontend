@@ -20,7 +20,6 @@ const MainDashBoard = () => {
   const [data, setData] = useState([]);
   const [dayBegin, setDayBegin] = useState(new Date());
   const [dayEnd, setDayEnd] = useState(new Date());
-
   const { error: monthlyError, data: monthlyData } =
     useQuery(LOAD_REVENUE_MONTHLY);
   const { error: weeklyError, data: weeklyData } =
@@ -34,19 +33,19 @@ const MainDashBoard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if (timeSelected === 0 && daysThisMonthData) {
+      if (timeSelected === 0) {
         setData(daysThisMonthData.revenueDaysThisMonth);
         return;
       }
-      if (timeSelected === 1 && weekdaysData) {
+      if (timeSelected === 1) {
         setData(weekdaysData.revenueWeekdays);
         return;
       }
-      if (timeSelected === 2 && weeklyData) {
+      if (timeSelected === 2) {
         setData(weeklyData.revenueWeekly);
         return;
       }
-      if (timeSelected === 3 && monthlyData) {
+      if (timeSelected === 3) {
         setData(monthlyData.revenueMonthly);
         return;
       }
