@@ -24,6 +24,7 @@ const BudaTableToolbar = ({
   handleSearch,
   searchBy,
   deleteItem,
+  checkModal
 }) => {
   const [value, setValue] = useState("");
   const li = Array.from(headCells, (item) => item.label);
@@ -97,7 +98,7 @@ const BudaTableToolbar = ({
             <DeleteIcon />
           </IconButton>
         </Tooltip>
-      ) : (
+      ) : checkModal && (
         <Box display="flex" flexDirection="row">
           {/* <Tooltip title="Filter list">
             <FilterPopup list={li} />

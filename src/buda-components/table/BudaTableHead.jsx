@@ -17,6 +17,7 @@ const EnhancedTableHead = ({
   rowCount,
   onRequestSort,
   headCells,
+  isNotShowCheckbox = false
 }) => {
   const createSortHandler = (props) => (event) => {
     onRequestSort(event, props);
@@ -25,6 +26,7 @@ const EnhancedTableHead = ({
   return (
     <TableHead>
       <TableRow>
+        {!isNotShowCheckbox &&
         <TableCell padding="checkbox">
           <Checkbox
             color="primary"
@@ -32,7 +34,7 @@ const EnhancedTableHead = ({
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "select all" }}
           />
-        </TableCell>
+        </TableCell>}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}

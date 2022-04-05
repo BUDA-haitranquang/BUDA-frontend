@@ -90,11 +90,10 @@ const Product = (props) => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser);
     }
-
     fetchData();
-  }, [data]);
+  },[data])
 
-  if (error) return <Redirect to="/login" />;
+  // if(error) return <Redirect to="/login"/>;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -123,4 +122,5 @@ const Product = (props) => {
     </Box>
   );
 };
+
 export default Product;

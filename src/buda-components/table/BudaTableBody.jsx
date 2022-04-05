@@ -1,16 +1,8 @@
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/styles";
-import React from "react";
+import React, { useState } from "react";
 import { getComparator, stableSort } from "../../utils/tableUtils";
-
-const CustomWidthTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: 500,
-  },
-});
 
 const BudaTableBody = (props) => {
   const {
@@ -44,8 +36,14 @@ const BudaTableBody = (props) => {
     }
     setSelected(newSelected);
   };
-  
 
+  const CustomWidthTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))({
+    [`& .${tooltipClasses.tooltip}`]: {
+      maxWidth: 500,
+    },
+  });
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <TableBody {...remainProps}>
@@ -57,7 +55,10 @@ const BudaTableBody = (props) => {
             <TableRow
               sx={{ cursor: "pointer" }}
               hover
-              onClick={(e) => handleClick(e, row[type])}
+              onClick={(e) => {
+                if (isNotShowCheckbox) return;
+                return handleClick(e, row[type]);
+              }}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
@@ -75,7 +76,7 @@ const BudaTableBody = (props) => {
                   />
                 </TableCell>
               )}
-              <DetailTableBody row={row} labelId={labelId}/>
+              <DetailTableBody row={row} labelId={labelId} />
             </TableRow>
           </CustomWidthTooltip>
         );

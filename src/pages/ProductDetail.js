@@ -5,6 +5,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Redirect } from "react-router-dom";
+import productData from "../assets/productData";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -17,6 +18,9 @@ import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import {
   LOAD_PRODUCT,
   LOAD_PRODUCTS,
+  LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT,
+  LOAD_PRODUCT_GROUP_BY_PRODUCT,
+  LOAD_COMPONENTS_BY_PRODUCT,
 } from "../graphQl/products/productQueries";
 
 const ProductDetail = (props) => {
@@ -24,11 +28,25 @@ const ProductDetail = (props) => {
   const { window } = props;
   const { id } = useParams();
   const history = useHistory();
-  console.log(id);
 
   const [product, setProduct] = useState(null);
+  const [productCombo, setProductCombo] = useState(null);
+  const [productGroup, setProductGroup] = useState(null);
+  const [productComponent, setProductComponent] = useState(null);
 
-  const { error, loading, data, refetch } = useQuery(LOAD_PRODUCT, {
+  const productDetail = useQuery(LOAD_PRODUCT, {
+    variables: { productID: parseInt(id) },
+  });
+
+  const productComboData = useQuery(LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT, {
+    variables: { productID: parseInt(id) },
+  });
+
+  const productGroupData = useQuery(LOAD_PRODUCT_GROUP_BY_PRODUCT, {
+    variables: { productID: parseInt(id) },
+  });
+
+  const productComponentData = useQuery(LOAD_COMPONENTS_BY_PRODUCT, {
     variables: { productID: parseInt(id) },
   });
 
@@ -48,13 +66,38 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setProduct(data);
+      if (productDetail.data) setProduct(productDetail.data);
     }
 
     fetchData();
-  }, [data]);
+  }, [productDetail.data]);
 
-  if (error) return <Redirect to="/login" />;
+  useEffect(() => {
+    async function fetchComboData() {
+      if (productComboData.data) setProductCombo(productComboData.data);
+    }
+
+    fetchComboData();
+  }, [productComboData.data]);
+
+  useEffect(() => {
+    async function fetchGroupData() {
+      if (productGroupData.data) setProductGroup(productGroupData.data);
+    }
+
+    fetchGroupData();
+  }, [productGroupData.data]);
+
+  useEffect(() => {
+    async function fetchComponentData() {
+      console.log(productComponentData)
+      if (productComponentData.data) setProductComponent(productComponentData.data);
+    }
+
+    fetchComponentData();
+  }, [productComponentData.data]);
+
+  if (productDetail.error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -66,7 +109,7 @@ const ProductDetail = (props) => {
             <div></div>
           ) : (
             <CombinedDetail
-              data={product}
+              data={{product, productCombo, productGroup, productComponent}}
               Modal={EditProductModal}
               Information={ProductInformation}
               handleDelete={handleDeleteProduct}
