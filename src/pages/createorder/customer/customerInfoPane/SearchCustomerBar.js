@@ -1,5 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { Autocomplete, Button, Grid, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
@@ -30,7 +36,6 @@ export default function SearchCustomerBar() {
   const [searchValue, setSearchValue] = useState("");
   const [customers, setCustomers] = useState([]);
   const { data } = useQuery(LOAD_CUSTOMERS);
-  const handleSearch = () => {};
 
   useEffect(() => {
     async function fetchData() {
@@ -63,18 +68,22 @@ export default function SearchCustomerBar() {
         options={customers}
         sx={{ width: "60%" }}
         autoHighlight
-        getOptionLabel={(option) => option.name || ""}
+        getOptionLabel={(option) => option.name + option.phoneNumber ||""}
         inputValue={searchValue}
         onInputChange={(event, newInputValue, reason) => {
           if (reason === "reset") setSearchValue("");
           else setSearchValue(newInputValue);
         }}
         renderOption={(props, option) => (
-          <Box {...props}>
-            <Grid container>
-              <Grid item xs={8}>
-                {option.name}
-              </Grid>
+          <Box
+            {...props}
+            style={{ width: "100%", borderBottom: "1px solid #e1dede" }}
+          >
+            <Grid>
+              <Typography>{option.name}</Typography>
+              <Typography style={{ opacity: 0.6 }}>
+                {option.phoneNumber}
+              </Typography>
             </Grid>
           </Box>
         )}

@@ -19,9 +19,9 @@ export default function CustomerInfo() {
   const { customer } = useSelector((state) => state.productCart);
   return (
     <Paper className={classes.root}>
-      <Typography>Name:{customer?.name}</Typography>
-      <Typography>Phone:{customer?.phoneNumber}</Typography>
-      <Typography>Address:{customer?.address}</Typography>
+      <Typography>Name: {customer?.name}</Typography>
+      <Typography>Phone: {customer?.phoneNumber}</Typography>
+      <Typography>Address: {customer?.address}</Typography>
     </Paper>
   );
 }
