@@ -34,6 +34,7 @@ import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
+import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
 
 const AppRouter = () => {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -94,14 +95,11 @@ const AppRouter = () => {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
+          <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
           <PrivateRoute
             authed={isAuth}
-            exact path="/staff"
-            component={Staff}
-          />
-          <PrivateRoute
-            authed={isAuth}
-            exact path="/staff/:id"
+            exact
+            path="/staff/:id"
             component={StaffDetail}
           />
           <PrivateRoute
@@ -163,6 +161,12 @@ const AppRouter = () => {
             exact
             path="/buy-order/create"
             component={CreateBuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buy-order/:id"
+            component={DetailBuyOrder}
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />

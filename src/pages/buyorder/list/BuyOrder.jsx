@@ -11,6 +11,12 @@ import { LOAD_BUY_ORDERS } from "../../../graphQl/buyorders/BuyOrderQueries";
 
 const headCells = [
   {
+    id: "textID",
+    numeric: false,
+    disablePadding: false,
+    label: "Text ID",
+  },
+  {
     id: "supplierName",
     numeric: false,
     disablePadding: false,

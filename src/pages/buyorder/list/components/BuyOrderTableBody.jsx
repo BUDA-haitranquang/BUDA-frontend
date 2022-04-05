@@ -13,11 +13,18 @@ function BuyOrderTableBody(props) {
   const history = useHistory();
 
   return (
-    <Fragment onClick={() => history.push(`${row.buyOrderID}`)}>
+    <Fragment>
+      <TableCell
+        align="left"
+        style={{ textDecoration: "none", color: "blue" }}
+        onClick={() => history.push(`buy-order/${row.buyOrderID}`)}
+      >
+        {row.textID}
+      </TableCell>
       <TableCell align="left">{row.supplier.name}</TableCell>
       <TableCell align="left">{row.status}</TableCell>
       <TableCell align="right">{row.totalCost}</TableCell>
-      <TableCell align="left">{"hieutran"}</TableCell>
+      <TableCell align="left">{row.staff?.name || ""}</TableCell>
       <TableCell align="left">{row.creationTime}</TableCell>
     </Fragment>
   );
