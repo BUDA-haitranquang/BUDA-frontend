@@ -1,35 +1,35 @@
 import { gql } from "@apollo/client";
 
-export const LOAD_REVENUE_WEEKLY = gql`
+export const LOAD_TOTAL_REVENUE_DAY = gql`
   query {
-    revenueWeekly {
+    totalRevenueDay {
       timePeriod
       revenue
     }
   }
 `;
 
-export const LOAD_REVENUE_MONTHLY = gql`
+export const LOAD_TOTAL_REVENUE_WEEK = gql`
   query {
-    revenueMonthly {
+    totalRevenueWeek {
       timePeriod
       revenue
     }
   }
 `;
 
-export const LOAD_REVENUE_WEEKDAYS = gql`
+export const LOAD_TOTAL_REVENUE_MONTH = gql`
   query {
-    revenueWeekdays {
+    totalRevenueMonth {
       timePeriod
       revenue
     }
   }
 `;
 
-export const LOAD_REVENUE_DAYS_THIS_MONTH = gql`
+export const LOAD_TOTAL_REVENUE_YEAR = gql`
   query {
-    revenueDaysThisMonth {
+    totalRevenueYear {
       timePeriod
       revenue
     }

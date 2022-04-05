@@ -3,13 +3,9 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import CombinedTable from "../components/CombinedTable";
-import AddProductModal from "../components/modal/AddProductModal";
 import Sidebar from "../components/Sidebar";
 import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
-import { useMutation } from "@apollo/client";
-import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import BudaTable from "../buda-components/table/BudaTable";
 const headCells = [
   {
@@ -18,29 +14,23 @@ const headCells = [
     disablePadding: false,
     label: "Name",
   },
-  {
-    id: "sellingPrice",
-    numeric: true,
-    disablePadding: true,
-    label: "Price",
-  },
-  {
+   {
     id: "amountLeft",
     numeric: true,
     disablePadding: true,
-    label: "Left",
+    label: "Total amount",
   },
   {
-    id: "differce",
+    id: "",
     numeric: true,
     disablePadding: true,
-    label: "Diff",
+    label: "amount left",
   },
   {
-    id: "Alert",
+    id: "",
     numeric: true,
     disablePadding: true,
-    label: "Alert",
+    label: "Note",
   },
 ];
 
@@ -48,17 +38,7 @@ const Collation = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
-  const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
 
-  const handleDelete = (selected) => {
-    if (selected === []) return;
-    selected.forEach((item) => {
-      hideProduct({
-        variables: { productID: parseInt(item) },
-        refetchQueries: [{ query: LOAD_PRODUCTS }],
-      });
-    });
-  };
 
   useEffect(() => {
     async function fetchData() {
@@ -66,7 +46,7 @@ const Collation = (props) => {
     }
 
     fetchData();
-    console.log(data);
+
   }, [data]);
 
   if (error) return <Redirect to="/login" />;
@@ -85,10 +65,10 @@ const Collation = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            deleteItems={handleDelete}
+
             data={products}
             headCells={headCells}
-            Modal={AddProductModal}
+
             type="productID"
             DetailTableBody={CollationTableBody}
             isNotShowCheckBox={true}
