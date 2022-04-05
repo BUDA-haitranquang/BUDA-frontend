@@ -37,31 +37,18 @@ const headCells = [
 const Collation = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
-  const { error, loading, data} = useQuery(LOAD_PRODUCTS);
-
-  
-  const handleDelete = (selected) =>{
-      if (selected===[]) return 
-      selected.forEach(
-        (item)=>{
-          hideProduct({
-            variables:{productID: parseInt(item)},
-            refetchQueries: [{query: LOAD_PRODUCTS}]
-          })
-        }
-      )
-  }
+  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
 
   useEffect(() => {
-    async function fetchData(){
-      if(data) setProducts(data.productsByUser);
+    async function fetchData() {
+      if (data) setProducts(data.productsByUser);
     }
-    
+
     fetchData();
     console.log(data);
-  }, [data]); 
+  }, [data]);
 
-  if(error) return <Redirect to="/login"/>;
+  if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -79,10 +66,9 @@ const Collation = (props) => {
           <BudaTable
             data={products}
             headCells={headCells}
-
-            type='productID'
+            type="productID"
             DetailTableBody={CollationTableBody}
-            isNotShowCheckBox = {true}
+            isNotShowCheckBox={true}
           />
         </Box>
       </Box>
