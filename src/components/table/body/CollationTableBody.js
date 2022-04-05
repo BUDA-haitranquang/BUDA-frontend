@@ -9,7 +9,7 @@ import { CenterFocusStrong } from "@mui/icons-material";
 import CollationModal from "../../modal/CollationModal";
 const CollationTableBody = (props) => {
   const { row, labelId } = props;
-  
+  const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
 
   const changeOpen = () => {
@@ -48,11 +48,50 @@ const CollationTableBody = (props) => {
       </TableCell>
 
       <TableCell align="right">{row.amountLeft}</TableCell>
-      <TableCell align="right">{row.amountLeft }</TableCell>
+      <TableCell align="right">{row.amountLeft - value}</TableCell>
+
       <TableCell align="center">
-        <Button variant = 'outlined' onClick={changeOpen}> Note</Button>
+        <TextField
+          sx={{
+            width: 100,
+          }}
+          size="small"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </TableCell>
-      <CollationModal title = {row.name} isOpen={open} handleClose={changeClose} />
+      <TableCell align="center">
+        <Button onClick={changeOpen}> Details</Button>
+      </TableCell>
+
+      {/* <Modal
+                        open = {open}
+                        onClose={changeClose}
+                    >
+                       <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Title
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                <p>Noi dung : Khong biet ghi gi</p>
+                                <p>Noi dung 2 : Khong biet ghi gi 2</p>
+                            </Typography>
+                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
+                            <div style = {{
+                                display : 'flex',
+                                justifyContent : 'center'
+                            }}
+                            >
+                              <input type ="text" placeholder="placee holder" align="center"/>
+                              <button type='submit' width={100}>addd</button>
+                            </div>
+                           
+                        </Box>
+                    </Modal> */}
+      <CollationModal isOpen={open} handleClose={changeClose} />
     </>
   );
 };
