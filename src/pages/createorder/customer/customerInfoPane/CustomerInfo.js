@@ -1,8 +1,8 @@
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
+import { useSelector } from "react-redux";
 import { color4 } from "../../CreateOrder";
-import { useDispatch, useSelector } from "react-redux";
 
 const useStyle = makeStyles(() => ({
   root: {
@@ -17,5 +17,11 @@ const useStyle = makeStyles(() => ({
 export default function CustomerInfo() {
   const classes = useStyle();
   const { customer } = useSelector((state) => state.productCart);
-  return <Paper className={classes.root}>Name:{customer?.name}</Paper>;
+  return (
+    <Paper className={classes.root}>
+      <Typography>Name:{customer?.name}</Typography>
+      <Typography>Phone:{customer?.phoneNumber}</Typography>
+      <Typography>Address:{customer?.address}</Typography>
+    </Paper>
+  );
 }
