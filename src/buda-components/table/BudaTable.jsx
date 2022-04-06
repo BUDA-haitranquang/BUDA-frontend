@@ -127,7 +127,6 @@ const BudaTable = (props) => {
               type = {type}
               isNotShowCheckbox = {isNotShowCheckBox}
             />
-            {console.log(isNotShowCheckBox)}
             {Modal && <Modal isOpen={isOpen} handleClose={handleClose} />}
             {tableChildren}
           </Table>

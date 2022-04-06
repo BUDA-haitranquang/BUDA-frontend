@@ -30,11 +30,15 @@ import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
+import BuyOrder from "./pages/buyorder/list/BuyOrder";
+import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
+import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
 import SellOrder from "./pages/SellOrder";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
+
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -184,6 +188,24 @@ const AppRouter = () => {
             exact
             path="/create-order"
             component={CreateOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buy-order"
+            component={BuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buy-order/create"
+            component={CreateBuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buy-order/:id"
+            component={DetailBuyOrder}
           />
           <PrivateRoute
             authed={isAuth}
