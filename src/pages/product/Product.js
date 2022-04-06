@@ -3,13 +3,18 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import CombinedTable from "../../components/CombinedTable";
-import AddProductModal from "../../components/modal/AddProductModal";
-import Sidebar from "../../components/Sidebar";
-import ProductTableBody from "../../components/table/body/ProductTableBody";
-import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import AddProductModal from "../components/modal/AddProductModal";
+import Sidebar from "../components/Sidebar";
+import ProductTableBody from "../components/table/body/ProductTableBody";
+import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 import { useMutation } from "@apollo/client";
-import { HIDE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
+import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import BudaTable from "../buda-components/table/BudaTable";
+import { useSnackbar } from "notistack";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
 const headCells = [
   // {
   //   id: "ID",
@@ -49,7 +54,7 @@ const headCells = [
   },
   {
     id: "description",
-    numeric: true,
+    numeric: false,
     disablePadding: true,
     label: "Description",
   },
@@ -58,30 +63,37 @@ const headCells = [
 const Product = (props) => {
   const { window } = props;
   const [products, setProducts] = useState([]);
-  const { error, loading, data} = useQuery(LOAD_PRODUCTS);
+  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
-  
-  const handleDelete = (selected) =>{
-      if (selected===[]) return 
-      selected.forEach(
-        (item)=>{
-          hideProduct({
-            variables:{productID: parseInt(item)},
-            refetchQueries: [{query: LOAD_PRODUCTS}]
-          })
-        }
-      )
-  }
+  const { enqueueSnackbar } = useSnackbar();
+  const [isLoading, setIsLoading] = useState(false);
+  const handleDelete = (selected) => {
+    if (selected === []) return;
+    setIsLoading(true);
+    try {
+      selected.forEach((item) => {
+        hideProduct({
+          variables: { productID: parseInt(item) },
+          refetchQueries: [{ query: LOAD_PRODUCTS }],
+        });
+      });
+      enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
+    } catch (e) {
+      enqueueSnackbar("An error occured", AlertErrorProp);
+    } finally {
+      setIsLoading(false);
+
+    }
+  };
 
   useEffect(() => {
-    async function fetchData(){
-      if(data) setProducts(data.productsByUser);
+    async function fetchData() {
+      if (data) setProducts(data.productsByUser);
     }
-    
     fetchData();
-  }, [data]); 
+  },[data])
 
-  if(error) return <Redirect to="/login"/>;
+  // if(error) return <Redirect to="/login"/>;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -95,18 +107,20 @@ const Product = (props) => {
       >
         <Toolbar />
         <Box>{}</Box>
+  
         <Box>
-          <CombinedTable
+          <BudaTable
             deleteItems={handleDelete}
             data={products}
             headCells={headCells}
             Modal={AddProductModal}
-            Body={ProductTableBody}
-            type='productID'
+            type="productID"
+            DetailTableBody={ProductTableBody}
           />
         </Box>
       </Box>
     </Box>
   );
 };
+
 export default Product;

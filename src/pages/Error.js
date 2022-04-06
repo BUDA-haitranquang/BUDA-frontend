@@ -1,10 +1,11 @@
-import React from 'react'
-
+import * as React from 'react';
 const Error = () => {
+
     return (
         <div>
-            error
+          error
         </div>
     )
 }
-export default Error
+export default Error;
+

@@ -1,93 +1,119 @@
-import React, { useEffect,useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Box from "@mui/material/Box";
-import CombinedTable from "../components/CombinedTable";
+import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
-import {useQuery} from "@apollo/client";
-import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
+import Box from "@mui/material/Box";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
-import CustomerTableBody from '../components/table/body/CustomerTableBody';
+import Sidebar from "../components/Sidebar";
+import CustomerTableBody from "../components/table/body/CustomerTableBody";
+import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
+import BudaTable from "../buda-components/table/BudaTable";
+import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
+import { useSnackbar } from "notistack";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
 const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "#",
-  // },
   {
     id: "name",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Name",
   },
   {
     id: "phoneNumber",
     numeric: false,
-    disablePadding: true,
-    label: "Phone",
+    disablePadding: false,
+    label: "Phone Number",
   },
   {
     id: "address",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "Address",
-  },
-  {
-    id: "gender",
-    numeric: false,
-    disablePadding: true,
-    label: "Gender",
   },
   {
     id: "ageGroup",
     numeric: false,
-    disablePadding: true,
-    label: "Group",
+    disablePadding: false,
+    label: "Age Group",
+  },
+  {
+    id: "gender",
+    numeric: false,
+    disablePadding: false,
+    label: "Gender",
   },
   {
     id: "totalSpend",
     numeric: false,
-    disablePadding: true,
-    label: "Spend",
+    disablePadding: false,
+    label: "totalSpend",
   },
-
 ];
 
 const Customer = (props) => {
   const { window } = props;
-  const [customers,setCustomers] = useState([]);
-  const {error,loading,data} = useQuery(LOAD_CUSTOMERS);
-  useEffect(()=>{
-    async function fetchData(){
-      if(data) setCustomers(data.customersByUser)
+  const [customer, setCustomer] = useState([]);
+  const { error, loading, data } = useQuery(LOAD_CUSTOMERS);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleDelete = (selected) => {
+    if (selected === []) return;
+    setIsLoading(true);
+    try {
+      selected.forEach((item) => {
+        hideCustomer({
+          variables: { customerID: parseInt(item) },
+          refetchQueries: [{ query: LOAD_CUSTOMERS }],
+        });
+      });
+      enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
+    } catch (e) {
+      enqueueSnackbar("An error occured", AlertErrorProp);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      if (data) setCustomer(data.customersByUser);
     }
     fetchData();
-    },[data])
+    console.log(data);
+  }, [data]);
+
+  if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Customer" />
-
       <Box
-        //mt={5}
         width="100%"
         display="flex"
         flexDirection="column"
         alignItems="center"
-        justifyContent = 'center'
+        justifyContent="center"
       >
         <Toolbar />
         <Box>{}</Box>
-        <Box >
-          <CombinedTable 
-            data={customers} 
-            headCells={headCells} 
-            Modal={AddCustomerModal} 
-            Body={CustomerTableBody} 
-            type = 'customerID'/>
+        <Box>
+          <BudaTable
+            deleteItems={handleDelete}
+            data={customer}
+            headCells={headCells}
+            Modal={AddCustomerModal}
+            type="customerID"
+            DetailTableBody={CustomerTableBody}
+          />
         </Box>
       </Box>
     </Box>
   );
 };
+
 export default Customer;
