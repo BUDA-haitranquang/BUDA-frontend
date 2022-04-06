@@ -35,4 +35,3 @@ export const LOAD_TOTAL_EXPENSE_YEAR = gql`
     }
   }
 `;
-

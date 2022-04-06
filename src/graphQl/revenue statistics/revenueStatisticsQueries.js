@@ -35,4 +35,3 @@ export const LOAD_TOTAL_REVENUE_YEAR = gql`
     }
   }
 `;
-

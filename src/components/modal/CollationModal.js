@@ -5,17 +5,17 @@ import React, { useState } from "react";
 
 import BudaModal from "../../buda-components/modal/BudaModal";
 
-const CollationModal = ({ isOpen, handleClose,title }) => {
+const CollationModal = ({ isOpen, handleClose, title }) => {
   const [comment, setComment] = useState("");
   const today = new Date();
-  const [amount,setAmount] = useState();
+  const [amount, setAmount] = useState();
   const resetForm = () => {};
   const isValid = () => {};
   const handleSubmit = () => {};
 
   return (
     <BudaModal
-      title = {title}
+      title={title}
       open={isOpen}
       onClose={handleClose}
       textOk="Save"
@@ -29,23 +29,23 @@ const CollationModal = ({ isOpen, handleClose,title }) => {
             "& > :not(style)": { m: 1 },
           }}
         >
-        <TextField
-          required
-          fullWidth
-          label = 'Difference amount'
-          type="number"
-          variant = 'outlined'
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-      
+          <TextField
+            required
+            fullWidth
+            label="Difference amount"
+            type="number"
+            variant="outlined"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+
           <TextField
             // required
             fullWidth
             multiline
-            rows = {3}
+            rows={3}
             id="outlined-basic"
-            label= 'Note'
+            label="Note"
             variant="outlined"
             value={comment}
             onChange={(e) => {

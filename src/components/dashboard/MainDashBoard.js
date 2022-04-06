@@ -55,46 +55,31 @@ const MainDashBoard = () => {
   const { error: yearExpenseError, data: yearExpenseData } = useQuery(
     LOAD_TOTAL_EXPENSE_YEAR
   );
+
+  const scaleData = (data) =>
+    data.map((item) => {
+      let object = {};
+      object.revenue = item.revenue / 1000;
+      object.timePeriod = item.timePeriod;
+      return object;
+    });
+
   useEffect(() => {
     async function fetchData() {
       if (timeSelected === 0 && dayRevenueData && dayExpenseData) {
-        const scaleData = dayRevenueData.totalRevenueDay.map((item) => {
-          let object = {};
-          object.revenue = item.revenue / 1000;
-          object.timePeriod = item.timePeriod  
-          return object;
-        });
-        setRevenue(scaleData);
-        return ;
+        setRevenue(scaleData(dayRevenueData.totalRevenueDay));
+        return;
       }
       if (timeSelected === 1 && weekRevenueData && weekExpenseData) {
-        const scaleData = weekRevenueData.totalRevenueWeek.map((item) => {
-          let object = {};
-          object.revenue = item.revenue / 1000;
-          object.timePeriod = item.timePeriod  
-          return object;
-        });
-        setRevenue(scaleData);
+        setRevenue(scaleData(weekRevenueData.totalRevenueWeek));
         return;
       }
       if (timeSelected === 2 && monthRevenueData && monthExpenseData) {
-        const scaleData = monthRevenueData.totalRevenueMonth.map((item) => {
-          let object = {};
-          object.revenue = item.revenue / 1000;
-          object.timePeriod = item.timePeriod  
-          return object;
-        });
-        setRevenue(scaleData);
+        setRevenue(scaleData(monthRevenueData.totalRevenueMonth));
         return;
       }
       if (timeSelected === 3 && yearRevenueData && yearExpenseData) {
-        const scaleData = yearRevenueData.totalRevenueYear.map((item) => {
-          let object = {};
-          object.revenue = item.revenue / 1000;
-          object.timePeriod = item.timePeriod  
-          return object;
-        });
-        setRevenue(scaleData);
+        setRevenue(scaleData(yearRevenueData.totalRevenueYear));
         return;
       }
     }
@@ -111,19 +96,18 @@ const MainDashBoard = () => {
     yearExpenseData,
   ]);
 
-
   const handleChooseDate = (timeSelected, callback) => {
     setTimeSelected(timeSelected);
     // callback()
   };
 
   return (
-    <Grid container spacing={2} sx={{ width: "100%" }}>
+    <Grid container spacing={1} sx={{ width: "100%" }}>
       <Grid
         item
         flexDirection="column"
-        sm={12}
-        md={8}
+        sm={14}
+        md={9}
         sx={{
           height: "80vh",
         }}
@@ -235,7 +219,7 @@ const MainDashBoard = () => {
               <Box sx={{ display: "flex", justifyContent: "row" }}>
                 <BudaDatePicker onlyDate={true} setValue={setDayBegin} />
                 <Box
-                  px={2}
+                  px={1}
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",

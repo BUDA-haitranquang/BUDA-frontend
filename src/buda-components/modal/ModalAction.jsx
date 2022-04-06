@@ -1,7 +1,6 @@
 import { Box, Button, DialogActions } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-
 const useStyles = makeStyles(() => ({
   root: {
     paddingTop: "28px",
@@ -37,7 +36,12 @@ const ModalAction = (props) => {
       ) : (
         <Box display="flex">
           {onClose && !isNotShowCloseButton ? (
-            <Button variant="outlined" color="primary" size="small" onClick={() => onClose()}>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={() => onClose()}
+            >
               {textClose ? textClose : "Cancel"}
             </Button>
           ) : null}

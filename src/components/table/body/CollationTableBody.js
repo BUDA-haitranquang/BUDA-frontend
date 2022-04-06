@@ -1,13 +1,19 @@
 import { TableCell, TextField } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
+
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { display, flexbox } from "@mui/system";
-import { CenterFocusStrong } from "@mui/icons-material";
+
 import CollationModal from "../../modal/CollationModal";
+import {makeStyles} from '@mui/styles';
+const useStyle = makeStyles({
+  button: {
+    '&.MuiButton-root':{textTransform : 'none'}
+  }
+})
+
 const CollationTableBody = (props) => {
+  const classes = useStyle()
   const { row, labelId } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -25,14 +31,16 @@ const CollationTableBody = (props) => {
           to={{ pathname: `${row.productID}` }}
           style={{ textDecoration: "none", color: "blue" }}
         >
-          {row.name}
+          {row.productSKU}
         </Link>
       </TableCell>
 
+      <TableCell align="left" sx={{ maxWidth: "100px" }}>
+        {row.name}
+      </TableCell>
       <TableCell align="right">{row.amountLeft}</TableCell>
-      <TableCell align="right">{row.amountLeft}</TableCell>
-      <TableCell align="center">
-        <Button onClick={changeOpen}> Edit</Button>
+      <TableCell align="right">
+        <Button onClick={changeOpen} className = {classes.button} variant = 'outlined'> Edit</Button>
       </TableCell>
 
       <CollationModal
