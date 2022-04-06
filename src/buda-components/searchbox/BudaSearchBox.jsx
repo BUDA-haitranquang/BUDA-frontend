@@ -64,7 +64,7 @@ function SearchBox(props) {
           ),
           endAdornment: removeable && value && value.length > 0 && (
             <InputAdornment position="end" onClick={handleClear}>
-              <CancelIcon style={{ width: "24px", height: "24px" }} />
+              <CancelIcon style={{ width: "24px", height: "24px", cursor: "pointer" }} />
             </InputAdornment>
           ),
         }}

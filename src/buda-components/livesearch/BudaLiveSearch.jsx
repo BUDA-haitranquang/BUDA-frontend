@@ -35,6 +35,7 @@ function LiveSearch(props) {
     inputProps,
     height,
     maxHeight,
+    style,
   } = props;
 
   const classes = useStyles();
@@ -69,7 +70,7 @@ function LiveSearch(props) {
   };
 
   return (
-    <div className={classes.root} ref={refInput}>
+    <div className={classes.root} ref={refInput} style={{ ...style }}>
       <SearchBox
         query={query}
         placeholder={placeholder}
@@ -117,6 +118,7 @@ function LiveSearch(props) {
               {options.map((option, idx) => (
                 <Box
                   className="BudaLiveSearch-option"
+                  key={idx}
                   onClick={() => {
                     onChooseItem(option);
                     handleClosePopper();
