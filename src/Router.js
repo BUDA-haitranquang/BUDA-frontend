@@ -26,6 +26,7 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
+import Discount from './pages/Discount';
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
@@ -231,6 +232,7 @@ const AppRouter = () => {
             path="/cost/othercost"
             component={OtherCost}
           />
+          <PrivateRoute authed={isAuth} exact path="/discount" component={Discount} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />

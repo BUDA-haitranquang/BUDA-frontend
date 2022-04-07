@@ -46,7 +46,7 @@ mutation editProduct(
   )
   {productID}
 } 
-`
+`;
 
 export const HIDE_PRODUCT_MUTATION = gql`
   mutation hideProduct($productID: Int!) {
@@ -54,4 +54,4 @@ export const HIDE_PRODUCT_MUTATION = gql`
       productID
     }
   }
-`;
+`
