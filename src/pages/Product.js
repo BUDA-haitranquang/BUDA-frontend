@@ -1,20 +1,18 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
-import AddProductModal from "../components/modal/AddProductModal";
-import Sidebar from "../components/Sidebar";
-import ProductTableBody from "../components/table/body/ProductTableBody";
-import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
-import { useMutation } from "@apollo/client";
-import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
-import BudaTable from "../buda-components/table/BudaTable";
 import { useSnackbar } from "notistack";
+import React, { useEffect, useState } from "react";
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
+import AddProductModal from "../components/modal/AddProductModal";
+import Sidebar from "../components/Sidebar";
+import ProductTableBody from "../components/table/body/ProductTableBody";
+import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 const headCells = [
   // {
   //   id: "ID",
@@ -67,6 +65,7 @@ const Product = (props) => {
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
+
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -82,7 +81,6 @@ const Product = (props) => {
       enqueueSnackbar("An error occured", AlertErrorProp);
     } finally {
       setIsLoading(false);
-
     }
   };
 
@@ -91,7 +89,7 @@ const Product = (props) => {
       if (data) setProducts(data.productsByUser);
     }
     fetchData();
-  },[data])
+  }, [data]);
 
   // if(error) return <Redirect to="/login"/>;
 
@@ -107,7 +105,7 @@ const Product = (props) => {
       >
         <Toolbar />
         <Box>{}</Box>
-  
+
         <Box>
           <BudaTable
             deleteItems={handleDelete}
