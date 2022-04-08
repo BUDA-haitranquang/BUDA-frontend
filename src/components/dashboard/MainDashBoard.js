@@ -7,52 +7,94 @@ import BudaLineChart from "../../buda-components/charts/BudaLineChart";
 import BudaBarChart from "../../buda-components/charts/BudaBarChart";
 import { useQuery } from "@apollo/client";
 import {
-  LOAD_REVENUE_MONTHLY,
-  LOAD_REVENUE_WEEKLY,
-  LOAD_REVENUE_WEEKDAYS,
-  LOAD_REVENUE_DAYS_THIS_MONTH,
+  LOAD_TOTAL_REVENUE_DAY,
+  LOAD_TOTAL_REVENUE_MONTH,
+  LOAD_TOTAL_REVENUE_WEEK,
+  LOAD_TOTAL_REVENUE_YEAR,
 } from "../../graphQl/revenue statistics/revenueStatisticsQueries";
-const info = [{ name: "revenue", color: "#82ca9d", datakey: "revenue" }];
+import {
+  LOAD_TOTAL_EXPENSE_MONTH,
+  LOAD_TOTAL_EXPENSE_DAY,
+  LOAD_TOTAL_EXPENSE_YEAR,
+  LOAD_TOTAL_EXPENSE_WEEK,
+} from "../../graphQl/revenue statistics/expenseStatisticsQueries";
+const info = [
+  { name: "revenue", color: "#82ca9d", datakey: "revenue" },
+  { name: "expense", color: "#12ca9d", datakey: "expense" },
+];
 
 const MainDashBoard = () => {
   const [chart, setChart] = useState(0);
   const [timeSelected, setTimeSelected] = useState(0);
-  const [data, setData] = useState([]);
+  const [revenue, setRevenue] = useState([]);
   const [dayBegin, setDayBegin] = useState(new Date());
   const [dayEnd, setDayEnd] = useState(new Date());
 
-  const { error: monthlyError, data: monthlyData } =
-    useQuery(LOAD_REVENUE_MONTHLY);
-  const { error: weeklyError, data: weeklyData } =
-    useQuery(LOAD_REVENUE_WEEKLY);
-  const { error: daysThisMonthError, data: daysThisMonthData } = useQuery(
-    LOAD_REVENUE_DAYS_THIS_MONTH
+  const { error: dayRevenueError, data: dayRevenueData } = useQuery(
+    LOAD_TOTAL_REVENUE_DAY
   );
-  const { error: weekdaysError, data: weekdaysData } = useQuery(
-    LOAD_REVENUE_WEEKDAYS
+  const { error: weekRevenueError, data: weekRevenueData } = useQuery(
+    LOAD_TOTAL_REVENUE_WEEK
   );
+  const { error: monthRevenueError, data: monthRevenueData } = useQuery(
+    LOAD_TOTAL_REVENUE_MONTH
+  );
+  const { error: yearRevenueError, data: yearRevenueData } = useQuery(
+    LOAD_TOTAL_REVENUE_YEAR
+  );
+
+  const { error: dayExpenseError, data: dayExpenseData } = useQuery(
+    LOAD_TOTAL_EXPENSE_DAY
+  );
+  const { error: weekExpenseError, data: weekExpenseData } = useQuery(
+    LOAD_TOTAL_EXPENSE_WEEK
+  );
+  const { error: monthExpenseError, data: monthExpenseData } = useQuery(
+    LOAD_TOTAL_EXPENSE_MONTH
+  );
+  const { error: yearExpenseError, data: yearExpenseData } = useQuery(
+    LOAD_TOTAL_EXPENSE_YEAR
+  );
+
+  const scaleData = (data) =>
+    data.map((item) => {
+      let object = {};
+      object.revenue = item.revenue / 1000;
+      object.timePeriod = item.timePeriod;
+      return object;
+    });
 
   useEffect(() => {
     async function fetchData() {
-      if (timeSelected === 0 && daysThisMonthData) {
-        setData(daysThisMonthData.revenueDaysThisMonth);
+      if (timeSelected === 0 && dayRevenueData && dayExpenseData) {
+        setRevenue(scaleData(dayRevenueData.totalRevenueDay));
         return;
       }
-      if (timeSelected === 1 && weekdaysData) {
-        setData(weekdaysData.revenueWeekdays);
+      if (timeSelected === 1 && weekRevenueData && weekExpenseData) {
+        setRevenue(scaleData(weekRevenueData.totalRevenueWeek));
         return;
       }
-      if (timeSelected === 2 && weeklyData) {
-        setData(weeklyData.revenueWeekly);
+      if (timeSelected === 2 && monthRevenueData && monthExpenseData) {
+        setRevenue(scaleData(monthRevenueData.totalRevenueMonth));
         return;
       }
-      if (timeSelected === 3 && monthlyData) {
-        setData(monthlyData.revenueMonthly);
+      if (timeSelected === 3 && yearRevenueData && yearExpenseData) {
+        setRevenue(scaleData(yearRevenueData.totalRevenueYear));
         return;
       }
     }
     fetchData();
-  }, [timeSelected]);
+  }, [
+    timeSelected,
+    dayRevenueData,
+    weekRevenueData,
+    monthRevenueData,
+    yearRevenueData,
+    dayExpenseData,
+    weekExpenseData,
+    monthExpenseData,
+    yearExpenseData,
+  ]);
 
   const handleChooseDate = (timeSelected, callback) => {
     setTimeSelected(timeSelected);
@@ -60,17 +102,17 @@ const MainDashBoard = () => {
   };
 
   return (
-    <Grid container spacing={2} sx={{ width: "100%" }}>
+    <Grid container spacing={1} sx={{ width: "100%" }}>
       <Grid
         item
         flexDirection="column"
-        sm={12}
-        md={8}
+        sm={14}
+        md={9}
         sx={{
           height: "80vh",
         }}
       >
-        {data.length === 0 ? (
+        {revenue.length === 0 ? (
           <Box
             sx={{
               textAlign: "center",
@@ -111,9 +153,19 @@ const MainDashBoard = () => {
               </Box>
             </Box>
             {chart % 2 === 0 ? (
-              <BudaLineChart data={data} info={info} xAxis="timePeriod" />
+              <BudaLineChart
+                yUnit="k"
+                data={revenue}
+                info={info}
+                xAxis="timePeriod"
+              />
             ) : (
-              <BudaBarChart data={data} info={info} xAxis="timePeriod" />
+              <BudaBarChart
+                yUnit="k"
+                data={revenue}
+                info={info}
+                xAxis="timePeriod"
+              />
             )}
           </>
         )}
@@ -129,7 +181,7 @@ const MainDashBoard = () => {
                 sx={{ width: "100%", height: "55px" }}
                 onClick={() => handleChooseDate(0)}
               >
-                Day in this month{" "}
+                Day{" "}
               </Button>
               <Box py={2}></Box>
             </Grid>
@@ -139,7 +191,7 @@ const MainDashBoard = () => {
                 sx={{ width: "100%", height: "55px" }}
                 onClick={() => handleChooseDate(1)}
               >
-                Weekdays
+                Week
               </Button>
               <Box py={2}></Box>
             </Grid>
@@ -149,7 +201,7 @@ const MainDashBoard = () => {
                 variant={timeSelected === 2 ? "contained" : "outlined"}
                 onClick={() => handleChooseDate(2)}
               >
-                Weekly
+                Month
               </Button>
               <Box py={2}></Box>
             </Grid>
@@ -159,7 +211,7 @@ const MainDashBoard = () => {
                 variant={timeSelected === 3 ? "contained" : "outlined"}
                 onClick={() => handleChooseDate(3)}
               >
-                Monthly
+                Year
               </Button>
               <Box py={3}></Box>
             </Grid>
@@ -167,7 +219,7 @@ const MainDashBoard = () => {
               <Box sx={{ display: "flex", justifyContent: "row" }}>
                 <BudaDatePicker onlyDate={true} setValue={setDayBegin} />
                 <Box
-                  px={2}
+                  px={1}
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
