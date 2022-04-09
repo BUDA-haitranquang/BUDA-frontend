@@ -3,44 +3,52 @@ import SignUpForm from "../components/signin/SignUpForm";
 import LogInPic from "../assets/login.jpg";
 import { Grid, Box ,Hidden} from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import LoginBackground from "../assets/Background.png";
+
 
 const useStyle = makeStyles((theme) => ({
   imgWrapper: {
     width: "100%",
     height: "100%",
   },
+  background: {
+    backgroundImage: `url(${LoginBackground})`,
+    backgroundRepeat: "no-repeat",
+    width: "100%",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  },
 }));
 
 const SignUp = () => {
-   const classes = useStyle();
+   const cls = useStyle();
   return (
     <>
-      <Grid container sx ={{height:'100vh'}}spacing={0}>
-        <Grid item lg={6} xs={0}>
-          <Box style={{ width: "100%", height: "100%" }}>
-            <Hidden only={['xs','sm','md']}>
-            <img
-              alt = 'someimg'
-              className={classes.imgWrapper}
-              src={LogInPic}
-              width="100%"
-              height="100%"
-            ></img>
-            </Hidden>
+    
+      <Box
+        container
+        sx={{ height: "100vh" }}
+        spacing={0}
+        className={cls.background}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Hidden lgDown>
+          <Box width="45%">
+            <SignUpForm />
           </Box>
-        </Grid>
-        <Grid item lg={6} xs={12}>
-          <Box
-            style={{
-              backgroundColor: "#1976d2",
-              width: "100%",
-              height: "100%",
-            }}
-          >
-              <SignUpForm/>
+        </Hidden>
+        <Hidden lgUp>
+          <Box width="100%">
+            <SignUpForm />
           </Box>
-        </Grid>
-      </Grid>
+        </Hidden>
+      </Box>
     </>
   );
 };
