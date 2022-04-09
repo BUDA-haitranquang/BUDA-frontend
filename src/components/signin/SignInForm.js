@@ -139,7 +139,7 @@ const SignInForm = () => {
         dispatch(addRefreshToken(refreshToken));
       })
       .then(() => {
-        history.push("/dashboard");
+        history.push("/dashboard/buy");
         enqueueSnackbar('Login successfully',AlertSuccessProp);
       })
       .catch((error) => {

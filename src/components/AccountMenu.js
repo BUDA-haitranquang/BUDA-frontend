@@ -9,7 +9,7 @@ import { removeToken } from "../redux/tokenSlice";
 import { useHistory } from "react-router";
 
 export default function AccountMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [ anchorEl, setAnchorEl ] = React.useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const open = Boolean(anchorEl);
@@ -38,7 +38,7 @@ export default function AccountMenu() {
         onClick={handleClick}
         style={{color: "white", fontWeight: "600"}}
       >
-        <AccountCircleIcon sx={{paddingRight: "4px", fontSize: "2rem"}} />
+      <AccountCircleIcon sx={{paddingRight: "4px", fontSize: "2rem"}} />
         Username
       </Button>
       <Menu

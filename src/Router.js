@@ -35,6 +35,8 @@ import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
+import Business from "./pages/Business";
+import SellOrderBusiness from "./pages/SellOrderBusiness";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -121,13 +123,13 @@ const AppRouter = () => {
           />
           <PrivateRoute
             authed={isAuth}
-            exact path="/staff/note/:id"
+            exact path="/staff/:id"
             component={StaffDetail}
           />
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/dashboard/buy"
+            path="/dashboard/overview"
             component={Dashboard}
           />
           <PrivateRoute
@@ -170,7 +172,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/statistic/business"
+            path="/statistic/Customer"
             component={Statistic}
           />
           <PrivateRoute
@@ -208,6 +210,12 @@ const AppRouter = () => {
             exact
             path="/cost/othercost"
             component={OtherCost}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/business/Sell"
+            component={Business}
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />

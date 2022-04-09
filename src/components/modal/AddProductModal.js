@@ -2,14 +2,17 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import InputLabel from '@mui/material/InputLabel';
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
+import MenuItem from '@mui/material/MenuItem';
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
-
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -20,7 +23,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
-
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -67,7 +69,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
       alertAmount >= 0;
     return isValid;
   };
-
+  const handleChange = (e) =>{ setGroup(e.target.value)};
   const handleSubmit = () => {
     if (isFormValid()) addProduct();
     else enqueueSnackbar("Invalid input", AlertErrorProp);
@@ -158,14 +160,23 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               style={{ width: "48%" }}
             />
           </div>
-          <TextField
+          {/* <TextField
             fullWidth
             id="outlined-basic"
             label="Group"
             variant="outlined"
             value={group}
             onChange={(e) => setGroup(e.target.value)}
-          />
+          /> */}
+          <FormControl fullWidth >
+            <InputLabel >Grou[</InputLabel>
+            <Select onChange={handleChange} label="Group" value={group}>
+              <MenuItem value={1}>Group1</MenuItem>
+              <MenuItem>Group2</MenuItem>
+              <MenuItem>Group3</MenuItem>
+            </Select>
+          </FormControl>
+          
           <TextField
             fullWidth
             id="outlined-basic"

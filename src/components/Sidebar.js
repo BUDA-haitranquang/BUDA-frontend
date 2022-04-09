@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import {
   AppBar,
   Box,
@@ -65,12 +66,21 @@ const title = [
   "staff",
   "cost",
   "statistic",
+  "business"
 ];
 function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
+const titleStyle = {
+    fontWeight: "bold",
+    //fontSize: 17,
+};
+const childStyle = {
+  display: "flex",
+  justifyContent: "center",
+}
 const sidebarItems = [
-  [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
+  [createData("Overview", "overview", ""), createData("Task", "task", "")],
   [
     createData("Product", "", ""),
     createData("Collation", "collation", ""),
@@ -86,10 +96,13 @@ const sidebarItems = [
     createData("Other Cost", "othercost", ""),
   ],
   [
-    createData("Business", "business", ""),
     createData("Customer", "customer", ""),
     createData("Product", "product", ""),
   ],
+  [
+    createData("Buy", "buy", ""),
+    createData("Sell", "sell", "")
+  ]
 ];
 const Sidebar = ({ window, name }) => {
   const history = useHistory();
@@ -126,6 +139,8 @@ const Sidebar = ({ window, name }) => {
         return <MonetizationOnIcon />;
       case 7:
         return <BarChartIcon />;
+      case 8:
+        return <AddBusinessIcon/>;
       default:
         break;
     }
@@ -155,7 +170,10 @@ const Sidebar = ({ window, name }) => {
               }}
             >
               <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-              <ListItemText primary={capitalizeFirstLetter(item)} />
+              <ListItemText 
+              primaryTypographyProps={{style: titleStyle}}
+              primary={capitalizeFirstLetter(item)} 
+              />
               {sidebarItems[idx].length - 1 ? (
                 focus === item ? (
                   <ExpandLessIcon />
@@ -172,7 +190,10 @@ const Sidebar = ({ window, name }) => {
                   return (
                     <Link to={`/${item}/${component.link}`}>
                       <ListItem button>
-                        <ListItemText primary={component.name} />
+                        <ListItemText 
+                          primaryTypographyProps={{style: childStyle}}
+                          primary={component.name}
+                         />
                       </ListItem>
                     </Link>
                   );

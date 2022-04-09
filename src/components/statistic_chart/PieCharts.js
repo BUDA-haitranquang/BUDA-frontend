@@ -35,6 +35,8 @@ const PChart = ({data,colors,title})=> {
             outerRadius='70%'
             fill="#8884d8"
             dataKey="value"
+            //isAnimationActive
+            animationBegin="400"
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
