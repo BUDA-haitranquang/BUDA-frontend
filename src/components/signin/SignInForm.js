@@ -7,6 +7,8 @@ import {
   InputAdornment,
   Typography,
   Link,
+  Modal,
+  CircularProgress,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
@@ -115,7 +117,25 @@ const SignInForm = () => {
     };
   }, []);
 
-  if (loading) return "Signing in...";
+  if (loading)
+    return (
+      <Modal open={true}>
+        <Box
+          width="100%"
+          height="100%"
+          style={{ background: "transparent" }}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography variant="h2" style={{ color: "white" }}>
+            Signing in ...
+          </Typography>
+          <CircularProgress />
+        </Box>
+      </Modal>
+    );
   //if (error) return `Sign in error! ${error.message}`;
 
   const login = () => {

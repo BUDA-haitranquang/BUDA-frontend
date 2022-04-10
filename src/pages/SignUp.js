@@ -1,10 +1,9 @@
 import React from "react";
 import SignUpForm from "../components/signin/SignUpForm";
 import LogInPic from "../assets/login.jpg";
-import { Grid, Box ,Hidden} from "@mui/material";
+import { Grid, Box, Hidden } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import LoginBackground from "../assets/Background.png";
-
 
 const useStyle = makeStyles((theme) => ({
   imgWrapper: {
@@ -22,10 +21,9 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
-   const cls = useStyle();
+  const cls = useStyle();
   return (
     <>
-    
       <Box
         container
         sx={{ height: "100vh" }}
