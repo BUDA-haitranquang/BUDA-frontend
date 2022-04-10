@@ -47,7 +47,7 @@ const CollationTableBody = (props) => {
         title={row.name}
         isOpen={open}
         handleClose={changeClose}
-        style={{ zIndex: 9999 }}
+        productID = {row.productID}
       />
     </>
   );

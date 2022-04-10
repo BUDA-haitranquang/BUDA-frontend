@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import CollationTableBody from "../components/table/body/CollationTableBody";
-import { LOAD_COLATIONS } from "../graphQl/collation/collation";
+import { LOAD_COLATIONS } from "../graphQl/collation/collationQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 const headCells = [
   {
