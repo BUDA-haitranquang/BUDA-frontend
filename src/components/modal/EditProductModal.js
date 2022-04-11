@@ -16,7 +16,7 @@ import {
 const EditProductModal = ({ data, isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const product = data.product;
+  const product = data.product.product;
   console.log(product);
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.sellingPrice);
