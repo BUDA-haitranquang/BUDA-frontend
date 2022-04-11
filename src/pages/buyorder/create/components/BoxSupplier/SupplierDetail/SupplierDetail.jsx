@@ -14,7 +14,7 @@ function SupplierDetail(props) {
 
   return supplier ? (
     <Grid container spacing={2}>
-      <Grid className={classes.root} item xs={12} md={3}>
+      <Grid className={classes.root} item xs={12} md={4}>
         <Box className="SupplierDetail-info">
           <Typography className="SupplierDetail-info-field">Address</Typography>
           <Typography>{supplier.address || ""}</Typography>
@@ -26,7 +26,6 @@ function SupplierDetail(props) {
         </Box>
       </Grid>
     </Grid>
-
   ) : (
     <></>
   );
