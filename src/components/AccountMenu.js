@@ -50,10 +50,8 @@ export default function AccountMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem onClick={handleClose}>Tien dep trai</MenuItem>
       </Menu>
     </div>
   );
