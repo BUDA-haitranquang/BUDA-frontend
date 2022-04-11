@@ -11,6 +11,7 @@ export const EDIT_PRODUCT_QUANTITY = gql`
       quantityLog: { amountLeftChange: $amountLeftChange, message: $message }
     ) {
       productID
+      amountLeft
     }
   }
 `;

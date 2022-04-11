@@ -48,6 +48,7 @@ const CollationTableBody = (props) => {
         isOpen={open}
         handleClose={changeClose}
         productID = {row.productID}
+        data = {row}
       />
     </>
   );

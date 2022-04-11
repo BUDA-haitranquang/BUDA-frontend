@@ -10,7 +10,7 @@ import {
   AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import { EDIT_PRODUCT_QUANTITY } from "../../graphQl/collation/collationMutations";
-const CollationModal = ({ isOpen, handleClose, title, productID }) => {
+const CollationModal = ({ isOpen, handleClose, title, productID,data }) => {
   const [comment, setComment] = useState("");
   const {enqueueSnackbar} = useSnackbar();
   const [amount, setAmount] = useState(null);
@@ -30,7 +30,12 @@ const CollationModal = ({ isOpen, handleClose, title, productID }) => {
         amountLeftChange: parseInt(amount),
         message: comment
       },
-      refretchQueries: [{ LOAD_COLATIONS }],
+      refretchQueries: [{
+        query: LOAD_COLATIONS,
+        variables: {
+          productID: data.productID,
+        },
+      },{query: LOAD_COLATIONS}],
     }).then(res => {
       handleClose();
       enqueueSnackbar("Add successfully",AlertSuccessProp);
