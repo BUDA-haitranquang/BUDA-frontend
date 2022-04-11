@@ -87,11 +87,13 @@ export default function CreateOrder() {
         },
         refetchQueries: [{ query: LOAD_PRODUCTS }],
       })
-      await window.location.reload();
     } catch (e) {
       console.table(e);
       // alert(e.graphQLErrors[0].extensions.response.body);
       alert(e.message);
+      // setTimeout(1000);
+    } finally {
+      window.location.reload();
     }
 
     dispatch(clearProductCart());
