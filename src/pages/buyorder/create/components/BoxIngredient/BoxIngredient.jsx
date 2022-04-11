@@ -99,31 +99,14 @@ function BoxIngredient(props) {
       (item) => item.ingredient.ingredientID === ingredient.ingredientID
     );
     if (index < 0) {
-      // setBuyOrderItems([
-      //   ...buyOrderItems,
-      //   {
-      //     ingredient: ingredient,
-      //     quantity: 1,
-      //     pricePerUnit: ingredient.price,
-      //   },
-      // ]);
-
       const newItem = {
         ingredient: ingredient,
         quantity: 1,
         pricePerUnit: ingredient.price,
       };
-
-      /// Cach 1
-      // const newState = [...buyOrderItems];
-      // newState.push(newItem);
-      // setBuyOrderItems(newState);
-
-      /// Cach 2
-      setBuyOrderItems((prevState) => {
-        prevState.push(newItem);
-        return prevState;
-      });
+      const newState = [...buyOrderItems];
+      newState.push(newItem);
+      setBuyOrderItems(newState);
     } else {
       setBuyOrderItems(
         buyOrderItems.map((buyOrderItem) => {
