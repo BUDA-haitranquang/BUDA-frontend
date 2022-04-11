@@ -27,14 +27,14 @@ export default function CostGrid() {
       justifyContent="space-evenly"
       sx={{ marginTop: "10px" }}
     >
-      <UneditableMoneyBox xs={4} title="Total" value={totalPrice} />
+      <UneditableMoneyBox xs={4} title="Total" value={totalPrice.toLocaleString()} />
       <EditableMoneyBox
         xs={4}
         title="Discount"
-        value={discount}
+        value={discount.toLocaleString()}
         onChange={changeDiscountPrice}
       />
-      <UneditableMoneyBox xs={4} title="Final" value={totalPrice - discount} />
+      <UneditableMoneyBox xs={4} title="Final" value={(totalPrice - discount).toLocaleString()} />
     </Grid>
   );
 }

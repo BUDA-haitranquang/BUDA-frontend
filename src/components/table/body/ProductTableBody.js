@@ -15,10 +15,10 @@ const ProductTableBody = (props) => {
         </Link>
       </TableCell>
 
-      <TableCell align="right">{row.sellingPrice}</TableCell>
-      <TableCell align="right">{row.amountLeft}</TableCell>
-      <TableCell align="right">{row.alertAmount}</TableCell>
-      <TableCell align="right">{row.costPerUnit}</TableCell>
+      <TableCell align="right">{row.sellingPrice.toLocaleString()}</TableCell>
+      <TableCell align="right">{row.amountLeft.toLocaleString()}</TableCell>
+      <TableCell align="right">{row.alertAmount.toLocaleString()}</TableCell>
+      <TableCell align="right">{row.costPerUnit.toLocaleString()}</TableCell>
       <TableCell align="left">{row.description}</TableCell>
     </>
   );

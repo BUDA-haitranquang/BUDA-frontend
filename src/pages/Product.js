@@ -67,6 +67,7 @@ const Product = (props) => {
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
+  
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);

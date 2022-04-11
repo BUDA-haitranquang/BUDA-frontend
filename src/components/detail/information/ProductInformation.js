@@ -45,7 +45,7 @@ export default function ProductInformation({ data }) {
           <Typography variant="subtitle3" style={{ fontStyle: "italic" }}>
             {description}
           </Typography>
-          <Typography variant="h4">{sellingPrice} $</Typography>
+          <Typography variant="h4">{sellingPrice.toLocaleString()} VND</Typography>
           <Divider />
           <Box
             style={{
@@ -55,13 +55,13 @@ export default function ProductInformation({ data }) {
             }}
           >
             <Typography variant="subtitle3" style={{}}>
-              Cost: {costPerUnit}
+              Cost: {costPerUnit.toLocaleString()}
             </Typography>
             <Typography variant="subtitle3" style={{}}>
-              Amount Left: {amountLeft}
+              Amount Left: {amountLeft.toLocaleString()}
             </Typography>
             <Typography variant="subtitle3" style={{}}>
-              Alert Amount: {alertAmount}
+              Alert Amount: {alertAmount.toLocaleString()}
             </Typography>
           </Box>
         </Box>
