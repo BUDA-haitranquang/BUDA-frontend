@@ -1,12 +1,11 @@
-import React from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Box } from "@mui/system";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { removeToken } from "../redux/tokenSlice";
 import { useHistory } from "react-router";
+import { removeToken } from "../redux/tokenSlice";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,7 +24,7 @@ export default function AccountMenu() {
   const handleLogout = () => {
     dispatch(removeToken());
     history.push("/login");
-  }
+  };
 
   return (
     <div>
@@ -36,9 +35,9 @@ export default function AccountMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        style={{color: "white", fontWeight: "600"}}
+        style={{ color: "white", fontWeight: "600" }}
       >
-        <AccountCircleIcon sx={{paddingRight: "4px", fontSize: "2rem"}} />
+        <AccountCircleIcon sx={{ paddingRight: "4px", fontSize: "2rem" }} />
         Username
       </Button>
       <Menu
