@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import LiveSearch from "../../../../buda-components/livesearch/BudaLiveSearch";
 import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
 import {
-  calculateTotalDiscount,
-  calculateTotalPrice
+  addDiscount,
+  calculateTotalPrice,
 } from "../../../../redux/productCartSlice";
 import UneditableMoneyBox from "../../common/moneybox/UneditableMoneyBox";
 
@@ -16,6 +16,7 @@ export default function CostGrid() {
   const { totalPrice } = useSelector((state) => state.productCart);
   const [chosenDiscount, setChosenDiscount] = useState(null);
   const [discounts, setDiscounts] = useState([]);
+  const [calculatedDiscountValue, setCalculatedDiscountValue] = useState(0);
   // const [discountValue, setDiscountValue] = useState(0);
 
   const { error, loading, data } = useQuery(LOAD_DISCOUNTS);
@@ -26,6 +27,29 @@ export default function CostGrid() {
     }
     fetchData();
   }, [data]);
+
+  useEffect(() => {
+    if (chosenDiscount) {
+      switch (chosenDiscount.discountType) {
+        case "CASH_ONLY":
+          setCalculatedDiscountValue(chosenDiscount.cash);
+          break;
+
+        case "PERCENTAGE_ONLY":
+          let cashLimit = chosenDiscount.cashLimit
+            ? chosenDiscount.cashLimit
+            : 999999999;
+          let discountByPercent = chosenDiscount.percentage * totalPrice * 0.01;
+          setCalculatedDiscountValue(
+            discountByPercent < cashLimit ? discountByPercent : cashLimit
+          );
+          break;
+
+        default:
+          break;
+      }
+    }
+  }, [chosenDiscount, totalPrice]);
 
   dispatch(calculateTotalPrice());
 
@@ -38,8 +62,10 @@ export default function CostGrid() {
 
   const onChooseDiscount = (option) => {
     setChosenDiscount(option);
-    console.table(option);
+    dispatch(addDiscount(option));
   };
+
+  // useEffect(() => {}, [chosenDiscount]);
 
   const filterDiscount = (filter) => {
     return discounts.filter((discount) => {
@@ -75,17 +101,18 @@ export default function CostGrid() {
               <Typography>Cash: {option?.cash}</Typography>
             )}
             {option.discountType === "PERCENTAGE_ONLY" && (
-              <Typography>Percentage: {option?.percentage} %</Typography>
-            )}
-            {option.discountType === "BOTH" && (
               <Box
                 width="100%"
                 display="flex"
                 flexDirection="row"
                 justifyContent="space-between"
               >
-                <Typography>Cash: {option?.cash}</Typography>
                 <Typography>Percentage: {option?.percentage} %</Typography>
+                {option.cashLimit ? (
+                  <Typography>Cash Limit: {option.cashLimit}</Typography>
+                ) : (
+                  <></>
+                )}
               </Box>
             )}
           </Box>
@@ -108,7 +135,7 @@ export default function CostGrid() {
           xs={4}
           title="Discount"
           // value={discountValue}
-          value={chosenDiscount?.cash}
+          value={calculatedDiscountValue}
           // onChange={changeDiscountPrice}
         />
         <LiveSearch
@@ -127,7 +154,7 @@ export default function CostGrid() {
         xs={4}
         title="Final"
         // value={totalPrice - discountValue}
-        value={totalPrice - (chosenDiscount?.cash || 0)}
+        value={totalPrice - (calculatedDiscountValue || 0)}
       />
     </Grid>
   );

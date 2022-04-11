@@ -6,8 +6,9 @@ const productCartSlice = createSlice({
   initialState: {
     productCart: [],
     totalPrice: 0,
-    discount: 0,
+    discount: {},
     customer: {},
+    finalAmount: 0,
   },
   reducers: {
     setProductCart: (state, action) => {
@@ -22,11 +23,16 @@ const productCartSlice = createSlice({
       data.forEach(calculateSum);
       state.totalPrice = total;
     },
-    calculateTotalDiscount: (state, action) => {
+    addDiscount: (state, action) => {
       state.discount = action.payload;
+    },
+    calculateFinalAmount: (state, action) => {
+      state.finalAmount = action.payload;
     },
     clearProductCart: (state, action) => {
       state.productCart = [];
+      state.customer = null;
+      state.discount = null;
     },
     addProductCart: (state, action) => {
       const duplicateIndex = state.productCart.findIndex(
@@ -63,9 +69,11 @@ const productCartSlice = createSlice({
 export const {
   setProductCart,
   clearProductCart,
+  addDiscount,
   addProductCart,
   changeProductCartItem,
   calculateTotalPrice,
+  calculateFinalAmount,
   calculateTotalDiscount,
   deleteProductCart,
   fetchData,
