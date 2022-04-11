@@ -14,6 +14,9 @@ const productCartSlice = createSlice({
     setProductCart: (state, action) => {
       state.productCart = action.payload;
     },
+    setCustomer: (state, action) => {
+      state.customer = action.payload;
+    },
     calculateTotalPrice: (state, action) => {
       const data = state.productCart;
       let total = 0;
@@ -68,6 +71,7 @@ const productCartSlice = createSlice({
 
 export const {
   setProductCart,
+  setCustomer,
   clearProductCart,
   addDiscount,
   addProductCart,

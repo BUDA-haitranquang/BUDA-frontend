@@ -1,7 +1,17 @@
-import { Paper, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCustomer } from "../../../../redux/productCartSlice";
 import { color4 } from "../../CreateOrder";
 
 const useStyle = makeStyles(() => ({
@@ -11,17 +21,69 @@ const useStyle = makeStyles(() => ({
     padding: "8px",
     overflow: "hidden",
     height: "40vh",
+    "& .MuiTableCell-root": {
+      padding: "4px",
+    }
   },
 }));
 
 export default function CustomerInfo() {
   const classes = useStyle();
+  const dispatch = useDispatch();
   const { customer } = useSelector((state) => state.productCart);
   return (
-    <Paper className={classes.root}>
-      <Typography>Name: {customer?.name}</Typography>
-      <Typography>Phone: {customer?.phoneNumber}</Typography>
-      <Typography>Address: {customer?.address}</Typography>
-    </Paper>
+    customer && (
+      <Paper className={classes.root}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell>Name:</TableCell>
+              <TableCell align="right">
+                <i>{customer?.name}</i>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Phone:</TableCell>
+              <TableCell align="right">
+                <i>{customer?.phonenumber}</i>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Total Spend:</TableCell>
+              <TableCell align="right">
+                <i>{customer?.totalSpend.toLocaleString()}</i>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Gender:</TableCell>
+              <TableCell align="right">
+                <i>{customer?.gender}</i>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Age Group:</TableCell>
+              <TableCell align="right">
+                <i>{customer?.ageGroup}</i>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Address:</TableCell>
+              <TableCell align="right">
+                <i>{customer?.address}</i>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <Button
+          variant="contained"
+          color="error"
+          endIcon={<DeleteIcon />}
+          sx={{ marginTop: "24px" }}
+          onClick={() => dispatch(setCustomer(null))}
+        >
+          Remove
+        </Button>
+      </Paper>
+    )
   );
 }
