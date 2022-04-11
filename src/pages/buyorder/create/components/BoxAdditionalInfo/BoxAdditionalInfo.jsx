@@ -12,19 +12,17 @@ function BoxAdditionalInfo(props) {
   return (
     <Paper className={classes.root}>
       <Box className="BoxAdditionalInfo-header">
-        <Typography variant="h6">
-          Additional Information
-        </Typography>
+        <Typography variant="h6">Additional Information</Typography>
       </Box>
 
       <Box className="BoxAdditionalInfo-main">
         <BudaTextField
-          label="Code:"
+          label="Text ID:"
           value={buyOrderCode}
           onChange={setBuyOrderCode}
           textFieldHeight={40}
           otherProps={{
-            mb: 2
+            mb: 2,
           }}
         />
         <BudaTextField
@@ -33,7 +31,7 @@ function BoxAdditionalInfo(props) {
           onChange={setNote}
           textFieldHeight={40}
           otherProps={{
-            mb: 2
+            mb: 2,
           }}
         />
       </Box>

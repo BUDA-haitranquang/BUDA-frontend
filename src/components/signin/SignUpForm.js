@@ -1,54 +1,39 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Button,
   OutlinedInput,
   InputAdornment,
+  Typography,
+  Link,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import {useHistory} from 'react-router';
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useHistory } from "react-router";
 import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../redux/tokenSlice";
-import {useSnackbar} from 'notistack';
+import { useSnackbar } from "notistack";
 import {
   AlertErrorProp,
   AlertSuccessProp,
-} from '../../buda-components/alert/BudaNoti'; 
-import {
-  REGISTER_USER
-} from "../../graphQl/authentication/authMutations";
+} from "../../buda-components/alert/BudaNoti";
+import { REGISTER_USER } from "../../graphQl/authentication/authMutations";
 const useStyle = makeStyles({
-  outlinedInputName: {
-    "&.MuiOutlinedInput-root": {
-      backgroundColor: "#fff",
-      borderRadius: "10px",
-      width: "35%",
-      height:'40px',
+  label: {
+    "&.MuiInputLabel-root": {
+      "&.Mui-focused": { color: "black" },
     },
-    'label + &': {
-      marginTop: '15px',
-    },
-    "& input":{
-      padding:'15px',
-      height:'10px'
-    }
   },
-  label:{
-    '&.MuiInputLabel-root':{
-    '&.Mui-focused':{color:'black'},
-    }
-  }  ,
-  nameWrapper:{
-    width:'100%',
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'center',
+  nameWrapper: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   wrapper: {
     display: "flex",
@@ -74,36 +59,40 @@ const useStyle = makeStyles({
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
-      backgroundColor: "#fff",
+      backgroundColor: "#224957",
       borderRadius: "10px",
-      width: "75%",
-      height:'40px',
+      width: "100%",
+      height: "50px",
+      "&:hover": {
+        outline: "none",
+        boxShadow: "0px 0px 0px 3px #20DF7F inset",
+      },
     },
-    'label + &': {
-      marginTop: '15px',
+    "&.MuiOutlinedInput-inputAdornedStart": {
+      opacity: 0.5,
     },
-    "& input":{
-      padding:'15px',
-      height:'10px'
-    }
-  },
-  checkboxWrapper: { marginLeft: "15%" },
-  buttonWrapper: {
-    marginLeft: "15%",
-    width: "70%",
+    "& input": {
+      padding: "15px",
+      height: "10px",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#ffffff",
+    },
   },
   button: {
     "&.MuiButton-root": {
-      color: "#fff",
-      width: "75%",
+      width: "100%",
+      background: "#20DF7F",
+      color: "white",
       borderRadius: 10,
-      //border: "1px solid #fff",
-      backgroundColor:'#42B72A',
-      height: 40,
+      height: 50,
       "&:hover": {
-        backgroundImage: "linear-gradient(120deg, #C9FFBF 0%, #FFAFBD 100%)",
+        background: "#56EFA2",
         border: "none",
       },
+    },
+    "&.MuiButton-text": {
+      fontSize: 19,
     },
   },
 });
@@ -111,20 +100,20 @@ const useStyle = makeStyles({
 const SignUpForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const btn = useRef(null)
+  const btn = useRef(null);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [email,setEmail] = useState("");
-  const [firstName,setFirstName] = useState("");
-  const [lastName,setLastName] = useState("");
-  const [phone,setPhone] = useState("");
-  const [confirmPassword,setConfirmPassword] = useState("");
-  const classes = useStyle();;
-  const [visibility,setVisibility] =useState(false);  
-  const {enqueueSnackbar} = useSnackbar();
-  const [registerUser,{loading,error}] = useMutation(REGISTER_USER);
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const classes = useStyle();
+  const [visibility, setVisibility] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
   useEffect(() => {
-    const listener = event => {
+    const listener = (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
         btn.current.click();
@@ -136,96 +125,100 @@ const SignUpForm = () => {
     };
   }, []);
 
-  if (loading) return 'Loading';
-  
-  
-  
+  if (loading) return "Loading";
+
   const handleVisibility = (e) => {
-    setVisibility(!visibility) ;
-};
- const register = ()=>{
-   registerUser({
-     variables:{
-       username: userName,
-       firstName: firstName,
-       lastName:lastName,
-       phoneNumber: phone,
-       email:email,
-       password: password
-     }
-   }).then(res=>{
-     const {accessToken,refreshToken} = res.data.userRegister;
-     dispatch(addToken(accessToken));
-   })
-   .then(()=>{
-    history.push('/login');
-    enqueueSnackbar("Please check your email",AlertSuccessProp);
+    setVisibility(!visibility);
+  };
+  const register = () => {
+    registerUser({
+      variables: {
+        username: userName,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phone,
+        email: email,
+        password: password,
+      },
     })
-   .catch(e=> 
-    {enqueueSnackbar('Error',AlertErrorProp);
-      console.log(error);
-  }); 
- } 
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data.userRegister;
+        dispatch(addToken(accessToken));
+      })
+      .then(() => {
+        history.push("/login");
+        enqueueSnackbar("Please check your email", AlertSuccessProp);
+      })
+      .catch((e) => {
+        enqueueSnackbar("Error", AlertErrorProp);
+        console.log(error);
+      });
+  };
 
-const validate = ()=>{
-  if (!userName) return false;
-  if(!password) return false;
-  if(!firstName) return false;
-  if(!lastName) return false;
-  if(!email) return false;
-  if(password.length<8) return false;
-  if(password !== confirmPassword) return false;
-  return true; 
-}
+  const validate = () => {
+    if (!userName) return false;
+    if (!password) return false;
+    if (!firstName) return false;
+    if (!lastName) return false;
+    if (!email) return false;
+    if (password.length < 8) return false;
+    if (password !== confirmPassword) return false;
+    return true;
+  };
 
- const handleSubmit=(e)=>{
-   e.preventDefault();
-   if(!validate()) {
-    enqueueSnackbar('Invalid input',AlertErrorProp);
-    return ;
-   } 
-  register();
- }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validate()) {
+      enqueueSnackbar("Invalid input", AlertErrorProp);
+      return;
+    }
+    register();
+  };
   return (
     <>
-      <Box mx={10} className={classes.wrapper}>
+      <Box className={classes.wrapper}>
         <Box
           style={{
             width: "100%",
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Box className={classes.headlineText}>Welcome!</Box>
-          <Box className={classes.formContainer} pt={2}>
+          <Box
+            style={{ marginLeft: "8rem", marginRight: "8rem" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
             <Box className={classes.nameWrapper}>
-            <OutlinedInput
-              className={classes.outlinedInputName}
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              type="text"
-              placeholder="First Name"
-              startAdornment={
-                <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
-            />
-              <Box px={2}></Box>
               <OutlinedInput
-              className={classes.outlinedInputName}
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              type="text"
-              placeholder="Last Name"
-              startAdornment={
-                <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
-            />
+                className={classes.outlinedInput}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="First Name"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                  </InputAdornment>
+                }
+                style={{ marginBottom: "1.25rem", marginRight: "0.5rem" }}
+              />
+              <OutlinedInput
+                className={classes.outlinedInput}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Last Name"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                  </InputAdornment>
+                }
+                style={{ marginBottom: "1.25rem", marginLeft: "0.5rem" }}
+              />
             </Box>
-              <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={email}
@@ -234,11 +227,11 @@ const validate = ()=>{
               placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
-                  <EmailIcon style={{ opacity: 0.5 }} />
+                  <EmailIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={phone}
@@ -247,12 +240,11 @@ const validate = ()=>{
               placeholder="Phone Number"
               startAdornment={
                 <InputAdornment position="start">
-                  <PhoneIcon style={{ opacity: 0.5 }} />
+                  <PhoneIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            <Box py={1}></Box>
-          
             <OutlinedInput
               className={classes.outlinedInput}
               value={userName}
@@ -261,29 +253,32 @@ const validate = ()=>{
               placeholder=" Username"
               startAdornment={
                 <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5 }} />
+                  <PersonIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            <Box py={1}></Box> 
             <OutlinedInput
-              className = {classes.outlinedInput}
+              className={classes.outlinedInput}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type={visibility?'text':'password'}
+              type={visibility ? "text" : "password"}
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5 }} />
+                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
-              endAdornment = {
-                <InputAdornment position='end'>
-                  <Button onClick ={handleVisibility}> <VisibilityIcon style={{opacity:0.5}}/></Button>
+              endAdornment={
+                <InputAdornment position="end">
+                  <Button onClick={handleVisibility}>
+                    {" "}
+                    <VisibilityIcon style={{ opacity: 0.5, color: "white" }} />
+                  </Button>
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={confirmPassword}
@@ -292,16 +287,36 @@ const validate = ()=>{
               placeholder="Confirm Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5 }} />
+                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            
-            <Box py={1}></Box>
-            <Button 
-              className={classes.button} 
-              onClick={handleSubmit} 
-              ref = {btn}>Sign up</Button>
+            <Button
+              className={classes.button}
+              onClick={handleSubmit}
+              ref={btn}
+              style={{ marginBottom: "1.25rem" }}
+            >
+              Sign up
+            </Button>
+            <Typography>
+              <Link
+                onClick={(e) => {
+                  history.push("/login");
+                }}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  color: "white",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Back to login page
+              </Link>
+            </Typography>
           </Box>
         </Box>
       </Box>
