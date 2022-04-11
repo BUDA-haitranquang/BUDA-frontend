@@ -7,6 +7,7 @@ import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { CreateBuyOrderContext } from "./context/CreateBuyOrderContext";
 import { useMutation } from "@apollo/client";
 import { NEW_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
+import { useHistory } from "react-router-dom";
 
 CreateBuyOrder.propTypes = {};
 
@@ -14,10 +15,11 @@ function CreateBuyOrder(props) {
   const { window } = props;
   const [buyOrderRequest, setBuyOrderRequest] = useState(null);
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
+  const history = useHistory();
 
   const handleCreateBuyOrder = async () => {
     try {
-      await newBuyOrder({
+      newBuyOrder({
         variables: {
           status: "RECEIVING",
           buyOrderItemDTOs: buyOrderRequest.buyOrderItemDTOs.map((item) => {
@@ -27,14 +29,15 @@ function CreateBuyOrder(props) {
               ingredient: {
                 ingredientID: item.ingredient.ingredientID,
               },
-            }
+            };
           }),
           supplierID: buyOrderRequest.supplier.supplierID,
         },
+      }).then((result) => {
+        history.push(`/buy-order/${result.data.newBuyOrder.buyOrderID}`);
       });
-    } catch (e) {
-    }
-  }
+    } catch (e) {}
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -49,7 +52,9 @@ function CreateBuyOrder(props) {
       >
         <Toolbar />
         <Box padding={3} width="100%" bgcolor="#f0f2f5">
-          <CreateBuyOrderContext.Provider value={{ buyOrderRequest, setBuyOrderRequest }}>
+          <CreateBuyOrderContext.Provider
+            value={{ buyOrderRequest, setBuyOrderRequest }}
+          >
             <Grid container spacing={3}>
               <Grid item sm={12} md={9}>
                 <BoxSupplier />
@@ -63,7 +68,13 @@ function CreateBuyOrder(props) {
             </Grid>
           </CreateBuyOrderContext.Provider>
 
-          <Button variant="contained" color={"success"} onClick={handleCreateBuyOrder}>Create</Button>
+          <Button
+            variant="contained"
+            color={"success"}
+            onClick={handleCreateBuyOrder}
+          >
+            Create
+          </Button>
         </Box>
       </Box>
     </Box>
