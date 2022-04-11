@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
+import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import BudaTable from "../../../buda-components/table/BudaTable";
 import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import Sidebar from "../../../components/Sidebar";
@@ -51,6 +51,7 @@ const headCells = [
 const BuyOrder = (props) => {
   const { window } = props;
   const [buyOrders, setBuyOrders] = useState([]);
+  const history = useHistory();
   const { error, loading, data } = useQuery(LOAD_BUY_ORDERS);
   const [deleteBuyOrder] = useMutation(DELETE_BUY_ORDER);
 
@@ -86,18 +87,24 @@ const BuyOrder = (props) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
+        m={3}
       >
         <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={buyOrders}
-            headCells={headCells}
-            DetailTableBody={BuyOrderTableBody}
-            type="buyOrderID"
-          />
-        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ alignSelf: "flex-end" }}
+          onClick={() => history.push(`/buy-order/create`)}
+        >
+          Create buy order
+        </Button>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={buyOrders}
+          headCells={headCells}
+          DetailTableBody={BuyOrderTableBody}
+          type="buyOrderID"
+        />
       </Box>
     </Box>
   );

@@ -7,6 +7,9 @@ import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { CreateBuyOrderContext } from "./context/CreateBuyOrderContext";
 import { useMutation } from "@apollo/client";
 import { NEW_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
+import { useHistory } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
 
 CreateBuyOrder.propTypes = {};
 
@@ -14,10 +17,58 @@ function CreateBuyOrder(props) {
   const { window } = props;
   const [buyOrderRequest, setBuyOrderRequest] = useState(null);
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
+  const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const validateSupplier = () => {
+    if (buyOrderRequest.supplier && buyOrderRequest.supplier.supplierID) {
+      return true;
+    }
+    enqueueSnackbar("Please choose a supplier", AlertErrorProp);
+    return false;
+  };
+
+  const validateBuyOrderItems = () => {
+    if (
+      buyOrderRequest.buyOrderItemDTOs &&
+      buyOrderRequest.buyOrderItemDTOs.length > 0
+    ) {
+      buyOrderRequest.buyOrderItemDTOs.every((item, index) => {
+        if (item.quantity <= 0) {
+          enqueueSnackbar(
+            "Ingredient number "
+              .concat(index.toString())
+              .concat(": ")
+              .concat("Quantity is less than 0")
+          );
+          return false;
+        }
+        if (item.pricePerUnit <= 0) {
+          enqueueSnackbar(
+            "Ingredient number "
+              .concat(index.toString())
+              .concat(": ")
+              .concat("Price per unit is less than 0")
+          );
+          return false;
+        }
+        return true;
+      });
+      return true;
+    }
+    enqueueSnackbar("Please choose at least 1 ingredient", AlertErrorProp);
+    return false;
+  };
 
   const handleCreateBuyOrder = async () => {
+    if (!validateSupplier()) {
+      return;
+    }
+    if (!validateBuyOrderItems()) {
+      return;
+    }
     try {
-      await newBuyOrder({
+      newBuyOrder({
         variables: {
           status: "RECEIVING",
           buyOrderItemDTOs: buyOrderRequest.buyOrderItemDTOs.map((item) => {
@@ -27,14 +78,17 @@ function CreateBuyOrder(props) {
               ingredient: {
                 ingredientID: item.ingredient.ingredientID,
               },
-            }
+            };
           }),
           supplierID: buyOrderRequest.supplier.supplierID,
         },
+      }).then((result) => {
+        history.push(`/buy-order/${result.data.newBuyOrder.buyOrderID}`);
       });
     } catch (e) {
+      enqueueSnackbar("An error happened", AlertErrorProp);
     }
-  }
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -49,7 +103,9 @@ function CreateBuyOrder(props) {
       >
         <Toolbar />
         <Box padding={3} width="100%" bgcolor="#f0f2f5">
-          <CreateBuyOrderContext.Provider value={{ buyOrderRequest, setBuyOrderRequest }}>
+          <CreateBuyOrderContext.Provider
+            value={{ buyOrderRequest, setBuyOrderRequest }}
+          >
             <Grid container spacing={3}>
               <Grid item sm={12} md={9}>
                 <BoxSupplier />
@@ -63,7 +119,13 @@ function CreateBuyOrder(props) {
             </Grid>
           </CreateBuyOrderContext.Provider>
 
-          <Button variant="contained" color={"success"} onClick={handleCreateBuyOrder}>Create</Button>
+          <Button
+            variant="contained"
+            color={"success"}
+            onClick={handleCreateBuyOrder}
+          >
+            Create
+          </Button>
         </Box>
       </Box>
     </Box>
