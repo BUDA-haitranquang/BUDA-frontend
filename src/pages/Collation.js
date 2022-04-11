@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import CollationTableBody from "../components/table/body/CollationTableBody";
-import { LOAD_COLATIONS } from "../graphQl/collation/collation";
+import { LOAD_COLATIONS } from "../graphQl/collation/collationQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 const headCells = [
   {
@@ -48,7 +48,7 @@ const Collation = (props) => {
   }, [data]);
 
   if (error) return <Redirect to="/login" />;
-
+  console.log(data)
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Product" />
