@@ -1,9 +1,9 @@
 const defaultPalette = {
-	primary: {
-		light: "#a3ccf4",
-		main: "#6389df",
-		dark: "#1f2b6c",
-	}
+  primary: {
+    light: "#a3ccf4",
+    main: "#6389df",
+    dark: "#1f2b6c",
+  },
 };
 
 export const colorGreenSuccessful = {
@@ -23,11 +23,11 @@ export const colorRedError = {
 };
 
 export const colorOrangeWarning = {
-	primary: {
-		light: "#FFBB00",
-		main: "#FFCC00",
-		dark: "#E3A90B",
-	},
+  primary: {
+    light: "#FFBB00",
+    main: "#FFCC00",
+    dark: "#E3A90B",
+  },
 };
 
 export const colorRed = {
@@ -43,7 +43,7 @@ export const colorRed = {
 
 export const colorBlue = {
   primary: {
-    light: "#33A0FF",
+    light: "#0063EC",
     main: "#0088FF",
     dark: "#006db3",
   },
@@ -77,6 +77,6 @@ export const colorOrange = {
 export const colorHovering = {
   primary: "#F2F9FF",
   secondary: "",
-}
+};
 
 export default defaultPalette;

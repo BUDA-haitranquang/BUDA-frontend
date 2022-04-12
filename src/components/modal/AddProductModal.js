@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+import UploadIcon from "@mui/icons-material/Upload";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import {
@@ -9,10 +10,12 @@ import {
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import axios from "axios";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
 
+  const [image, setImage] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
@@ -32,7 +35,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setCostPerUnit(0);
     setGroup("");
     setDescription("");
-  }
+  };
 
   const addProduct = () => {
     setIsLoading(true);
@@ -69,8 +72,23 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   };
 
   const handleSubmit = () => {
-    if (isFormValid()) addProduct();
-    else enqueueSnackbar("Invalid input", AlertErrorProp);
+    if (isFormValid()) {
+      addProduct();
+      submitImage();
+    } else enqueueSnackbar("Invalid input", AlertErrorProp);
+  };
+  const submitImage = async () => {
+    const data = await axios.post(
+      "http://143.198.194.24:8080/api/picture/upload",
+      image
+    );
+  };
+  const handleUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      setImage(URL.createObjectURL(img));
+    }
+    console.log(image);
   };
 
   return (
@@ -176,6 +194,20 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <input
+            accept="image/png, image/jpeg"
+            style={{ display: "none" }}
+            id="raised-button-file"
+            multiple
+            type="file"
+            onClick={handleUpload}
+          />
+          <label htmlFor="raised-button-file">
+            <Button variant="contained" component="span">
+              <UploadIcon />
+              Upload picture
+            </Button>
+          </label>
         </Box>
       }
     ></BudaModal>

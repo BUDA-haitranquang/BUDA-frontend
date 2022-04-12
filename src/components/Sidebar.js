@@ -22,7 +22,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -171,7 +171,8 @@ const Sidebar = ({ window, name }) => {
                 {sidebarItems[idx].map((component) => {
                   return (
                     <Link to={`/${item}/${component.link}`}>
-                      <ListItem button>
+                      <ListItem sx={{ textAlign: "left" }} button>
+                        <Box pl={7}></Box>
                         <ListItemText primary={component.name} />
                       </ListItem>
                     </Link>

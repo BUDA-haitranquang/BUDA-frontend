@@ -6,6 +6,7 @@ import {
   OutlinedInput,
   InputAdornment,
 } from "@mui/material";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
@@ -122,7 +123,7 @@ const SignInForm = () => {
     };
   }, []);
 
-  if (loading) return "Signing in...";
+  if (loading) return <CircularProgress />;
   //if (error) return `Sign in error! ${error.message}`;
 
   const login = () => {
