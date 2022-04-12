@@ -104,6 +104,7 @@ const BuyOrder = (props) => {
           headCells={headCells}
           DetailTableBody={BuyOrderTableBody}
           type="buyOrderID"
+          isNotShowCheckBox={true}
         />
       </Box>
     </Box>

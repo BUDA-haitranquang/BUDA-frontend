@@ -40,7 +40,7 @@ import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
 import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
-import SellOrderList from "./pages/SellOrderList";
+import SellOrderList from "./pages/sellorder/list/SellOrderList";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -218,7 +218,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/sell-order/:id"
+            path="/business/sell/:id"
             component={SellOrderDetail}
           />
            <PrivateRoute

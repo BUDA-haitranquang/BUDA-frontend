@@ -1,14 +1,15 @@
 import { TableCell } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+
 const SellOrderTableBody = (props) => {
   const { row, labelId } = props;
+
   return (
     <>
-      {/* <TableCell align="right">{row.id}</TableCell> */}
       <TableCell component="th" id={labelId} scope="row">
         <Link
-          to={{ pathname: `${row.sellOrderID}`,}}
+          to={{ pathname: `sell/${row.id}` }}
           style={{ textDecoration: "none", color: "blue" }}
         >
           {row.sellOrderID}

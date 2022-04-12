@@ -1,14 +1,15 @@
 import { Toolbar } from "@mui/material";
-import Box from "@mui/material/Box";
+import { Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
-import { LOAD_SELL_ORDER } from "../graphQl/sellOrder/sellOrderQueries";
+import Sidebar from "../../../components/Sidebar";
+import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/sellOrderQueries";
 import { useMutation } from "@apollo/client";
-import { DELETE_SELL_ORDER_MUTATION } from "../graphQl/sellOrder/newSellOrderMutation";
+import { DELETE_SELL_ORDER_MUTATION } from "../../../graphQl/sellOrder/newSellOrderMutation";
 // import BudaTableServer from "../buda-components/tableservertable/BudaServerTable";
-import BudaServerTable from "../buda-components/budaservertable/BudaServerTable";
-import SellOrderTableBody from "../components/table/body/SellOrderTableBody";
+import BudaServerTable from "../../../buda-components/budaservertable/BudaServerTable";
+import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const headCells = [
   {
     id: "sellOrderID",
@@ -50,7 +51,7 @@ const headCells = [
 
 const SellOrderList = (props) => {
   const { window } = props;
-
+  const history = useHistory();
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Sell order" />
@@ -62,17 +63,23 @@ const SellOrderList = (props) => {
         justifyContent="center"
       >
         <Toolbar />
-        <Box>{}</Box>
 
-        <Box>
-          <BudaServerTable
-            headCells={headCells}
-            type="id"
-            DetailTableBody={SellOrderTableBody}
-            searchBar={false}
-            isNotShowCheckBox={true}
-          />
-        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ alignSelf: "flex-end" }}
+          onClick={() => history.push(`/business/sell`)}
+        >
+          Create sell order
+        </Button>
+
+        <BudaServerTable
+          headCells={headCells}
+          type="id"
+          DetailTableBody={SellOrderTableBody}
+          searchBar={false}
+          isNotShowCheckBox={true}
+        />
       </Box>
     </Box>
   );

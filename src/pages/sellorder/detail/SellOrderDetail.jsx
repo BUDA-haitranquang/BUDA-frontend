@@ -4,7 +4,8 @@ import { Box, Grid, Toolbar, Typography } from "@mui/material";
 import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
 import Sidebar from "../../../components/Sidebar";
 import BoxProduct from "./components/BoxProduct/BoxProduct";
-import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
+// import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
+import {LOAD_SELL_ORDER_DETAILS} from '../../../graphQl/sellOrder/sellOrderQueries'
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
@@ -15,7 +16,7 @@ function SellOrderDetail(props) {
   const [ sellOrder, setSellOrder] = useState(null);
   const { id } = useParams();
 
-  const { data } = useQuery(LOAD_SELL_ORDER, {
+  const { data } = useQuery(LOAD_SELL_ORDER_DETAILS, {
     variables: {
       sellOrderID: parseInt(id),
     },
