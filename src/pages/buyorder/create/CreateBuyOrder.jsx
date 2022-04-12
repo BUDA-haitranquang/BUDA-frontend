@@ -68,7 +68,6 @@ function CreateBuyOrder(props) {
       return;
     }
     try {
-      debugger;
       newBuyOrder({
         variables: {
           status: buyOrderRequest.status,

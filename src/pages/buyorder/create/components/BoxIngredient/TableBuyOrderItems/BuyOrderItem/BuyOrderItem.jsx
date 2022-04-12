@@ -17,13 +17,13 @@ function BuyOrderItem(props) {
 
   const handlePriceChange = (e) => {
     const price = e.target.value || 0;
-    item.pricePerUnit = price;
+    item.pricePerUnit = parseFloat(price);
     setPricePerUnit(price);
   };
 
   const handleQuantityChange = (e) => {
     const quantity = e.target.value || 0;
-    item.quantity = quantity;
+    item.quantity = parseInt(quantity);
     setQuantity(quantity);
   };
 
@@ -62,7 +62,7 @@ function BuyOrderItem(props) {
           inputProps={{
             style: { textAlign: "right" },
           }}
-          value={item.quantity.toLocaleString()}
+          value={item.quantity}
           onChange={(e) => handleQuantityChange(e)}
           name="quantity"
         />
@@ -77,7 +77,7 @@ function BuyOrderItem(props) {
           inputProps={{
             style: { textAlign: "right" },
           }}
-          value={item.pricePerUnit.toLocaleString()}
+          value={item.pricePerUnit}
           onChange={(e) => handlePriceChange(e)}
           name="price-per-unit"
         />
@@ -88,7 +88,7 @@ function BuyOrderItem(props) {
   const CellAmount = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {(item.quantity * item.pricePerUnit).toLocaleString() || 0}
+        {(item.quantity * item.pricePerUnit).toLocaleString() || "0"}
       </TableCell>
     );
   }, [item.quantity, item.pricePerUnit]);

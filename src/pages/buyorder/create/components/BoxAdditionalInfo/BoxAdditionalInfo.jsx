@@ -33,7 +33,6 @@ function BoxAdditionalInfo(props) {
   };
 
   const handleStatusChange = (e, status) => {
-    debugger;
     setStatus(status.label);
     setBuyOrderRequest((prevBuyOrderRequest) => ({
       ...prevBuyOrderRequest,
