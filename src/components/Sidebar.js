@@ -6,6 +6,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
+import WorkIcon from '@mui/icons-material/Work';
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
@@ -63,6 +64,7 @@ const title = [
   "ingredient",
   "supplier",
   "customer",
+  "business",
   "staff",
   "cost",
   "statistic"
@@ -82,6 +84,7 @@ const sidebarItems = [
   [createData("Ingredient", "", "")],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
+  [createData('Sell','sell',""),createData('Buy','buy',"")],
   [createData("Note", "note", "")],
   [
     createData("Fixed", "fixedcost", ""),
@@ -110,6 +113,7 @@ const Sidebar = ({ window, name }) => {
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {
+    if (typeof string !== 'string') return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
@@ -126,10 +130,12 @@ const Sidebar = ({ window, name }) => {
       case 4:
         return <GroupsIcon />;
       case 5:
-        return <AssignmentIndIcon />;
+        return <WorkIcon/>
       case 6:
-        return <MonetizationOnIcon />;
+        return <AssignmentIndIcon />;
       case 7:
+        return <MonetizationOnIcon />;
+      case 8:
         return <BarChartIcon />;
       default:
         break;
