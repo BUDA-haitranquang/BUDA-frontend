@@ -30,13 +30,13 @@ const headCells =[
     },
     {
         id: "address",
-        numeric: true,
+        numeric: false,
         disablePadding: false,
         label: "Address",
     },
     {
         id: "email",
-        numeric: true,
+        numeric: false,
         disablePadding: false,
         label: "Email",
     },

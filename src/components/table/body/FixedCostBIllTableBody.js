@@ -8,9 +8,9 @@ const FixedCostBillTableBody = (props) => {
         <TableCell component="th" id={labelId} scope="row">
             {row.message}
         </TableCell>
-        <TableCell align="center">{row.dueTime}</TableCell>
-        <TableCell align="center">{row.creationTime}</TableCell>
-        <TableCell align="center">{row.totalSpend}</TableCell>
+        <TableCell align="left">{row.dueTime}</TableCell>
+        <TableCell align="left">{row.creationTime}</TableCell>
+        <TableCell align="left">{row.totalSpend}</TableCell>
    </>     
     );
 };
