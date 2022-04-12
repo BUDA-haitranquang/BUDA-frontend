@@ -21,11 +21,11 @@ function BuyOrderTableBody(props) {
       >
         {row.textID}
       </TableCell>
-      <TableCell align="left">{row.supplier.name}</TableCell>
+      <TableCell align="left">{row.supplierName}</TableCell>
       <TableCell align="left">{row.status}</TableCell>
       <TableCell align="right">{row.totalCost}</TableCell>
-      <TableCell align="left">{row.staff?.name || ""}</TableCell>
-      <TableCell align="left">{row.creationTime}</TableCell>
+      <TableCell align="left">{row.createdBy}</TableCell>
+      <TableCell align="left">{row.createdAt}</TableCell>
     </Fragment>
   );
 }

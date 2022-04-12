@@ -69,6 +69,7 @@ function BoxAdditionalInfo(props) {
           <Typography mb={1}>Status:</Typography>
           <Autocomplete
             disablePortal
+            disableClearable
             defaultValue="FINISHED"
             options={buyOrderStatuses}
             sx={{ width: "100%", height: "60px" }}
