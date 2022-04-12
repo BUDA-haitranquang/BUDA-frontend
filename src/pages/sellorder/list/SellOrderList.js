@@ -3,10 +3,6 @@ import { Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
-import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/sellOrderQueries";
-import { useMutation } from "@apollo/client";
-import { DELETE_SELL_ORDER_MUTATION } from "../../../graphQl/sellOrder/newSellOrderMutation";
-// import BudaTableServer from "../buda-components/tableservertable/BudaServerTable";
 import BudaServerTable from "../../../buda-components/budaservertable/BudaServerTable";
 import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -53,7 +49,7 @@ const SellOrderList = (props) => {
   const { window } = props;
   const history = useHistory();
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex",margin:'6px' }}>
       <Sidebar window={window} name="Sell order" />
       <Box
         width="100%"
@@ -61,6 +57,7 @@ const SellOrderList = (props) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
+        m={3}
       >
         <Toolbar />
 
