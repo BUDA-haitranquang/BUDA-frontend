@@ -70,7 +70,7 @@ function CreateBuyOrder(props) {
     try {
       newBuyOrder({
         variables: {
-          status: "RECEIVING",
+          status: buyOrderRequest.status,
           buyOrderItemDTOs: buyOrderRequest.buyOrderItemDTOs.map((item) => {
             return {
               quantity: item.quantity,
