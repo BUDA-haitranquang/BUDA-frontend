@@ -1,7 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, TableCell, TableRow } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import Input from "@material-ui/core/Input";
+import { changeProductCartItem } from "../../../../../../../redux/productCartSlice";
 
 BuyOrderItem.propTypes = {
   item: PropTypes.object,
@@ -11,6 +13,20 @@ BuyOrderItem.propTypes = {
 
 function BuyOrderItem(props) {
   const { item, index, onRemove } = props;
+  const [pricePerUnit, setPricePerUnit] = useState(item.pricePerUnit);
+  const [quantity, setQuantity] = useState(item.quantity);
+
+  const handlePriceChange = (e) => {
+    const price = e.target.value || 0;
+    item.pricePerUnit = price;
+    setPricePerUnit(price);
+  };
+
+  const handleQuantityChange = (e) => {
+    const quantity = e.target.value || 0;
+    item.quantity = quantity;
+    setQuantity(quantity);
+  };
 
   const CellImage = useMemo(() => {
     return (
@@ -43,7 +59,14 @@ function BuyOrderItem(props) {
   const CellQuantity = useMemo(() => {
     return (
       <TableCell align="center" style={{ width: "105px" }}>
-        {item.quantity}
+        <Input
+          inputProps={{
+            style: { textAlign: "right" },
+          }}
+          value={item.quantity.toLocaleString()}
+          onChange={(e) => handleQuantityChange(e)}
+          name="quantity"
+        />
       </TableCell>
     );
   }, [item.quantity]);
@@ -51,7 +74,14 @@ function BuyOrderItem(props) {
   const CellPrice = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {item.pricePerUnit}
+        <Input
+          inputProps={{
+            style: { textAlign: "right" },
+          }}
+          value={item.pricePerUnit.toLocaleString()}
+          onChange={(e) => handlePriceChange(e)}
+          name="price-per-unit"
+        />
       </TableCell>
     );
   }, [item.pricePerUnit]);
@@ -59,7 +89,7 @@ function BuyOrderItem(props) {
   const CellAmount = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {item.quantity * item.pricePerUnit}
+        {(item.quantity * item.pricePerUnit).toLocaleString() || 0}
       </TableCell>
     );
   }, [item.quantity, item.pricePerUnit]);
