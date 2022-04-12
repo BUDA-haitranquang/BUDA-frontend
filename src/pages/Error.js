@@ -62,7 +62,7 @@ const classes = useStyeles();
         >
         <div className={classes.headding}><b>404</b> </div>
         <div style={{fontSize:35,paddingBottom:10,fontFamily: 'monospace',color: '007bff',}}><b>Oops! - PAGE NOT FOUND</b> </div>
-        <Typography variant='h6' gutterBottom paddingBottom='10' color='#42494F'>Sorry, an error has occured, Tat ca la tai thang Tran Quang Hai </Typography>
+        <Typography variant='h6' gutterBottom paddingBottom='10' color='#42494F'>Sorry, an error has occured</Typography>
         <div style={{
           paddingTop: 25,
         }}> 
