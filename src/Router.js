@@ -34,12 +34,12 @@ import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
 import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
-import SellOrder from "./pages/SellOrder";
+import SellOrderStats from "./pages/SellOrderStats";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
-
+import SellOrderList from "./pages/SellOrderList";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -151,7 +151,7 @@ const AppRouter = () => {
             authed={isAuth}
             exact
             path="/product/delete"
-            component={Statistic}
+            component={SellOrderList}
           />
           <PrivateRoute
             authed={isAuth}
@@ -211,8 +211,8 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/sell-order-statistic"
-            component={SellOrder}
+            path="/sellorderstatistic"
+            component={SellOrderStats}
           />
            <PrivateRoute
             authed={isAuth}
@@ -231,6 +231,12 @@ const AppRouter = () => {
             exact
             path="/cost/othercost"
             component={OtherCost}
+          />
+           <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buisness/sellorderlist"
+            component={SellOrderList}
           />
           <PrivateRoute authed={isAuth} exact path="/discount" component={Discount} />
           <Route exact path="/login" component={Login} />
