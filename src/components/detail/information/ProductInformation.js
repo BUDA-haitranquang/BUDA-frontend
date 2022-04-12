@@ -4,6 +4,7 @@ import React from "react";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
+  console.log(data);
   const {
     name,
     sellingPrice,
@@ -12,7 +13,12 @@ export default function ProductInformation({ data }) {
     costPerUnit,
     description,
     picture,
-  } = data.product;
+  } = data.product.product;
+
+  const productCombo = data?.productCombo?.productComboIncludeProduct;
+  const productGroup = data?.productGroup?.productGroupByProduct;
+  const productComponent = data?.productComponent?.componentsByProduct;
+
   return (
     <Grid container direction="row">
       <Grid item xs={3} style={{ height: "100%" }}>
@@ -39,7 +45,7 @@ export default function ProductInformation({ data }) {
           <Typography variant="subtitle3" style={{ fontStyle: "italic" }}>
             {description}
           </Typography>
-          <Typography variant="h4">{sellingPrice} $</Typography>
+          <Typography variant="h4">{sellingPrice.toLocaleString()} VND</Typography>
           <Divider />
           <Box
             style={{
@@ -49,17 +55,47 @@ export default function ProductInformation({ data }) {
             }}
           >
             <Typography variant="subtitle3" style={{}}>
-              Cost: {costPerUnit}
+              Cost: {costPerUnit.toLocaleString()}
             </Typography>
             <Typography variant="subtitle3" style={{}}>
-              Amount Left: {amountLeft}
+              Amount Left: {amountLeft.toLocaleString()}
             </Typography>
             <Typography variant="subtitle3" style={{}}>
-              Alert Amount: {alertAmount}
+              Alert Amount: {alertAmount.toLocaleString()}
             </Typography>
           </Box>
         </Box>
+        <Divider />
 
+        <Box>
+          {console.log(productCombo)}
+          {productCombo?.map((combo) => (
+            <Box
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
+            >
+              <Typography width="50%">Combo: {combo?.name}</Typography>
+              <Typography width="50%">
+                Description: {combo?.description}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+        <Divider />
+
+        <Box>
+          {console.log(productGroup)}
+          {productGroup?.map((group) => (
+            <Typography width="50%">Group: {group?.name}</Typography>
+          ))}
+        </Box>
+        <Divider />
+
+        <Box>
+          {console.log(productComponent)}
+          {productComponent?.map((component) => (
+            <Typography width="50%">Ingredient: {component?.ingredient.name}</Typography>
+          ))}
+        </Box>
         <Divider />
       </Grid>
     </Grid>

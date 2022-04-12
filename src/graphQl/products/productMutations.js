@@ -53,4 +53,4 @@ export const HIDE_PRODUCT_MUTATION = gql`
       productID
     }
   }
-`;
+`

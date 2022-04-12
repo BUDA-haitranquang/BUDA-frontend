@@ -1,121 +1,62 @@
-import { TableCell,TextField } from "@mui/material";
+import { TableCell, TextField } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { display, flexbox } from "@mui/system";
-import { CenterFocusStrong } from "@mui/icons-material";
-const CollationTableBody = (props) => {
-const { row, labelId } = props;
-const [ value,setValue ] = React.useState(0);
-const [ open,setOpen ] = React.useState(false);
-const [ textValue,setTextValue ] = React.useState('');
-const [ status,setStatus ] = React.useState(false)
-const changeOpen = () => {setOpen(true)};
-const changeClose = () => {setOpen(false)};
-const changeStatus = () =>{setStatus(true)};
-const handleSubmit = (e) =>{
-  e.preventDefault();
-  console.log("YES");
-}
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: "20px",
-    align : 'center',
-  };
-const inputStyle = {
-    align: "center"
-}
+import Button from "@mui/material/Button";
+import CollationModal from "../../modal/CollationModal";
+import { makeStyles } from "@mui/styles";
+const useStyle = makeStyles({
+  button: {
+    "&.MuiButton-root": { textTransform: "none" },
+  },
+});
 
+const CollationTableBody = (props) => {
+  const classes = useStyle();
+  const { row, labelId } = props;
+  const [totalAmount, setTotalAmount] = React.useState(row.amountLeft);
+  const [open, setOpen] = React.useState(false);
+  const changeOpen = () => {
+    setOpen(true);
+  };
+  const changeClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
       <TableCell component="th" id={labelId} scope="row">
         <Link
-          to={{ pathname: `${row.productID}`,}}
+          to={{ pathname: `${row.productID}` }}
           style={{ textDecoration: "none", color: "blue" }}
         >
-          {row.name}
+          {row.productSKU}
         </Link>
       </TableCell>
 
-      <TableCell align="right">{row.amountLeft}</TableCell>
-      <TableCell align="right">{row.amountLeft-value}</TableCell>
+      <TableCell align="left" sx={{ maxWidth: "100px" }}>
+        {row.name}
+      </TableCell>
+      <TableCell align="right">{totalAmount}</TableCell>
+      <TableCell align="right">
+        <Button
+          onClick={changeOpen}
+          className={classes.button}
+          variant="outlined"
+        >
+          {" "}
+          Edit
+        </Button>
+      </TableCell>
 
-      <TableCell align="center">
-                    <TextField
-                        sx={{
-                            width : 100,
-                        }}
-                        size="small" 
-                        type="number"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        onChange={(e) => setValue(e.target.value)}
-                    />
-                </TableCell>
-               <TableCell align="center">
-                    <Button onClick={changeOpen}> Details</Button>
-                    <Modal
-                        open = {open}
-                        onClose={changeClose}
-                    >
-                       <Box sx={style}>
-                            {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Title
-                            </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <p>Noi dung : Khong biet ghi gi</p>
-                                <p>Noi dung 2 : Khong biet ghi gi 2</p>
-                            </Typography>
-                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button> */}
-                            <div style = {{
-                                display : 'flex',
-                                justifyContent : 'center',
-                                height: 30,
-                            }}
-                            >
-                              <input style={{
-                                padding: 0.25,
-                                paddingLeft: 1,
-                                flex: '1 0 auto',
-                                borderColor: 'transparent',
-                                color: 'hsl(210, 22%, 49%)',
-                                background: 'hsl(210, 36%, 96%)',
-                                borderTopLeftRadius: 0.25,
-                                borderBottomLeftRadius: 0.25,
-                              
-                              }} type ="text" placeholder="  placee holder"
-                                onChange={(e) => {setTextValue(e.target.value)}}
-                              />
-                              <button type='submit' style={{
-                                flex: '0 0 5rem',
-                                display: 'grid',
-                                alignItems: 'center',
-                                cursor: 'pointer',
-                                height: 30,
-                                borderTopLeftRadius: 0.25,
-                                borderBottomLeftRadius: 0.25,
-                                background: 'hsl(205, 86%, 81%)',
-                              }}
-                              onClick={changeStatus}>addd</button>
-                            </div>
-                            <div style={{paddingTop: 7}}> {status == true ? `- ${textValue}` : ``}</div>
-                            <Button sx = {{width : 336 , height : 30,pt : 2}} onClick={changeClose}>Close</Button>
-                        </Box>
-                    </Modal>
-               </TableCell> 
-
+      <CollationModal
+        title={row.name}
+        isOpen={open}
+        handleClose={changeClose}
+        productID={row.productID}
+        amountChange={(val) => {
+          setTotalAmount(val);
+        }}
+      />
     </>
   );
 };

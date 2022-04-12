@@ -23,6 +23,7 @@ const BudaTable = (props) => {
     stickyHeader = true,
     padding,
     size,
+    isNotShowCheckBox = false,
     ...remainProps
   } = props;
 
@@ -76,7 +77,7 @@ const BudaTable = (props) => {
       : setDisplay(
           data.filter((item) =>
             item[searchBy]
-              .toString()
+              ?.toString()
               .toUpperCase()
               .includes(search.toString().toUpperCase())
           )
@@ -97,7 +98,7 @@ const BudaTable = (props) => {
               deleteItems(selected);
               setSelected([]);
             }}
-            checkModal = {Modal ? true : false}
+            checkModal={Modal ? true : false}
           />
           <Table
             sx={{ minWidth: 1000 }}
@@ -112,6 +113,7 @@ const BudaTable = (props) => {
               onRequestSort={handleRequestSort}
               rowCount={display.length}
               headCells={headCells}
+              isNotShowCheckbox={isNotShowCheckBox}
             />
             <BudaTableBody
               order={order}
@@ -122,7 +124,8 @@ const BudaTable = (props) => {
               setSelected={setSelected}
               data={displayData}
               DetailTableBody={DetailTableBody}
-              type = {type}
+              type={type}
+              isNotShowCheckbox={isNotShowCheckBox}
             />
             {Modal && <Modal isOpen={isOpen} handleClose={handleClose} />}
             {tableChildren}

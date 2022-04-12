@@ -26,25 +26,28 @@ const useStyles = makeStyles({
   },
 });
 
-
 const BudaDatePicker = ({
   onlyDate,
   label,
   initialDate = new Date(0, 0, 0, 0, 0, 0),
+  setValue = () => {},
 }) => {
   const classes = useStyles();
   const [timeValue, setTimeValue] = useState(initialDate);
-  console.log(timeValue);
+
+  useEffect(() => {
+    setValue(timeValue);
+  }, [timeValue]);
+
   return (
     <>
       <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        <Typography variant="h6">{label}</Typography>
-
         <Box className={classes.dateTimeContainer}>
-          <Box width="180px">
+          <Box width={onlyDate ? "100%" : "80px"}>
             <CustomizeDatePicker
               setTimeValue={(val) => setTimeValue(val)}
               timeValue={timeValue}
+              label={label}
             />
           </Box>
           {!onlyDate && (
@@ -67,20 +70,22 @@ const BudaDatePicker = ({
 
 export default BudaDatePicker;
 
-const initializeDate= (timeValue) => {
-  const INITIALDATE = new Date(0,0,0,0,0,0);
+const initializeDate = (timeValue) => {
+  const INITIALDATE = new Date(0, 0, 0, 0, 0, 0);
   if (!(timeValue instanceof Date) || isNaN(timeValue)) return null;
-  return timeValue.getFullYear() !== INITIALDATE.getFullYear() 
-        || timeValue.getMonth() !== INITIALDATE.getMonth()
-        || timeValue.getDate() !== INITIALDATE.getDate() ? timeValue : null;
-}
+  return timeValue.getFullYear() !== INITIALDATE.getFullYear() ||
+    timeValue.getMonth() !== INITIALDATE.getMonth() ||
+    timeValue.getDate() !== INITIALDATE.getDate()
+    ? timeValue
+    : null;
+};
 
-const CustomizeDatePicker = ({ setTimeValue, timeValue }) => {
+const CustomizeDatePicker = ({ setTimeValue, timeValue, label }) => {
   const classes = useStyles();
   const [date, setDate] = useState(initializeDate(timeValue));
 
   useEffect(() => {
-    let day = new Date(0,0,0,0,0,0);
+    let day = new Date(0, 0, 0, 0, 0, 0);
     if (!(date instanceof Date) || isNaN(date)) return;
     day.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
     day.setHours(timeValue.getHours());
@@ -92,9 +97,9 @@ const CustomizeDatePicker = ({ setTimeValue, timeValue }) => {
     <StyledEngineProvider injectFirst>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={viLocale}>
         <DesktopDatePicker
-          label="Date"
-          value={date}  
-          inputFormat='dd/MM/yyyy'
+          label={label}
+          value={date}
+          inputFormat="dd/MM/yyyy"
           onChange={(newValue) => {
             setDate(newValue);
           }}
@@ -104,11 +109,9 @@ const CustomizeDatePicker = ({ setTimeValue, timeValue }) => {
               InputLabelProps={{
                 ...params.InputProps,
                 shrink: true,
-                placeholder:'dd/mm/yyyy'
+                placeholder: "dd/mm/yyyy",
               }}
-            
               className={classes.timeInput}
-         
             />
           )}
         />

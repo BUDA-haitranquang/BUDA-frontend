@@ -16,8 +16,7 @@ import {
 const EditProductModal = ({ data, isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const product = data.product;
-  console.log(product);
+  const product = data.product.product;
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.sellingPrice);
   const [amountLeft, setAmountLeft] = useState(product.amountLeft);
@@ -38,7 +37,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
     setCostPerUnit(0);
     setGroup("");
     setDescription("");
-  }
+  };
 
   const editProduct = () => {
     setIsLoading(true);
@@ -123,19 +122,17 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           >
             <TextField
               required
-              type="number"
               label="Price"
               variant="outlined"
-              value={price}
+              value={price.toLocaleString()}
               onChange={(e) => setPrice(e.target.value)}
               style={{ width: "48%" }}
             />
             <TextField
               required
-              type="number"
               label="Cost"
               variant="outlined"
-              value={costPerUnit}
+              value={costPerUnit.toLocaleString()}
               onChange={(e) => setCostPerUnit(e.target.value)}
               style={{ width: "48%" }}
             />
@@ -152,20 +149,18 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             <TextField
               fullWidth
               required
-              type="number"
               label="Amount Left"
               variant="outlined"
-              value={amountLeft}
+              value={amountLeft.toLocaleString()}
               onChange={(e) => setAmountLeft(e.target.value)}
               style={{ width: "48%" }}
             />
             <TextField
               fullWidth
               required
-              type="number"
               label="Alert Amount"
               variant="outlined"
-              value={alertAmount}
+              value={alertAmount.toLocaleString()}
               onChange={(e) => setAlertAmount(e.target.value)}
               style={{ width: "48%" }}
             />

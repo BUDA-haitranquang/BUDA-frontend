@@ -26,15 +26,21 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
+import Discount from './pages/Discount';
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
+import BuyOrder from "./pages/buyorder/list/BuyOrder";
+import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
+import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
+import SellOrder from "./pages/SellOrder";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
 import IngredientDetail from "./pages/IngerdientsDetail";
+
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -194,6 +200,30 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
+            path="/buy-order"
+            component={BuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buy-order/create"
+            component={CreateBuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/buy-order/:id"
+            component={DetailBuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/sell-order-statistic"
+            component={SellOrder}
+          />
+           <PrivateRoute
+            authed={isAuth}
+            exact
             path="/cost/fixedCost"
             component={FixCost}
           />
@@ -209,6 +239,7 @@ const AppRouter = () => {
             path="/cost/othercost"
             component={OtherCost}
           />
+          <PrivateRoute authed={isAuth} exact path="/discount" component={Discount} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />

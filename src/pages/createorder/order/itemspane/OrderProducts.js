@@ -20,7 +20,7 @@ const useStyle = makeStyles(() => ({
     padding: "8px",
     overflow: "hidden",
     "& .MuiTableContainer-root": {
-      height: "32vh",
+      height: "40vh",
     },
     "& .MuiTable-root": {
       backgroundColor: "yellow",
