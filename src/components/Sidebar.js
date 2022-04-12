@@ -162,7 +162,7 @@ const Sidebar = ({ window, name }) => {
               })}
             </Collapse>
             :
-            console.log(12)
+            console.log("")
             }
           </>
         ))}
