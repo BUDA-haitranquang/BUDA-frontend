@@ -34,12 +34,12 @@ import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
 import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
-import SellOrder from "./pages/SellOrder";
+import SellOrder from "./pages/sellorder/list/SellOrder";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
-
+import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -213,6 +213,12 @@ const AppRouter = () => {
             exact
             path="/sell-order-statistic"
             component={SellOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/sell-order/:id"
+            component={SellOrderDetail}
           />
            <PrivateRoute
             authed={isAuth}
