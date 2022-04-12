@@ -58,8 +58,18 @@ const BuyOrder = (props) => {
   useEffect(() => {
     async function fetchData() {
       if (data) {
-        let buyOrdersByUser = [...data.buyOrdersByUser];
-        setBuyOrders(buyOrdersByUser.reverse());
+        let buyOrdersByUser = [...data.buyOrdersByUser].map((value) => {
+          return {
+            buyOrderID: value.buyOrderID,
+            textID: value.textID,
+            supplierName: value.supplier?.name,
+            status: value.status,
+            totalCost: value.totalCost,
+            createdBy: value.staff?.name,
+            createdAt: value.createdAt,
+          };
+        });
+        setBuyOrders(buyOrdersByUser);
       }
     }
 

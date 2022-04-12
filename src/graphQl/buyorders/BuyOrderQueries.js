@@ -11,7 +11,7 @@ export const LOAD_BUY_ORDERS = gql`
         address
         phoneNumber
       }
-      creationTime
+      createdAt: creationTime
       status
       totalCost
       staff {
