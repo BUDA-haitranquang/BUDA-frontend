@@ -6,6 +6,8 @@ export const ADD_CUSTOMER_MUTATION = gql`
       $phoneNumber: String!
       $address: String!
       $totalSpend: Float!
+      $gender: Gender
+      $ageGroup: AgeGroup
     ){
         newCustomer(
             customerInput:{
@@ -13,6 +15,8 @@ export const ADD_CUSTOMER_MUTATION = gql`
                 phoneNumber: $phoneNumber
                 address: $address
                 totalSpend: $totalSpend
+                gender: $gender
+                ageGroup: $ageGroup
             })
         {customerID}
     }

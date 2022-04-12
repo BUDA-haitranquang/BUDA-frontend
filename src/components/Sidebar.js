@@ -6,6 +6,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
+import WorkIcon from "@mui/icons-material/Work";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
@@ -22,7 +23,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -30,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { setFocus } from "../redux/sidebarSlice";
 import AccountMenu from "./AccountMenu";
+
 const useStyle = makeStyles({
   root: {
     "& a:link": {
@@ -62,13 +64,16 @@ const title = [
   "ingredient",
   "supplier",
   "customer",
+  "business",
   "staff",
   "cost",
   "statistic",
 ];
+
 function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
+
 const sidebarItems = [
   [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
   [
@@ -79,6 +84,7 @@ const sidebarItems = [
   [createData("Ingredient", "", "")],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
+  [createData("Sell", "sell", ""), createData("Buy", "buy", "")],
   [createData("Note", "note", "")],
   [
     createData("Fixed", "fixedcost", ""),
@@ -105,9 +111,12 @@ const Sidebar = ({ window, name }) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const classes = useStyle();
+
   function capitalizeFirstLetter(string) {
+    if (typeof string !== "string") return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
   const itemRender = (i) => {
     switch (i) {
       case 0:
@@ -121,10 +130,12 @@ const Sidebar = ({ window, name }) => {
       case 4:
         return <GroupsIcon />;
       case 5:
-        return <AssignmentIndIcon />;
+        return <WorkIcon />;
       case 6:
-        return <MonetizationOnIcon />;
+        return <AssignmentIndIcon />;
       case 7:
+        return <MonetizationOnIcon />;
+      case 8:
         return <BarChartIcon />;
       default:
         break;

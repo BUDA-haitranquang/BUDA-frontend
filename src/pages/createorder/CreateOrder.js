@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import _ from "lodash";
@@ -15,8 +15,6 @@ import Navbar from "./Navbar";
 import CostGrid from "./order/costpane/CostGrid";
 import OrderProducts from "./order/itemspane/OrderProducts";
 import SearchProductBar from "./order/itemspane/SearchProductBar";
-import Services from "./order/others/services/Services";
-import Shipping from "./order/others/Shipping";
 
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
@@ -29,15 +27,15 @@ const useStyle = makeStyles(() => ({
     height: "100vh",
     overflow: "hidden",
     "& .main-order-grid": {
-      "& .others": {
-        "& .MuiGrid-root": {
-          height: "26vh",
-          backgroundColor: `${color4}`,
-          border: "2px solid gray",
-          padding: "6px",
-          overflow: "hidden",
-        },
-      },
+      // "& .others": {
+      //   "& .MuiGrid-root": {
+      //     height: "26vh",
+      //     backgroundColor: `${color4}`,
+      //     border: "2px solid gray",
+      //     padding: "6px",
+      //     overflow: "hidden",
+      //   },
+      // },
     },
   },
 }));
@@ -45,7 +43,7 @@ const useStyle = makeStyles(() => ({
 export default function CreateOrder() {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const { productCart, totalPrice, discount } = useSelector(
+  const { productCart, totalPrice, discount, customer } = useSelector(
     (state) => state.productCart
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);
@@ -54,7 +52,6 @@ export default function CreateOrder() {
   // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
   // #tatcataiTranQuangHai
   const createNewOrder = async () => {
-
     // Cái _ là lodash nhé (nôm na thì lodash là một thư viện chứa các utilities khá là mạnh)
     // Tại sao phải dùng clone ở đây ?
     // Từ từ nhé, đọc chậm thôi này:
@@ -81,17 +78,22 @@ export default function CreateOrder() {
 
     // mutation này nếu không hiểu thì xem comment trong newSellOrderMutation.js
     try {
-      const response = await newSellOrder({
+      await newSellOrder({
         variables: {
           sellOrderItemDTOs: sellOrderInfoMapped,
-          // discountID: 3
+          status: "FINISHED",
+          customerID: customer?.customerID,
+          discountID: discount?.discountID,
         },
         refetchQueries: [{ query: LOAD_PRODUCTS }],
-      });
-      console.log(response);
+      })
     } catch (e) {
-      alert(e.graphQLErrors[0].extensions.response.body);
-      // alert(e.message);
+      console.table(e);
+      // alert(e.graphQLErrors[0].extensions.response.body);
+      alert(e.message);
+      // setTimeout(1000);
+    } finally {
+      window.location.reload();
     }
 
     dispatch(clearProductCart());
@@ -105,10 +107,10 @@ export default function CreateOrder() {
           <SearchProductBar />
           <Box className="itemsPane">
             <OrderProducts />
-            <Grid container className="others">
-              <Services />
+            {/* <Grid container className="others"> tạm thời chưa deploy tính năng này
+              <Services /> 
               <Shipping />
-            </Grid>
+            </Grid> */}
           </Box>
           <CostGrid />
         </Grid>
@@ -121,14 +123,22 @@ export default function CreateOrder() {
           <SearchCustomerBar />
           <CustomerInfo />
           <CustomerPayment />
+          <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            <Button
+              onClick={createNewOrder}
+              variant="contained"
+              color="success"
+              disabled={productCart.length <= 0}
+              sx={{
+                marginTop: "24px",
+                width: "40%",
+                height: "60px",
+              }}
+            >
+              <Typography variant="h5">DONE</Typography>
+            </Button>
+          </Box>
         </Grid>
-        <Button
-          onClick={createNewOrder}
-          variant="contained"
-          disabled={productCart.length > 0 ? false : true}
-        >
-          DONE
-        </Button>
       </Grid>
     </Box>
   );

@@ -1,43 +1,105 @@
-import SearchIcon from '@mui/icons-material/Search';
-import { FormControl, IconButton, InputAdornment, OutlinedInput, Typography } from "@mui/material";
+import { useQuery } from "@apollo/client";
+import {
+  Autocomplete,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import AddCustomerModal from "../../../../components/modal/AddCustomerModal";
+import { LOAD_CUSTOMERS } from "../../../../graphQl/customers/customersQueries";
+import { addCustomer } from "../../../../redux/productCartSlice";
 
 const useStyle = makeStyles(() => ({
   root: {
+    display: "flex",
+    justifyContent: "space-between",
     marginBottom: "12px",
     "& .MuiOutlinedInput-input": {
       paddingTop: "10px",
       paddingBottom: "10px",
-      color: "black"
+      color: "black",
     },
   },
 }));
 
 export default function SearchCustomerBar() {
   const classes = useStyle();
+  const dispatch = useDispatch();
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [value, setValue] = useState("");
-  const handleSearch = () => {};
+  const [searchValue, setSearchValue] = useState("");
+  const [customers, setCustomers] = useState([]);
+  const { data } = useQuery(LOAD_CUSTOMERS);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (data) setCustomers(data.customersByUser);
+    }
+
+    fetchData();
+  }, [data]);
+
+  const handleAddCustomer = (value) => {
+    if (value) {
+      dispatch(addCustomer(value));
+      setValue("");
+    }
+  };
+
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+
   return (
     <Box className={classes.root}>
-      <FormControl variant="outlined" fullWidth>
-        <OutlinedInput
-          placeholder="Search Customer"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton type="submit" onClick={(e) => handleSearch(value)}>
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          }
-          onKeyPress={(e) => {
-            if (e.key === "Enter") handleSearch(value);
-          }}
-        />
-      </FormControl>
+      <Autocomplete
+        id="customer-select"
+        value={value}
+        onChange={(event, value) => handleAddCustomer(value)}
+        options={customers}
+        sx={{ width: "60%" }}
+        autoHighlight
+        getOptionLabel={(option) => option.name + option.phoneNumber ||""}
+        inputValue={searchValue}
+        onInputChange={(event, newInputValue, reason) => {
+          if (reason === "reset") setSearchValue("");
+          else setSearchValue(newInputValue);
+        }}
+        renderOption={(props, option) => (
+          <Box
+            {...props}
+            style={{ width: "100%", borderBottom: "1px solid #e1dede" }}
+          >
+            <Grid>
+              <Typography>{option.name}</Typography>
+              <Typography style={{ opacity: 0.6 }}>
+                {option.phoneNumber}
+              </Typography>
+            </Grid>
+          </Box>
+        )}
+        renderInput={(params) => {
+          return <TextField {...params} label="Search Customer"></TextField>;
+        }}
+      />
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ width: "35%", padding: "2px" }}
+        onClick={handleOpenModal}
+      >
+        NEW CUSTOMER
+      </Button>
+      <AddCustomerModal isOpen={isOpenModal} handleClose={handleCloseModal} />
     </Box>
   );
 }
