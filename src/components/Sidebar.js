@@ -6,6 +6,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MenuIcon from "@mui/icons-material/Menu";
+import WorkIcon from "@mui/icons-material/Work";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
@@ -22,7 +23,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -38,12 +39,12 @@ const useStyle = makeStyles({
       color: "black",
       "&:hover": {
         color: "grey",
-        fontWeight: "600"
-      }
+        fontWeight: "600",
+      },
     },
     "& a:visited": {
-      color: "black"
-    }
+      color: "black",
+    },
   },
   logo: {
     width: "100%",
@@ -52,20 +53,21 @@ const useStyle = makeStyles({
     display: "flex",
     justifyContent: "center",
     textDecoration: "none",
-    color: "black"
-  }
+    color: "black",
+  },
 });
 const drawerWidth = 200;
 
 const title = [
   "dashboard",
+  "business",
   "product",
   "ingredient",
   "supplier",
   "customer",
   "staff",
   "cost",
-  "statistic"
+  "statistic",
 ];
 
 function createData(name, link, check) {
@@ -73,26 +75,29 @@ function createData(name, link, check) {
 }
 
 const sidebarItems = [
-  [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
+  [createData("Overall", "overall", ""), createData("Incomplete", "incomplete", "")],
   [
-    createData("Product", "", ""),
-    createData("Collation", "collation", ""),
-    createData("Delete", "delete", "")
+    createData("Sell", "sell", ""),
+    createData("Sell history", "sell-history", ""),
+    createData("Buy", "buy", ""),
+    createData("Buy history", "buy-history", ""),
   ],
+  [createData("Product", "", ""), createData("Collation", "collation", "")],
   [createData("Ingredient", "", "")],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
+
   [createData("Note", "note", "")],
   [
     createData("Fixed", "fixedcost", ""),
     createData("Fixed Cost Bill", "fixedcostBill", ""),
-    createData("Other Cost", "othercost", "")
+    createData("Other Cost", "othercost", ""),
   ],
   [
     createData("Business", "business", ""),
     createData("Customer", "customer", ""),
-    createData("Product", "product", "")
-  ]
+    createData("Product", "product", ""),
+  ],
 ];
 const Sidebar = ({ window, name }) => {
   const history = useHistory();
@@ -110,6 +115,7 @@ const Sidebar = ({ window, name }) => {
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {
+    if (typeof string !== "string") return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
@@ -118,18 +124,20 @@ const Sidebar = ({ window, name }) => {
       case 0:
         return <AddShoppingCartIcon />;
       case 1:
-        return <ShoppingBasketOutlined />;
+        return <WorkIcon />;
       case 2:
-        return <StoreIcon />;
+        return <ShoppingBasketOutlined />;
       case 3:
-        return <ShoppingCartIcon />;
+        return <StoreIcon />;
       case 4:
-        return <GroupsIcon />;
+        return <ShoppingCartIcon />;
       case 5:
-        return <AssignmentIndIcon />;
+        return <GroupsIcon />;
       case 6:
-        return <MonetizationOnIcon />;
+        return <AssignmentIndIcon />;
       case 7:
+        return <MonetizationOnIcon />;
+      case 8:
         return <BarChartIcon />;
       default:
         break;
@@ -199,7 +207,7 @@ const Sidebar = ({ window, name }) => {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` }
+          ml: { sm: `${drawerWidth}px` },
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -234,14 +242,14 @@ const Sidebar = ({ window, name }) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth
-            }
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -252,8 +260,8 @@ const Sidebar = ({ window, name }) => {
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth
-            }
+              width: drawerWidth,
+            },
           }}
           open
         >

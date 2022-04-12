@@ -5,9 +5,9 @@ const SupplierTableBody = (props) => {
     return (
        <>
         <TableCell component="th" id={labelId} scope="row">{row.name}</TableCell>
-        <TableCell align="center">{row.phoneNumber}</TableCell>
-        <TableCell align="center">{row.address}</TableCell>
-        <TableCell align="center">{row.email}</TableCell>
+        <TableCell align="left ">{row.phoneNumber}</TableCell>
+        <TableCell align="left">{row.address}</TableCell>
+        <TableCell align="left">{row.email}</TableCell>
    </>     
     );
 };

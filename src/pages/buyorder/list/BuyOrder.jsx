@@ -89,12 +89,12 @@ const BuyOrder = (props) => {
         justifyContent="center"
         m={3}
       >
-        <Toolbar />
+        <Toolbar /> 
         <Button
           variant="contained"
           color="primary"
           style={{ alignSelf: "flex-end" }}
-          onClick={() => history.push(`/buy-order/create`)}
+          onClick={() => history.push(`/business/buy`)}
         >
           Create buy order
         </Button>
