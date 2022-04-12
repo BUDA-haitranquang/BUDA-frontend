@@ -4,6 +4,7 @@ export const LOAD_PRODUCTS = gql`
   query {
     productsByUser {
       productID
+      sku: productSKU
       name
       sellingPrice
       amountLeft
@@ -18,6 +19,7 @@ export const LOAD_PRODUCT = gql`
   query product($productID: Int!) {
     product(productID: $productID) {
       productID
+      sku: productSKU
       name
       description
       amountLeft
