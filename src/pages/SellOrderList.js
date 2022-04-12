@@ -9,11 +9,6 @@ import { DELETE_SELL_ORDER_MUTATION } from "../graphQl/sellOrder/newSellOrderMut
 // import BudaTableServer from "../buda-components/tableservertable/BudaServerTable";
 import BudaServerTable from "../buda-components/budaservertable/BudaServerTable";
 import SellOrderTableBody from "../components/table/body/SellOrderTableBody";
-import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
 const headCells = [
   {
     id: "sellOrderID",
@@ -55,28 +50,6 @@ const headCells = [
 
 const SellOrderList = (props) => {
   const { window } = props;
-  // const { error, loading, data } = useQuery(LOAD_SELL_ORDER);
-  const [deleteSellOrder] = useMutation(DELETE_SELL_ORDER_MUTATION);
-  const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
-  const handleDelete = (selected) => {
-    if (selected === []) return;
-    setIsLoading(true);
-    try {
-      selected.forEach((item) => {
-        deleteSellOrder({
-          variables: { sellOrderID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_SELL_ORDER }],
-        });
-      });
-      enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
-    } catch (e) {
-      enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -93,11 +66,11 @@ const SellOrderList = (props) => {
 
         <Box>
           <BudaServerTable
-            deleteItems={handleDelete}
             headCells={headCells}
             type="id"
             DetailTableBody={SellOrderTableBody}
-            searchBar = {false}
+            searchBar={false}
+            isNotShowCheckBox={true}
           />
         </Box>
       </Box>

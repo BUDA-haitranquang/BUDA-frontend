@@ -94,7 +94,7 @@ const BuyOrder = (props) => {
           variant="contained"
           color="primary"
           style={{ alignSelf: "flex-end" }}
-          onClick={() => history.push(`/buy-order/create`)}
+          onClick={() => history.push(`/business/buy/create`)}
         >
           Create buy order
         </Button>

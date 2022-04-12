@@ -26,7 +26,7 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
-import Discount from './pages/Discount';
+import Discount from "./pages/Discount";
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
@@ -78,11 +78,14 @@ const AppRouter = () => {
     new HttpLink({ uri: "http://143.198.194.24:4000/" }),
   ]);
 
-  const PrivateRoute = ({ authed, ...routeProps }) =>{
+  const PrivateRoute = ({ authed, ...routeProps }) => {
     console.log(authed);
-    return authed === true ? <Route {...routeProps} /> : <Redirect to="/login" />;
-  }
-    
+    return authed === true ? (
+      <Route {...routeProps} />
+    ) : (
+      <Redirect to="/login" />
+    );
+  };
 
   const getNewAccessToken = async () => {
     return client
@@ -119,14 +122,11 @@ const AppRouter = () => {
       <Router>
         <Switch>
           <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
+          <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
           <PrivateRoute
             authed={isAuth}
-            exact path="/staff"
-            component={Staff}
-          />
-          <PrivateRoute
-            authed={isAuth}
-            exact path="/staff/note/:id"
+            exact
+            path="/staff/note/:id"
             component={StaffDetail}
           />
           <PrivateRoute
@@ -159,7 +159,7 @@ const AppRouter = () => {
             path="/product/:id"
             component={ProductDetail}
           />
-       
+
           <PrivateRoute
             authed={isAuth}
             exact
@@ -187,7 +187,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/create-order"
+            path="/business/sell"
             component={CreateOrder}
           />
           <PrivateRoute
@@ -196,16 +196,16 @@ const AppRouter = () => {
             path="/buy-order"
             component={BuyOrder}
           />
-          <PrivateRoute
+          {/* <PrivateRoute
             authed={isAuth}
             exact
             path="/buy-order/create"
             component={CreateBuyOrder}
-          />
+          /> */}
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/buy-order/:id"
+            path="/business/buy/:id"
             component={DetailBuyOrder}
           />
           <PrivateRoute
@@ -214,7 +214,7 @@ const AppRouter = () => {
             path="/sellorderstatistic"
             component={SellOrderStats}
           />
-           <PrivateRoute
+          <PrivateRoute
             authed={isAuth}
             exact
             path="/cost/fixedCost"
@@ -226,19 +226,36 @@ const AppRouter = () => {
             path="/cost/fixedcostBill"
             component={FixCostBill}
           />
-           <PrivateRoute
+          <PrivateRoute
             authed={isAuth}
             exact
             path="/cost/othercost"
             component={OtherCost}
           />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/business/sell-history"
+            component={SellOrderList}
+          />
            <PrivateRoute
             authed={isAuth}
             exact
-            path="/buisness/sellorderlist"
-            component={SellOrderList}
+            path="/business/buy"
+            component={CreateBuyOrder}
           />
-          <PrivateRoute authed={isAuth} exact path="/discount" component={Discount} />
+           <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/business/buy-history"
+            component={BuyOrder}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/discount"
+            component={Discount}
+          />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />

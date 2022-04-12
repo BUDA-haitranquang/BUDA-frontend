@@ -47,11 +47,7 @@ const BudaServerTable = (props) => {
     },
   });
   const [isLoading, setIsLoading] = useState(false);
-//   const displayData = display.slice(
-//     page * rowsPerPage,
-//     (page + 1) * rowsPerPage
-//   );
- const  displayData = display;
+  const displayData = display;
   const handlePageChange = (e, newPage) => {
     setPage(newPage);
   };
@@ -75,10 +71,10 @@ const BudaServerTable = (props) => {
 
   useEffect(() => {
     const loadData = async () => {
-        if (data) {
+      if (data) {
         let sellorder = data.sellOrdersByUser.map((item) => {
           return {
-            id: item.sellOrderID, 
+            id: item.sellOrderID,
             customerName: item.customer?.name,
             sellOrderID: item.textID,
             finalCost: item.finalCost,
@@ -88,14 +84,15 @@ const BudaServerTable = (props) => {
           };
         });
         setDisplay(sellorder);
-      }};
+      }
+    };
     loadData();
   }, [data]);
   useEffect(() => {
     refetch();
     setSelected([]);
   }, [page, rowsPerPage]);
-  
+
   const handleSelectAllClick = (e) => {
     if (e.target.checked) {
       const newSelecteds = display.map((n) => n[type]);
@@ -104,7 +101,7 @@ const BudaServerTable = (props) => {
     }
     setSelected([]);
   };
- 
+
   //   useEffect(() => {
   //     !search
   //       ? setDisplay(data)
@@ -127,7 +124,7 @@ const BudaServerTable = (props) => {
             handleOpen={handleOpen}
             handleSearch={(val) => setSearch(val)}
             headCells={headCells}
-            searchBar = {searchBar}
+            searchBar={searchBar}
             searchBy={(val) => setSearchBy(val)}
             deleteItem={() => {
               deleteItems(selected);
@@ -177,7 +174,7 @@ const BudaServerTable = (props) => {
           nextIconButtonProps={
             displayData.length === 0
               ? {
-                  disabled: true
+                  disabled: true,
                 }
               : undefined
           }
