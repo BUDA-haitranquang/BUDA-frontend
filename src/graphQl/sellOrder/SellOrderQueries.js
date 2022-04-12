@@ -1,37 +1,37 @@
 import { gql } from "@apollo/client";
 
-export const LOAD_SELL_ORDERS = gql`
-    query{
-        sellOrdersByUser{
-            sellOrderID
-            customer {
-                name
-                address
-                phoneNumber
-            }
-            discount {
-                percentage
-            }
-            creationTime
-            finishTime
-            ageGroup
-            gender
-            actualDiscountCash
-            actualDiscountPercentage
-            realCost
-            finalCost
-            userID
-            staff {
-                name
-            }
-            customerMessage
-            status
-            textID
-        }
+export const LOAD_SELL_ORDER = gql`
+  query sellOrdersByUser($page: Int, $size: Int) {
+    sellOrdersByUser(page: $page, size: $size) {
+      sellOrderID
+      customer {
+          name
+          address
+          phoneNumber
+      }
+      discount {
+          percentage
+      }
+      creationTime
+      finishTime
+      ageGroup
+      gender
+      actualDiscountCash
+      actualDiscountPercentage
+      realCost
+      finalCost
+      userID
+      staff {
+          name
+      }
+      customerMessage
+      status
+      textID
     }
-` 
+  }
+`;
 
-export const LOAD_SELL_ORDER = gql `
+export const LOAD_SELL_ORDER_DETAILS = gql `
     query LOAD_SELL_ORDER($sellOrderID: Int){
         sellOrder(sellOrderID: $sellOrderID){
             sellOrderID
