@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Box, TableCell, TableRow } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Input from "@material-ui/core/Input";
-import { changeProductCartItem } from "../../../../../../../redux/productCartSlice";
 
 BuyOrderItem.propTypes = {
   item: PropTypes.object,
