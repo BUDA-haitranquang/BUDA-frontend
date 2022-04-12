@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const BudaBarChart=({data,xAxis,width = '100%',height = '100%',legend = true,info,...props})=> {
+const BudaBarChart=({data,xAxis,width = '100%',height = '100%',legend = true,info,yUnit = '',...props})=> {
     return (
       <ResponsiveContainer width= {width} height={height}>
         <BarChart
@@ -17,7 +17,7 @@ const BudaBarChart=({data,xAxis,width = '100%',height = '100%',legend = true,inf
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={xAxis} />
-          <YAxis />
+          <YAxis unit = {yUnit}/>
           <Tooltip />
           {legend && <Legend />}
           {/* <Bar dataKey="pv" fill="#CD201F" name = 'Chi phí'/>

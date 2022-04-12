@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Button, OutlinedInput, InputAdornment } from "@mui/material";
-
+import {
+  Box,
+  Button,
+  OutlinedInput,
+  InputAdornment,
+  Typography,
+  Link,
+} from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
@@ -18,21 +24,6 @@ import {
 } from "../../buda-components/alert/BudaNoti";
 import { REGISTER_USER } from "../../graphQl/authentication/authMutations";
 const useStyle = makeStyles({
-  outlinedInputName: {
-    "&.MuiOutlinedInput-root": {
-      backgroundColor: "#fff",
-      borderRadius: "10px",
-      width: "35%",
-      height: "40px",
-    },
-    "label + &": {
-      marginTop: "15px",
-    },
-    "& input": {
-      padding: "15px",
-      height: "10px",
-    },
-  },
   label: {
     "&.MuiInputLabel-root": {
       "&.Mui-focused": { color: "black" },
@@ -42,7 +33,7 @@ const useStyle = makeStyles({
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   wrapper: {
     display: "flex",
@@ -68,36 +59,40 @@ const useStyle = makeStyles({
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
-      backgroundColor: "#fff",
+      backgroundColor: "#224957",
       borderRadius: "10px",
-      width: "75%",
-      height: "40px",
+      width: "100%",
+      height: "50px",
+      "&:hover": {
+        outline: "none",
+        boxShadow: "0px 0px 0px 3px #20DF7F inset",
+      },
     },
-    "label + &": {
-      marginTop: "15px",
+    "&.MuiOutlinedInput-inputAdornedStart": {
+      opacity: 0.5,
     },
     "& input": {
       padding: "15px",
       height: "10px",
     },
-  },
-  checkboxWrapper: { marginLeft: "15%" },
-  buttonWrapper: {
-    marginLeft: "15%",
-    width: "70%",
+    "& .MuiOutlinedInput-input": {
+      color: "#ffffff",
+    },
   },
   button: {
     "&.MuiButton-root": {
-      color: "#fff",
-      width: "75%",
+      width: "100%",
+      background: "#20DF7F",
+      color: "white",
       borderRadius: 10,
-      //border: "1px solid #fff",
-      backgroundColor: "#42B72A",
-      height: 40,
+      height: 50,
       "&:hover": {
-        backgroundImage: "linear-gradient(120deg, #C9FFBF 0%, #FFAFBD 100%)",
+        background: "#56EFA2",
         border: "none",
       },
+    },
+    "&.MuiButton-text": {
+      fontSize: 19,
     },
   },
 });
@@ -181,44 +176,49 @@ const SignUpForm = () => {
   };
   return (
     <>
-      <Box mx={10} className={classes.wrapper}>
+      <Box className={classes.wrapper}>
         <Box
           style={{
             width: "100%",
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Box className={classes.headlineText}>Welcome!</Box>
-          <Box className={classes.formContainer} pt={2}>
+          <Box
+            style={{ marginLeft: "8rem", marginRight: "8rem" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
             <Box className={classes.nameWrapper}>
               <OutlinedInput
-                className={classes.outlinedInputName}
+                className={classes.outlinedInput}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 type="text"
                 placeholder="First Name"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon style={{ opacity: 0.5 }} />
+                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
                   </InputAdornment>
                 }
+                style={{ marginBottom: "1.25rem", marginRight: "0.5rem" }}
               />
-              <Box px={2}></Box>
               <OutlinedInput
-                className={classes.outlinedInputName}
+                className={classes.outlinedInput}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 type="text"
                 placeholder="Last Name"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon style={{ opacity: 0.5 }} />
+                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
                   </InputAdornment>
                 }
+                style={{ marginBottom: "1.25rem", marginLeft: "0.5rem" }}
               />
             </Box>
-            <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={email}
@@ -227,11 +227,11 @@ const SignUpForm = () => {
               placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
-                  <EmailIcon style={{ opacity: 0.5 }} />
+                  <EmailIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={phone}
@@ -240,9 +240,10 @@ const SignUpForm = () => {
               placeholder="Phone Number"
               startAdornment={
                 <InputAdornment position="start">
-                  <PhoneIcon style={{ opacity: 0.5 }} />
+                  <PhoneIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
             <Box py={1}></Box>
 
@@ -254,9 +255,10 @@ const SignUpForm = () => {
               placeholder=" Username"
               startAdornment={
                 <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5 }} />
+                  <PersonIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
             <Box py={1}></Box>
             <OutlinedInput
@@ -267,19 +269,19 @@ const SignUpForm = () => {
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5 }} />
+                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
               endAdornment={
                 <InputAdornment position="end">
                   <Button onClick={handleVisibility}>
                     {" "}
-                    <VisibilityIcon style={{ opacity: 0.5 }} />
+                    <VisibilityIcon style={{ opacity: 0.5, color: "white" }} />
                   </Button>
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-            <Box py={1}></Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={confirmPassword}
@@ -288,15 +290,36 @@ const SignUpForm = () => {
               placeholder="Confirm Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5 }} />
+                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
                 </InputAdornment>
               }
+              style={{ marginBottom: "1.25rem" }}
             />
-
-            <Box py={1}></Box>
-            <Button className={classes.button} onClick={handleSubmit} ref={btn}>
+            <Button
+              className={classes.button}
+              onClick={handleSubmit}
+              ref={btn}
+              style={{ marginBottom: "1.25rem" }}
+            >
               Sign up
             </Button>
+            <Typography>
+              <Link
+                onClick={(e) => {
+                  history.push("/login");
+                }}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  color: "white",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Back to login page
+              </Link>
+            </Typography>
           </Box>
         </Box>
       </Box>

@@ -22,6 +22,12 @@ const headCells = [
   //   label: "ID",
   // },
   {
+    id: "sku",
+    numeric: false,
+    disablePadding: false,
+    label: "SKU",
+  },
+  {
     id: "name",
     numeric: false,
     disablePadding: false,
