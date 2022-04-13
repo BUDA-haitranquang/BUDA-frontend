@@ -50,7 +50,7 @@ export default function CustomerInfo() {
             <TableRow>
               <TableCell>Total Spend:</TableCell>
               <TableCell align="right">
-                <i>{customer?.totalSpend.toLocaleString() || 0}</i>
+                <i>{customer?.totalSpend?.toLocaleString() || 0}</i>
               </TableCell>
             </TableRow>
             <TableRow>
