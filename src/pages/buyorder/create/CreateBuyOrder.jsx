@@ -10,12 +10,13 @@ import { NEW_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
+import BoxMoney from "./components/BoxMoney/BoxMoney";
 
 CreateBuyOrder.propTypes = {};
 
 function CreateBuyOrder(props) {
   const { window } = props;
-  const [buyOrderRequest, setBuyOrderRequest] = useState(null);
+  const [buyOrderRequest, setBuyOrderRequest] = useState({});
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -102,7 +103,16 @@ function CreateBuyOrder(props) {
         justifyContent="center"
       >
         <Toolbar />
-        <Box padding={3} width="100%" bgcolor="#f0f2f5">
+        <Box
+          padding={3}
+          width="100%"
+          bgcolor="#f0f2f5"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+          }}
+        >
           <CreateBuyOrderContext.Provider
             value={{ buyOrderRequest, setBuyOrderRequest }}
           >
@@ -116,13 +126,17 @@ function CreateBuyOrder(props) {
               <Grid item xs={12}>
                 <BoxIngredient />
               </Grid>
+              <Grid item xs={12}>
+                <BoxMoney />
+              </Grid>
             </Grid>
           </CreateBuyOrderContext.Provider>
 
           <Button
             variant="contained"
-            color={"success"}
+            color="primary"
             onClick={handleCreateBuyOrder}
+            style={{ alignSelf: "flex-end" }}
           >
             Create
           </Button>
