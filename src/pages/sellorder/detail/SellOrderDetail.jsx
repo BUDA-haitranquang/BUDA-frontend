@@ -32,7 +32,7 @@ function SellOrderDetail(props) {
   }, [data]);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex"}}>
       <Sidebar window={window} name="Sell Order" />
 
       <Box
@@ -49,10 +49,10 @@ function SellOrderDetail(props) {
           </Typography>
 
           <Grid container spacing={3}>
-            <Grid item sm={12} md={9}>
+            <Grid item xs={8} >
               <BoxCustomer customer={sellOrder?.customer} />
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item xs={4} >
               <BoxAdditionalInfo
                 status={sellOrder?.status}
                 textID={sellOrder?.textID}

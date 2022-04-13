@@ -14,7 +14,14 @@ BoxAdditionalInfo.propTypes = {
 function BoxAdditionalInfo(props) {
   const { textID, creationTime, finishTime, status } = props;
   const classes = useStyles();
-
+  let cTime = null;
+  let fTime = null;
+  if(creationTime){
+    cTime = creationTime.slice(0,10) + '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + creationTime.slice(11,19);
+  }
+  if(finishTime){
+    fTime = finishTime.slice(0,10) + '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + finishTime.slice(11,19)
+  }
   return (
     <Paper className={classes.root}>
       <Box className="BoxAdditionalInfo-header">
@@ -40,14 +47,14 @@ function BoxAdditionalInfo(props) {
           <Typography className="BoxAdditionalInfo-info-field">
             Creation time
           </Typography>
-          <Typography>{creationTime || "--/--/----"}</Typography>
+          <Typography>{creationTime ? cTime :  "--/--/----"}</Typography>
         </Grid>
 
         <Grid className="BoxAdditionalInfo-info" item xs={12}>
           <Typography className="BoxAdditionalInfo-info-field">
             Finish time
           </Typography>
-          <Typography>{finishTime || "--/--/----"}</Typography>
+          <Typography>{finishTime ? fTime : "--/--/----"}</Typography>
         </Grid>
       </Grid>
     </Paper>

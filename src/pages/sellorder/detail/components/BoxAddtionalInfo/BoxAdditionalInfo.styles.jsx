@@ -5,7 +5,6 @@ const useStyles = makeStyles(() => ({
     overflow: "auto",
     padding: "0 16px",
     height: "100%",
-
     "& .BoxAdditionalInfo-header": {
       display: "flex",
       alignItems: "center",
