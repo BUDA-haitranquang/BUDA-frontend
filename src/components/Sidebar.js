@@ -60,11 +60,11 @@ const drawerWidth = 200;
 
 const title = [
   "dashboard",
+  "business",
   "product",
   "ingredient",
   "supplier",
   "customer",
-  "business",
   "staff",
   "cost",
   "statistic",
@@ -75,16 +75,18 @@ function createData(name, link, check) {
 }
 
 const sidebarItems = [
-  [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
+  [createData("Overall", "overall", ""), createData("Incomplete", "incomplete", "")],
   [
-    createData("Product", "", ""),
-    createData("Collation", "collation", ""),
-    createData("Delete", "delete", ""),
+    createData("Sell", "sell", ""),
+    createData("Sell history", "sell-history", ""),
+    createData("Buy", "buy", ""),
+    createData("Buy history", "buy-history", ""),
   ],
+  [createData("Product", "", ""), createData("Collation", "collation", "")],
   [createData("Ingredient", "", "")],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
-  [createData("Sell", "sell", ""), createData("Buy", "buy", "")],
+
   [createData("Note", "note", "")],
   [
     createData("Fixed", "fixedcost", ""),
@@ -122,15 +124,15 @@ const Sidebar = ({ window, name }) => {
       case 0:
         return <AddShoppingCartIcon />;
       case 1:
-        return <ShoppingBasketOutlined />;
-      case 2:
-        return <StoreIcon />;
-      case 3:
-        return <ShoppingCartIcon />;
-      case 4:
-        return <GroupsIcon />;
-      case 5:
         return <WorkIcon />;
+      case 2:
+        return <ShoppingBasketOutlined />;
+      case 3:
+        return <StoreIcon />;
+      case 4:
+        return <ShoppingCartIcon />;
+      case 5:
+        return <GroupsIcon />;
       case 6:
         return <AssignmentIndIcon />;
       case 7:

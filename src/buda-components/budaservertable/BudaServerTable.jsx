@@ -6,14 +6,17 @@ import {
   TablePagination,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import BudaTableBody from "./BudaTableBody";
-import BudaTableHead from "./BudaTableHead";
-import BudaTableToolbar from "./BudaTableToolbar";
-const BudaTable = (props) => {
+import BudaServerTableBody from "./BudaServerTableBody";
+import BudaServerTableHead from "./BudaServerTableHead";
+import BudaServerTableToolbar from "./BudaServerTableToolbar";
+import { useQuery } from "@apollo/client";
+import { LOAD_SELL_ORDER } from "../../graphQl/sellOrder/sellOrderQueries";
+import { dateToDateString } from "../../utils/utils";
+import { capitalizeFirstLetter } from "../../utils/utils";
+const BudaServerTable = (props) => {
   const {
     tableChildren,
     modalChildren,
-    data,
     headCells,
     Modal,
     DetailTableBody,
@@ -24,6 +27,7 @@ const BudaTable = (props) => {
     padding,
     size,
     isNotShowCheckBox = false,
+    searchBar = true,
     ...remainProps
   } = props;
 
@@ -33,15 +37,17 @@ const BudaTable = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
   const [isOpen, setIsOpen] = useState(false);
-  const [display, setDisplay] = useState(data);
+  const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState(headCells[0].id);
-
-  const displayData = display.slice(
-    page * rowsPerPage,
-    (page + 1) * rowsPerPage
-  );
-
+  const { data, refetch } = useQuery(LOAD_SELL_ORDER, {
+    variables: {
+      page: parseInt(page),
+      size: parseInt(rowsPerPage),
+    },
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const displayData = display;
   const handlePageChange = (e, newPage) => {
     setPage(newPage);
   };
@@ -63,6 +69,30 @@ const BudaTable = (props) => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const loadData = async () => {
+      if (data) {
+        let sellorder = data.sellOrdersByUser.map((item) => {
+          return {
+            id: item.sellOrderID,
+            customerName: item.customer?.name,
+            sellOrderID: item.textID,
+            finalCost: item.finalCost,
+            creationTime: dateToDateString(item.creationTime),
+            finishTime: dateToDateString(item.finishTime),
+            status: capitalizeFirstLetter(item.status),
+          };
+        });
+        setDisplay(sellorder);
+      }
+    };
+    loadData();
+  }, [data]);
+  useEffect(() => {
+    refetch();
+    setSelected([]);
+  }, [page, rowsPerPage]);
+
   const handleSelectAllClick = (e) => {
     if (e.target.checked) {
       const newSelecteds = display.map((n) => n[type]);
@@ -71,28 +101,30 @@ const BudaTable = (props) => {
     }
     setSelected([]);
   };
-  useEffect(() => {
-    !search
-      ? setDisplay(data)
-      : setDisplay(
-          data.filter((item) =>
-            item[searchBy]
-              ?.toString()
-              .toUpperCase()
-              .includes(search.toString().toUpperCase())
-          )
-        );
-  }, [search, searchBy, data]);
+
+  //   useEffect(() => {
+  //     !search
+  //       ? setDisplay(data)
+  //       : setDisplay(
+  //           data.filter((item) =>
+  //             item[searchBy]
+  //               .toString()
+  //               .toUpperCase()
+  //               .includes(search.toString().toUpperCase())
+  //           )
+  //         );
+  //   }, [search, searchBy, data]);
 
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
         <TableContainer sx={{ paddingRight: "10px" }}>
-          <BudaTableToolbar
+          <BudaServerTableToolbar
             numSelected={selected.length}
             handleOpen={handleOpen}
             handleSearch={(val) => setSearch(val)}
             headCells={headCells}
+            searchBar={searchBar}
             searchBy={(val) => setSearchBy(val)}
             deleteItem={() => {
               deleteItems(selected);
@@ -105,7 +137,7 @@ const BudaTable = (props) => {
             stickyHeader={stickyHeader}
             {...remainProps}
           >
-            <BudaTableHead
+            <BudaServerTableHead
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -115,7 +147,7 @@ const BudaTable = (props) => {
               headCells={headCells}
               isNotShowCheckbox={isNotShowCheckBox}
             />
-            <BudaTableBody
+            <BudaServerTableBody
               order={order}
               orderBy={orderBy}
               selected={selected}
@@ -134,15 +166,22 @@ const BudaTable = (props) => {
         <TablePagination
           rowsPerPageOptions={[20, 50, 100]}
           component="div"
-          count={display.length}
+          count={1000}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleRowsPerPageChange}
+          nextIconButtonProps={
+            displayData.length === 0
+              ? {
+                  disabled: true,
+                }
+              : undefined
+          }
         />
       </Paper>
     </Box>
   );
 };
 
-export default BudaTable;
+export default BudaServerTable;
