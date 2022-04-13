@@ -7,6 +7,7 @@ import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { LOAD_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderQueries";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import BoxMoney from "./components/BoxMoney/BoxMoney";
 
 DetailBuyOrder.propTypes = {};
 
@@ -62,6 +63,16 @@ function DetailBuyOrder(props) {
             </Grid>
             <Grid item xs={12}>
               <BoxIngredient buyOrderItems={buyOrder?.buyOrderItems} />
+            </Grid>
+            <Grid item xs={12}>
+              <BoxMoney
+                totalMoney={buyOrder?.buyOrderItems.reduce(
+                  (previousValue, currentValue) =>
+                    previousValue +
+                    currentValue.quantity * currentValue.pricePerUnit,
+                  0
+                )}
+              />
             </Grid>
           </Grid>
         </Box>
