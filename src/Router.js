@@ -39,6 +39,7 @@ import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
+import IngredientDetail from "./pages/IngerdientsDetail";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -165,6 +166,12 @@ const AppRouter = () => {
             exact
             path="/ingredient"
             component={Ingredient}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/ingredient/:id"
+            component={IngredientDetail}
           />
           <PrivateRoute
             authed={isAuth}
