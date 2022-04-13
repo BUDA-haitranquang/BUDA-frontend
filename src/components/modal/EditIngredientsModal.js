@@ -26,13 +26,7 @@ const EditIngredientModal = ({ data, isOpen, handleClose }) => {
   const [description, setDescription] = useState(ingredient.description);
   const [updateIngredient] = useMutation(UPDATE_INGREDIENT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
-  const resetForm = () => {
-    setName("");
-    setPrice(0);
-    setAlertAmountLeft(0);
-    setAmountLeft(0);
-    setDescription("");
-  };
+
   const editIngredient = () => {
     setIsLoading(true);
     updateIngredient({

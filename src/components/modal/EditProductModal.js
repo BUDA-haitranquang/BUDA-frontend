@@ -29,16 +29,6 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const resetForm = () => {
-    setName("");
-    setPrice(0);
-    setAmountLeft(0);
-    setAlertAmount(0);
-    setCostPerUnit(0);
-    setSku("");
-    setDescription("");
-  };
-
   const editProduct = () => {
     setIsLoading(true);
     updateProduct({
