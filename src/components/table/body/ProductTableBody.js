@@ -8,13 +8,13 @@ const ProductTableBody = (props) => {
       {/* <TableCell align="right">{row.id}</TableCell> */}
       <TableCell component="th" id={labelId} scope="row">
         <Link
-          to={{ pathname: `${row.productID}`,}}
+          to={{ pathname: `${row.productID}` }}
           style={{ textDecoration: "none", color: "blue" }}
         >
-          {row.name}
+          {row.sku}
         </Link>
       </TableCell>
-
+      <TableCell align="left">{row.name}</TableCell>
       <TableCell align="right">{row.sellingPrice.toLocaleString()}</TableCell>
       <TableCell align="right">{row.amountLeft.toLocaleString()}</TableCell>
       <TableCell align="right">{row.alertAmount.toLocaleString()}</TableCell>

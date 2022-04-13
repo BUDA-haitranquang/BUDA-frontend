@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, TableCell, TableRow } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import Input from "@material-ui/core/Input";
 
 BuyOrderItem.propTypes = {
   item: PropTypes.object,
@@ -11,6 +12,20 @@ BuyOrderItem.propTypes = {
 
 function BuyOrderItem(props) {
   const { item, index, onRemove } = props;
+  const [pricePerUnit, setPricePerUnit] = useState(item.pricePerUnit);
+  const [quantity, setQuantity] = useState(item.quantity);
+
+  const handlePriceChange = (e) => {
+    const price = e.target.value || 0;
+    item.pricePerUnit = parseFloat(price);
+    setPricePerUnit(price);
+  };
+
+  const handleQuantityChange = (e) => {
+    const quantity = e.target.value || 0;
+    item.quantity = parseInt(quantity);
+    setQuantity(quantity);
+  };
 
   const CellImage = useMemo(() => {
     return (
@@ -43,7 +58,14 @@ function BuyOrderItem(props) {
   const CellQuantity = useMemo(() => {
     return (
       <TableCell align="center" style={{ width: "105px" }}>
-        {item.quantity}
+        <Input
+          inputProps={{
+            style: { textAlign: "right" },
+          }}
+          value={item.quantity}
+          onChange={(e) => handleQuantityChange(e)}
+          name="quantity"
+        />
       </TableCell>
     );
   }, [item.quantity]);
@@ -51,7 +73,14 @@ function BuyOrderItem(props) {
   const CellPrice = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {item.pricePerUnit}
+        <Input
+          inputProps={{
+            style: { textAlign: "right" },
+          }}
+          value={item.pricePerUnit}
+          onChange={(e) => handlePriceChange(e)}
+          name="price-per-unit"
+        />
       </TableCell>
     );
   }, [item.pricePerUnit]);
@@ -59,7 +88,7 @@ function BuyOrderItem(props) {
   const CellAmount = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {item.quantity * item.pricePerUnit}
+        {(item.quantity * item.pricePerUnit).toLocaleString() || "0"}
       </TableCell>
     );
   }, [item.quantity, item.pricePerUnit]);

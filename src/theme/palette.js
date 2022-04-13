@@ -6,6 +6,11 @@ const defaultPalette = {
 	}
 };
 
+export const errorTheme = {
+  body1: '#000',
+  fontColor:"#000",
+}
+
 export const colorGreenSuccessful = {
   primary: {
     light: "#3FDA9E",

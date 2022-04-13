@@ -58,8 +58,18 @@ const BuyOrder = (props) => {
   useEffect(() => {
     async function fetchData() {
       if (data) {
-        let buyOrdersByUser = [...data.buyOrdersByUser];
-        setBuyOrders(buyOrdersByUser.reverse());
+        let buyOrdersByUser = [...data.buyOrdersByUser].map((value) => {
+          return {
+            buyOrderID: value.buyOrderID,
+            textID: value.textID,
+            supplierName: value.supplier?.name,
+            status: value.status,
+            totalCost: value.totalCost,
+            createdBy: value.staff?.name,
+            createdAt: value.createdAt,
+          };
+        });
+        setBuyOrders(buyOrdersByUser);
       }
     }
 
@@ -89,12 +99,12 @@ const BuyOrder = (props) => {
         justifyContent="center"
         m={3}
       >
-        <Toolbar />
+        <Toolbar /> 
         <Button
           variant="contained"
           color="primary"
           style={{ alignSelf: "flex-end" }}
-          onClick={() => history.push(`/buy-order/create`)}
+          onClick={() => history.push(`/business/buy`)}
         >
           Create buy order
         </Button>
@@ -104,6 +114,7 @@ const BuyOrder = (props) => {
           headCells={headCells}
           DetailTableBody={BuyOrderTableBody}
           type="buyOrderID"
+          isNotShowCheckBox={true}
         />
       </Box>
     </Box>

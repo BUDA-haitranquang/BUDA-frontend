@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import AgeGroupSellOrder from "../components/statistics/sellorder/AgeGroupSellOrder";
 import GenderSellOrder from "../components/statistics/sellorder/GenderSellOrder";
-const SellOrder = (props) => {
+const SellOrderStats = (props) => {
   const { window } = props;
   return (
     <Box sx={{ display: "flex" }}>
@@ -24,4 +24,4 @@ const SellOrder = (props) => {
   );
 };
 
-export default SellOrder;
+export default SellOrderStats;

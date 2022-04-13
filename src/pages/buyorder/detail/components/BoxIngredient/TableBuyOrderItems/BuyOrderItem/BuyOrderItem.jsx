@@ -41,7 +41,7 @@ function BuyOrderItem(props) {
   const CellQuantity = useMemo(() => {
     return (
       <TableCell align="center" style={{ width: "105px" }}>
-        {item.quantity}
+        {item.quantity.toLocaleString()}
       </TableCell>
     );
   }, [item.quantity]);
@@ -49,7 +49,7 @@ function BuyOrderItem(props) {
   const CellPrice = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {item.pricePerUnit}
+        {item.pricePerUnit.toLocaleString()}
       </TableCell>
     );
   }, [item.pricePerUnit]);
@@ -57,7 +57,7 @@ function BuyOrderItem(props) {
   const CellAmount = useMemo(() => {
     return (
       <TableCell align="right" style={{ width: "115px" }}>
-        {item.quantity * item.pricePerUnit}
+        {(item.quantity * item.pricePerUnit).toLocaleString()}
       </TableCell>
     );
   }, [item.quantity, item.pricePerUnit]);

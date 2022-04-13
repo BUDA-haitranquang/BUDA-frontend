@@ -70,7 +70,7 @@ function CreateBuyOrder(props) {
     try {
       newBuyOrder({
         variables: {
-          status: "RECEIVING",
+          status: buyOrderRequest.status,
           buyOrderItemDTOs: buyOrderRequest.buyOrderItemDTOs.map((item) => {
             return {
               quantity: item.quantity,
@@ -83,7 +83,7 @@ function CreateBuyOrder(props) {
           supplierID: buyOrderRequest.supplier.supplierID,
         },
       }).then((result) => {
-        history.push(`/buy-order/${result.data.newBuyOrder.buyOrderID}`);
+        history.push(`buy/${result.data.newBuyOrder.buyOrderID}`);
       });
     } catch (e) {
       enqueueSnackbar("An error happened", AlertErrorProp);

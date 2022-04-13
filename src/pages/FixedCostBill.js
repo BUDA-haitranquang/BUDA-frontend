@@ -11,28 +11,28 @@ import AddFixedCostBillModal from "../components/modal/AddFixedCostBillModal";
 import FixedCostBillTableBody from "../components/table/body/FixedCostBIllTableBody";
 const headCells =[ 
     {
-        id: "name",
+        id: "message",
         numeric: false,
         disablePadding: false,
-        label: "Name",
+        label: "Message",
     },
     {
-        id: "description",
+        id: "dueTime",
         numeric: false,
         disablePadding: false,
-        label: "Description",
+        label: "Due Time",
     },
     {
-        id: "period",
-        numeric: true,
+        id: "creationTime",
+        numeric: false,
         disablePadding: false,
-        label: "Period",
+        label: "Creation Time",
     },
     {
-        id: "moneyamount",
-        numeric: true,
+        id: "dueTime",
+        numeric: false,
         disablePadding: false,
-        label: "Money Amount",
+        label: "Due Time",
     },
 ];
 
@@ -46,7 +46,6 @@ const FixCostBill = (props) =>{
             if(data) setFixCosts(data.fixedCostBillsByUser);
         }
         fetchData();
-        console.log(data);
     },[data]);
 
     if (error) return  <Redirect to="/login"/>;

@@ -14,14 +14,14 @@ const IngredientTableBody = (props) => {
           }}
           style={{ textDecoration: "none", color: "blue" }}
         >
-          {row.name}
+          {row.sku}
         </Link>
       </TableCell>
-
+      <TableCell align="left">{row.name}</TableCell>
       <TableCell align="right">{row.price}</TableCell>
       <TableCell align="right">{row.amountLeft}</TableCell>
       <TableCell align="right">{row.alertAmountLeft}</TableCell>
-    
+
       <TableCell align="left">{row.description}</TableCell>
     </>
   );
