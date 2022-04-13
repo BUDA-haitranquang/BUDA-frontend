@@ -6,37 +6,37 @@ import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
 import { buyOrderStatuses } from "../../../constant/BuyOrderStatus";
 
 function BoxAdditionalInfo(props) {
-  const [note, setNote] = useState("");
-  const [buyOrderCode, setBuyOrderCode] = useState("");
+  const [description, setDescription] = useState("");
+  const [textId, setTextId] = useState("");
   const [status, setStatus] = useState("");
 
   const { setBuyOrderRequest } = useContext(CreateBuyOrderContext);
 
   const classes = useStyles();
 
-  const handleCodeChange = (e) => {
-    const textId = e.target.value || "";
-    setBuyOrderCode(textId);
+  const handleTextIdChange = (value) => {
+    const textId = value || "";
+    setTextId(textId);
     setBuyOrderRequest((prevBuyOrderRequest) => ({
       ...prevBuyOrderRequest,
       // textID: textId,
     }));
   };
 
-  const handleNoteChange = (e) => {
-    const note = e.target.value || "";
-    setNote(note);
+  const handleDescriptionChange = (value) => {
+    const note = value || "";
+    setDescription(note);
     setBuyOrderRequest((prevBuyOrderRequest) => ({
       ...prevBuyOrderRequest,
       // textID: textId,
     }));
   };
 
-  const handleStatusChange = (e, status) => {
-    setStatus(status.label);
+  const handleStatusChange = (e, newStatus) => {
+    setStatus(newStatus.label);
     setBuyOrderRequest((prevBuyOrderRequest) => ({
       ...prevBuyOrderRequest,
-      status: status.label,
+      status: status,
     }));
   };
 
@@ -49,17 +49,17 @@ function BoxAdditionalInfo(props) {
       <Box className="BoxAdditionalInfo-main">
         <BudaTextField
           label="Text ID:"
-          value={buyOrderCode}
-          onChange={(e) => handleCodeChange(e)}
+          value={textId}
+          onChange={handleTextIdChange}
           textFieldHeight={40}
           otherProps={{
             mb: 2,
           }}
         />
         <BudaTextField
-          label="Note:"
-          value={note}
-          onChange={(e) => handleNoteChange(e)}
+          label="Description:"
+          value={description}
+          onChange={handleDescriptionChange}
           textFieldHeight={40}
           otherProps={{
             mb: 2,
