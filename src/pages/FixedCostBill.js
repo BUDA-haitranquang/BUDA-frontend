@@ -46,7 +46,6 @@ const FixCostBill = (props) =>{
             if(data) setFixCosts(data.fixedCostBillsByUser);
         }
         fetchData();
-        console.log(data);
     },[data]);
 
     if (error) return  <Redirect to="/login"/>;

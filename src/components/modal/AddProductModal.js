@@ -32,7 +32,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setCostPerUnit(0);
     setGroup("");
     setDescription("");
-  }
+  };
 
   const addProduct = () => {
     setIsLoading(true);

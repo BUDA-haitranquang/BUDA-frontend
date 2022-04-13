@@ -83,7 +83,7 @@ function CreateBuyOrder(props) {
           supplierID: buyOrderRequest.supplier.supplierID,
         },
       }).then((result) => {
-        history.push(`/buy-order/${result.data.newBuyOrder.buyOrderID}`);
+        history.push(`buy/${result.data.newBuyOrder.buyOrderID}`);
       });
     } catch (e) {
       enqueueSnackbar("An error happened", AlertErrorProp);

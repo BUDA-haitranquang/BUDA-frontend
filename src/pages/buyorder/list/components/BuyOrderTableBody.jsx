@@ -17,7 +17,7 @@ function BuyOrderTableBody(props) {
       <TableCell
         align="left"
         style={{ textDecoration: "none", color: "blue" }}
-        onClick={() => history.push(`buy-order/${row.buyOrderID}`)}
+        onClick={() => history.push(`buy/${row.buyOrderID}`)}
       >
         {row.textID}
       </TableCell>
