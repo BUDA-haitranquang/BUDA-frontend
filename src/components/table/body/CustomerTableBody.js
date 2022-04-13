@@ -8,10 +8,9 @@ const CustomerTableBody = (props) => {
                 {row.name}
             </TableCell>
             <TableCell align="left">{row.phoneNumber}</TableCell>
-            <TableCell align="left">{row.address}</TableCell>
             <TableCell align="left">{row.gender}</TableCell>
             <TableCell align="left">{row.ageGroup}</TableCell>
-            <TableCell align="left">{row.totalSpend}</TableCell>
+            <TableCell align="right">{row.totalSpend}</TableCell>
     </>     
     );
 };
