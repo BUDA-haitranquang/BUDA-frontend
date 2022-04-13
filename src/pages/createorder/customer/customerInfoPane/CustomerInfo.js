@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
@@ -23,7 +22,7 @@ const useStyle = makeStyles(() => ({
     height: "40vh",
     "& .MuiTableCell-root": {
       padding: "4px",
-    }
+    },
   },
 }));
 

@@ -1,5 +1,12 @@
 import { useMutation } from "@apollo/client";
-import { Box, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import {
@@ -49,7 +56,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
   };
 
   const isValid = () => {
-    return name.length > 0
+    return name.length > 0;
   };
 
   const handleSubmit = () => {
@@ -125,32 +132,40 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
               justifyContent: "space-between",
             }}
           >
-            <Select
-              value={gender}
-              label="Gender"
-              onChange={(e) => setGender(e.target.value)}
-              style={{ width: "48%" }}
-            >
-              <MenuItem value={"UNKNOWN"}>Unknown</MenuItem>
-              <MenuItem value={"MALE"}>Male</MenuItem>
-              <MenuItem value={"FEMALE"}>Female</MenuItem>
-            </Select>
-            <Select
-              value={ageGroup}
-              label="Age Group"
-              onChange={(e) => setAgeGroup(e.target.value)}
-              style={{ width: "48%" }}
-            >
-              <MenuItem value={"UNKNOWN"}>Unknown</MenuItem>
-              <MenuItem value={"FROM_0_TO_12"}>From 0 to 12</MenuItem>
-              <MenuItem value={"FROM_12_TO_18"}>From 12 to 18</MenuItem>
-              <MenuItem value={"FROM_18_TO_24"}>From 18 to 24</MenuItem>
-              <MenuItem value={"FROM_24_TO_30"}>From 24 to 30</MenuItem>
-              <MenuItem value={"FROM_30_TO_40"}>From 30 to 40</MenuItem>
-              <MenuItem value={"FROM_40_TO_50"}>From 40 to 50</MenuItem>
-              <MenuItem value={"FROM_50_TO_65"}>From 50 to 65</MenuItem>
-              <MenuItem value={"FROM_65_AND_ABOVE"}>From 65 and above</MenuItem>
-            </Select>
+            <FormControl style={{ width: "48%" }}>
+              <InputLabel>Gender</InputLabel>
+              <Select
+                value={gender}
+                label="Gender"
+                onChange={(e) => setGender(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value={"UNKNOWN"}>Unknown</MenuItem>
+                <MenuItem value={"MALE"}>Male</MenuItem>
+                <MenuItem value={"FEMALE"}>Female</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl style={{ width: "48%" }}>
+              <InputLabel>Gender</InputLabel>
+              <Select
+                value={ageGroup}
+                label="Age Group"
+                onChange={(e) => setAgeGroup(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value={"UNKNOWN"}>Unknown</MenuItem>
+                <MenuItem value={"FROM_0_TO_12"}>From 0 to 12</MenuItem>
+                <MenuItem value={"FROM_12_TO_18"}>From 12 to 18</MenuItem>
+                <MenuItem value={"FROM_18_TO_24"}>From 18 to 24</MenuItem>
+                <MenuItem value={"FROM_24_TO_30"}>From 24 to 30</MenuItem>
+                <MenuItem value={"FROM_30_TO_40"}>From 30 to 40</MenuItem>
+                <MenuItem value={"FROM_40_TO_50"}>From 40 to 50</MenuItem>
+                <MenuItem value={"FROM_50_TO_65"}>From 50 to 65</MenuItem>
+                <MenuItem value={"FROM_65_AND_ABOVE"}>
+                  From 65 and above
+                </MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </Box>
       }
