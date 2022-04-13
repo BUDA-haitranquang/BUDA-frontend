@@ -41,6 +41,8 @@ import Collation from "./pages/Collation";
 import OtherCost from "./pages/OtherCost";
 import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/list/SellOrderList";
+import IngredientDetail from "./pages/IngerdientsDetail";
+
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -166,6 +168,12 @@ const AppRouter = () => {
             exact
             path="/ingredient"
             component={Ingredient}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/ingredient/:id"
+            component={IngredientDetail}
           />
           <PrivateRoute
             authed={isAuth}
