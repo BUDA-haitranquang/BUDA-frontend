@@ -75,7 +75,7 @@ const Customer = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setCustomer(data.customersByUser);
+      if (data) setCustomer(data.customersByUser.map(item => item));
     }
     fetchData();
     console.log(data);
@@ -98,7 +98,7 @@ const Customer = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={customer}
+            data={customer.reverse()}
             headCells={headCells}
             Modal={AddCustomerModal}
             type="customerID"

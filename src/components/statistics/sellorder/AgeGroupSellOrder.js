@@ -45,11 +45,11 @@ const AgeGroupSellOrder = () => {
           <Toolbar />
           <Box>{}</Box>
           <h1> Sell order by age group</h1>
-          <BudaLegend
+          {age.length !== 0 ?<BudaLegend
             data={age}
             colors={COLORSAGEGROUP}
             style={{ display: "flex", flexDirection: "column", width: "100%" }}
-          />
+          />: <h6>No data</h6>}
         </Box>
       </Grid>
 
@@ -61,13 +61,14 @@ const AgeGroupSellOrder = () => {
         alignItems="center"
         justifyContent="center"
       >
+        {age.length !== 0 &&
         <BudaPieChart
           legend={false}
           data={age}
           colors={COLORSAGEGROUP}
           width="100%"
           height={500}
-        />
+        />}
       </Grid>
     </Grid>
   );

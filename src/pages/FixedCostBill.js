@@ -43,7 +43,7 @@ const FixCostBill = (props) =>{
 
     useEffect(() => {
         async function fetchData(){
-            if(data) setFixCosts(data.fixedCostBillsByUser);
+            if(data) setFixCosts(data.fixedCostBillsByUser.map(item=>item));
         }
         fetchData();
     },[data]);
@@ -64,7 +64,7 @@ const FixCostBill = (props) =>{
             <Box>{}</Box>
             <Box>
             <BudaTable
-                data={fixcosts}
+                data={fixcosts.reverse()}
                 headCells={headCells}
                 Modal={AddFixedCostBillModal}
                 type='fixedCostBillID'

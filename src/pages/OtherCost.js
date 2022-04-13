@@ -76,7 +76,7 @@ const OtherCost = (props) =>{
 
     useEffect(() => {
         async function fetchData(){
-            if(data) setFixCosts(data.otherCostsByUser);
+            if(data) setFixCosts(data.otherCostsByUser.map(item=>item));
         }
         fetchData();
         console.log(data);
@@ -99,7 +99,7 @@ const OtherCost = (props) =>{
             <Box>
             <BudaTable
                 deleteItems={handleDelete}
-                data={fixcosts}
+                data={fixcosts.reverse()}
                 headCells={headCells}
                 Modal={AddOtherCostModal}
                 type='otherCostID'

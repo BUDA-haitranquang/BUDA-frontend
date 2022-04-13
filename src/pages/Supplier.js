@@ -69,7 +69,7 @@ const Supplier = (props) =>{
       };
     useEffect(() => {
         async function fetchData(){
-            if(data) setSupplier(data.suppliersByUser);
+            if(data) setSupplier(data.suppliersByUser.map(item => item));
         }
         fetchData();
         console.log(data);
@@ -92,7 +92,7 @@ const Supplier = (props) =>{
             <Box>
             <BudaTable
                 deleteItems={handleDelete}
-                data={supplier}
+                data={supplier.reverse()}
                 headCells={headCells}
                 Modal={AddSupplierModal}
                 type='supplierID'

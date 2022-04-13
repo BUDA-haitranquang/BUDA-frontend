@@ -91,7 +91,7 @@ const Product = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setProducts(data.productsByUser);
+      if (data) setProducts(data.productsByUser.map(item => item));
     }
     fetchData();
   }, [data]);
@@ -114,7 +114,7 @@ const Product = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={products}
+            data={products.reverse()}
             headCells={headCells}
             Modal={AddProductModal}
             type="productID"

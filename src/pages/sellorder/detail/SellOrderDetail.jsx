@@ -5,15 +5,16 @@ import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
 import Sidebar from "../../../components/Sidebar";
 import BoxProduct from "./components/BoxProduct/BoxProduct";
 // import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
-import {LOAD_SELL_ORDER_DETAILS} from '../../../graphQl/sellOrder/sellOrderQueries'
+import { LOAD_SELL_ORDER_DETAILS } from "../../../graphQl/sellOrder/sellOrderQueries";
 import { useParams } from "react-router-dom";
+import { dateToDateString } from "../../../utils/utils";
 import { useQuery } from "@apollo/client";
 
-SellOrderDetail.propTypes={};
+SellOrderDetail.propTypes = {};
 
 function SellOrderDetail(props) {
   const { window } = props;
-  const [ sellOrder, setSellOrder] = useState(null);
+  const [sellOrder, setSellOrder] = useState(null);
   const { id } = useParams();
 
   const { data } = useQuery(LOAD_SELL_ORDER_DETAILS, {
@@ -56,8 +57,8 @@ function SellOrderDetail(props) {
               <BoxAdditionalInfo
                 status={sellOrder?.status}
                 textID={sellOrder?.textID}
-                creationTime={sellOrder?.creationTime}
-                finishTime={sellOrder?.finishTime}
+                creationTime={dateToDateString(sellOrder?.creationTime)}
+                finishTime={dateToDateString(sellOrder?.finishTime)}
               />
             </Grid>
             <Grid item xs={12}>
