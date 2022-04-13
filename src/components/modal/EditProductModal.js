@@ -22,7 +22,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
   const [amountLeft, setAmountLeft] = useState(product.amountLeft);
   const [alertAmount, setAlertAmount] = useState(product.alertAmount);
   const [costPerUnit, setCostPerUnit] = useState(product.costPerUnit);
-  const [group, setGroup] = useState(product.group);
+  const [sku, setSku] = useState(product.sku);
   const [description, setDescription] = useState(product.description);
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
@@ -35,7 +35,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
     setAmountLeft(0);
     setAlertAmount(0);
     setCostPerUnit(0);
-    setGroup("");
+    setSku("");
     setDescription("");
   };
 
@@ -44,6 +44,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
     updateProduct({
       variables: {
         productID: product.productID,
+        productSKU: sku,
         name: name,
         description: description,
         costPerUnit: parseFloat(costPerUnit),
@@ -75,6 +76,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
     // TODO: check định dạng (price, cost, ... phải là number)
     // + thông báo chi tiết cho từng lỗi, hiện tại đang báo chung lỗi "Invalid input"
     const isValid =
+      sku !== "" &&
       name !== "" &&
       price >= 0 &&
       amountLeft >= 0 &&
@@ -105,6 +107,13 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             "& > :not(style)": { m: 1 },
           }}
         >
+          <TextField
+            fullWidth
+            label="Code (SKU)"
+            variant="outlined"
+            value={sku}
+            onChange={(e) => setSku(e.target.value)}
+          />
           <TextField
             required
             fullWidth
@@ -165,13 +174,6 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
               style={{ width: "48%" }}
             />
           </div>
-          <TextField
-            fullWidth
-            label="Group"
-            variant="outlined"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
-          />
           <TextField
             fullWidth
             label="Description"

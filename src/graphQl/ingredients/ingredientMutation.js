@@ -3,6 +3,7 @@ import {gql} from '@apollo/client';
 export const ADD_INGREDIENT_MUTATION = gql`
     mutation newIngredient(
         $name: String!
+        $ingredientSKU: String
         $amountLeft: Int!
         $price: Float!
         $description: String
@@ -10,6 +11,7 @@ export const ADD_INGREDIENT_MUTATION = gql`
         newIngredient(
             ingredientInput:{
                 name:$name
+                ingredientSKU: $ingredientSKU
                 amountLeft:$amountLeft
                 price:$price
                 description: $description
@@ -26,6 +28,7 @@ export const HIDE_INGREDIENT_MUTATION = gql`
 export const UPDATE_INGREDIENT_MUTATION = gql`
     mutation editIngredient(
         $ingredientID: Int!
+        $ingredientSKU: String
         $name: String!
         $description: String!
         $amountLeft: Int!
@@ -35,6 +38,7 @@ export const UPDATE_INGREDIENT_MUTATION = gql`
         editIngredient(
             ingredientID: $ingredientID
             ingredient:{
+                ingredientSKU: $ingredientSKU
                 name: $name
                 amountLeft: $amountLeft
                 description: $description

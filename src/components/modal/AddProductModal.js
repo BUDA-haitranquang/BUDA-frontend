@@ -14,6 +14,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [name, setName] = useState("");
+  const [sku, setSku] = useState(null);
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
   const [alertAmount, setAlertAmount] = useState(0);
@@ -25,6 +26,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
+    setSku(null);
     setName("");
     setPrice(0);
     setAmountLeft(0);
@@ -38,6 +40,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setIsLoading(true);
     newProduct({
       variables: {
+        productSKU: sku,
         name: name,
         description: description,
         costPerUnit: parseFloat(costPerUnit),
@@ -89,6 +92,18 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             "& > :not(style)": { m: 1 },
           }}
         >
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Sku (Code)"
+            variant="outlined"
+            value={sku}
+            onChange={(e) => {
+              let skuText = e.target.value;
+              if (skuText && skuText.length > 0) setSku(e.target.value);
+              else setSku(null);
+            }}
+          />
           <TextField
             required
             fullWidth

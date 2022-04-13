@@ -15,19 +15,19 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [name, setName] = useState("");
+  const [sku, setSku] = useState(null);
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
   // const [cost, setCost] = useState(0);
-  const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
   const [newIngredient, { error }] = useMutation(ADD_INGREDIENT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
+    setSku(null);
     setName("");
     setPrice(0);
     setAmountLeft(0);
-    setGroup("");
     setDescription("");
   };
 
@@ -36,6 +36,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
     newIngredient({
       variables: {
         name: name,
+        ingredientSKU: sku,
         description: description,
         price: parseFloat(price),
         amountLeft: parseInt(amountLeft),
@@ -85,6 +86,18 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
           }}
         >
           <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Sku (Code)"
+            variant="outlined"
+            value={sku}
+            onChange={(e) => {
+              let skuText = e.target.value;
+              if (skuText && skuText.length > 0) setSku(e.target.value);
+              else setSku(null);
+            }}
+          />
+          <TextField
             required
             fullWidth
             id="outlined-basic"
@@ -114,14 +127,6 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             variant="outlined"
             value={amountLeft}
             onChange={(e) => setAmountLeft(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Group"
-            variant="outlined"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
           />
           <TextField
             fullWidth
