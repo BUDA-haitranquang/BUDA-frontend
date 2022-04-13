@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Autocomplete, Box, Paper, TextField, Typography } from "@mui/material";
 import BudaTextField from "../../../../../buda-components/textfield/BudaTextField";
 import useStyles from "./BoxAdditionalInfo.styles";
@@ -6,38 +6,37 @@ import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
 import { buyOrderStatuses } from "../../../constant/BuyOrderStatus";
 
 function BoxAdditionalInfo(props) {
-  const [note, setNote] = useState("");
-  const [buyOrderCode, setBuyOrderCode] = useState("");
-  const [status, setStatus] = useState("");
+  const defaultStatus = "FINISHED";
+
+  const [description, setDescription] = useState("");
+  const [textId, setTextId] = useState("");
+  const [status, setStatus] = useState(defaultStatus);
 
   const { setBuyOrderRequest } = useContext(CreateBuyOrderContext);
 
   const classes = useStyles();
 
-  const handleCodeChange = (e) => {
-    const textId = e.target.value || "";
-    setBuyOrderCode(textId);
+  useEffect(() => {
     setBuyOrderRequest((prevBuyOrderRequest) => ({
       ...prevBuyOrderRequest,
       // textID: textId,
+      // description: description,
+      status: status,
     }));
+  }, [textId, description, status]);
+
+  const handleTextIdChange = (value) => {
+    const textId = value || "";
+    setTextId(textId);
   };
 
-  const handleNoteChange = (e) => {
-    const note = e.target.value || "";
-    setNote(note);
-    setBuyOrderRequest((prevBuyOrderRequest) => ({
-      ...prevBuyOrderRequest,
-      // textID: textId,
-    }));
+  const handleDescriptionChange = (value) => {
+    const note = value || "";
+    setDescription(note);
   };
 
-  const handleStatusChange = (e, status) => {
-    setStatus(status.label);
-    setBuyOrderRequest((prevBuyOrderRequest) => ({
-      ...prevBuyOrderRequest,
-      status: status.label,
-    }));
+  const handleStatusChange = (newStatus) => {
+    setStatus(newStatus.label);
   };
 
   return (
@@ -49,17 +48,17 @@ function BoxAdditionalInfo(props) {
       <Box className="BoxAdditionalInfo-main">
         <BudaTextField
           label="Text ID:"
-          value={buyOrderCode}
-          onChange={(e) => handleCodeChange(e)}
+          value={textId}
+          onChange={handleTextIdChange}
           textFieldHeight={40}
           otherProps={{
             mb: 2,
           }}
         />
         <BudaTextField
-          label="Note:"
-          value={note}
-          onChange={(e) => handleNoteChange(e)}
+          label="Description:"
+          value={description}
+          onChange={handleDescriptionChange}
           textFieldHeight={40}
           otherProps={{
             mb: 2,
@@ -70,11 +69,11 @@ function BoxAdditionalInfo(props) {
           <Autocomplete
             disablePortal
             disableClearable
-            defaultValue="FINISHED"
+            defaultValue={defaultStatus}
             options={buyOrderStatuses}
             sx={{ width: "100%", height: "60px" }}
             renderInput={(params) => <TextField {...params} />}
-            onChange={(e, value) => handleStatusChange(e, value)}
+            onChange={(e, value) => handleStatusChange(value)}
           />
         </Box>
       </Box>

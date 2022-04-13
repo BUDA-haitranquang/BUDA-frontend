@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
@@ -23,7 +22,7 @@ const useStyle = makeStyles(() => ({
     height: "40vh",
     "& .MuiTableCell-root": {
       padding: "4px",
-    }
+    },
   },
 }));
 
@@ -51,7 +50,7 @@ export default function CustomerInfo() {
             <TableRow>
               <TableCell>Total Spend:</TableCell>
               <TableCell align="right">
-                <i>{customer?.totalSpend.toLocaleString() || 0}</i>
+                <i>{customer?.totalSpend?.toLocaleString() || 0}</i>
               </TableCell>
             </TableRow>
             <TableRow>
