@@ -92,8 +92,8 @@ export default function CreateOrder() {
       window.location.reload();
     } catch (e) {
       console.table(e);
-      // alert(e.graphQLErrors[0].extensions.response.body);
-      alert(e.message);
+      if(e.graphQLErrors[0].extensions.response.body) alert(e.graphQLErrors[0].extensions.response.body);
+      else alert(e.message);
       // setTimeout(1000);
     } finally {
       // window.location.reload();
