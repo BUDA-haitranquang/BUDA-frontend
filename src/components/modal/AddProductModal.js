@@ -19,7 +19,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [amountLeft, setAmountLeft] = useState(0);
   const [alertAmount, setAlertAmount] = useState(0);
   const [costPerUnit, setCostPerUnit] = useState(0);
-  const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
 
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
@@ -32,7 +31,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setAmountLeft(0);
     setAlertAmount(0);
     setCostPerUnit(0);
-    setGroup("");
     setDescription("");
   };
 
@@ -173,14 +171,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               style={{ width: "48%" }}
             />
           </div>
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Group"
-            variant="outlined"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
-          />
           <TextField
             fullWidth
             id="outlined-basic"
