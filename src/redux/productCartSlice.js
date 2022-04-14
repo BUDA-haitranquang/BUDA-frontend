@@ -29,6 +29,9 @@ const productCartSlice = createSlice({
     addDiscount: (state, action) => {
       state.discount = action.payload;
     },
+    deleteDiscount: (state, action) => {
+      state.discount = null;
+    },
     calculateFinalAmount: (state, action) => {
       state.finalAmount = action.payload;
     },
@@ -74,6 +77,7 @@ export const {
   setCustomer,
   clearProductCart,
   addDiscount,
+  deleteDiscount,
   addProductCart,
   changeProductCartItem,
   calculateTotalPrice,

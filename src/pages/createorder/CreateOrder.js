@@ -15,6 +15,8 @@ import Navbar from "./Navbar";
 import CostGrid from "./order/costpane/CostGrid";
 import OrderProducts from "./order/itemspane/OrderProducts";
 import SearchProductBar from "./order/itemspane/SearchProductBar";
+import { useSnackbar } from "notistack";
+import { AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
@@ -41,6 +43,7 @@ const useStyle = makeStyles(() => ({
 }));
 
 export default function CreateOrder() {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyle();
   const dispatch = useDispatch();
   const { productCart, totalPrice, discount, customer } = useSelector(
@@ -88,10 +91,10 @@ export default function CreateOrder() {
         refetchQueries: [{ query: LOAD_PRODUCTS }],
       })
 
+      await enqueueSnackbar("New order created successfully", AlertSuccessProp);
       await dispatch(clearProductCart());
       window.location.reload();
     } catch (e) {
-      console.table(e);
       if(e.graphQLErrors[0].extensions.response.body) alert(e.graphQLErrors[0].extensions.response.body);
       else alert(e.message);
       // setTimeout(1000);
