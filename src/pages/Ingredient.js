@@ -86,7 +86,7 @@ const Ingredient = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setIngredients(data.ingredientsByUser);
+      if (data) setIngredients(data.ingredientsByUser.map(item => item));
     }
     fetchData();
   }, [data]);
@@ -106,7 +106,7 @@ const Ingredient = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={ingredients}
+            data={ingredients.reverse()}
             headCells={headCells}
             Modal={AddIngredientModal}
             type="ingredientID"

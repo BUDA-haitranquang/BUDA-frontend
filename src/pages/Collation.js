@@ -41,7 +41,7 @@ const Collation = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setProducts(data.productsByUser);
+      if (data) setProducts(data.productsByUser.map(item => item));
     }
 
     fetchData();
@@ -63,7 +63,7 @@ const Collation = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            data={products}
+            data={products.reverse()}
             headCells={headCells}
             type="productID"
             DetailTableBody={CollationTableBody}

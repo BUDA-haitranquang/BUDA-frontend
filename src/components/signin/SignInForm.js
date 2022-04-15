@@ -151,7 +151,7 @@ const SignInForm = () => {
         dispatch(addRefreshToken(refreshToken));
       })
       .then(() => {
-        history.push("/");
+        history.push("/dashboard");
         enqueueSnackbar("Login successfully", AlertSuccessProp);
       })
       .catch((error) => {

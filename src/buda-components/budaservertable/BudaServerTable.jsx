@@ -78,8 +78,8 @@ const BudaServerTable = (props) => {
             customerName: item.customer?.name,
             sellOrderID: item.textID,
             finalCost: item.finalCost,
-            creationTime: dateToDateString(item.creationTime),
-            finishTime: dateToDateString(item.finishTime),
+            creationTime: (item.creationTime),
+            finishTime: (item.finishTime),
             status: capitalizeFirstLetter(item.status),
           };
         });
