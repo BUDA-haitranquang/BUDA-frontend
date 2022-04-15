@@ -1,62 +1,27 @@
 import i18n from "i18next";
-import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
-import Backend from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-
-import translationEN from "../locales/en/translation";
-import translationVI from "../locales/vi/translation";
-
-// the translations
-const resources = {
-  en: {
-    translation: translationEN,
-  },
-  vi: {
-    translation: translationVI,
-  },
-};
-
-let loadPath = "../locales/{{lng}}/{{ns}}.json";
+import Backend from "i18next-http-backend";
 
 i18n
-  .use(Backend)
-  .use(I18nextBrowserLanguageDetector)
+  .use(LanguageDetector)
   .use(initReactI18next)
+  .use(Backend)
   .init({
-    // detection: {
-    //   order: ["cookie", "querystring"],
-    //   lookupCookie: "lang",
-    // },
-    resources,
-    // fallbackLng: "en",
-    // lng: window.localStorage.getItem('language'),
-    supportedLngs: ["en", "vi"],
+    fallbackLng: "en",
     debug: true,
+
+    // have a common namespace used around the full app
+    ns: ["translations"],
+    defaultNS: "translations",
+
     interpolation: {
       escapeValue: false,
     },
-    detection: {
-      order: ["localStorage", "navigator"],
-      lookupQuerystring: "lng",
-      lookupLocalStorage: "language",
-      caches: ["localStorage"]
-    }
-    // ns:[
-    //     "common",
-    //     "error",
-    // ],
-    // backend: {
-    //   // backend: Http,
-    //   loadPath: loadPath,
-    //   // backendOption: {
-    //   //   loadPath: "/v3/locales/{{lng}}/{{ns}}.json",
-    //   // },
-    // },
   });
 
 export const changeLanguageHandler = (lang) => {
-  window.localStorage.setItem('language', lang);
+  window.localStorage.setItem("language", lang);
   i18n.changeLanguage(lang);
 };
-
 export default i18n;

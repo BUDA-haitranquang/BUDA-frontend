@@ -1,18 +1,43 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { Suspense } from "react";
+import { useTranslation, Trans } from "react-i18next";
 
-const TestMultiLanguage2 = () => {
-  const { t } = useTranslation(["common"]);
+function Page() {
+  const { t, i18n } = useTranslation("other/ns");
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
-    <div className="col-md-6">
-      <div className="card p-2">
-        <div className="card-body">
-          <h5 class="card-title">{t("content.class")}</h5>
-          <h5 class="card-title">{t("common:error")}</h5>
-        </div>
+    <div className="App">
+      <div className="App-header">
+        <h2>{t("Welcome to React")}</h2>
+        <button onClick={() => changeLanguage("de")}>de</button>
+        <button onClick={() => changeLanguage("en")}>en</button>
+      </div>
+      <div className="App-intro">
+        <Trans>
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </Trans>
+        <br />
+        <br />
+        <Trans i18nKey="welcome">trans</Trans>
+        <br />
+        <br />
+        <span>{t("interpolation.example", { what: "< 5" })}</span>
+      </div>
+      <div style={{ marginTop: 40 }}>
+        Learn more:&nbsp;
+        <a href="https://react.i18next.com">https://react.i18next.js</a>
       </div>
     </div>
   );
-};
+}
 
-export default TestMultiLanguage2;
+export default function TestMultiLanguage2() {
+  return (
+    <Suspense fallback="loading...">
+      <Page />
+    </Suspense>
+  );
+}
