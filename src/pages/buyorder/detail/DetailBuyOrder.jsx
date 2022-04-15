@@ -50,10 +50,10 @@ function DetailBuyOrder(props) {
           </Typography>
 
           <Grid container spacing={3}>
-            <Grid item sm={12} md={9}>
+            <Grid item xs={8}>
               <BoxSupplier supplier={buyOrder?.supplier} />
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item xs={4}>
               <BoxAdditionalInfo
                 status={buyOrder?.status}
                 textID={buyOrder?.textID}
