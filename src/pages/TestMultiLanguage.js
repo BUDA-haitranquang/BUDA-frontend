@@ -1,25 +1,24 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { changeLanguageHandler } from "../translation/i18n";
+import React, { Suspense } from "react";
+import { useTranslation, Trans } from "react-i18next";
 
-const TestMultiLanguage = () => {
-  const { t } = useTranslation();
+function Page() {
+  const { t } = useTranslation("other/ns");
 
   return (
-    <div className="col-md-6">
-      <div className="card p-2">
-        <div className="card-body">
-          <h5 class="card-title">{t("content.functional")}</h5>
-          <button onClick={() => changeLanguageHandler("en")}>
-            Change to ENG
-          </button>
-          <button onClick={() => changeLanguageHandler("vi")}>
-            Change to VI
-          </button>
-        </div>
+      <div className="App-intro">
+        <br />
+        <Trans i18nKey="welcome">trans</Trans>
+        <br />
+        <br />
+        <span>{t("interpolation.example", { what: "< 5" })}</span>
       </div>
-    </div>
   );
-};
+}
 
-export default TestMultiLanguage;
+export default function TestMultiLanguage2() {
+  return (
+    <Suspense fallback="loading...">
+      <Page />
+    </Suspense>
+  );
+}

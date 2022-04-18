@@ -1,5 +1,5 @@
 import { SnackbarProvider } from "notistack";
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
@@ -11,32 +11,34 @@ import i18n from "./translation/i18n";
 ReactDOM.render(
   <React.Fragment>
     <I18nextProvider i18n={i18n}>
-      <SnackbarProvider
-        maxSnack={1}
-        // hideIconVariant={true}
-        // classes={{
-        //   variantSuccess: "snackSuccess",
-        //   variantError: "snackError",
-        //   variantWarning: "snackWarning",
-        //   variantInfo: "snackInfo",
-        // }}
-      >
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                minHeight: "100vh",
-              }}
-            >
-              <AppRouter />
-              {/* <Footer /> */}
-            </div>
-          </PersistGate>
-        </Provider>
-      </SnackbarProvider>
+      <Suspense fallback="loading...">
+        <SnackbarProvider
+          maxSnack={1}
+          // hideIconVariant={true}
+          // classes={{
+          //   variantSuccess: "snackSuccess",
+          //   variantError: "snackError",
+          //   variantWarning: "snackWarning",
+          //   variantInfo: "snackInfo",
+          // }}
+        >
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  minHeight: "100vh",
+                }}
+              >
+                <AppRouter />
+                {/* <Footer /> */}
+              </div>
+            </PersistGate>
+          </Provider>
+        </SnackbarProvider>
+      </Suspense>
     </I18nextProvider>
   </React.Fragment>,
   document.getElementById("root")
