@@ -1,3 +1,6 @@
 {
-    "error": "errorEN"
+    "error": "An error happened",
+    "save": "Save",
+    "ok": "Ok",
+    "cancel": "Cancel"
 }
