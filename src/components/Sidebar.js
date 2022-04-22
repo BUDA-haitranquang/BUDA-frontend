@@ -67,7 +67,7 @@ const title = [
   "customer",
   "staff",
   "cost",
-  "statistic",
+  // "statistic",
 ];
 
 function createData(name, link, check) {
@@ -75,7 +75,10 @@ function createData(name, link, check) {
 }
 
 const sidebarItems = [
-  [createData("Overall", "overall", ""), createData("Incomplete", "incomplete", "")],
+  [
+    createData("Overall", "overall", ""),
+    // createData("Incomplete", "incomplete", ""),
+  ],
   [
     createData("Sell", "sell", ""),
     createData("Sell history", "sell-history", ""),
@@ -95,8 +98,8 @@ const sidebarItems = [
   ],
   [
     createData("Business", "business", ""),
-    createData("Customer", "customer", ""),
-    createData("Product", "product", ""),
+     // createData("Customer", "customer", ""),
+    // createData("Product", "product", ""),
   ],
 ];
 const Sidebar = ({ window, name }) => {
@@ -137,8 +140,8 @@ const Sidebar = ({ window, name }) => {
         return <AssignmentIndIcon />;
       case 7:
         return <MonetizationOnIcon />;
-      case 8:
-        return <BarChartIcon />;
+      // case 8:
+      //   return <BarChartIcon />;
       default:
         break;
     }

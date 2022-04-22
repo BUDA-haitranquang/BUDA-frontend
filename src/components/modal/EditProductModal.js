@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -15,6 +16,7 @@ import {
 
 const EditProductModal = ({ data, isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(["common", "product"]);
 
   const product = data.product.product;
   const [name, setName] = useState(product.name);
@@ -22,28 +24,19 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
   const [amountLeft, setAmountLeft] = useState(product.amountLeft);
   const [alertAmount, setAlertAmount] = useState(product.alertAmount);
   const [costPerUnit, setCostPerUnit] = useState(product.costPerUnit);
-  const [group, setGroup] = useState(product.group);
+  const [sku, setSku] = useState(product.sku);
   const [description, setDescription] = useState(product.description);
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const resetForm = () => {
-    setName("");
-    setPrice(0);
-    setAmountLeft(0);
-    setAlertAmount(0);
-    setCostPerUnit(0);
-    setGroup("");
-    setDescription("");
-  };
-
   const editProduct = () => {
     setIsLoading(true);
     updateProduct({
       variables: {
         productID: product.productID,
+        productSKU: sku,
         name: name,
         description: description,
         costPerUnit: parseFloat(costPerUnit),
@@ -75,6 +68,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
     // TODO: check định dạng (price, cost, ... phải là number)
     // + thông báo chi tiết cho từng lỗi, hiện tại đang báo chung lỗi "Invalid input"
     const isValid =
+      sku !== "" &&
       name !== "" &&
       price >= 0 &&
       amountLeft >= 0 &&
@@ -96,6 +90,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
       onClose={handleClose}
       onOk={handleSubmit}
       isLoading={isLoading}
+      title={t("product:editProductModal.title")}
       children={
         <Box
           component="form"
@@ -106,9 +101,16 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           }}
         >
           <TextField
+            fullWidth
+            label={t("product:sku")}
+            variant="outlined"
+            value={sku}
+            onChange={(e) => setSku(e.target.value)}
+          />
+          <TextField
             required
             fullWidth
-            label="Name"
+            label={t("product:productName")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -122,7 +124,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           >
             <TextField
               required
-              label="Price"
+              label={t("product:price")}
               variant="outlined"
               value={price.toLocaleString()}
               onChange={(e) => setPrice(e.target.value)}
@@ -130,7 +132,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             />
             <TextField
               required
-              label="Cost"
+              label={t("product:cost")}
               variant="outlined"
               value={costPerUnit.toLocaleString()}
               onChange={(e) => setCostPerUnit(e.target.value)}
@@ -149,7 +151,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             <TextField
               fullWidth
               required
-              label="Amount Left"
+              label={t("product:amountLeft")}
               variant="outlined"
               value={amountLeft.toLocaleString()}
               onChange={(e) => setAmountLeft(e.target.value)}
@@ -158,7 +160,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             <TextField
               fullWidth
               required
-              label="Alert Amount"
+              label={t("product:alertAmount")}
               variant="outlined"
               value={alertAmount.toLocaleString()}
               onChange={(e) => setAlertAmount(e.target.value)}
@@ -167,14 +169,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           </div>
           <TextField
             fullWidth
-            label="Group"
-            variant="outlined"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            label="Description"
+            label={t("product:description")}
             variant="outlined"
             multiline
             rows={3}

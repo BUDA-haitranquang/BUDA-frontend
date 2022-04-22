@@ -73,7 +73,7 @@ export default function Navbar() {
       <Grid container xs={2} className="navigation">
         <HomeIcon
           className="home-icon"
-          onClick={() => history.push("/")}
+          onClick={() => history.push("/dashboard")}
         ></HomeIcon>
         <AccountMenu />
       </Grid>

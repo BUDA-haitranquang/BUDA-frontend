@@ -1,0 +1,17 @@
+{
+  "productName": "Tên sản phẩm",
+  "name": "Tên SP",
+  "sku": "Mã SKU",
+  "price": "Giá",
+  "amountLeft": "Tồn kho",
+  "alertAmount": "Báo động",
+  "cost": "Chi phí",
+  "description": "Mô tả",
+  "table": {},
+  "addProductModal": {
+    "title": "Thêm sản phẩm mới"
+  },
+  "editProductModal": {
+    "title": "Sửa sản phẩm"
+  }
+}

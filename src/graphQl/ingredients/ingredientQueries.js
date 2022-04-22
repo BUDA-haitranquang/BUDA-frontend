@@ -21,6 +21,7 @@ export const LOAD_INGREDIENT = gql`
   query ingredient($ingredientID: Int!){
     ingredient(ingredientID: $ingredientID) {
       ingredientID
+      sku: ingredientSKU
       name 
       description
       amountLeft

@@ -13,7 +13,7 @@ function CustomerDetail(props) {
     // { console.log(customer)};
   
     return customer ? (
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{width: 300}}>
         <Grid className={classes.root}  item xs={12} md={4}>
           <Box className="CustomerDetail-info">
             <Typography className="CustomerDetail-info-field">Address</Typography>

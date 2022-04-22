@@ -1,6 +1,7 @@
 import { TableCell } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { dateToDateString } from "../../../utils/utils";
 const FixedCostBillTableBody = (props) => {
     const { row,labelId } = props;
     return (
@@ -8,8 +9,8 @@ const FixedCostBillTableBody = (props) => {
         <TableCell component="th" id={labelId} scope="row">
             {row.message}
         </TableCell>
-        <TableCell align="left">{row.dueTime}</TableCell>
-        <TableCell align="left">{row.creationTime}</TableCell>
+        <TableCell align="left">{dateToDateString(row.dueTime)}</TableCell>
+        <TableCell align="left">{dateToDateString(row.creationTime)}</TableCell>
         <TableCell align="left">{row.totalSpend}</TableCell>
    </>     
     );

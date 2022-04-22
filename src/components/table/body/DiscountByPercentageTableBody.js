@@ -1,6 +1,7 @@
 import { TableCell } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { dateToDateString } from "../../../utils/utils";
 const DiscountByPercentageTableBody = (props) => {
   const { row, labelId } = props;
   return (
@@ -18,8 +19,8 @@ const DiscountByPercentageTableBody = (props) => {
       <TableCell align="right">{`${row.percentage}%`}</TableCell>
       <TableCell align="right">{row.cashLimit}</TableCell>
       <TableCell align="right">{row.orderCount}</TableCell>
-      <TableCell align="left">{row.createdTime}</TableCell>
-      <TableCell align="left">{row.expiryTime}</TableCell>
+      <TableCell align="left">{dateToDateString(row.createdTime)}</TableCell>
+      <TableCell align="left">{dateToDateString(row.expiryTime)}</TableCell>
     </>
   );
 };

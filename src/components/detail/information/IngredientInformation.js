@@ -5,6 +5,7 @@ import MainImage from "../MainImage";
 
 export default function IngredientInformation({ data }) {
   const {
+    sku,
     name,
     price,
     amountLeft,
@@ -15,7 +16,11 @@ export default function IngredientInformation({ data }) {
   return (
     <Grid container direction="row">
       <Grid item xs={3} style={{ height: "100%" }}>
-        <MainImage source={picture.pictureLink} />
+        {picture ? (
+          <MainImage source={picture.pictureLink} />
+        ) : (
+          <MainImage source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
+        )}
       </Grid>
       <Grid
         item
@@ -28,7 +33,7 @@ export default function IngredientInformation({ data }) {
         }}
       >
         <Typography variant="subtitle2" style={{ textTransform: "uppercase" }}>
-          {name}
+          Code: {<b>{sku}</b>}
         </Typography>
 
         <Box style={{ flexDirection: "column" }}>
@@ -38,7 +43,7 @@ export default function IngredientInformation({ data }) {
           <Typography variant="subtitle3" style={{ fontStyle: "italic" }}>
             {description}
           </Typography>
-          <Typography variant="h4">{price} $</Typography>
+          <Typography variant="h4">{price} VND</Typography>
           <Divider />
           <Box
             style={{

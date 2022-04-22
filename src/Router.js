@@ -42,6 +42,8 @@ import OtherCost from "./pages/OtherCost";
 import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
+import TestMultiLanguage from "./pages/TestMultiLanguage";
+import TestMultiLanguage2 from "./pages/TestMultiLanguage2";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -125,11 +127,11 @@ const AppRouter = () => {
       <Router>
         <Switch>
           <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
-          <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
+
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/staff/note/:id"
+            path="/staff/:id"
             component={StaffDetail}
           />
           <PrivateRoute
@@ -220,7 +222,7 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/sellorderstatistic"
+            path="/statistic"
             component={SellOrderStats}
           />
           <PrivateRoute
@@ -229,7 +231,7 @@ const AppRouter = () => {
             path="/business/sell/:id"
             component={SellOrderDetail}
           />
-           <PrivateRoute
+          <PrivateRoute
             authed={isAuth}
             exact
             path="/cost/fixedCost"
@@ -253,13 +255,13 @@ const AppRouter = () => {
             path="/business/sell-history"
             component={SellOrderList}
           />
-           <PrivateRoute
+          <PrivateRoute
             authed={isAuth}
             exact
             path="/business/buy"
             component={CreateBuyOrder}
           />
-           <PrivateRoute
+          <PrivateRoute
             authed={isAuth}
             exact
             path="/business/buy-history"
@@ -272,8 +274,15 @@ const AppRouter = () => {
             component={Discount}
           />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/multi-lang" component={TestMultiLanguage} />
+          <Route exact path="/multi-lang2" component={TestMultiLanguage2} />
           <Route exact path="/signup" component={SignUp} />
-          <PrivateRoute authed={isAuth} exact path="/" component={Dashboard} />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/dashboard"
+            component={Dashboard}
+          />
           <Route path="*" component={Error} />
         </Switch>
       </Router>

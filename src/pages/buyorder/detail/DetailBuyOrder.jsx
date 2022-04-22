@@ -7,6 +7,7 @@ import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { LOAD_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderQueries";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import {dateToDateString} from '../../../utils/utils'
 import BoxMoney from "./components/BoxMoney/BoxMoney";
 
 DetailBuyOrder.propTypes = {};
@@ -50,15 +51,15 @@ function DetailBuyOrder(props) {
           </Typography>
 
           <Grid container spacing={3}>
-            <Grid item sm={12} md={9}>
+            <Grid item xs={8}>
               <BoxSupplier supplier={buyOrder?.supplier} />
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item xs={4}>
               <BoxAdditionalInfo
                 status={buyOrder?.status}
                 textID={buyOrder?.textID}
-                creationTime={buyOrder?.creationTime}
-                finishTime={buyOrder?.finishTime}
+                creationTime={dateToDateString(buyOrder?.creationTime)}
+                finishTime={dateToDateString(buyOrder?.finishTime)}
               />
             </Grid>
             <Grid item xs={12}>
