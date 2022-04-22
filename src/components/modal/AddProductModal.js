@@ -2,9 +2,10 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp,
+  AlertSuccessProp
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
@@ -12,6 +13,7 @@ import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(["common", "product"]);
 
   const [name, setName] = useState("");
   const [sku, setSku] = useState(null);
@@ -81,6 +83,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
       textOk="Save"
       onOk={handleSubmit}
       isLoading={isLoading}
+      title={t("product:addProductModal.title")}
       children={
         <Box
           component="form"
@@ -93,7 +96,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Sku (Code)"
+            label={t("product:sku")}
             variant="outlined"
             value={sku}
             onChange={(e) => {
@@ -106,7 +109,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             required
             fullWidth
             id="outlined-basic"
-            label="Name"
+            label={t("product:productName")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -122,7 +125,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               required
               type="number"
               id="outlined-basic"
-              label="Price"
+              label={t("product:price")}
               variant="outlined"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -132,7 +135,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               required
               type="number"
               id="outlined-basic"
-              label="Cost"
+              label={t("product:cost")}
               variant="outlined"
               value={costPerUnit}
               onChange={(e) => setCostPerUnit(e.target.value)}
@@ -153,7 +156,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               required
               type="number"
               id="outlined-basic"
-              label="Amount Left"
+              label={t("product:amountLeft")}
               variant="outlined"
               value={amountLeft}
               onChange={(e) => setAmountLeft(e.target.value)}
@@ -164,7 +167,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               required
               type="number"
               id="outlined-basic"
-              label="Alert Amount"
+              label={t("product:alertAmount")}
               variant="outlined"
               value={alertAmount}
               onChange={(e) => setAlertAmount(e.target.value)}
@@ -174,7 +177,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Description"
+            label={t("product:description")}
             variant="outlined"
             multiline
             rows={3}
