@@ -37,14 +37,12 @@ function BuyOrderItem(props) {
 
   const handlePriceChange = (e) => {
     const price = e.target.value || 0;
-    item.pricePerUnit = parseFloat(price);
-    setPricePerUnit(price);
+    setPricePerUnit(parseFloat(price));
   };
 
   const handleQuantityChange = (e) => {
     const quantity = e.target.value || 0;
-    item.quantity = parseInt(quantity);
-    setQuantity(quantity);
+    setQuantity(parseInt(quantity));
   };
 
   const CellImage = useMemo(() => {
