@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import { Button, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
@@ -23,29 +22,10 @@ export const color2 = "#3399FF";
 export const color3 = "#D1D1D1";
 export const color4 = "#FFFFFF";
 
-const useStyle = makeStyles(() => ({
-  root: {
-    backgroundColor: `${color1}`,
-    height: "100vh",
-    overflow: "hidden",
-    "& .main-order-grid": {
-      // "& .others": {
-      //   "& .MuiGrid-root": {
-      //     height: "26vh",
-      //     backgroundColor: `${color4}`,
-      //     border: "2px solid gray",
-      //     padding: "6px",
-      //     overflow: "hidden",
-      //   },
-      // },
-    },
-  },
-}));
-
 export default function CreateOrder() {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const { productCart, totalPrice, discount, customer } = useSelector(
+  const { productCart, discount, customer } = useSelector(
     (state) => state.productCart
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);

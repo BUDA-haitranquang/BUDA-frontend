@@ -274,8 +274,6 @@ const AppRouter = () => {
             component={Discount}
           />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/multi-lang" component={TestMultiLanguage} />
-          <Route exact path="/multi-lang2" component={TestMultiLanguage2} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute
             authed={isAuth}

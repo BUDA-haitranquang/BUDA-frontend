@@ -86,11 +86,8 @@ const headCells = [
   },
 ];
 
-const initData = [];
-
 export default function OrderProducts() {
   const classes = useStyle();
-  const dispatch = useDispatch();
   const [rows, setRows] = useState([]);
   const { productCart } = useSelector((state) => state.productCart);
 
