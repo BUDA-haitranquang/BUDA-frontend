@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -15,6 +16,7 @@ import {
 
 const EditProductModal = ({ data, isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(["common", "product"]);
 
   const product = data.product.product;
   const [name, setName] = useState(product.name);
@@ -88,6 +90,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
       onClose={handleClose}
       onOk={handleSubmit}
       isLoading={isLoading}
+      title={t("product:editProductModal.title")}
       children={
         <Box
           component="form"
@@ -99,7 +102,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
         >
           <TextField
             fullWidth
-            label="Code (SKU)"
+            label={t("product:sku")}
             variant="outlined"
             value={sku}
             onChange={(e) => setSku(e.target.value)}
@@ -107,7 +110,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           <TextField
             required
             fullWidth
-            label="Name"
+            label={t("product:productName")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -121,7 +124,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           >
             <TextField
               required
-              label="Price"
+              label={t("product:price")}
               variant="outlined"
               value={price.toLocaleString()}
               onChange={(e) => setPrice(e.target.value)}
@@ -129,7 +132,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             />
             <TextField
               required
-              label="Cost"
+              label={t("product:cost")}
               variant="outlined"
               value={costPerUnit.toLocaleString()}
               onChange={(e) => setCostPerUnit(e.target.value)}
@@ -148,7 +151,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             <TextField
               fullWidth
               required
-              label="Amount Left"
+              label={t("product:amountLeft")}
               variant="outlined"
               value={amountLeft.toLocaleString()}
               onChange={(e) => setAmountLeft(e.target.value)}
@@ -157,7 +160,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             <TextField
               fullWidth
               required
-              label="Alert Amount"
+              label={t("product:alertAmount")}
               variant="outlined"
               value={alertAmount.toLocaleString()}
               onChange={(e) => setAlertAmount(e.target.value)}
@@ -166,7 +169,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           </div>
           <TextField
             fullWidth
-            label="Description"
+            label={t("product:description")}
             variant="outlined"
             multiline
             rows={3}

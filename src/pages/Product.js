@@ -3,6 +3,7 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -13,58 +14,10 @@ import Sidebar from "../components/Sidebar";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
-const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "ID",
-  // },
-  {
-    id: "sku",
-    numeric: false,
-    disablePadding: false,
-    label: "SKU",
-  },
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "sellingPrice",
-    numeric: true,
-    disablePadding: true,
-    label: "Price",
-  },
-  {
-    id: "amountLeft",
-    numeric: true,
-    disablePadding: true,
-    label: "Left",
-  },
-  {
-    id: "alertAmount",
-    numeric: true,
-    disablePadding: true,
-    label: "Alert",
-  },
-  {
-    id: "costPerUnit",
-    numeric: true,
-    disablePadding: true,
-    label: "Cost",
-  },
-  {
-    id: "description",
-    numeric: false,
-    disablePadding: true,
-    label: "Description",
-  },
-];
 
 const Product = (props) => {
+  
+  const { t } = useTranslation(["common", "product"]);
   const { window } = props;
   const [products, setProducts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
@@ -97,6 +50,51 @@ const Product = (props) => {
   }, [data]);
 
   // if(error) return <Redirect to="/login"/>;
+
+  const headCells = [
+    {
+      id: "sku",
+      numeric: false,
+      disablePadding: false,
+      label: t("product:sku"),
+    },
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("product:name"),
+    },
+    {
+      id: "sellingPrice",
+      numeric: true,
+      disablePadding: true,
+      label: t("product:price"),
+    },
+    {
+      id: "amountLeft",
+      numeric: true,
+      disablePadding: true,
+      label: t("product:amountLeft"),
+    },
+    {
+      id: "alertAmount",
+      numeric: true,
+      disablePadding: true,
+      label: t("product:alertAmount"),
+    },
+    {
+      id: "costPerUnit",
+      numeric: true,
+      disablePadding: true,
+      label: t("product:cost"),
+    },
+    {
+      id: "description",
+      numeric: false,
+      disablePadding: true,
+      label: t("product:description"),
+    },
+  ];
 
   return (
     <Box sx={{ display: "flex" }}>

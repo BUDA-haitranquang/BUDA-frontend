@@ -42,6 +42,8 @@ import OtherCost from "./pages/OtherCost";
 import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
+import TestMultiLanguage from "./pages/TestMultiLanguage";
+import TestMultiLanguage2 from "./pages/TestMultiLanguage2";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -272,6 +274,8 @@ const AppRouter = () => {
             component={Discount}
           />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/multi-lang" component={TestMultiLanguage} />
+          <Route exact path="/multi-lang2" component={TestMultiLanguage2} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute
             authed={isAuth}
