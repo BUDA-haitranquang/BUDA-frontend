@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Box, TableCell, TableRow } from "@mui/material";
+import DefaultImage from "../../../../../../../buda-components/SVG/DefaultImage";
 
 BuyOrderItem.propTypes = {
   item: PropTypes.object,
@@ -13,18 +14,22 @@ function BuyOrderItem(props) {
   const CellImage = useMemo(() => {
     return (
       <TableCell align="center" style={{ width: "60px" }}>
-        <Box
-          component="img"
-          sx={{
-            height: 64,
-            width: 64,
-          }}
-          alt={item.ingredient.name}
-          src={item.ingredient.picture.link}
-        />
+        {item.ingredient.picture ? (
+          <Box
+            component="img"
+            sx={{
+              height: 64,
+              width: 64,
+            }}
+            alt={item.ingredient.name}
+            src={item.ingredient.picture.link}
+          />
+        ) : (
+          <DefaultImage style={{ height: "40px", width: "40px" }} />
+        )}
       </TableCell>
     );
-  }, [item.ingredient.name, item.ingredient.picture.link]);
+  }, [item.ingredient.name, item.ingredient.picture?.link]);
 
   const CellSKU = useMemo(() => {
     return (
