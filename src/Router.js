@@ -281,7 +281,7 @@ const AppRouter = () => {
             path="/dashboard"
             component={Dashboard}
           />
-          <PrivateRoute path="*" component={Dashboard} />
+          <PrivateRoute authed={isAuth} path="*" component={Dashboard} />
         </Switch>
       </Router>
     </ApolloProvider>
