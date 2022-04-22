@@ -8,6 +8,7 @@ import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";
 import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
 import _ from "lodash";
+import DefaultImage from "../../../../../buda-components/SVG/DefaultImage";
 
 function BoxIngredient(props) {
   const [openCreateIngredient, setOpenCreateIngredient] = useState(false);
@@ -55,17 +56,19 @@ function BoxIngredient(props) {
             alignItems="center"
             columnGap={2}
           >
-            <Box
-              component="img"
-              sx={{
-                height: 64,
-                width: 64,
-              }}
-              alt={option.name ? option.name : ""}
-              src={
-                option.picture && option.picture.link ? option.picture.link : ""
-              }
-            />
+            {option.picture ? (
+              <Box
+                component="img"
+                sx={{
+                  height: 64,
+                  width: 64,
+                }}
+                alt={option.name ? option.name : ""}
+                src={option.picture.link}
+              />
+            ) : (
+              <DefaultImage style={{ height: "40px", width: "40px" }} />
+            )}
             <Box
               display="flex"
               flexDirection="column"
