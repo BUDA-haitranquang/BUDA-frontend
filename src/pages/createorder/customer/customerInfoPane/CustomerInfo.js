@@ -19,7 +19,7 @@ const useStyle = makeStyles(() => ({
     border: "2px solid gray",
     padding: "8px",
     overflow: "hidden",
-    height: "40vh",
+    height: "39vh",
     "& .MuiTableCell-root": {
       padding: "4px",
     },

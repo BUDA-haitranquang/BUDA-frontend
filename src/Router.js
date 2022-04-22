@@ -283,7 +283,7 @@ const AppRouter = () => {
             path="/dashboard"
             component={Dashboard}
           />
-          <Route path="*" component={Error} />
+          <PrivateRoute path="*" component={Dashboard} />
         </Switch>
       </Router>
     </ApolloProvider>
