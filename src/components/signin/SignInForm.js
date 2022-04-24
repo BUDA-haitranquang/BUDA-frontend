@@ -117,9 +117,6 @@ const SignInForm = () => {
     };
   }, []);
 
-<<<<<<< HEAD
-  if (loading) return <CircularProgress />;
-=======
   if (loading)
     return (
       <Modal open={true}>
@@ -139,7 +136,6 @@ const SignInForm = () => {
         </Box>
       </Modal>
     );
->>>>>>> 4b60e0984f6f5d6a01cfcc95b08b75b893b22340
   //if (error) return `Sign in error! ${error.message}`;
 
   const login = () => {

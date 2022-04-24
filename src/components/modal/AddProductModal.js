@@ -74,19 +74,32 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const handleSubmit = () => {
     if (isFormValid()) {
       addProduct();
+
       submitImage();
     } else enqueueSnackbar("Invalid input", AlertErrorProp);
   };
   const submitImage = async () => {
-    const data = await axios.post(
-      "http://143.198.194.24:8080/api/picture/upload",
-      image
-    );
+    let formData = new FormData();
+    await formData.append("file", "image");
+    console.log(formData);
+    await axios({
+      method: "post",
+      url: "http://143.198.194.24:8080/api/picture/upload",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidWRhdGVzdGVyQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJ0b2tlblR5cGUiOiJBY2Nlc3MiLCJleHAiOjE2NTA2MjY1NzQsInVzZXJJRCI6MiwiaWF0IjoxNjQ5OTA2NTc0fQ.elH5BeE7Qi8WpZAArQTaDm4Za1bnL8IzUCgr58CezTfXdr7-ckE8Ls1GjQ5_o22Xx8DpjLxoymlEV54LNaV_Ew",
+        ...formData.getHeaders(),
+      },
+      data: formData,
+    })
+      .then((res) => res.json())
+      .then((res) => console.log("success: ", res))
+      .catch((err) => console.log("fail: ", err));
   };
   const handleUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
-      setImage(URL.createObjectURL(img));
+      setImage(img);
     }
     console.log(image);
   };
@@ -200,7 +213,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             id="raised-button-file"
             multiple
             type="file"
-            onClick={handleUpload}
+            onChange={handleUpload}
           />
           <label htmlFor="raised-button-file">
             <Button variant="contained" component="span">
