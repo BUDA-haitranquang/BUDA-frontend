@@ -17,11 +17,11 @@ const CollationModal = ({
   productID,
   amountChange,
 }) => {
-  const [comment, setComment] = useState("");
+  const [ comment, setComment] = useState("");
   const { enqueueSnackbar } = useSnackbar();
-  const [amount, setAmount] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [editProductQuantity, { error, data: quantityData }] = useMutation(
+  const [ amount, setAmount ] = useState(null);
+  const [ loading, setLoading ] = useState(false);
+  const [ editProductQuantity, { error, data: quantityData }] = useMutation(
     EDIT_PRODUCT_QUANTITY
   );
   const resetForm = () => {

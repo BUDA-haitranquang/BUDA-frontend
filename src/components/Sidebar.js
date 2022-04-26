@@ -86,7 +86,7 @@ const sidebarItems = [
     createData("Buy history", "buy-history", ""),
   ],
   [createData("Product", "", ""), createData("Collation", "collation", "")],
-  [createData("Ingredient", "", "")],
+  [createData("Detail", "detail", ""),createData("Collation", "collation", "")],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
 

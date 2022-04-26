@@ -49,3 +49,25 @@ export const UPDATE_INGREDIENT_MUTATION = gql`
         {ingredientID}
     }
 `
+
+export const EDIT_INGREDIENT_QUANTITY = gql `
+    mutation editIngredientQuantity(
+        $ingredientID: Int!
+        $amountLeftChange: Int!
+        $message: String!
+    )
+    {
+        editIngredientQuantity(
+            ingredientID: $ingredientID
+            quantityLog: {
+                amountLeftChange: $amountLeftChange
+                message: $message
+            }
+        )
+        {
+            ingredientID
+            amountLeft
+        }
+    }
+    
+`

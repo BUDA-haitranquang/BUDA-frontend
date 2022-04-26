@@ -44,7 +44,7 @@ import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
 import TestMultiLanguage from "./pages/TestMultiLanguage";
 import TestMultiLanguage2 from "./pages/TestMultiLanguage2";
-
+import IngredientCollation from "./pages/collation/IngredientCollation";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -164,11 +164,16 @@ const AppRouter = () => {
             path="/product/:id"
             component={ProductDetail}
           />
-
+           <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/ingredient/collation"
+            component={IngredientCollation}
+          />
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/ingredient"
+            path="/ingredient/detail"
             component={Ingredient}
           />
           <PrivateRoute
@@ -207,12 +212,7 @@ const AppRouter = () => {
             path="/buy-order"
             component={BuyOrder}
           />
-          {/* <PrivateRoute
-            authed={isAuth}
-            exact
-            path="/buy-order/create"
-            component={CreateBuyOrder}
-          /> */}
+         
           <PrivateRoute
             authed={isAuth}
             exact
