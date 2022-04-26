@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp
+  AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";

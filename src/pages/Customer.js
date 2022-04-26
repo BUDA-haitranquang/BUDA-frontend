@@ -14,38 +14,7 @@ import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "phoneNumber",
-    numeric: false,
-    disablePadding: false,
-    label: "Phone Number",
-  },
-  {
-    id: "ageGroup",
-    numeric: false,
-    disablePadding: false,
-    label: "Age Group",
-  },
-  {
-    id: "gender",
-    numeric: false,
-    disablePadding: false,
-    label: "Gender",
-  },
-  {
-    id: "totalSpend",
-    numeric: true,
-    disablePadding: false,
-    label: "totalSpend",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Customer = (props) => {
   const { window } = props;
@@ -54,7 +23,7 @@ const Customer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
-
+  const {t} = useTranslation(['common','customer'])
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -75,13 +44,46 @@ const Customer = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setCustomer(data.customersByUser.map(item => item));
+      if (data) setCustomer(data.customersByUser.map((item) => item));
     }
     fetchData();
     console.log(data);
   }, [data]);
 
   if (error) return <Redirect to="/login" />;
+
+  const headCells = [
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:customerName"),
+    },
+    {
+      id: "phoneNumber",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:phoneNumber"),
+    },
+    {
+      id: "ageGroup",
+      numeric: false,
+      disablePadding: false,
+      label: t('customer:ageGroup'),
+    },
+    {
+      id: "gender",
+      numeric: false,
+      disablePadding: false,
+      label: t('customer:gender'),
+    },
+    {
+      id: "totalSpend",
+      numeric: true,
+      disablePadding: false,
+      label: t('customer:totalSpend'),
+    },
+  ];
 
   return (
     <Box sx={{ display: "flex" }}>
