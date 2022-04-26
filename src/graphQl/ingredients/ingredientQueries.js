@@ -33,3 +33,15 @@ export const LOAD_INGREDIENT = gql`
     }
   }
 `
+
+export const Ingredient_Collation = gql`
+  query{
+    ingredientsByUser {
+      ingredientID
+      ingredientSKU
+      name
+      description
+      amountLeft
+    }
+  }
+`
