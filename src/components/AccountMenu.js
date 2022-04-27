@@ -10,6 +10,7 @@ import { useHistory } from "react-router";
 import UKflag from "../assets/UK-flag.png";
 import VIflag from "../assets/VN-flag.png";
 import { removeToken } from "../redux/tokenSlice";
+import Notification from "./Notification";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -70,9 +71,14 @@ export default function AccountMenu() {
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
+        <Notification />
+
       </Box>
 
-      <Box className="languages" style={{display: "flex", alignItems: "center"}}>
+      <Box
+        className="languages"
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <Button onClick={() => changeLanguage("en")}>
           <img
             src={UKflag}
