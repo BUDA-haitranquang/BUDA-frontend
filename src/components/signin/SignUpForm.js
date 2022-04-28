@@ -59,14 +59,10 @@ const useStyle = makeStyles({
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
-      backgroundColor: "#224957",
+      backgroundColor: "white",
       borderRadius: "10px",
       width: "100%",
       height: "50px",
-      "&:hover": {
-        outline: "none",
-        boxShadow: "0px 0px 0px 3px #20DF7F inset",
-      },
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
@@ -76,18 +72,19 @@ const useStyle = makeStyles({
       height: "10px",
     },
     "& .MuiOutlinedInput-input": {
-      color: "#ffffff",
+      color: "black",
     },
   },
   button: {
     "&.MuiButton-root": {
       width: "100%",
-      background: "#20DF7F",
+      background: "rgba(72, 149, 255, 1)",
       color: "white",
       borderRadius: 10,
       height: 50,
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       "&:hover": {
-        background: "#56EFA2",
+        background: "rgba(97, 163, 255, 1)",
         border: "none",
       },
     },
@@ -185,12 +182,7 @@ const SignUpForm = () => {
             alignItems: "center",
           }}
         >
-          <Box
-            style={{ marginLeft: "8rem", marginRight: "8rem" }}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-          >
+          <Box display="flex" flexDirection="column" alignItems="center">
             <Box className={classes.nameWrapper}>
               <OutlinedInput
                 className={classes.outlinedInput}
@@ -200,7 +192,7 @@ const SignUpForm = () => {
                 placeholder="First Name"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                    <PersonIcon style={{ opacity: 0.5 }} />
                   </InputAdornment>
                 }
                 style={{ marginBottom: "1.25rem", marginRight: "0.5rem" }}
@@ -213,7 +205,7 @@ const SignUpForm = () => {
                 placeholder="Last Name"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                    <PersonIcon style={{ opacity: 0.5 }} />
                   </InputAdornment>
                 }
                 style={{ marginBottom: "1.25rem", marginLeft: "0.5rem" }}
@@ -227,7 +219,7 @@ const SignUpForm = () => {
               placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
-                  <EmailIcon style={{ opacity: 0.5, color: "white" }} />
+                  <EmailIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -240,7 +232,7 @@ const SignUpForm = () => {
               placeholder="Phone Number"
               startAdornment={
                 <InputAdornment position="start">
-                  <PhoneIcon style={{ opacity: 0.5, color: "white" }} />
+                  <PhoneIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -253,7 +245,7 @@ const SignUpForm = () => {
               placeholder=" Username"
               startAdornment={
                 <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                  <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -266,14 +258,14 @@ const SignUpForm = () => {
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
+                  <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               endAdornment={
                 <InputAdornment position="end">
                   <Button onClick={handleVisibility}>
                     {" "}
-                    <VisibilityIcon style={{ opacity: 0.5, color: "white" }} />
+                    <VisibilityIcon style={{ opacity: 0.5 }} />
                   </Button>
                 </InputAdornment>
               }
@@ -287,7 +279,7 @@ const SignUpForm = () => {
               placeholder="Confirm Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
+                  <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -309,7 +301,7 @@ const SignUpForm = () => {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "center",
-                  color: "white",
+                  color: "black",
                   textDecoration: "none",
                   cursor: "pointer",
                 }}

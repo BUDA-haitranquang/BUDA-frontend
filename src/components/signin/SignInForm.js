@@ -52,15 +52,10 @@ const useStyle = makeStyles({
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
-      backgroundColor: "#224957",
+      backgroundColor: "white",
       borderRadius: "10px",
       width: "100%",
       height: "50px",
-
-      "&:hover": {
-        outline: "none",
-        boxShadow: "0px 0px 0px 3px #20DF7F inset",
-      },
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
       opacity: 0.5,
@@ -70,18 +65,19 @@ const useStyle = makeStyles({
       height: "10px",
     },
     "& .MuiOutlinedInput-input": {
-      color: "#ffffff",
+      color: "#black",
     },
   },
   button1: {
     "&.MuiButton-root": {
       width: "100%",
-      background: "#20DF7F",
+      background: "rgba(72, 149, 255, 1)",
       color: "white",
       borderRadius: 10,
       height: 50,
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       "&:hover": {
-        background: "#56EFA2",
+        background: "rgba(97, 163, 255, 1)",
         border: "none",
       },
     },
@@ -195,7 +191,7 @@ const SignInForm = () => {
             variant="h1"
             style={{
               fontFamily: "'Montserrat', sans-serif",
-              color: "white",
+              color: "black",
               marginBottom: "4rem",
               fontWeight: 500,
             }}
@@ -219,7 +215,7 @@ const SignInForm = () => {
             
             </Box>*/}
 
-          <Box style={{ marginLeft: "8rem", marginRight: "8rem" }}>
+          <Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={email}
@@ -229,7 +225,7 @@ const SignInForm = () => {
               placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                  <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -243,7 +239,7 @@ const SignInForm = () => {
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
+                  <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -261,7 +257,7 @@ const SignInForm = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-                color: "white",
+                color: "black",
                 cursor: "default",
               }}
             >
@@ -271,7 +267,7 @@ const SignInForm = () => {
                   history.push("/signup");
                 }}
                 style={{
-                  color: "#20DF7F",
+                  color: "rgba(72, 149, 255, 1)",
                   textDecoration: "none",
                   cursor: "pointer",
                 }}

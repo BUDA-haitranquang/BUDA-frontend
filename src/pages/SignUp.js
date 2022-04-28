@@ -1,9 +1,8 @@
 import React from "react";
 import SignUpForm from "../components/signin/SignUpForm";
-import LogInPic from "../assets/login.jpg";
-import { Grid, Box, Hidden } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import LoginBackground from "../assets/Background.png";
+import LoginBackground from "../assets/Background_1.png";
 
 const useStyle = makeStyles((theme) => ({
   imgWrapper: {
@@ -17,6 +16,15 @@ const useStyle = makeStyles((theme) => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+  },
+  boxCointainer: {
+    background: "rgba(255, 255, 255, 0.83)",
+    display: "flex",
+    flexDirecition: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "3rem",
+    borderRadius: "20px",
   },
 }));
 
@@ -36,16 +44,9 @@ const SignUp = () => {
           alignItems: "center",
         }}
       >
-        <Hidden lgDown>
-          <Box width="45%">
-            <SignUpForm />
-          </Box>
-        </Hidden>
-        <Hidden lgUp>
-          <Box width="100%">
-            <SignUpForm />
-          </Box>
-        </Hidden>
+        <Box className={cls.boxCointainer}>
+          <SignUpForm />
+        </Box>
       </Box>
     </>
   );

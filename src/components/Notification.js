@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
       borderRadius: "10px",
     },
     marginLeft: "2rem",
-    height: "700px",
+    height: "350px",
   },
 }));
 const Notification = () => {
