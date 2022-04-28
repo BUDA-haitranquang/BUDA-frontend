@@ -1,12 +1,9 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import { Toolbar, Tabs, Tab } from "@mui/material";
+import { Toolbar } from "@mui/material";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
-import UnfinishedOrder from "../components/dashboard/UnfinishedOrder";
-import Revenue from "../components/dashboard/Revenue";
 import MainDashBoard from "../components/dashboard/MainDashBoard";
+
 function Dashboard(props) {
   const { window } = props;
 
@@ -17,7 +14,7 @@ function Dashboard(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Dashboard" />
-      <Box sx ={{width:'100%'}}>
+      <Box sx={{ width: "100%" }}>
         <Toolbar />
         {/* <Box pt={1}>
           <Tabs value={currentTab} onChange={handleChange}>
@@ -31,8 +28,8 @@ function Dashboard(props) {
         </Box>
         {currentTab === 0 && <UnfinishedOrder />}
         {currentTab === 1 && <Revenue />} */}
-        <Box sx={{width:'100%'}}>
-        <MainDashBoard/>
+        <Box sx={{ width: "100%" }}>
+          <MainDashBoard />
         </Box>
       </Box>
     </Box>

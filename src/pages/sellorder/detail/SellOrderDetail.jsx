@@ -19,8 +19,8 @@ function SellOrderDetail(props) {
 
   const { data } = useQuery(LOAD_SELL_ORDER_DETAILS, {
     variables: {
-      sellOrderID: parseInt(id),
-    },
+      sellOrderID: parseInt(id)
+    }
   });
 
   useEffect(() => {
@@ -29,11 +29,12 @@ function SellOrderDetail(props) {
         setSellOrder(data.sellOrder);
       }
     }
+
     fetchData();
   }, [data]);
 
   return (
-    <Box sx={{ display: "flex"}}>
+    <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Sell Order" />
 
       <Box
@@ -50,10 +51,10 @@ function SellOrderDetail(props) {
           </Typography>
 
           <Grid container spacing={3}>
-            <Grid item xs={8} >
+            <Grid item xs={8}>
               <BoxCustomer customer={sellOrder?.customer} />
             </Grid>
-            <Grid item xs={4} >
+            <Grid item xs={4}>
               <BoxAdditionalInfo
                 status={sellOrder?.status}
                 textID={sellOrder?.textID}

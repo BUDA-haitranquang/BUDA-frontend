@@ -21,61 +21,61 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Name",
+    label: "Name"
   },
   {
     id: "email",
     numeric: false,
     disablePadding: true,
-    label: "Email",
+    label: "Email"
   },
   {
     id: "phoneNumber",
     numeric: false,
     disablePadding: true,
-    label: "Phone number",
+    label: "Phone number"
   },
   {
     id: "address",
     numeric: false,
     disablePadding: true,
-    label: "Address",
+    label: "Address"
   },
   {
     id: "staffPosition",
     numeric: false,
     disablePadding: true,
-    label: "Position",
-  },
+    label: "Position"
+  }
 ];
 
 const Staff = (props) => {
   const { window } = props;
   const [staffs, setStaffs] = useState([]);
-  const { error, loading, data} = useQuery(LOAD_STAFFS);
+  const { error, loading, data } = useQuery(LOAD_STAFFS);
   const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
 
-  const handleDelete = (selected) =>{
-      if (selected===[]) return 
-      selected.forEach(
-        (item)=>{
-          deleteStaff({
-            variables:{staffID: parseInt(item)},
-            refetchQueries: [{query: LOAD_STAFFS}]
-          })
-        }
-      )
-  }
+  const handleDelete = (selected) => {
+    if (selected === []) return;
+    selected.forEach(
+      (item) => {
+        deleteStaff({
+          variables: { staffID: parseInt(item) },
+          refetchQueries: [{ query: LOAD_STAFFS }]
+        });
+      }
+    );
+  };
 
   useEffect(() => {
-    async function fetchData(){
-      if(data) setStaffs(data.staffsByUser.slice().sort((a, b) => b.staffID - a.staffID));
+    async function fetchData() {
+      if (data) setStaffs(data.staffsByUser.slice().sort((a, b) => b.staffID - a.staffID));
     }
-    
-    fetchData();
-  }, [data]); 
 
-  if(error) return <Redirect to="/login"/>;
+    fetchData();
+  }, [data]);
+
+  if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -96,7 +96,7 @@ const Staff = (props) => {
             headCells={headCells}
             Modal={AddStaffModal}
             DetailTableBody={StaffTableBody}
-            type='staffID'
+            type="staffID"
           />
         </Box>
       </Box>

@@ -10,10 +10,7 @@ import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
 import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import { useTranslation } from "react-i18next";
 
 const Customer = (props) => {
@@ -23,7 +20,7 @@ const Customer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
-  const {t} = useTranslation(['common','customer'])
+  const { t } = useTranslation(["common", "customer"]);
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -31,7 +28,7 @@ const Customer = (props) => {
       selected.forEach((item) => {
         hideCustomer({
           variables: { customerID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_CUSTOMERS }],
+          refetchQueries: [{ query: LOAD_CUSTOMERS }]
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -46,6 +43,7 @@ const Customer = (props) => {
     async function fetchData() {
       if (data) setCustomer(data.customersByUser.map((item) => item));
     }
+
     fetchData();
     console.log(data);
   }, [data]);
@@ -57,32 +55,32 @@ const Customer = (props) => {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("customer:customerName"),
+      label: t("customer:customerName")
     },
     {
       id: "phoneNumber",
       numeric: false,
       disablePadding: false,
-      label: t("customer:phoneNumber"),
+      label: t("customer:phoneNumber")
     },
     {
       id: "ageGroup",
       numeric: false,
       disablePadding: false,
-      label: t('customer:ageGroup'),
+      label: t("customer:ageGroup")
     },
     {
       id: "gender",
       numeric: false,
       disablePadding: false,
-      label: t('customer:gender'),
+      label: t("customer:gender")
     },
     {
       id: "totalSpend",
       numeric: true,
       disablePadding: false,
-      label: t('customer:totalSpend'),
-    },
+      label: t("customer:totalSpend")
+    }
   ];
 
   return (

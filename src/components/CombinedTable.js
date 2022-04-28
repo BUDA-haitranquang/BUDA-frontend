@@ -1,11 +1,5 @@
-import {
-  Box,
-  Paper,
-  Table,
-  TableContainer,
-  TablePagination,
-} from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { Box, Paper, Table, TableContainer, TablePagination } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import EnhancedToolbar from "./table/EnhancedToolbar";
 

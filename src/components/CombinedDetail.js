@@ -25,7 +25,7 @@ function CombinedDetail(props) {
           width: "92%",
           margin: "0 auto",
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "space-evenly"
         }}
       >
         <Grid item xs={12}>
@@ -36,7 +36,7 @@ function CombinedDetail(props) {
           style={{
             width: "100%",
             justifyContent: "flex-end",
-            marginTop: "20px",
+            marginTop: "20px"
           }}
         >
           <Button

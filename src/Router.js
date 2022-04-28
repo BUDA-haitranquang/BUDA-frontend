@@ -1,26 +1,13 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  from,
-  gql,
-  HttpLink,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, from, gql, HttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
-import { addRefreshToken, addToken } from "../src/redux/tokenSlice";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { addToken } from "../src/redux/tokenSlice";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
-import Error from "./pages/Error";
 import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
@@ -42,9 +29,8 @@ import OtherCost from "./pages/OtherCost";
 import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
-import TestMultiLanguage from "./pages/TestMultiLanguage";
-import TestMultiLanguage2 from "./pages/TestMultiLanguage2";
 import IngredientCollation from "./pages/collation/IngredientCollation";
+
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -61,8 +47,8 @@ const AppRouter = () => {
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${jwt}`,
-      },
+        authorization: `Bearer ${jwt}`
+      }
     };
   });
 
@@ -80,7 +66,7 @@ const AppRouter = () => {
 
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://103.173.228.124:4000/" }),
+    new HttpLink({ uri: "http://103.173.228.124:4000/" })
   ]);
 
   const PrivateRoute = ({ authed, ...routeProps }) => {
@@ -103,7 +89,7 @@ const AppRouter = () => {
             }
           }
         `,
-        variables: { token: refreshJwt },
+        variables: { token: refreshJwt }
       })
       .then((res) => {
         const { accessToken, refreshToken } = res.data.newAccessToken;
@@ -119,7 +105,7 @@ const AppRouter = () => {
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link: authLink.concat(link),
+    link: authLink.concat(link)
   });
 
   return (
@@ -164,7 +150,7 @@ const AppRouter = () => {
             path="/product/:id"
             component={ProductDetail}
           />
-           <PrivateRoute
+          <PrivateRoute
             authed={isAuth}
             exact
             path="/ingredient/collation"
@@ -212,7 +198,7 @@ const AppRouter = () => {
             path="/buy-order"
             component={BuyOrder}
           />
-         
+
           <PrivateRoute
             authed={isAuth}
             exact

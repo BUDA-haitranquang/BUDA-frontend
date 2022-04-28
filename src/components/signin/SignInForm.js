@@ -1,45 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  OutlinedInput,
-  InputAdornment,
-  Typography,
-  Link,
-  Modal,
-  CircularProgress,
-} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Button, CircularProgress, InputAdornment, Link, Modal, OutlinedInput, Typography } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 import { useMutation } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
-import { addToken, addRefreshToken } from "../../redux/tokenSlice";
+import { addRefreshToken, addToken } from "../../redux/tokenSlice";
 
-import {
-  LOGIN_USER,
-  NEW_ACCESS_TOKEN,
-} from "../../graphQl/authentication/authMutations";
+import { LOGIN_USER, NEW_ACCESS_TOKEN } from "../../graphQl/authentication/authMutations";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+
 const useStyle = makeStyles({
   wrapper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   formContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   headlineText: {
     paddingTop: "15%",
@@ -48,25 +33,25 @@ const useStyle = makeStyles({
     color: "#fff",
     fontFamily: "Lexend Deca",
     fontWeight: 800,
-    marginLeft: "15%",
+    marginLeft: "15%"
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "white",
       borderRadius: "10px",
       width: "100%",
-      height: "50px",
+      height: "50px"
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
-      opacity: 0.5,
+      opacity: 0.5
     },
     "& input": {
       padding: "15px",
-      height: "10px",
+      height: "10px"
     },
     "& .MuiOutlinedInput-input": {
-      color: "#black",
-    },
+      color: "#black"
+    }
   },
   button1: {
     "&.MuiButton-root": {
@@ -78,13 +63,13 @@ const useStyle = makeStyles({
       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       "&:hover": {
         background: "rgba(97, 163, 255, 1)",
-        border: "none",
-      },
+        border: "none"
+      }
     },
     "&.MuiButton-text": {
-      fontSize: 19,
-    },
-  },
+      fontSize: 19
+    }
+  }
 });
 
 const SignInForm = () => {
@@ -138,8 +123,8 @@ const SignInForm = () => {
     userLogin({
       variables: {
         email: email,
-        password: password,
-      },
+        password: password
+      }
     })
       .then((res) => {
         const { accessToken, refreshToken } = res.data.userLogin;
@@ -184,7 +169,7 @@ const SignInForm = () => {
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <Typography
@@ -193,7 +178,7 @@ const SignInForm = () => {
               fontFamily: "'Montserrat', sans-serif",
               color: "black",
               marginBottom: "4rem",
-              fontWeight: 500,
+              fontWeight: 500
             }}
           >
             BUDA
@@ -258,7 +243,7 @@ const SignInForm = () => {
                 flexDirection: "row",
                 justifyContent: "center",
                 color: "black",
-                cursor: "default",
+                cursor: "default"
               }}
             >
               Don't have an account?&nbsp;
@@ -269,7 +254,7 @@ const SignInForm = () => {
                 style={{
                   color: "rgba(72, 149, 255, 1)",
                   textDecoration: "none",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 Sign up

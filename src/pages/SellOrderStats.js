@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import AgeGroupSellOrder from "../components/statistics/sellorder/AgeGroupSellOrder";
 import GenderSellOrder from "../components/statistics/sellorder/GenderSellOrder";
+
 const SellOrderStats = (props) => {
   const { window } = props;
   return (

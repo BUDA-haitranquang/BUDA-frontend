@@ -1,11 +1,10 @@
-import * as React from 'react';
-import Popover from '@mui/material/Popover';
-import { MenuItem } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import Popover from "@mui/material/Popover";
 //import Button from '@mui/material/Button';
-import { IconButton } from '@mui/material';
-import FilterListIcon from '@mui/icons-material/FilterList';
-const FilterPopup=({list})=>{
+import { IconButton, MenuItem } from "@mui/material";
+import FilterListIcon from "@mui/icons-material/FilterList";
+
+const FilterPopup = ({ list }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -17,30 +16,30 @@ const FilterPopup=({list})=>{
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
 
-    return(
-        <div>
-            <IconButton aria-describedby={id} onClick={handleClick}>
-            <FilterListIcon/>
-            </IconButton>
-        <Popover
+  return (
+    <div>
+      <IconButton aria-describedby={id} onClick={handleClick}>
+        <FilterListIcon />
+      </IconButton>
+      <Popover
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left"
         }}>
-            {list.map((item,index)=>{
-                        return(
-                            <MenuItem onClick={handleClose} key = {index}> {item} </MenuItem>
-                        )
-                    })}
+        {list.map((item, index) => {
+          return (
+            <MenuItem onClick={handleClose} key={index}> {item} </MenuItem>
+          );
+        })}
 
       </Popover>
-            {/* <Menu
+      {/* <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
@@ -55,8 +54,8 @@ const FilterPopup=({list})=>{
                         )
                     })}
       </Menu> */}
-        </div>
-    )
-}
+    </div>
+  );
+};
 
 export default FilterPopup;

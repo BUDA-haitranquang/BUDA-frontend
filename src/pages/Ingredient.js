@@ -4,16 +4,13 @@ import Box from "@mui/material/Box";
 import { Toolbar } from "@mui/material";
 import AddIngredientModal from "../components/modal/AddIngredientModal";
 import IngredientTableBody from "../components/table/body/IngredientTableBody";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutation";
-import { useQuery } from "@apollo/client";
 import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
+
 const headCells = [
   // {
   //   id: "ID",
@@ -25,38 +22,38 @@ const headCells = [
     id: "sku",
     numeric: false,
     disablePadding: false,
-    label: "SKU",
+    label: "SKU"
   },
   {
     id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Name",
+    label: "Name"
   },
   {
     id: "price",
     numeric: true,
     disablePadding: true,
-    label: "Price",
+    label: "Price"
   },
   {
     id: "amountLeft",
     numeric: true,
     disablePadding: true,
-    label: "Left",
+    label: "Left"
   },
   {
     id: "alertAmountLeft",
     numeric: true,
     disablePadding: true,
-    label: "Alert",
+    label: "Alert"
   },
   {
     id: "description",
     numeric: false,
     disablePadding: true,
-    label: "Description",
-  },
+    label: "Description"
+  }
 ];
 
 const Ingredient = (props) => {
@@ -73,7 +70,7 @@ const Ingredient = (props) => {
       selected.forEach((item) => {
         hideIngredient({
           variables: { ingredientID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_INGREDIENTS }],
+          refetchQueries: [{ query: LOAD_INGREDIENTS }]
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -88,6 +85,7 @@ const Ingredient = (props) => {
     async function fetchData() {
       if (data) setIngredients(data.ingredientsByUser.map(item => item));
     }
+
     fetchData();
   }, [data]);
 

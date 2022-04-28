@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/material";
 import Chart from "react-google-charts";
 
 const data = [
@@ -8,18 +7,18 @@ const data = [
   ["Los Angeles, CA", 3792000, 3694000],
   ["Chicago, IL", 2695000, 2896000],
   ["Houston, TX", 2099000, 1953000],
-  ["Philadelphia, PA", 1526000, 1517000],
+  ["Philadelphia, PA", 1526000, 1517000]
 ];
 const options = {
   title: "Population of Largest U.S. Cities",
   chartArea: { width: "50%" },
   hAxis: {
     title: "Total Population",
-    minValue: 0,
+    minValue: 0
   },
   vAxis: {
-    title: "City",
-  },
+    title: "City"
+  }
 };
 
 export default function BarChart() {

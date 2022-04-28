@@ -1,7 +1,6 @@
 import { ShoppingBasketOutlined } from "@mui/icons-material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
@@ -23,7 +22,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -39,12 +38,12 @@ const useStyle = makeStyles({
       color: "black",
       "&:hover": {
         color: "grey",
-        fontWeight: "600",
-      },
+        fontWeight: "600"
+      }
     },
     "& a:visited": {
-      color: "black",
-    },
+      color: "black"
+    }
   },
   logo: {
     width: "100%",
@@ -53,8 +52,8 @@ const useStyle = makeStyles({
     display: "flex",
     justifyContent: "center",
     textDecoration: "none",
-    color: "black",
-  },
+    color: "black"
+  }
 });
 const drawerWidth = 200;
 
@@ -66,7 +65,7 @@ const title = [
   "supplier",
   "customer",
   "staff",
-  "cost",
+  "cost"
   // "statistic",
 ];
 
@@ -76,17 +75,17 @@ function createData(name, link, check) {
 
 const sidebarItems = [
   [
-    createData("Overall", "overall", ""),
+    createData("Overall", "overall", "")
     // createData("Incomplete", "incomplete", ""),
   ],
   [
     createData("Sell", "sell", ""),
     createData("Sell history", "sell-history", ""),
     createData("Buy", "buy", ""),
-    createData("Buy history", "buy-history", ""),
+    createData("Buy history", "buy-history", "")
   ],
   [createData("Product", "", ""), createData("Collation", "collation", "")],
-  [createData("Detail", "detail", ""),createData("Collation", "collation", "")],
+  [createData("Detail", "detail", ""), createData("Collation", "collation", "")],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
 
@@ -94,13 +93,13 @@ const sidebarItems = [
   [
     createData("Fixed", "fixedcost", ""),
     createData("Fixed Cost Bill", "fixedcostBill", ""),
-    createData("Other Cost", "othercost", ""),
+    createData("Other Cost", "othercost", "")
   ],
   [
-    createData("Business", "business", ""),
-     // createData("Customer", "customer", ""),
+    createData("Business", "business", "")
+    // createData("Customer", "customer", ""),
     // createData("Product", "product", ""),
-  ],
+  ]
 ];
 const Sidebar = ({ window, name }) => {
   const history = useHistory();
@@ -210,7 +209,7 @@ const Sidebar = ({ window, name }) => {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          ml: { sm: `${drawerWidth}px` }
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -245,14 +244,14 @@ const Sidebar = ({ window, name }) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true
           }}
           sx={{
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
         >
           {drawer}
@@ -263,8 +262,8 @@ const Sidebar = ({ window, name }) => {
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
           open
         >

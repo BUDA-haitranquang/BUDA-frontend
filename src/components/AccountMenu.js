@@ -43,7 +43,7 @@ export default function AccountMenu() {
         width: "300px",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "space-between"
       }}
     >
       <Box>
@@ -65,7 +65,7 @@ export default function AccountMenu() {
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            "aria-labelledby": "basic-button",
+            "aria-labelledby": "basic-button"
           }}
         >
           <MenuItem onClick={handleClose}>My account</MenuItem>

@@ -1,7 +1,7 @@
 import React from "react";
 import SignInForm from "../components/signin/SignInForm";
 import LoginBackground from "../assets/Background_1.png";
-import {Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -10,8 +10,7 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat",
     width: "100%",
     backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "cover"
   },
   boxCointainer: {
     background: "rgba(255, 255, 255, 0.83)",
@@ -20,8 +19,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     padding: "3rem",
-    borderRadius: "20px",
-  },
+    borderRadius: "20px"
+  }
 });
 
 const Login = () => {
@@ -37,7 +36,7 @@ const Login = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Box className={cls.boxCointainer}>

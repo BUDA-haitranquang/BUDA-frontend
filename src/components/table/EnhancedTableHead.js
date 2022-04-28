@@ -1,23 +1,16 @@
 import React from "react";
-import {
-  TableHead,
-  TableRow,
-  TableCell,
-  Checkbox,
-  TableSortLabel,
-  Box,
-} from "@mui/material";
+import { Box, Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 
 const EnhancedTableHead = ({
-  onSelectAllClick,
-  order,
-  orderBy,
-  numSelected,
-  rowCount,
-  onRequestSort,
-  headCells,
-}) => {
+                             onSelectAllClick,
+                             order,
+                             orderBy,
+                             numSelected,
+                             rowCount,
+                             onRequestSort,
+                             headCells
+                           }) => {
   const createSortHandler = (props) => (event) => {
     onRequestSort(event, props);
   };
@@ -37,7 +30,7 @@ const EnhancedTableHead = ({
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
-            sx={{fontWeight: "600"}}
+            sx={{ fontWeight: "600" }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}

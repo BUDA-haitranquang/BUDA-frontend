@@ -1,15 +1,11 @@
 import { useMutation } from "@apollo/client";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import {
-  Box, Button, IconButton, Modal,
-  TextField,
-  Typography
-} from "@mui/material";
+import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { UPDATE_STAFF_MUTATION } from "../../graphQl/staff/staffMutation";
 import { LOAD_STAFF, LOAD_STAFFS } from "../../graphQl/staff/staffQueries";
 
-const EditStaffModal = ({data, isOpen, handleClose }) => {
+const EditStaffModal = ({ data, isOpen, handleClose }) => {
   const staff = data.staff;
   const [name, setName] = useState(staff.name);
   const [password, setPassword] = useState(staff.password);
@@ -34,28 +30,27 @@ const EditStaffModal = ({data, isOpen, handleClose }) => {
         salary: parseFloat(salary)
       },
       refetchQueries: [{
-        query: LOAD_STAFF, 
-        variables:{
+        query: LOAD_STAFF,
+        variables: {
           staffID: staff.staffID
         }
-      },{
+      }, {
         query: LOAD_STAFFS
       }]
     });
-  }
+  };
 
   const isFormValid = () => {
     const isValid = (name !== "") && (salary >= 0);
     return isValid;
-  }
+  };
 
   const handleSubmit = () => {
-    if(isFormValid()) {
+    if (isFormValid()) {
       editStaff();
       handleClose();
-    }
-    else alert("Invalid input");
-  }
+    } else alert("Invalid input");
+  };
 
   return (
     <Modal
@@ -78,7 +73,7 @@ const EditStaffModal = ({data, isOpen, handleClose }) => {
           boxShadow: 24,
           p: 5,
           outline: 0,
-          "& > :not(style)": { m: 1 },
+          "& > :not(style)": { m: 1 }
         }}
       >
         <Box
@@ -114,7 +109,7 @@ const EditStaffModal = ({data, isOpen, handleClose }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        
+
         <TextField
           fullWidth
           required
@@ -155,8 +150,8 @@ const EditStaffModal = ({data, isOpen, handleClose }) => {
           onChange={(e) => setSalary(e.target.value)}
         />
 
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           onClick={handleSubmit}
         >
           Edit Staff

@@ -2,16 +2,10 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { UPDATE_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
-import {
-  LOAD_INGREDIENT,
-  LOAD_INGREDIENTS,
-} from "../../graphQl/ingredients/ingredientQueries";
+import { LOAD_INGREDIENT, LOAD_INGREDIENTS } from "../../graphQl/ingredients/ingredientQueries";
 
 const EditIngredientModal = ({ data, isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -37,19 +31,19 @@ const EditIngredientModal = ({ data, isOpen, handleClose }) => {
         description: description,
         amountLeft: parseInt(amountLeft),
         price: parseFloat(price),
-        alertAmountLeft: parseInt(alertAmountLeft),
+        alertAmountLeft: parseInt(alertAmountLeft)
       },
       refetchQueries: [
         {
           query: LOAD_INGREDIENT,
           variables: {
-            ingredientID: ingredient.ingredientID,
-          },
+            ingredientID: ingredient.ingredientID
+          }
         },
         {
-          query: LOAD_INGREDIENTS,
-        },
-      ],
+          query: LOAD_INGREDIENTS
+        }
+      ]
     })
       .then((res) => {
         handleClose();
@@ -86,7 +80,7 @@ const EditIngredientModal = ({ data, isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 },
+            "& > :not(style)": { m: 1 }
           }}
         >
           <TextField
@@ -108,7 +102,7 @@ const EditIngredientModal = ({ data, isOpen, handleClose }) => {
             style={{
               width: "100%",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "space-between"
             }}
           >
             <TextField
@@ -136,7 +130,7 @@ const EditIngredientModal = ({ data, isOpen, handleClose }) => {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-              marginTop: "16px",
+              marginTop: "16px"
             }}
           >
             <TextField

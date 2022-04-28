@@ -4,10 +4,7 @@ import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";
 import Sidebar from "../components/Sidebar";
@@ -30,7 +27,7 @@ const Product = (props) => {
       selected.forEach((item) => {
         hideProduct({
           variables: { productID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_PRODUCTS }],
+          refetchQueries: [{ query: LOAD_PRODUCTS }]
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -45,6 +42,7 @@ const Product = (props) => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser.map((item) => item));
     }
+
     fetchData();
   }, [data]);
 
@@ -55,44 +53,44 @@ const Product = (props) => {
       id: "sku",
       numeric: false,
       disablePadding: false,
-      label: t("product:sku"),
+      label: t("product:sku")
     },
     {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("product:name"),
+      label: t("product:name")
     },
     {
       id: "sellingPrice",
       numeric: true,
       disablePadding: true,
-      label: t("product:price"),
+      label: t("product:price")
     },
     {
       id: "amountLeft",
       numeric: true,
       disablePadding: true,
-      label: t("product:amountLeft"),
+      label: t("product:amountLeft")
     },
     {
       id: "alertAmount",
       numeric: true,
       disablePadding: true,
-      label: t("product:alertAmount"),
+      label: t("product:alertAmount")
     },
     {
       id: "costPerUnit",
       numeric: true,
       disablePadding: true,
-      label: t("product:cost"),
+      label: t("product:cost")
     },
     {
       id: "description",
       numeric: false,
       disablePadding: true,
-      label: t("product:description"),
-    },
+      label: t("product:description")
+    }
   ];
 
   return (

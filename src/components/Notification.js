@@ -1,17 +1,18 @@
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Badge, IconButton, Menu, MenuItem, Box } from "@mui/material";
+import { Badge, Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useQuery } from "@apollo/client";
 import { GET_NOTIFICATION_BY_USER } from "../graphQl/notification/notificationByUser";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
 export const useStyles = makeStyles((theme) => ({
   menu: {
     "& .MuiPaper-root": {
-      borderRadius: "10px",
+      borderRadius: "10px"
     },
     marginLeft: "2rem",
-    height: "350px",
-  },
+    height: "350px"
+  }
 }));
 const Notification = () => {
   const cls = useStyles();
@@ -50,7 +51,7 @@ const Notification = () => {
           onClose={handleClose}
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           className={cls.menu}
         >
@@ -68,7 +69,7 @@ const Notification = () => {
           onClose={handleClose}
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           style={{ marginLeft: "2rem" }}
         >

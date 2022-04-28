@@ -19,7 +19,7 @@ const AddStaffModal = (props) => {
   const [address, setAddress] = useState("");
   const [staffPosition, setStaffPosition] = useState("BASIC");
   const [salary, setSalary] = useState(0.0);
-  
+
   const [newStaff, { error }] = useMutation(ADD_STAFF_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +32,7 @@ const AddStaffModal = (props) => {
     setAddress("");
     setStaffPosition("");
     setSalary(0);
-  }
+  };
 
   const addStaff = () => {
     setIsLoading(true);
@@ -47,7 +47,7 @@ const AddStaffModal = (props) => {
         staffPosition: staffPosition,
         salary: parseFloat(salary)
       },
-      refetchQueries: [{query: LOAD_STAFFS}]
+      refetchQueries: [{ query: LOAD_STAFFS }]
     })
       .then((result) => {
         handleClose();
@@ -56,19 +56,18 @@ const AddStaffModal = (props) => {
       .then(() => resetForm())
       .catch((e) => enqueueSnackbar(e.message, AlertErrorProp))
       .finally(() => setIsLoading(false));
-  }
+  };
 
   const isFormValid = () => {
     const isValid = (name !== "") && (password !== "") && (salary >= 0);
     return isValid;
-  }
+  };
 
   const handleSubmit = () => {
-    if(isFormValid()) {
+    if (isFormValid()) {
       addStaff();
-    }
-    else enqueueSnackbar("Invalid input", AlertErrorProp);
-  }
+    } else enqueueSnackbar("Invalid input", AlertErrorProp);
+  };
 
   return (
     <BudaModal
@@ -83,7 +82,7 @@ const AddStaffModal = (props) => {
         autoComplete="off"
         sx={{
           width: "480px",
-          "& > :not(style)": { m: 1 },
+          "& > :not(style)": { m: 1 }
         }}
       >
         <TextField
@@ -126,7 +125,7 @@ const AddStaffModal = (props) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        
+
         <TextField
           fullWidth
           required

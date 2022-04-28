@@ -7,31 +7,32 @@ import Sidebar from "../components/Sidebar";
 import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_COLATIONS } from "../graphQl/collation/collationQueries";
 import BudaTable from "../buda-components/table/BudaTable";
+
 const headCells = [
   {
     id: "productSKU",
     numeric: false,
     disablePadding: false,
-    label: "SKU",
+    label: "SKU"
   },
   {
     id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Name",
+    label: "Name"
   },
   {
     id: "amountLeft",
     numeric: true,
     disablePadding: true,
-    label: "Amount",
+    label: "Amount"
   },
   {
     id: "",
     numeric: true,
     disablePadding: true,
-    label: "",
-  },
+    label: ""
+  }
 ];
 
 const Collation = (props) => {
@@ -48,7 +49,7 @@ const Collation = (props) => {
   }, [data]);
 
   if (error) return <Redirect to="/login" />;
-  console.log(data)
+  console.log(data);
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Product" />

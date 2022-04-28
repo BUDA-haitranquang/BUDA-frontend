@@ -1,18 +1,12 @@
-import {
-  Box,
-  Paper,
-  Table,
-  TableContainer,
-  TablePagination,
-} from "@mui/material";
+import { Box, Paper, Table, TableContainer, TablePagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import BudaServerTableBody from "./BudaServerTableBody";
 import BudaServerTableHead from "./BudaServerTableHead";
 import BudaServerTableToolbar from "./BudaServerTableToolbar";
 import { useQuery } from "@apollo/client";
 import { LOAD_SELL_ORDER } from "../../graphQl/sellOrder/sellOrderQueries";
-import { dateToDateString } from "../../utils/utils";
 import { capitalizeFirstLetter } from "../../utils/utils";
+
 const BudaServerTable = (props) => {
   const {
     tableChildren,
@@ -43,8 +37,8 @@ const BudaServerTable = (props) => {
   const { data, refetch } = useQuery(LOAD_SELL_ORDER, {
     variables: {
       page: parseInt(page),
-      size: parseInt(rowsPerPage),
-    },
+      size: parseInt(rowsPerPage)
+    }
   });
   const [isLoading, setIsLoading] = useState(false);
   const displayData = display;
@@ -80,7 +74,7 @@ const BudaServerTable = (props) => {
             finalCost: item.finalCost,
             creationTime: (item.creationTime),
             finishTime: (item.finishTime),
-            status: capitalizeFirstLetter(item.status),
+            status: capitalizeFirstLetter(item.status)
           };
         });
         setDisplay(sellorder);
@@ -174,8 +168,8 @@ const BudaServerTable = (props) => {
           nextIconButtonProps={
             displayData.length === 0
               ? {
-                  disabled: true,
-                }
+                disabled: true
+              }
               : undefined
           }
         />

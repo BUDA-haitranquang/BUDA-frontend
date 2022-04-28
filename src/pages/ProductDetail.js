@@ -5,22 +5,18 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Redirect } from "react-router-dom";
-import productData from "../assets/productData";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import CombinedDetail from "../components/CombinedDetail";
 import ProductInformation from "../components/detail/information/ProductInformation";
 import EditProductModal from "../components/modal/EditProductModal";
 import Sidebar from "../components/Sidebar";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import {
+  LOAD_COMPONENTS_BY_PRODUCT,
   LOAD_PRODUCT,
-  LOAD_PRODUCTS,
   LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT,
   LOAD_PRODUCT_GROUP_BY_PRODUCT,
-  LOAD_COMPONENTS_BY_PRODUCT,
+  LOAD_PRODUCTS
 } from "../graphQl/products/productQueries";
 
 const ProductDetail = (props) => {
@@ -35,19 +31,19 @@ const ProductDetail = (props) => {
   const [productComponent, setProductComponent] = useState(null);
 
   const productDetail = useQuery(LOAD_PRODUCT, {
-    variables: { productID: parseInt(id) },
+    variables: { productID: parseInt(id) }
   });
 
   const productComboData = useQuery(LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT, {
-    variables: { productID: parseInt(id) },
+    variables: { productID: parseInt(id) }
   });
 
   const productGroupData = useQuery(LOAD_PRODUCT_GROUP_BY_PRODUCT, {
-    variables: { productID: parseInt(id) },
+    variables: { productID: parseInt(id) }
   });
 
   const productComponentData = useQuery(LOAD_COMPONENTS_BY_PRODUCT, {
-    variables: { productID: parseInt(id) },
+    variables: { productID: parseInt(id) }
   });
 
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
@@ -55,7 +51,7 @@ const ProductDetail = (props) => {
   const handleDeleteProduct = () => {
     hideProduct({
       variables: { productID: parseInt(id) },
-      refetchQueries: [{ query: LOAD_PRODUCTS }],
+      refetchQueries: [{ query: LOAD_PRODUCTS }]
     })
       .then(history.push("/product"))
       .then((res) => {
@@ -90,7 +86,7 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     async function fetchComponentData() {
-      console.log(productComponentData)
+      console.log(productComponentData);
       if (productComponentData.data) setProductComponent(productComponentData.data);
     }
 
@@ -109,7 +105,7 @@ const ProductDetail = (props) => {
             <div></div>
           ) : (
             <CombinedDetail
-              data={{product, productCombo, productGroup, productComponent}}
+              data={{ product, productCombo, productGroup, productComponent }}
               Modal={EditProductModal}
               Information={ProductInformation}
               handleDelete={handleDeleteProduct}

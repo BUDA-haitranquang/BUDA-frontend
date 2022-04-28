@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import BudaModal from "../../buda-components/modal/BudaModal";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 
 import { useMutation } from "@apollo/client";
 import { ADD_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
@@ -39,9 +36,9 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
         ingredientSKU: sku,
         description: description,
         price: parseFloat(price),
-        amountLeft: parseInt(amountLeft),
+        amountLeft: parseInt(amountLeft)
       },
-      refetchQueries: [{ query: LOAD_INGREDIENTS }],
+      refetchQueries: [{ query: LOAD_INGREDIENTS }]
     })
       .then((res) => {
         handleClose();
@@ -82,7 +79,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 },
+            "& > :not(style)": { m: 1 }
           }}
         >
           <TextField

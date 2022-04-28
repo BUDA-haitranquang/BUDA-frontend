@@ -3,16 +3,10 @@ import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { UPDATE_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
-import {
-  LOAD_PRODUCT,
-  LOAD_PRODUCTS,
-} from "../../graphQl/products/productQueries";
+import { LOAD_PRODUCT, LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 
 const EditProductModal = ({ data, isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -42,19 +36,19 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
         costPerUnit: parseFloat(costPerUnit),
         amountLeft: parseInt(amountLeft),
         alertAmount: parseInt(alertAmount),
-        sellingPrice: parseFloat(price),
+        sellingPrice: parseFloat(price)
       },
       refetchQueries: [
         {
           query: LOAD_PRODUCT,
           variables: {
-            productID: product.productID,
-          },
+            productID: product.productID
+          }
         },
         {
-          query: LOAD_PRODUCTS,
-        },
-      ],
+          query: LOAD_PRODUCTS
+        }
+      ]
     })
       .then((res) => {
         handleClose();
@@ -97,7 +91,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 },
+            "& > :not(style)": { m: 1 }
           }}
         >
           <TextField
@@ -119,7 +113,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
             style={{
               width: "100%",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "space-between"
             }}
           >
             <TextField
@@ -145,7 +139,7 @@ const EditProductModal = ({ data, isOpen, handleClose }) => {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-              marginTop: "16px",
+              marginTop: "16px"
             }}
           >
             <TextField

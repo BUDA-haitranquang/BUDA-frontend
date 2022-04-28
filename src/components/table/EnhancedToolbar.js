@@ -10,7 +10,7 @@ import {
   OutlinedInput,
   Toolbar,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import React, { useState } from "react";
@@ -18,13 +18,13 @@ import FilterPopup from "./FilterPopup";
 import SplitButton from "./SplitButton";
 
 const EnhancedToolbar = ({
-  headCells,
-  numSelected,
-  handleOpen,
-  handleSearch,
-  searchBy,
-  deleteItem,
-}) => {
+                           headCells,
+                           numSelected,
+                           handleOpen,
+                           handleSearch,
+                           searchBy,
+                           deleteItem
+                         }) => {
   const [value, setValue] = useState("");
   const li = Array.from(headCells, (item) => item.label);
   return (
@@ -38,8 +38,8 @@ const EnhancedToolbar = ({
             alpha(
               theme.palette.primary.main,
               theme.palette.action.activatedOpacity
-            ),
-        }),
+            )
+        })
       }}
     >
       {numSelected > 0 ? (

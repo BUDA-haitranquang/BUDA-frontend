@@ -7,15 +7,14 @@ import LoginBackground from "../assets/Background_1.png";
 const useStyle = makeStyles((theme) => ({
   imgWrapper: {
     width: "100%",
-    height: "100%",
+    height: "100%"
   },
   background: {
     backgroundImage: `url(${LoginBackground})`,
     backgroundRepeat: "no-repeat",
     width: "100%",
     backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "cover"
   },
   boxCointainer: {
     background: "rgba(255, 255, 255, 0.83)",
@@ -24,8 +23,8 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "3rem",
-    borderRadius: "20px",
-  },
+    borderRadius: "20px"
+  }
 }));
 
 const SignUp = () => {
@@ -41,7 +40,7 @@ const SignUp = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Box className={cls.boxCointainer}>
