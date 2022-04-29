@@ -9,37 +9,13 @@ import FixedCostTableBody from "../components/table/body/FixedCostTableBody";
 import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
 import { HIDE_FIXED_COST_MUTATION } from "../graphQl/cost/fixedCost/fixedCostMutation";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 import {
     AlertErrorProp,
     AlertSuccessProp,
   } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
-const headCells =[ 
-    {
-        id: "name",
-        numeric: false,
-        disablePadding: false,
-        label: "Name",
-    },
-    {
-        id: "description",
-        numeric: false,
-        disablePadding: false,
-        label: "Description",
-    },
-    {
-        id: "period",
-        numeric: true,
-        disablePadding: false,
-        label: "Period",
-    },
-    {
-        id: "moneyamount",
-        numeric: true,
-        disablePadding: false,
-        label: "Money Amount",
-    },
-];
+
 
 const FixCost = (props) =>{
     const { window } = props;
@@ -48,6 +24,33 @@ const FixCost = (props) =>{
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(false);
     const [ hideFixedCost ] = useMutation(HIDE_FIXED_COST_MUTATION);
+    const { t } = useTranslation(["common","cost"]);
+    const headCells =[ 
+      {
+          id: "name",
+          numeric: false,
+          disablePadding: false,
+          label: t("cost:Name"),
+      },
+      {
+          id: "description",
+          numeric: false,
+          disablePadding: false,
+          label: t("common:Description"),
+      },
+      {
+          id: "period",
+          numeric: true,
+          disablePadding: false,
+          label: t("cost:Period")
+      },
+      {
+          id: "moneyamount",
+          numeric: true,
+          disablePadding: false,
+          label: t("cost:moneyAmount")
+      },
+  ];
     const handleDelete = (selected) => {
         if (selected === []) return;
         setIsLoading(true);

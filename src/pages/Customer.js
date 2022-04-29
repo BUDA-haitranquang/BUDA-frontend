@@ -10,42 +10,11 @@ import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "phoneNumber",
-    numeric: false,
-    disablePadding: false,
-    label: "Phone Number",
-  },
-  {
-    id: "ageGroup",
-    numeric: false,
-    disablePadding: false,
-    label: "Age Group",
-  },
-  {
-    id: "gender",
-    numeric: false,
-    disablePadding: false,
-    label: "Gender",
-  },
-  {
-    id: "totalSpend",
-    numeric: true,
-    disablePadding: false,
-    label: "totalSpend",
-  },
-];
 
 const Customer = (props) => {
   const { window } = props;
@@ -54,7 +23,40 @@ const Customer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
-
+  const  { t } = useTranslation(["common","customer"]);
+  const headCells = [
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:Name"),
+    },
+    {
+      id: "phoneNumber",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:PhoneNumber"),
+    },
+    {
+      id: "ageGroup",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:ageGroup"),
+    },
+    {
+      id: "gender",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:Gender"),
+    },
+    {
+      id: "totalSpend",
+      numeric: true,
+      disablePadding: false,
+      label: t("customer:TotalSpend"),
+    },
+  ];
+  
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);

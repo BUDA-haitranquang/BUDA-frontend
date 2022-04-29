@@ -6,14 +6,14 @@ import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
-
+import { useTranslation } from "react-i18next";
 import { useMutation } from "@apollo/client";
 import { ADD_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
 import { LOAD_INGREDIENTS } from "../../graphQl/ingredients/ingredientQueries";
 
 const AddIngredientModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
-
+  const { t } = useTranslation(["common","ingredient"]);
   const [name, setName] = useState("");
   const [sku, setSku] = useState(null);
   const [price, setPrice] = useState(0);
@@ -73,9 +73,10 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
     <BudaModal
       open={isOpen}
       onClose={handleClose}
-      textOk="Save"
+      textOk={t("common:save")}
       onOk={handleSubmit}
       isLoading={isLoading}
+      title={t("ingredient:addIngredientModal.title")}
       children={
         <Box
           component="form"
@@ -88,7 +89,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Sku (Code)"
+            label={t("ingredient:SKU")}
             variant="outlined"
             value={sku}
             onChange={(e) => {
@@ -101,7 +102,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             required
             fullWidth
             id="outlined-basic"
-            label="Name"
+            label={t("ingredient:Name")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -112,7 +113,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             fullWidth
             type="number"
             id="outlined-basic"
-            label="Price"
+            label={t("ingredient:Price")}
             variant="outlined"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -123,7 +124,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             required
             type="number"
             id="outlined-basic"
-            label="Amount Left"
+            label={t("ingredient:Left")}
             variant="outlined"
             value={amountLeft}
             onChange={(e) => setAmountLeft(e.target.value)}
@@ -131,7 +132,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Description"
+            label={t("ingredient:Description")}
             variant="outlined"
             multiline
             rows={3}

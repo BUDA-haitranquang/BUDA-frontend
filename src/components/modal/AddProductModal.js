@@ -80,7 +80,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     <BudaModal
       open={isOpen}
       onClose={handleClose}
-      textOk="Save"
+      textOk={t("common:save")}
       onOk={handleSubmit}
       isLoading={isLoading}
       title={t("product:addProductModal.title")}

@@ -1,0 +1,11 @@
+{
+    "Name":"Name",
+    "PhoneNumber":"Phone Number",
+    "ageGroup": "Age Group",
+    "Gender" : "Gender",
+    "TotalSpend" : "Total Spend",
+    "Address" : "Address",
+    "addCustomerModal" : {
+        "title" : "Add Customer"
+    }
+}

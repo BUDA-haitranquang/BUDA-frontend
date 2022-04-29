@@ -11,7 +11,7 @@ import {
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_SUPPLIER_MUTATION } from "../../graphQl/suppliers/suppliersMutations";
 import { LOAD_SUPPLIERS } from "../../graphQl/suppliers/suppliersQueries";
-
+import { useTranslation } from "react-i18next";
 const AddSupplierModal = ({isOpen,handleClose}) => {
     const { enqueueSnackbar } = useSnackbar();
     const [ name,setName ] = useState("");
@@ -19,7 +19,8 @@ const AddSupplierModal = ({isOpen,handleClose}) => {
     const [ address,setAddress ] = useState("");
     const [ email,setEmail ] = useState("");
     const [ newSupplier,{error} ] = useMutation(ADD_SUPPLIER_MUTATION);
-    const [ isLoading,setIsLoading ] = useState(false); 
+    const [ isLoading,setIsLoading ] = useState(false);
+    const { t } = useTranslation(["common","supplier"]) ;
     const resetForm = () => {
         setName("")
         setPhoneNumber("")
@@ -58,8 +59,9 @@ const AddSupplierModal = ({isOpen,handleClose}) => {
         <BudaModal
             open={isOpen}
             onClose={handleClose}
-            textOk="Save"
+            textOk={t("common:save")}
             onOk={handleSubmit}
+            title={t("supplier:addSupplierModal.title")}
             isLoading={isLoading}
             children={
                 <Box
@@ -74,7 +76,7 @@ const AddSupplierModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Name"
+                        label={t("supplier:Name")}
                         variant="outlined"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -83,7 +85,7 @@ const AddSupplierModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Phone Number"
+                        label={t("supplier:PhoneNumber")}
                         variant="outlined"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
@@ -92,7 +94,7 @@ const AddSupplierModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Address"
+                        label={t("supplier:Address")}
                         variant="outlined"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
@@ -101,7 +103,7 @@ const AddSupplierModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Email"
+                        label={t("supplier:Email")}
                         variant="outlined"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

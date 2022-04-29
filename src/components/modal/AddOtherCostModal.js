@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -19,6 +20,7 @@ const AddOtherCostModal = ({isOpen,handleClose}) => {
     const [ creationTime, setCreationTime] = useState("");
     const [ newOtherCost,{error} ] = useMutation(ADD_OTHER_COST);
     const [ isLoading,setIsLoading ] = useState(false);
+    const { t } = useTranslation(["common","cost"]);
     const resetForm = () => {
       setName("")
       setDescription("")
@@ -56,7 +58,8 @@ const AddOtherCostModal = ({isOpen,handleClose}) => {
       <BudaModal
           open={isOpen}
           onClose={handleClose}
-          textOk="Save"
+          textOk={t("common:save")}
+          title={t("cost:addOtherCostModal.title")}
           onOk={handleSubmit}
           isLoading={isLoading}
           children={
@@ -72,7 +75,7 @@ const AddOtherCostModal = ({isOpen,handleClose}) => {
                       required
                       fullWidth
                       id="outlined-basic"
-                      label="Name"
+                      label={t("cost:Name")}
                       variant="outlined"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -88,7 +91,7 @@ const AddOtherCostModal = ({isOpen,handleClose}) => {
                           required
                           type="number"
                           id="outlined-basic"
-                          label="totalCost"
+                          label={t("cost:totalCost")}
                           variant="outlined"
                           value={totalCost}
                           onChange={(e) => setTotalCost(e.target.value)}
@@ -99,7 +102,7 @@ const AddOtherCostModal = ({isOpen,handleClose}) => {
                       required
                       fullWidth
                       id="outlined-basic"
-                      label="Status"
+                      label={t("cost:Status")}
                       variant="outlined"
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
@@ -108,7 +111,7 @@ const AddOtherCostModal = ({isOpen,handleClose}) => {
                       required
                       fullWidth
                       id="outlined-basic"
-                      label="description"
+                      label={t("common:Description")}
                       variant="outlined"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}

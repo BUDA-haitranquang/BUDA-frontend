@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import AddOtherCostModal from "../components/modal/AddOtherCostModal";
 import Sidebar from "../components/Sidebar";
+import { useTranslation } from "react-i18next";
 import { LOAD_OTHER_COST } from "../graphQl/cost/otherCost/otherCostQueries";
 import { HIDE_OTHER_COST } from "../graphQl/cost/otherCost/otherCostMutation";
 import OtherCostTableBody from "../components/table/body/OtherCostTableBody";
@@ -14,38 +15,7 @@ import {
     AlertSuccessProp,
   } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
-const headCells =[ 
-    {
-        id: "name",
-        numeric: false,
-        disablePadding: false,
-        label: "Name",
-    },
-    {
-        id: "totalCost",
-        numeric: true,
-        disablePadding: false,
-        label: "Total Cost",
-    },
-    {
-        id: "creationTime",
-        numeric: false,
-        disablePadding: false,
-        label: "Creation Time",
-    },
-    {
-        id: "status",
-        numeric: false,
-        disablePadding: false,
-        label: "Status",
-    },
-    {
-        id: "description",
-        numeric: false,
-        disablePadding: false,
-        label: "Description",
-    },
-];
+
 
 const OtherCost = (props) =>{
     const { window } = props;
@@ -54,6 +24,39 @@ const OtherCost = (props) =>{
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(false);
     const [ hideOtherCost ] = useMutation(HIDE_OTHER_COST);
+    const { t } = useTranslation(["common","cost"])
+    const headCells =[ 
+      {
+          id: "name",
+          numeric: false,
+          disablePadding: false,
+          label: t("cost:Name"),
+      },
+      {
+          id: "totalCost",
+          numeric: true,
+          disablePadding: false,
+          label: t("cost:totalCost"),
+      },
+      {
+          id: "creationTime",
+          numeric: false,
+          disablePadding: false,
+          label: t("cost:creationTime"),
+      },
+      {
+          id: "status",
+          numeric: false,
+          disablePadding: false,
+          label:  t("cost:Status"),
+      },
+      {
+          id: "description",
+          numeric: false,
+          disablePadding: false,
+          label: t("common:Description"),
+      },
+  ];
     const handleDelete = (selected) => {
         if (selected === []) return;
         setIsLoading(true);

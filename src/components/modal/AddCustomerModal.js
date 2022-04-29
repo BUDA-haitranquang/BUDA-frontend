@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import {
   AlertErrorProp,
@@ -27,6 +28,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [ageGroup, setAgeGroup] = useState("UNKNOWN");
   const [newCustomer, { error }] = useMutation(ADD_CUSTOMER_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
+  const { t }  = useTranslation(["common","customer"]);
   const resetForm = () => {
     setName("");
     setPhoneNumber("");
@@ -67,7 +69,8 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
     <BudaModal
       open={isOpen}
       onClose={handleClose}
-      textOk="Save"
+      textOk={t("common:save")}
+      title={t("customer:addCustomerModal.title")}
       onOk={handleSubmit}
       isLoading={isLoading}
       children={
@@ -84,7 +87,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             required
             fullWidth
             id="outlined-basic"
-            label="Name"
+            label={t("customer:Name")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -99,7 +102,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             <TextField
               type="number"
               id="outlined-basic"
-              label="Total spent"
+              label={t("customer:TotalSpend")}
               variant="outlined"
               value={totalSpend.toLocaleString()}
               onChange={(e) => setTotalSpend(e.target.value)}
@@ -108,7 +111,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
             <TextField
               fullWidth
               id="outlined-basic"
-              label="Phone Number"
+              label={t("customer:PhoneNumber")}
               variant="outlined"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
@@ -118,7 +121,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Address"
+            label={t("customer:Address")}
             multiline
             rows="3"
             variant="outlined"

@@ -9,52 +9,53 @@ import StaffTableBody from "../components/table/body/StaffTableBody";
 import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFFS } from "../graphQl/staff/staffQueries";
 import BudaTable from "../buda-components/table/BudaTable";
+import { useTranslation } from "react-i18next";
 
-const headCells = [
-  // {
-  //   id: "ID",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "ID",
-  // },
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "email",
-    numeric: false,
-    disablePadding: true,
-    label: "Email",
-  },
-  {
-    id: "phoneNumber",
-    numeric: false,
-    disablePadding: true,
-    label: "Phone number",
-  },
-  {
-    id: "address",
-    numeric: false,
-    disablePadding: true,
-    label: "Address",
-  },
-  {
-    id: "staffPosition",
-    numeric: false,
-    disablePadding: true,
-    label: "Position",
-  },
-];
 
 const Staff = (props) => {
   const { window } = props;
   const [staffs, setStaffs] = useState([]);
+  const { t } = useTranslation(["common","staff"]);
   const { error, loading, data} = useQuery(LOAD_STAFFS);
   const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
-
+  const headCells = [
+    // {
+    //   id: "ID",
+    //   numeric: true,
+    //   disablePadding: false,
+    //   label: "ID",
+    // },
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("staff:Name"),
+    },
+    {
+      id: "email",
+      numeric: false,
+      disablePadding: true,
+      label: t("common:Email"),
+    },
+    {
+      id: "phoneNumber",
+      numeric: false,
+      disablePadding: true,
+      label: t("common:PhoneNumber"),
+    },
+    {
+      id: "address",
+      numeric: false,
+      disablePadding: true,
+      label: t("common:Address"),
+    },
+    {
+      id: "staffPosition",
+      numeric: false,
+      disablePadding: true,
+      label: t("staff:Position"),
+    },
+  ];
   const handleDelete = (selected) =>{
       if (selected===[]) return 
       selected.forEach(

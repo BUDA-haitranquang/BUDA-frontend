@@ -1,0 +1,16 @@
+{
+    "SKU": "SKU Code",
+    "Name":"Name",
+    "Price":"Price",
+    "Left" : "Amount Left",
+    "Description": "Description",
+    "alert":"Alert",
+    "table": {},
+    "addIngredientModal":{
+        "title" : "Create new Ingredient"
+    },
+    "editIngredientModal":{
+        "title" : "Edit Ingredient"
+    },
+    "Ingredient" : "Ingredient"
+}

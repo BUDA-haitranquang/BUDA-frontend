@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { parse } from "graphql";
 import { set } from "lodash";
+import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import {
@@ -20,6 +21,7 @@ const AddFixedCostModal = ({isOpen,handleClose}) => {
     const [ moneyAmount,setMoneyAmount ] = useState(0.0);
     const [ newFixedCost,{error} ] = useMutation(ADD_FIXED_COST_MUTATION);
     const [ isLoading,setIsLoading ] = useState(false); 
+    const { t } = useTranslation(["common","cost"]);
     const resetForm = () => {
         setName("")
         setDescription("")
@@ -58,7 +60,8 @@ const AddFixedCostModal = ({isOpen,handleClose}) => {
         <BudaModal
             open={isOpen}
             onClose={handleClose}
-            textOk="Save"
+            textOk={t("common:save")}
+            title = {t("cost:addCostModal.title")}
             onOk={handleSubmit}
             isLoading={isLoading}
             children={
@@ -74,7 +77,7 @@ const AddFixedCostModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Name"
+                        label={t("cost:Name")}
                         variant="outlined"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -90,7 +93,7 @@ const AddFixedCostModal = ({isOpen,handleClose}) => {
                             required
                             type="number"
                             id="outlined-basic"
-                            label="moneyAmount"
+                            label={t("cost:moneyAmount")}
                             variant="outlined"
                             value={moneyAmount}
                             onChange={(e) => setMoneyAmount(e.target.value)}
@@ -100,7 +103,7 @@ const AddFixedCostModal = ({isOpen,handleClose}) => {
                             required
                             type="number"
                             id="outlined-basic"
-                            label="Period"
+                            label={t("cost:Period")}
                             variant="outlined"
                             value={period}
                             onChange={(e) => setPeriod(e.target.value)}
@@ -111,7 +114,7 @@ const AddFixedCostModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Description"
+                        label={t("common:Description")}
                         variant="outlined"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}

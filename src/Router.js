@@ -80,7 +80,9 @@ const AppRouter = () => {
 
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://143.198.194.24:4000/" }),
+    new HttpLink({ uri: "http://103.173.228.124:4000/" }),
+    
+
   ]);
 
   const PrivateRoute = ({ authed, ...routeProps }) => {

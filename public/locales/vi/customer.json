@@ -1,0 +1,11 @@
+{
+    "Name":"Tên Khách Hàng",
+    "PhoneNumber":"Số Điện Thoại",
+    "ageGroup": "Độ Tuổi",
+    "Gender" : "Giới Tính",
+    "TotalSpend" : "Tổng lượng mua",
+    "Address" : "Địa Chỉ",
+    "addCustomerModal" : {
+        "title" : "Thêm khách hàng mới"
+    }
+}
