@@ -4,7 +4,6 @@ import React from "react";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
-  console.log(data);
   const {
     sku,
     name,
@@ -13,7 +12,7 @@ export default function ProductInformation({ data }) {
     alertAmount,
     costPerUnit,
     description,
-    picture,
+    picture
   } = data.product.product;
 
   const productCombo = data?.productCombo?.productComboIncludeProduct;
@@ -26,7 +25,8 @@ export default function ProductInformation({ data }) {
         {picture ? (
           <MainImage source={picture.pictureLink} />
         ) : (
-          <MainImage source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
+          <MainImage
+            source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
         )}
       </Grid>
       <Grid
@@ -36,7 +36,7 @@ export default function ProductInformation({ data }) {
         style={{
           height: "100%",
           justifyContent: "space-between",
-          marginLeft: "5%",
+          marginLeft: "5%"
         }}
       >
         <Typography variant="subtitle2" style={{ textTransform: "uppercase" }}>
@@ -58,7 +58,7 @@ export default function ProductInformation({ data }) {
             style={{
               marginTop: "40px",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "space-between"
             }}
           >
             <Typography variant="subtitle3" style={{}}>

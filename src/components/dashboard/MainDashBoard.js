@@ -1,20 +1,20 @@
-import { Grid, Box, Button, ButtonGroup } from "@mui/material";
+import { Box, Button, ButtonGroup, Grid } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import { useEffect, useState } from "react";
-import BudaDatePicker from "../../buda-components/datepicker/BudaDatePicker";
 import BudaLineChart from "../../buda-components/charts/BudaLineChart";
 import BudaBarChart from "../../buda-components/charts/BudaBarChart";
 import { useQuery } from "@apollo/client";
 import {
   LOAD_BUSINESS_OVERALL_EVERY_DAY,
-  LOAD_BUSINESS_OVERALL_EVERY_WEEK,
   LOAD_BUSINESS_OVERALL_EVERY_MONTH,
-  LOAD_BUSINESS_OVERALL_EVERY_YEAR,
+  LOAD_BUSINESS_OVERALL_EVERY_WEEK,
+  LOAD_BUSINESS_OVERALL_EVERY_YEAR
 } from "../../graphQl/revenue statistics/businessOverallStatistics";
+
 const info = [
   { name: "revenue", color: "#82ca9d", datakey: "revenue" },
-  { name: "expense", color: "#DC143C", datakey: "expense" },
+  { name: "expense", color: "#DC143C", datakey: "expense" }
   // { name: "profit", color: "#00BFFF", datakey: "profit" },
 ];
 
@@ -67,13 +67,14 @@ const MainDashBoard = () => {
         return;
       }
     }
+
     fetchData();
   }, [
     timeSelected,
     dayRevenueData,
     weekRevenueData,
     monthRevenueData,
-    yearRevenueData,
+    yearRevenueData
   ]);
 
   const handleChooseDate = (timeSelected, callback) => {
@@ -89,7 +90,7 @@ const MainDashBoard = () => {
         sm={14}
         md={9}
         sx={{
-          height: "80vh",
+          height: "80vh"
         }}
       >
         {revenue.length === 0 ? (
@@ -97,7 +98,7 @@ const MainDashBoard = () => {
             sx={{
               textAlign: "center",
               paddingTop: "25%",
-              paddingBottom: "25%",
+              paddingBottom: "25%"
             }}
           >
             <h1>No data</h1>
