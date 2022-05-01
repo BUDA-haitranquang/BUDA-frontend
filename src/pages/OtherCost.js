@@ -1,49 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
 import AddOtherCostModal from "../components/modal/AddOtherCostModal";
 import Sidebar from "../components/Sidebar";
-import { LOAD_OTHER_COST } from "../graphQl/cost/otherCost/otherCostQueries";
-import { HIDE_OTHER_COST } from "../graphQl/cost/otherCost/otherCostMutation";
 import OtherCostTableBody from "../components/table/body/OtherCostTableBody";
-import { useSnackbar } from "notistack";
-import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
-import BudaTable from "../buda-components/table/BudaTable";
-
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name"
-  },
-  {
-    id: "totalCost",
-    numeric: true,
-    disablePadding: false,
-    label: "Total Cost"
-  },
-  {
-    id: "creationTime",
-    numeric: false,
-    disablePadding: false,
-    label: "Creation Time"
-  },
-  {
-    id: "status",
-    numeric: false,
-    disablePadding: false,
-    label: "Status"
-  },
-  {
-    id: "description",
-    numeric: false,
-    disablePadding: false,
-    label: "Description"
-  }
-];
+import { HIDE_OTHER_COST } from "../graphQl/cost/otherCost/otherCostMutation";
+import { LOAD_OTHER_COST } from "../graphQl/cost/otherCost/otherCostQueries";
 
 const OtherCost = (props) => {
   const { window } = props;
@@ -52,6 +23,39 @@ const OtherCost = (props) => {
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [hideOtherCost] = useMutation(HIDE_OTHER_COST);
+  const { t } = useTranslation(["common", "cost"]);
+  const headCells = [
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("cost:Name"),
+    },
+    {
+      id: "totalCost",
+      numeric: true,
+      disablePadding: false,
+      label: t("cost:totalCost"),
+    },
+    {
+      id: "creationTime",
+      numeric: false,
+      disablePadding: false,
+      label: t("cost:creationTime"),
+    },
+    {
+      id: "status",
+      numeric: false,
+      disablePadding: false,
+      label: t("cost:Status"),
+    },
+    {
+      id: "description",
+      numeric: false,
+      disablePadding: false,
+      label: t("common:Description"),
+    },
+  ];
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -59,7 +63,7 @@ const OtherCost = (props) => {
       selected.forEach((item) => {
         hideOtherCost({
           variables: { fixedCostID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_OTHER_COST }]
+          refetchQueries: [{ query: LOAD_OTHER_COST }],
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -67,14 +71,12 @@ const OtherCost = (props) => {
       enqueueSnackbar("An error occured", AlertErrorProp);
     } finally {
       setIsLoading(false);
-
     }
   };
 
-
   useEffect(() => {
     async function fetchData() {
-      if (data) setFixCosts(data.otherCostsByUser.map(item => item));
+      if (data) setFixCosts(data.otherCostsByUser.map((item) => item));
     }
 
     fetchData();

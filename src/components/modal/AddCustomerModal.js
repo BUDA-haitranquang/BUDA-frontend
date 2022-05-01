@@ -5,20 +5,23 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
+  TextField
 } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp,
+  AlertSuccessProp
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_CUSTOMER_MUTATION } from "../../graphQl/customers/customersMutations";
 import { LOAD_CUSTOMERS } from "../../graphQl/customers/customersQueries";
-import { useTranslation } from "react-i18next";
+
 const AddCustomerModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const { t }  = useTranslation(["common","customer"]);
+  
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
@@ -27,13 +30,14 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
   const [ageGroup, setAgeGroup] = useState("UNKNOWN");
   const [newCustomer, { error }] = useMutation(ADD_CUSTOMER_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
-  const {t} = useTranslation(['common','customer'])
+
   const resetForm = () => {
     setName("");
     setPhoneNumber("");
     setTotalSpend(0);
     setAddress("");
   };
+  
   const addCustomer = () => {
     setIsLoading(true);
     newCustomer({
@@ -68,7 +72,8 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
     <BudaModal
       open={isOpen}
       onClose={handleClose}
-      textOk={t('common:save')}
+      textOk={t("common:save")}
+      title={t("customer:Modal.title")}
       onOk={handleSubmit}
       isLoading={isLoading}
       children={

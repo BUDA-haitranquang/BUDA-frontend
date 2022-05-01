@@ -2,5 +2,14 @@
     "error": "Có lỗi xảy ra",
     "save": "Lưu",
     "ok": "OK",
-    "cancel": "Huỷ"
+    "cancel": "Huỷ",
+    "Email":"Email",
+    "PhoneNumber" : "Số Điện Thoại",
+    "Address" : "Địa Chỉ",
+    "Description" : "Mô tả",
+    "Amount" : "Số lượng",
+    "SKU" : "Mã SKU",
+    "Edit" : "Chỉnh sửa",
+    "Account" : "Tài khoản",
+    "Password" : "Mật Khẩu"
 }

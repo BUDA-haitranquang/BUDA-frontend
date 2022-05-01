@@ -4,6 +4,7 @@ import { parse } from "graphql";
 import { set } from "lodash";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -19,6 +20,7 @@ const AddFixedCostBillModal = ({isOpen,handleClose}) => {
     const [ dueTime,setDueTime ] = useState("");
     const [ totalSpend,setTotalSpend ] = useState(0);
     const [ isLoading,setIsLoading ] = useState(false); 
+    const { t } = useTranslation(["common","cost"]);
     const [ newFixedCostBill,setFixedCostBill] = useMutation(ADD_FIXED_COST_BILL_MUTATION);
     const resetForm = () => {
         setMessage("")
@@ -57,7 +59,8 @@ const AddFixedCostBillModal = ({isOpen,handleClose}) => {
         <BudaModal
             open={isOpen}
             onClose={handleClose}
-            textOk="Save"
+            textOk={t("common:save")}
+            title={t("cost:addBillCostModal.title")}
             onOk={handleSubmit}
             isLoading={isLoading}
             children={
@@ -73,7 +76,7 @@ const AddFixedCostBillModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="Name"
+                        label={t("cost:Name")}
                         variant="outlined"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
@@ -89,7 +92,7 @@ const AddFixedCostBillModal = ({isOpen,handleClose}) => {
                             required
                             type="number"
                             id="outlined-basic"
-                            label="moneyAmount"
+                            label={t("cost:moneyAmount")}
                             variant="outlined"
                             value={totalSpend}
                             onChange={(e) => setTotalSpend(e.target.value)}
@@ -100,7 +103,7 @@ const AddFixedCostBillModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="dueTime"
+                        label={t("cost:dueTime")}
                         variant="outlined"
                         value={dueTime}
                         onChange={(e) => setDueTime(e.target.value)}
@@ -109,7 +112,7 @@ const AddFixedCostBillModal = ({isOpen,handleClose}) => {
                         required
                         fullWidth
                         id="outlined-basic"
-                        label="CreationTime"
+                        label={t("cost:creationTime")}
                         variant="outlined"
                         value={creationTime}
                         onChange={(e) => creationTime(e.target.value)}
