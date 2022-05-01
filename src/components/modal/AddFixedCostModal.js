@@ -2,7 +2,11 @@ import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
-import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import { useTranslation } from "react-i18next";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_FIXED_COST_MUTATION } from "../../graphQl/cost/fixedCost/fixedCostMutation";
 import { LOAD_FIXED_COST } from "../../graphQl/cost/fixedCost/fixedCostQueries";
@@ -15,11 +19,12 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
   const [moneyAmount, setMoneyAmount] = useState(0.0);
   const [newFixedCost, { error }] = useMutation(ADD_FIXED_COST_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation(["common", "cost"]);
   const resetForm = () => {
     setName("");
     setDescription("");
     setPeriod(0);
-    setMoneyAmount(0.00);
+    setMoneyAmount(0.0);
   };
   const addFixedCost = () => {
     setIsLoading(true);
@@ -28,9 +33,9 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
         name: name,
         description: description,
         period: parseInt(period),
-        moneyAmount: parseFloat(moneyAmount)
+        moneyAmount: parseFloat(moneyAmount),
       },
-      refetchQueries: [{ query: LOAD_FIXED_COST }]
+      refetchQueries: [{ query: LOAD_FIXED_COST }],
     })
       .then((res) => {
         handleClose();
@@ -53,7 +58,8 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
     <BudaModal
       open={isOpen}
       onClose={handleClose}
-      textOk="Save"
+      textOk={t("common:save")}
+      title={t("cost:addCostModal.title")}
       onOk={handleSubmit}
       isLoading={isLoading}
       children={
@@ -62,14 +68,14 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 }
+            "& > :not(style)": { m: 1 },
           }}
         >
           <TextField
             required
             fullWidth
             id="outlined-basic"
-            label="Name"
+            label={t("cost:Name")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -78,14 +84,14 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
             style={{
               width: "100%",
               display: "flex",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             <TextField
               required
               type="number"
               id="outlined-basic"
-              label="moneyAmount"
+              label={t("cost:moneyAmount")}
               variant="outlined"
               value={moneyAmount}
               onChange={(e) => setMoneyAmount(e.target.value)}
@@ -95,7 +101,7 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
               required
               type="number"
               id="outlined-basic"
-              label="Period"
+              label={t("cost:Period")}
               variant="outlined"
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
@@ -106,7 +112,7 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
             required
             fullWidth
             id="outlined-basic"
-            label="Description"
+            label={t("common:Description")}
             variant="outlined"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

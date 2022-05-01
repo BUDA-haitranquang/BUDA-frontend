@@ -1,17 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
 import Sidebar from "../components/Sidebar";
 import CustomerTableBody from "../components/table/body/CustomerTableBody";
-import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
-import BudaTable from "../buda-components/table/BudaTable";
 import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
-import { useSnackbar } from "notistack";
-import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
-import { useTranslation } from "react-i18next";
+import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 
 const Customer = (props) => {
   const { window } = props;
@@ -21,6 +24,7 @@ const Customer = (props) => {
   const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(["common", "customer"]);
+
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -28,7 +32,7 @@ const Customer = (props) => {
       selected.forEach((item) => {
         hideCustomer({
           variables: { customerID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_CUSTOMERS }]
+          refetchQueries: [{ query: LOAD_CUSTOMERS }],
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -55,32 +59,32 @@ const Customer = (props) => {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("customer:customerName")
+      label: t("customer:customerName"),
     },
     {
       id: "phoneNumber",
       numeric: false,
       disablePadding: false,
-      label: t("customer:phoneNumber")
+      label: t("customer:phoneNumber"),
     },
     {
       id: "ageGroup",
       numeric: false,
       disablePadding: false,
-      label: t("customer:ageGroup")
+      label: t("customer:ageGroup"),
     },
     {
       id: "gender",
       numeric: false,
       disablePadding: false,
-      label: t("customer:gender")
+      label: t("customer:gender"),
     },
     {
       id: "totalSpend",
       numeric: true,
       disablePadding: false,
-      label: t("customer:totalSpend")
-    }
+      label: t("customer:totalSpend"),
+    },
   ];
 
   return (
