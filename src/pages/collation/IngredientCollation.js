@@ -58,7 +58,7 @@ const IngredientCollation = (props) => {
   console.log(data);
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Ingredient Collation" />
+      <Sidebar window={window} name="Ingredient Collation" id="ingredient"/>
       <Box
         width="100%"
         display="flex"

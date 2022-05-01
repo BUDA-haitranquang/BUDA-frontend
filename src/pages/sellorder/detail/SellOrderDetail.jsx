@@ -35,7 +35,7 @@ function SellOrderDetail(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Sell Order" />
+      <Sidebar window={window} name="Sell Order" id="business"/>
 
       <Box
         width="100%"

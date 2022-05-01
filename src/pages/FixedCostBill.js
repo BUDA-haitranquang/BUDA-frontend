@@ -54,7 +54,7 @@ const FixCostBill = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Bill Cost" />
+      <Sidebar window={window} name="Bill Cost" id="cost" />
       <Box
         width="100%"
         display="flex"

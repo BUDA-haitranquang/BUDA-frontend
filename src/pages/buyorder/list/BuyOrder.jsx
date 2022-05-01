@@ -90,7 +90,7 @@ const BuyOrder = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Buy Order" />
+      <Sidebar window={window} name="Buy Order" id="business" />
       <Box
         width="100%"
         display="flex"

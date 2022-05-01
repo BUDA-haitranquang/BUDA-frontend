@@ -13,7 +13,7 @@ function Dashboard(props) {
   // };
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Dashboard" />
+      <Sidebar window={window} name="Dashboard" id="dashboard" />
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         {/* <Box pt={1}>

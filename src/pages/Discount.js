@@ -30,7 +30,7 @@ function Discount(props) {
   }, [data]);
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Discount" />
+      <Sidebar window={window} name="Discount" id="discount"/>
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         <Box pt={1}>
