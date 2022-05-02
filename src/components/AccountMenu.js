@@ -43,10 +43,19 @@ export default function AccountMenu() {
         width: "300px",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
       }}
     >
-      <Box>
+      <Box
+        style={{
+          borderRadius: "20px",
+          border: "2px rgba(0,0,0,0.5) solid",
+          maxHeight: "40px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
         <Button
           id="basic-button"
           variant="text"
@@ -54,7 +63,7 @@ export default function AccountMenu() {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          style={{ color: "white", fontWeight: "600" }}
+          style={{ color: "black", fontWeight: "600" }}
         >
           <AccountCircleIcon sx={{ paddingRight: "4px", fontSize: "2rem" }} />
           Username
@@ -65,14 +74,13 @@ export default function AccountMenu() {
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            "aria-labelledby": "basic-button"
+            "aria-labelledby": "basic-button",
           }}
         >
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
         <Notification />
-
       </Box>
 
       <Box

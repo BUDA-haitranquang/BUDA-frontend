@@ -71,7 +71,7 @@ const useStyle = makeStyles({
     },
   },
   root: {
-    margin: "0.75rem",
+    margin: "0.85rem",
     "& a:link": {
       textDecoration: "none",
       color: "white",
@@ -85,9 +85,10 @@ const useStyle = makeStyles({
     },
   },
   logo: {
+    marginTop: "1rem",
     width: "100%",
     fontSize: "40px",
-    fontWeight: "500",
+    fontWeight: "700",
     display: "flex",
     justifyContent: "center",
     textDecoration: "none",
@@ -195,7 +196,13 @@ const Sidebar = ({ window, name, id }) => {
     </>
   );
   const drawer = (
-    <div style={{ background: "#1976d2", flexGrow: 1 }}>
+    // <div style={{ background: "#1976d2", flexGrow: 1 }}>
+    <div
+      style={{
+        backgroundImage: "linear-gradient(#1367ba, #409fff)",
+        flexGrow: 1,
+      }}
+    >
       <Toolbar children={logo} />
       <List className={classes.root}>
         {title.map((item, idx) => (
@@ -223,6 +230,9 @@ const Sidebar = ({ window, name, id }) => {
                 </ListItemIcon>
 
                 <ListItemText
+                  primaryTypographyProps={{
+                    fontFamily: "'Montserrat', san-serif",
+                  }}
                   primary={capitalizeFirstLetter(item)}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 />
@@ -248,6 +258,9 @@ const Sidebar = ({ window, name, id }) => {
                     <Link to={`/${item}/${component.link}`}>
                       <ListItem className={classes.subItem}>
                         <ListItemText
+                          primaryTypographyProps={{
+                            fontFamily: "'Montserrat', san-serif",
+                          }}
                           primary={component.name}
                           style={{ color: "white" }}
                         />
@@ -269,14 +282,15 @@ const Sidebar = ({ window, name, id }) => {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
+        elevation={0}
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <IconButton
+        <Toolbar sx={{ justifyContent: "space-between", background: "white" }}>
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -284,22 +298,28 @@ const Sidebar = ({ window, name, id }) => {
             sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
+
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
-            style={{ textTranform: "uppercase" }}
+            fontWeight={850}
+            fontFamily="'Montserrat', san-serif"
+            style={{
+              textTranform: "uppercase",
+              color: "black",
+            }}
           >
             {name}
           </Typography>
+
           <AccountMenu />
         </Toolbar>
       </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
       >
         <Drawer
           container={container}

@@ -7,7 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./redux/store";
 import AppRouter from "./Router";
 import i18n from "./translation/i18n";
-
+import ThemeProvider from "./theme/globalTheme";
 ReactDOM.render(
   <React.Fragment>
     <I18nextProvider i18n={i18n}>
@@ -22,21 +22,23 @@ ReactDOM.render(
           //   variantInfo: "snackInfo",
           // }}
         >
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  minHeight: "100vh",
-                }}
-              >
-                <AppRouter />
-                {/* <Footer /> */}
-              </div>
-            </PersistGate>
-          </Provider>
+          <ThemeProvider>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    minHeight: "100vh",
+                  }}
+                >
+                  <AppRouter />
+                  {/* <Footer /> */}
+                </div>
+              </PersistGate>
+            </Provider>
+          </ThemeProvider>
         </SnackbarProvider>
       </Suspense>
     </I18nextProvider>
