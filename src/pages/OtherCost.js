@@ -87,7 +87,7 @@ const OtherCost = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Other Cost" />
+      <Sidebar window={window} name="Other Cost" id="cost" />
       <Box
         width="100%"
         display="flex"

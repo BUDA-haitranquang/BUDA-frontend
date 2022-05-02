@@ -95,7 +95,7 @@ function Statistic(props) {
   };
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Dashboard" />
+      <Sidebar window={window} name="Dashboard" id="statistic"/>
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         <Box pt={1}>

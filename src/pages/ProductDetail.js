@@ -97,7 +97,7 @@ const ProductDetail = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Product Detail" />
+      <Sidebar window={window} name="Product Detail" id="product"/>
       <Box>
         <Toolbar />
         <Box pt={1}>
