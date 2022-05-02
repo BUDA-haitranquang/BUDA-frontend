@@ -52,7 +52,7 @@ function CreateBuyOrder(props) {
         if (item.pricePerUnit <= 0) {
           enqueueSnackbar(
             t("error.validateBuyOrderItems.priceLessThanZero", {
-              index: index.toString()
+              index: (index + 1).toString()
             }),
             AlertErrorProp
           );
