@@ -52,7 +52,7 @@ const BuyOrder = (props) => {
   const { window } = props;
   const [buyOrders, setBuyOrders] = useState([]);
   const history = useHistory();
-  const { error, loading, data } = useQuery(LOAD_BUY_ORDERS);
+  const { error, loading, data, refetch } = useQuery(LOAD_BUY_ORDERS);
   const [deleteBuyOrder] = useMutation(DELETE_BUY_ORDER);
 
   useEffect(() => {
@@ -78,6 +78,15 @@ const BuyOrder = (props) => {
 
   if (error) return <Redirect to="/login" />;
 
+  /// đoạn này về sau có thể ốp TypeScript vào (type của nó sẽ bao gồm
+  /// page, rowsPerPage và một số filter khác)
+  const handleRefetchData = async (filter) => {
+    await refetch({
+      page: filter.page,
+      size: filter.rowsPerPage,
+    });
+  };
+
   const handleDelete = (selected) => {
     if (selected === []) return;
     selected.forEach((item) => {
@@ -99,7 +108,7 @@ const BuyOrder = (props) => {
         justifyContent="center"
         m={3}
       >
-        <Toolbar /> 
+        <Toolbar />
         <Button
           variant="contained"
           color="primary"
@@ -115,6 +124,7 @@ const BuyOrder = (props) => {
           DetailTableBody={BuyOrderTableBody}
           type="buyOrderID"
           isNotShowCheckBox={true}
+          onRefetchData={handleRefetchData}
         />
       </Box>
     </Box>

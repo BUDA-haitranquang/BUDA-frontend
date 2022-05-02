@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const LOAD_BUY_ORDERS = gql`
-  query LOAD_BUY_ORDERS {
-    buyOrdersByUser {
+  query LOAD_BUY_ORDERS($page: Int, $size: Int) {
+    buyOrdersByUser(page: $page, size: $size) {
       buyOrderID
       textID
       supplier {
