@@ -4,10 +4,14 @@ import BudaTextField from "../../../../../buda-components/textfield/BudaTextFiel
 import useStyles from "./BoxAdditionalInfo.styles";
 import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
 import { buyOrderStatuses } from "../../../constant/BuyOrderStatus";
+import { useTranslation } from "react-i18next";
 
 function BoxAdditionalInfo(props) {
   const defaultStatus = "FINISHED";
 
+  const { t } = useTranslation("buyorder", {
+    keyPrefix: "create.boxAdditionalInfo",
+  });
   const [description, setDescription] = useState("");
   const [textId, setTextId] = useState("");
   const [status, setStatus] = useState(defaultStatus);
@@ -42,12 +46,12 @@ function BoxAdditionalInfo(props) {
   return (
     <Paper className={classes.root}>
       <Box className="BoxAdditionalInfo-header">
-        <Typography variant="h6">Additional Information</Typography>
+        <Typography variant="h6">{t("title")}</Typography>
       </Box>
 
       <Box className="BoxAdditionalInfo-main">
         <BudaTextField
-          label="Text ID:"
+          label={t("textId")}
           value={textId}
           onChange={handleTextIdChange}
           textFieldHeight={40}
@@ -56,7 +60,7 @@ function BoxAdditionalInfo(props) {
           }}
         />
         <BudaTextField
-          label="Description:"
+          label={t("description")}
           value={description}
           onChange={handleDescriptionChange}
           textFieldHeight={40}
@@ -65,7 +69,7 @@ function BoxAdditionalInfo(props) {
           }}
         />
         <Box mb={2}>
-          <Typography mb={1}>Status:</Typography>
+          <Typography mb={1}>{t("status")}</Typography>
           <Autocomplete
             disablePortal
             disableClearable
