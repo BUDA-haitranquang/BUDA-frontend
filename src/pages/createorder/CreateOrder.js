@@ -49,7 +49,7 @@ export default function CreateOrder() {
       return {
         productID: item.productID,
         quantity: item.quantity,
-        pricePerUnit: item.sellingPrice
+        pricePerUnit: item.sellingPrice,
       };
     });
 
@@ -65,9 +65,9 @@ export default function CreateOrder() {
           sellOrderItemDTOs: sellOrderInfoMapped,
           status: "FINISHED",
           customerID: customer?.customerID,
-          discountID: discount?.discountID
+          discountID: discount?.discountID,
         },
-        refetchQueries: [{ query: LOAD_PRODUCTS }]
+        refetchQueries: [{ query: LOAD_PRODUCTS }],
       });
 
       await enqueueSnackbar("New order created successfully", AlertSuccessProp);
@@ -85,7 +85,7 @@ export default function CreateOrder() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar sx={{ backgroundColor: "#1976d2" }} />
+      <Sidebar sx={{ backgroundColor: "#1976d2" }} id="business" />
       <Grid
         container
         sx={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "80px" }}
@@ -121,7 +121,7 @@ export default function CreateOrder() {
               sx={{
                 marginTop: "24px",
                 width: "40%",
-                height: "60px"
+                height: "60px",
               }}
             >
               <Typography variant="h5">DONE</Typography>
