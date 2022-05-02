@@ -218,20 +218,24 @@ const Sidebar = ({ window, name, id }) => {
                 display="flex"
                 flexDirection="row"
               >
-                <ListItemIcon style={{ color: "white" }}>
+                <ListItemIcon style={{ color: "rgba(255, 255, 255, 0.9)" }}>
                   {itemRender(idx)}
                 </ListItemIcon>
 
                 <ListItemText
                   primary={capitalizeFirstLetter(item)}
-                  style={{ color: "white" }}
+                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 />
               </Box>
               {sidebarItems[idx].length - 1 ? (
                 focus === item ? (
-                  <ExpandLessIcon style={{ color: "white" }} />
+                  <ExpandLessIcon
+                    style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                  />
                 ) : (
-                  <ExpandMoreIcon style={{ color: "white" }} />
+                  <ExpandMoreIcon
+                    style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                  />
                 )
               ) : (
                 ""
