@@ -11,11 +11,13 @@ import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
 import BoxMoney from "./components/BoxMoney/BoxMoney";
+import { useTranslation } from "react-i18next";
 
 CreateBuyOrder.propTypes = {};
 
 function CreateBuyOrder(props) {
   const { window } = props;
+  const { t } = useTranslation("buyorder", { keyPrefix: "create" });
   const [buyOrderRequest, setBuyOrderRequest] = useState({});
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
   const history = useHistory();
@@ -25,7 +27,10 @@ function CreateBuyOrder(props) {
     if (buyOrderRequest.supplier && buyOrderRequest.supplier.supplierID) {
       return true;
     }
-    enqueueSnackbar("Please choose a supplier", AlertErrorProp);
+    enqueueSnackbar(
+      t("error.validateSupplier.supplierNotChosen"),
+      AlertErrorProp
+    );
     return false;
   };
 
@@ -37,19 +42,19 @@ function CreateBuyOrder(props) {
       buyOrderRequest.buyOrderItemDTOs.every((item, index) => {
         if (item.quantity <= 0) {
           enqueueSnackbar(
-            "Ingredient number "
-              .concat(index.toString())
-              .concat(": ")
-              .concat("Quantity is less than 0")
+            t("error.validateBuyOrderItems.quantityLessThanOrEqualZero", {
+              index: (index + 1).toString()
+            }),
+            AlertErrorProp
           );
           return false;
         }
         if (item.pricePerUnit <= 0) {
           enqueueSnackbar(
-            "Ingredient number "
-              .concat(index.toString())
-              .concat(": ")
-              .concat("Price per unit is less than 0")
+            t("error.validateBuyOrderItems.priceLessThanZero", {
+              index: (index + 1).toString()
+            }),
+            AlertErrorProp
           );
           return false;
         }
@@ -57,7 +62,7 @@ function CreateBuyOrder(props) {
       });
       return true;
     }
-    enqueueSnackbar("Please choose at least 1 ingredient", AlertErrorProp);
+    enqueueSnackbar(t("error.validateBuyOrderItems.emptyBuyOrder"), AlertErrorProp);
     return false;
   };
 
@@ -93,7 +98,7 @@ function CreateBuyOrder(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Buy Order" id="business"/>
+      <Sidebar window={window} name={t("title")} id="business" />
 
       <Box
         width="100%"

@@ -3,6 +3,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 BoxIngredient.propTypes = {
   buyOrderItems: PropTypes.array,
@@ -10,6 +11,7 @@ BoxIngredient.propTypes = {
 
 function BoxIngredient(props) {
   const { buyOrderItems } = props;
+  const { t } = useTranslation("buyorder", { keyPrefix: "detail.boxIngredientList" });
 
   const classes = useStyles();
 
@@ -17,7 +19,7 @@ function BoxIngredient(props) {
     <Paper className={classes.root}>
       <Box className="BoxIngredient-main">
         <Box className="BoxIngredient-header">
-          <Typography variant="h6">Ingredient list</Typography>
+          <Typography variant="h6">{t("title")}</Typography>
         </Box>
 
         <TableBuyOrderItem buyOrderItems={buyOrderItems} />
