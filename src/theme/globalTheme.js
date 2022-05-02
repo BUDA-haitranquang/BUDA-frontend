@@ -1,18 +1,29 @@
-import { Global } from "@emotion/react";
-import { createTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { createTheme, ThemeProvider } from "@mui/material";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const useStyle = makeStyles((theme) =>
-  createTheme({
-    "@global": {
-      "*": {},
+const theme = createTheme({
+  "@global": {
+    "*": {
+      typography: {
+        fontFamily: ["'Montserrat'", "sans - serif"].join(","),
+      },
     },
-  })
-);
+  },
+});
 
-const GlobalStyles = () => {
-  useStyle();
-  return null;
+const Theme = ({ children }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          fontFamily: "'Montserrat', san-serif",
+        }}
+      >
+        {children}
+      </Box>
+    </ThemeProvider>
+  );
 };
-
-export default GlobalStyles;
+export default Theme;
