@@ -85,7 +85,7 @@ export default function CreateOrder() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar sx={{ backgroundColor: "#1976d2" }} id="business" />
+      <Sidebar name="Create Order" sx={{ backgroundColor: "#1976d2" }} id="business" />
       <Grid
         container
         sx={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "80px" }}
