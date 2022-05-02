@@ -4,25 +4,20 @@ import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
-import MenuIcon from "@mui/icons-material/Menu";
-import WorkIcon from "@mui/icons-material/Work";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
+import WorkIcon from "@mui/icons-material/Work";
 import {
   AppBar,
   Box,
   Collapse,
-  CssBaseline,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
+  CssBaseline, Drawer, List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
