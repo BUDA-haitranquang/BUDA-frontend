@@ -8,7 +8,7 @@ const SellOrderStats = (props) => {
   const { window } = props;
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Sell order " />
+      <Sidebar window={window} name="Sell order " id="business" />
       <Box
         width="100%"
         display="flex"

@@ -40,7 +40,7 @@ const StaffDetail = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Staff Detail" />
+      <Sidebar window={window} name="Staff Detail" id="staff" />
       <Box>
         <Toolbar />
         <Box pt={1}>

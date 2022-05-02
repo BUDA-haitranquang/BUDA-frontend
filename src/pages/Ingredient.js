@@ -88,7 +88,7 @@ const Ingredient = (props) => {
   ];
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("ingredient:Ingredient")} />
+      <Sidebar window={window} name={t("ingredient:Ingredient")} id="ingredient" />
       <Box
         width="100%"
         display="flex"
