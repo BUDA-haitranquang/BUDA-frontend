@@ -59,7 +59,7 @@ const Product = (props) => {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("product:name")
+      label: t("product:productName")
     },
     {
       id: "sellingPrice",
