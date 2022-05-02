@@ -11,6 +11,8 @@
   },
 
   "detail": {
+    "title": "Buy order detail",
+
     "boxSupplier": {
       "title": "Supplier detail information",
       "address": "Address",

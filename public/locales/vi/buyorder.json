@@ -11,6 +11,8 @@
   },
 
   "detail": {
+    "title": "Chi tiết đơn nhập hàng",
+
     "boxSupplier": {
       "title": "Thông tin nhà cung cấp",
       "address": "Địa chỉ",
@@ -27,7 +29,7 @@
 
     "boxIngredientList": {
       "title": "Thông tin nguyên liệu",
-      "no": "Số thứ tự",
+      "no": "STT",
       "image": "Ảnh",
       "sku": "Mã SKU",
       "name": "Tên nguyên liệu",
