@@ -1,0 +1,101 @@
+{
+  "list": {
+    "title": "Buy order list",
+    "buttonCreate": "Create buy order",
+    "textId": "Code",
+    "supplierName": "Supplier",
+    "status": "Status",
+    "totalCost": "Total cost",
+    "createdBy": "Issuer",
+    "createdAt": "Created at"
+  },
+
+  "detail": {
+    "boxSupplier": {
+      "title": "Supplier detail information",
+      "address": "Address",
+      "email": "Email"
+    },
+
+    "boxAdditionalInfo": {
+      "title": "Additional information",
+      "textId": "Code",
+      "status":"Status",
+      "createdAt": "Created at",
+      "finishedAt": "Finished at"
+    },
+
+    "boxIngredientList": {
+      "title": "Ingredient information",
+      "no": "No.",
+      "image": "Image",
+      "sku": "SKU",
+      "name": "Name",
+      "quantity": "Quantity",
+      "price": "Price",
+      "amount": "Amount"
+    },
+
+    "boxTotalMoney": {
+      "total": "Total"
+    }
+  },
+
+  "create": {
+    "title": "Create buy order",
+
+    "boxSupplier": {
+      "title": "Supplier detail information",
+      "placeholder": "Search for a supplier",
+      "buttonCreate": "Add a new supplier",
+      "address": "Address",
+      "email": "Email"
+    },
+
+    "boxAdditionalInfo": {
+      "title": "Additional information",
+      "textId": "Code",
+      "description": "Description",
+      "status":"Status"
+    },
+
+    "boxIngredientList": {
+      "title": "Ingredient information",
+
+      "searchBox": {
+        "placeholder": "Search for ingredient",
+        "buttonCreate":"Add a new ingredient",
+        "cellIngredient": {
+          "amountLeft": "Amount left"
+        }
+      },
+      
+      "table": {
+        "no": "No.",
+        "image": "Image",
+        "sku": "SKU",
+        "name": "Name",
+        "quantity": "Quantity",
+        "price": "Price",
+        "amount": "Amount"
+      }
+
+    },
+
+    "boxTotalMoney": {
+      "total": "Total"
+    },
+
+    "error": {
+      "validateSupplier": {
+        "supplierNotChosen": "Please choose a supplier"
+      },
+
+      "validateBuyOrderItems": {
+        "emptyBuyOrder": "Buy order can't be empty",
+        "quantityLessThanOrEqualZero": "Ingredient number {{index}}: quantity must be bigger than 0",
+        "priceLessThanZero": "Ingredient number {{index}}: price cannot be less than 0"
+      }
+    }
+  }
+}
