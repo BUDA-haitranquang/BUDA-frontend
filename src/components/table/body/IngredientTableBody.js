@@ -9,7 +9,7 @@ const IngredientTableBody = (props) => {
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{
-            pathname: `ingredient/${row.ingredientID}`,
+            pathname: `${row.ingredientID}`,
             // state: { data: row },
           }}
           style={{ textDecoration: "none", color: "blue" }}
