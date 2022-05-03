@@ -23,7 +23,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
-
+  const [pictureID, setPictureID] = useState("");
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -47,6 +47,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
         amountLeft: parseInt(amountLeft),
         alertAmount: parseInt(alertAmount),
         sellingPrice: parseFloat(price),
+        pictureID: parseInt(pictureID),
       },
       refetchQueries: [{ query: LOAD_PRODUCTS }],
     })
@@ -71,7 +72,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     return isValid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isFormValid()) {
       addProduct();
 
@@ -80,20 +81,21 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   };
   const submitImage = async () => {
     let formData = new FormData();
-    await formData.append("file", "image");
+    await formData.append("file", image);
     console.log(formData);
     await axios({
       method: "post",
       url: "http://143.198.194.24:8080/api/picture/upload",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidWRhdGVzdGVyQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJ0b2tlblR5cGUiOiJBY2Nlc3MiLCJleHAiOjE2NTA2MjY1NzQsInVzZXJJRCI6MiwiaWF0IjoxNjQ5OTA2NTc0fQ.elH5BeE7Qi8WpZAArQTaDm4Za1bnL8IzUCgr58CezTfXdr7-ckE8Ls1GjQ5_o22Xx8DpjLxoymlEV54LNaV_Ew",
-        ...formData.getHeaders(),
+          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidWRhdGVzdGVyQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJ0b2tlblR5cGUiOiJBY2Nlc3MiLCJleHAiOjE2NTEyMTkzOTcsInVzZXJJRCI6MiwiaWF0IjoxNjUxMjAxMzk3fQ.1VqziIW3rce6bhS_bFRRpbgUuFb6GNp-72zJSvpNbuFe6g9vWG-Ha1nUFXCuRWcs3EO_64TOjkib1gH9rYdGEw",
       },
       data: formData,
     })
-      .then((res) => res.json())
-      .then((res) => console.log("success: ", res))
+      .then((res) => {
+        const id = res.data.pictureID;
+        setPictureID(id);
+      })
       .catch((err) => console.log("fail: ", err));
   };
   const handleUpload = (e) => {

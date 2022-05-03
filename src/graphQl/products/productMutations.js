@@ -8,9 +8,37 @@ export const ADD_PRODUCT_MUTATION = gql`
     $costPerUnit: Float!
     $sellingPrice: Float!
     $description: String
-  ){
+    $pictureID: Int
+  ) {
     newProduct(
-      productInput:{
+      productInput: {
+        name: $name
+        amountLeft: $amountLeft
+        alertAmount: $alertAmount
+        costPerUnit: $costPerUnit
+        sellingPrice: $sellingPrice
+        description: $description
+        picture: $pictureID
+      }
+    ) {
+      productID
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT_MUTATION = gql`
+  mutation editProduct(
+    $productID: Int!
+    $name: String!
+    $amountLeft: Int!
+    $alertAmount: Int!
+    $costPerUnit: Float!
+    $sellingPrice: Float!
+    $description: String
+  ) {
+    editProduct(
+      productID: $productID
+      product: {
         name: $name
         amountLeft: $amountLeft
         alertAmount: $alertAmount
@@ -18,34 +46,10 @@ export const ADD_PRODUCT_MUTATION = gql`
         sellingPrice: $sellingPrice
         description: $description
       }
-    )
-    {productID}
-  } 
-`;
-
-export const UPDATE_PRODUCT_MUTATION = gql`
-mutation editProduct(
-  $productID: Int!
-  $name: String!
-  $amountLeft: Int!
-  $alertAmount: Int!
-  $costPerUnit: Float!
-  $sellingPrice: Float!
-  $description: String
-){
-  editProduct(
-    productID: $productID
-    product:{
-      name: $name
-      amountLeft: $amountLeft
-      alertAmount: $alertAmount
-      costPerUnit: $costPerUnit
-      sellingPrice: $sellingPrice
-      description: $description
+    ) {
+      productID
     }
-  )
-  {productID}
-} 
+  }
 `;
 
 export const HIDE_PRODUCT_MUTATION = gql`
@@ -54,4 +58,4 @@ export const HIDE_PRODUCT_MUTATION = gql`
       productID
     }
   }
-`
+`;
