@@ -18,7 +18,7 @@ export const ADD_PRODUCT_MUTATION = gql`
         costPerUnit: $costPerUnit
         sellingPrice: $sellingPrice
         description: $description
-        picture: $pictureID
+        picture: { pictureID: $pictureID }
       }
     ) {
       productID

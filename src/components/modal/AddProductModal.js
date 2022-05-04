@@ -11,10 +11,11 @@ import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
-
+  const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
   const [image, setImage] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -74,9 +75,8 @@ const AddProductModal = ({ isOpen, handleClose }) => {
 
   const handleSubmit = async () => {
     if (isFormValid()) {
-      addProduct();
-
       submitImage();
+      addProduct();
     } else enqueueSnackbar("Invalid input", AlertErrorProp);
   };
   const submitImage = async () => {
@@ -85,10 +85,9 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     console.log(formData);
     await axios({
       method: "post",
-      url: "http://143.198.194.24:8080/api/picture/upload",
+      url: "http://103.173.228.124:8080/api/picture/upload",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidWRhdGVzdGVyQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJ0b2tlblR5cGUiOiJBY2Nlc3MiLCJleHAiOjE2NTEyMTkzOTcsInVzZXJJRCI6MiwiaWF0IjoxNjUxMjAxMzk3fQ.1VqziIW3rce6bhS_bFRRpbgUuFb6GNp-72zJSvpNbuFe6g9vWG-Ha1nUFXCuRWcs3EO_64TOjkib1gH9rYdGEw",
+        Authorization: `Bearer ${jwt}`,
       },
       data: formData,
     })
