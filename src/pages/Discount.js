@@ -1,13 +1,14 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Toolbar, Tabs, Tab, Divider } from "@mui/material";
+import { Divider, Tab, Tabs, Toolbar } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import { LOAD_DISCOUNTS } from "../graphQl/discounts/discountQueries";
 import DiscountByPercentage from "../components/discount/DiscountByPercentage";
 
 import DiscountByCash from "../components/discount/DiscountByCash";
+
 function Discount(props) {
   const { window } = props;
   const [currentTab, setCurrentTab] = useState(0);
@@ -20,15 +21,16 @@ function Discount(props) {
   useEffect(() => {
     async function fetchData() {
       if (data) {
-        setDiscountByCash(data.discountsByUser.filter(item => item.discountType === 'CASH_ONLY' || item.discountType === 'BOTH'));
-        setDiscountByPercentage(data.discountsByUser.filter(item => item.discountType === 'PERCENTAGE_ONLY' || item.discountType === 'BOTH'));
+        setDiscountByCash(data.discountsByUser.filter(item => item.discountType === "CASH_ONLY" || item.discountType === "BOTH"));
+        setDiscountByPercentage(data.discountsByUser.filter(item => item.discountType === "PERCENTAGE_ONLY" || item.discountType === "BOTH"));
       }
     }
+
     fetchData();
   }, [data]);
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Discount" />
+      <Sidebar window={window} name="Discount" id="discount"/>
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         <Box pt={1}>
@@ -50,8 +52,8 @@ function Discount(props) {
           justifyContent="center"
         >
           <Box py={1}></Box>
-          {currentTab === 1 && <DiscountByCash discounts={discountByCash}/>}
-          {currentTab === 0 && <DiscountByPercentage discounts={discountByPercentage}/>}
+          {currentTab === 1 && <DiscountByCash discounts={discountByCash} />}
+          {currentTab === 0 && <DiscountByPercentage discounts={discountByPercentage} />}
         </Box>
       </Box>
     </Box>

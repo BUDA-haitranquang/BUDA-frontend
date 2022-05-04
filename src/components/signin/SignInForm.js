@@ -1,45 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  OutlinedInput,
-  InputAdornment,
-  Typography,
-  Link,
-  Modal,
-  CircularProgress,
-} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Button, CircularProgress, InputAdornment, Link, Modal, OutlinedInput, Typography } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 import { useMutation } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
-import { addToken, addRefreshToken } from "../../redux/tokenSlice";
+import { addRefreshToken, addToken } from "../../redux/tokenSlice";
 
-import {
-  LOGIN_USER,
-  NEW_ACCESS_TOKEN,
-} from "../../graphQl/authentication/authMutations";
+import { LOGIN_USER, NEW_ACCESS_TOKEN } from "../../graphQl/authentication/authMutations";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+
 const useStyle = makeStyles({
   wrapper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   formContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   headlineText: {
     paddingTop: "15%",
@@ -48,47 +33,43 @@ const useStyle = makeStyles({
     color: "#fff",
     fontFamily: "Lexend Deca",
     fontWeight: 800,
-    marginLeft: "15%",
+    marginLeft: "15%"
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
-      backgroundColor: "#224957",
+      backgroundColor: "white",
       borderRadius: "10px",
       width: "100%",
-      height: "50px",
-
-      "&:hover": {
-        outline: "none",
-        boxShadow: "0px 0px 0px 3px #20DF7F inset",
-      },
+      height: "50px"
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
-      opacity: 0.5,
+      opacity: 0.5
     },
     "& input": {
       padding: "15px",
-      height: "10px",
+      height: "10px"
     },
     "& .MuiOutlinedInput-input": {
-      color: "#ffffff",
-    },
+      color: "#black"
+    }
   },
   button1: {
     "&.MuiButton-root": {
       width: "100%",
-      background: "#20DF7F",
+      background: "rgba(72, 149, 255, 1)",
       color: "white",
       borderRadius: 10,
       height: 50,
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       "&:hover": {
-        background: "#56EFA2",
-        border: "none",
-      },
+        background: "rgba(97, 163, 255, 1)",
+        border: "none"
+      }
     },
     "&.MuiButton-text": {
-      fontSize: 19,
-    },
-  },
+      fontSize: 19
+    }
+  }
 });
 
 const SignInForm = () => {
@@ -142,8 +123,8 @@ const SignInForm = () => {
     userLogin({
       variables: {
         email: email,
-        password: password,
-      },
+        password: password
+      }
     })
       .then((res) => {
         const { accessToken, refreshToken } = res.data.userLogin;
@@ -151,7 +132,7 @@ const SignInForm = () => {
         dispatch(addRefreshToken(refreshToken));
       })
       .then(() => {
-        history.push("/");
+        history.push("/dashboard");
         enqueueSnackbar("Login successfully", AlertSuccessProp);
       })
       .catch((error) => {
@@ -188,16 +169,16 @@ const SignInForm = () => {
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <Typography
             variant="h1"
             style={{
               fontFamily: "'Montserrat', sans-serif",
-              color: "white",
+              color: "black",
               marginBottom: "4rem",
-              fontWeight: 500,
+              fontWeight: 500
             }}
           >
             BUDA
@@ -219,7 +200,7 @@ const SignInForm = () => {
             
             </Box>*/}
 
-          <Box style={{ marginLeft: "8rem", marginRight: "8rem" }}>
+          <Box>
             <OutlinedInput
               className={classes.outlinedInput}
               value={email}
@@ -229,7 +210,7 @@ const SignInForm = () => {
               placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                  <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -243,7 +224,7 @@ const SignInForm = () => {
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
+                  <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -261,8 +242,8 @@ const SignInForm = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-                color: "white",
-                cursor: "default",
+                color: "black",
+                cursor: "default"
               }}
             >
               Don't have an account?&nbsp;
@@ -271,9 +252,9 @@ const SignInForm = () => {
                   history.push("/signup");
                 }}
                 style={{
-                  color: "#20DF7F",
+                  color: "rgba(72, 149, 255, 1)",
                   textDecoration: "none",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 Sign up

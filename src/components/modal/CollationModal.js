@@ -1,22 +1,19 @@
-// import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { LOAD_COLATIONS } from "../../graphQl/collation/collationQueries";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import { EDIT_PRODUCT_QUANTITY } from "../../graphQl/collation/collationMutations";
+
 const CollationModal = ({
-  isOpen,
-  handleClose,
-  title,
-  productID,
-  amountChange,
-}) => {
+                          isOpen,
+                          handleClose,
+                          title,
+                          productID,
+                          amountChange
+                        }) => {
   const [comment, setComment] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const [amount, setAmount] = useState(null);
@@ -40,9 +37,9 @@ const CollationModal = ({
       variables: {
         productID: parseInt(productID),
         amountLeftChange: parseInt(amount),
-        message: comment,
+        message: comment
       },
-      refretchQueries: [{ query: LOAD_COLATIONS }],
+      refretchQueries: [{ query: LOAD_COLATIONS }]
     })
       .then((res) => {
         handleClose();
@@ -78,7 +75,7 @@ const CollationModal = ({
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 },
+            "& > :not(style)": { m: 1 }
           }}
         >
           <TextField

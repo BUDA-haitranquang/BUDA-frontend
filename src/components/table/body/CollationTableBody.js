@@ -1,13 +1,14 @@
-import { TableCell, TextField } from "@mui/material";
+import { TableCell } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CollationModal from "../../modal/CollationModal";
 import { makeStyles } from "@mui/styles";
+
 const useStyle = makeStyles({
   button: {
-    "&.MuiButton-root": { textTransform: "none" },
-  },
+    "&.MuiButton-root": { textTransform: "none" }
+  }
 });
 
 const CollationTableBody = (props) => {

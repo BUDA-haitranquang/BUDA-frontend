@@ -1,33 +1,33 @@
-import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import BudaModal from "../../buda-components/modal/BudaModal";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp,
+  AlertSuccessProp
 } from "../../buda-components/alert/BudaNoti";
-
-import { useMutation } from "@apollo/client";
+import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
 import { LOAD_INGREDIENTS } from "../../graphQl/ingredients/ingredientQueries";
 
 const AddIngredientModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
-
+  const { t } = useTranslation(["common","ingredient"]);
   const [name, setName] = useState("");
+  const [sku, setSku] = useState(null);
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
   // const [cost, setCost] = useState(0);
-  const [group, setGroup] = useState("");
   const [description, setDescription] = useState("");
   const [newIngredient, { error }] = useMutation(ADD_INGREDIENT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
+    setSku(null);
     setName("");
     setPrice(0);
     setAmountLeft(0);
-    setGroup("");
     setDescription("");
   };
 
@@ -36,11 +36,12 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
     newIngredient({
       variables: {
         name: name,
+        ingredientSKU: sku,
         description: description,
         price: parseFloat(price),
-        amountLeft: parseInt(amountLeft),
+        amountLeft: parseInt(amountLeft)
       },
-      refetchQueries: [{ query: LOAD_INGREDIENTS }],
+      refetchQueries: [{ query: LOAD_INGREDIENTS }]
     })
       .then((res) => {
         handleClose();
@@ -72,23 +73,36 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
     <BudaModal
       open={isOpen}
       onClose={handleClose}
-      textOk="Save"
+      textOk={t("common:save")}
       onOk={handleSubmit}
       isLoading={isLoading}
+      title={t("ingredient:addIngredientModal.title")}
       children={
         <Box
           component="form"
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 },
+            "& > :not(style)": { m: 1 }
           }}
         >
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label={t("ingredient:SKU")}
+            variant="outlined"
+            value={sku}
+            onChange={(e) => {
+              let skuText = e.target.value;
+              if (skuText && skuText.length > 0) setSku(e.target.value);
+              else setSku(null);
+            }}
+          />
           <TextField
             required
             fullWidth
             id="outlined-basic"
-            label="Name"
+            label={t("ingredient:Name")}
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -99,7 +113,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             fullWidth
             type="number"
             id="outlined-basic"
-            label="Price"
+            label={t("ingredient:Price")}
             variant="outlined"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -110,7 +124,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
             required
             type="number"
             id="outlined-basic"
-            label="Amount Left"
+            label={t("ingredient:Left")}
             variant="outlined"
             value={amountLeft}
             onChange={(e) => setAmountLeft(e.target.value)}
@@ -118,15 +132,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Group"
-            variant="outlined"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Description"
+            label={t("ingredient:Description")}
             variant="outlined"
             multiline
             rows={3}

@@ -1,0 +1,15 @@
+{
+    "error": "An error happened",
+    "save": "Save",
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "Email":"Email",
+    "PhoneNumber" : "PhoneNumber",
+    "Address" : "Addres",
+    "Description" : "Description",
+    "Amount" : "Amount",
+    "SKU" : "SKU Code",
+    "Edit" : "Edit",
+    "Account" : "Account",
+    "Password" : "Password"
+}

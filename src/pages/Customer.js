@@ -1,57 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
-import AddCustomerModal from "../components/modal/AddCustomerModal";
-import Sidebar from "../components/Sidebar";
-import CustomerTableBody from "../components/table/body/CustomerTableBody";
-import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
-import BudaTable from "../buda-components/table/BudaTable";
-import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
 import { useSnackbar } from "notistack";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Redirect } from "react-router-dom";
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "phoneNumber",
-    numeric: false,
-    disablePadding: false,
-    label: "Phone Number",
-  },
-  {
-    id: "address",
-    numeric: false,
-    disablePadding: false,
-    label: "Address",
-  },
-  {
-    id: "ageGroup",
-    numeric: false,
-    disablePadding: false,
-    label: "Age Group",
-  },
-  {
-    id: "gender",
-    numeric: false,
-    disablePadding: false,
-    label: "Gender",
-  },
-  {
-    id: "totalSpend",
-    numeric: false,
-    disablePadding: false,
-    label: "totalSpend",
-  },
-];
+import BudaTable from "../buda-components/table/BudaTable";
+import AddCustomerModal from "../components/modal/AddCustomerModal";
+import Sidebar from "../components/Sidebar";
+import CustomerTableBody from "../components/table/body/CustomerTableBody";
+import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
+import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 
 const Customer = (props) => {
   const { window } = props;
@@ -60,6 +23,7 @@ const Customer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(["common", "customer"]);
 
   const handleDelete = (selected) => {
     if (selected === []) return;
@@ -81,17 +45,51 @@ const Customer = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setCustomer(data.customersByUser);
+      if (data) setCustomer(data.customersByUser.map((item) => item));
     }
+
     fetchData();
     console.log(data);
   }, [data]);
 
   if (error) return <Redirect to="/login" />;
 
+  const headCells = [
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:customerName"),
+    },
+    {
+      id: "phoneNumber",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:phoneNumber"),
+    },
+    {
+      id: "ageGroup",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:ageGroup"),
+    },
+    {
+      id: "gender",
+      numeric: false,
+      disablePadding: false,
+      label: t("customer:gender"),
+    },
+    {
+      id: "totalSpend",
+      numeric: true,
+      disablePadding: false,
+      label: t("customer:totalSpend"),
+    },
+  ];
+
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Customer" />
+      <Sidebar window={window} name="Customer" id="customer"/>
       <Box
         width="100%"
         display="flex"
@@ -104,7 +102,7 @@ const Customer = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={customer}
+            data={customer.reverse()}
             headCells={headCells}
             Modal={AddCustomerModal}
             type="customerID"

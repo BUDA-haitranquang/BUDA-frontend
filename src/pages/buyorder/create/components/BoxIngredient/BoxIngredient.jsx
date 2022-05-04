@@ -8,8 +8,13 @@ import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";
 import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
 import _ from "lodash";
+import DefaultImage from "../../../../../buda-components/SVG/DefaultImage";
+import { useTranslation } from "react-i18next";
 
 function BoxIngredient(props) {
+  const { t } = useTranslation("buyorder", {
+    keyPrefix: "create.boxIngredientList",
+  });
   const [openCreateIngredient, setOpenCreateIngredient] = useState(false);
   const [buyOrderItems, setBuyOrderItems] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -55,17 +60,19 @@ function BoxIngredient(props) {
             alignItems="center"
             columnGap={2}
           >
-            <Box
-              component="img"
-              sx={{
-                height: 64,
-                width: 64,
-              }}
-              alt={option.name ? option.name : ""}
-              src={
-                option.picture && option.picture.link ? option.picture.link : ""
-              }
-            />
+            {option.picture ? (
+              <Box
+                component="img"
+                sx={{
+                  height: 64,
+                  width: 64,
+                }}
+                alt={option.name ? option.name : ""}
+                src={option.picture.link}
+              />
+            ) : (
+              <DefaultImage style={{ height: "40px", width: "40px" }} />
+            )}
             <Box
               display="flex"
               flexDirection="column"
@@ -78,7 +85,7 @@ function BoxIngredient(props) {
           </Box>
 
           <Box display="flex">
-            <Typography color="#747C87">Amount Left: &nbsp; &nbsp;</Typography>
+            <Typography color="#747C87">{t("searchBox.cellIngredient.amountLeft")}: &nbsp; &nbsp;</Typography>
             <Typography>{option.amountLeft}</Typography>
           </Box>
         </Box>
@@ -138,11 +145,11 @@ function BoxIngredient(props) {
     <Paper className={classes.root}>
       <Box className="BoxIngredient-main">
         <Box className="BoxIngredient-header">
-          <Typography variant="h6">Ingredient list</Typography>
+          <Typography variant="h6">{t("title")}</Typography>
           <LiveSearch
-            placeholder="Search for an ingredient"
+            placeholder={t("searchBox.placeholder")}
             createable
-            textCreate="Add a new ingredient"
+            textCreate={t("searchBox.buttonCreate")}
             onClickCreate={() => setOpenCreateIngredient(true)}
             maxHeight={300}
             onChooseItem={onChooseIngredient}

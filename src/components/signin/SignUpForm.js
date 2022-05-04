@@ -1,12 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Box,
-  Button,
-  OutlinedInput,
-  InputAdornment,
-  Typography,
-  Link,
-} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Button, InputAdornment, Link, OutlinedInput, Typography } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
@@ -18,35 +11,33 @@ import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../redux/tokenSlice";
 import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import { REGISTER_USER } from "../../graphQl/authentication/authMutations";
+
 const useStyle = makeStyles({
   label: {
     "&.MuiInputLabel-root": {
-      "&.Mui-focused": { color: "black" },
-    },
+      "&.Mui-focused": { color: "black" }
+    }
   },
   nameWrapper: {
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   wrapper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   formContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   headlineText: {
     paddingTop: "15%",
@@ -55,46 +46,43 @@ const useStyle = makeStyles({
     color: "#fff",
     fontFamily: "Poppins",
     fontWeight: 800,
-    marginLeft: "15%",
+    marginLeft: "15%"
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
-      backgroundColor: "#224957",
+      backgroundColor: "white",
       borderRadius: "10px",
       width: "100%",
-      height: "50px",
-      "&:hover": {
-        outline: "none",
-        boxShadow: "0px 0px 0px 3px #20DF7F inset",
-      },
+      height: "50px"
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
-      opacity: 0.5,
+      opacity: 0.5
     },
     "& input": {
       padding: "15px",
-      height: "10px",
+      height: "10px"
     },
     "& .MuiOutlinedInput-input": {
-      color: "#ffffff",
-    },
+      color: "black"
+    }
   },
   button: {
     "&.MuiButton-root": {
       width: "100%",
-      background: "#20DF7F",
+      background: "rgba(72, 149, 255, 1)",
       color: "white",
       borderRadius: 10,
       height: 50,
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       "&:hover": {
-        background: "#56EFA2",
-        border: "none",
-      },
+        background: "rgba(97, 163, 255, 1)",
+        border: "none"
+      }
     },
     "&.MuiButton-text": {
-      fontSize: 19,
-    },
-  },
+      fontSize: 19
+    }
+  }
 });
 
 const SignUpForm = () => {
@@ -138,8 +126,8 @@ const SignUpForm = () => {
         lastName: lastName,
         phoneNumber: phone,
         email: email,
-        password: password,
-      },
+        password: password
+      }
     })
       .then((res) => {
         const { accessToken, refreshToken } = res.data.userRegister;
@@ -182,15 +170,10 @@ const SignUpForm = () => {
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
-          <Box
-            style={{ marginLeft: "8rem", marginRight: "8rem" }}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-          >
+          <Box display="flex" flexDirection="column" alignItems="center">
             <Box className={classes.nameWrapper}>
               <OutlinedInput
                 className={classes.outlinedInput}
@@ -200,7 +183,7 @@ const SignUpForm = () => {
                 placeholder="First Name"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                    <PersonIcon style={{ opacity: 0.5 }} />
                   </InputAdornment>
                 }
                 style={{ marginBottom: "1.25rem", marginRight: "0.5rem" }}
@@ -213,7 +196,7 @@ const SignUpForm = () => {
                 placeholder="Last Name"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                    <PersonIcon style={{ opacity: 0.5 }} />
                   </InputAdornment>
                 }
                 style={{ marginBottom: "1.25rem", marginLeft: "0.5rem" }}
@@ -227,7 +210,7 @@ const SignUpForm = () => {
               placeholder="Email"
               startAdornment={
                 <InputAdornment position="start">
-                  <EmailIcon style={{ opacity: 0.5, color: "white" }} />
+                  <EmailIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -240,7 +223,7 @@ const SignUpForm = () => {
               placeholder="Phone Number"
               startAdornment={
                 <InputAdornment position="start">
-                  <PhoneIcon style={{ opacity: 0.5, color: "white" }} />
+                  <PhoneIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -255,7 +238,7 @@ const SignUpForm = () => {
               placeholder=" Username"
               startAdornment={
                 <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5, color: "white" }} />
+                  <PersonIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -269,14 +252,14 @@ const SignUpForm = () => {
               placeholder="Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
+                  <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               endAdornment={
                 <InputAdornment position="end">
                   <Button onClick={handleVisibility}>
                     {" "}
-                    <VisibilityIcon style={{ opacity: 0.5, color: "white" }} />
+                    <VisibilityIcon style={{ opacity: 0.5 }} />
                   </Button>
                 </InputAdornment>
               }
@@ -290,7 +273,7 @@ const SignUpForm = () => {
               placeholder="Confirm Password"
               startAdornment={
                 <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5, color: "white" }} />
+                  <LockIcon style={{ opacity: 0.5 }} />
                 </InputAdornment>
               }
               style={{ marginBottom: "1.25rem" }}
@@ -312,9 +295,9 @@ const SignUpForm = () => {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "center",
-                  color: "white",
+                  color: "black",
                   textDecoration: "none",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 Back to login page

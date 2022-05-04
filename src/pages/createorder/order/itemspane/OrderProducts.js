@@ -20,7 +20,7 @@ const useStyle = makeStyles(() => ({
     padding: "8px",
     overflow: "hidden",
     "& .MuiTableContainer-root": {
-      height: "40vh",
+      height: "36vh",
     },
     "& .MuiTable-root": {
       backgroundColor: "yellow",
@@ -86,11 +86,8 @@ const headCells = [
   },
 ];
 
-const initData = [];
-
 export default function OrderProducts() {
   const classes = useStyle();
-  const dispatch = useDispatch();
   const [rows, setRows] = useState([]);
   const { productCart } = useSelector((state) => state.productCart);
 

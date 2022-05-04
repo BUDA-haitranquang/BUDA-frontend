@@ -1,6 +1,7 @@
+import { LoadingButton } from "@mui/lab";
 import { Box, Button, DialogActions } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
+import { useTranslation } from "react-i18next";
 const useStyles = makeStyles(() => ({
   root: {
     paddingTop: "28px",
@@ -24,7 +25,7 @@ const ModalAction = (props) => {
     ...remainProps
   } = props;
   const classes = useStyles();
-
+  const {t} = useTranslation('common');
   if (!onOk && !onClose && !Component) {
     return <> </>;
   }
@@ -42,21 +43,21 @@ const ModalAction = (props) => {
               size="small"
               onClick={() => onClose()}
             >
-              {textClose ? textClose : "Cancel"}
+              {textClose ? textClose : t("common:cancel")}
             </Button>
           ) : null}
           {onOk && !isNotShowActionButton ? (
-            <Button
+            <LoadingButton
               variant="contained"
               color={okButtonType ? okButtonType : "primary"}
               size="small"
               style={{ marginLeft: "16px" }}
               onClick={() => onOk()}
-              isLoading={isLoading}
+              loading={isLoading}
               disabled={disabledOk}
             >
               {textOk ? textOk : "OK"}
-            </Button>
+            </LoadingButton>
           ) : null}
         </Box>
       )}

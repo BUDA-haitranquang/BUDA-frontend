@@ -8,58 +8,70 @@ import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import Sidebar from "../../../components/Sidebar";
 import BuyOrderTableBody from "./components/BuyOrderTableBody";
 import { LOAD_BUY_ORDERS } from "../../../graphQl/buyorders/BuyOrderQueries";
-
-const headCells = [
-  {
-    id: "textID",
-    numeric: false,
-    disablePadding: false,
-    label: "Text ID",
-  },
-  {
-    id: "supplierName",
-    numeric: false,
-    disablePadding: false,
-    label: "Supplier name",
-  },
-  {
-    id: "status",
-    numeric: false,
-    disablePadding: true,
-    label: "Status",
-  },
-  {
-    id: "totalCost",
-    numeric: true,
-    disablePadding: true,
-    label: "Total cost",
-  },
-  {
-    id: "createdBy",
-    numeric: false,
-    disablePadding: true,
-    label: "Created by",
-  },
-  {
-    id: "createdAt",
-    numeric: false,
-    disablePadding: true,
-    label: "Created at",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const BuyOrder = (props) => {
   const { window } = props;
+  const { t } = useTranslation("buyorder", { keyPrefix: "list" });
   const [buyOrders, setBuyOrders] = useState([]);
   const history = useHistory();
   const { error, loading, data } = useQuery(LOAD_BUY_ORDERS);
   const [deleteBuyOrder] = useMutation(DELETE_BUY_ORDER);
 
+  const headCells = [
+    {
+      id: "textID",
+      numeric: false,
+      disablePadding: false,
+      label: t("textId"),
+    },
+    {
+      id: "supplierName",
+      numeric: false,
+      disablePadding: false,
+      label: t("supplierName"),
+    },
+    {
+      id: "status",
+      numeric: false,
+      disablePadding: true,
+      label: t("status"),
+    },
+    {
+      id: "totalCost",
+      numeric: true,
+      disablePadding: true,
+      label: t("totalCost"),
+    },
+    {
+      id: "createdBy",
+      numeric: false,
+      disablePadding: true,
+      label: t("createdBy"),
+    },
+    {
+      id: "createdAt",
+      numeric: false,
+      disablePadding: true,
+      label: t("createdAt"),
+    },
+  ];
+
   useEffect(() => {
     async function fetchData() {
       if (data) {
-        let buyOrdersByUser = [...data.buyOrdersByUser];
-        setBuyOrders(buyOrdersByUser.reverse());
+        let buyOrdersByUser = [...data.buyOrdersByUser].map((value) => {
+          return {
+            buyOrderID: value.buyOrderID,
+            textID: value.textID,
+            supplierName: value.supplier?.name,
+            status: value.status,
+            totalCost: value.totalCost,
+            createdBy: value.staff?.name,
+            createdAt: value.createdAt,
+          };
+        });
+        setBuyOrders(buyOrdersByUser);
       }
     }
 
@@ -80,7 +92,7 @@ const BuyOrder = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Buy Order" />
+      <Sidebar window={window} name={t("title")} id="business" />
       <Box
         width="100%"
         display="flex"
@@ -94,9 +106,9 @@ const BuyOrder = (props) => {
           variant="contained"
           color="primary"
           style={{ alignSelf: "flex-end" }}
-          onClick={() => history.push(`/buy-order/create`)}
+          onClick={() => history.push(`/business/buy`)}
         >
-          Create buy order
+          {t("buttonCreate")}
         </Button>
         <BudaTable
           deleteItems={handleDelete}
@@ -104,6 +116,7 @@ const BuyOrder = (props) => {
           headCells={headCells}
           DetailTableBody={BuyOrderTableBody}
           type="buyOrderID"
+          isNotShowCheckBox={true}
         />
       </Box>
     </Box>

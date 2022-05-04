@@ -1,0 +1,28 @@
+{
+    "customerName" : "Tên khách",
+    "phoneNumber" : "Số điện thoại",
+    "ageGroup":"Nhóm tuổi",
+    "gender": "Giới tính",
+    "totalSpend": "Tổng chi", 
+    "address": "Địa chỉ",
+    "Modal":{
+        "title": "Thêm Khách hàng mới",
+        "gender":{
+            "unknown":"Chưa biết",
+            "male":"Nam",
+            "female":"Nữ"
+        },
+        "ageGroup":{
+            "unknown":"Chưa biết",
+            "group1":"Từ 0 đến 12",
+            "group2":"Từ 12 đến 18",
+            "group3":"Từ 18 đến 24",
+            "group4":"Từ 24 đến 30",
+            "group5":"Từ 30 đến 40",
+            "group6":"Từ 40 đến 50",
+            "group7":"Từ 50 đến 65",
+            "group8":"Trên 65"
+        }
+    }
+
+}

@@ -17,3 +17,31 @@ export const LOAD_INGREDIENTS = gql`
   }
 `;
 
+export const LOAD_INGREDIENT = gql`
+  query ingredient($ingredientID: Int!){
+    ingredient(ingredientID: $ingredientID) {
+      ingredientID
+      sku: ingredientSKU
+      name 
+      description
+      amountLeft
+      price
+      picture{
+        pictureLink
+      }
+      alertAmountLeft
+    }
+  }
+`
+
+export const Ingredient_Collation = gql`
+  query{
+    ingredientsByUser {
+      ingredientID
+      ingredientSKU
+      name
+      description
+      amountLeft
+    }
+  }
+`

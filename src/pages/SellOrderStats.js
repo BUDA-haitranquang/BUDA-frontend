@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import AgeGroupSellOrder from "../components/statistics/sellorder/AgeGroupSellOrder";
 import GenderSellOrder from "../components/statistics/sellorder/GenderSellOrder";
-const SellOrder = (props) => {
+
+const SellOrderStats = (props) => {
   const { window } = props;
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Sell order " />
+      <Sidebar window={window} name="Sell order " id="business" />
       <Box
         width="100%"
         display="flex"
@@ -24,4 +25,4 @@ const SellOrder = (props) => {
   );
 };
 
-export default SellOrder;
+export default SellOrderStats;

@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const ADD_PRODUCT_MUTATION = gql`
   mutation newProduct(
     $name: String!
+    $productSKU: String
     $amountLeft: Int!
     $alertAmount: Int!
     $costPerUnit: Float!
@@ -13,6 +14,7 @@ export const ADD_PRODUCT_MUTATION = gql`
     newProduct(
       productInput: {
         name: $name
+        productSKU: $productSKU
         amountLeft: $amountLeft
         alertAmount: $alertAmount
         costPerUnit: $costPerUnit
@@ -29,6 +31,7 @@ export const ADD_PRODUCT_MUTATION = gql`
 export const UPDATE_PRODUCT_MUTATION = gql`
   mutation editProduct(
     $productID: Int!
+    $productSKU: String
     $name: String!
     $amountLeft: Int!
     $alertAmount: Int!
@@ -40,6 +43,7 @@ export const UPDATE_PRODUCT_MUTATION = gql`
       productID: $productID
       product: {
         name: $name
+        productSKU: $productSKU
         amountLeft: $amountLeft
         alertAmount: $alertAmount
         costPerUnit: $costPerUnit

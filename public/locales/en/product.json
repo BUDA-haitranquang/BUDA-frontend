@@ -1,0 +1,16 @@
+{
+  "productName": "Product Name",
+  "sku": "SKU",
+  "price": "Price",
+  "amountLeft": "Left",
+  "alertAmount": "Alert at",
+  "cost": "Cost",
+  "description": "Description",
+  "table": {},
+  "addProductModal": {
+    "title": "Create new Product"
+  },
+  "editProductModal": {
+    "title": "Edit Product"
+  }
+}

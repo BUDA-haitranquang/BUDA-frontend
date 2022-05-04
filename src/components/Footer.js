@@ -13,27 +13,27 @@ const useStyle = makeStyles({
     width: `calc(100% - ${drawerWidth})px`,
     overflowX: "hidden",
     "& > *": {
-      color: "white",
+      color: "white"
     },
     "& a": {
       textDecoration: "none",
       color: "white",
       "&:hover": {
         // color: "cyan",
-      },
+      }
     },
     "& .MuiBox-root": {
       display: "flex",
       marginBottom: "5px",
       "& .MuiTypography-root": {
-        marginLeft: "15px",
-      },
+        marginLeft: "15px"
+      }
     },
 
     "& .MuiGrid-item": {
-      paddingTop: "20px",
-    },
-  },
+      paddingTop: "20px"
+    }
+  }
 });
 
 export default function Footer() {
@@ -45,7 +45,7 @@ export default function Footer() {
           marginTop: "40px",
           marginLeft: `${drawerWidth}px`,
           paddingBottom: "10px",
-          backgroundColor: "#1976d2",
+          backgroundColor: "#1976d2"
         }}
       >
         <Grid container spacing={5} style={{ marginTop: "0" }}>

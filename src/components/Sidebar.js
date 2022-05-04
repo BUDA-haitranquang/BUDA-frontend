@@ -1,23 +1,18 @@
 import { ShoppingBasketOutlined } from "@mui/icons-material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GroupsIcon from "@mui/icons-material/Groups";
-import MenuIcon from "@mui/icons-material/Menu";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
+import WorkIcon from "@mui/icons-material/Work";
 import {
   AppBar,
   Box,
   Collapse,
-  CssBaseline,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
+  CssBaseline, Drawer, List,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -32,40 +27,81 @@ import { setFocus } from "../redux/sidebarSlice";
 import AccountMenu from "./AccountMenu";
 
 const useStyle = makeStyles({
+  selectedItem: {
+    cursor: "pointer",
+    background: "rgba(45, 142, 255, 1)",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
+    borderRadius: "6px",
+    paddingTop: "0.75rem",
+    paddingBottom: "0.75rem",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  item: {
+    cursor: "pointer",
+    borderRadius: "6px",
+    paddingTop: "0.75rem",
+    paddingBottom: "0.75rem",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // "&:hover": {
+    //   background: "rgba(45, 142, 255, 1)",
+    //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
+    // },
+  },
+  subItem: {
+    borderRadius: "6px",
+    marginTop: "0.25rem",
+    "&:hover": {
+      background: "rgba(47, 143, 255, 0.68)",
+    },
+  },
+  itemOpen: {
+    transition: "transform 0.4s",
+    "&:hover": {
+      transition: "transform 0.4s",
+      transform: "translate(10px,0px)",
+    },
+  },
   root: {
+    margin: "0.85rem",
     "& a:link": {
       textDecoration: "none",
-      color: "black",
-      "&:hover": {
-        color: "grey",
-        fontWeight: "600"
-      }
+      color: "white",
+      // "&:hover": {
+      //   color: "grey",
+      //   fontWeight: "600",
+      // },
     },
     "& a:visited": {
-      color: "black"
-    }
+      color: "black",
+    },
   },
   logo: {
+    marginTop: "1rem",
     width: "100%",
     fontSize: "40px",
-    fontWeight: "800",
+    fontWeight: "700",
     display: "flex",
     justifyContent: "center",
     textDecoration: "none",
-    color: "black"
-  }
+    color: "white",
+  },
 });
-const drawerWidth = 200;
+const drawerWidth = 240;
 
 const title = [
   "dashboard",
+  "business",
   "product",
   "ingredient",
   "supplier",
   "customer",
   "staff",
   "cost",
-  "statistic"
+  // "statistic",
 ];
 
 function createData(name, link, check) {
@@ -73,28 +109,37 @@ function createData(name, link, check) {
 }
 
 const sidebarItems = [
-  [createData("Buy", "buy", ""), createData("Sell", "sell", "")],
   [
-    createData("Product", "", ""),
-    createData("Collation", "collation", ""),
-    createData("Delete", "delete", "")
+    createData("Overall", "overall", ""),
+    // createData("Incomplete", "incomplete", ""),
   ],
-  [createData("Ingredient", "", "")],
+  [
+    createData("Sell", "sell", ""),
+    createData("Sell history", "sell-history", ""),
+    createData("Buy", "buy", ""),
+    createData("Buy history", "buy-history", ""),
+  ],
+  [createData("Product", "", ""), createData("Collation", "collation", "")],
+  [
+    createData("Detail", "detail", ""),
+    createData("Collation", "collation", ""),
+  ],
   [createData("Supplier", "supplier", "")],
   [createData("Customer", "customer", "")],
+
   [createData("Note", "note", "")],
   [
     createData("Fixed", "fixedcost", ""),
     createData("Fixed Cost Bill", "fixedcostBill", ""),
-    createData("Other Cost", "othercost", "")
+    createData("Other Cost", "othercost", ""),
   ],
   [
     createData("Business", "business", ""),
-    createData("Customer", "customer", ""),
-    createData("Product", "product", "")
-  ]
+    // createData("Customer", "customer", ""),
+    // createData("Product", "product", ""),
+  ],
 ];
-const Sidebar = ({ window, name }) => {
+const Sidebar = ({ window, name, id }) => {
   const history = useHistory();
   const focus = useSelector((state) => state.sidebar.focus);
   const dispatch = useDispatch();
@@ -110,6 +155,7 @@ const Sidebar = ({ window, name }) => {
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {
+    if (typeof string !== "string") return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
@@ -118,19 +164,21 @@ const Sidebar = ({ window, name }) => {
       case 0:
         return <AddShoppingCartIcon />;
       case 1:
-        return <ShoppingBasketOutlined />;
+        return <WorkIcon />;
       case 2:
-        return <StoreIcon />;
+        return <ShoppingBasketOutlined />;
       case 3:
-        return <ShoppingCartIcon />;
+        return <StoreIcon />;
       case 4:
-        return <GroupsIcon />;
+        return <ShoppingCartIcon />;
       case 5:
-        return <AssignmentIndIcon />;
+        return <GroupsIcon />;
       case 6:
-        return <MonetizationOnIcon />;
+        return <AssignmentIndIcon />;
       case 7:
-        return <BarChartIcon />;
+        return <MonetizationOnIcon />;
+      // case 8:
+      //   return <BarChartIcon />;
       default:
         break;
     }
@@ -143,15 +191,23 @@ const Sidebar = ({ window, name }) => {
     </>
   );
   const drawer = (
-    <div style={{ backgroundColor: "aliceblue", flexGrow: 1 }}>
+    // <div style={{ background: "#1976d2", flexGrow: 1 }}>
+    <div
+      style={{
+        backgroundImage: "linear-gradient(#1367ba, #409fff)",
+        flexGrow: 1,
+      }}
+    >
       <Toolbar children={logo} />
-
-      <Divider />
       <List className={classes.root}>
         {title.map((item, idx) => (
           <>
             <ListItem
-              button
+              className={
+                id.toLowerCase().includes(item.toLowerCase())
+                  ? classes.selectedItem
+                  : classes.item
+              }
               onClick={() => {
                 let value = focus === item ? "" : item;
                 setFocusSideBar(value);
@@ -159,13 +215,32 @@ const Sidebar = ({ window, name }) => {
                   history.push(`/${title[idx]}`);
               }}
             >
-              <ListItemIcon>{itemRender(idx)}</ListItemIcon>
-              <ListItemText primary={capitalizeFirstLetter(item)} />
+              <Box
+                className={classes.itemOpen}
+                display="flex"
+                flexDirection="row"
+              >
+                <ListItemIcon style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+                  {itemRender(idx)}
+                </ListItemIcon>
+
+                <ListItemText
+                  primaryTypographyProps={{
+                    fontFamily: "'Montserrat', san-serif",
+                  }}
+                  primary={capitalizeFirstLetter(item)}
+                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
+                />
+              </Box>
               {sidebarItems[idx].length - 1 ? (
                 focus === item ? (
-                  <ExpandLessIcon />
+                  <ExpandLessIcon
+                    style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                  />
                 ) : (
-                  <ExpandMoreIcon />
+                  <ExpandMoreIcon
+                    style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                  />
                 )
               ) : (
                 ""
@@ -176,9 +251,14 @@ const Sidebar = ({ window, name }) => {
                 {sidebarItems[idx].map((component) => {
                   return (
                     <Link to={`/${item}/${component.link}`}>
-                      <ListItem sx={{ textAlign: "left" }} button>
-                        <Box pl={7}></Box>
-                        <ListItemText primary={component.name} />
+                      <ListItem className={classes.subItem}>
+                        <ListItemText
+                          primaryTypographyProps={{
+                            fontFamily: "'Montserrat', san-serif",
+                          }}
+                          primary={component.name}
+                          style={{ color: "white" }}
+                        />
                       </ListItem>
                     </Link>
                   );
@@ -197,14 +277,15 @@ const Sidebar = ({ window, name }) => {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
+        elevation={0}
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` }
+          ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <IconButton
+        <Toolbar sx={{ justifyContent: "space-between", background: "white" }}>
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -212,22 +293,28 @@ const Sidebar = ({ window, name }) => {
             sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
+
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
-            style={{ textTranform: "uppercase" }}
+            fontWeight={850}
+            fontFamily="'Montserrat', san-serif"
+            style={{
+              textTranform: "uppercase",
+              color: "black",
+            }}
           >
             {name}
           </Typography>
+
           <AccountMenu />
         </Toolbar>
       </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
       >
         <Drawer
           container={container}
@@ -235,14 +322,14 @@ const Sidebar = ({ window, name }) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth
-            }
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -253,8 +340,8 @@ const Sidebar = ({ window, name }) => {
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth
-            }
+              width: drawerWidth,
+            },
           }}
           open
         >

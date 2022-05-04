@@ -10,54 +10,54 @@ import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFF, LOAD_STAFFS } from "../graphQl/staff/staffQueries";
 
 const StaffDetail = (props) => {
-	const { window } = props;
-	const { id } = useParams();
-	const history = useHistory();
+  const { window } = props;
+  const { id } = useParams();
+  const history = useHistory();
 
-	const [staff, setStaff] = useState(null);
+  const [staff, setStaff] = useState(null);
 
-	const { error, loading, data, refetch } = useQuery(LOAD_STAFF, {
-		variables: { staffID: parseInt(id) },
-	});
+  const { error, loading, data, refetch } = useQuery(LOAD_STAFF, {
+    variables: { staffID: parseInt(id) }
+  });
 
-	const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
+  const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
 
-	const handleDeleteStaff = () => {
-		deleteStaff({
-		  variables:{staffID: parseInt(id) },
-		  refetchQueries: [{query: LOAD_STAFFS}]
-		})
-		.then(history.push('/staff'))
-	}
+  const handleDeleteStaff = () => {
+    deleteStaff({
+      variables: { staffID: parseInt(id) },
+      refetchQueries: [{ query: LOAD_STAFFS }]
+    })
+      .then(history.push("/staff"));
+  };
 
-	useEffect(() => {
-	  async function fetchData(){
-		if(data) setStaff(data);
-	  }
-	  
-	  fetchData();
-	}, [data]);
+  useEffect(() => {
+    async function fetchData() {
+      if (data) setStaff(data);
+    }
 
-	return (
-		<Box sx={{ display: "flex" }}>
-		  <Sidebar window={window} name="Staff Detail" />
-		  <Box>
-			<Toolbar />
-			<Box pt={1}>
-			  {staff === null ? (
-				<div></div>
-			  ) : (
-				<CombinedDetail
-				  data={staff}
-				  Modal={EditStaffModal}
-				  Information={StaffInformation}
-				  handleDelete={handleDeleteStaff}
-				/>
-			  )}
-			</Box>
-		  </Box>
-		</Box>
-	  );
-}
+    fetchData();
+  }, [data]);
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <Sidebar window={window} name="Staff Detail" id="staff" />
+      <Box>
+        <Toolbar />
+        <Box pt={1}>
+          {staff === null ? (
+            <div></div>
+          ) : (
+            <CombinedDetail
+              data={staff}
+              Modal={EditStaffModal}
+              Information={StaffInformation}
+              handleDelete={handleDeleteStaff}
+            />
+          )}
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
 export default StaffDetail;

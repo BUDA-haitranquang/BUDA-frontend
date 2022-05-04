@@ -10,12 +10,15 @@ import { NEW_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
+import BoxMoney from "./components/BoxMoney/BoxMoney";
+import { useTranslation } from "react-i18next";
 
 CreateBuyOrder.propTypes = {};
 
 function CreateBuyOrder(props) {
   const { window } = props;
-  const [buyOrderRequest, setBuyOrderRequest] = useState(null);
+  const { t } = useTranslation("buyorder", { keyPrefix: "create" });
+  const [buyOrderRequest, setBuyOrderRequest] = useState({});
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -24,7 +27,10 @@ function CreateBuyOrder(props) {
     if (buyOrderRequest.supplier && buyOrderRequest.supplier.supplierID) {
       return true;
     }
-    enqueueSnackbar("Please choose a supplier", AlertErrorProp);
+    enqueueSnackbar(
+      t("error.validateSupplier.supplierNotChosen"),
+      AlertErrorProp
+    );
     return false;
   };
 
@@ -36,19 +42,19 @@ function CreateBuyOrder(props) {
       buyOrderRequest.buyOrderItemDTOs.every((item, index) => {
         if (item.quantity <= 0) {
           enqueueSnackbar(
-            "Ingredient number "
-              .concat(index.toString())
-              .concat(": ")
-              .concat("Quantity is less than 0")
+            t("error.validateBuyOrderItems.quantityLessThanOrEqualZero", {
+              index: (index + 1).toString()
+            }),
+            AlertErrorProp
           );
           return false;
         }
         if (item.pricePerUnit <= 0) {
           enqueueSnackbar(
-            "Ingredient number "
-              .concat(index.toString())
-              .concat(": ")
-              .concat("Price per unit is less than 0")
+            t("error.validateBuyOrderItems.priceLessThanZero", {
+              index: (index + 1).toString()
+            }),
+            AlertErrorProp
           );
           return false;
         }
@@ -56,7 +62,7 @@ function CreateBuyOrder(props) {
       });
       return true;
     }
-    enqueueSnackbar("Please choose at least 1 ingredient", AlertErrorProp);
+    enqueueSnackbar(t("error.validateBuyOrderItems.emptyBuyOrder"), AlertErrorProp);
     return false;
   };
 
@@ -70,7 +76,7 @@ function CreateBuyOrder(props) {
     try {
       newBuyOrder({
         variables: {
-          status: "RECEIVING",
+          status: buyOrderRequest.status,
           buyOrderItemDTOs: buyOrderRequest.buyOrderItemDTOs.map((item) => {
             return {
               quantity: item.quantity,
@@ -83,7 +89,7 @@ function CreateBuyOrder(props) {
           supplierID: buyOrderRequest.supplier.supplierID,
         },
       }).then((result) => {
-        history.push(`/buy-order/${result.data.newBuyOrder.buyOrderID}`);
+        history.push(`buy/${result.data.newBuyOrder.buyOrderID}`);
       });
     } catch (e) {
       enqueueSnackbar("An error happened", AlertErrorProp);
@@ -92,7 +98,7 @@ function CreateBuyOrder(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Buy Order" />
+      <Sidebar window={window} name={t("title")} id="business" />
 
       <Box
         width="100%"
@@ -102,7 +108,16 @@ function CreateBuyOrder(props) {
         justifyContent="center"
       >
         <Toolbar />
-        <Box padding={3} width="100%" bgcolor="#f0f2f5">
+        <Box
+          padding={3}
+          width="100%"
+          bgcolor="#f0f2f5"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+          }}
+        >
           <CreateBuyOrderContext.Provider
             value={{ buyOrderRequest, setBuyOrderRequest }}
           >
@@ -116,13 +131,17 @@ function CreateBuyOrder(props) {
               <Grid item xs={12}>
                 <BoxIngredient />
               </Grid>
+              <Grid item xs={12}>
+                <BoxMoney />
+              </Grid>
             </Grid>
           </CreateBuyOrderContext.Provider>
 
           <Button
             variant="contained"
-            color={"success"}
+            color="primary"
             onClick={handleCreateBuyOrder}
+            style={{ alignSelf: "flex-end" }}
           >
             Create
           </Button>

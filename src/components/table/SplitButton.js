@@ -1,17 +1,17 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import MenuItem from '@mui/material/MenuItem';
-import { useState,useRef } from 'react';
-import Popover from '@mui/material/Popover';
+import * as React from "react";
+import { useRef, useState } from "react";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import MenuItem from "@mui/material/MenuItem";
+import Popover from "@mui/material/Popover";
 
 
-export default function SplitButton({options,searchBy}) {
+export default function SplitButton({ options, searchBy }) {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const list = Array.from(options,item=>item.label);
+  const list = Array.from(options, item => item.label);
 //   const handleClick = () => {
 // //    console.info(`You clicked ${options[selectedIndex]}`);
 //   };
@@ -36,11 +36,11 @@ export default function SplitButton({options,searchBy}) {
   return (
     <React.Fragment>
       <ButtonGroup variant="text" ref={anchorRef} aria-label="split button">
-        <Button  >{list[selectedIndex]}</Button>
+        <Button>{list[selectedIndex]}</Button>
         <Button
           size="small"
-          aria-controls={open ? 'split-button-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "split-button-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}
@@ -51,26 +51,26 @@ export default function SplitButton({options,searchBy}) {
       <Popover
         //sx={{position:'absolute'}}
         open={open}
-        onClose ={handleClose}
+        onClose={handleClose}
         anchorEl={anchorRef.current}
         //role={undefined}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left"
         }}
-        transition 
+        transition
         disablePortal
       >
-     {list.map((option, index) => (
-                    <MenuItem
-                      key={option}
-                      disabled={index === selectedIndex}
-                      selected={index === selectedIndex}
-                      onClick={(event) => handleMenuItemClick(event, index)}
-                    >
-                      {option.toUpperCase()}
-                    </MenuItem>
-                  ))}
+        {list.map((option, index) => (
+          <MenuItem
+            key={option}
+            disabled={index === selectedIndex}
+            selected={index === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index)}
+          >
+            {option.toUpperCase()}
+          </MenuItem>
+        ))}
 
       </Popover>
     </React.Fragment>

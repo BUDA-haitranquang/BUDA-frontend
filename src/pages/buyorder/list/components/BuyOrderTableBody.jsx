@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { TableCell } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
-
+import {dateToDateString} from '../../../../utils/utils'
 BuyOrderTableBody.propTypes = {
   row: PropTypes.number,
   labelId: PropTypes.any,
@@ -17,15 +17,15 @@ function BuyOrderTableBody(props) {
       <TableCell
         align="left"
         style={{ textDecoration: "none", color: "blue" }}
-        onClick={() => history.push(`buy-order/${row.buyOrderID}`)}
+        onClick={() => history.push(`buy/${row.buyOrderID}`)}
       >
         {row.textID}
       </TableCell>
-      <TableCell align="left">{row.supplier.name}</TableCell>
+      <TableCell align="left">{row.supplierName}</TableCell>
       <TableCell align="left">{row.status}</TableCell>
       <TableCell align="right">{row.totalCost}</TableCell>
-      <TableCell align="left">{row.staff?.name || ""}</TableCell>
-      <TableCell align="left">{row.creationTime}</TableCell>
+      <TableCell align="left">{row.createdBy}</TableCell>
+      <TableCell align="left">{dateToDateString(row.createdAt)}</TableCell>
     </Fragment>
   );
 }

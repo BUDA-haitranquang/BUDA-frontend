@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { Grid, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LiveSearch from "../../../../buda-components/livesearch/BudaLiveSearch";
@@ -8,6 +9,7 @@ import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
 import {
   addDiscount,
   calculateTotalPrice,
+  deleteDiscount,
 } from "../../../../redux/productCartSlice";
 import UneditableMoneyBox from "../../common/moneybox/UneditableMoneyBox";
 
@@ -49,6 +51,7 @@ export default function CostGrid() {
           break;
       }
     }
+    else setCalculatedDiscountValue(0);
   }, [chosenDiscount, totalPrice]);
 
   dispatch(calculateTotalPrice());
@@ -128,7 +131,11 @@ export default function CostGrid() {
       justifyContent="space-evenly"
       sx={{ marginTop: "10px" }}
     >
-      <UneditableMoneyBox xs={4} title="Total" value={totalPrice.toLocaleString()} />
+      <UneditableMoneyBox
+        xs={4}
+        title="Total"
+        value={totalPrice.toLocaleString()}
+      />
 
       <Box className="discount-box">
         <UneditableMoneyBox
@@ -138,6 +145,32 @@ export default function CostGrid() {
           value={calculatedDiscountValue.toLocaleString()}
           // onChange={changeDiscountPrice}
         />
+        {chosenDiscount && (
+          <Box
+            fullWidth
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography variant="h6" color="green" style={{ width: "80%" }}>
+              # {chosenDiscount?.name || ""}
+            </Typography>
+            <IconButton
+              style={{ width: "15%" }}
+              color="error"
+              component="span"
+              onClick={() => {
+                setChosenDiscount(null);
+                dispatch(deleteDiscount());
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        )}
+
         <LiveSearch
           placeholder="Search Discount"
           // createable

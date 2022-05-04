@@ -1,17 +1,18 @@
 import { useMutation } from "@apollo/client";
 import { Button, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import _ from "lodash";
+import { useSnackbar } from "notistack";
 import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import Sidebar from "../../components/Sidebar";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import { NEW_SELL_ORDER_MUTATION } from "../../graphQl/sellOrder/newSellOrderMutation";
 import { clearProductCart } from "../../redux/productCartSlice";
 import CustomerInfo from "./customer/customerInfoPane/CustomerInfo";
 import SearchCustomerBar from "./customer/customerInfoPane/SearchCustomerBar";
 import CustomerPayment from "./customer/customerPayment/CustomerPayment";
-import Navbar from "./Navbar";
 import CostGrid from "./order/costpane/CostGrid";
 import OrderProducts from "./order/itemspane/OrderProducts";
 import SearchProductBar from "./order/itemspane/SearchProductBar";
@@ -21,29 +22,10 @@ export const color2 = "#3399FF";
 export const color3 = "#D1D1D1";
 export const color4 = "#FFFFFF";
 
-const useStyle = makeStyles(() => ({
-  root: {
-    backgroundColor: `${color1}`,
-    height: "100vh",
-    overflow: "hidden",
-    "& .main-order-grid": {
-      // "& .others": {
-      //   "& .MuiGrid-root": {
-      //     height: "26vh",
-      //     backgroundColor: `${color4}`,
-      //     border: "2px solid gray",
-      //     padding: "6px",
-      //     overflow: "hidden",
-      //   },
-      // },
-    },
-  },
-}));
-
 export default function CreateOrder() {
-  const classes = useStyle();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const { productCart, totalPrice, discount, customer } = useSelector(
+  const { productCart, discount, customer } = useSelector(
     (state) => state.productCart
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);
@@ -86,23 +68,28 @@ export default function CreateOrder() {
           discountID: discount?.discountID,
         },
         refetchQueries: [{ query: LOAD_PRODUCTS }],
-      })
+      });
+
+      await enqueueSnackbar("New order created successfully", AlertSuccessProp);
+      await dispatch(clearProductCart());
+      window.location.reload();
     } catch (e) {
-      console.table(e);
-      // alert(e.graphQLErrors[0].extensions.response.body);
-      alert(e.message);
+      if (e.graphQLErrors[0].extensions.response.body)
+        alert(e.graphQLErrors[0].extensions.response.body);
+      else alert(e.message);
       // setTimeout(1000);
     } finally {
-      window.location.reload();
+      // window.location.reload();
     }
-
-    dispatch(clearProductCart());
   };
 
   return (
-    <Box className={classes.root}>
-      <Navbar />
-      <Grid container sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
+    <Box sx={{ display: "flex" }}>
+      <Sidebar name="Create Order" sx={{ backgroundColor: "#1976d2" }} id="business" />
+      <Grid
+        container
+        sx={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "80px" }}
+      >
         <Grid item xs={8} className="main-order-grid">
           <SearchProductBar />
           <Box className="itemsPane">
@@ -123,7 +110,9 @@ export default function CreateOrder() {
           <SearchCustomerBar />
           <CustomerInfo />
           <CustomerPayment />
-          <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <Box
+            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
             <Button
               onClick={createNewOrder}
               variant="contained"

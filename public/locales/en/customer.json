@@ -1,0 +1,27 @@
+{
+    "customerName" : "Name",
+    "phoneNumber" : "Phone number",
+    "ageGroup":"Age group",
+    "gender": "Gender",
+    "totalSpend": "Total spend" ,
+    "address":"Address",
+    "Modal":{
+        "title": "Add Customer",
+        "gender":{
+            "unknown":"Unknown",
+            "male":"Male",
+            "female":"Female"
+        },
+        "ageGroup":{
+            "unknown":"Unknown",
+            "group1":"From 0 to 12",
+            "group2":"From 12 to 18",
+            "group3":"From 18 to 24",
+            "group4":"From 24 to 30",
+            "group5":"From 30 to 40",
+            "group6":"From 40 to 50",
+            "group7":"From 50 to 65",
+            "group8":"Above 65"
+        }
+    }
+}

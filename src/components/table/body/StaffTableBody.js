@@ -7,10 +7,10 @@ const StaffTableBody = (props) => {
 
   return (
     <Fragment>
-      <TableCell component="th" id={labelId} scope="row" >
+      <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{
-            pathname: `staff/${row.staffID}`,
+            pathname: `staff/${row.staffID}`
           }}
           style={{ textDecoration: "none", color: "blue" }}
         >

@@ -1,59 +1,57 @@
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import DiscountByCashTableBody from "../table/body/DiscountByCashTableBody";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { useSnackbar } from "notistack";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import AddDiscountModal from "../modal/AddDiscountModals";
 import { LOAD_DISCOUNTS } from "../../graphQl/discounts/discountQueries";
 import { DELETE_DISCOUNTS_MUTATION } from "../../graphQl/discounts/discountMutations";
+
 const headCells = [
   {
     id: "discountCode",
     numeric: false,
     disablePadding: false,
-    label: "Code",
+    label: "Code"
   },
   {
     id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Name",
+    label: "Name"
   },
   {
     id: "cash",
     numeric: true,
     disablePadding: true,
-    label: "Cash",
+    label: "Cash"
   },
   {
     id: "cashLimit",
     numeric: true,
     disablePadding: true,
-    label: "Cash limit",
+    label: "Cash limit"
   },
   {
     id: "orderCount",
     numeric: true,
     disablePadding: true,
-    label: "Order count",
+    label: "Order count"
   },
   {
     id: "createdTime",
     numeric: false,
     disablePadding: true,
-    label: "Created time",
+    label: "Created time"
   },
   {
     id: "expiryTime",
     numeric: false,
     disablePadding: true,
-    label: "Expiry time",
-  },
+    label: "Expiry time"
+  }
 ];
 
 const DiscountByCash = ({ discounts }) => {
@@ -67,7 +65,7 @@ const DiscountByCash = ({ discounts }) => {
       selected.forEach((item) => {
         deleteDiscount({
           variables: { discountID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_DISCOUNTS }],
+          refetchQueries: [{ query: LOAD_DISCOUNTS }]
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
