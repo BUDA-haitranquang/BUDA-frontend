@@ -1,8 +1,9 @@
 import { useMutation } from "@apollo/client";
 import { Box, Button, TextField } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
@@ -29,6 +30,22 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [description, setDescription] = useState("");
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [preview, setPreview] = useState();
+
+  // create a preview as a side effect, whenever selected file is changed
+  useEffect(() => {
+    if (!image) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(image);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [image]);
 
   const resetForm = () => {
     setSku(null);
@@ -99,8 +116,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
 
   const handleUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
-      let img = e.target.files[0];
-      setImage(img);
+      setImage(e.target.files[0]);
     }
   };
 
@@ -208,24 +224,33 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             label={t("product:description")}
             variant="outlined"
             multiline
-            rows={3}
+            rows={2}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <input
-            accept="image/png, image/jpeg"
-            style={{ display: "none" }}
-            id="raised-button-file"
-            multiple
-            type="file"
-            onChange={handleUpload}
-          />
-          <label htmlFor="raised-button-file">
-            <Button variant="contained" component="span">
-              <UploadIcon />
-              Upload picture
-            </Button>
-          </label>
+          <Box style={{maxHeight: "120px"}}>
+            <>
+            <input
+              accept="image/png, image/jpeg"
+              style={{ display: "none" }}
+              id="raised-button-file"
+              multiple
+              type="file"
+              onChange={handleUpload}
+            />
+            <label htmlFor="raised-button-file">
+              <Button variant="contained" component="span">
+                <UploadIcon />
+                Upload picture
+              </Button>
+            </label>
+            </>
+            <img alt="product-preview" src={preview} height="120px" style={{"marginLeft":"80px"}} />
+            {image && <Button variant="contained" color="error" onClick={() => setImage(null)}>
+                <DeleteIcon />
+                Remove Image
+              </Button>}
+          </Box>
         </Box>
       }
     ></BudaModal>
