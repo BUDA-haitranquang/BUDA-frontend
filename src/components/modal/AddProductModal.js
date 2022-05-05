@@ -38,6 +38,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setAlertAmount(0);
     setCostPerUnit(0);
     setDescription("");
+    setImage(null);
   };
 
   const addProduct = (pictureID) => {
