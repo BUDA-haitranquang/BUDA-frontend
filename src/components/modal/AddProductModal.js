@@ -251,7 +251,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               <label htmlFor="raised-button-file">
                 <Button variant="contained" component="span">
                   <UploadIcon />
-                  Upload picture
+                  {t("addProductModal:uploadImage")}
                 </Button>
               </label>
             </>
@@ -270,7 +270,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
                 onClick={() => setImage(null)}
               >
                 <DeleteIcon />
-                Remove Image
+                {t("addProductModal:removeImage")}
               </Button>
             )}
           </Box>

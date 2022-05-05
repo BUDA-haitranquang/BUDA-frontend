@@ -9,7 +9,9 @@
   "description": "Mô tả",
   "table": {},
   "addProductModal": {
-    "title": "Thêm sản phẩm mới"
+    "title": "Thêm sản phẩm mới",
+    "uploadImage": "Thêm ảnh",
+    "removeImage": "Bỏ ảnh"
   },
   "editProductModal": {
     "title": "Sửa sản phẩm"

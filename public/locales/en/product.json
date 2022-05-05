@@ -8,7 +8,9 @@
   "description": "Description",
   "table": {},
   "addProductModal": {
-    "title": "Create new Product"
+    "title": "Create new Product",
+    "uploadImage": "Upload Image",
+    "removeImage": "Remove Image"
   },
   "editProductModal": {
     "title": "Edit Product"
