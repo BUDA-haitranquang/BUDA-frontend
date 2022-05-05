@@ -4,7 +4,10 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
@@ -14,7 +17,7 @@ import { useSelector } from "react-redux";
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState();
   const { t } = useTranslation(["common", "product"]);
 
   const [name, setName] = useState("");
@@ -24,7 +27,6 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [alertAmount, setAlertAmount] = useState(0);
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [description, setDescription] = useState("");
-  const [pictureID, setPictureID] = useState("");
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,7 +40,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setDescription("");
   };
 
-  const addProduct = () => {
+  const addProduct = (pictureID) => {
     setIsLoading(true);
     newProduct({
       variables: {
@@ -49,9 +51,9 @@ const AddProductModal = ({ isOpen, handleClose }) => {
         amountLeft: parseInt(amountLeft),
         alertAmount: parseInt(alertAmount),
         sellingPrice: parseFloat(price),
-        pictureID: parseInt(pictureID),
+        pictureID: pictureID === "" ? undefined : parseInt(pictureID),
       },
-      refetchQueries: [{ query: LOAD_PRODUCTS }]
+      refetchQueries: [{ query: LOAD_PRODUCTS }],
     })
       .then((res) => {
         handleClose();
@@ -76,34 +78,29 @@ const AddProductModal = ({ isOpen, handleClose }) => {
 
   const handleSubmit = async () => {
     if (isFormValid()) {
-      submitImage();
-      addProduct();
+      if (image) submitImage().then((res) => addProduct(res.data.pictureID));
+      else addProduct("");
     } else enqueueSnackbar("Invalid input", AlertErrorProp);
   };
+
   const submitImage = async () => {
     let formData = new FormData();
-    await formData.append("file", image);
-    console.log(formData);
-    await axios({
+    formData.append("file", image);
+    return axios({
       method: "post",
       url: "http://103.173.228.124:8080/api/picture/upload",
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
       data: formData,
-    })
-      .then((res) => {
-        const id = res.data.pictureID;
-        setPictureID(id);
-      })
-      .catch((err) => console.log("fail: ", err));
+    }).catch((err) => enqueueSnackbar("Upload image error", AlertErrorProp));
   };
+
   const handleUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
       setImage(img);
     }
-    console.log(image);
   };
 
   return (
@@ -120,7 +117,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 }
+            "& > :not(style)": { m: 1 },
           }}
         >
           <TextField
@@ -148,7 +145,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             style={{
               width: "100%",
               display: "flex",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             <TextField
@@ -178,7 +175,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-              marginTop: "16px"
+              marginTop: "16px",
             }}
           >
             <TextField
