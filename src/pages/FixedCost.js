@@ -1,43 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
+import BudaTable from "../buda-components/table/BudaTable";
 import AddFixedCostModal from "../components/modal/AddFixedCostModal";
 import Sidebar from "../components/Sidebar";
 import FixedCostTableBody from "../components/table/body/FixedCostTableBody";
-import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
 import { HIDE_FIXED_COST_MUTATION } from "../graphQl/cost/fixedCost/fixedCostMutation";
-import { useSnackbar } from "notistack";
-import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
-import BudaTable from "../buda-components/table/BudaTable";
-
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name"
-  },
-  {
-    id: "description",
-    numeric: false,
-    disablePadding: false,
-    label: "Description"
-  },
-  {
-    id: "period",
-    numeric: true,
-    disablePadding: false,
-    label: "Period"
-  },
-  {
-    id: "moneyamount",
-    numeric: true,
-    disablePadding: false,
-    label: "Money Amount"
-  }
-];
+import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
 
 const FixCost = (props) => {
   const { window } = props;
@@ -46,6 +23,33 @@ const FixCost = (props) => {
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [hideFixedCost] = useMutation(HIDE_FIXED_COST_MUTATION);
+  const { t } = useTranslation(["common", "cost"]);
+  const headCells = [
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("cost:Name"),
+    },
+    {
+      id: "description",
+      numeric: false,
+      disablePadding: false,
+      label: t("common:Description"),
+    },
+    {
+      id: "period",
+      numeric: true,
+      disablePadding: false,
+      label: t("cost:Period"),
+    },
+    {
+      id: "moneyamount",
+      numeric: true,
+      disablePadding: false,
+      label: t("cost:moneyAmount"),
+    },
+  ];
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -53,7 +57,7 @@ const FixCost = (props) => {
       selected.forEach((item) => {
         hideFixedCost({
           variables: { fixedCostID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_FIXED_COST }]
+          refetchQueries: [{ query: LOAD_FIXED_COST }],
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -61,14 +65,12 @@ const FixCost = (props) => {
       enqueueSnackbar("An error occured", AlertErrorProp);
     } finally {
       setIsLoading(false);
-
     }
   };
 
-
   useEffect(() => {
     async function fetchData() {
-      if (data) setFixCosts(data.fixedCostsByUser.map(item => item));
+      if (data) setFixCosts(data.fixedCostsByUser.map((item) => item));
     }
 
     fetchData();
@@ -79,7 +81,7 @@ const FixCost = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Cost" />
+      <Sidebar window={window} name="Cost" id="cost"/>
       <Box
         width="100%"
         display="flex"

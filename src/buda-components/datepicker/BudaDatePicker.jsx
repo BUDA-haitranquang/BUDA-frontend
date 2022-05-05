@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Box, TextField } from "@mui/material";
-import { Typography } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { Box, TextField } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import viLocale from "date-fns/locale/vi";
-// import { DesktopTimePicker } from '@mui/lab';
-// import InputAdornment from '@mui/material/InputAdornment';
-// import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { isNull } from "lodash";
+import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles({
   timeInput: {
@@ -93,6 +89,7 @@ const CustomizeDatePicker = ({ setTimeValue, timeValue, label }) => {
     day.setSeconds(0);
     setTimeValue(day);
   }, [date]);
+  
   return (
     <StyledEngineProvider injectFirst>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={viLocale}>

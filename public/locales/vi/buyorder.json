@@ -1,0 +1,103 @@
+{
+  "list": {
+    "title": "Danh sách đơn nhập hàng",
+    "buttonCreate": "Tạo đơn nhập hàng",
+    "textId": "Mã đơn",
+    "supplierName": "Nhà cung cấp",
+    "status": "Trạng thái",
+    "totalCost": "Tổng chi phí",
+    "createdBy": "Người tạo đơn",
+    "createdAt": "Ngày tạo đơn"
+  },
+
+  "detail": {
+    "title": "Chi tiết đơn nhập hàng",
+
+    "boxSupplier": {
+      "title": "Thông tin nhà cung cấp",
+      "address": "Địa chỉ",
+      "email": "Email"
+    },
+
+    "boxAdditionalInfo": {
+      "title": "Thông tin thêm",
+      "textId": "Mã đơn",
+      "status":"Trạng thái",
+      "createdAt": "Ngày tạo đơn",
+      "finishedAt": "Ngày hoàn thành"
+    },
+
+    "boxIngredientList": {
+      "title": "Thông tin nguyên liệu",
+      "no": "STT",
+      "image": "Ảnh",
+      "sku": "Mã SKU",
+      "name": "Tên nguyên liệu",
+      "quantity": "Số lượng",
+      "price": "Đơn giá",
+      "amount": "Thành tiền"
+    },
+
+    "boxTotalMoney": {
+      "total": "Tổng tiền"
+    }
+  },
+
+  "create": {
+    "title": "Thêm mới đơn nhập hàng",
+
+    "boxSupplier": {
+      "title": "Thông tin nhà cung cấp",
+      "placeholder": "Tìm kiếm nhà cung cấp",
+      "buttonCreate": "Thêm mới nhà cung cấp",
+      "address": "Địa chỉ",
+      "email": "Email"
+    },
+
+    "boxAdditionalInfo": {
+      "title": "Thông tin thêm",
+      "textId": "Mã đơn",
+      "description": "Mô tả",
+      "status":"Trạng thái"
+    },
+
+    "boxIngredientList": {
+      "title": "Thông tin nguyên liệu",
+
+      "searchBox": {
+        "placeholder": "Tìm kiếm nguyên liệu",
+        "buttonCreate":"Thêm mới nguyên liệu",
+        "cellIngredient": {
+          "amountLeft": "Tồn kho"
+        }
+      },
+
+      "table": {
+        "no": "STT",
+        "image": "Ảnh",
+        "sku": "Mã SKU",
+        "name": "Tên nguyên liệu",
+        "quantity": "Số lượng",
+        "price": "Đơn giá",
+        "amount": "Thành tiền"
+      }
+
+    },
+
+    "boxTotalMoney": {
+      "total": "Tổng tiền"
+    },
+
+    "error": {
+      "validateSupplier": {
+        "supplierNotChosen": "Hãy chọn 1 nhà cung cấp"
+      },
+
+      "validateBuyOrderItems": {
+        "emptyBuyOrder": "Đơn nhập hàng không được để trống nguyên liệu",
+        "quantityLessThanOrEqualZero": "Nguyên liệu số {{index}}: số lượng phải lớn hơn 0",
+        "priceLessThanZero": "Nguyên liệu số {{index}}: đơn giá không được nhỏ hơn 0"
+      }
+    }
+  }
+}

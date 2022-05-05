@@ -42,7 +42,7 @@ const IngredientDetail = (props) => {
   if (error) return <Redirect to="/login" />;
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Ingredient Detail" />
+      <Sidebar window={window} name="Ingredient Detail" id="ingredient" />
       <Box>
         <Toolbar />
         <Box pt={1}>

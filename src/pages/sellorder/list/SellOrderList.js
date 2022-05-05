@@ -10,38 +10,38 @@ const headCells = [
     id: "sellOrderID",
     numeric: false,
     disablePadding: false,
-    label: "ID"
+    label: "ID",
   },
   {
     id: "customerName",
     numeric: false,
     disablePadding: true,
-    label: "Customer"
+    label: "Customer",
   },
   {
     id: "finalCost",
     numeric: true,
     disablePadding: true,
-    label: "Final cost"
+    label: "Final cost",
   },
   {
     id: "creationTime",
     numeric: true,
     disablePadding: true,
-    label: "Creation time"
+    label: "Creation time",
   },
   {
     id: "finishTime",
     numeric: true,
     disablePadding: true,
-    label: "Finish time"
+    label: "Finish time",
   },
   {
     id: "status",
     numeric: false,
     disablePadding: true,
-    label: "Status"
-  }
+    label: "Status",
+  },
 ];
 
 const SellOrderList = (props) => {
@@ -49,7 +49,7 @@ const SellOrderList = (props) => {
   const history = useHistory();
   return (
     <Box sx={{ display: "flex", margin: "6px" }}>
-      <Sidebar window={window} name="Sell order" />
+      <Sidebar window={window} name="Sell order" id="business" />
       <Box
         width="100%"
         display="flex"

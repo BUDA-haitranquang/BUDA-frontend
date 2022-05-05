@@ -37,10 +37,10 @@ const Notification = () => {
       <IconButton onClick={handleClick}>
         {unseenNoti() > 0 ? (
           <Badge badgeContent={unseenNoti()} color="secondary">
-            <NotificationsIcon style={{ color: "white" }} />
+            <NotificationsIcon style={{ color: "black" }} />
           </Badge>
         ) : (
-          <NotificationsIcon style={{ color: "white" }} />
+          <NotificationsIcon style={{ color: "black" }} />
         )}
       </IconButton>
       {notiData ? (

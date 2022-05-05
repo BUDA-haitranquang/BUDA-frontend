@@ -6,6 +6,7 @@
     "totalSpend": "Total spend" ,
     "address":"Address",
     "Modal":{
+        "title": "Add Customer",
         "gender":{
             "unknown":"Unknown",
             "male":"Male",

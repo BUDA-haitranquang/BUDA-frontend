@@ -7,13 +7,15 @@ import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { LOAD_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderQueries";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import {dateToDateString} from '../../../utils/utils'
+import { dateToDateString } from "../../../utils/utils";
 import BoxMoney from "./components/BoxMoney/BoxMoney";
+import { useTranslation } from "react-i18next";
 
 DetailBuyOrder.propTypes = {};
 
 function DetailBuyOrder(props) {
   const { window } = props;
+  const { t } = useTranslation("buyorder", { keyPrefix: "detail" });
   const [buyOrder, setBuyOrder] = useState(null);
   const { id } = useParams();
 
@@ -35,7 +37,7 @@ function DetailBuyOrder(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Buy Order" />
+      <Sidebar window={window} name={t("title")} id="business" />
 
       <Box
         width="100%"

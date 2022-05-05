@@ -6,6 +6,7 @@
     "totalSpend": "Tổng chi", 
     "address": "Địa chỉ",
     "Modal":{
+        "title": "Thêm Khách hàng mới",
         "gender":{
             "unknown":"Chưa biết",
             "male":"Nam",

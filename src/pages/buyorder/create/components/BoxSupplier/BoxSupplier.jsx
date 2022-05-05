@@ -9,8 +9,10 @@ import { LOAD_SUPPLIERS } from "../../../../../graphQl/suppliers/suppliersQuerie
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
+import { useTranslation } from "react-i18next";
 
 function BoxSupplier(props) {
+  const { t } = useTranslation("buyorder", { keyPrefix: "create.boxSupplier" });
   const [openCreateSupplier, setOpenCreateSupplier] = useState(false);
   const [chosenSupplier, setChosenSupplier] = useState(null);
   const [suppliers, setSuppliers] = useState([]);
@@ -68,12 +70,12 @@ function BoxSupplier(props) {
     <Paper className={classes.root}>
       <Box className="BoxSupplier-main">
         <Box className="BoxSupplier-header">
-          <Typography variant="h6">Supplier detail info.</Typography>
+          <Typography variant="h6">{t("title")}</Typography>
           {!chosenSupplier ? (
             <LiveSearch
-              placeholder="Search for a supplier"
+              placeholder={t("placeholder")}
               createable
-              textCreate="Add a new supplier"
+              textCreate={t("buttonCreate")}
               onClickCreate={() => setOpenCreateSupplier(true)}
               maxHeight={150}
               onChooseItem={onChooseSupplier}
