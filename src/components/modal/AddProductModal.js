@@ -14,6 +14,7 @@ import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import imageCompression from "browser-image-compression";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -94,6 +95,14 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     return isValid;
   };
 
+  async function compressImage(imageFile) {
+    const options = {
+      maxSizeMB: 1,
+      alwaysKeepResolution: true,
+    };
+    return await imageCompression(imageFile, options);
+  }
+
   const handleSubmit = async () => {
     if (isFormValid()) {
       if (image) submitImage().then((res) => addProduct(res.data.pictureID));
@@ -103,7 +112,8 @@ const AddProductModal = ({ isOpen, handleClose }) => {
 
   const submitImage = async () => {
     let formData = new FormData();
-    formData.append("file", image);
+    let imageCompressed = await compressImage(image);
+    formData.append("file", imageCompressed);
     return axios({
       method: "post",
       url: "http://103.173.228.124:8080/api/picture/upload",
@@ -228,28 +238,41 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <Box style={{maxHeight: "120px"}}>
+          <Box style={{ maxHeight: "120px" }}>
             <>
-            <input
-              accept="image/png, image/jpeg"
-              style={{ display: "none" }}
-              id="raised-button-file"
-              multiple
-              type="file"
-              onChange={handleUpload}
-            />
-            <label htmlFor="raised-button-file">
-              <Button variant="contained" component="span">
-                <UploadIcon />
-                Upload picture
-              </Button>
-            </label>
+              <input
+                accept="image/png, image/jpeg"
+                style={{ display: "none" }}
+                id="raised-button-file"
+                multiple
+                type="file"
+                onChange={handleUpload}
+              />
+              <label htmlFor="raised-button-file">
+                <Button variant="contained" component="span">
+                  <UploadIcon />
+                  Upload picture
+                </Button>
+              </label>
             </>
-            <img alt="product-preview" src={preview} height="120px" style={{"marginLeft":"80px"}} />
-            {image && <Button variant="contained" color="error" onClick={() => setImage(null)}>
+            {image && (
+              <img
+                alt="product-preview"
+                src={preview}
+                height="120px"
+                style={{ marginLeft: "40px" }}
+              />
+            )}
+            {image && (
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => setImage(null)}
+              >
                 <DeleteIcon />
                 Remove Image
-              </Button>}
+              </Button>
+            )}
           </Box>
         </Box>
       }
