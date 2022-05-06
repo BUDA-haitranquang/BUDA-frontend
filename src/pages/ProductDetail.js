@@ -86,7 +86,6 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     async function fetchComponentData() {
-      console.log(productComponentData);
       if (productComponentData.data) setProductComponent(productComponentData.data);
     }
 
