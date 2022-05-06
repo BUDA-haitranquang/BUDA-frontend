@@ -55,7 +55,7 @@ const IngredientCollation = (props) => {
   }, [data]);
 
   if (error) return <Redirect to="/login" />;
-  console.log(data);
+  
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Ingredient Collation" id="ingredient"/>

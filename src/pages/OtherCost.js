@@ -80,7 +80,6 @@ const OtherCost = (props) => {
     }
 
     fetchData();
-    console.log(data);
   }, [data]);
 
   if (error) return <Redirect to="/login" />;

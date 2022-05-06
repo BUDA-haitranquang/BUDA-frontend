@@ -69,7 +69,6 @@ export default function OrderProductItem({ row, serial }) {
         color="error"
         component="span"
         onClick={() => {
-          console.log(row);
           dispatch(deleteProductCart(row));
         }}
       >
