@@ -6,5 +6,7 @@
     "table":{},
     "addSupplierModal" : {
         "title" : "Thêm nhà cung cấp"
-    }
+    },
+    "supplier":"Nhà cung cấp"
+
 }

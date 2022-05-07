@@ -8,11 +8,14 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
 import WorkIcon from "@mui/icons-material/Work";
+import { useTranslation } from "react-i18next";
 import {
   AppBar,
   Box,
   Collapse,
-  CssBaseline, Drawer, List,
+  CssBaseline,
+  Drawer,
+  List,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -46,6 +49,7 @@ const useStyle = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  
     // "&:hover": {
     //   background: "rgba(45, 142, 255, 1)",
     //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
@@ -92,53 +96,11 @@ const useStyle = makeStyles({
 });
 const drawerWidth = 240;
 
-const title = [
-  "dashboard",
-  "business",
-  "product",
-  "ingredient",
-  "supplier",
-  "customer",
-  "staff",
-  "cost",
-  // "statistic",
-];
 
 function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
 
-const sidebarItems = [
-  [
-    createData("Overall", "overall", ""),
-    // createData("Incomplete", "incomplete", ""),
-  ],
-  [
-    createData("Sell", "sell", ""),
-    createData("Sell history", "sell-history", ""),
-    createData("Buy", "buy", ""),
-    createData("Buy history", "buy-history", ""),
-  ],
-  [createData("Product", "", ""), createData("Collation", "collation", "")],
-  [
-    createData("Detail", "detail", ""),
-    createData("Collation", "collation", ""),
-  ],
-  [createData("Supplier", "supplier", "")],
-  [createData("Customer", "customer", "")],
-
-  [createData("Note", "note", "")],
-  [
-    createData("Fixed", "fixedcost", ""),
-    createData("Fixed Cost Bill", "fixedcostBill", ""),
-    createData("Other Cost", "othercost", ""),
-  ],
-  [
-    createData("Business", "business", ""),
-    // createData("Customer", "customer", ""),
-    // createData("Product", "product", ""),
-  ],
-];
 const Sidebar = ({ window, name, id }) => {
   const history = useHistory();
   const focus = useSelector((state) => state.sidebar.focus);
@@ -150,6 +112,7 @@ const Sidebar = ({ window, name, id }) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const { t } = useTranslation(["sidebar"]);
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const classes = useStyle();
@@ -158,6 +121,53 @@ const Sidebar = ({ window, name, id }) => {
     if (typeof string !== "string") return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+  
+const title = [
+  ["Dashboard",t("sidebar:dashBoard.section")],
+  ["Business",t("sidebar:business.section")],
+  ["Product",t("sidebar:product.section")],
+  ["Ingredient",t("sidebar:ingredient.section")],
+  ["Supplier",t("sidebar:supplier.section")],
+  ["Customer",t("sidebar:customer.section")],
+  ["Staff",t("sidebar:staff.section")],
+  ["Cost",t("sidebar:cost.section")],
+  // "statistic",
+];
+
+  const sidebarItems = [
+    [
+      createData("Overall", "overall", ""),
+      // createData("Incomplete", "incomplete", ""),
+    ],
+    [
+      createData(t("sidebar:business.sell"), "sell", ""),
+      createData(t("sidebar:business.sellHistory"), "sell-history", ""),
+      createData(t("sidebar:business.buy"), "buy", ""),
+      createData(t("sidebar:business.buyHistory"), "buy-history", ""),
+    ],
+    [createData(t("sidebar:product.product"), "", ""),
+     createData(t("sidebar:product.collation"), "collation", "")
+    ],
+    [
+      createData(t("sidebar:ingredient.ingredient"), "detail", ""),
+      createData(t("sidebar:ingredient.collation"), "collation", ""),
+    ],
+    [createData(t("sidebar:supplier.section"), "supplier", "")],
+    [createData(t("sidebar:customer.section"), "customer", "")],
+
+    [createData("Note", "note", "")],
+    [
+      createData(t("sidebar:cost.fixed"), "fixedcost", ""),
+      createData(t("sidebar:cost.fixedCostBill"), "fixedcostBill", ""),
+      createData(t("sidebar:cost.otherCost"), "othercost", ""),
+    ],
+    [
+      createData("Business", "business", ""),
+      // createData("Customer", "customer", ""),
+      // createData("Product", "product", ""),
+    ],
+  ];
 
   const itemRender = (i) => {
     switch (i) {
@@ -204,15 +214,15 @@ const Sidebar = ({ window, name, id }) => {
           <>
             <ListItem
               className={
-                id.toLowerCase().includes(item.toLowerCase())
+                id.toLowerCase().includes(item[0].toLowerCase())
                   ? classes.selectedItem
                   : classes.item
               }
               onClick={() => {
-                let value = focus === item ? "" : item;
+                let value = focus === item[1] ? "" : item[1];
                 setFocusSideBar(value);
                 if (sidebarItems[idx].length === 1)
-                  history.push(`/${title[idx]}`);
+                  history.push(`/${title[idx][0]}`);
               }}
             >
               <Box
@@ -226,14 +236,15 @@ const Sidebar = ({ window, name, id }) => {
 
                 <ListItemText
                   primaryTypographyProps={{
+                    marginLeft:"-10px",
                     fontFamily: "'Montserrat', san-serif",
                   }}
-                  primary={capitalizeFirstLetter(item)}
+                  primary={capitalizeFirstLetter(item[1])}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 />
               </Box>
               {sidebarItems[idx].length - 1 ? (
-                focus === item ? (
+                focus === item[1] ? (
                   <ExpandLessIcon
                     style={{ color: "rgba(255, 255, 255, 0.5)" }}
                   />
@@ -247,10 +258,10 @@ const Sidebar = ({ window, name, id }) => {
               )}{" "}
             </ListItem>
             {sidebarItems[idx].length - 1 ? (
-              <Collapse in={focus === item}>
+              <Collapse in={focus === item[1]}>
                 {sidebarItems[idx].map((component) => {
                   return (
-                    <Link to={`/${item}/${component.link}`}>
+                    <Link to={`/${item[0]}/${component.link}`}>
                       <ListItem className={classes.subItem}>
                         <ListItemText
                           primaryTypographyProps={{
