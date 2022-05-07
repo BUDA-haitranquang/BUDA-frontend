@@ -14,7 +14,7 @@ const IncompletedFixedCost = (props) => {
 //   const { t } = useTranslation(["common", "product"]);
   const [fixedCost, setFixedCost] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_FIXED_COST);
-console.log(data)
+
   const toObject = (data1)=>{
       let incompleted = {};
       incompleted.fixedCostBillID = data1?.fixCostBillID;
@@ -68,7 +68,7 @@ console.log(data)
       label: "Status"
     },
   ];
-console.log(fixedCost)
+
   return (
     <Box sx={{ display: "flex" }}>
         <Box>

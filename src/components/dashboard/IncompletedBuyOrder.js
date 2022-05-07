@@ -14,7 +14,7 @@ const IncompletedBuyOrder = (props) => {
 //   const { t } = useTranslation(["common", "product"]);
   const [buyOrder, setBuyOrder] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_BUY_ORDER);
-console.log(data)
+
   const toObject = (data1)=>{
       let incompletedBuyOrder = {};
       incompletedBuyOrder.sellOrderID = data1?.sellOrderID;

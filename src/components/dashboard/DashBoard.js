@@ -67,7 +67,7 @@ const MainDashBoard = () => {
     }
     fetchData();
   }, [dayRevenueData]);
-  //   console.log(scaleData(dayRevenueData.businessOverallXDays))
+
 
   return (
     <Box width="100%">

@@ -14,7 +14,7 @@ const IncompletedOtherCost = (props) => {
 //   const { t } = useTranslation(["common", "product"]);
   const [otherCost, setOtherCost] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_OTHER_COST);
-console.log(data)
+
   const toObject = (data1)=>{
       let incompleted = {};
       incompleted.otherCostID = data1?.otherCostID;
