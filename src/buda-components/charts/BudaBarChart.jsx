@@ -15,7 +15,7 @@ const BudaBarChart=({data,xAxis,width = '100%',height = '100%',legend = true,inf
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey={xAxis} />
           <YAxis unit = {yUnit}/>
           <Tooltip />

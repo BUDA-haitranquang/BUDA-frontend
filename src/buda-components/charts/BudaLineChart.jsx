@@ -33,7 +33,7 @@ const BudaLineChart = ({
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
+        {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey={xAxis} />
         <YAxis unit={yUnit} />
         <Tooltip />
