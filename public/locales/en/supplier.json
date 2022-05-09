@@ -6,5 +6,6 @@
     "table":{},
     "addSupplierModal" : {
         "title" : "Add supplier"
-    }
+    },
+    "supplier":"Supplier"
 }
