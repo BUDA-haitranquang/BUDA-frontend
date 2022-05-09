@@ -24,7 +24,6 @@ const BudaTable = (props) => {
     padding,
     size,
     isNotShowCheckBox = false,
-    onRefetchData,
     ...remainProps
   } = props;
 
@@ -42,15 +41,6 @@ const BudaTable = (props) => {
     page * rowsPerPage,
     (page + 1) * rowsPerPage
   );
-
-  useEffect(() => {
-    if (onRefetchData) {
-      onRefetchData({
-        page: page,
-        rowsPerPage: rowsPerPage,
-      });
-    }
-  }, [page, rowsPerPage]);
 
   const handlePageChange = (e, newPage) => {
     setPage(newPage);
