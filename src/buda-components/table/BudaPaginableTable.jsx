@@ -9,17 +9,22 @@ import React, { useEffect, useState } from "react";
 import BudaTableBody from "./BudaTableBody";
 import BudaTableHead from "./BudaTableHead";
 import BudaTableToolbar from "./BudaTableToolbar";
-import { useHistory } from "react-router-dom";
-const BudaTable = (props) => {
+
+const BudaPaginableTable = (props) => {
   const {
-    tableChildren,
-    modalChildren,
     data,
     headCells,
+    page = 0,
+    onPageChange,
+    rowsPerPage = 50,
+    onRowsPerPageChange,
+    total,
+    deleteItems,
+    tableChildren,
+    modalChildren,
     Modal,
     DetailTableBody,
     type,
-    deleteItems,
     children,
     stickyHeader = true,
     padding,
@@ -31,27 +36,10 @@ const BudaTable = (props) => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState(headCells[0].id);
 
-  const handlePageChange = (e, newPage) => {
-    setPage(newPage);
-    props.history?.push({
-      search: `?page=${newPage}&limit=${rowsPerPage}`,
-    });
-  };
-
-  const handleRowsPerPageChange = (e) => {
-    debugger;
-    setRowsPerPage(e.target.value);
-    setPage(0);
-    props.history?.push({
-      search: `?page=${0}&limit=${e.target.value}`,
-    });
-  };
   const handleRequestSort = (e, props) => {
     const isAsc = orderBy === props && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -101,7 +89,7 @@ const BudaTable = (props) => {
               deleteItems(selected);
               setSelected([]);
             }}
-            checkModal={Modal ? true : false}
+            checkModal={!!Modal}
           />
           <Table
             sx={{ minWidth: 1000 }}
@@ -137,15 +125,15 @@ const BudaTable = (props) => {
         <TablePagination
           rowsPerPageOptions={[20, 50, 100]}
           component="div"
-          count={600}
+          count={total}
           rowsPerPage={rowsPerPage}
           page={page}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleRowsPerPageChange}
+          onPageChange={onPageChange}
+          onRowsPerPageChange={onRowsPerPageChange}
         />
       </Paper>
     </Box>
   );
 };
 
-export default BudaTable;
+export default BudaPaginableTable;

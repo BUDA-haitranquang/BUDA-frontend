@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useLocation } from "react-router-dom";
 import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import Sidebar from "../../../components/Sidebar";
 import BuyOrderTableBody from "./components/BuyOrderTableBody";
@@ -12,12 +12,18 @@ import { useSnackbar } from "notistack";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
 import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
 
-const BuyOrder = (props) => {
-  // const { window } = props;
+const BuyOrder = () => {
   const { t } = useTranslation("buyorder", { keyPrefix: "list" });
-  const [buyOrders, setBuyOrders] = useState([]);
+
   const history = useHistory();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const [buyOrders, setBuyOrders] = useState([]);
+  const [filters, setFilters] = useState({});
+
   const { enqueueSnackbar } = useSnackbar();
+
   const { error, refetch } = useQuery(LOAD_BUY_ORDERS);
   const [deleteBuyOrder] = useMutation(DELETE_BUY_ORDER);
 
@@ -60,32 +66,45 @@ const BuyOrder = (props) => {
     },
   ];
 
-  /// search by
-  const queryParams = new URLSearchParams(window.location.search);
-  const searchPage = queryParams.get("page");
-  const searchLimit = queryParams.get("limit");
-  const searchSupplierName = queryParams.get("supplierName");
-  const searchStatus = queryParams.get("status");
-  const searchTextId = queryParams.get("textId");
-  const searchFrom = queryParams.get("from");
-  const searchTo = queryParams.get("to");
-
-  /// đoạn này về sau có thể ốp TypeScript vào (type của nó sẽ bao gồm
-  /// page, rowsPerPage và một số filter khác)
+  /// initialize
   useEffect(() => {
-    const handleRefetchData = async () => {
-      return refetch({
-        page: searchPage ? parseInt(searchPage) : 0,
-        size: searchLimit ? parseInt(searchLimit) : 50,
-        // supplierName: searchSupplierName,
-        // status: searchStatus,
-        // textId: searchTextId,
-        // from: searchFrom,
-        // to: searchTo,
-      });
+    async function init() {
+      const filter = initFilter();
+      initData(filter);
+    }
+
+    init();
+  }, [location.search]);
+
+  /// init filter
+  const initFilter = () => {
+    const searchPage = queryParams.get("page");
+    const searchLimit = queryParams.get("rowsPerPage");
+    const searchSupplierName = queryParams.get("supplierName");
+    const searchStatus = queryParams.get("status");
+    const searchTextId = queryParams.get("textId");
+    const searchFrom = queryParams.get("from");
+    const searchTo = queryParams.get("to");
+
+    let newFilters = {
+      page: searchPage ? parseInt(searchPage) : 0,
+      size: searchLimit ? parseInt(searchLimit) : 50,
+      supplierName: searchSupplierName,
+      status: searchStatus,
+      textId: searchTextId,
+      from: searchFrom,
+      to: searchTo,
     };
 
-    handleRefetchData()
+    setFilters(newFilters);
+    return newFilters;
+  };
+
+  /// init data
+  const initData = (filter) => {
+    refetch({
+      ...filter,
+    })
       .then((response) => {
         if (response.data) {
           let buyOrdersByUser = [...response.data.buyOrdersByUser].map(
@@ -105,15 +124,7 @@ const BuyOrder = (props) => {
         }
       })
       .catch((reason) => enqueueSnackbar(reason, AlertErrorProp));
-  }, [
-    searchPage,
-    searchLimit,
-    searchSupplierName,
-    searchStatus,
-    searchTextId,
-    searchFrom,
-    searchTo,
-  ]);
+  };
 
   if (error) return <Redirect to="/login" />;
 
@@ -124,6 +135,41 @@ const BuyOrder = (props) => {
         variables: { buyOrderID: parseInt(item) },
         refetchQueries: [{ query: LOAD_BUY_ORDERS }],
       });
+    });
+  };
+
+  const handlePageChange = (event, newPage) => {
+    const newParams = {
+      ...Object.fromEntries(queryParams),
+      page: newPage,
+    };
+
+    handleChangeQueryString(newParams);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    const newParams = {
+      ...Object.fromEntries(queryParams),
+      page: 0,
+      rowsPerPage: event.target.value,
+    };
+
+    handleChangeQueryString(newParams);
+  };
+
+  const handleChangeQueryString = (filter) => {
+    // append filter to URL
+    let queryString = "?";
+    Object.entries(filter).forEach(([key, value], index) => {
+      if (index > 0) {
+        queryString = queryString.concat("&");
+      }
+      queryString = queryString.concat(key, "=", value);
+    });
+
+    // replace current URL
+    history.replace({
+      search: queryString,
     });
   };
 
@@ -148,13 +194,17 @@ const BuyOrder = (props) => {
           {t("buttonCreate")}
         </Button>
         <BudaPaginableTable
-          deleteItems={handleDelete}
           data={buyOrders}
           headCells={headCells}
+          page={filters?.page}
+          onPageChange={handlePageChange}
+          rowsPerPage={filters?.size}
+          onRowsPerPageChange={handleRowsPerPageChange}
+          total={600}
+          deleteItems={handleDelete}
           DetailTableBody={BuyOrderTableBody}
           type="buyOrderID"
           isNotShowCheckBox={true}
-          history={history}
         />
       </Box>
     </Box>
