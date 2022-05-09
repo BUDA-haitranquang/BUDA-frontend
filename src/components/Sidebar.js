@@ -12,12 +12,14 @@ import {
   AppBar,
   Box,
   Collapse,
-  CssBaseline, Drawer, List,
+  CssBaseline,
+  Drawer,
+  List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -151,7 +153,7 @@ const Sidebar = ({ window, name, id }) => {
     setMobileOpen(!mobileOpen);
   };
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    window !== undefined ? () => window.document.body : undefined;
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {
