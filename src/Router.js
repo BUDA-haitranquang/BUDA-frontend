@@ -43,7 +43,7 @@ const AppRouter = () => {
   const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
   const dispatch = useDispatch();
 
-  const authLink = setContext((_, { headers }) => {
+  let authLink = setContext((_, { headers }) => {
     return {
       headers: {
         ...headers,
@@ -60,13 +60,29 @@ const AppRouter = () => {
             getNewAccessToken();
           }
         }
+        authLink = setContext((_, { headers }) => {
+          return {
+            headers: {
+              ...headers,
+              authorization: `Bearer ${jwt}`
+            }
+          };
+        });
+
+        setTimeout(()=>{}, 1000);
+        return forward(operation);
       }
+
+      if(networkError) console.log("NETWORK_ERROR_GRAPHQL");
     }
   );
 
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://103.173.228.124:4000/" }),
+    new HttpLink({ 
+      // uri: "http://103.173.228.124:4000/" 
+      uri: "http://159.89.203.89:4000/"
+    }),
   ]);
 
   const PrivateRoute = ({ authed, ...routeProps }) => {
