@@ -22,7 +22,7 @@ const IncompletedSellOrder = (props) => {
       incompletedSellOrder.customerName = data1?.customer?.name;
       incompletedSellOrder.finalCost = data1?.finalCost;
       incompletedSellOrder.creationTime = data1?.creationTime;
-    //   incompletedSellOrder.status = data.status;
+      incompletedSellOrder.status = data?.status;
       return incompletedSellOrder;
   }  
 
@@ -34,8 +34,9 @@ const IncompletedSellOrder = (props) => {
     }
     
     fetchData();
+
   }, [data]);
-  
+  console.log(sellOrder)  
   // if(error) return <Redirect to="/login"/>;
   const headCells = [
     {
@@ -62,12 +63,24 @@ const IncompletedSellOrder = (props) => {
       disablePadding: true,
       label: "final Cost"
     },
-    // {
-    //   id: "status",
-    //   numeric: false,
-    //   disablePadding: true,
-    //   label: "Status"
-    // },
+    {
+      id: "status",
+      numeric: false,
+      disablePadding: true,
+      label: "Status"
+    },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: "Finish"
+    },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: "Cancel"
+    },
   ];
 
   return (

@@ -19,17 +19,17 @@ import IncompletedSellOrder from "./IncompletedSellOrder";
 import IncompletedBuyOrder from "./IncompletedBuyOrder";
 import IncompletedFixedCostBill from "./IncompletedFixedCostBill";
 import IncompletedOtherCost from "./IncompletedOtherCost";
-const useStyle = makeStyles({
-  box: {
-    width: "100%",
-    height: "150px",
-    backgroundColor: "#1976D2",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// const useStyle = makeStyles({
+//   box: {
+//     width: "100%",
+//     height: "150px",
+//     backgroundColor: "#1976D2",
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
 
 const info = [
   { name: "revenue", color: "#82ca9d", datakey: "revenue" },
@@ -39,7 +39,7 @@ const info = [
 const MainDashBoard = () => {
   const [chart, setChart] = useState(0);
   const [revenue, setRevenue] = useState([]);
-  const classes = useStyle();
+  // const classes = useStyle();
   const [tab, setTab] = useState(0);
   const { error: dayRevenueError, data: dayRevenueData } = useQuery(
     LOAD_BUSINESS_OVERALL_30_DAY
@@ -75,8 +75,9 @@ const MainDashBoard = () => {
         <Grid
           item
           flexDirection="column"
-          sm={14}
-          md={9}
+          // sm={14}
+          sm = {12}
+          // md={9}
           sx={{
             height: "200px",
           }}
@@ -85,8 +86,8 @@ const MainDashBoard = () => {
             <Box
               sx={{
                 textAlign: "center",
-                paddingTop: "25%",
-                paddingBottom: "25%",
+                paddingTop: "10%",
+                // paddingBottom: "25%",
               }}
             >
               <h1>No data</h1>
@@ -128,7 +129,7 @@ const MainDashBoard = () => {
                   data={revenue}
                   info={info}
                   xAxis="timePeriod"
-                  legend={false}
+                  legend={true}
                 />
               ) : (
                 <BudaBarChart
@@ -136,14 +137,14 @@ const MainDashBoard = () => {
                   data={revenue}
                   info={info}
                   xAxis="timePeriod"
-                  legend={false}
+                  legend={true}
                 />
               )}
             </>
           )}
         </Grid>
 
-        <Grid
+        {/* <Grid
           item
           xs
           display="flex"
@@ -156,10 +157,11 @@ const MainDashBoard = () => {
             <h4 style={{ margin: "0 0 0 0", color: "white" }}>Total Revenue</h4>
             <h1 style={{ margin: "0 0 0 0", color: "white " }}>1000</h1>
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Box py={3}></Box>
-      <Divider />
+      <Box py ={2}> </Box>
+      {/* <Divider /> */}
       <Box>
         <Tabs value={tab} onChange={handleChangeTab}>
           <Tab label="Sell Order" />

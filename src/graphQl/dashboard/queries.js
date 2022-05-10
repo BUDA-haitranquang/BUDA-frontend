@@ -10,6 +10,7 @@ export const INCOMPLETED_SELL_ORDER = gql`
       finalCost
       creationTime
       textID
+      status
     }
   }
 `;

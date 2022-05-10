@@ -2,6 +2,7 @@ import { TableCell } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import  {dateToDateString} from '../../../utils/utils'
+
 const IncompletedBuyOrderTableBody = (props) => {
   const { row, labelId } = props;
   return (
@@ -24,3 +25,5 @@ const IncompletedBuyOrderTableBody = (props) => {
 };
 
 export default IncompletedBuyOrderTableBody;
+
+
