@@ -17,6 +17,9 @@
     "Status" : "Status",
     "addOtherCostModal":{
         "title":" New Other Cost"
-    }
+    },
+    "fixedCost":"Fixed Cost",
+    "fixedCostBill":"Fixed Cost Bill",
+    "otherCost":"Other Cost"
 
 }

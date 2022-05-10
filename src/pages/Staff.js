@@ -80,7 +80,7 @@ const Staff = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Staff" id="staff"/>
+      <Sidebar window={window} name={t("staff:staff")} id="staff"/>
       <Box
         width="100%"
         display="flex"

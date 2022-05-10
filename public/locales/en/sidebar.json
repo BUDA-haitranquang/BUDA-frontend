@@ -1,0 +1,40 @@
+{
+    "dashBoard": 
+        {
+            "section": "Dashboard"
+        },
+    "business":{
+        "section":"Business",
+        "sellHistory":"Sell history",
+        "buy":"Buy",
+        "sell":"Sell",
+        "buyHistory":"Buy history"
+    },
+    "product":{
+        "section":"Product",
+        "product":"Product",
+        "collation":"Collation"
+    },
+    "ingredient":{
+        "section":"Ingredient",
+        "collation":"Collation",
+        "ingredient":"Ingredient"
+    },
+    "supplier":{
+        "section":"Supplier"
+    },
+    "customer":{
+        "section":"Customer"
+    },
+    "staff":{
+        "section":"Staff"
+    },
+    "cost":{
+        "section":"Cost",
+        "fixed":"Fixed Cost",
+        "fixedCostBill":"Fixed Cost Bill",
+        "otherCost":"Other Cost"
+    }
+    
+
+}
