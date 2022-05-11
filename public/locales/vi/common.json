@@ -11,5 +11,7 @@
     "SKU" : "Mã SKU",
     "Edit" : "Chỉnh sửa",
     "Account" : "Tài khoản",
-    "Password" : "Mật Khẩu"
+    "Password" : "Mật Khẩu",
+    "search":"Tìm kiếm",
+    "data":"Dữ liệu"
 }

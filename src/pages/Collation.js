@@ -25,7 +25,7 @@ const Collation = (props) => {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("product:Name"),
+      label: t("product:name"),
     },
     {
       id: "amountLeft",
@@ -53,7 +53,7 @@ const Collation = (props) => {
   
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Product" id="product" />
+      <Sidebar window={window} name={t("product:productCollation")} id="product" />
       <Box
         width="100%"
         display="flex"

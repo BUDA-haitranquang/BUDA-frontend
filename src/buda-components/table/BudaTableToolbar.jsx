@@ -16,7 +16,7 @@ import { alpha } from "@mui/material/styles";
 import React, { useState } from "react";
 import FilterPopup from "./FilterPopup";
 import SplitButton from "./SplitButton";
-
+import { useTranslation } from "react-i18next";
 const BudaTableToolbar = ({
   headCells,
   numSelected,
@@ -28,6 +28,7 @@ const BudaTableToolbar = ({
 }) => {
   const [value, setValue] = useState("");
   const li = Array.from(headCells, (item) => item.label);
+  const {t} = useTranslation(['common'])
   return (
     <Toolbar
       sx={{
@@ -59,15 +60,15 @@ const BudaTableToolbar = ({
           id="tableTitle"
           component="div"
         >
-          DATA
+          {t("common:data")}
         </Typography>
       )}
 
       {numSelected === 0 && (
         <FormControl variant="outlined">
-          <InputLabel>Search</InputLabel>
+          <InputLabel>{t("common:search")}</InputLabel>
           <OutlinedInput
-            label="Search"
+            label={t("common:search")}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             endAdornment={

@@ -11,5 +11,7 @@
     "SKU" : "SKU Code",
     "Edit" : "Edit",
     "Account" : "Account",
-    "Password" : "Password"
+    "Password" : "Password",
+    "search":"Search",
+    "data":"Data"
 }
