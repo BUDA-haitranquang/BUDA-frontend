@@ -14,22 +14,10 @@ import BudaLineChart from "../../buda-components/charts/BudaLineChart";
 import BudaBarChart from "../../buda-components/charts/BudaBarChart";
 import { useQuery } from "@apollo/client";
 import { LOAD_BUSINESS_OVERALL_30_DAY } from "../../graphQl/revenue statistics/businessOverallStatistics";
-import { makeStyles } from "@mui/styles";
 import IncompletedSellOrder from "./IncompletedSellOrder";
 import IncompletedBuyOrder from "./IncompletedBuyOrder";
 import IncompletedFixedCostBill from "./IncompletedFixedCostBill";
 import IncompletedOtherCost from "./IncompletedOtherCost";
-// const useStyle = makeStyles({
-//   box: {
-//     width: "100%",
-//     height: "150px",
-//     backgroundColor: "#1976D2",
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
 
 const info = [
   { name: "revenue", color: "#82ca9d", datakey: "revenue" },
@@ -39,7 +27,6 @@ const info = [
 const MainDashBoard = () => {
   const [chart, setChart] = useState(0);
   const [revenue, setRevenue] = useState([]);
-  // const classes = useStyle();
   const [tab, setTab] = useState(0);
   const { error: dayRevenueError, data: dayRevenueData } = useQuery(
     LOAD_BUSINESS_OVERALL_30_DAY
@@ -68,16 +55,13 @@ const MainDashBoard = () => {
     fetchData();
   }, [dayRevenueData]);
 
-
   return (
     <Box width="100%">
       <Grid container spacing={2} sx={{ width: "100%" }}>
         <Grid
           item
           flexDirection="column"
-          // sm={14}
-          sm = {12}
-          // md={9}
+          sm={12}
           sx={{
             height: "200px",
           }}
@@ -87,7 +71,6 @@ const MainDashBoard = () => {
               sx={{
                 textAlign: "center",
                 paddingTop: "10%",
-                // paddingBottom: "25%",
               }}
             >
               <h1>No data</h1>
@@ -101,10 +84,7 @@ const MainDashBoard = () => {
                 justifyContent="space-between"
               >
                 <Box>
-                  <h1 style={{ margin: "10px 0 0 30px " }}>
-                    {/* {chart % 2 === 0 ? "Line Chart" : "Bar Chart"} */}
-                    Overview
-                  </h1>
+                  <h1 style={{ margin: "10px 0 0 30px " }}>Overview</h1>
                 </Box>
                 <Box pt={1}>
                   <ButtonGroup sx={{ paddingRight: "30px" }}>
@@ -143,25 +123,9 @@ const MainDashBoard = () => {
             </>
           )}
         </Grid>
-
-        {/* <Grid
-          item
-          xs
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Box py={5} px="100%"></Box>
-          <Box className={classes.box}>
-            <h4 style={{ margin: "0 0 0 0", color: "white" }}>Total Revenue</h4>
-            <h1 style={{ margin: "0 0 0 0", color: "white " }}>1000</h1>
-          </Box>
-        </Grid> */}
       </Grid>
-      <Box py={3}></Box>
-      <Box py ={2}> </Box>
-      {/* <Divider /> */}
+      <Box py={5}></Box>
+
       <Box>
         <Tabs value={tab} onChange={handleChangeTab}>
           <Tab label="Sell Order" />
@@ -171,6 +135,7 @@ const MainDashBoard = () => {
         </Tabs>
       </Box>
       <Divider />
+      <Box py = {2}></Box>
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >

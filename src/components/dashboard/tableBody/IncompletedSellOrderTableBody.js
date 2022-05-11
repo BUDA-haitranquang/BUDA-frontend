@@ -9,24 +9,7 @@ import {
   FINISH_SELL_ORDER,
   CANCEL_SELL_ORDER,
 } from "../../../graphQl/dashboard/mutation";
-import { makeStyles } from "@mui/styles";
-
-const useStyle = makeStyles({
-  finish:{
-    "&.MuiButtonBase-root":{
-      // '&:hover':{
-      //   backgroundColor:'green'
-      // }
-    }
-  },
-  cancel:{
-    "&.MuiButtonBase-root":{
-      // '&:hover':{
-      //   backgroundColor:'red'
-      // }
-    }
-  }
-})
+import { INCOMPLETED_SELL_ORDER } from "../../../graphQl/dashboard/queries";
 const IncompletedSellOrderTableBody = (props) => {
   const { row, labelId } = props;
   return (
@@ -56,40 +39,43 @@ const IncompletedSellOrderTableBody = (props) => {
 
 export default IncompletedSellOrderTableBody;
 
-const FinishOrder = ({id}) => {
-  const classes = useStyle()
+const FinishOrder = ({ id }) => {
   const [finishSellOrder] = useMutation(FINISH_SELL_ORDER);
-  const  hanldeFinish = async (id) => {
+  const hanldeFinish = async (id) => {
     finishSellOrder({
       variables: { sellOrderID: parseInt(id) },
+      refetchQueries: [{ query: INCOMPLETED_SELL_ORDER }],
     });
   };
   return (
     <>
       <IconButton
-        className = {classes.finish}
         onClick={(e) => {
           hanldeFinish(id);
         }}
       >
-        <CheckIcon sx={{'&:hover':{color:'green'}}}/>
+        <CheckIcon sx={{ "&:hover": { color: "green" } }} />
       </IconButton>
     </>
   );
 };
 
-const CancelOrder = ({id}) => {
-  const classes = useStyle()
+const CancelOrder = ({ id }) => {
   const [cancelSellOrder] = useMutation(CANCEL_SELL_ORDER);
   const hanldeCancel = async (id) => {
     cancelSellOrder({
       variables: { sellOrderID: parseInt(id) },
+      refetchQueries: [{ query: INCOMPLETED_SELL_ORDER }],
     });
   };
   return (
     <>
-      <IconButton className ={classes.cancel} onClick ={(e)=>{hanldeCancel(id)}}>
-        <CloseIcon sx={{'&:hover':{color:'red'}}} />
+      <IconButton
+        onClick={(e) => {
+          hanldeCancel(id);
+        }}
+      >
+        <CloseIcon sx={{ "&:hover": { color: "red" } }} />
       </IconButton>
     </>
   );
