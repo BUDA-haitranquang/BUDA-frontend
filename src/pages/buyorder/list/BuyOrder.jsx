@@ -78,7 +78,7 @@ const BuyOrder = (props) => {
     fetchData();
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
 
   const handleDelete = (selected) => {
     if (selected === []) return;

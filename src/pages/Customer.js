@@ -52,7 +52,7 @@ const Customer = (props) => {
     console.log(data);
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
 
   const headCells = [
     {

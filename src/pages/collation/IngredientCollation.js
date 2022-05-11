@@ -54,7 +54,7 @@ const IngredientCollation = (props) => {
     fetchData();
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
   
   return (
     <Box sx={{ display: "flex" }}>
