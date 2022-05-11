@@ -33,11 +33,11 @@ const BudaLineChart = ({
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
+        {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey={xAxis} />
         <YAxis unit={yUnit} />
         <Tooltip />
-        {legend && <Legend />}
+        {legend && <Legend verticalAlign='middle' align='right' layout="vertical"/>}
         {/* <Line type="linear" dataKey="pv" stroke="#CD201F" activeDot={{ r: 8 }} name = 'Chi phí'/>
           <Line type="linear" dataKey="uv" stroke="#82ca9d" name='Doanh thu' /> */}
         {info.map((item) => (

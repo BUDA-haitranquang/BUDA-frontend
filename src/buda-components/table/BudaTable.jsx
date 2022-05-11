@@ -24,6 +24,7 @@ const BudaTable = (props) => {
     padding,
     size,
     isNotShowCheckBox = false,
+    toolbar = true,
     ...remainProps
   } = props;
 
@@ -88,7 +89,7 @@ const BudaTable = (props) => {
     <Box sx={{ width: "100%" }}>
       <Paper>
         <TableContainer sx={{ paddingRight: "10px" }}>
-          <BudaTableToolbar
+          {toolbar && <BudaTableToolbar
             numSelected={selected.length}
             handleOpen={handleOpen}
             handleSearch={(val) => setSearch(val)}
@@ -99,7 +100,7 @@ const BudaTable = (props) => {
               setSelected([]);
             }}
             checkModal={Modal ? true : false}
-          />
+          />}
           <Table
             sx={{ minWidth: 1000 }}
             stickyHeader={stickyHeader}

@@ -15,11 +15,11 @@ const BudaBarChart=({data,xAxis,width = '100%',height = '100%',legend = true,inf
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey={xAxis} />
           <YAxis unit = {yUnit}/>
           <Tooltip />
-          {legend && <Legend />}
+          {legend && <Legend verticalAlign='middle' align='right' layout="vertical"/>}
           {/* <Bar dataKey="pv" fill="#CD201F" name = 'Chi phí'/>
           <Bar dataKey="uv" fill="#82ca9d"name ='Doanh thu' /> */}
           {info.map(item =>
