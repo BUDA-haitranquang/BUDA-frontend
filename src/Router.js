@@ -42,6 +42,7 @@ import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
 import IngredientCollation from "./pages/collation/IngredientCollation";
+import PrintDemo from "./pages/PrintDemo";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -289,6 +290,7 @@ const AppRouter = () => {
           />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/print" component={PrintDemo} />
           <PrivateRoute
             authed={isAuth}
             exact
