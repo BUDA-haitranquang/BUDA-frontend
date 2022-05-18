@@ -16,7 +16,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { addToken } from "../src/redux/tokenSlice";
+import { addRefreshToken, addToken, removeToken } from "../src/redux/tokenSlice";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
@@ -65,11 +65,18 @@ const AppRouter = () => {
     };
   });
 
+  let countRetryGetToken = 0;
+
   const errorLink = onError(
     ({ graphQLErrors, networkError, operation, forward }) => {
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           if (err.extensions.code === "UNAUTHENTICATED") {
+            if(countRetryGetToken > 3) {
+              dispatch(removeToken()).then(() => window.location.reload());
+            }
+            countRetryGetToken ++;
+
             getNewAccessToken().then(() => {
               const oldHeaders = operation.getContext().headers;
               operation.setContext({
@@ -92,8 +99,8 @@ const AppRouter = () => {
   const link = from([
     errorLink,
     new HttpLink({
-      uri: "http://103.173.228.124:4000/"
-      // uri: "http://159.89.203.89:4000/",
+      // uri: "http://103.173.228.124:4000/"
+      uri: "http://159.89.203.89:4000/",
     }),
   ]);
 
@@ -122,11 +129,13 @@ const AppRouter = () => {
       .then((res) => {
         const { accessToken, refreshToken } = res.data.newAccessToken;
         dispatch(addToken(accessToken));
+        dispatch(addRefreshToken(refreshToken));
         return accessToken;
 
         // dispatch(addRefreshToken(refreshToken));
       })
       .then(() => console.log("new access token generated"))
+      .then(() => countRetryGetToken = 0)
       .catch((e) => {
         console.log(e);
       });
