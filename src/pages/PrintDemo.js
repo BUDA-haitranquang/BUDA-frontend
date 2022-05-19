@@ -16,7 +16,7 @@ export default function PrintDemo() {
         />
 
         {/* component to be printed */}
-        <ComponentToPrint ref={(el) => (componentRef = el)} />
+        <ComponentToPrint ref={(el) => (componentRef = el)} testStr="In cai nay ra man hinh di"/>
       </div>
     </>
   );

@@ -22,8 +22,30 @@ export const NEW_SELL_ORDER_MUTATION = gql`
       }
     ) {
       sellOrderID
+      textID
       realCost
       finalCost
+      creationTime
+      finishTime
+      realCost
+      finalCost
+      actualDiscountCash
+      actualDiscountPercentage
+      customerMessage
+      status
+      sellOrderItems {
+        product {
+          productSKU
+          name
+        }
+        quantity
+        pricePerUnit
+      }
+      customer {
+        name
+        address
+        phoneNumber
+      }
     }
   }
 `;
