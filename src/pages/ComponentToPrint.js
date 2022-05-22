@@ -56,9 +56,9 @@ const value = {
   ],
 };
 
-const ComponentToPrint = () => {
+const ComponentToPrint = React.forwardRef((props, ref) => {
   return (
-    <div className="bg-gray-200 p-6">
+    <div ref={ref} className="bg-gray-200 p-6">
       <div className="a4-screen-sized">
         <div className="aspect-ratio-box shadow-lg rounded-lg overflow-hidden">
           <div className="aspect-ratio-box-inside border border-gray-200 rounded-lg overflow-hidden">
@@ -173,6 +173,6 @@ const ComponentToPrint = () => {
       </div>
     </div>
   );
-};
+});
 
 export default ComponentToPrint;

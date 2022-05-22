@@ -4,7 +4,7 @@ import ReactToPrint from "react-to-print";
 import ComponentToPrint from "./ComponentToPrint";
 
 export default function PrintDemo() {
-  let componentRef = useRef();
+  const componentRef = useRef();
 
   return (
     <>
@@ -12,11 +12,11 @@ export default function PrintDemo() {
         {/* button to trigger printing of target component */}
         <ReactToPrint
           trigger={() => <Button>Print this out!</Button>}
-          content={() => componentRef}
+          content={() => componentRef.current}
         />
 
         {/* component to be printed */}
-        <ComponentToPrint ref={(el) => (componentRef = el)} testStr="In cai nay ra man hinh di"/>
+        <ComponentToPrint ref={componentRef} testStr="In cai nay ra man hinh di"/>
       </div>
     </>
   );
