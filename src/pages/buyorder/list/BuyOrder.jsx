@@ -82,7 +82,7 @@ const BuyOrder = () => {
     const searchLimit = queryParams.get("rowsPerPage");
     const searchSupplierName = queryParams.get("supplierName");
     const searchStatus = queryParams.get("status");
-    const searchTextId = queryParams.get("textId");
+    const searchTextId = queryParams.get("textID");
     const searchFrom = queryParams.get("from");
     const searchTo = queryParams.get("to");
 
@@ -157,6 +157,14 @@ const BuyOrder = () => {
     handleChangeQueryString(newParams);
   };
 
+  const handleSearch = (searchBy, value) => {
+    const newParams = {
+      [searchBy]: value,
+    };
+
+    handleChangeQueryString(newParams);
+  };
+
   const handleChangeQueryString = (filter) => {
     // append filter to URL
     let queryString = "?";
@@ -196,6 +204,7 @@ const BuyOrder = () => {
         <BudaPaginableTable
           data={buyOrders}
           headCells={headCells}
+          onSearch={handleSearch}
           page={filters?.page}
           onPageChange={handlePageChange}
           rowsPerPage={filters?.size}

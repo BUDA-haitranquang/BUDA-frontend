@@ -14,6 +14,7 @@ const BudaPaginableTable = (props) => {
   const {
     data,
     headCells,
+    onSearch,
     page = 0,
     onPageChange,
     rowsPerPage = 50,
@@ -62,18 +63,15 @@ const BudaPaginableTable = (props) => {
     setSelected([]);
   };
 
-  // useEffect(() => {
-  //   !search
-  //     ? setDisplay(data)
-  //     : setDisplay(
-  //         data.filter((item) =>
-  //           item[searchBy]
-  //             ?.toString()
-  //             .toUpperCase()
-  //             .includes(search.toString().toUpperCase())
-  //         )
-  //       );
-  // }, [search, searchBy, data]);
+  useEffect(() => {
+    if (selected && selected.length) {
+      setSelected([]);
+    }
+
+    if (onSearch) {
+      onSearch(searchBy, search);
+    }
+  }, [search, searchBy]);
 
   return (
     <Box sx={{ width: "100%" }}>
