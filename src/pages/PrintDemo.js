@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
+import SellOrderPrintForm from "../components/printforms/SellOrderPrintForm";
 import ComponentToPrint from "./ComponentToPrint";
 
 export default function PrintDemo() {
@@ -16,7 +17,7 @@ export default function PrintDemo() {
         />
 
         {/* component to be printed */}
-        <ComponentToPrint ref={componentRef} testStr="In cai nay ra man hinh di"/>
+        <SellOrderPrintForm ref={componentRef} testStr="In cai nay ra man hinh di"/>
       </div>
     </>
   );
