@@ -1,0 +1,33 @@
+{
+    "title":"Create Order",
+    "newProduct":"New Product",
+    "clearCart":"Clear Cart",
+    "newCustomer":"New Customer",
+    "left":"Left",
+    "price":"Price",
+    "searchProduct":"Search product",
+    "searchCustomer":"Search customer",
+    "productTable":{
+        "number":"No.",
+        "name":"Name",
+        "price":"Price",
+        "quantity":"Qty.",
+        "total":"Total"   
+    },
+    "customerInfo":{
+        "name":"Name",
+        "phone":"Phone",
+        "totalSpend":"Total spend",
+        "gender":"Gender",
+        "ageGroup":"Age group",
+        "address":"address"
+    },
+    "total":"Total",
+    "discount":"Discount",
+    "searchDiscount":"Search Discount",
+    "final":"Final",
+    "customerGives":"Customer Gives",
+    "change":"Change",
+    "done":"Done",
+    "remove":"Remove"
+}   

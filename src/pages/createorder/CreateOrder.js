@@ -16,7 +16,7 @@ import CustomerPayment from "./customer/customerPayment/CustomerPayment";
 import CostGrid from "./order/costpane/CostGrid";
 import OrderProducts from "./order/itemspane/OrderProducts";
 import SearchProductBar from "./order/itemspane/SearchProductBar";
-
+import { useTranslation } from "react-i18next";
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
 export const color3 = "#D1D1D1";
@@ -29,7 +29,7 @@ export default function CreateOrder() {
     (state) => state.productCart
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);
-
+  const {t} = useTranslation(['sell']);
   // hàm này xử lý khá là phức tạp
   // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
   // #tatcataiTranQuangHai
@@ -85,7 +85,7 @@ export default function CreateOrder() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar name="Create Order" sx={{ backgroundColor: "#1976d2" }} id="business" />
+      <Sidebar name={t('sell:title')} sx={{ backgroundColor: "#1976d2" }} id="business" />
       <Grid
         container
         sx={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "80px" }}
@@ -124,7 +124,7 @@ export default function CreateOrder() {
                 height: "60px",
               }}
             >
-              <Typography variant="h5">DONE</Typography>
+              <Typography sx ={{}}variant="h6">{t('sell:done')}</Typography>
             </Button>
           </Box>
         </Grid>

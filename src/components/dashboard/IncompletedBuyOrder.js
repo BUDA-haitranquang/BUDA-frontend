@@ -13,7 +13,7 @@ const IncompletedBuyOrder = (props) => {
   //   const { t } = useTranslation(["common", "product"]);
   const [buyOrder, setBuyOrder] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_BUY_ORDER);
-
+  const {t} = useTranslation('dashboard');
   const toObject = (data1) => {
     let incompletedBuyOrder = {};
     incompletedBuyOrder.sellOrderID = data1?.sellOrderID;
@@ -48,25 +48,25 @@ const IncompletedBuyOrder = (props) => {
       id: "supplierName",
       numeric: false,
       disablePadding: false,
-      label: "Supplier",
+      label: t("dashboard:buyOrder.supplier"),
     },
     {
       id: "creationTime",
       numeric: false,
       disablePadding: true,
-      label: "Creation Time",
+      label: t("dashboard:buyOrder.creationTime"),
     },
     {
       id: "totalCost",
       numeric: true,
       disablePadding: true,
-      label: "Total Cost",
+      label: t("dashboard:buyOrder.totalCost"),
     },
     {
       id: "status",
       numeric: false,
       disablePadding: true,
-      label: "Status",
+      label: t("dashboard:buyOrder.status"),
     },
   ];
 

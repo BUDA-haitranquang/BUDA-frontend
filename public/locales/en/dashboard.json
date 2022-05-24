@@ -1,0 +1,36 @@
+{
+  "title": "Dashboard",
+  "overview": "Overview",
+  "revenue": "revenue",
+  "expense": "expense",
+  "sellOrder": {
+    "title": "Sell Order",
+    "customer": "Customer",
+    "creationTime": "Creation Time",
+    "finalCost": "Final Cost",
+    "status": "Status",
+    "finish": "Finish",
+    "cancel": "Cancel"
+  },
+  "buyOrder": {
+    "title": "Buy Order",
+    "supplier": "Supplier",
+    "creationTime": "Creation Time",
+    "totalCost": "Total Cost",
+    "status": "Status"
+  },
+  "fixedCost": {
+    "title": "Fixed Cost",
+    "creationTime": "Creation Time",
+    "dueTime": "Due Time",
+    "moneyAmount": "Money Amount",
+    "status": "Status"
+  },
+  "otherCost": {
+    "title": "Other Cost",
+    "name": "Name",
+    "creationTime": "Creation Time",
+    "totalCost": "Total Cost",
+    "status": "Status"
+  }
+}
