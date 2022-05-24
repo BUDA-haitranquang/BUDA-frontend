@@ -6,11 +6,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Redirect } from "react-router-dom";
 import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
-import CombinedDetail from "../components/CombinedDetail";
+import CombinedDetailProduct from "../components/CombineDetailProduct";
 import ProductInformation from "../components/detail/information/ProductInformation";
 import EditProductModal from "../components/modal/EditProductModal";
 import Sidebar from "../components/Sidebar";
-import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import { HIDE_PRODUCT_MUTATION,NEW_RETAL_FROM_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import {
   LOAD_COMPONENTS_BY_PRODUCT,
   LOAD_PRODUCT,
@@ -24,7 +24,6 @@ const ProductDetail = (props) => {
   const { window } = props;
   const { id } = useParams();
   const history = useHistory();
-
   const [product, setProduct] = useState(null);
   const [productCombo, setProductCombo] = useState(null);
   const [productGroup, setProductGroup] = useState(null);
@@ -47,7 +46,6 @@ const ProductDetail = (props) => {
   });
 
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
-
   const handleDeleteProduct = () => {
     hideProduct({
       variables: { productID: parseInt(id) },
@@ -103,7 +101,7 @@ const ProductDetail = (props) => {
           {product === null ? (
             <div></div>
           ) : (
-            <CombinedDetail
+            <CombinedDetailProduct
               data={{ product, productCombo, productGroup, productComponent }}
               Modal={EditProductModal}
               Information={ProductInformation}

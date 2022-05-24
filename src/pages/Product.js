@@ -9,7 +9,7 @@ import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";
 import Sidebar from "../components/Sidebar";
 import ProductTableBody from "../components/table/body/ProductTableBody";
-import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
+import { HIDE_PRODUCT_MUTATION,NEW_RETAIL_MUTATION} from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 
 const Product = (props) => {
@@ -18,6 +18,7 @@ const Product = (props) => {
   const [products, setProducts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
+  const [newRetail] = useMutation(NEW_RETAIL_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const handleDelete = (selected) => {
@@ -37,6 +38,16 @@ const Product = (props) => {
       setIsLoading(false);
     }
   };
+
+  const handleRetail = (sku) => {
+   
+        newRetail({
+            variables: {productSKU: sku },
+            refetchQueries: [{ query: LOAD_PRODUCTS }]
+       })
+      enqueueSnackbar("Retail item(s) successfully", AlertSuccessProp);
+   
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -90,7 +101,7 @@ const Product = (props) => {
       numeric: false,
       disablePadding: true,
       label: t("product:description")
-    }
+    },
   ];
 
   return (

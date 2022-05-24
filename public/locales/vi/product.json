@@ -1,6 +1,5 @@
 {
-  "productName": "Tên sản phẩm",
-  "name": "Tên SP",
+  "Name": "Tên sản phẩm",
   "sku": "Mã SKU",
   "price": "Giá",
   "amountLeft": "Tồn kho",

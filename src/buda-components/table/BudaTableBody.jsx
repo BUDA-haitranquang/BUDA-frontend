@@ -16,6 +16,7 @@ const BudaTableBody = (props) => {
     data,
     isNotShowCheckbox = false,
     type,
+    newRetail,
     ...remainProps
   } = props;
 
@@ -75,7 +76,7 @@ const BudaTableBody = (props) => {
                   />
                 </TableCell>
               )}
-              <DetailTableBody row={row} labelId={labelId} />
+              <DetailTableBody row={row} labelId={labelId} newRetail={newRetail}/>
             </TableRow>
           </CustomWidthTooltip>
         );

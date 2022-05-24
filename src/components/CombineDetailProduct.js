@@ -2,10 +2,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, Grid } from "@mui/material";
 import React, { useState } from "react";
+import RetailFromProductModal from "../components/modal/RetailFromProductModal";
+CombinedDetailProduct.propTypes = {};
 
-CombinedDetail.propTypes = {};
-
-function CombinedDetail(props) {
+function CombinedDetailProduct(props) {
   const { data, Modal, Information, handleDelete } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [ open, setOpen ] = useState(false);
@@ -15,7 +15,6 @@ function CombinedDetail(props) {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleRetailOpen = () => setOpen(true);
   const handleRetailClose = () => setOpen(false);
   return (
     <div>
@@ -58,13 +57,25 @@ function CombinedDetail(props) {
           >
             Delete
           </Button>
-         
+          {/* <Button
+            variant="contained"
+            // endIcon={<DeleteIcon />}
+            sx={{ width: "1%" }}
+            onClick={(e)=>{setOpen(true)}}
+          >
+            Retail
+          </Button> */}
         </Grid>
-        
+        {/* <RetailFromProductModal
+          isOpen = {open}
+          handleClose = {handleRetailClose}
+          data = {data.product.product}
+          title = {"Title"}
+        /> */}
         <Modal isOpen={isOpen} handleClose={handleClose} data={data} />
       </Grid>
     </div>
   );
 }
 
-export default CombinedDetail;
+export default CombinedDetailProduct;

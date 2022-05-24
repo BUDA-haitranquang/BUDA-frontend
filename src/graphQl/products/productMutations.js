@@ -63,3 +63,35 @@ export const HIDE_PRODUCT_MUTATION = gql`
     }
   }
 `;
+
+export const NEW_RETAIL_MUTATION = gql`
+mutation newRetail($productSKU: String!){
+  newRetail(
+   newRetail:{
+     productSKU:$productSKU
+   }
+ )
+ {
+   productID
+ }
+}
+`
+
+export const NEW_RETAL_FROM_PRODUCT_MUTATION  = gql `
+  mutation newRetailFromProduct(
+    $productID: Int
+    $ingredientSKU: String
+  )
+  {
+    newRetailFromProduct(
+      newRetail:{
+        productID: $productID
+        ingredientSKU: $ingredientSKU
+      }
+    )
+    {
+      ingredientID
+    }
+  }
+  
+`

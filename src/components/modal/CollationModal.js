@@ -31,6 +31,7 @@ const CollationModal = ({
     if (comment.length === 0) return false;
     return true;
   };
+
   const editQuantity = () => {
     setLoading(true);
     editProductQuantity({

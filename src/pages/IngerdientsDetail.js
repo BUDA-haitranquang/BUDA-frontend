@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Redirect } from "react-router-dom";
 import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
-import CombinedDetail from "../components/CombinedDetail";
+import CombinedDetail from "../components/CombineDetailIngredient";
 import IngredientInformation from "../components/detail/information/IngredientInformation";
 import Sidebar from "../components/Sidebar";
 import EditIngredientModal from "../components/modal/EditIngredientsModal";

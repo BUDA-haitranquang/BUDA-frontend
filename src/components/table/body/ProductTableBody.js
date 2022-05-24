@@ -1,9 +1,9 @@
-import { TableCell } from "@mui/material";
+import { Button, TableCell } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductTableBody = (props) => {
-  const { row, labelId } = props;
+  const { row, labelId , newRetail } = props;
   return (
     <>
       {/* <TableCell align="right">{row.id}</TableCell> */}

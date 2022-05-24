@@ -24,6 +24,7 @@ const BudaTable = (props) => {
     padding,
     size,
     isNotShowCheckBox = false,
+    retail,
     ...remainProps
   } = props;
 
@@ -126,6 +127,9 @@ const BudaTable = (props) => {
               DetailTableBody={DetailTableBody}
               type={type}
               isNotShowCheckbox={isNotShowCheckBox}
+              newRetail={(sku)=>{
+                console.log(sku)
+              }}
             />
             {Modal && <Modal isOpen={isOpen} handleClose={handleClose} />}
             {tableChildren}
