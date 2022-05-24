@@ -75,7 +75,6 @@ export default function ProductInformation({ data }) {
         <Divider />
 
         <Box>
-          {console.log(productCombo)}
           {productCombo?.map((combo) => (
             <Box
               style={{ flexDirection: "row", justifyContent: "space-around" }}
@@ -90,7 +89,6 @@ export default function ProductInformation({ data }) {
         <Divider />
 
         <Box>
-          {console.log(productGroup)}
           {productGroup?.map((group) => (
             <Typography width="50%">Group: {group?.name}</Typography>
           ))}
@@ -98,7 +96,6 @@ export default function ProductInformation({ data }) {
         <Divider />
 
         <Box>
-          {console.log(productComponent)}
           {productComponent?.map((component) => (
             <Typography width="50%">
               Ingredient: {component?.ingredient.name}

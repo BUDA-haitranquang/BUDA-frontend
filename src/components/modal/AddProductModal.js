@@ -1,15 +1,25 @@
 import { useMutation } from "@apollo/client";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+import UploadIcon from "@mui/icons-material/Upload";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_PRODUCT_MUTATION } from "../../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import imageCompression from "browser-image-compression";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
+  const [image, setImage] = useState();
   const { t } = useTranslation(["common", "product"]);
 
   const [name, setName] = useState("");
@@ -19,9 +29,24 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [alertAmount, setAlertAmount] = useState(0);
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [description, setDescription] = useState("");
-
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [preview, setPreview] = useState();
+
+  // create a preview as a side effect, whenever selected file is changed
+  useEffect(() => {
+    if (!image) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(image);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [image]);
 
   const resetForm = () => {
     setSku(null);
@@ -31,9 +56,10 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     setAlertAmount(0);
     setCostPerUnit(0);
     setDescription("");
+    setImage(null);
   };
 
-  const addProduct = () => {
+  const addProduct = (pictureID) => {
     setIsLoading(true);
     newProduct({
       variables: {
@@ -43,9 +69,10 @@ const AddProductModal = ({ isOpen, handleClose }) => {
         costPerUnit: parseFloat(costPerUnit),
         amountLeft: parseInt(amountLeft),
         alertAmount: parseInt(alertAmount),
-        sellingPrice: parseFloat(price)
+        sellingPrice: parseFloat(price),
+        pictureID: pictureID === "" ? undefined : parseInt(pictureID),
       },
-      refetchQueries: [{ query: LOAD_PRODUCTS }]
+      refetchQueries: [{ query: LOAD_PRODUCTS }],
     })
       .then((res) => {
         handleClose();
@@ -68,9 +95,39 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     return isValid;
   };
 
-  const handleSubmit = () => {
-    if (isFormValid()) addProduct();
-    else enqueueSnackbar("Invalid input", AlertErrorProp);
+  async function compressImage(imageFile) {
+    const options = {
+      maxSizeMB: 1,
+      alwaysKeepResolution: true,
+    };
+    return await imageCompression(imageFile, options);
+  }
+
+  const handleSubmit = async () => {
+    if (isFormValid()) {
+      if (image) submitImage().then((res) => addProduct(res.data.pictureID));
+      else addProduct("");
+    } else enqueueSnackbar("Invalid input", AlertErrorProp);
+  };
+
+  const submitImage = async () => {
+    let formData = new FormData();
+    let imageCompressed = await compressImage(image);
+    formData.append("file", imageCompressed);
+    return axios({
+      method: "post",
+      url: "http://103.173.228.124:8080/api/picture/upload",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+      data: formData,
+    }).catch((err) => enqueueSnackbar("Upload image error", AlertErrorProp));
+  };
+
+  const handleUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
   };
 
   return (
@@ -87,7 +144,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 }
+            "& > :not(style)": { m: 1 },
           }}
         >
           <TextField
@@ -115,7 +172,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             style={{
               width: "100%",
               display: "flex",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             <TextField
@@ -145,7 +202,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-              marginTop: "16px"
+              marginTop: "16px",
             }}
           >
             <TextField
@@ -177,10 +234,46 @@ const AddProductModal = ({ isOpen, handleClose }) => {
             label={t("product:description")}
             variant="outlined"
             multiline
-            rows={3}
+            rows={2}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <Box style={{ maxHeight: "120px" }}>
+            <>
+              <input
+                accept="image/png, image/jpeg"
+                style={{ display: "none" }}
+                id="raised-button-file"
+                multiple
+                type="file"
+                onChange={handleUpload}
+              />
+              <label htmlFor="raised-button-file">
+                <Button variant="contained" component="span">
+                  <UploadIcon />
+                  {t("product:addProductModal.uploadImage")}
+                </Button>
+              </label>
+            </>
+            {image && (
+              <img
+                alt="product-preview"
+                src={preview}
+                height="120px"
+                style={{ marginLeft: "40px" }}
+              />
+            )}
+            {image && (
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => setImage(null)}
+              >
+                <DeleteIcon />
+                {t("product:addProductModal.removeImage")}
+              </Button>
+            )}
+          </Box>
         </Box>
       }
     ></BudaModal>

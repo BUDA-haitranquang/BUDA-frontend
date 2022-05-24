@@ -12,8 +12,8 @@ i18n
     debug: true,
 
     // have a common namespace used around the full app
-    ns: ["translations"],
-    defaultNS: "translations",
+    // ns: ["translations"],
+    // defaultNS: "translations",
 
     interpolation: {
       escapeValue: false,

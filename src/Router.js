@@ -1,10 +1,22 @@
-import { ApolloClient, ApolloProvider, from, gql, HttpLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  from,
+  gql,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { addToken } from "../src/redux/tokenSlice";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import { addRefreshToken, addToken, removeToken } from "../src/redux/tokenSlice";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
@@ -30,6 +42,7 @@ import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
 import IngredientCollation from "./pages/collation/IngredientCollation";
+import PrintDemo from "./pages/PrintDemo";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -47,26 +60,50 @@ const AppRouter = () => {
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${jwt}`
-      }
+        authorization: `Bearer ${jwt}`,
+      },
     };
   });
+
+  let countRetryGetToken = 0;
 
   const errorLink = onError(
     ({ graphQLErrors, networkError, operation, forward }) => {
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           if (err.extensions.code === "UNAUTHENTICATED") {
-            getNewAccessToken();
+            if(countRetryGetToken > 3) {
+              dispatch(removeToken())
+              setTimeout(window.location.reload(), 0)
+              window.location.reload()
+            }
+            countRetryGetToken ++;
+
+            getNewAccessToken().then(() => {
+              const oldHeaders = operation.getContext().headers;
+              operation.setContext({
+                headers: {
+                  ...oldHeaders,
+                  authorization: `Bearer ${jwt}`,
+                },
+              });
+            });
+
+            return forward(operation);
           }
         }
       }
+
+      if (networkError) console.log("NETWORK_ERROR_GRAPHQL");
     }
   );
 
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://103.173.228.124:4000/" })
+    new HttpLink({
+      uri: "http://103.173.228.124:4000/"
+      // uri: "http://159.89.203.89:4000/",
+    }),
   ]);
 
   const PrivateRoute = ({ authed, ...routeProps }) => {
@@ -89,15 +126,18 @@ const AppRouter = () => {
             }
           }
         `,
-        variables: { token: refreshJwt }
+        variables: { token: refreshJwt },
       })
       .then((res) => {
         const { accessToken, refreshToken } = res.data.newAccessToken;
-        // return accessToken;
         dispatch(addToken(accessToken));
+        dispatch(addRefreshToken(refreshToken));
+        return accessToken;
+
         // dispatch(addRefreshToken(refreshToken));
       })
       .then(() => console.log("new access token generated"))
+      .then(() => countRetryGetToken = 0)
       .catch((e) => {
         console.log(e);
       });
@@ -105,7 +145,7 @@ const AppRouter = () => {
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link: authLink.concat(link)
+    link: authLink.concat(link),
   });
 
   return (
@@ -259,8 +299,9 @@ const AppRouter = () => {
             path="/discount"
             component={Discount}
           />
-          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/print" component={PrintDemo} />
           <PrivateRoute
             authed={isAuth}
             exact

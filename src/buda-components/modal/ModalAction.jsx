@@ -1,3 +1,4 @@
+import { LoadingButton } from "@mui/lab";
 import { Box, Button, DialogActions } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
@@ -46,17 +47,17 @@ const ModalAction = (props) => {
             </Button>
           ) : null}
           {onOk && !isNotShowActionButton ? (
-            <Button
+            <LoadingButton
               variant="contained"
               color={okButtonType ? okButtonType : "primary"}
               size="small"
               style={{ marginLeft: "16px" }}
               onClick={() => onOk()}
-              isLoading={isLoading}
+              loading={isLoading}
               disabled={disabledOk}
             >
               {textOk ? textOk : "OK"}
-            </Button>
+            </LoadingButton>
           ) : null}
         </Box>
       )}

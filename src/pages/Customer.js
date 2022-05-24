@@ -52,7 +52,7 @@ const Customer = (props) => {
     console.log(data);
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
 
   const headCells = [
     {
@@ -89,7 +89,7 @@ const Customer = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Customer" id="customer"/>
+      <Sidebar window={window} name={t("customer:customer")} id="customer"/>
       <Box
         width="100%"
         display="flex"

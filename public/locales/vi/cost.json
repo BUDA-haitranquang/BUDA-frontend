@@ -17,6 +17,9 @@
     },
     "otherCostName" : "Chi phí khác",
     "totalCost" : "Tổng Chi Phí",
-    "Status" : "Trạng Thái"
+    "Status" : "Trạng Thái",
+    "fixedCost":"Chi phí cố định",
+    "fixedCostBill":"Hoá đơn cố định",
+    "otherCost":"Chi phí khác"
     
 }

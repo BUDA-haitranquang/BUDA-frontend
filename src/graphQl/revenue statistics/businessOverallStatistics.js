@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const LOAD_BUSINESS_OVERALL_EVERY_DAY = gql`
+export const LOAD_BUSINESS_OVERALL_30_DAY = gql`
 query {
     businessOverallXDays(X:30){
         timePeriod

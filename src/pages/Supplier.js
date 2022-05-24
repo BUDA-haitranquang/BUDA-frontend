@@ -77,11 +77,11 @@ const Supplier = (props) => {
     console.log(data);
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Supplier" id="supplier"/>
+      <Sidebar window={window} name={t('supplier:supplier')} id="supplier"/>
       <Box
         width="100%"
         display="flex"

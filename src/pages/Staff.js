@@ -76,11 +76,11 @@ const Staff = (props) => {
     fetchData();
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Staff" id="staff"/>
+      <Sidebar window={window} name={t("staff:staff")} id="staff"/>
       <Box
         width="100%"
         display="flex"

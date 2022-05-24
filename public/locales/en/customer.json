@@ -1,4 +1,5 @@
 {
+    "customer":"Customer",
     "customerName" : "Name",
     "phoneNumber" : "Phone number",
     "ageGroup":"Age group",

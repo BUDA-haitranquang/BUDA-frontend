@@ -39,7 +39,7 @@ const IngredientDetail = (props) => {
 
     fetchData();
   }, [data]);
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name="Ingredient Detail" id="ingredient" />

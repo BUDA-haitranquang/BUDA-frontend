@@ -59,7 +59,7 @@ const Product = (props) => {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("product:name")
+      label: t("product:productName")
     },
     {
       id: "sellingPrice",
@@ -95,7 +95,7 @@ const Product = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Product" id="product"/>
+      <Sidebar window={window} name={t("product:product")} id="product"/>
       <Box
         width="100%"
         display="flex"

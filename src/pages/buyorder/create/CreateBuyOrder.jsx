@@ -39,11 +39,11 @@ function CreateBuyOrder(props) {
       buyOrderRequest.buyOrderItemDTOs &&
       buyOrderRequest.buyOrderItemDTOs.length > 0
     ) {
-      buyOrderRequest.buyOrderItemDTOs.every((item, index) => {
+      return buyOrderRequest.buyOrderItemDTOs.every((item, index) => {
         if (item.quantity <= 0) {
           enqueueSnackbar(
             t("error.validateBuyOrderItems.quantityLessThanOrEqualZero", {
-              index: (index + 1).toString()
+              index: (index + 1).toString(),
             }),
             AlertErrorProp
           );
@@ -52,7 +52,7 @@ function CreateBuyOrder(props) {
         if (item.pricePerUnit <= 0) {
           enqueueSnackbar(
             t("error.validateBuyOrderItems.priceLessThanZero", {
-              index: (index + 1).toString()
+              index: (index + 1).toString(),
             }),
             AlertErrorProp
           );
@@ -60,9 +60,11 @@ function CreateBuyOrder(props) {
         }
         return true;
       });
-      return true;
     }
-    enqueueSnackbar(t("error.validateBuyOrderItems.emptyBuyOrder"), AlertErrorProp);
+    enqueueSnackbar(
+      t("error.validateBuyOrderItems.emptyBuyOrder"),
+      AlertErrorProp
+    );
     return false;
   };
 

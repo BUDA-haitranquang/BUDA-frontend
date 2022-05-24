@@ -77,11 +77,11 @@ const FixCost = (props) => {
     console.log(data);
   }, [data]);
 
-  if (error) return <Redirect to="/login" />;
+  // if (error) return <Redirect to="/login" />;
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Cost" id="cost"/>
+      <Sidebar window={window} name={t("cost:fixedCost")} id="cost"/>
       <Box
         width="100%"
         display="flex"

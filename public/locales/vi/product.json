@@ -1,4 +1,5 @@
 {
+  "product":"Sản phẩm",
   "productName": "Tên sản phẩm",
   "name": "Tên SP",
   "sku": "Mã SKU",
@@ -8,8 +9,12 @@
   "cost": "Chi phí",
   "description": "Mô tả",
   "table": {},
+  "name":"Sản phẩm",
+  "productCollation":"Kiểm kê sản phẩm",
   "addProductModal": {
-    "title": "Thêm sản phẩm mới"
+    "title": "Thêm sản phẩm mới",
+    "uploadImage": "Thêm ảnh",
+    "removeImage": "Bỏ ảnh"
   },
   "editProductModal": {
     "title": "Sửa sản phẩm"

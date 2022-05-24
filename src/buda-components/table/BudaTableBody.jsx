@@ -1,7 +1,7 @@
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/styles";
-import React, { useState } from "react";
+import React from "react";
 import { getComparator, stableSort } from "../../utils/tableUtils";
 
 const BudaTableBody = (props) => {
@@ -51,7 +51,7 @@ const BudaTableBody = (props) => {
         const isItemSelected = isSelected(row[type]);
         const labelId = `enhanced-table-checkbox-${idx}`;
         return (
-          <CustomWidthTooltip title={row.description || ""}>
+          <CustomWidthTooltip title={row.description || ""} key={row.id}>
             <TableRow
               sx={{ cursor: "pointer" }}
               hover
@@ -62,7 +62,6 @@ const BudaTableBody = (props) => {
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
-              key={row.id}
               selected={isItemSelected}
             >
               {isNotShowCheckbox ? (
