@@ -4,17 +4,20 @@ import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { EDIT_INGREDIENT_QUANTITY } from "../../graphQl/ingredients/ingredientMutation";
 import { Ingredient_Collation } from "../../graphQl/ingredients/ingredientQueries";
-import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
-
+import { useTranslation } from "react-i18next";
 const IngredientCollationModal = ({
-                                    isOpen,
-                                    handleClose,
-                                    title,
-                                    ingredientID,
-                                    amountChange,
-                                    desChange
-                                  }) => {
+  isOpen,
+  handleClose,
+  title,
+  ingredientID,
+  amountChange,
+  desChange,
+}) => {
   const [comment, setComment] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const [amount, setAmount] = useState(null);
@@ -38,18 +41,16 @@ const IngredientCollationModal = ({
       variables: {
         ingredientID: parseInt(ingredientID),
         amountLeftChange: parseInt(amount),
-        message: comment
+        message: comment,
       },
-      refretchQueries: [{ query: Ingredient_Collation }]
+      refretchQueries: [{ query: Ingredient_Collation }],
     })
       .then((res) => {
         handleClose();
         enqueueSnackbar("Add successfully", AlertSuccessProp);
       })
       .then(resetForm())
-      .catch((e) =>
-        enqueueSnackbar("An error have happened", AlertErrorProp)
-      )
+      .catch((e) => enqueueSnackbar("An error have happened", AlertErrorProp))
       .finally(setLoading(false));
   };
 
@@ -84,7 +85,7 @@ const IngredientCollationModal = ({
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 }
+            "& > :not(style)": { m: 1 },
           }}
         >
           <TextField

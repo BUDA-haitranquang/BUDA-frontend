@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { color4 } from "../../CreateOrder";
 import { useDispatch, useSelector } from "react-redux";
 import OrderProductItem from "./OrderProductItem";
-
+import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
     backgroundColor: `${color4}`,
@@ -41,56 +41,57 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-const headCells = [
-  {
-    id: "no",
-    numeric: false,
-    disablePadding: false,
-    label: "No.",
-    size: 1,
-  },
-  {
-    id: "sku",
-    numeric: false,
-    disablePadding: false,
-    label: "SKU",
-    size: 2,
-  },
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-    size: 4,
-  },
-  {
-    id: "sellingPrice",
-    numeric: true,
-    disablePadding: true,
-    label: "Price",
-    size: 2,
-  },
-  {
-    id: "qty",
-    numeric: true,
-    disablePadding: true,
-    label: "Qty.",
-    size: 1,
-  },
-  {
-    id: "total",
-    numeric: true,
-    disablePadding: true,
-    label: "Total",
-    size: 2,
-  },
-];
-
 export default function OrderProducts() {
   const classes = useStyle();
   const [rows, setRows] = useState([]);
   const { productCart } = useSelector((state) => state.productCart);
-
+  const {t} = useTranslation(['sell']);
+  
+  const headCells = [
+    {
+      id: "no",
+      numeric: false,
+      disablePadding: false,
+      label: t('sell:productTable.number'),
+      size: 1,
+    },
+    {
+      id: "sku",
+      numeric: false,
+      disablePadding: false,
+      label: "SKU",
+      size: 2,
+    },
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t('sell:productTable.name'),
+      size: 4,
+    },
+    {
+      id: "sellingPrice",
+      numeric: true,
+      disablePadding: true,
+      label: t("sell:productTable.price"),
+      size: 2,
+    },
+    {
+      id: "qty",
+      numeric: true,
+      disablePadding: true,
+      label: t('sell:productTable.quantity'),
+      size: 1,
+    },
+    {
+      id: "total",
+      numeric: true,
+      disablePadding: true,
+      label: t('sell:productTable.total'),
+      size: 2,
+    },
+  ];
+  
   useEffect(() => {
     async function fetchData() {
       if (productCart) setRows(productCart);
