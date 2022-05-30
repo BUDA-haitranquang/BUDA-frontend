@@ -7,45 +7,45 @@ import Sidebar from "../../components/Sidebar";
 import IngredientCollationTableBody from "../../components/table/body/IngredientCollationTableBody";
 import { Ingredient_Collation } from "../../graphQl/ingredients/ingredientQueries";
 import BudaTable from "../../buda-components/table/BudaTable";
-
-const headCells = [
-  {
-    id: "ingredientSKU",
-    numeric: false,
-    disablePadding: false,
-    label: "SKU"
-  },
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name"
-  },
-  {
-    id: "message",
-    numeric: false,
-    disablePadding: false,
-    label: "Message"
-  },
-  {
-    id: "amountLeft",
-    numeric: true,
-    disablePadding: true,
-    label: "Amount Left"
-  },
-  {
-    id: "Edit",
-    numeric: true,
-    disablePadding: true,
-    label: "Edit"
-  }
-];
+import { useTranslation } from "react-i18next";
 
 const IngredientCollation = (props) => {
   const { window } = props;
+  const {t} = useTranslation('ingredientCollation');
   const [ingredients, setIngredients] = useState([]);
   const { error, loading, data } = useQuery(Ingredient_Collation);
-
+  const headCells = [
+    {
+      id: "ingredientSKU",
+      numeric: false,
+      disablePadding: false,
+      label: "SKU"
+    },
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("ingredientCollation:ingredient")
+    },
+    {
+      id: "message",
+      numeric: false,
+      disablePadding: false,
+      label: t("ingredientCollation:message")
+    },
+    {
+      id: "amountLeft",
+      numeric: true,
+      disablePadding: true,
+      label: t("ingredientCollation:amountLeft")
+    },
+    {
+      id: "Edit",
+      numeric: true,
+      disablePadding: true,
+      label: t("ingredientCollation:edit")
+    }
+  ];
   useEffect(() => {
     async function fetchData() {
       if (data) setIngredients(data.ingredientsByUser.map(item => item));
@@ -58,7 +58,7 @@ const IngredientCollation = (props) => {
   
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Ingredient Collation" id="ingredient"/>
+      <Sidebar window={window} name={t('ingredientCollation:title')} id="ingredient"/>
       <Box
         width="100%"
         display="flex"

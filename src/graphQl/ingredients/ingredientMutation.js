@@ -71,3 +71,24 @@ export const EDIT_INGREDIENT_QUANTITY = gql `
     }
     
 `
+
+export const REATAIL_FROM_INGREDIENT = gql`
+    mutation newRetailFromIngredient(
+        $ingredientID: Int!
+        $productSKU: String!
+        $price: Float!
+    )
+    {
+        newRetailFromIngredient(
+            newRetail:{
+                ingredientID: $ingredientID
+                productSKU: $productSKU
+                price: $price
+            }
+        )
+        {
+            productID
+        }
+    }
+    
+`;

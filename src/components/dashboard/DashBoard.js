@@ -18,13 +18,10 @@ import IncompletedSellOrder from "./IncompletedSellOrder";
 import IncompletedBuyOrder from "./IncompletedBuyOrder";
 import IncompletedFixedCostBill from "./IncompletedFixedCostBill";
 import IncompletedOtherCost from "./IncompletedOtherCost";
-
-const info = [
-  { name: "revenue", color: "#82ca9d", datakey: "revenue" },
-  { name: "expense", color: "#DC143C", datakey: "expense" },
-];
+import { useTranslation } from "react-i18next";
 
 const MainDashBoard = () => {
+  const {t} = useTranslation(['dashboard']);
   const [chart, setChart] = useState(0);
   const [revenue, setRevenue] = useState([]);
   const [tab, setTab] = useState(0);
@@ -55,6 +52,11 @@ const MainDashBoard = () => {
     fetchData();
   }, [dayRevenueData]);
 
+  const info = [
+    { name: t("dashboard:revenue"), color: "#82ca9d", datakey: "revenue" },
+    { name: t("dashboard:expense"), color: "#DC143C", datakey: "expense" },
+  ];
+
   return (
     <Box width="100%">
       <Grid container spacing={2} sx={{ width: "100%" }}>
@@ -84,7 +86,7 @@ const MainDashBoard = () => {
                 justifyContent="space-between"
               >
                 <Box>
-                  <h1 style={{ margin: "10px 0 0 30px " }}>Overview</h1>
+                  <h1 style={{ margin: "10px 0 0 30px " }}>{t("dashboard:overview")}</h1>
                 </Box>
                 <Box pt={1}>
                   <ButtonGroup sx={{ paddingRight: "30px" }}>
@@ -128,10 +130,10 @@ const MainDashBoard = () => {
 
       <Box>
         <Tabs value={tab} onChange={handleChangeTab}>
-          <Tab label="Sell Order" />
-          <Tab label="Buy Order" />
-          <Tab label="Fixed Cost" />
-          <Tab label="Other Cost" />
+          <Tab label={t("dashboard:sellOrder.title")} />
+          <Tab label={t("dashboard:buyOrder.title")} />
+          <Tab label={t("dashboard:fixedCost.title")} />
+          <Tab label={t("dashboard:otherCost.title")} />
         </Tabs>
       </Box>
       <Divider />

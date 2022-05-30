@@ -13,5 +13,6 @@
     "Account" : "Tài khoản",
     "Password" : "Mật Khẩu",
     "search":"Tìm kiếm",
-    "data":"Dữ liệu"
+    "data":"Dữ liệu",
+    "rowsPerPage":"Số hàng trên trang"
 }

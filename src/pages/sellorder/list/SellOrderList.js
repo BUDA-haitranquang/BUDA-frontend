@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../../components/Sidebar";
 import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useTranslation } from "react-i18next";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
 import { Redirect, useLocation } from "react-router-dom";
 import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
@@ -11,45 +12,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries";
 import { DELETE_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderMutation";
 import { capitalizeFirstLetter } from "../../../utils/utils";
-
-const headCells = [
-  {
-    id: "textId",
-    numeric: false,
-    disablePadding: false,
-    label: "Text ID",
-  },
-  {
-    id: "customerName",
-    numeric: false,
-    disablePadding: true,
-    label: "Customer",
-  },
-  {
-    id: "finalCost",
-    numeric: true,
-    disablePadding: true,
-    label: "Final cost",
-  },
-  {
-    id: "creationTime",
-    numeric: true,
-    disablePadding: true,
-    label: "Creation time",
-  },
-  {
-    id: "finishTime",
-    numeric: true,
-    disablePadding: true,
-    label: "Finish time",
-  },
-  {
-    id: "status",
-    numeric: false,
-    disablePadding: true,
-    label: "Status",
-  },
-];
 
 const SellOrderList = (props) => {
   const { window } = props;
@@ -65,6 +27,47 @@ const SellOrderList = (props) => {
 
   const { error, refetch } = useQuery(LOAD_SELL_ORDER);
   const [deleteSellOrder] = useMutation(DELETE_SELL_ORDER);
+
+  const { t } = useTranslation("sellOrderHistory");
+
+  const headCells = [
+    {
+      id: "sellOrderID",
+      numeric: false,
+      disablePadding: false,
+      label: "ID",
+    },
+    {
+      id: "customerName",
+      numeric: false,
+      disablePadding: true,
+      label: t("sellOrderHistory:table.customer"),
+    },
+    {
+      id: "finalCost",
+      numeric: true,
+      disablePadding: true,
+      label: t("sellOrderHistory:table.finalCost"),
+    },
+    {
+      id: "creationTime",
+      numeric: true,
+      disablePadding: true,
+      label: t("sellOrderHistory:table.creationTime"),
+    },
+    {
+      id: "finishTime",
+      numeric: true,
+      disablePadding: true,
+      label: t("sellOrderHistory:table.finishTime"),
+    },
+    {
+      id: "status",
+      numeric: false,
+      disablePadding: true,
+      label: t("sellOrderHistory:table.status"),
+    },
+  ];
 
   /// initialize
   useEffect(() => {
@@ -183,7 +186,11 @@ const SellOrderList = (props) => {
 
   return (
     <Box sx={{ display: "flex", margin: "6px" }}>
-      <Sidebar window={window} name="Sell order" id="business" />
+      <Sidebar
+        window={window}
+        name={t("sellOrderHistory:title")}
+        id="business"
+      />
       <Box
         width="100%"
         display="flex"
@@ -200,7 +207,7 @@ const SellOrderList = (props) => {
           style={{ alignSelf: "flex-end" }}
           onClick={() => history.push(`/business/sell`)}
         >
-          Create sell order
+          {t("sellOrderHistory:createSellOrder")}
         </Button>
 
         <BudaPaginableTable

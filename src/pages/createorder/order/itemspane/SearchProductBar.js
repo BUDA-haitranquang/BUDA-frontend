@@ -16,7 +16,7 @@ import {
   addProductCart,
   clearProductCart,
 } from "../../../../redux/productCartSlice";
-
+import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
     marginBottom: "12px",
@@ -36,7 +36,7 @@ export default function SearchProductBar() {
   const [searchProductValue, setSearchProductValue] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
-
+  const {t} = useTranslation(['sell']);
   useEffect(() => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser);
@@ -68,7 +68,7 @@ export default function SearchProductBar() {
         sx={{ width: "15%", padding: "2px" }}
         onClick={handleOpenModal}
       >
-        NEW PRODUCT
+        {t('sell:newProduct')}
       </Button>
       <Autocomplete
         id="product-select"
@@ -90,16 +90,16 @@ export default function SearchProductBar() {
                 {option.name}
               </Grid>
               <Grid item xs={2} sx={{ display: "flex" }}>
-                <Typography> Left: {option.amountLeft} </Typography>
+                <Typography> {t('sell:left')}: {option.amountLeft} </Typography>
               </Grid>
               <Grid item xs={2} sx={{ display: "flex" }}>
-                <Typography> Price: {option.sellingPrice} </Typography>
+                <Typography> {t('sell:price')}: {option.sellingPrice} </Typography>
               </Grid>
             </Grid>
           </Box>
         )}
         renderInput={(params) => {
-          return <TextField {...params} label="Search Product"></TextField>;
+          return <TextField {...params} label={t("sell:searchProduct")}></TextField>;
         }}
       />
       <Button
@@ -109,7 +109,7 @@ export default function SearchProductBar() {
         onClick={() => dispatch(clearProductCart())}
         loadingIndicator="Clearing..."
       >
-        CLEAR CART
+        {t('sell:clearCart')}
       </Button>
 
       <AddProductModal isOpen={isOpenModal} handleClose={handleCloseModal} />

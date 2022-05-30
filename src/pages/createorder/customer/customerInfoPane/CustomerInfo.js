@@ -12,7 +12,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCustomer } from "../../../../redux/productCartSlice";
 import { color4 } from "../../CreateOrder";
-
+import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
     backgroundColor: `${color4}`,
@@ -28,6 +28,7 @@ const useStyle = makeStyles(() => ({
 
 export default function CustomerInfo() {
   const classes = useStyle();
+  const {t} = useTranslation('sell');
   const dispatch = useDispatch();
   const { customer } = useSelector((state) => state.productCart);
   return (
@@ -36,37 +37,37 @@ export default function CustomerInfo() {
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell>Name:</TableCell>
+              <TableCell>{t('sell:customerInfo.name')}:</TableCell>
               <TableCell align="right">
                 <i>{customer?.name}</i>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Phone:</TableCell>
+              <TableCell>{t('sell:customerInfo.phone')}:</TableCell>
               <TableCell align="right">
                 <i>{customer?.phonenumber}</i>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Total Spend:</TableCell>
+              <TableCell>{t('sell:customerInfo.totalSpend')}:</TableCell>
               <TableCell align="right">
                 <i>{customer?.totalSpend?.toLocaleString() || 0}</i>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Gender:</TableCell>
+              <TableCell>{t('sell:customerInfo.gender')}:</TableCell>
               <TableCell align="right">
                 <i>{customer?.gender}</i>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Age Group:</TableCell>
+              <TableCell>{t('sell:customerInfo.ageGroup')}:</TableCell>
               <TableCell align="right">
                 <i>{customer?.ageGroup}</i>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Address:</TableCell>
+              <TableCell>{t('sell:customerInfo.address')}:</TableCell>
               <TableCell align="right">
                 <i>{customer?.address}</i>
               </TableCell>
@@ -80,7 +81,7 @@ export default function CustomerInfo() {
           sx={{ marginTop: "24px" }}
           onClick={() => dispatch(setCustomer(null))}
         >
-          Remove
+          {t('sell:remove')}
         </Button>
       </Paper>
     )

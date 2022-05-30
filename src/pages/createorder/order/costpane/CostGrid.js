@@ -12,7 +12,7 @@ import {
   deleteDiscount,
 } from "../../../../redux/productCartSlice";
 import UneditableMoneyBox from "../../common/moneybox/UneditableMoneyBox";
-
+import { useTranslation } from "react-i18next";
 export default function CostGrid() {
   const dispatch = useDispatch();
   const { totalPrice } = useSelector((state) => state.productCart);
@@ -20,7 +20,7 @@ export default function CostGrid() {
   const [discounts, setDiscounts] = useState([]);
   const [calculatedDiscountValue, setCalculatedDiscountValue] = useState(0);
   // const [discountValue, setDiscountValue] = useState(0);
-
+  const {t} = useTranslation(['sell']);
   const { error, loading, data } = useQuery(LOAD_DISCOUNTS);
 
   useEffect(() => {
@@ -133,14 +133,14 @@ export default function CostGrid() {
     >
       <UneditableMoneyBox
         xs={4}
-        title="Total"
+        title={t('sell:total')}
         value={totalPrice.toLocaleString()}
       />
 
       <Box className="discount-box">
         <UneditableMoneyBox
           xs={4}
-          title="Discount"
+          title={t('sell:discount')}
           // value={discountValue}
           value={calculatedDiscountValue.toLocaleString()}
           // onChange={changeDiscountPrice}
@@ -172,7 +172,7 @@ export default function CostGrid() {
         )}
 
         <LiveSearch
-          placeholder="Search Discount"
+          placeholder={t("sell:searchDiscount")}
           // createable
           // textCreate="Add new Discount"
           // onClickCreate={() => setOpenCreateDiscount(true)}
@@ -185,7 +185,7 @@ export default function CostGrid() {
 
       <UneditableMoneyBox
         xs={4}
-        title="Final"
+        title={t('sell:final')}
         // value={totalPrice - discountValue}
         value={(totalPrice - (calculatedDiscountValue || 0)).toLocaleString()}
       />

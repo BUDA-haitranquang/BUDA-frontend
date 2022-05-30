@@ -13,7 +13,7 @@ const IncompletedOtherCost = (props) => {
   //   const { t } = useTranslation(["common", "product"]);
   const [otherCost, setOtherCost] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_OTHER_COST);
-
+  const {t} = useTranslation('dashboard');
   const toObject = (data1) => {
     let incompleted = {};
     incompleted.otherCostID = data1?.otherCostID;
@@ -47,25 +47,25 @@ const IncompletedOtherCost = (props) => {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: "Name",
+      label: t("dashboard:otherCost.name"),
     },
     {
       id: "creationTime",
       numeric: false,
       disablePadding: true,
-      label: "Creation Time",
+      label: t("dashboard:otherCost.creationTime"),
     },
     {
       id: "totalCost",
       numeric: true,
       disablePadding: true,
-      label: "Total Cost",
+      label: t("dashboard:otherCost.totalCost"),
     },
     {
       id: "status",
       numeric: false,
       disablePadding: true,
-      label: "Status",
+      label: t("dashboard:otherCost.status"),
     },
   ];
 

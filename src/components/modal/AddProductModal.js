@@ -116,7 +116,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     formData.append("file", imageCompressed);
     return axios({
       method: "post",
-      url: "http://103.173.228.124:8080/api/picture/upload",
+      url: "http://103.173.228.124:8079/api/picture/upload",
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
