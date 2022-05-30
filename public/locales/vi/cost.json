@@ -4,7 +4,7 @@
     "dueTime" : "Hạn cuối",
     "creationTime" : "Ngày tạo",
     "totalSpend" : "Tổng Trả",
-    "Period" :"Chu kỳ",
+    "Period" :"Chu kỳ (ngày)",
     "moneyAmount" : "Tổng lượng tiền",
     "addCostModal":{
         "title" : "Chi phí phát sinh"
