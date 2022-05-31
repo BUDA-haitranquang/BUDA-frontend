@@ -4,52 +4,54 @@ import Sidebar from "../../../components/Sidebar";
 import BudaServerTable from "../../../buda-components/budaservertable/BudaServerTable";
 import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-const headCells = [
-  {
-    id: "sellOrderID",
-    numeric: false,
-    disablePadding: false,
-    label: "ID",
-  },
-  {
-    id: "customerName",
-    numeric: false,
-    disablePadding: true,
-    label: "Customer",
-  },
-  {
-    id: "finalCost",
-    numeric: true,
-    disablePadding: true,
-    label: "Final cost",
-  },
-  {
-    id: "creationTime",
-    numeric: true,
-    disablePadding: true,
-    label: "Creation time",
-  },
-  {
-    id: "finishTime",
-    numeric: true,
-    disablePadding: true,
-    label: "Finish time",
-  },
-  {
-    id: "status",
-    numeric: false,
-    disablePadding: true,
-    label: "Status",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const SellOrderList = (props) => {
   const { window } = props;
   const history = useHistory();
+  const {t} = useTranslation('sellOrderHistory')
+  const headCells = [
+    {
+      id: "sellOrderID",
+      numeric: false,
+      disablePadding: false,
+      label: "ID",
+    },
+    {
+      id: "customerName",
+      numeric: false,
+      disablePadding: true,
+      label: t("sellOrderHistory:table.customer"),
+    },
+    {
+      id: "finalCost",
+      numeric: true,
+      disablePadding: true,
+      label:  t("sellOrderHistory:table.finalCost"),
+    },
+    {
+      id: "creationTime",
+      numeric: true,
+      disablePadding: true,
+      label:  t("sellOrderHistory:table.creationTime"),
+    },
+    {
+      id: "finishTime",
+      numeric: true,
+      disablePadding: true,
+      label:  t("sellOrderHistory:table.finishTime"),
+    },
+    {
+      id: "status",
+      numeric: false,
+      disablePadding: true,
+      label:  t("sellOrderHistory:table.status"),
+    },
+  ];
+  
   return (
     <Box sx={{ display: "flex", margin: "6px" }}>
-      <Sidebar window={window} name="Sell order" id="business" />
+      <Sidebar window={window} name={ t("sellOrderHistory:title")} id="business" />
       <Box
         width="100%"
         display="flex"
@@ -66,7 +68,7 @@ const SellOrderList = (props) => {
           style={{ alignSelf: "flex-end" }}
           onClick={() => history.push(`/business/sell`)}
         >
-          Create sell order
+           {t("sellOrderHistory:createSellOrder")}
         </Button>
 
         <BudaServerTable

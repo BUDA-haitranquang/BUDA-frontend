@@ -13,7 +13,7 @@ const IncompletedFixedCost = (props) => {
   //   const { t } = useTranslation(["common", "product"]);
   const [fixedCost, setFixedCost] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_FIXED_COST);
-
+  const {t} = useTranslation('dashboard');
   const toObject = (data1) => {
     let incompleted = {};
     incompleted.fixedCostBillID = data1?.fixedCostBillID;
@@ -48,25 +48,25 @@ const IncompletedFixedCost = (props) => {
       id: "creationTime",
       numeric: false,
       disablePadding: true,
-      label: "Creation Time",
+      label: t("dashboard:fixedCost.creationTime"),
     },
     {
       id: "dueTime",
       numeric: false,
       disablePadding: false,
-      label: "Due Time",
+      label: t("dashboard:fixedCost.dueTime"),
     },
     {
       id: "totalSpend",
       numeric: true,
       disablePadding: true,
-      label: "Money Amount",
+      label: t("dashboard:fixedCost.moneyAmount"),
     },
     {
       id: "status",
       numeric: false,
       disablePadding: true,
-      label: "Status",
+      label: t("dashboard:fixedCost.status"),
     },
   ];
 

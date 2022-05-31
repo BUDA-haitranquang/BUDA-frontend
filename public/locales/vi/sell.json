@@ -1,0 +1,33 @@
+{
+    "title":"Tạo đơn",
+    "newProduct":"Sản phẩm mới",
+    "clearCart":"Xoá",
+    "newCustomer":"Khách mới",
+    "left":"Tồn kho",
+    "price":"Giá",
+    "searchProduct":"Tìm sản phẩm",
+    "searchCustomer":"Tìm khách",  
+    "productTable":{
+        "number":"STT",
+        "name":"Sản phẩm",
+        "price":"Giá",
+        "quantity":"SL.",
+        "total":"Thành tiền" 
+    },
+    "customerInfo":{
+        "name":"Tên",
+        "phone":"SĐT",
+        "totalSpend":"Tổng chi",
+        "gender":"Giới tính",
+        "ageGroup":"Nhóm tuổi",
+        "address":"Địa chỉ"
+    },
+    "total":"Tổng tiền",
+    "discount":"Giảm giá",
+    "searchDiscount":"Tìm mã giảm giá",
+    "final":"Thanh toán",
+    "customerGives":"Khách trả",
+    "change":"Tiền thừa",
+    "done":"Hoàn thành",
+    "remove":"Xoá khách"
+}

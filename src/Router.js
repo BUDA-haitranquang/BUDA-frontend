@@ -73,7 +73,9 @@ const AppRouter = () => {
         for (let err of graphQLErrors) {
           if (err.extensions.code === "UNAUTHENTICATED") {
             if(countRetryGetToken > 3) {
-              dispatch(removeToken()).then(() => window.location.reload());
+              dispatch(removeToken())
+              setTimeout(window.location.reload(), 0)
+              window.location.reload()
             }
             countRetryGetToken ++;
 

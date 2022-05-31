@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import AddCustomerModal from "../../../../components/modal/AddCustomerModal";
 import { LOAD_CUSTOMERS } from "../../../../graphQl/customers/customersQueries";
 import { addCustomer } from "../../../../redux/productCartSlice";
-
+import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
     display: "flex",
@@ -30,7 +30,7 @@ const useStyle = makeStyles(() => ({
 export default function SearchCustomerBar() {
   const classes = useStyle();
   const dispatch = useDispatch();
-
+  const {t} = useTranslation(['sell']);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [value, setValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -88,7 +88,7 @@ export default function SearchCustomerBar() {
           </Box>
         )}
         renderInput={(params) => {
-          return <TextField {...params} label="Search Customer"></TextField>;
+          return <TextField {...params} label={t('sell:searchCustomer')}></TextField>;
         }}
       />
       <Button
@@ -97,7 +97,7 @@ export default function SearchCustomerBar() {
         sx={{ width: "35%", padding: "2px" }}
         onClick={handleOpenModal}
       >
-        NEW CUSTOMER
+        {t('sell:newCustomer')}
       </Button>
       <AddCustomerModal isOpen={isOpenModal} handleClose={handleCloseModal} />
     </Box>
