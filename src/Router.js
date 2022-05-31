@@ -17,7 +17,6 @@ import {
   Switch,
 } from "react-router-dom";
 import { addRefreshToken, addToken, removeToken } from "../src/redux/tokenSlice";
-import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
 import Ingredient from "./pages/Ingredient";
@@ -31,6 +30,7 @@ import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
 import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
+import CreateOrder from "./pages/createorder/CreateOrder";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
 import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
 import SellOrderStats from "./pages/SellOrderStats";
@@ -45,13 +45,6 @@ import IngredientCollation from "./pages/collation/IngredientCollation";
 import PrintDemo from "./pages/PrintDemo";
 
 const AppRouter = () => {
-  // const errorLink = onError(({ graphqlErrors, networkError }) => {
-  //   if (graphqlErrors) {
-  //     graphqlErrors.map(({ message, location, path }) => {
-  //       alert(`Graphql error ${message}`);
-  //     });
-  //   }
-  // });
 
   const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
   const dispatch = useDispatch();

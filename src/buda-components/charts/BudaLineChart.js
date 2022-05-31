@@ -1,13 +1,7 @@
 import React from "react";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
+  Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis,
+  YAxis
 } from "recharts";
 
 const BudaLineChart = ({

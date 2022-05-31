@@ -3,7 +3,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
-import { React } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import Sidebar from "../../components/Sidebar";

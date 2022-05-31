@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import BudaTable from "../../../buda-components/table/BudaTable";
 import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
 import Sidebar from "../../../components/Sidebar";
