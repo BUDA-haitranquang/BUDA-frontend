@@ -19,7 +19,10 @@ const BuyOrder = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  const [buyOrders, setBuyOrders] = useState([]);
+  const [buyOrders, setBuyOrders] = useState({
+    count: 0,
+    data: [],
+  });
   const [filters, setFilters] = useState({});
 
   const { enqueueSnackbar } = useSnackbar();
@@ -120,7 +123,12 @@ const BuyOrder = () => {
               createdAt: value.createdAt,
             };
           });
-          setBuyOrders(buyOrdersByUser);
+
+          setBuyOrders((buyOrders) => ({
+            ...buyOrders,
+            count: response.data.buyOrdersByFilter.count,
+            data: buyOrdersByUser,
+          }));
         }
       })
       .catch((reason) => enqueueSnackbar(reason, AlertErrorProp));
@@ -204,14 +212,14 @@ const BuyOrder = () => {
           {t("buttonCreate")}
         </Button>
         <BudaPaginableTable
-          data={buyOrders}
+          data={buyOrders.data}
           headCells={headCells}
           onSearch={handleSearch}
           page={filters?.page}
           onPageChange={handlePageChange}
           rowsPerPage={filters?.size}
           onRowsPerPageChange={handleRowsPerPageChange}
-          total={600}
+          total={buyOrders.count}
           deleteItems={handleDelete}
           DetailTableBody={BuyOrderTableBody}
           type="buyOrderID"

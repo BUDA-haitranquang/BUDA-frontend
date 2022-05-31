@@ -20,7 +20,10 @@ const SellOrderList = (props) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  const [sellOrders, setSellOrders] = useState([]);
+  const [sellOrders, setSellOrders] = useState({
+    count: 0,
+    data: [],
+  });
   const [filters, setFilters] = useState({});
 
   const { enqueueSnackbar } = useSnackbar();
@@ -32,10 +35,10 @@ const SellOrderList = (props) => {
 
   const headCells = [
     {
-      id: "sellOrderID",
+      id: "textID",
       numeric: false,
       disablePadding: false,
-      label: "ID",
+      label: t("sellOrderHistory:table.textID"),
     },
     {
       id: "customerName",
@@ -94,7 +97,7 @@ const SellOrderList = (props) => {
       size: searchLimit ? parseInt(searchLimit) : 50,
       customerName: searchCustomerName,
       status: searchStatus,
-      textId: searchTextId,
+      textID: searchTextId,
       from: searchFrom,
       to: searchTo,
     };
@@ -109,21 +112,26 @@ const SellOrderList = (props) => {
       ...filter,
     })
       .then((response) => {
-        if (response.data) {
-          let sellOrdersByUser = [...response.data.sellOrdersByUser].map(
-            (item) => {
-              return {
-                id: item.sellOrderID,
-                customerName: item.customer?.name,
-                sellOrderID: item.textID,
-                finalCost: item.finalCost,
-                creationTime: item.creationTime,
-                finishTime: item.finishTime,
-                status: capitalizeFirstLetter(item.status),
-              };
-            }
-          );
-          setSellOrders(sellOrdersByUser);
+        if (response.data && response.data.sellOrdersByFilter) {
+          let sellOrdersByUser = [
+            ...response.data.sellOrdersByFilter.sellOrders,
+          ].map((item) => {
+            return {
+              id: item.sellOrderID,
+              customerName: item.customer?.name,
+              sellOrderID: item.textID,
+              finalCost: item.finalCost,
+              creationTime: item.creationTime,
+              finishTime: item.finishTime,
+              status: capitalizeFirstLetter(item.status),
+            };
+          });
+
+          setSellOrders((sellOrders) => ({
+            ...sellOrders,
+            count: response.data.sellOrdersByFilter.count,
+            data: sellOrdersByUser,
+          }));
         }
       })
       .catch((reason) => enqueueSnackbar(reason, AlertErrorProp));
@@ -175,7 +183,9 @@ const SellOrderList = (props) => {
       if (index > 0) {
         queryString = queryString.concat("&");
       }
-      queryString = queryString.concat(key, "=", value);
+      if (value.trim().length !== 0) {
+        queryString = queryString.concat(key, "=", value.trim());
+      }
     });
 
     // replace current URL
@@ -211,14 +221,14 @@ const SellOrderList = (props) => {
         </Button>
 
         <BudaPaginableTable
-          data={sellOrders}
+          data={sellOrders.data}
           headCells={headCells}
           onSearch={handleSearch}
           page={filters?.page}
           onPageChange={handlePageChange}
           rowsPerPage={filters?.size}
           onRowsPerPageChange={handleRowsPerPageChange}
-          total={600}
+          total={sellOrders.count || 0}
           deleteItems={handleDelete}
           DetailTableBody={SellOrderTableBody}
           type="buyOrderID"
