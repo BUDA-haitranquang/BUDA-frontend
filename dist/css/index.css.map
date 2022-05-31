@@ -1,0 +1,1 @@
+{"version":3,"file":"css/index.css","mappings":"AAAA,KACI,UACA,SAEI,eACA,iBAEJ,U","sources":["webpack://store-management-app/./src/sass/index.scss"],"sourcesContent":["body {\r\n    padding: 0;\r\n    margin: 0;\r\n    font: {\r\n        size: 3rem;\r\n        weight: 1000;\r\n    };\r\n    color: red;\r\n}"],"names":[],"sourceRoot":""}
