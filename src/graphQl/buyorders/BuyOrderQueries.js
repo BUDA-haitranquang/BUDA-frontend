@@ -1,23 +1,44 @@
 import { gql } from "@apollo/client";
 
 export const LOAD_BUY_ORDERS = gql`
-  query LOAD_BUY_ORDERS($page: Int, $size: Int) {
-    buyOrdersByUser(page: $page, size: $size) {
-      buyOrderID
-      textID
-      supplier {
-        email
-        name
-        address
-        phoneNumber
+  query LOAD_BUY_ORDERS(
+    $page: Int
+    $size: Int
+    $textID: String
+    $supplierName: String
+    $status: Status
+    $from: String
+    $to: String
+  ) {
+    buyOrdersByFilter(
+      page: $page
+      size: $size
+      filter: {
+        textID: $textID
+        supplierName: $supplierName
+        status: $status
+        from: $from
+        to: $to
       }
-      createdAt: creationTime
-      status
-      totalCost
-      staff {
-        name
+    ) {
+      count
+      buyOrders {
+        buyOrderID
+        textID
+        supplier {
+          email
+          name
+          address
+          phoneNumber
+        }
+        createdAt: creationTime
+        status
+        totalCost
+        staff {
+          name
+        }
+        userID
       }
-      userID
     }
   }
 `;

@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import BudaTableBody from "./BudaTableBody";
 import BudaTableHead from "./BudaTableHead";
 import BudaTableToolbar from "./BudaTableToolbar";
+import { isNull } from "lodash";
 
 const BudaPaginableTable = (props) => {
   const {
@@ -38,7 +39,7 @@ const BudaPaginableTable = (props) => {
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
   const [searchBy, setSearchBy] = useState(headCells[0].id);
 
   const handleRequestSort = (e, props) => {
@@ -68,7 +69,7 @@ const BudaPaginableTable = (props) => {
       setSelected([]);
     }
 
-    if (onSearch) {
+    if (onSearch && !isNull(search)) {
       onSearch(searchBy, search);
     }
   }, [search, searchBy]);

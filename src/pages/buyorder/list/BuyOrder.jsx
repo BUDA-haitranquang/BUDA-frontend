@@ -91,7 +91,7 @@ const BuyOrder = () => {
       size: searchLimit ? parseInt(searchLimit) : 50,
       supplierName: searchSupplierName,
       status: searchStatus,
-      textId: searchTextId,
+      textID: searchTextId,
       from: searchFrom,
       to: searchTo,
     };
@@ -107,19 +107,19 @@ const BuyOrder = () => {
     })
       .then((response) => {
         if (response.data) {
-          let buyOrdersByUser = [...response.data.buyOrdersByUser].map(
-            (value) => {
-              return {
-                buyOrderID: value.buyOrderID,
-                textID: value.textID,
-                supplierName: value.supplier?.name,
-                status: value.status,
-                totalCost: value.totalCost,
-                createdBy: value.staff?.name,
-                createdAt: value.createdAt,
-              };
-            }
-          );
+          let buyOrdersByUser = [
+            ...response.data.buyOrdersByFilter.buyOrders,
+          ].map((value) => {
+            return {
+              buyOrderID: value.buyOrderID,
+              textID: value.textID,
+              supplierName: value.supplier?.name,
+              status: value.status,
+              totalCost: value.totalCost,
+              createdBy: value.staff?.name,
+              createdAt: value.createdAt,
+            };
+          });
           setBuyOrders(buyOrdersByUser);
         }
       })
@@ -172,7 +172,9 @@ const BuyOrder = () => {
       if (index > 0) {
         queryString = queryString.concat("&");
       }
-      queryString = queryString.concat(key, "=", value);
+      if (value.trim().length !== 0) {
+        queryString = queryString.concat(key, "=", value.trim());
+      }
     });
 
     // replace current URL
