@@ -65,6 +65,7 @@ const BudaPaginableTable = (props) => {
   };
 
   useEffect(() => {
+    debugger;
     if (selected && selected.length) {
       setSelected([]);
     }
@@ -72,7 +73,14 @@ const BudaPaginableTable = (props) => {
     if (onSearch && !isNull(search)) {
       onSearch(searchBy, search);
     }
-  }, [search, searchBy]);
+  }, [search]);
+
+  useEffect(() => {
+    if (selected && selected.length) {
+      setSelected([]);
+    }
+    setSearch("");
+  }, [searchBy]);
 
   return (
     <Box sx={{ width: "100%" }}>
