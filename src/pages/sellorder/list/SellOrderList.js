@@ -9,7 +9,7 @@ import { Redirect, useLocation } from "react-router-dom";
 import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
 import { useSnackbar } from "notistack";
 import { useMutation, useQuery } from "@apollo/client";
-import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries";
+import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/sellOrderQueries";
 import { DELETE_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderMutation";
 import { capitalizeFirstLetter } from "../../../utils/utils";
 
