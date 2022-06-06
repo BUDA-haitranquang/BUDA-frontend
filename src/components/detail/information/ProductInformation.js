@@ -1,6 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import Barcode from "react-barcode";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
@@ -12,7 +13,7 @@ export default function ProductInformation({ data }) {
     alertAmount,
     costPerUnit,
     description,
-    picture
+    picture,
   } = data.product.product;
 
   const productCombo = data?.productCombo?.productComboIncludeProduct;
@@ -22,12 +23,30 @@ export default function ProductInformation({ data }) {
   return (
     <Grid container direction="row" fullWidth>
       <Grid item xs={3} style={{ height: "100%" }}>
-        {picture ? (
-          <MainImage source={picture.pictureLink} />
-        ) : (
-          <MainImage
-            source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
-        )}
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          {picture ? (
+            <MainImage source={picture.pictureLink} />
+          ) : (
+            <MainImage source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
+          )}
+          <Box maxWidth={150} mt={4}>
+            <Barcode
+              marginTop={6}
+              width={1}
+              height={50}
+              fontSize={14}
+              background="#ccffff"
+              value={"PROD" + sku} // add store identity ?
+              text={"PRODUCT: " + sku}
+            />
+          </Box>
+        </Box>
       </Grid>
       <Grid
         item
@@ -36,7 +55,7 @@ export default function ProductInformation({ data }) {
         style={{
           height: "100%",
           justifyContent: "space-between",
-          marginLeft: "5%"
+          marginLeft: "5%",
         }}
       >
         <Typography variant="subtitle2" style={{ textTransform: "uppercase" }}>
@@ -58,7 +77,7 @@ export default function ProductInformation({ data }) {
             style={{
               marginTop: "40px",
               display: "flex",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             <Typography variant="subtitle3" style={{}}>
