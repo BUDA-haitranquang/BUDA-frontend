@@ -2,7 +2,6 @@ import React from "react";
 import Barcode from "react-barcode";
 
 const IngredientDetailPrintForm = React.forwardRef((props, ref) => {
-  console.log(props);
   const sku = props.sku;
   return (
     <div ref={ref}>
@@ -11,7 +10,6 @@ const IngredientDetailPrintForm = React.forwardRef((props, ref) => {
         width={1}
         height={50}
         fontSize={14}
-        background="#ccffff"
         value={"IGRE" + sku} // add store identity ?
         text={"INGREDIENT: " + sku}
       />

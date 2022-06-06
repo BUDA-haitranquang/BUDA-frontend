@@ -11,7 +11,6 @@ const ProductDetailPrintForm = React.forwardRef((props, ref) => {
         width={1}
         height={50}
         fontSize={14}
-        background="#ccffff"
         value={"PROD" + sku} // add store identity ?
         text={"PRODUCT: " + sku}
       />
