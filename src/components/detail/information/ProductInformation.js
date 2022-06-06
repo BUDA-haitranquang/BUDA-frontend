@@ -1,7 +1,9 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import PrintIcon from "@mui/icons-material/Print";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
-import Barcode from "react-barcode";
+import React, { useRef } from "react";
+import ReactToPrint from "react-to-print";
+import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
@@ -20,6 +22,8 @@ export default function ProductInformation({ data }) {
   const productGroup = data?.productGroup?.productGroupByProduct;
   const productComponent = data?.productComponent?.componentsByProduct;
 
+  const componentRef = useRef();
+
   return (
     <Grid container direction="row" fullWidth>
       <Grid item xs={3} style={{ height: "100%" }}>
@@ -35,15 +39,18 @@ export default function ProductInformation({ data }) {
           ) : (
             <MainImage source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
           )}
-          <Box maxWidth={150} mt={4}>
-            <Barcode
-              marginTop={6}
-              width={1}
-              height={50}
-              fontSize={14}
-              background="#ccffff"
-              value={"PROD" + sku} // add store identity ?
-              text={"PRODUCT: " + sku}
+          <Box maxWidth={150} mt={3}>
+            <ProductDetailPrintForm ref={componentRef} sku={sku} />
+            {/* button to trigger printing of target component */}
+            <ReactToPrint
+              trigger={() => (
+                <Button sx={{ marginTop: "10px" }} variant="contained">
+                  <PrintIcon style={{ marginRight: "10px" }} />
+                  Barcode
+                </Button>
+              )}
+              content={() => componentRef.current}
+              documentTitle={"Product:" + name}
             />
           </Box>
         </Box>
