@@ -1,4 +1,3 @@
-import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
 import Barcode from "react-barcode";
 
