@@ -6,19 +6,19 @@ import BudaLineChart from "../../buda-components/charts/BudaLineChart";
 import BudaBarChart from "../../buda-components/charts/BudaBarChart";
 import { useQuery } from "@apollo/client";
 import {
-  LOAD_BUSINESS_OVERALL_EVERY_DAY,
+  LOAD_BUSINESS_OVERALL_30_DAY,
   LOAD_BUSINESS_OVERALL_EVERY_MONTH,
   LOAD_BUSINESS_OVERALL_EVERY_WEEK,
   LOAD_BUSINESS_OVERALL_EVERY_YEAR
 } from "../../graphQl/revenue statistics/businessOverallStatistics";
-
+import BudaDatePicker from "../../buda-components/datepicker/BudaDatePicker";
 const info = [
   { name: "revenue", color: "#82ca9d", datakey: "revenue" },
   { name: "expense", color: "#DC143C", datakey: "expense" }
   // { name: "profit", color: "#00BFFF", datakey: "profit" },
 ];
 
-const MainDashBoard = () => {
+const Reveneu = () => {
   const [chart, setChart] = useState(0);
   const [timeSelected, setTimeSelected] = useState(0);
   const [revenue, setRevenue] = useState([]);
@@ -26,7 +26,7 @@ const MainDashBoard = () => {
   const [dayEnd, setDayEnd] = useState(new Date());
 
   const { error: dayRevenueError, data: dayRevenueData } = useQuery(
-    LOAD_BUSINESS_OVERALL_EVERY_DAY
+    LOAD_BUSINESS_OVERALL_30_DAY
   );
   const { error: weekRevenueError, data: weekRevenueData } = useQuery(
     LOAD_BUSINESS_OVERALL_EVERY_WEEK
@@ -196,7 +196,7 @@ const MainDashBoard = () => {
               </Button>
               <Box py={3}></Box>
             </Grid>
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
               <Box sx={{ display: "flex", justifyContent: "row" }}>
                 <BudaDatePicker onlyDate={true} setValue={setDayBegin} />
                 <Box
@@ -221,7 +221,7 @@ const MainDashBoard = () => {
                 {" "}
                 Submit{" "}
               </Button>
-            </Grid> */}
+            </Grid>
           </Grid>
         </Box>
       </Grid>
@@ -229,4 +229,4 @@ const MainDashBoard = () => {
   );
 };
 
-export default MainDashBoard;
+export default Reveneu;

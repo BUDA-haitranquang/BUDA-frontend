@@ -4,7 +4,6 @@ import {
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -18,6 +17,7 @@ const BudaLineChart = ({
   height = "100%",
   legend = true,
   yUnit,
+  legendPosition = "bottom",
   ...props
 }) => {
   return (
@@ -33,13 +33,19 @@ const BudaLineChart = ({
           bottom: 5,
         }}
       >
-        {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey={xAxis} />
         <YAxis unit={yUnit} />
         <Tooltip />
-        {legend && <Legend verticalAlign='middle' align='right' layout="vertical"/>}
-        {/* <Line type="linear" dataKey="pv" stroke="#CD201F" activeDot={{ r: 8 }} name = 'Chi phí'/>
-          <Line type="linear" dataKey="uv" stroke="#82ca9d" name='Doanh thu' /> */}
+        {legend && (
+          <Legend
+            verticalAlign={
+              legendPosition === "bottom" ? legendPosition : "middle"
+            }
+            align={legendPosition === "bottom" ? "center" : "right"}
+            layout={legendPosition === "bottom" ? "horizontal" : "vertical"}
+          />
+        )}
+
         {info.map((item) => (
           <Line
             type="linear"
