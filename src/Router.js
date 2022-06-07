@@ -47,6 +47,7 @@ import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
 import IngredientCollation from "./pages/collation/IngredientCollation";
 import PrintDemo from "./pages/PrintDemo";
+import DetailDiscount from "./pages/discount/detail/DetailDiscount";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -302,6 +303,12 @@ const AppRouter = () => {
             exact
             path="/discount"
             component={Discount}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/discount/:id"
+            component={DetailDiscount}
           />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
