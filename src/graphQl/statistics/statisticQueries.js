@@ -35,3 +35,24 @@ export const LOAD_TOTAL_SPEND_AGE_THIS_MONTH_BY_USER = gql`
     }
   }
 `;
+
+export const LOAD_RETENTION_RATE_WEEKLY = gql`
+  query {
+    retentionRateWeekly
+  }
+`;
+
+export const LOAD_RETENTION_RATE_MOTHLY = gql`
+  query {
+    retentionRateMonthly
+  }
+`;
+
+export const LOAD_TOTAL_COUNT_BY_HOUR = gql`
+  query {
+    totalCountByHours {
+      hour
+      totalCount
+    }
+  }
+`;

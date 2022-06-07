@@ -112,6 +112,7 @@ const MainDashBoard = () => {
                   info={info}
                   xAxis="timePeriod"
                   legend={true}
+                  legendPosition = "right"
                 />
               ) : (
                 <BudaBarChart
@@ -120,6 +121,7 @@ const MainDashBoard = () => {
                   info={info}
                   xAxis="timePeriod"
                   legend={true}
+                  legendPosition = "right"
                 />
               )}
             </>

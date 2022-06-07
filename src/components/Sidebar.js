@@ -8,6 +8,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
 import WorkIcon from "@mui/icons-material/Work";
+import BarChartIcon from "@mui/icons-material/BarChart";
 import { useTranslation } from "react-i18next";
 import {
   AppBar,
@@ -132,6 +133,7 @@ const title = [
   ["Customer",t("sidebar:customer.section")],
   ["Staff",t("sidebar:staff.section")],
   ["Cost",t("sidebar:cost.section")],
+  ["Statistic",t("sidebar:statistic.section")],
   // "statistic",
 ];
 
@@ -164,8 +166,9 @@ const title = [
     ],
     [
       createData("Business", "business", ""),
-      // createData("Customer", "customer", ""),
-      // createData("Product", "product", ""),
+      createData("Customer", "customer", ""),
+      createData("Product", "product", ""),
+      createData("Reveneu","reveneu",""),
     ],
   ];
 
@@ -187,8 +190,8 @@ const title = [
         return <AssignmentIndIcon />;
       case 7:
         return <MonetizationOnIcon />;
-      // case 8:
-      //   return <BarChartIcon />;
+      case 8:
+        return <BarChartIcon />;
       default:
         break;
     }

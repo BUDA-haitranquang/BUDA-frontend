@@ -34,6 +34,9 @@
         "fixed":"Chi Phí Cố Định",
         "fixedCostBill":"Hoá Đơn Cố Định",
         "otherCost":"Chi Phí Khác"
+    },
+    "statistic":{
+        "section":"Thống Kê"
     }
     
 
