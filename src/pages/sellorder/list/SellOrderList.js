@@ -137,8 +137,6 @@ const SellOrderList = (props) => {
       .catch((reason) => enqueueSnackbar(reason, AlertErrorProp));
   };
 
-  if (error) return <Redirect to="/login" />;
-
   const handleDelete = (selected) => {
     if (selected === []) return;
     selected.forEach((item) => {
