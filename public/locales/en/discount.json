@@ -1,0 +1,23 @@
+{
+  "list": {
+
+  },
+
+  "detail": {
+    "title": "Discount detail",
+
+    "boxPrimaryInfo": {
+      "title": "Discount detail information",
+      "percentage": "Discount (%)",
+      "cashLimit": "Maximum discount value",
+      "orderCount": "Maximum orders"
+    },
+
+    "boxAdditionalInfo": {
+      "title": "Additional information",
+      "createdAt": "Created at",
+      "finishedAt": "Finished at",
+      "description": "Description"
+    }
+  }
+}
