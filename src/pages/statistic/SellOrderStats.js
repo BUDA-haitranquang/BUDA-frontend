@@ -1,14 +1,14 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Sidebar from "../components/Sidebar";
-import AgeGroupSellOrder from "../components/statistics/sellorder/AgeGroupSellOrder";
-import GenderSellOrder from "../components/statistics/sellorder/GenderSellOrder";
+import Sidebar from "../../components/Sidebar";
+import AgeGroupSellOrder from "../../components/statistics/sellorder/AgeGroupSellOrder";
+import GenderSellOrder from "../../components/statistics/sellorder/GenderSellOrder";
 
 const SellOrderStats = (props) => {
   const { window } = props;
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Sell order " id="business" />
+      <Sidebar window={window} name="Sell order " id="statistic" />
       <Box
         width="100%"
         display="flex"

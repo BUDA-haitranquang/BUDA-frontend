@@ -16,7 +16,11 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { addRefreshToken, addToken, removeToken } from "../src/redux/tokenSlice";
+import {
+  addRefreshToken,
+  addToken,
+  removeToken,
+} from "../src/redux/tokenSlice";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
@@ -28,12 +32,13 @@ import Staff from "./pages/Staff";
 import Discount from "./pages/Discount";
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
-import Statistic from "./pages/Statistic";
+import Statistic from "./pages/statistic/Statistic";
+import ReveneuPage from "./pages/statistic/Reveneu";
 import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
 import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
-import SellOrderStats from "./pages/SellOrderStats";
+import SellOrderStats from "./pages/statistic/SellOrderStats";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
@@ -43,7 +48,7 @@ import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
 import IngredientCollation from "./pages/collation/IngredientCollation";
 import PrintDemo from "./pages/PrintDemo";
-
+import Retention from "./pages/statistic/Retention";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -72,12 +77,12 @@ const AppRouter = () => {
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           if (err.extensions.code === "UNAUTHENTICATED") {
-            if(countRetryGetToken > 3) {
-              dispatch(removeToken())
-              setTimeout(window.location.reload(), 0)
-              window.location.reload()
+            if (countRetryGetToken > 3) {
+              dispatch(removeToken());
+              setTimeout(window.location.reload(), 0);
+              window.location.reload();
             }
-            countRetryGetToken ++;
+            countRetryGetToken++;
 
             getNewAccessToken().then(() => {
               const oldHeaders = operation.getContext().headers;
@@ -101,7 +106,7 @@ const AppRouter = () => {
   const link = from([
     errorLink,
     new HttpLink({
-      uri: "http://103.173.228.124:4000/"
+      uri: "http://103.173.228.124:4000/",
       // uri: "http://159.89.203.89:4000/",
     }),
   ]);
@@ -137,7 +142,7 @@ const AppRouter = () => {
         // dispatch(addRefreshToken(refreshToken));
       })
       .then(() => console.log("new access token generated"))
-      .then(() => countRetryGetToken = 0)
+      .then(() => (countRetryGetToken = 0))
       .catch((e) => {
         console.log(e);
       });
@@ -214,12 +219,12 @@ const AppRouter = () => {
             path="/supplier"
             component={Supplier}
           />
-          <PrivateRoute
+          {/* <PrivateRoute
             authed={isAuth}
             exact
             path="/statistic/business"
             component={Statistic}
-          />
+          /> */}
           <PrivateRoute
             authed={isAuth}
             exact
@@ -248,8 +253,20 @@ const AppRouter = () => {
           <PrivateRoute
             authed={isAuth}
             exact
-            path="/statistic"
+            path="/statistic/customer"
             component={SellOrderStats}
+          />
+          <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/statistic/business"
+            component={Retention}
+          />
+           <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/statistic/reveneu"
+            component={ReveneuPage}
           />
           <PrivateRoute
             authed={isAuth}
