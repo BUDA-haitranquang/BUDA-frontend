@@ -16,7 +16,11 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { addRefreshToken, addToken, removeToken } from "../src/redux/tokenSlice";
+import {
+  addRefreshToken,
+  addToken,
+  removeToken,
+} from "../src/redux/tokenSlice";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
@@ -25,7 +29,7 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
-import Discount from "./pages/Discount";
+import Discount from "./pages/discount/list/Discount";
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/Statistic";
@@ -72,12 +76,12 @@ const AppRouter = () => {
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           if (err.extensions.code === "UNAUTHENTICATED") {
-            if(countRetryGetToken > 3) {
-              dispatch(removeToken())
-              setTimeout(window.location.reload(), 0)
-              window.location.reload()
+            if (countRetryGetToken > 3) {
+              dispatch(removeToken());
+              setTimeout(window.location.reload(), 0);
+              window.location.reload();
             }
-            countRetryGetToken ++;
+            countRetryGetToken++;
 
             getNewAccessToken().then(() => {
               const oldHeaders = operation.getContext().headers;
@@ -101,7 +105,7 @@ const AppRouter = () => {
   const link = from([
     errorLink,
     new HttpLink({
-      uri: "http://103.173.228.124:4000/"
+      uri: "http://103.173.228.124:4000/",
       // uri: "http://159.89.203.89:4000/",
     }),
   ]);
@@ -137,7 +141,7 @@ const AppRouter = () => {
         // dispatch(addRefreshToken(refreshToken));
       })
       .then(() => console.log("new access token generated"))
-      .then(() => countRetryGetToken = 0)
+      .then(() => (countRetryGetToken = 0))
       .catch((e) => {
         console.log(e);
       });

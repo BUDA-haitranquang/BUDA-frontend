@@ -1,57 +1,60 @@
-import AddDiscountModal from "../modal/AddDiscountModals";
+import AddDiscountModal from "../../../../components/modal/AddDiscountModals";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
-import DiscountByPercentageTableBody from "../table/body/DiscountByPercentageTableBody";
-import BudaTable from "../../buda-components/table/BudaTable";
+import DiscountByPercentageTableBody from "./components/DiscountByPercentageTableBody";
+import BudaTable from "../../../../buda-components/table/BudaTable";
 import { useSnackbar } from "notistack";
-import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../../../buda-components/alert/BudaNoti";
 import { useMutation } from "@apollo/client";
-import { DELETE_DISCOUNTS_MUTATION } from "../../graphQl/discounts/discountMutations";
-import { LOAD_DISCOUNTS } from "../../graphQl/discounts/discountQueries";
+import { DELETE_DISCOUNTS_MUTATION } from "../../../../graphQl/discounts/discountMutations";
+import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
 
 const headCells = [
   {
     id: "discountCode",
     numeric: false,
     disablePadding: false,
-    label: "Code"
+    label: "Code",
   },
   {
     id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Name"
+    label: "Name",
   },
   {
     id: "percentage",
     numeric: true,
     disablePadding: true,
-    label: "Percentage"
+    label: "Percentage",
   },
   {
     id: "cashLimit",
     numeric: true,
     disablePadding: true,
-    label: "Cash limit"
+    label: "Cash limit",
   },
   {
     id: "orderCount",
     numeric: true,
     disablePadding: true,
-    label: "Order count"
+    label: "Order count",
   },
   {
     id: "createdTime",
     numeric: false,
     disablePadding: true,
-    label: "Created time"
+    label: "Created time",
   },
   {
     id: "expiryTime",
     numeric: false,
     disablePadding: true,
-    label: "Expiry time"
-  }
+    label: "Expiry time",
+  },
 ];
 
 const DiscountByPercentage = ({ discounts }) => {
@@ -65,7 +68,7 @@ const DiscountByPercentage = ({ discounts }) => {
       selected.forEach((item) => {
         deleteDiscount({
           variables: { discountID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_DISCOUNTS }]
+          refetchQueries: [{ query: LOAD_DISCOUNTS }],
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
