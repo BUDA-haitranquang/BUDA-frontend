@@ -21,6 +21,8 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
@@ -49,7 +51,7 @@ const useStyle = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-  
+
     // "&:hover": {
     //   background: "rgba(45, 142, 255, 1)",
     //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
@@ -96,7 +98,6 @@ const useStyle = makeStyles({
 });
 const drawerWidth = 240;
 
-
 function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
@@ -122,18 +123,19 @@ const Sidebar = ({ window, name, id }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  
-const title = [
-  ["Dashboard",t("sidebar:dashBoard.section")],
-  ["Business",t("sidebar:business.section")],
-  ["Product",t("sidebar:product.section")],
-  ["Ingredient",t("sidebar:ingredient.section")],
-  ["Supplier",t("sidebar:supplier.section")],
-  ["Customer",t("sidebar:customer.section")],
-  ["Staff",t("sidebar:staff.section")],
-  ["Cost",t("sidebar:cost.section")],
-  // "statistic",
-];
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.down("lg"));
+  const title = [
+    ["Dashboard", t("sidebar:dashBoard.section")],
+    ["Business", t("sidebar:business.section")],
+    ["Product", t("sidebar:product.section")],
+    ["Ingredient", t("sidebar:ingredient.section")],
+    ["Supplier", t("sidebar:supplier.section")],
+    ["Customer", t("sidebar:customer.section")],
+    ["Staff", t("sidebar:staff.section")],
+    ["Cost", t("sidebar:cost.section")],
+    // "statistic",
+  ];
 
   const sidebarItems = [
     [
@@ -146,8 +148,9 @@ const title = [
       createData(t("sidebar:business.buy"), "buy", ""),
       createData(t("sidebar:business.buyHistory"), "buy-history", ""),
     ],
-    [createData(t("sidebar:product.product"), "", ""),
-     createData(t("sidebar:product.collation"), "collation", "")
+    [
+      createData(t("sidebar:product.product"), "", ""),
+      createData(t("sidebar:product.collation"), "collation", ""),
     ],
     [
       createData(t("sidebar:ingredient.ingredient"), "detail", ""),
@@ -230,17 +233,18 @@ const title = [
                 display="flex"
                 flexDirection="row"
               >
-                <ListItemIcon style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+                <ListItemIcon sx={{ color: "rgba(255, 255, 255, 0.9)" }}>
                   {itemRender(idx)}
                 </ListItemIcon>
 
                 <ListItemText
                   primaryTypographyProps={{
-                    marginLeft:"-10px",
+                    marginLeft: "-10px",
                     fontFamily: "'Montserrat', san-serif",
+                    variant: "body2",
                   }}
                   primary={capitalizeFirstLetter(item[1])}
-                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
+                  sx={{ color: "rgba(255, 255, 255, 0.9)" }}
                 />
               </Box>
               {sidebarItems[idx].length - 1 ? (
@@ -266,6 +270,7 @@ const title = [
                         <ListItemText
                           primaryTypographyProps={{
                             fontFamily: "'Montserrat', san-serif",
+                            variant: "body2",
                           }}
                           primary={component.name}
                           style={{ color: "white" }}
