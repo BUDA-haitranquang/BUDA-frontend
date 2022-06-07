@@ -115,7 +115,7 @@ const Sidebar = ({ window, name, id }) => {
   };
   const { t } = useTranslation(["sidebar"]);
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    window !== undefined ? () => window.document.body : undefined;
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {

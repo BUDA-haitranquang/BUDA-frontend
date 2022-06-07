@@ -1,14 +1,15 @@
+import { useQuery } from "@apollo/client";
+import { Box, Button, Grid, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import BoxCustomer from "./components/BoxCustomer/BoxCustomer";
-import { Box, Grid, Toolbar, Typography } from "@mui/material";
-import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
+import { useParams } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
-import BoxProduct from "./components/BoxProduct/BoxProduct";
 // import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
 import { LOAD_SELL_ORDER_DETAILS } from "../../../graphQl/sellOrder/sellOrderQueries";
-import { useParams } from "react-router-dom";
 import { dateToDateString } from "../../../utils/utils";
-import { useQuery } from "@apollo/client";
+import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
+import BoxCustomer from "./components/BoxCustomer/BoxCustomer";
+import BoxProduct from "./components/BoxProduct/BoxProduct";
+import PrintSellOrderModal from "./PrintSellOrderModal";
 
 SellOrderDetail.propTypes = {};
 
@@ -17,16 +18,23 @@ function SellOrderDetail(props) {
   const [sellOrder, setSellOrder] = useState(null);
   const { id } = useParams();
 
+  const [openPrintModal, setOpenPrintModal] = useState(false);
+
+  const handleClosePrintModal = () => {
+    setOpenPrintModal(false);
+  };
+
   const { data } = useQuery(LOAD_SELL_ORDER_DETAILS, {
     variables: {
-      sellOrderID: parseInt(id)
-    }
+      sellOrderID: parseInt(id),
+    },
   });
 
   useEffect(() => {
     async function fetchData() {
       if (data) {
         setSellOrder(data.sellOrder);
+        console.log(data.sellOrder);
       }
     }
 
@@ -35,7 +43,7 @@ function SellOrderDetail(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Sell Order" id="business"/>
+      <Sidebar window={window} name="Sell Order" id="business" />
 
       <Box
         width="100%"
@@ -49,6 +57,12 @@ function SellOrderDetail(props) {
           <Typography variant="h4" paddingBottom={2}>
             {sellOrder?.textID}
           </Typography>
+          <Button onClick={() => setOpenPrintModal(true)}>bam de in</Button>
+          <PrintSellOrderModal
+            open={openPrintModal}
+            handleClose={handleClosePrintModal}
+            sellOrder={sellOrder}
+          />
 
           <Grid container spacing={3}>
             <Grid item xs={8}>
