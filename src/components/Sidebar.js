@@ -8,6 +8,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
 import WorkIcon from "@mui/icons-material/Work";
+import DiscountIcon from "@mui/icons-material/Discount";
 import { useTranslation } from "react-i18next";
 import {
   AppBar,
@@ -49,7 +50,7 @@ const useStyle = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-  
+
     // "&:hover": {
     //   background: "rgba(45, 142, 255, 1)",
     //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
@@ -96,7 +97,6 @@ const useStyle = makeStyles({
 });
 const drawerWidth = 240;
 
-
 function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
@@ -122,18 +122,18 @@ const Sidebar = ({ window, name, id }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  
-const title = [
-  ["Dashboard",t("sidebar:dashBoard.section")],
-  ["Business",t("sidebar:business.section")],
-  ["Product",t("sidebar:product.section")],
-  ["Ingredient",t("sidebar:ingredient.section")],
-  ["Supplier",t("sidebar:supplier.section")],
-  ["Customer",t("sidebar:customer.section")],
-  ["Staff",t("sidebar:staff.section")],
-  ["Cost",t("sidebar:cost.section")],
-  // "statistic",
-];
+  const title = [
+    ["Dashboard", t("sidebar:dashBoard.section")],
+    ["Business", t("sidebar:business.section")],
+    ["Product", t("sidebar:product.section")],
+    ["Ingredient", t("sidebar:ingredient.section")],
+    ["Supplier", t("sidebar:supplier.section")],
+    ["Customer", t("sidebar:customer.section")],
+    ["Staff", t("sidebar:staff.section")],
+    ["Cost", t("sidebar:cost.section")],
+    ["Discount", t("sidebar:discount.section")],
+    // "statistic",
+  ];
 
   const sidebarItems = [
     [
@@ -146,8 +146,9 @@ const title = [
       createData(t("sidebar:business.buy"), "buy", ""),
       createData(t("sidebar:business.buyHistory"), "buy-history", ""),
     ],
-    [createData(t("sidebar:product.product"), "", ""),
-     createData(t("sidebar:product.collation"), "collation", "")
+    [
+      createData(t("sidebar:product.product"), "", ""),
+      createData(t("sidebar:product.collation"), "collation", ""),
     ],
     [
       createData(t("sidebar:ingredient.ingredient"), "detail", ""),
@@ -167,6 +168,7 @@ const title = [
       // createData("Customer", "customer", ""),
       // createData("Product", "product", ""),
     ],
+    [createData(t("sidebar:discount.section"), "discount", "")],
   ];
 
   const itemRender = (i) => {
@@ -187,6 +189,8 @@ const title = [
         return <AssignmentIndIcon />;
       case 7:
         return <MonetizationOnIcon />;
+      case 8:
+        return <DiscountIcon />;
       // case 8:
       //   return <BarChartIcon />;
       default:
@@ -236,7 +240,7 @@ const title = [
 
                 <ListItemText
                   primaryTypographyProps={{
-                    marginLeft:"-10px",
+                    marginLeft: "-10px",
                     fontFamily: "'Montserrat', san-serif",
                   }}
                   primary={capitalizeFirstLetter(item[1])}

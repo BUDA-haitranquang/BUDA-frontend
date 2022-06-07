@@ -34,7 +34,9 @@
         "fixed":"Fixed Cost",
         "fixedCostBill":"Fixed Cost Bill",
         "otherCost":"Other Cost"
+    },
+    "discount": {
+        "section": "Discounts"
     }
-    
 
 }
