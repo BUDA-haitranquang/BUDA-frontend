@@ -8,13 +8,6 @@ import {
   Tooltip,
 } from "recharts";
 
-// const style = {
-//   //top: '50%',
-//   right: 0,
-//   transform: 'translate(0, -50%)',
-//   //lineHeight: '24px',
-// };
-
 const BudaPieChart = ({
   data,
   colors,
@@ -44,7 +37,7 @@ const BudaPieChart = ({
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {`${(percent * 100).toFixed(0)}%`}
+        {`${(percent * 100).toFixed(2)}%`}
       </text>
     );
   };
@@ -71,7 +64,7 @@ const BudaPieChart = ({
             ))}
           </Pie>
           {legend && <Legend />}
-          <Tooltip />
+          <Tooltip  />
         </PieChart>
       </ResponsiveContainer>
     </>

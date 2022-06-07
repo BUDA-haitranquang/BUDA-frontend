@@ -2,9 +2,9 @@ import * as React from "react";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import { Grid, Tab, Tabs, Toolbar } from "@mui/material";
-import Sidebar from "../components/Sidebar";
-import PChart from "../components/statistic_chart/PieCharts";
-import RChart from "../components/statistic_chart/RadarCharts";
+import Sidebar from "../../components/Sidebar";
+import PChart from "../../components/statistic_chart/PieCharts";
+import RChart from "../../components/statistic_chart/RadarCharts";
 
 const GENDER = [
   { name: "nam", value: 500 },
