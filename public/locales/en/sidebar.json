@@ -34,6 +34,9 @@
         "fixed":"Fixed Cost",
         "fixedCostBill":"Fixed Cost Bill",
         "otherCost":"Other Cost"
+    },
+    "statistic":{
+        "section":"Statistic"
     }
     
 

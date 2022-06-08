@@ -32,12 +32,13 @@ import Staff from "./pages/Staff";
 import Discount from "./pages/Discount";
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
-import Statistic from "./pages/Statistic";
+import Statistic from "./pages/statistic/Statistic";
+import ReveneuPage from "./pages/statistic/Reveneu";
 import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
 import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
-import SellOrderStats from "./pages/SellOrderStats";
+import SellOrderStats from "./pages/statistic/SellOrderStats";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
 import Collation from "./pages/Collation";
@@ -50,6 +51,7 @@ import PrintDemo from "./pages/PrintDemo";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import { Box } from "@mui/material";
+import Retention from "./pages/statistic/Retention";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -158,7 +160,7 @@ const AppRouter = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Sidebar/>
+        <Sidebar />
         <Box display="flex" flexDirection="column" width="100%">
           <Header />
           <Box height={30}></Box>
@@ -169,7 +171,6 @@ const AppRouter = () => {
               path="/staff"
               component={Staff}
             />
-
             <PrivateRoute
               authed={isAuth}
               exact
@@ -230,12 +231,12 @@ const AppRouter = () => {
               path="/supplier"
               component={Supplier}
             />
-            <PrivateRoute
-              authed={isAuth}
-              exact
-              path="/statistic/business"
-              component={Statistic}
-            />
+            {/* <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/statistic/business"
+            component={Statistic}
+          /> */}
             <PrivateRoute
               authed={isAuth}
               exact
@@ -264,8 +265,20 @@ const AppRouter = () => {
             <PrivateRoute
               authed={isAuth}
               exact
-              path="/statistic"
+              path="/statistic/customer"
               component={SellOrderStats}
+            />
+            <PrivateRoute
+              authed={isAuth}
+              exact
+              path="/statistic/business"
+              component={Retention}
+            />
+            <PrivateRoute
+              authed={isAuth}
+              exact
+              path="/statistic/reveneu"
+              component={ReveneuPage}
             />
             <PrivateRoute
               authed={isAuth}

@@ -1,7 +1,8 @@
 import React from "react";
 import { Box } from "@mui/material";
-import AgeGroupSellOrder from "../components/statistics/sellorder/AgeGroupSellOrder";
-import GenderSellOrder from "../components/statistics/sellorder/GenderSellOrder";
+
+import AgeGroupSellOrder from "../../components/statistics/sellorder/AgeGroupSellOrder";
+import GenderSellOrder from "../../components/statistics/sellorder/GenderSellOrder";
 
 const SellOrderStats = (props) => {
   return (
