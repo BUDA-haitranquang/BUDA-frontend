@@ -5,12 +5,10 @@ import { useHistory, useParams } from "react-router-dom";
 import CombinedDetail from "../components/CombinedDetail";
 import StaffInformation from "../components/detail/information/StaffInformation";
 import EditStaffModal from "../components/modal/EditStaffModal";
-import Sidebar from "../components/Sidebar";
 import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFF, LOAD_STAFFS } from "../graphQl/staff/staffQueries";
 
 const StaffDetail = (props) => {
-  const { window } = props;
   const { id } = useParams();
   const history = useHistory();
 
@@ -40,7 +38,6 @@ const StaffDetail = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Staff Detail" id="staff" />
       <Box>
         <Toolbar />
         <Box pt={1}>

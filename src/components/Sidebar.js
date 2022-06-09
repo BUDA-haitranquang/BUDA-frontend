@@ -21,16 +21,12 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography,
-  useTheme,
-  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { setFocus } from "../redux/sidebarSlice";
-import AccountMenu from "./AccountMenu";
 
 const useStyle = makeStyles({
   selectedItem: {
@@ -52,11 +48,6 @@ const useStyle = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-
-    // "&:hover": {
-    //   background: "rgba(45, 142, 255, 1)",
-    //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
-    // },
   },
   subItem: {
     borderRadius: "6px",
@@ -77,10 +68,6 @@ const useStyle = makeStyles({
     "& a:link": {
       textDecoration: "none",
       color: "white",
-      // "&:hover": {
-      //   color: "grey",
-      //   fontWeight: "600",
-      // },
     },
     "& a:visited": {
       color: "black",
@@ -103,10 +90,12 @@ function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
 
-const Sidebar = ({ window, name, id }) => {
+const Sidebar = () => {
   const history = useHistory();
+  console.log(history.location.pathname);
   const focus = useSelector((state) => state.sidebar.focus);
   const dispatch = useDispatch();
+  console.log(history.location.pathname);
   const [mobileOpen, setMobileOpen] = useState(false);
   const setFocusSideBar = (val) => {
     dispatch(setFocus(val));
@@ -115,8 +104,6 @@ const Sidebar = ({ window, name, id }) => {
     setMobileOpen(!mobileOpen);
   };
   const { t } = useTranslation(["sidebar"]);
-  const container =
-    window !== undefined ? () => window.document.body : undefined;
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {
@@ -124,8 +111,6 @@ const Sidebar = ({ window, name, id }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  const theme = useTheme();
-  const lg = useMediaQuery(theme.breakpoints.down("lg"));
   const title = [
     ["Dashboard", t("sidebar:dashBoard.section")],
     ["Business", t("sidebar:business.section")],
@@ -206,7 +191,6 @@ const Sidebar = ({ window, name, id }) => {
     </>
   );
   const drawer = (
-    // <div style={{ background: "#1976d2", flexGrow: 1 }}>
     <div
       style={{
         backgroundImage: "linear-gradient(#1367ba, #409fff)",
@@ -219,7 +203,9 @@ const Sidebar = ({ window, name, id }) => {
           <>
             <ListItem
               className={
-                id.toLowerCase().includes(item[0].toLowerCase())
+                history.location.pathname
+                  .toLowerCase()
+                  .includes(item[0].toLowerCase())
                   ? classes.selectedItem
                   : classes.item
               }
@@ -301,41 +287,12 @@ const Sidebar = ({ window, name, id }) => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between", background: "white" }}>
-          {/* <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            fontWeight={850}
-            fontFamily="'Montserrat', san-serif"
-            style={{
-              textTranform: "uppercase",
-              color: "black",
-            }}
-          >
-            {name}
-          </Typography>
-
-          <AccountMenu />
-        </Toolbar>
-      </AppBar>
+      ></AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       >
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}

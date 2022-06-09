@@ -6,13 +6,11 @@ import { useTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddStaffModal from "../components/modal/AddStaffModal";
-import Sidebar from "../components/Sidebar";
 import StaffTableBody from "../components/table/body/StaffTableBody";
 import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFFS } from "../graphQl/staff/staffQueries";
 
 const Staff = (props) => {
-  const { window } = props;
   const [staffs, setStaffs] = useState([]);
   const { t } = useTranslation(["common", "staff"]);
   const { error, loading, data } = useQuery(LOAD_STAFFS);
@@ -80,7 +78,6 @@ const Staff = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("staff:staff")} id="staff"/>
       <Box
         width="100%"
         display="flex"
