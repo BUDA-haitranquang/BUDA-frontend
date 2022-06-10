@@ -160,10 +160,14 @@ const AppRouter = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Sidebar />
+        {isAuth && <Sidebar />}
         <Box display="flex" flexDirection="column" width="100%">
-          <Header />
-          <Box height={30}></Box>
+          {isAuth && (
+            <>
+              <Header />
+              <Box height={30}></Box>
+            </>
+          )}
           <Switch>
             <PrivateRoute
               authed={isAuth}
