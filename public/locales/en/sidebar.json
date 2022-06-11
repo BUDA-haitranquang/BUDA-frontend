@@ -37,7 +37,9 @@
     },
     "statistic":{
         "section":"Statistic"
+    },
+    "discount": {
+        "section": "Discounts"
     }
-    
 
 }

@@ -9,6 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
 import WorkIcon from "@mui/icons-material/Work";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import DiscountIcon from "@mui/icons-material/Discount";
 import { useTranslation } from "react-i18next";
 import {
   AppBar,
@@ -121,6 +122,7 @@ const Sidebar = () => {
     ["Staff", t("sidebar:staff.section")],
     ["Cost", t("sidebar:cost.section")],
     ["Statistic", t("sidebar:statistic.section")],
+    ["Discount", t("sidebar:discount.section")],
   ];
 
   const sidebarItems = [
@@ -157,6 +159,7 @@ const Sidebar = () => {
       createData("Product", "product", ""),
       createData("Reveneu","reveneu",""),
     ],
+    [createData(t("sidebar:discount.section"), "discount", "")],
   ];
 
   const itemRender = (i) => {
@@ -179,6 +182,8 @@ const Sidebar = () => {
         return <MonetizationOnIcon />;
       case 8:
         return <BarChartIcon />;
+      case 9:
+        return <DiscountIcon />;
       default:
         break;
     }

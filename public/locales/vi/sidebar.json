@@ -37,6 +37,9 @@
     },
     "statistic":{
         "section":"Thống Kê"
+    },
+    "discount": {
+        "section": "Mã giảm giá"
     }
     
 

@@ -29,7 +29,7 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Staff from "./pages/Staff";
-import Discount from "./pages/Discount";
+import Discount from "./pages/discount/list/Discount";
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
 import Statistic from "./pages/statistic/Statistic";
@@ -52,6 +52,7 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import { Box } from "@mui/material";
 import Retention from "./pages/statistic/Retention";
+import DetailDiscount from "./pages/discount/detail/DetailDiscount";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -331,6 +332,12 @@ const AppRouter = () => {
               exact
               path="/discount"
               component={Discount}
+            />
+            <PrivateRoute
+              authed={isAuth}
+              exact
+              path="/discount/:id"
+              component={DetailDiscount}
             />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
