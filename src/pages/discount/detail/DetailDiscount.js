@@ -35,8 +35,6 @@ function DetailDiscount(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("title")} id="business" />
-
       <Box
         width="100%"
         display="flex"
