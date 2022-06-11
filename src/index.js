@@ -8,10 +8,12 @@ import store, { persistor } from "./redux/store";
 import AppRouter from "./Router";
 import i18n from "./translation/i18n";
 import ThemeProvider from "./theme/globalTheme";
+import FallbackLoading from "./components/FallbackLoading";
+import { Box } from "@mui/material";
 ReactDOM.render(
   <React.Fragment>
     <I18nextProvider i18n={i18n}>
-      <Suspense fallback="loading...">
+      <Suspense fallback={<FallbackLoading />}>
         <SnackbarProvider
           maxSnack={1}
           // hideIconVariant={true}
@@ -28,11 +30,12 @@ ReactDOM.render(
                 <div
                   style={{
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
                     minHeight: "100vh",
                   }}
                 >
+                  {/* <SidebarGlobal /> */}
                   <AppRouter />
                   {/* <Footer /> */}
                 </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BoxSupplier from "./components/BoxSupplier/BoxSupplier";
 import { Box, Grid, Toolbar, Typography } from "@mui/material";
 import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
-import Sidebar from "../../../components/Sidebar";
 import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { LOAD_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderQueries";
 import { useParams } from "react-router-dom";
@@ -14,7 +13,6 @@ import { useTranslation } from "react-i18next";
 DetailBuyOrder.propTypes = {};
 
 function DetailBuyOrder(props) {
-  const { window } = props;
   const { t } = useTranslation("buyorder", { keyPrefix: "detail" });
   const [buyOrder, setBuyOrder] = useState(null);
   const { id } = useParams();
@@ -37,8 +35,6 @@ function DetailBuyOrder(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("title")} id="business" />
-
       <Box
         width="100%"
         display="flex"

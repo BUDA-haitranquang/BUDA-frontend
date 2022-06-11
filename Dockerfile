@@ -9,10 +9,11 @@ EXPOSE 3000
 # directory to a new app directory on the container
 COPY package.json .
 COPY package-lock.json .
-COPY . .
+
 # Changes working directory to the new directory just created
 # Installs npm dependencies on container
 
 # Command container will actually run when called
 RUN npm install
+COPY . .
 CMD ["npm", "start"]

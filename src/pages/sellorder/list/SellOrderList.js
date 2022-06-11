@@ -1,6 +1,5 @@
 import { Box, Button, Toolbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Sidebar from "../../../components/Sidebar";
 import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useTranslation } from "react-i18next";
@@ -14,8 +13,6 @@ import { DELETE_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderMutation"
 import { capitalizeFirstLetter } from "../../../utils/utils";
 
 const SellOrderList = (props) => {
-  const { window } = props;
-
   const history = useHistory();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -137,8 +134,6 @@ const SellOrderList = (props) => {
       .catch((reason) => enqueueSnackbar(reason, AlertErrorProp));
   };
 
-  if (error) return <Redirect to="/login" />;
-
   const handleDelete = (selected) => {
     if (selected === []) return;
     selected.forEach((item) => {
@@ -196,11 +191,6 @@ const SellOrderList = (props) => {
 
   return (
     <Box sx={{ display: "flex", margin: "6px" }}>
-      <Sidebar
-        window={window}
-        name={t("sellOrderHistory:title")}
-        id="business"
-      />
       <Box
         width="100%"
         display="flex"

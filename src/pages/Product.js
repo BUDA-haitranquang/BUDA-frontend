@@ -7,14 +7,12 @@ import { useTranslation } from "react-i18next";
 import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";
-import Sidebar from "../components/Sidebar";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
 
 const Product = (props) => {
   const { t } = useTranslation(["common", "product"]);
-  const { window } = props;
   const [products, setProducts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
@@ -95,7 +93,6 @@ const Product = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("product:product")} id="product"/>
       <Box
         width="100%"
         display="flex"

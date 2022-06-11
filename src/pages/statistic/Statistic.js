@@ -2,10 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import { Grid, Tab, Tabs, Toolbar } from "@mui/material";
-import Sidebar from "../components/Sidebar";
-import PChart from "../components/statistic_chart/PieCharts";
-import RChart from "../components/statistic_chart/RadarCharts";
-
+import PChart from "../../components/statistic_chart/PieCharts";
+import RChart from "../../components/statistic_chart/RadarCharts";
 const GENDER = [
   { name: "nam", value: 500 },
   { name: "nữ", value: 800 },
@@ -87,15 +85,12 @@ const AGE_GROUP = [
 
 
 function Statistic(props) {
-  const { window } = props;
-
   const [currentTab, setCurrentTab] = useState(0);
   const handleChange = (e, newValue) => {
     setCurrentTab(newValue);
   };
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Dashboard" id="statistic"/>
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         <Box pt={1}>

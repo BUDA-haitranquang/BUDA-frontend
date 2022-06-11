@@ -35,6 +35,9 @@
         "fixedCostBill":"Hoá Đơn Cố Định",
         "otherCost":"Chi Phí Khác"
     },
+    "statistic":{
+        "section":"Thống Kê"
+    },
     "discount": {
         "section": "Mã giảm giá"
     }
