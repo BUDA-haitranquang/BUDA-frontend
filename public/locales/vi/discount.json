@@ -1,6 +1,13 @@
 {
   "list": {
-
+    "code": "Mã giảm giá",
+    "name": "Tên chương trình",
+    "percentage": "Chiết khấu (%)",
+    "cash": "Chiếu khấu (VND)",
+    "cashLimit": "Giá trị giảm tối đa",
+    "orderCount": "Số đơn hàng áp dụng",
+    "createdAt": "Ngày bắt đầu",
+    "finishedAt": "Ngày kết thúc"
   },
 
   "detail": {

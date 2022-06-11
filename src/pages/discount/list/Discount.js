@@ -6,7 +6,6 @@ import Sidebar from "../../../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import { LOAD_DISCOUNTS } from "../../../graphQl/discounts/discountQueries";
 import DiscountByPercentage from "./discountbypercentage/DiscountByPercentage";
-
 import DiscountByCash from "./discountbycash/DiscountByCash";
 
 function Discount(props) {

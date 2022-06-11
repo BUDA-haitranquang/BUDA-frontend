@@ -11,56 +11,59 @@ import {
 import AddDiscountModal from "../../../../components/modal/AddDiscountModals";
 import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
 import { DELETE_DISCOUNTS_MUTATION } from "../../../../graphQl/discounts/discountMutations";
-
-const headCells = [
-  {
-    id: "discountCode",
-    numeric: false,
-    disablePadding: false,
-    label: "Code",
-  },
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "cash",
-    numeric: true,
-    disablePadding: true,
-    label: "Cash",
-  },
-  {
-    id: "cashLimit",
-    numeric: true,
-    disablePadding: true,
-    label: "Cash limit",
-  },
-  {
-    id: "orderCount",
-    numeric: true,
-    disablePadding: true,
-    label: "Order count",
-  },
-  {
-    id: "createdTime",
-    numeric: false,
-    disablePadding: true,
-    label: "Created time",
-  },
-  {
-    id: "expiryTime",
-    numeric: false,
-    disablePadding: true,
-    label: "Expiry time",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const DiscountByCash = ({ discounts }) => {
+  const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [deleteDiscount] = useMutation(DELETE_DISCOUNTS_MUTATION);
+
+  const headCells = [
+    {
+      id: "discountCode",
+      numeric: false,
+      disablePadding: false,
+      label: t("discount:list.code"),
+    },
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: false,
+      label: t("discount:list.name"),
+    },
+    {
+      id: "cash",
+      numeric: true,
+      disablePadding: true,
+      label: t("discount:list.cash"),
+    },
+    {
+      id: "cashLimit",
+      numeric: true,
+      disablePadding: true,
+      label: t("discount:list.cashLimit"),
+    },
+    {
+      id: "orderCount",
+      numeric: true,
+      disablePadding: true,
+      label: t("discount:list.orderCount"),
+    },
+    {
+      id: "createdTime",
+      numeric: false,
+      disablePadding: true,
+      label: t("discount:list.createdAt"),
+    },
+    {
+      id: "expiryTime",
+      numeric: false,
+      disablePadding: true,
+      label: t("discount:list.finishedAt"),
+    },
+  ];
+
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
