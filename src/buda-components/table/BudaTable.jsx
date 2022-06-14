@@ -20,6 +20,7 @@ const BudaTable = (props) => {
     DetailTableBody,
     type,
     deleteItems,
+    printable,
     printItems,
     children,
     stickyHeader = true,
@@ -101,6 +102,7 @@ const BudaTable = (props) => {
               deleteItems(selected);
               setSelected([]);
             }}
+            printable={printable}
             printItem={() => {
               printItems(selected);
               setSelected([]);
