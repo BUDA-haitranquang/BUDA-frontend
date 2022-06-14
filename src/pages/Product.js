@@ -1,15 +1,18 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
+import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";
+import ProductBarcodeListPrintForm from "../components/printforms/ProductBarcodeListPrintForm";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
+import PrintIcon from "@mui/icons-material/Print";
 
 const Product = (props) => {
   const { t } = useTranslation(["common", "product"]);
@@ -18,6 +21,9 @@ const Product = (props) => {
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
+
+  const componentRef = useRef();
+
   const handleDelete = (selected) => {
     if (selected === []) return;
     setIsLoading(true);
@@ -36,20 +42,9 @@ const Product = (props) => {
     }
   };
 
-  const handlePrintMultiple = (selected) => {
-    if (selected === []) return;
-    setIsLoading(true);
-    try {
-      selected.forEach((item) => {
-        console.log("Printed item");
-      });
-      enqueueSnackbar("Print processed", AlertSuccessProp);
-    } catch (e) {
-      enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -122,13 +117,19 @@ const Product = (props) => {
           <BudaTable
             deleteItems={handleDelete}
             printable={true}
-            printItems={handlePrintMultiple}
+            printItems={handlePrint}
             data={products.reverse()}
             headCells={headCells}
             Modal={AddProductModal}
             type="productID"
             DetailTableBody={ProductTableBody}
           />
+          <Box maxWidth={150} mt={3} sx={{ position: "fixed", left: "100vw" }}>
+            <ProductBarcodeListPrintForm
+              ref={componentRef}
+              listProduct={products}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>
