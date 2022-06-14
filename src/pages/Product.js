@@ -41,10 +41,7 @@ const Product = (props) => {
     setIsLoading(true);
     try {
       selected.forEach((item) => {
-        hideProduct({
-          variables: { productID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_PRODUCTS }]
-        });
+        console.log("Printed item");
       });
       enqueueSnackbar("Print processed", AlertSuccessProp);
     } catch (e) {
@@ -124,6 +121,7 @@ const Product = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
+            printable={true}
             printItems={handlePrintMultiple}
             data={products.reverse()}
             headCells={headCells}

@@ -12,7 +12,7 @@ import {
 import BudaModal from "../../../buda-components/modal/BudaModal";
 import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
 
-const PrintProductModal = ({ isOpen, handleClose, sku }) => {
+const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(["common", "print"]);
 
@@ -109,4 +109,4 @@ const PrintProductModal = ({ isOpen, handleClose, sku }) => {
     ></BudaModal>
   );
 };
-export default PrintProductModal;
+export default PrintProductBarcodeModal;

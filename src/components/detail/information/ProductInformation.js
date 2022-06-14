@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import React, { useRef, useState } from "react";
 import Barcode from "react-barcode";
 import ReactToPrint from "react-to-print";
-import PrintProductModal from "../../modal/print/PrintProductModal";
+import PrintProductBarcodeModal from "../../modal/print/PrintProductBarcodeModal";
 import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
 import MainImage from "../MainImage";
 
@@ -76,7 +76,7 @@ export default function ProductInformation({ data }) {
             </Button>
           </Box>
 
-          <PrintProductModal
+          <PrintProductBarcodeModal
             isOpen={isOpenModal}
             handleClose={handleCloseModal}
             sku={sku}
