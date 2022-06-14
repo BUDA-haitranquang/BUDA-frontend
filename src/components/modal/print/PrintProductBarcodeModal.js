@@ -10,7 +10,7 @@ import {
   AlertSuccessProp,
 } from "../../../buda-components/alert/BudaNoti";
 import BudaModal from "../../../buda-components/modal/BudaModal";
-import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
+import ProductBarcodePrintForm from "../../printforms/ProductBarcodePrintForm";
 
 const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -84,7 +84,7 @@ const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
             onChange={(e) => setNumCopy(e.target.value)}
           />
           <Box maxWidth={150} mt={3} sx={{ position: "fixed", left: "100vw" }}>
-            <ProductDetailPrintForm
+            <ProductBarcodePrintForm
               ref={componentRef}
               sku={sku}
               numCopy={numCopy}

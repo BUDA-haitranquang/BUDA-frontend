@@ -1,11 +1,9 @@
 import PrintIcon from "@mui/icons-material/Print";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Barcode from "react-barcode";
-import ReactToPrint from "react-to-print";
 import PrintProductBarcodeModal from "../../modal/print/PrintProductBarcodeModal";
-import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
