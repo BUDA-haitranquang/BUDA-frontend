@@ -36,6 +36,24 @@ const Product = (props) => {
     }
   };
 
+  const handlePrintMultiple = (selected) => {
+    if (selected === []) return;
+    setIsLoading(true);
+    try {
+      selected.forEach((item) => {
+        hideProduct({
+          variables: { productID: parseInt(item) },
+          refetchQueries: [{ query: LOAD_PRODUCTS }]
+        });
+      });
+      enqueueSnackbar("Print processed", AlertSuccessProp);
+    } catch (e) {
+      enqueueSnackbar("An error occured", AlertErrorProp);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser.map((item) => item));
@@ -106,6 +124,7 @@ const Product = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
+            printItems={handlePrintMultiple}
             data={products.reverse()}
             headCells={headCells}
             Modal={AddProductModal}

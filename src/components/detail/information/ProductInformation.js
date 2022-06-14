@@ -1,8 +1,10 @@
 import PrintIcon from "@mui/icons-material/Print";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import Barcode from "react-barcode";
 import ReactToPrint from "react-to-print";
+import PrintProductModal from "../../modal/print/PrintProductModal";
 import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
 import MainImage from "../MainImage";
 
@@ -24,6 +26,15 @@ export default function ProductInformation({ data }) {
 
   const componentRef = useRef();
 
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+
   return (
     <Grid container direction="row" fullWidth>
       <Grid item xs={3} style={{ height: "100%" }}>
@@ -39,20 +50,37 @@ export default function ProductInformation({ data }) {
           ) : (
             <MainImage source="https://cdn2.iconfinder.com/data/icons/small-buttons/64/Button_pressed_with_add_icon-512.png" />
           )}
-          <Box maxWidth={150} mt={3}>
-            <ProductDetailPrintForm ref={componentRef} sku={sku} />
-            {/* button to trigger printing of target component */}
-            <ReactToPrint
-              trigger={() => (
-                <Button sx={{ marginTop: "10px" }} variant="contained">
-                  <PrintIcon style={{ marginRight: "10px" }} />
-                  Barcode
-                </Button>
-              )}
-              content={() => componentRef.current}
-              documentTitle={"Product:" + name}
+          <Box
+            mt={2}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Barcode
+              marginTop={6}
+              width={1}
+              height={50}
+              fontSize={14}
+              value={"PROD" + sku} // add store identity ?
+              text={"PRODUCT: " + sku}
             />
+            <Button
+              onClick={handleOpenModal}
+              sx={{ marginTop: "10px" }}
+              variant="contained"
+            >
+              <PrintIcon style={{ marginRight: "10px" }} />
+              Barcode
+            </Button>
           </Box>
+
+          <PrintProductModal
+            isOpen={isOpenModal}
+            handleClose={handleCloseModal}
+            sku={sku}
+          />
         </Box>
       </Grid>
       <Grid
