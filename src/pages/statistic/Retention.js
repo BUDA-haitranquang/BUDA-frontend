@@ -27,7 +27,7 @@ function Retention(props) {
   console.log(monthlyData);
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Retention" id="statistic"/>
+      {/* <Sidebar window={window} name="Retention" id="statistic"/> */}
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         {/* <Box pt={1}> */}
