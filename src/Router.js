@@ -48,6 +48,7 @@ import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import IngredientDetail from "./pages/IngerdientsDetail";
 import IngredientCollation from "./pages/collation/IngredientCollation";
 import PrintDemo from "./pages/PrintDemo";
+import ProductStatistic from "./pages/statistic/ProductStatistic";
 import Retention from "./pages/statistic/Retention";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -262,6 +263,12 @@ const AppRouter = () => {
             path="/statistic/business"
             component={Retention}
           />
+           {/* <PrivateRoute
+            authed={isAuth}
+            exact
+            path="/statistic/product"
+            component={ProductStatistic}
+          /> */}
            <PrivateRoute
             authed={isAuth}
             exact
