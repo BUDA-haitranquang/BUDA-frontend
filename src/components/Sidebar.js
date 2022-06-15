@@ -157,7 +157,7 @@ const Sidebar = () => {
       createData("Business", "business", ""),
       createData("Customer", "customer", ""),
       createData("Product", "product", ""),
-      createData("Reveneu","reveneu",""),
+      createData("Reveneu", "reveneu", ""),
     ],
     [createData(t("sidebar:discount.section"), "discount", "")],
   ];
@@ -208,9 +208,7 @@ const Sidebar = () => {
           <>
             <ListItem
               className={
-                history.location.pathname
-                  .toLowerCase()
-                  .includes(item[0].toLowerCase())
+                history.location.pathname.includes(item[0])
                   ? classes.selectedItem
                   : classes.item
               }
@@ -259,7 +257,13 @@ const Sidebar = () => {
                 {sidebarItems[idx].map((component) => {
                   return (
                     <Link to={`/${item[0]}/${component.link}`}>
-                      <ListItem className={classes.subItem}>
+                      <ListItem
+                        className={classes.subItem}
+                        onClick={() => {
+                          setFocusSideBar("");
+                          setFocusSideBar(item[1]);
+                        }}
+                      >
                         <ListItemText
                           primaryTypographyProps={{
                             fontFamily: "'Montserrat', san-serif",
