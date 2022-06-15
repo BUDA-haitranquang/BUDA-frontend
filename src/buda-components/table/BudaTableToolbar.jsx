@@ -11,7 +11,7 @@ import {
   OutlinedInput,
   Toolbar,
   Tooltip,
-  Typography
+  Typography,
 } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -131,8 +131,24 @@ const BudaTableToolbar = ({
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={deleteItem}>Delete</MenuItem>
-            {printable && <MenuItem onClick={printItem}>Print</MenuItem>}
+            <MenuItem
+              onClick={() => {
+                deleteItem();
+                setAnchorEl(null);
+              }}
+            >
+              Delete
+            </MenuItem>
+            {printable && (
+              <MenuItem
+                onClick={() => {
+                  printItem();
+                  setAnchorEl(null);
+                }}
+              >
+                Print
+              </MenuItem>
+            )}
           </Menu>
         </Box>
       ) : (

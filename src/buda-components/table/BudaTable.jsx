@@ -30,7 +30,7 @@ const BudaTable = (props) => {
     toolbar = true,
     ...remainProps
   } = props;
-  const {t} = useTranslation(['common'])
+  const { t } = useTranslation(["common"]);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -40,6 +40,7 @@ const BudaTable = (props) => {
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState(headCells[0].id);
+
 
   const displayData = display.slice(
     page * rowsPerPage,
@@ -92,23 +93,25 @@ const BudaTable = (props) => {
     <Box sx={{ width: "100%" }}>
       <Paper>
         <TableContainer sx={{ paddingRight: "10px" }}>
-          {toolbar && <BudaTableToolbar
-            numSelected={selected.length}
-            handleOpen={handleOpen}
-            handleSearch={(val) => setSearch(val)}
-            headCells={headCells}
-            searchBy={(val) => setSearchBy(val)}
-            deleteItem={() => {
-              deleteItems(selected);
-              setSelected([]);
-            }}
-            printable={printable}
-            printItem={() => {
-              printItems(selected);
-              setSelected([]);
-            }}
-            checkModal={Modal ? true : false}
-          />}
+          {toolbar && (
+            <BudaTableToolbar
+              numSelected={selected.length}
+              handleOpen={handleOpen}
+              handleSearch={(val) => setSearch(val)}
+              headCells={headCells}
+              searchBy={(val) => setSearchBy(val)}
+              deleteItem={() => {
+                deleteItems(selected);
+                setSelected([]);
+              }}
+              printable={printable}
+              printItem={() => {
+                printItems(selected);
+                setSelected([]);
+              }}
+              checkModal={Modal ? true : false}
+            />
+          )}
           <Table
             sx={{ minWidth: 1000 }}
             stickyHeader={stickyHeader}
@@ -149,7 +152,6 @@ const BudaTable = (props) => {
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleRowsPerPageChange}
           // labelRowsPerPage = {t('common:rowsPerPage')}
-          
         />
       </Paper>
     </Box>

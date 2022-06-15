@@ -5,7 +5,10 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
-import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";
 import ProductBarcodeListPrintForm from "../components/printforms/ProductBarcodeListPrintForm";
@@ -21,7 +24,7 @@ const Product = (props) => {
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
-
+  const [printItem, setPrintItem] = useState([]);
   const componentRef = useRef();
 
   const handleDelete = (selected) => {
@@ -31,7 +34,7 @@ const Product = (props) => {
       selected.forEach((item) => {
         hideProduct({
           variables: { productID: parseInt(item) },
-          refetchQueries: [{ query: LOAD_PRODUCTS }]
+          refetchQueries: [{ query: LOAD_PRODUCTS }],
         });
       });
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
@@ -42,9 +45,14 @@ const Product = (props) => {
     }
   };
 
-  const handlePrint = useReactToPrint({
+  const print = useReactToPrint({
     content: () => componentRef.current,
   });
+
+  const handlePrint = (val) => {
+    let x = products.filter((item) => val.indexOf(item.productID) !== -1);
+    setPrintItem(x);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -54,53 +62,59 @@ const Product = (props) => {
     fetchData();
   }, [data]);
 
-  // if(error) return <Redirect to="/login"/>;
+  useEffect(() => {
+    if (printItem && printItem.length>0){
+      print();
+    }
+  }, [printItem]);
 
+  // if(error) return <Redirect to="/login"/>;
+  console.log(printItem);
   const headCells = [
     {
       id: "sku",
       numeric: false,
       disablePadding: false,
-      label: t("product:sku")
+      label: t("product:sku"),
     },
     {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("product:productName")
+      label: t("product:productName"),
     },
     {
       id: "sellingPrice",
       numeric: true,
       disablePadding: true,
-      label: t("product:price")
+      label: t("product:price"),
     },
     {
       id: "amountLeft",
       numeric: true,
       disablePadding: true,
-      label: t("product:amountLeft")
+      label: t("product:amountLeft"),
     },
     {
       id: "alertAmount",
       numeric: true,
       disablePadding: true,
-      label: t("product:alertAmount")
+      label: t("product:alertAmount"),
     },
     {
       id: "costPerUnit",
       numeric: true,
       disablePadding: true,
-      label: t("product:cost")
+      label: t("product:cost"),
     },
     {
       id: "description",
       numeric: false,
       disablePadding: true,
-      label: t("product:description")
-    }
+      label: t("product:description"),
+    },
   ];
-
+  console.log(printItem);
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -123,11 +137,12 @@ const Product = (props) => {
             Modal={AddProductModal}
             type="productID"
             DetailTableBody={ProductTableBody}
+            print={print}
           />
           <Box maxWidth={150} mt={3} sx={{ position: "fixed", left: "100vw" }}>
             <ProductBarcodeListPrintForm
               ref={componentRef}
-              listProduct={products}
+              listProduct={printItem}
             />
           </Box>
         </Box>
