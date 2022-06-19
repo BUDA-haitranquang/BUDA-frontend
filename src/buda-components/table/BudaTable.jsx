@@ -31,7 +31,7 @@ const BudaTable = (props) => {
     ...remainProps
   } = props;
   const { t } = useTranslation(["common"]);
-  const [order, setOrder] = useState("asc");
+  const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
@@ -88,6 +88,8 @@ const BudaTable = (props) => {
           )
         );
   }, [search, searchBy, data]);
+
+  console.log(data);
 
   return (
     <Box sx={{ width: "100%" }}>

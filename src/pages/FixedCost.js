@@ -91,7 +91,7 @@ const FixCost = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={fixcosts.reverse()}
+            data={fixcosts}
             headCells={headCells}
             Modal={AddFixedCostModal}
             type="fixedCostID"

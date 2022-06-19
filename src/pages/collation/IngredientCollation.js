@@ -67,7 +67,7 @@ const IngredientCollation = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            data={ingredients.reverse()}
+            data={ingredients}
             headCells={headCells}
             type="ingredientID"
             DetailTableBody={IngredientCollationTableBody}

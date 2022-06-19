@@ -1,13 +1,13 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Button, Toolbar } from "@mui/material";
+import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import { useReactToPrint } from "react-to-print";
 import {
   AlertErrorProp,
-  AlertSuccessProp,
+  AlertSuccessProp
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddProductModal from "../components/modal/AddProductModal";
@@ -15,7 +15,6 @@ import ProductBarcodeListPrintForm from "../components/printforms/ProductBarcode
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
-import PrintIcon from "@mui/icons-material/Print";
 
 const Product = (props) => {
   const { t } = useTranslation(["common", "product"]);
@@ -45,31 +44,35 @@ const Product = (props) => {
     }
   };
 
-  const print = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
   const handlePrint = (val) => {
+    console.log(val);
     let x = products.filter((item) => val.indexOf(item.productID) !== -1);
     setPrintItem(x);
   };
 
   useEffect(() => {
     async function fetchData() {
-      if (data) setProducts(data.productsByUser.map((item) => item));
+      if (data){
+        console.log(data.productsByUser);
+        setProducts(data.productsByUser.map((item) => item));
+      } 
     }
 
     fetchData();
   }, [data]);
 
+  const print = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   useEffect(() => {
-    if (printItem && printItem.length>0){
+    if (printItem && printItem.length > 0) {
       print();
     }
   }, [printItem]);
 
   // if(error) return <Redirect to="/login"/>;
-  console.log(printItem);
+
   const headCells = [
     {
       id: "sku",
@@ -114,7 +117,7 @@ const Product = (props) => {
       label: t("product:description"),
     },
   ];
-  console.log(printItem);
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -132,12 +135,11 @@ const Product = (props) => {
             deleteItems={handleDelete}
             printable={true}
             printItems={handlePrint}
-            data={products.reverse()}
+            data={products}
             headCells={headCells}
             Modal={AddProductModal}
             type="productID"
             DetailTableBody={ProductTableBody}
-            print={print}
           />
           <Box maxWidth={150} mt={3} sx={{ position: "fixed", left: "100vw" }}>
             <ProductBarcodeListPrintForm

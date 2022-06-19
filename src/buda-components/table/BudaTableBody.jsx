@@ -45,6 +45,7 @@ const BudaTableBody = (props) => {
     },
   });
   const isSelected = (name) => selected.indexOf(name) !== -1;
+  
   return (
     <TableBody {...remainProps}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
