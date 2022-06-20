@@ -76,3 +76,33 @@ export const LOAD_BUY_ORDER = gql`
     }
   }
 `;
+
+export const PRINT_BUY_ORDER = gql`
+  query PRINT_BUY_ORDER($buyOrderID: Int, $storeID: Int) {
+    buyOrder(buyOrderID: $buyOrderID, storeID:) {
+      buyOrder {
+        creationTime
+        finishTime
+        status
+        totalCost
+        supplier {
+          email
+          name
+          address
+          phoneNumber
+        }
+        staff {
+          name
+        }
+        buyOrderItems {
+          ingredient {
+            sku: ingredientSKU
+            name
+          }
+          pricePerUnit
+          quantity
+        }
+      }
+    }
+  }
+`;
