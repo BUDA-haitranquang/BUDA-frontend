@@ -98,7 +98,7 @@ const Ingredient = (props) => {
         <Box sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
           <BudaTable
             deleteItems={handleDelete}
-            data={ingredients.reverse()}
+            data={ingredients}
             headCells={headCells}
             Modal={AddIngredientModal}
             type="ingredientID"

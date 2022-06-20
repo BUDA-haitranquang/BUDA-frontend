@@ -99,7 +99,7 @@ const Customer = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={customer.reverse()}
+            data={customer}
             headCells={headCells}
             Modal={AddCustomerModal}
             type="customerID"

@@ -75,7 +75,7 @@ const IncompletedFixedCost = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={fixedCost.reverse()}
+          data={fixedCost}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="fixedCostBillID"

@@ -62,7 +62,7 @@ const Collation = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            data={products.reverse()}
+            data={products}
             headCells={headCells}
             type="productID"
             DetailTableBody={CollationTableBody}

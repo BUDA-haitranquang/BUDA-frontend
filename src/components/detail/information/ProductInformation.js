@@ -1,11 +1,9 @@
 import PrintIcon from "@mui/icons-material/Print";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Barcode from "react-barcode";
-import ReactToPrint from "react-to-print";
-import PrintProductModal from "../../modal/print/PrintProductModal";
-import ProductDetailPrintForm from "../../printforms/ProductDetailPrintForm";
+import PrintProductBarcodeModal from "../../modal/print/PrintProductBarcodeModal";
 import MainImage from "../MainImage";
 
 export default function ProductInformation({ data }) {
@@ -76,7 +74,7 @@ export default function ProductInformation({ data }) {
             </Button>
           </Box>
 
-          <PrintProductModal
+          <PrintProductBarcodeModal
             isOpen={isOpenModal}
             handleClose={handleCloseModal}
             sku={sku}

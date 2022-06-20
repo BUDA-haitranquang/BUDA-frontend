@@ -91,7 +91,7 @@ const Supplier = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={supplier.reverse()}
+            data={supplier}
             headCells={headCells}
             Modal={AddSupplierModal}
             type="supplierID"

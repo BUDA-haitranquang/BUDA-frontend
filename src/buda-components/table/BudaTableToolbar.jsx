@@ -1,8 +1,9 @@
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
+  Button,
   FormControl,
   IconButton,
   InputAdornment,
@@ -12,11 +13,12 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { alpha } from "@mui/material/styles";
 import React, { useState } from "react";
-import FilterPopup from "./FilterPopup";
-import SplitButton from "./SplitButton";
 import { useTranslation } from "react-i18next";
+import SplitButton from "./SplitButton";
 const BudaTableToolbar = ({
   headCells,
   numSelected,
@@ -24,16 +26,29 @@ const BudaTableToolbar = ({
   handleSearch,
   searchBy,
   deleteItem,
-  checkModal
+  printItem,
+  printable = false,
+  checkModal,
 }) => {
   const [value, setValue] = useState("");
   const li = Array.from(headCells, (item) => item.label);
-  const {t} = useTranslation(['common'])
+  const { t } = useTranslation(["common"]);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClickBulkAction = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseBulkAction = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Toolbar
       sx={{
         pl: { sm: 2 },
-        paddingTop: "10px",
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
@@ -94,22 +109,58 @@ const BudaTableToolbar = ({
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton onClick={deleteItem}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : checkModal && (
-        <Box display="flex" flexDirection="row">
-          {/* <Tooltip title="Filter list">
-            <FilterPopup list={li} />
-          </Tooltip> */}
-          <Tooltip title="Add">
-            <IconButton onClick={handleOpen}>
-              <AddIcon />
-            </IconButton>
-          </Tooltip>
+        <Box>
+          <Button
+            id="basic-button"
+            variant="contained"
+            aria-controls="basic-menu"
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClickBulkAction}
+            style={{ width: "200px", fontWeight: "600", marginRight: "20px" }}
+          >
+            Choose Action
+            <ArrowDropDownIcon sx={{ marginLeft: "10px" }} />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleCloseBulkAction}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem
+              onClick={() => {
+                deleteItem();
+                setAnchorEl(null);
+              }}
+            >
+              Delete
+            </MenuItem>
+            {printable && (
+              <MenuItem
+                onClick={() => {
+                  printItem();
+                  setAnchorEl(null);
+                }}
+              >
+                Print
+              </MenuItem>
+            )}
+          </Menu>
         </Box>
+      ) : (
+        checkModal && (
+          <Box display="flex" flexDirection="row">
+            <Tooltip title="Add">
+              <IconButton onClick={handleOpen}>
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )
       )}
     </Toolbar>
   );
