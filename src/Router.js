@@ -53,6 +53,7 @@ import Header from "./components/Header";
 import { Box } from "@mui/material";
 import Retention from "./pages/statistic/Retention";
 import DetailDiscount from "./pages/discount/detail/DetailDiscount";
+import Plans from "./pages/Plans/index";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -342,6 +343,7 @@ const AppRouter = () => {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/print" component={PrintDemo} />
+            <Route exact path="/plan" component={Plans} />
             <PrivateRoute
               authed={isAuth}
               exact
