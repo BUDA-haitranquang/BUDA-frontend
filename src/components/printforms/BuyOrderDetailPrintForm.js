@@ -1,33 +1,90 @@
-import { Box, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Paper,
+  TableBody,
+  TableCell,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import React from "react";
+import { dateToDateString } from "../../utils/utils";
 
 const BuyOrderDetailPrintForm = React.forwardRef((props, ref) => {
-  console.log(props);
   const buyOrder = props.buyOrderPrintInfo?.buyOrder;
+  const store = props.buyOrderPrintInfo?.store;
+
   return (
     <div ref={ref}>
       <Paper
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          padding: "20px 20px 20px 40px",
+        }}
       >
-        <Box>
-          <Typography variant="h6">Store name</Typography>
-          <Typography>Store address</Typography>
-          <Typography>Phone number</Typography>
-          <Typography>Current time</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginBottom: "16px",
+          }}
+        >
+          <Typography variant="h4">{store?.name}</Typography>
+          <Typography>Address: {store?.address}</Typography>
+          <Typography>Staff: {buyOrder?.staff?.name}</Typography>
         </Box>
-        {/* <Box>
-          <Typography>Customer name: {sellOrder.customer.name}</Typography>
-          <Typography>Address: {sellOrder.customer.address}</Typography>
-          <Typography>Phone: {sellOrder.customer.phoneNumber}</Typography>
-          <Typography>Points: {sellOrder.customer.name}</Typography>
+
+        <Divider>
+          <Typography variant="h6">Supplier Information</Typography>{" "}
+        </Divider>
+        <Box sx={{ marginBottom: "12px" }}>
+          <Typography variant="h6">{buyOrder?.supplier?.name}</Typography>
+          <Typography>Address: {buyOrder?.supplier?.address}</Typography>
+          <Typography>Phone: {buyOrder?.supplier?.phoneNumber}</Typography>
         </Box>
-        <Box>Line items info</Box> */}
+
+        <Divider>
+          <Typography variant="h6">List Items</Typography>{" "}
+        </Divider>
         <Box>
-          <Typography>Total cost: {buyOrder?.totalCost}</Typography>
-          {/* <Typography>Final cost: {buyOrder.finalCost}</Typography> */}
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <b>SKU</b>
+              </TableCell>
+              <TableCell>
+                <b>Name</b>
+              </TableCell>
+              <TableCell>
+                <b>Price</b>
+              </TableCell>
+              <TableCell>
+                <b>Quantity</b>
+              </TableCell>
+            </TableRow>
+            {buyOrder?.buyOrderItems.map((item) => (
+              <TableRow>
+                <TableCell align="left">{item?.ingredient?.sku}</TableCell>
+                <TableCell align="left">{item?.ingredient?.name}</TableCell>
+                <TableCell align="right">
+                  {item?.pricePerUnit.toLocaleString()}
+                </TableCell>
+                <TableCell align="left">{item?.quantity}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Box>
-        <Box>
-          <Typography>Other information</Typography>
+
+        <Box sx={{ marginTop: "20px" }}>
+          <Typography variant="h6">
+            Total Cost: {buyOrder?.totalCost.toLocaleString()}
+          </Typography>
+        </Box>
+
+        <Box sx={{ marginTop: "20px" }}>
+          Time: {dateToDateString(buyOrder?.finishTime)}
         </Box>
       </Paper>
     </div>

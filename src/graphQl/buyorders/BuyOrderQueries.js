@@ -111,6 +111,10 @@ export const PRINT_BUY_ORDER = gql`
           quantity
         }
       }
+      store {
+        name 
+        address
+      }
     }
   }
 `;

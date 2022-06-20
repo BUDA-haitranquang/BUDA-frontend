@@ -82,7 +82,7 @@ function DetailBuyOrder(props) {
             justifyContent="space-between"
           >
             <Typography variant="h4">{buyOrder?.textID}</Typography>
-            <Button variant="contained" onClick={() => handlePrint(parseInt(id), 6)}>
+            <Button variant="contained" onClick={() => handlePrint(parseInt(id), 8)}>
               <PrintIcon style={{ marginRight: "10px" }} />
               Print
             </Button>
