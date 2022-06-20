@@ -78,8 +78,16 @@ export const LOAD_BUY_ORDER = gql`
 `;
 
 export const PRINT_BUY_ORDER = gql`
-  query PRINT_BUY_ORDER($buyOrderID: Int, $storeID: Int) {
-    buyOrder(buyOrderID: $buyOrderID, storeID:) {
+  query PRINT_BUY_ORDER(
+    $buyOrderID: Int 
+    $storeID: Int
+  ){
+    printBuyOrder(
+      printInput: {
+        buyOrderID: $buyOrderID 
+        storeID: $storeID
+      }
+      ){
       buyOrder {
         creationTime
         finishTime
