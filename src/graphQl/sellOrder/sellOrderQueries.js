@@ -87,6 +87,8 @@ export const LOAD_SELL_ORDER_DETAILS = gql`
           amountLeft
           description
         }
+        quantity
+        pricePerUnit
       }
       textID
     }

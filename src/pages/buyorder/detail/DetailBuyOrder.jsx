@@ -89,10 +89,10 @@ function DetailBuyOrder(props) {
           </Box>
 
           <Grid container spacing={3}>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <BoxSupplier supplier={buyOrder?.supplier} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <BoxAdditionalInfo
                 status={buyOrder?.status}
                 textID={buyOrder?.textID}
