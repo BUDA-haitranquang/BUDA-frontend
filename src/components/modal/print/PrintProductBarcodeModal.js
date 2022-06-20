@@ -1,61 +1,17 @@
-import { useMutation } from "@apollo/client";
+import PrintIcon from "@mui/icons-material/Print";
 import { Box, Button, TextField } from "@mui/material";
-import { useSnackbar } from "notistack";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactToPrint from "react-to-print";
-import PrintIcon from "@mui/icons-material/Print";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../../../buda-components/alert/BudaNoti";
 import BudaModal from "../../../buda-components/modal/BudaModal";
 import ProductBarcodePrintForm from "../../printforms/ProductBarcodePrintForm";
 
 const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
-  const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(["common", "print"]);
 
   const componentRef = useRef();
 
   const [numCopy, setNumCopy] = useState(1);
-  //   const [newCustomer, { error }] = useMutation(ADD_CUSTOMER_MUTATION);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const resetForm = () => {
-    setNumCopy("");
-  };
-
-  const printProduct = () => {
-    setIsLoading(true);
-    // newCustomer({
-    //   variables: {
-    //     name: name,
-    //     phoneNumber: phoneNumber,
-    //     address: address,
-    //     totalSpend: parseFloat(totalSpend),
-    //     gender: gender,
-    //     ageGroup: ageGroup,
-    //   },
-    //   refetchQueries: [{ query: LOAD_CUSTOMERS }],
-    // })
-    //   .then((res) => {
-    //     handleClose();
-    //     enqueueSnackbar("Add successfully", AlertSuccessProp);
-    //   })
-    //   .then(resetForm())
-    //   .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp))
-    //   .finally(setIsLoading(false));
-  };
-
-  const isValid = () => {
-    return numCopy > 0;
-  };
-
-  const handleSubmit = () => {
-    if (isValid()) printProduct();
-    else enqueueSnackbar("Invalid input", AlertErrorProp);
-  };
 
   return (
     <BudaModal
@@ -63,7 +19,6 @@ const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
       onClose={handleClose}
       title={t("print:enterNumCopy")}
       isNotShowFooter={true}
-      isLoading={isLoading}
       children={
         <Box
           component="form"
