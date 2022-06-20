@@ -45,7 +45,6 @@ const Product = (props) => {
   };
 
   const handlePrint = (val) => {
-    console.log(val);
     let x = products.filter((item) => val.indexOf(item.productID) !== -1);
     setPrintItem(x);
   };
@@ -53,7 +52,6 @@ const Product = (props) => {
   useEffect(() => {
     async function fetchData() {
       if (data){
-        console.log(data.productsByUser);
         setProducts(data.productsByUser.map((item) => item));
       } 
     }
