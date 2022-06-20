@@ -2,8 +2,8 @@ import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
 
 const BuyOrderDetailPrintForm = React.forwardRef((props, ref) => {
-  // console.log(props);
-  // const sellOrder = props.sellOrder;
+  console.log(props);
+  const buyOrder = props.buyOrderPrintInfo?.buyOrder;
   return (
     <div ref={ref}>
       <Paper
@@ -21,11 +21,11 @@ const BuyOrderDetailPrintForm = React.forwardRef((props, ref) => {
           <Typography>Phone: {sellOrder.customer.phoneNumber}</Typography>
           <Typography>Points: {sellOrder.customer.name}</Typography>
         </Box>
-        <Box>Line items info</Box>
+        <Box>Line items info</Box> */}
         <Box>
-          <Typography>Real cost: {sellOrder.realCost}</Typography>
-          <Typography>Final cost: {sellOrder.finalCost}</Typography>
-        </Box> */}
+          <Typography>Total cost: {buyOrder?.totalCost}</Typography>
+          {/* <Typography>Final cost: {buyOrder.finalCost}</Typography> */}
+        </Box>
         <Box>
           <Typography>Other information</Typography>
         </Box>

@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useLazyQuery } from "@apollo/client";
 import PrintIcon from "@mui/icons-material/Print";
 import { Box, Button, Grid, Toolbar, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
@@ -21,6 +21,7 @@ function DetailBuyOrder(props) {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation("buyorder", { keyPrefix: "detail" });
   const [buyOrder, setBuyOrder] = useState(null);
+  const [buyOrderPrintInfo, setBuyOrderPrintInfo] = useState();
   const { id } = useParams();
 
   const componentRef = useRef();
@@ -31,7 +32,7 @@ function DetailBuyOrder(props) {
     },
   });
 
-  const [printBuyOrder] = useQuery(PRINT_BUY_ORDER);
+  const [printBuyOrder] = useLazyQuery(PRINT_BUY_ORDER);
 
   useEffect(() => {
     async function fetchData() {
@@ -48,16 +49,19 @@ function DetailBuyOrder(props) {
   });
 
   const handlePrint = (buyOrderID, storeID) => {
-    // printBuyOrder({
-    //   variables: {
-    //     buyOrderID: buyOrderID,
-    //     storeID: storeID
-    //   }
-    // })
-    //   .then((res) => {
-    //     print();
-    //   })
-    //   .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp))
+    printBuyOrder({
+      variables: {
+        buyOrderID: buyOrderID,
+        storeID: storeID
+      }
+    })
+      .then((res) => {
+        setBuyOrderPrintInfo(res.data.printBuyOrder)
+      })
+      .then(() => {
+        print();
+      })
+      .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp))
   }
 
   return (
@@ -78,7 +82,7 @@ function DetailBuyOrder(props) {
             justifyContent="space-between"
           >
             <Typography variant="h4">{buyOrder?.textID}</Typography>
-            <Button variant="contained" >
+            <Button variant="contained" onClick={() => handlePrint(parseInt(id), 6)}>
               <PrintIcon style={{ marginRight: "10px" }} />
               Print
             </Button>
@@ -113,7 +117,7 @@ function DetailBuyOrder(props) {
         </Box>
       </Box>
       <Box sx={{ position: "fixed", left: "100vw" }}>
-        <BuyOrderDetailPrintForm ref={componentRef} />
+        <BuyOrderDetailPrintForm ref={componentRef} buyOrderPrintInfo={buyOrderPrintInfo}/>
       </Box>
     </Box>
   );
