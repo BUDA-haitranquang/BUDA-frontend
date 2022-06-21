@@ -263,12 +263,12 @@ const AppRouter = () => {
             path="/statistic/business"
             component={Retention}
           />
-           {/* <PrivateRoute
+           <PrivateRoute
             authed={isAuth}
             exact
             path="/statistic/product"
             component={ProductStatistic}
-          /> */}
+          />
            <PrivateRoute
             authed={isAuth}
             exact

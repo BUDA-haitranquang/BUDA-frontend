@@ -57,7 +57,7 @@ query{
 }`
 
 export const PRODUCT_TOP_PROFIT = gql`
-query = {
+query {
     productsTopProfit{
         productID
         name 
@@ -66,7 +66,7 @@ query = {
 }`
 
 export const PRODUCT_LEAST_PROFIT = gql`
-query = {
+query {
     productsLeastProfit{
         productID
         name 

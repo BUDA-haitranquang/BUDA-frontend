@@ -19,7 +19,6 @@ const BudaLegend = ({ data, colors, style, ...props }) => {
 
   return (
     <Box sx={style}>
-      {console.log(renderItem)}
       {renderItem}
     </Box>
   );
