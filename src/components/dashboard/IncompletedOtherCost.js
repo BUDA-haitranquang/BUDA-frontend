@@ -74,7 +74,7 @@ const IncompletedOtherCost = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={otherCost.reverse()}
+          data={otherCost}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="otherCostID"

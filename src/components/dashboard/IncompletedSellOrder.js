@@ -88,7 +88,7 @@ const IncompletedSellOrder = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={sellOrder.reverse()}
+          data={sellOrder}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="sellOrderID"

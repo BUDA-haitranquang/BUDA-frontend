@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import Barcode from "react-barcode";
 
-const ProductDetailPrintForm = React.forwardRef((props, ref) => {
+const ProductBarcodePrintForm = React.forwardRef((props, ref) => {
   const numCopy = props.numCopy;
   const sku = props.sku;
   return (
@@ -22,4 +22,4 @@ const ProductDetailPrintForm = React.forwardRef((props, ref) => {
   );
 });
 
-export default ProductDetailPrintForm;
+export default ProductBarcodePrintForm;
