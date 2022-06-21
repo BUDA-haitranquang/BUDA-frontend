@@ -35,7 +35,7 @@ const ProductsStatObject = ({ label, data, dataKey,unit }) => {
         <h1 style ={{marginLeft:'20px'}}>{label}</h1>
       </Grid>
       <Grid item sx={{ width: "100%", height: "300px" }}>
-        <ResponsiveContainer width={"95%"} height={"100%"}>
+        <ResponsiveContainer width={"95%"} height={"95%"}>
           <BarChart
             width={400}
             height={300}
@@ -56,7 +56,7 @@ const ProductsStatObject = ({ label, data, dataKey,unit }) => {
               }}
               interval={0}
             />
-            <YAxis unit={unit} allowDecimals= {false}/>
+            <YAxis unit={unit} allowDecimals= {false} domain = {[0,dataMax => Math.ceil(dataMax*1.2)]}/>
             <Tooltip />
 
             <Bar

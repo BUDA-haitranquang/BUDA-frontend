@@ -88,13 +88,13 @@ const ProductStatistic = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Product Statistic" id="statistic" />
+
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         <Box></Box>
         <Box sx={{ width: "100%" }}>
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Products Reveneu" />
+            <Tab label="Products Revenue" />
             <Tab label="Products Profit" />
             <Tab label="Products Sell Number" />
             <Tab label="Returned Products" />
@@ -123,7 +123,7 @@ const ProductStatistic = (props) => {
                 label="Top profit"
                 data={productTopProfit}
                 dataKey={"profit"}
-                unit=" sp"
+                unit=" "
               />
               <ProductsStatObject
                 label="Least profit"

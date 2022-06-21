@@ -32,7 +32,6 @@ import Staff from "./pages/Staff";
 import Discount from "./pages/discount/list/Discount";
 import StaffDetail from "./pages/StaffDetail";
 import SignUp from "./pages/SignUp";
-import Statistic from "./pages/statistic/Statistic";
 import ReveneuPage from "./pages/statistic/Reveneu";
 import Supplier from "./pages/Supplier";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
@@ -237,12 +236,7 @@ const AppRouter = () => {
               path="/supplier"
               component={Supplier}
             />
-            {/* <PrivateRoute
-            authed={isAuth}
-            exact
-            path="/statistic/business"
-            component={Statistic}
-          /> */}
+        
             <PrivateRoute
               authed={isAuth}
               exact
