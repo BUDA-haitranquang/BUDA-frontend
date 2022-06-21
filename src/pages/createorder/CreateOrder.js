@@ -6,7 +6,6 @@ import { useSnackbar } from "notistack";
 import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
-import Sidebar from "../../components/Sidebar";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import { NEW_SELL_ORDER_MUTATION } from "../../graphQl/sellOrder/newSellOrderMutation";
 import { clearProductCart } from "../../redux/productCartSlice";
@@ -85,7 +84,6 @@ export default function CreateOrder() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar name={t('sell:title')} sx={{ backgroundColor: "#1976d2" }} id="business" />
       <Grid
         container
         sx={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "80px" }}

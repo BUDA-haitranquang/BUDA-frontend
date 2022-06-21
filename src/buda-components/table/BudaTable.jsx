@@ -20,6 +20,7 @@ const BudaTable = (props) => {
     DetailTableBody,
     type,
     deleteItems,
+    printItems,
     children,
     stickyHeader = true,
     padding,
@@ -98,6 +99,10 @@ const BudaTable = (props) => {
             searchBy={(val) => setSearchBy(val)}
             deleteItem={() => {
               deleteItems(selected);
+              setSelected([]);
+            }}
+            printItem={() => {
+              printItems(selected);
               setSelected([]);
             }}
             checkModal={Modal ? true : false}

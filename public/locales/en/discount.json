@@ -1,0 +1,30 @@
+{
+  "list": {
+    "code": "Discount code",
+    "name": "Name",
+    "percentage": "Discount (%)",
+    "cash": "Discount (VND)",
+    "cashLimit": "Maximum discount value",
+    "orderCount": "Maximum orders",
+    "createdAt": "Created at",
+    "finishedAt": "Finished at"
+  },
+
+  "detail": {
+    "title": "Discount detail",
+
+    "boxPrimaryInfo": {
+      "title": "Discount detail information",
+      "percentage": "Discount (%)",
+      "cashLimit": "Maximum discount value",
+      "orderCount": "Maximum orders"
+    },
+
+    "boxAdditionalInfo": {
+      "title": "Additional information",
+      "createdAt": "Created at",
+      "finishedAt": "Finished at",
+      "description": "Description"
+    }
+  }
+}

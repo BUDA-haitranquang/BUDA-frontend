@@ -1,20 +1,24 @@
+import { Box } from "@mui/material";
 import React from "react";
 import Barcode from "react-barcode";
 
 const ProductDetailPrintForm = React.forwardRef((props, ref) => {
-  console.log(props);
+  const numCopy = props.numCopy;
   const sku = props.sku;
   return (
-    <div ref={ref}>
-      <Barcode
-        marginTop={6}
-        width={1}
-        height={50}
-        fontSize={14}
-        value={"PROD" + sku} // add store identity ?
-        text={"PRODUCT: " + sku}
-      />
-    </div>
+    <Box ref={ref}>
+      {Array.from({ length: numCopy }, (_, index) => (
+        <Barcode
+          key={index}
+          marginTop={6}
+          width={1}
+          height={50}
+          fontSize={14}
+          value={"PROD" + sku} // add store identity ?
+          text={"PRODUCT: " + sku}
+        />
+      ))}
+    </Box>
   );
 });
 

@@ -3,15 +3,13 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "../../components/Sidebar";
 import IngredientCollationTableBody from "../../components/table/body/IngredientCollationTableBody";
 import { Ingredient_Collation } from "../../graphQl/ingredients/ingredientQueries";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { useTranslation } from "react-i18next";
 
 const IngredientCollation = (props) => {
-  const { window } = props;
-  const {t} = useTranslation('ingredientCollation');
+  const { t } = useTranslation("ingredientCollation");
   const [ingredients, setIngredients] = useState([]);
   const { error, loading, data } = useQuery(Ingredient_Collation);
   const headCells = [
@@ -19,46 +17,45 @@ const IngredientCollation = (props) => {
       id: "ingredientSKU",
       numeric: false,
       disablePadding: false,
-      label: "SKU"
+      label: "SKU",
     },
     {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t("ingredientCollation:ingredient")
+      label: t("ingredientCollation:ingredient"),
     },
     {
       id: "message",
       numeric: false,
       disablePadding: false,
-      label: t("ingredientCollation:message")
+      label: t("ingredientCollation:message"),
     },
     {
       id: "amountLeft",
       numeric: true,
       disablePadding: true,
-      label: t("ingredientCollation:amountLeft")
+      label: t("ingredientCollation:amountLeft"),
     },
     {
       id: "Edit",
       numeric: true,
       disablePadding: true,
-      label: t("ingredientCollation:edit")
-    }
+      label: t("ingredientCollation:edit"),
+    },
   ];
   useEffect(() => {
     async function fetchData() {
-      if (data) setIngredients(data.ingredientsByUser.map(item => item));
+      if (data) setIngredients(data.ingredientsByUser.map((item) => item));
     }
 
     fetchData();
   }, [data]);
 
   // if (error) return <Redirect to="/login" />;
-  
+
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t('ingredientCollation:title')} id="ingredient"/>
       <Box
         width="100%"
         display="flex"

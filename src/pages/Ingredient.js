@@ -10,13 +10,11 @@ import {
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddIngredientModal from "../components/modal/AddIngredientModal";
-import Sidebar from "../components/Sidebar";
 import IngredientTableBody from "../components/table/body/IngredientTableBody";
 import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutation";
 import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 
 const Ingredient = (props) => {
-  const { window } = props;
   const [ingredients, setIngredients] = useState([]);
   const { error, loading, data } = useQuery(LOAD_INGREDIENTS);
   const [hideIngredient] = useMutation(HIDE_INGREDIENT_MUTATION);
@@ -88,7 +86,6 @@ const Ingredient = (props) => {
   ];
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("ingredient:Ingredient")} id="ingredient" />
       <Box
         width="100%"
         display="flex"

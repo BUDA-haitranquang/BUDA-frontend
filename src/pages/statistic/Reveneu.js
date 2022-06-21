@@ -8,7 +8,7 @@ const ReveneuPage = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Reveneu and cost" id="statistic" />
+      {/* <Sidebar window={window} name="Reveneu and cost" id="statistic" /> */}
       <Box
         width="100%"
         display="flex"
