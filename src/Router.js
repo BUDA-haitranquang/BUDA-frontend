@@ -49,6 +49,7 @@ import IngredientDetail from "./pages/IngerdientsDetail";
 import IngredientCollation from "./pages/collation/IngredientCollation";
 import PrintDemo from "./pages/PrintDemo";
 import Retention from "./pages/statistic/Retention";
+import StaffNote from "./pages/StaffNote";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -158,7 +159,7 @@ const AppRouter = () => {
       <Router>
         <Switch>
           <PrivateRoute authed={isAuth} exact path="/staff" component={Staff} />
-
+          <PrivateRoute authed={isAuth} exact path="/note" component={StaffNote} />
           <PrivateRoute
             authed={isAuth}
             exact

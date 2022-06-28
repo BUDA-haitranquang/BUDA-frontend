@@ -92,7 +92,6 @@ const Product = (props) => {
       label: t("product:description")
     }
   ];
-
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar window={window} name={t("product:product")} id="product"/>
@@ -108,10 +107,10 @@ const Product = (props) => {
 
         <Box>
           <BudaTable
-            deleteItems={handleDelete}
+            // deleteItems={handleDelete}
             data={products.reverse()}
             headCells={headCells}
-            Modal={AddProductModal}
+            // Modal={AddProductModal}
             type="productID"
             DetailTableBody={ProductTableBody}
           />
