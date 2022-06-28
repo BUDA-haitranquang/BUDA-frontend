@@ -36,8 +36,7 @@ const IncompletedSellOrder = (props) => {
 
     fetchData();
   }, [data]);
-  console.log(sellOrder);
-  // if(error) return <Redirect to="/login"/>;
+  
   const headCells = [
     {
       id: "textID",

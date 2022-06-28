@@ -68,6 +68,18 @@ const IncompletedFixedCost = (props) => {
       disablePadding: true,
       label: t("dashboard:fixedCost.status"),
     },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:fixedCost.finish"),
+    },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:fixedCost.cancel"),
+    },
   ];
 
   return (

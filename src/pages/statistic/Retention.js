@@ -40,7 +40,7 @@ function Retention(props) {
             Retention rate
           </Typography>
         <Box pt = {1} sx={{display:'flex',justifyContent:'space-evenly'}}>
-        <BudaCircularChart value = {0.9} size = '200px' thickness = '5' title = "Weekly" />
+        <BudaCircularChart value = {weekly} size = '200px' thickness = '5' title = "Weekly" />
         <BudaCircularChart value = {monthly} size = '200px' thickness = '5' title = "Monthly"/>
         </Box>
         <Box py ={1}></Box>
