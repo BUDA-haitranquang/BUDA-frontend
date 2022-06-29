@@ -7,10 +7,9 @@ import { useTranslation } from "react-i18next";
 import { useReactToPrint } from "react-to-print";
 import {
   AlertErrorProp,
-  AlertSuccessProp
+  AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
-import AddProductModal from "../components/modal/AddProductModal";
 import ProductBarcodeListPrintForm from "../components/printforms/ProductBarcodeListPrintForm";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
@@ -51,9 +50,9 @@ const Product = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (data){
+      if (data) {
         setProducts(data.productsByUser.map((item) => item));
-      } 
+      }
     }
 
     fetchData();
@@ -115,7 +114,6 @@ const Product = (props) => {
       label: t("product:description"),
     },
   ];
-
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -135,7 +133,7 @@ const Product = (props) => {
             printItems={handlePrint}
             data={products}
             headCells={headCells}
-            Modal={AddProductModal}
+            // Modal={AddProductModal}
             type="productID"
             DetailTableBody={ProductTableBody}
           />

@@ -35,3 +35,17 @@ export const LOAD_STAFF = gql`
 		}
 	}
 `;
+
+
+export const LOAD_STAFF_NOTES = gql`
+	query{
+		staffNotesByUser{
+			staffNoteID
+			userID
+			staffID
+			noteDate
+			message
+			seen
+		}
+	}	
+`;

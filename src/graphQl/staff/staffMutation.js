@@ -61,3 +61,50 @@ export const DELETE_STAFF_MUTATION = gql`
     deleteStaff(staffID: $staffID)
   }
 `;
+
+
+export const DELETE_STAFF_NOTE_MUTATION = gql`
+  mutation deleteStaffNote($staffNoteID: Int!){
+    deleteStaffNote(staffNoteID: $staffNoteID)
+  }
+`
+
+export const ADD_STAFF_NOTE = gql ` 
+  mutation newStaffNote(
+      $staffID: Int!
+      $message: String!
+  )
+  {
+    newStaffNote(
+      staffNoteInput:{
+        message: $message
+        staffID: $staffID
+      }
+    )
+    {
+      staffNoteID
+    }
+  }
+`
+
+export const UPDATE_STAFF_NOTE = gql `
+  mutation updateStaffNote(
+    $staffNoteID: Int!
+    $message: String
+    $seen: Boolean
+    $staffID: Int
+  )
+  {
+    updateStaffNote(
+      staffNoteID: $staffNoteID
+      staffNote:{
+        message:$message
+        seen: $seen
+        staffID: $staffID
+      }
+    )
+    {
+      staffNoteID
+    }
+  }
+`
