@@ -7,16 +7,15 @@ import { useTranslation } from "react-i18next";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { INCOMPLETED_BUY_ORDER } from "../../graphQl/dashboard/queries";
 import IncompletedBuyOrderTableBody from "./tableBody/IncompletedBuyOrderTableBody";
-// import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 
 const IncompletedBuyOrder = (props) => {
-  //   const { t } = useTranslation(["common", "product"]);
+  
   const [buyOrder, setBuyOrder] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_BUY_ORDER);
   const {t} = useTranslation('dashboard');
   const toObject = (data1) => {
     let incompletedBuyOrder = {};
-    incompletedBuyOrder.sellOrderID = data1?.sellOrderID;
+    incompletedBuyOrder.buyOrderID = data1?.buyOrderID;
     incompletedBuyOrder.textID = data1?.textID;
     incompletedBuyOrder.supplierName = data1?.supplier?.name;
     incompletedBuyOrder.totalCost = data1?.totalCost;
@@ -68,6 +67,18 @@ const IncompletedBuyOrder = (props) => {
       disablePadding: true,
       label: t("dashboard:buyOrder.status"),
     },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:buyOrder.finish"),
+    },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:buyOrder.cancel"),
+    },
   ];
 
   return (
@@ -75,7 +86,7 @@ const IncompletedBuyOrder = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={buyOrder.reverse()}
+          data={buyOrder}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="buyOrderID"

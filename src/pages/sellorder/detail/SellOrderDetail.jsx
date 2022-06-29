@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import { Box, Button, Grid, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Sidebar from "../../../components/Sidebar";
 // import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
 import { LOAD_SELL_ORDER_DETAILS } from "../../../graphQl/sellOrder/sellOrderQueries";
 import { dateToDateString } from "../../../utils/utils";
@@ -10,11 +9,11 @@ import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
 import BoxCustomer from "./components/BoxCustomer/BoxCustomer";
 import BoxProduct from "./components/BoxProduct/BoxProduct";
 import PrintSellOrderModal from "./PrintSellOrderModal";
+import BoxMoney from "../../buyorder/detail/components/BoxMoney/BoxMoney";
 
 SellOrderDetail.propTypes = {};
 
 function SellOrderDetail(props) {
-  const { window } = props;
   const [sellOrder, setSellOrder] = useState(null);
   const { id } = useParams();
 
@@ -43,8 +42,6 @@ function SellOrderDetail(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Sell Order" id="business" />
-
       <Box
         width="100%"
         display="flex"
@@ -65,10 +62,10 @@ function SellOrderDetail(props) {
           />
 
           <Grid container spacing={3}>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <BoxCustomer customer={sellOrder?.customer} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <BoxAdditionalInfo
                 status={sellOrder?.status}
                 textID={sellOrder?.textID}
@@ -78,6 +75,16 @@ function SellOrderDetail(props) {
             </Grid>
             <Grid item xs={12}>
               <BoxProduct sellOrderItems={sellOrder?.sellOrderItems} />
+            </Grid>
+            <Grid item xs={12}>
+              <BoxMoney
+                totalMoney={sellOrder?.sellOrderItems.reduce(
+                  (previousValue, currentValue) =>
+                    previousValue +
+                    currentValue.quantity * currentValue.pricePerUnit,
+                  0
+                )}
+              />
             </Grid>
           </Grid>
         </Box>

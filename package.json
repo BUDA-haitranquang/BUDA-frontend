@@ -40,7 +40,11 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0"
   },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -65,6 +69,7 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "react-error-overlay": "6.0.9"
   }
 }

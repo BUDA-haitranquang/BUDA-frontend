@@ -9,7 +9,6 @@ import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaN
 import CombinedDetail from "../components/CombinedDetail";
 import ProductInformation from "../components/detail/information/ProductInformation";
 import EditProductModal from "../components/modal/EditProductModal";
-import Sidebar from "../components/Sidebar";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import {
   LOAD_COMPONENTS_BY_PRODUCT,
@@ -21,7 +20,6 @@ import {
 
 const ProductDetail = (props) => {
   const { enqueueSnackbar } = useSnackbar();
-  const { window } = props;
   const { id } = useParams();
   const history = useHistory();
 
@@ -96,7 +94,6 @@ const ProductDetail = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Product Detail" id="product"/>
       <Box>
         <Toolbar />
         <Box pt={1}>

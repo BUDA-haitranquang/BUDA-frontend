@@ -9,6 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
 import WorkIcon from "@mui/icons-material/Work";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import DiscountIcon from "@mui/icons-material/Discount";
 import { useTranslation } from "react-i18next";
 import {
   AppBar,
@@ -21,16 +22,12 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography,
-  useTheme,
-  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { setFocus } from "../redux/sidebarSlice";
-import AccountMenu from "./AccountMenu";
 
 const useStyle = makeStyles({
   selectedItem: {
@@ -52,11 +49,6 @@ const useStyle = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-
-    // "&:hover": {
-    //   background: "rgba(45, 142, 255, 1)",
-    //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
-    // },
   },
   subItem: {
     borderRadius: "6px",
@@ -77,10 +69,6 @@ const useStyle = makeStyles({
     "& a:link": {
       textDecoration: "none",
       color: "white",
-      // "&:hover": {
-      //   color: "grey",
-      //   fontWeight: "600",
-      // },
     },
     "& a:visited": {
       color: "black",
@@ -103,10 +91,12 @@ function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
 
-const Sidebar = ({ window, name, id }) => {
+const Sidebar = () => {
   const history = useHistory();
+  console.log(history.location.pathname);
   const focus = useSelector((state) => state.sidebar.focus);
   const dispatch = useDispatch();
+  console.log(history.location.pathname);
   const [mobileOpen, setMobileOpen] = useState(false);
   const setFocusSideBar = (val) => {
     dispatch(setFocus(val));
@@ -115,8 +105,6 @@ const Sidebar = ({ window, name, id }) => {
     setMobileOpen(!mobileOpen);
   };
   const { t } = useTranslation(["sidebar"]);
-  const container =
-    window !== undefined ? () => window.document.body : undefined;
   const classes = useStyle();
 
   function capitalizeFirstLetter(string) {
@@ -124,8 +112,6 @@ const Sidebar = ({ window, name, id }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  const theme = useTheme();
-  const lg = useMediaQuery(theme.breakpoints.down("lg"));
   const title = [
     ["Dashboard", t("sidebar:dashBoard.section")],
     ["Business", t("sidebar:business.section")],
@@ -136,6 +122,7 @@ const Sidebar = ({ window, name, id }) => {
     ["Staff", t("sidebar:staff.section")],
     ["Cost", t("sidebar:cost.section")],
     ["Statistic", t("sidebar:statistic.section")],
+    ["Discount", t("sidebar:discount.section")],
   ];
 
   const sidebarItems = [
@@ -170,8 +157,9 @@ const Sidebar = ({ window, name, id }) => {
       createData("Business", "business", ""),
       createData("Customer", "customer", ""),
       createData("Product", "product", ""),
-      createData("Reveneu","reveneu",""),
+      createData("Reveneu", "reveneu", ""),
     ],
+    [createData(t("sidebar:discount.section"), "discount", "")],
   ];
 
   const itemRender = (i) => {
@@ -194,6 +182,8 @@ const Sidebar = ({ window, name, id }) => {
         return <MonetizationOnIcon />;
       case 8:
         return <BarChartIcon />;
+      case 9:
+        return <DiscountIcon />;
       default:
         break;
     }
@@ -206,7 +196,6 @@ const Sidebar = ({ window, name, id }) => {
     </>
   );
   const drawer = (
-    // <div style={{ background: "#1976d2", flexGrow: 1 }}>
     <div
       style={{
         backgroundImage: "linear-gradient(#1367ba, #409fff)",
@@ -219,7 +208,7 @@ const Sidebar = ({ window, name, id }) => {
           <>
             <ListItem
               className={
-                id.toLowerCase().includes(item[0].toLowerCase())
+                history.location.pathname.includes(item[0])
                   ? classes.selectedItem
                   : classes.item
               }
@@ -268,7 +257,13 @@ const Sidebar = ({ window, name, id }) => {
                 {sidebarItems[idx].map((component) => {
                   return (
                     <Link to={`/${item[0]}/${component.link}`}>
-                      <ListItem className={classes.subItem}>
+                      <ListItem
+                        className={classes.subItem}
+                        onClick={() => {
+                          setFocusSideBar("");
+                          setFocusSideBar(item[1]);
+                        }}
+                      >
                         <ListItemText
                           primaryTypographyProps={{
                             fontFamily: "'Montserrat', san-serif",
@@ -301,41 +296,12 @@ const Sidebar = ({ window, name, id }) => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between", background: "white" }}>
-          {/* <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            fontWeight={850}
-            fontFamily="'Montserrat', san-serif"
-            style={{
-              textTranform: "uppercase",
-              color: "black",
-            }}
-          >
-            {name}
-          </Typography>
-
-          <AccountMenu />
-        </Toolbar>
-      </AppBar>
+      ></AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       >
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}

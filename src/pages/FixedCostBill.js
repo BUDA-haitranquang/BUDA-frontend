@@ -3,7 +3,6 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
 import { LOAD_FIXED_COST_BILL } from "../graphQl/cost/fixedCostBill/fixedCostBillQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 import { useTranslation } from "react-i18next";
@@ -12,7 +11,6 @@ import AddFixedCostBillModal from "../components/modal/AddFixedCostBillModal";
 import FixedCostBillTableBody from "../components/table/body/FixedCostBIllTableBody";
 
 const FixCostBill = (props) => {
-  const { window } = props;
   const [fixcosts, setFixCosts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_FIXED_COST_BILL);
   const { t } = useTranslation(["common", "cost"]);
@@ -54,7 +52,6 @@ const FixCostBill = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("cost:fixedCostBill")} id="cost" />
       <Box
         width="100%"
         display="flex"
@@ -66,7 +63,7 @@ const FixCostBill = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            data={fixcosts.reverse()}
+            data={fixcosts}
             headCells={headCells}
             Modal={AddFixedCostBillModal}
             type="fixedCostBillID"

@@ -11,13 +11,11 @@ import {
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddSupplierModal from "../components/modal/AddSupplierModal";
-import Sidebar from "../components/Sidebar";
 import SupplierTableBody from "../components/table/body/SupplierTableBody";
 import { HIDE_SUPPLIER_MUTATION } from "../graphQl/suppliers/suppliersMutations";
 import { LOAD_SUPPLIERS } from "../graphQl/suppliers/suppliersQueries";
 
 const Supplier = (props) => {
-  const { window } = props;
   const [supplier, setSupplier] = useState([]);
   const { error, loading, data } = useQuery(LOAD_SUPPLIERS);
   const { enqueueSnackbar } = useSnackbar();
@@ -81,7 +79,6 @@ const Supplier = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t('supplier:supplier')} id="supplier"/>
       <Box
         width="100%"
         display="flex"
@@ -94,7 +91,7 @@ const Supplier = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={supplier.reverse()}
+            data={supplier}
             headCells={headCells}
             Modal={AddSupplierModal}
             type="supplierID"

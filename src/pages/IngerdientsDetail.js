@@ -8,14 +8,12 @@ import { Redirect } from "react-router-dom";
 import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import IngredientCombinedDetail from "../components/IngredientCombinedDetail";
 import IngredientInformation from "../components/detail/information/IngredientInformation";
-import Sidebar from "../components/Sidebar";
 import EditIngredientModal from "../components/modal/EditIngredientsModal";
 import { HIDE_INGREDIENT_MUTATION } from "../graphQl/ingredients/ingredientMutation";
 import { LOAD_INGREDIENT, LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 import RetailIngredientModal from "../components/modal/RetailIngredientModal";
 const IngredientDetail = (props) => {
   const { enqueueSnackbar } = useSnackbar();
-  const { window } = props;
   const { id } = useParams();
   const history = useHistory();
   const [ingredient, setIngredient] = useState(null);
@@ -43,7 +41,6 @@ const IngredientDetail = (props) => {
   // if (error) return <Redirect to="/login" />;
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name="Ingredient Detail" id="ingredient" />
       <Box>
         <Toolbar />
         <Box pt={1}>

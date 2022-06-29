@@ -11,13 +11,11 @@ import {
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddCustomerModal from "../components/modal/AddCustomerModal";
-import Sidebar from "../components/Sidebar";
 import CustomerTableBody from "../components/table/body/CustomerTableBody";
 import { HIDE_CUSTOMER_MUTATION } from "../graphQl/customers/customersMutations";
 import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 
 const Customer = (props) => {
-  const { window } = props;
   const [customer, setCustomer] = useState([]);
   const { error, loading, data } = useQuery(LOAD_CUSTOMERS);
   const [isLoading, setIsLoading] = useState(false);
@@ -89,7 +87,6 @@ const Customer = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("customer:customer")} id="customer"/>
       <Box
         width="100%"
         display="flex"
@@ -102,7 +99,7 @@ const Customer = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={customer.reverse()}
+            data={customer}
             headCells={headCells}
             Modal={AddCustomerModal}
             type="customerID"

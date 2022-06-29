@@ -22,6 +22,7 @@ const BudaPaginableTable = (props) => {
     onRowsPerPageChange,
     total,
     deleteItems,
+    printItems,
     tableChildren,
     modalChildren,
     Modal,
@@ -94,6 +95,10 @@ const BudaPaginableTable = (props) => {
             searchBy={(val) => setSearchBy(val)}
             deleteItem={() => {
               deleteItems(selected);
+              setSelected([]);
+            }}
+            printItem={() => {
+              printItems(selected);
               setSelected([]);
             }}
             checkModal={!!Modal}

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import BoxSupplier from "./components/BoxSupplier/BoxSupplier";
 import { Box, Button, Grid, Toolbar } from "@mui/material";
 import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
-import Sidebar from "../../../components/Sidebar";
 import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
 import { CreateBuyOrderContext } from "./context/CreateBuyOrderContext";
 import { useMutation } from "@apollo/client";
@@ -16,7 +15,6 @@ import { useTranslation } from "react-i18next";
 CreateBuyOrder.propTypes = {};
 
 function CreateBuyOrder(props) {
-  const { window } = props;
   const { t } = useTranslation("buyorder", { keyPrefix: "create" });
   const [buyOrderRequest, setBuyOrderRequest] = useState({});
   const [newBuyOrder] = useMutation(NEW_BUY_ORDER);
@@ -100,8 +98,6 @@ function CreateBuyOrder(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("title")} id="business" />
-
       <Box
         width="100%"
         display="flex"

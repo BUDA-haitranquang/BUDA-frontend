@@ -11,13 +11,11 @@ import {
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddFixedCostModal from "../components/modal/AddFixedCostModal";
-import Sidebar from "../components/Sidebar";
 import FixedCostTableBody from "../components/table/body/FixedCostTableBody";
 import { HIDE_FIXED_COST_MUTATION } from "../graphQl/cost/fixedCost/fixedCostMutation";
 import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
 
 const FixCost = (props) => {
-  const { window } = props;
   const [fixcosts, setFixCosts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_FIXED_COST);
   const { enqueueSnackbar } = useSnackbar();
@@ -81,7 +79,6 @@ const FixCost = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("cost:fixedCost")} id="cost"/>
       <Box
         width="100%"
         display="flex"
@@ -94,7 +91,7 @@ const FixCost = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={fixcosts.reverse()}
+            data={fixcosts}
             headCells={headCells}
             Modal={AddFixedCostModal}
             type="fixedCostID"

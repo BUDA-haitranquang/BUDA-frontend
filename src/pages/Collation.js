@@ -5,12 +5,10 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
 import BudaTable from "../buda-components/table/BudaTable";
-import Sidebar from "../components/Sidebar";
 import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_COLATIONS } from "../graphQl/collation/collationQueries";
 
 const Collation = (props) => {
-  const { window } = props;
   const [products, setProducts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_COLATIONS);
   const { t } = useTranslation(["common", "product"]);
@@ -53,7 +51,6 @@ const Collation = (props) => {
   
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("product:productCollation")} id="product" />
       <Box
         width="100%"
         display="flex"
@@ -65,7 +62,7 @@ const Collation = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            data={products.reverse()}
+            data={products}
             headCells={headCells}
             type="productID"
             DetailTableBody={CollationTableBody}

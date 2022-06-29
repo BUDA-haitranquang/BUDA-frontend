@@ -11,13 +11,11 @@ import {
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddOtherCostModal from "../components/modal/AddOtherCostModal";
-import Sidebar from "../components/Sidebar";
 import OtherCostTableBody from "../components/table/body/OtherCostTableBody";
 import { HIDE_OTHER_COST } from "../graphQl/cost/otherCost/otherCostMutation";
 import { LOAD_OTHER_COST } from "../graphQl/cost/otherCost/otherCostQueries";
 
 const OtherCost = (props) => {
-  const { window } = props;
   const [fixcosts, setFixCosts] = useState([]);
   const { error, loading, data } = useQuery(LOAD_OTHER_COST);
   const { enqueueSnackbar } = useSnackbar();
@@ -86,7 +84,6 @@ const OtherCost = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar window={window} name={t("cost:otherCost")} id="cost" />
       <Box
         width="100%"
         display="flex"
@@ -99,7 +96,7 @@ const OtherCost = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={fixcosts.reverse()}
+            data={fixcosts}
             headCells={headCells}
             Modal={AddOtherCostModal}
             type="otherCostID"
