@@ -90,7 +90,7 @@ const Staff = (props) => {
         <Box>
           <BudaTable
             deleteItems={handleDelete}
-            data={staffs.reverse()}
+            data={staffs}
             headCells={headCells}
             Modal={AddStaffModal}
             DetailTableBody={StaffTableBody}

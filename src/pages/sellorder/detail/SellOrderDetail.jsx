@@ -9,6 +9,7 @@ import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
 import BoxCustomer from "./components/BoxCustomer/BoxCustomer";
 import BoxProduct from "./components/BoxProduct/BoxProduct";
 import PrintSellOrderModal from "./PrintSellOrderModal";
+import BoxMoney from "../../buyorder/detail/components/BoxMoney/BoxMoney";
 
 SellOrderDetail.propTypes = {};
 
@@ -61,10 +62,10 @@ function SellOrderDetail(props) {
           />
 
           <Grid container spacing={3}>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <BoxCustomer customer={sellOrder?.customer} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <BoxAdditionalInfo
                 status={sellOrder?.status}
                 textID={sellOrder?.textID}
@@ -74,6 +75,16 @@ function SellOrderDetail(props) {
             </Grid>
             <Grid item xs={12}>
               <BoxProduct sellOrderItems={sellOrder?.sellOrderItems} />
+            </Grid>
+            <Grid item xs={12}>
+              <BoxMoney
+                totalMoney={sellOrder?.sellOrderItems.reduce(
+                  (previousValue, currentValue) =>
+                    previousValue +
+                    currentValue.quantity * currentValue.pricePerUnit,
+                  0
+                )}
+              />
             </Grid>
           </Grid>
         </Box>

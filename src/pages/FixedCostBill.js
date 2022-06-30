@@ -63,7 +63,7 @@ const FixCostBill = (props) => {
         <Box>{}</Box>
         <Box>
           <BudaTable
-            data={fixcosts.reverse()}
+            data={fixcosts}
             headCells={headCells}
             Modal={AddFixedCostBillModal}
             type="fixedCostBillID"

@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
-import React from "react";
+import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -21,23 +21,35 @@ import {
   addToken,
   removeToken,
 } from "../src/redux/tokenSlice";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
+import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
+import BuyOrder from "./pages/buyorder/list/BuyOrder";
+import Collation from "./pages/Collation";
+import IngredientCollation from "./pages/collation/IngredientCollation";
 import CreateOrder from "./pages/createorder/CreateOrder";
 import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
+import DetailDiscount from "./pages/discount/detail/DetailDiscount";
+import Discount from "./pages/discount/list/Discount";
+import FixCost from "./pages/FixedCost";
+import FixCostBill from "./pages/FixedCostBill";
+import IngredientDetail from "./pages/IngerdientsDetail";
 import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
+import OtherCost from "./pages/OtherCost";
+import PrintDemo from "./pages/PrintDemo";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
-import Staff from "./pages/Staff";
-import Discount from "./pages/discount/list/Discount";
-import StaffDetail from "./pages/StaffDetail";
+import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
+import SellOrderList from "./pages/sellorder/list/SellOrderList";
 import SignUp from "./pages/SignUp";
-import Statistic from "./pages/statistic/Statistic";
+import Staff from "./pages/Staff";
+import StaffDetail from "./pages/StaffDetail";
+import StaffNote from "./pages/StaffNote";
+import Retention from "./pages/statistic/Retention";
 import ReveneuPage from "./pages/statistic/Reveneu";
-import Supplier from "./pages/Supplier";
-import BuyOrder from "./pages/buyorder/list/BuyOrder";
-import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
-import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
 import SellOrderStats from "./pages/statistic/SellOrderStats";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
@@ -54,6 +66,7 @@ import { Box } from "@mui/material";
 import Retention from "./pages/statistic/Retention";
 import DetailDiscount from "./pages/discount/detail/DetailDiscount";
 import Plans from "./pages/Plans/index";
+import Supplier from "./pages/Supplier";
 
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -176,6 +189,12 @@ const AppRouter = () => {
               exact
               path="/staff"
               component={Staff}
+            />
+            <PrivateRoute
+              authed={isAuth}
+              exact
+              path="/note"
+              component={StaffNote}
             />
             <PrivateRoute
               authed={isAuth}

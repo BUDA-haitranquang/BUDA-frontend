@@ -68,6 +68,18 @@ const IncompletedFixedCost = (props) => {
       disablePadding: true,
       label: t("dashboard:fixedCost.status"),
     },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:fixedCost.finish"),
+    },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:fixedCost.cancel"),
+    },
   ];
 
   return (
@@ -75,7 +87,7 @@ const IncompletedFixedCost = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={fixedCost.reverse()}
+          data={fixedCost}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="fixedCostBillID"

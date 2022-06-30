@@ -7,10 +7,8 @@ import { useTranslation } from "react-i18next";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { INCOMPLETED_OTHER_COST } from "../../graphQl/dashboard/queries";
 import IncompletedOtherCostTableBody from "./tableBody/IncompletedOtherCostTableBody";
-// import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 
 const IncompletedOtherCost = (props) => {
-  //   const { t } = useTranslation(["common", "product"]);
   const [otherCost, setOtherCost] = useState([]);
   const { error, loading, data } = useQuery(INCOMPLETED_OTHER_COST);
   const {t} = useTranslation('dashboard');
@@ -32,6 +30,7 @@ const IncompletedOtherCost = (props) => {
         );
       }
     }
+
     fetchData();
   }, [data]);
 
@@ -67,6 +66,18 @@ const IncompletedOtherCost = (props) => {
       disablePadding: true,
       label: t("dashboard:otherCost.status"),
     },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:otherCost.finish"),
+    },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: true,
+      label: t("dashboard:otherCost.cancel"),
+    },
   ];
 
   return (
@@ -74,7 +85,7 @@ const IncompletedOtherCost = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={otherCost.reverse()}
+          data={otherCost}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="otherCostID"

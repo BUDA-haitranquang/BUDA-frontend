@@ -36,8 +36,7 @@ const IncompletedSellOrder = (props) => {
 
     fetchData();
   }, [data]);
-  console.log(sellOrder);
-  // if(error) return <Redirect to="/login"/>;
+  
   const headCells = [
     {
       id: "textID",
@@ -88,7 +87,7 @@ const IncompletedSellOrder = (props) => {
       <Box>
         <BudaTable
           toolbar={false}
-          data={sellOrder.reverse()}
+          data={sellOrder}
           headCells={headCells}
           isNotShowCheckBox={true}
           type="sellOrderID"
