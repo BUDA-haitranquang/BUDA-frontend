@@ -51,6 +51,21 @@ import StaffNote from "./pages/StaffNote";
 import Retention from "./pages/statistic/Retention";
 import ReveneuPage from "./pages/statistic/Reveneu";
 import SellOrderStats from "./pages/statistic/SellOrderStats";
+import FixCost from "./pages/FixedCost";
+import FixCostBill from "./pages/FixedCostBill";
+import Collation from "./pages/Collation";
+import OtherCost from "./pages/OtherCost";
+import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
+import SellOrderList from "./pages/sellorder/list/SellOrderList";
+import IngredientDetail from "./pages/IngerdientsDetail";
+import IngredientCollation from "./pages/collation/IngredientCollation";
+import PrintDemo from "./pages/PrintDemo";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import { Box } from "@mui/material";
+import Retention from "./pages/statistic/Retention";
+import DetailDiscount from "./pages/discount/detail/DetailDiscount";
+import Plans from "./pages/Plans/index";
 import Supplier from "./pages/Supplier";
 
 const AppRouter = () => {
@@ -347,6 +362,7 @@ const AppRouter = () => {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/print" component={PrintDemo} />
+            <Route exact path="/plan" component={Plans} />
             <PrivateRoute
               authed={isAuth}
               exact
