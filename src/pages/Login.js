@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     flexDirecition: "row",
     justifyContent: "center",
     alignItems: "center",
-    padding: "3rem",
+    padding: "2.4rem",
     borderRadius: "20px"
   }
 });
