@@ -257,8 +257,8 @@ const SignInForm = () => {
             </Button>
             <ReCAPTCHA
               ref={recaptchaRef}
-              // sitekey="6Lc7GssgAAAAANuBqTcUfs7qwjUdvjMn1QTSr7zg" //BUDA sitekey
-              sitekey="6LcIJ8sgAAAAAImCIDAolaNlAmWepkoYJ3CsF4qR"
+              sitekey="6Lc7GssgAAAAANuBqTcUfs7qwjUdvjMn1QTSr7zg" //BUDA sitekey
+              // sitekey="6LcIJ8sgAAAAAImCIDAolaNlAmWepkoYJ3CsF4qR" //local key
               onChange={() => setValidCaptcha(true)}
               onExpired={() => setValidCaptcha(false)}
             />
