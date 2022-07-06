@@ -261,6 +261,7 @@ const SignInForm = () => {
               // sitekey="6LcIJ8sgAAAAAImCIDAolaNlAmWepkoYJ3CsF4qR" //local key
               onChange={() => setValidCaptcha(true)}
               onExpired={() => setValidCaptcha(false)}
+              onErrored={() => setValidCaptcha(false)}
             />
 
             <Typography
