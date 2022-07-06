@@ -14,6 +14,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useRef, useState } from "react";
+import { GoogleLogin } from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
@@ -21,7 +22,10 @@ import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
-import { LOGIN_USER } from "../../graphQl/authentication/authMutations";
+import {
+  LOGIN_GOOGLE,
+  LOGIN_USER,
+} from "../../graphQl/authentication/authMutations";
 import { addRefreshToken, addToken } from "../../redux/tokenSlice";
 
 const useStyle = makeStyles({
@@ -30,6 +34,7 @@ const useStyle = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    width: "90%"
   },
   formContainer: {
     width: "100%",
@@ -84,6 +89,9 @@ const useStyle = makeStyles({
   },
 });
 
+const clientIdGoogle =
+  "1069931989583-9f6bge28vmggapg9ah7bgf14sismu580.apps.googleusercontent.com";
+
 const SignInForm = () => {
   let history = useHistory();
   const [email, setEmail] = useState("");
@@ -93,6 +101,7 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  const [loginGoogle] = useMutation(LOGIN_GOOGLE);
   const { enqueueSnackbar } = useSnackbar();
   const [validCaptcha, setValidCaptcha] = useState(false);
 
@@ -163,6 +172,36 @@ const SignInForm = () => {
       });
   };
 
+  const loginGoogleOauth = (oauthJwt) => {
+    loginGoogle({
+      variables: {
+        token: oauthJwt,
+      },
+    })
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data.loginGoogle;
+        dispatch(addToken(accessToken));
+        dispatch(addRefreshToken(refreshToken));
+      })
+      .then(() => {
+        history.push("/dashboard");
+        enqueueSnackbar("Login with Google successfully", AlertSuccessProp);
+      })
+      .catch((error) => {
+        enqueueSnackbar("Google login error", AlertErrorProp);
+      });
+  };
+
+  const onSuccessGoogleLogin = (res) => {
+    console.log("Current user: ", res);
+    console.log("Current user: ", res.tokenId);
+    loginGoogleOauth(res.tokenId);
+  };
+
+  const onFailGoogleLogin = (res) => {
+    console.log("Google Login failed: ", res);
+  };
+
   // const getNewAccessToken = () => {
   //   newAccessToken({
   //     variables: {
@@ -195,7 +234,7 @@ const SignInForm = () => {
             style={{
               fontFamily: "'Montserrat', sans-serif",
               color: "black",
-              marginBottom: "4rem",
+              marginBottom: "2.4rem",
               fontWeight: 500,
             }}
           >
@@ -262,7 +301,6 @@ const SignInForm = () => {
               onExpired={() => setValidCaptcha(false)}
               onErrored={() => setValidCaptcha(false)}
             />
-
             <Typography
               style={{
                 display: "flex",
@@ -270,6 +308,9 @@ const SignInForm = () => {
                 justifyContent: "center",
                 color: "black",
                 cursor: "default",
+                opacity: "0.9",
+                marginTop: "0.4rem",
+                fontWeight: 500
               }}
             >
               Don't have an account?&nbsp;
@@ -281,11 +322,33 @@ const SignInForm = () => {
                   color: "rgba(72, 149, 255, 1)",
                   textDecoration: "none",
                   cursor: "pointer",
+                  fontWeight: 600
                 }}
               >
                 Sign up
               </Link>
             </Typography>
+
+            <Box
+              sx={{
+                margin: ".8rem auto",
+                borderTop: "2px solid #d6d6d6",
+                paddingTop: ".8rem",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                width: "60%"
+              }}
+            >
+              <GoogleLogin
+                clientId={clientIdGoogle}
+                onSuccess={onSuccessGoogleLogin}
+                onFailure={onFailGoogleLogin}
+                cookiePolicy={"single_host_origin"}
+              >
+                <Typography variant="button">Login using Google</Typography>
+              </GoogleLogin>
+            </Box>
           </Box>
         </Box>
       </Box>

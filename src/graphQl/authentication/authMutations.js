@@ -15,6 +15,21 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const LOGIN_GOOGLE = gql`
+  mutation loginGoogle(
+    $token: String
+  ){
+    loginGoogle(
+      jwtSimple: {
+        token: $token
+      }
+    ){
+      accessToken
+      refreshToken
+    }
+  }
+`;
+
 export const REGISTER_USER = gql`
   mutation newUser(
     $username: String!
