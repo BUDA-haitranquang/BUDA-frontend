@@ -29,9 +29,9 @@ const BudaTableToolbar = ({
   printItem,
   printable = false,
   checkModal,
+  title
 }) => {
   const [value, setValue] = useState("");
-  const li = Array.from(headCells, (item) => item.label);
   const { t } = useTranslation(["common"]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -75,7 +75,7 @@ const BudaTableToolbar = ({
           id="tableTitle"
           component="div"
         >
-          {t("common:data")}
+          {title}
         </Typography>
       )}
 

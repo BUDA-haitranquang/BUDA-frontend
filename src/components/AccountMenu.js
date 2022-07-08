@@ -37,6 +37,11 @@ export default function AccountMenu() {
     i18n.changeLanguage(lng);
   };
 
+  const handleMyAccount = ()=>{
+    handleClose();
+    history.push('/account');
+  }
+
   return (
     <Box
       sx={{
@@ -77,7 +82,7 @@ export default function AccountMenu() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleMyAccount}>My account</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
         <Notification />
