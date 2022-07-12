@@ -11,15 +11,14 @@ import UKflag from "../assets/UK-flag.png";
 import VIflag from "../assets/VN-flag.png";
 import { removeToken } from "../redux/tokenSlice";
 import Notification from "./Notification";
-
+import ChangePassModal from "./modal/ChangePassModal";
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openPass, setOpenPass] = React.useState();
   const dispatch = useDispatch();
   const history = useHistory();
   const open = Boolean(anchorEl);
-
   const { i18n } = useTranslation();
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -37,11 +36,11 @@ export default function AccountMenu() {
     i18n.changeLanguage(lng);
   };
 
-  const handleMyAccount = ()=>{
+  const handleMyAccount = () => {
     handleClose();
-    history.push('/account');
-  }
-
+    history.push("/account");
+  };
+  // console.log(openPass);
   return (
     <Box
       sx={{
@@ -84,6 +83,14 @@ export default function AccountMenu() {
         >
           <MenuItem onClick={handleMyAccount}>My account</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          <MenuItem
+            onClick={() => {
+              setOpenPass(true);
+              handleClose();
+            }}
+          >
+            Change password
+          </MenuItem>
         </Menu>
         <Notification />
       </Box>
@@ -107,6 +114,12 @@ export default function AccountMenu() {
           ></img>
         </Button>
       </Box>
+      <ChangePassModal
+        isOpen={openPass}
+        handleClose={() => {
+          setOpenPass(false);
+        }}
+      />
     </Box>
   );
 }

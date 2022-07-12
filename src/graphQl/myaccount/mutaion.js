@@ -38,3 +38,20 @@ mutation(
         storeID
     }
 }`
+
+export const UPDATE_STORE = gql`
+mutation updateStore(
+  $storeID:Int
+  $name:String
+  $userID:Int
+  $address:String
+){
+  updateStore(store:{
+    storeID: $storeID
+    userID:$userID
+    name: $name
+    address:$address
+  }){
+    userID
+  }
+}`

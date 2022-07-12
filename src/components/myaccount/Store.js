@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar, Box } from "@mui/material";
-// import { useSnackbar } from "notistack";
+import {  useQuery } from "@apollo/client";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { GET_STORE } from "../../graphQl/myaccount/queries";
@@ -10,7 +9,6 @@ const Stores = (props) => {
   const [stores, setStores] = useState([]);
   const { data } = useQuery(GET_STORE);
 
-  // const [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {
@@ -38,12 +36,12 @@ const Stores = (props) => {
       disablePadding: false,
       label: "Address",
     },
-    // {
-    //   id: "",
-    //   numeric: false,
-    //   disablePadding: false,
-    //   label: "Edit",
-    // },
+    {
+      id: "",
+      numeric: false,
+      disablePadding: false,
+      label: "Edit",
+    },
   ];
   return (
     <Box sx={{ display: "flex" }}>
@@ -58,14 +56,16 @@ const Stores = (props) => {
     
         <Box sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
           <BudaTable
+            canSearch = {false}
             minWidth={700}
-            maxRow = {[10]}
+            maxRow = {[5]}
             tableName = "My Stores"
             data={stores}
             Modal = {NewStoreModal}
             headCells={headCells}
             type="storeID"
             DetailTableBody={StoreTableBody}
+            isNotShowCheckBox = {true}
           />
         </Box>
       </Box>

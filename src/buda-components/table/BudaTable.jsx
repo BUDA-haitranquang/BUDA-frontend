@@ -31,6 +31,7 @@ const BudaTable = (props) => {
     minWidth = 1000,
     maxRow = [20, 50, 100], //array
     tableName = 'Data',
+    canSearch = true,
     ...remainProps
   } = props;
   const { t } = useTranslation(["common"]);
@@ -92,8 +93,6 @@ const BudaTable = (props) => {
         );
   }, [search, searchBy, data]);
 
-  console.log(data);
-
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
@@ -101,6 +100,7 @@ const BudaTable = (props) => {
           {toolbar && (
             <BudaTableToolbar
               title = {tableName}
+              canSearch = {canSearch}
               numSelected={selected.length}
               handleOpen={handleOpen}
               handleSearch={(val) => setSearch(val)}

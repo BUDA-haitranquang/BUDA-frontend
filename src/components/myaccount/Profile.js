@@ -4,19 +4,18 @@ import { Box, Button, Typography, TextField, IconButton } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import noAvatar from "D:/New folder (2)/BUDAcompany_frontend/src/assets/noAvatar.png";
 import { GET_USER } from "../../graphQl/myaccount/queries";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { SET_USER } from "../../graphQl/myaccount/mutaion";
 const Profile = (props) => {
   const [isEdit, setIsEdit] = useState(false);
   const { data } = useQuery(GET_USER);
-  const [setUser,{error}] = useMutation(SET_USER);
+  const [setUser, { error }] = useMutation(SET_USER);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-//   const [password, setPassword] = useState("");
+  //   const [password, setPassword] = useState("");
   const [prev, setPrev] = useState({});
 
   const handleCancel = () => {
@@ -27,7 +26,6 @@ const Profile = (props) => {
     setIsEdit(false);
   };
   const handleSave = async () => {
-    console.log(data.currentUser.userUUID);
     try {
       await setUser({
         variables: {
@@ -63,19 +61,6 @@ const Profile = (props) => {
   }, [data]);
   return (
     <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
-      <Box
-        sx={{
-          height: "300px",
-          backgroundImage: `url(${noAvatar})`,
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          backgroundPosition: "center",
-          borderRadius:'100%',
-          backgroundSize: "cover",   
-        backgroundColor:'black'
-        }}
-      ></Box>
-      <Box py={1}></Box>
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
@@ -154,8 +139,21 @@ const Profile = (props) => {
             justifyContent: "space-evenly",
           }}
         >
-          <Button onClick={handleSave}>Save</Button>
-          <Button onClick={handleCancel}>Cancel</Button>
+          <Button
+            variant="contained"
+            sx={{ width: "100px" }}
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{ width: "100px" }}
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
         </Box>
       )}
     </Box>

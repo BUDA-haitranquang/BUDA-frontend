@@ -23,8 +23,8 @@ const MyAccount = (props) => {
       >
         <Toolbar />
       
-        <Grid container spacing = {2} >
-          <Grid item xs={3}>
+        <Grid container >
+          <Grid item xs={12} sm = {12} md = {12} lg = {4} >
             <Profile />
           </Grid>
           <Grid item xs alignItems='center' justifyContent='center' display='flex'>

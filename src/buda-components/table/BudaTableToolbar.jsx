@@ -29,6 +29,7 @@ const BudaTableToolbar = ({
   printItem,
   printable = false,
   checkModal,
+  canSearch,
   title
 }) => {
   const [value, setValue] = useState("");
@@ -80,7 +81,7 @@ const BudaTableToolbar = ({
       )}
 
       {numSelected === 0 && (
-        <FormControl variant="outlined">
+        canSearch && (<FormControl variant="outlined">
           <InputLabel>{t("common:search")}</InputLabel>
           <OutlinedInput
             label={t("common:search")}
@@ -106,7 +107,7 @@ const BudaTableToolbar = ({
             }}
           />
         </FormControl>
-      )}
+      ))}
 
       {numSelected > 0 ? (
         <Box>
