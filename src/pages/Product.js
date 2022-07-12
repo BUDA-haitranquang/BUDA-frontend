@@ -14,6 +14,7 @@ import ProductBarcodeListPrintForm from "../components/printforms/ProductBarcode
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
+import AddProductModal from "../components/modal/AddProductModal";
 
 const Product = (props) => {
   const { t } = useTranslation(["common", "product"]);
@@ -133,7 +134,7 @@ const Product = (props) => {
             printItems={handlePrint}
             data={products}
             headCells={headCells}
-            // Modal={AddProductModal}
+            Modal={AddProductModal}
             type="productID"
             DetailTableBody={ProductTableBody}
           />

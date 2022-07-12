@@ -1,30 +1,47 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, CircularProgress, InputAdornment, Link, Modal, OutlinedInput, Typography } from "@mui/material";
+import { useMutation } from "@apollo/client";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  InputAdornment,
+  Link,
+  Modal,
+  OutlinedInput,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useMutation } from "@apollo/client";
-import { useDispatch, useSelector } from "react-redux";
-import { addRefreshToken, addToken } from "../../redux/tokenSlice";
-
-import { LOGIN_USER, NEW_ACCESS_TOKEN } from "../../graphQl/authentication/authMutations";
-import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
-import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import React, { useEffect, useRef, useState } from "react";
+import { GoogleLogin } from "react-google-login";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import {
+  AlertErrorProp,
+  AlertSuccessProp,
+} from "../../buda-components/alert/BudaNoti";
+import {
+  LOGIN_GOOGLE,
+  LOGIN_USER,
+} from "../../graphQl/authentication/authMutations";
+import { addRefreshToken, addToken } from "../../redux/tokenSlice";
 
 const useStyle = makeStyles({
   wrapper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: "90%"
   },
   formContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   headlineText: {
     paddingTop: "15%",
@@ -33,25 +50,25 @@ const useStyle = makeStyles({
     color: "#fff",
     fontFamily: "Lexend Deca",
     fontWeight: 800,
-    marginLeft: "15%"
+    marginLeft: "15%",
   },
   outlinedInput: {
     "&.MuiOutlinedInput-root": {
       backgroundColor: "white",
       borderRadius: "10px",
       width: "100%",
-      height: "50px"
+      height: "50px",
     },
     "&.MuiOutlinedInput-inputAdornedStart": {
-      opacity: 0.5
+      opacity: 0.5,
     },
     "& input": {
       padding: "15px",
-      height: "10px"
+      height: "10px",
     },
     "& .MuiOutlinedInput-input": {
-      color: "#black"
-    }
+      color: "#black",
+    },
   },
   button1: {
     "&.MuiButton-root": {
@@ -63,14 +80,17 @@ const useStyle = makeStyles({
       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       "&:hover": {
         background: "rgba(97, 163, 255, 1)",
-        border: "none"
-      }
+        border: "none",
+      },
     },
     "&.MuiButton-text": {
-      fontSize: 19
-    }
-  }
+      fontSize: 19,
+    },
+  },
 });
+
+const clientIdGoogle =
+  "1069931989583-9f6bge28vmggapg9ah7bgf14sismu580.apps.googleusercontent.com";
 
 const SignInForm = () => {
   let history = useHistory();
@@ -81,9 +101,11 @@ const SignInForm = () => {
   const dispatch = useDispatch();
   const btn = useRef(null);
   const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
-  const [newAccessToken] = useMutation(NEW_ACCESS_TOKEN);
-  const { refreshJwt } = useSelector((state) => state.token);
+  const [loginGoogle] = useMutation(LOGIN_GOOGLE);
   const { enqueueSnackbar } = useSnackbar();
+  const [validCaptcha, setValidCaptcha] = useState(false);
+
+  const recaptchaRef = React.createRef();
 
   useEffect(() => {
     const listener = (event) => {
@@ -119,12 +141,22 @@ const SignInForm = () => {
     );
   //if (error) return `Sign in error! ${error.message}`;
 
+  // const executeCaptcha = () => { //used for invisible captcha
+  //   recaptchaRef.current.execute();
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validCaptcha === true) login();
+    else enqueueSnackbar("Wrong Captcha", AlertErrorProp);
+  };
+
   const login = () => {
     userLogin({
       variables: {
         email: email,
-        password: password
-      }
+        password: password,
+      },
     })
       .then((res) => {
         const { accessToken, refreshToken } = res.data.userLogin;
@@ -138,6 +170,36 @@ const SignInForm = () => {
       .catch((error) => {
         enqueueSnackbar("Error", AlertErrorProp);
       });
+  };
+
+  const loginGoogleOauth = (oauthJwt) => {
+    loginGoogle({
+      variables: {
+        token: oauthJwt,
+      },
+    })
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data.loginGoogle;
+        dispatch(addToken(accessToken));
+        dispatch(addRefreshToken(refreshToken));
+      })
+      .then(() => {
+        history.push("/dashboard");
+        enqueueSnackbar("Login with Google successfully", AlertSuccessProp);
+      })
+      .catch((error) => {
+        enqueueSnackbar("Google login error", AlertErrorProp);
+      });
+  };
+
+  const onSuccessGoogleLogin = (res) => {
+    console.log("Current user: ", res);
+    console.log("Current user: ", res.tokenId);
+    loginGoogleOauth(res.tokenId);
+  };
+
+  const onFailGoogleLogin = (res) => {
+    console.log("Google Login failed: ", res);
   };
 
   // const getNewAccessToken = () => {
@@ -156,11 +218,6 @@ const SignInForm = () => {
   //   setTimeout(getNewAccessTokenLoop, 60);
   // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login();
-  };
-
   return (
     <>
       <Box className={classes.wrapper}>
@@ -169,7 +226,7 @@ const SignInForm = () => {
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Typography
@@ -177,8 +234,8 @@ const SignInForm = () => {
             style={{
               fontFamily: "'Montserrat', sans-serif",
               color: "black",
-              marginBottom: "4rem",
-              fontWeight: 500
+              marginBottom: "2.4rem",
+              fontWeight: 500,
             }}
           >
             BUDA
@@ -237,13 +294,23 @@ const SignInForm = () => {
             >
               LOG IN
             </Button>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey="6Lc7GssgAAAAANuBqTcUfs7qwjUdvjMn1QTSr7zg" //Google reCAPTCHA key
+              onChange={() => setValidCaptcha(true)}
+              onExpired={() => setValidCaptcha(false)}
+              onErrored={() => setValidCaptcha(false)}
+            />
             <Typography
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
                 color: "black",
-                cursor: "default"
+                cursor: "default",
+                opacity: "0.9",
+                marginTop: "0.4rem",
+                fontWeight: 500
               }}
             >
               Don't have an account?&nbsp;
@@ -254,12 +321,34 @@ const SignInForm = () => {
                 style={{
                   color: "rgba(72, 149, 255, 1)",
                   textDecoration: "none",
-                  cursor: "pointer"
+                  cursor: "pointer",
+                  fontWeight: 600
                 }}
               >
                 Sign up
               </Link>
             </Typography>
+
+            <Box
+              sx={{
+                margin: ".8rem auto",
+                borderTop: "2px solid #d6d6d6",
+                paddingTop: ".8rem",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                width: "60%"
+              }}
+            >
+              <GoogleLogin
+                clientId={clientIdGoogle}
+                onSuccess={onSuccessGoogleLogin}
+                onFailure={onFailGoogleLogin}
+                cookiePolicy={"single_host_origin"}
+              >
+                <Typography variant="button">Login using Google</Typography>
+              </GoogleLogin>
+            </Box>
           </Box>
         </Box>
       </Box>
