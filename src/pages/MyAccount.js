@@ -1,13 +1,10 @@
-import { useMutation, useQuery } from "@apollo/client";
+  
 import { Toolbar, Grid, Box } from "@mui/material";
 
-import { useSnackbar } from "notistack";
+
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  AlertErrorProp,
-  AlertSuccessProp,
-} from "../buda-components/alert/BudaNoti";
+
 import Profile from "../components/myaccount/Profile";
 import Stores from "../components/myaccount/Store"
 const MyAccount = (props) => {
