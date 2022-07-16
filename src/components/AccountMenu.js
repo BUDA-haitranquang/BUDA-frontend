@@ -82,7 +82,6 @@ export default function AccountMenu() {
           }}
         >
           <MenuItem onClick={handleMyAccount}>My account</MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
           <MenuItem
             onClick={() => {
               setOpenPass(true);
@@ -91,6 +90,7 @@ export default function AccountMenu() {
           >
             Change password
           </MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
         <Notification />
       </Box>
