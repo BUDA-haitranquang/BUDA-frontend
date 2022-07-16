@@ -14,7 +14,7 @@ const ChangePassModal = ({ isOpen, handleClose }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const { enqueueSnackbar } = useSnackbar();
-  const { updatePass } = useMutation(UPDATE_PASS);
+  const [ updatePass ] = useMutation(UPDATE_PASS);
 
   const isValid = () => {
     if (
@@ -36,14 +36,16 @@ const ChangePassModal = ({ isOpen, handleClose }) => {
           currentPassword: password,
           newPassword: newPassword,
           confirmNewPassword: confirmPassword,
-        },
+        }
       }).then(() => {
         enqueueSnackbar("Update successfully", AlertSuccessProp);
+        setPassword("");
+        setNewPassword('');
+        setConfirmPassword("");
         handleClose();
       });
     } catch (e) {
       enqueueSnackbar("Error", AlertErrorProp);
-      handleClose();
     }
   };
   return (
