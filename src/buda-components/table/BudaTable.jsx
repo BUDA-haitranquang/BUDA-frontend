@@ -28,6 +28,10 @@ const BudaTable = (props) => {
     size,
     isNotShowCheckBox = false,
     toolbar = true,
+    minWidth = 1000,
+    maxRow = [20, 50, 100], //array
+    tableName = 'Data',
+    canSearch = true,
     ...remainProps
   } = props;
   const { t } = useTranslation(["common"]);
@@ -35,7 +39,7 @@ const BudaTable = (props) => {
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const [rowsPerPage, setRowsPerPage] = useState(maxRow[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
@@ -89,14 +93,14 @@ const BudaTable = (props) => {
         );
   }, [search, searchBy, data]);
 
-  console.log(data);
-
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
         <TableContainer sx={{ paddingRight: "10px" }}>
           {toolbar && (
             <BudaTableToolbar
+              title = {tableName}
+              canSearch = {canSearch}
               numSelected={selected.length}
               handleOpen={handleOpen}
               handleSearch={(val) => setSearch(val)}
@@ -115,7 +119,7 @@ const BudaTable = (props) => {
             />
           )}
           <Table
-            sx={{ minWidth: 1000 }}
+            sx={{ minWidth: minWidth }}
             stickyHeader={stickyHeader}
             {...remainProps}
           >
@@ -146,7 +150,7 @@ const BudaTable = (props) => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[20, 50, 100]}
+          rowsPerPageOptions={maxRow}
           component="div"
           count={display.length}
           rowsPerPage={rowsPerPage}

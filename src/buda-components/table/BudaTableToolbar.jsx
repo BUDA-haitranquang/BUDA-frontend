@@ -29,9 +29,10 @@ const BudaTableToolbar = ({
   printItem,
   printable = false,
   checkModal,
+  canSearch,
+  title
 }) => {
   const [value, setValue] = useState("");
-  const li = Array.from(headCells, (item) => item.label);
   const { t } = useTranslation(["common"]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -75,12 +76,12 @@ const BudaTableToolbar = ({
           id="tableTitle"
           component="div"
         >
-          {t("common:data")}
+          {title}
         </Typography>
       )}
 
       {numSelected === 0 && (
-        <FormControl variant="outlined">
+        canSearch && (<FormControl variant="outlined">
           <InputLabel>{t("common:search")}</InputLabel>
           <OutlinedInput
             label={t("common:search")}
@@ -106,7 +107,7 @@ const BudaTableToolbar = ({
             }}
           />
         </FormControl>
-      )}
+      ))}
 
       {numSelected > 0 ? (
         <Box>

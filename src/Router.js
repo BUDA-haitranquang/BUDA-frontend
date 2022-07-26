@@ -53,7 +53,7 @@ import ReveneuPage from "./pages/statistic/Reveneu";
 import SellOrderStats from "./pages/statistic/SellOrderStats";
 import Plans from "./pages/Plans/index";
 import Supplier from "./pages/Supplier";
-
+import MyAccount from "./pages/MyAccount";
 const AppRouter = () => {
   // const errorLink = onError(({ graphqlErrors, networkError }) => {
   //   if (graphqlErrors) {
@@ -187,6 +187,12 @@ const AppRouter = () => {
               exact
               path="/staff/:id"
               component={StaffDetail}
+            />
+            <PrivateRoute
+              authed={isAuth}
+              exact
+              path="/account"
+              component={MyAccount}
             />
             <PrivateRoute
               authed={isAuth}

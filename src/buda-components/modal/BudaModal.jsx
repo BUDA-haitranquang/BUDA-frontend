@@ -34,6 +34,7 @@ const BudaModal = (props) => {
           bgcolor: "background.paper",
           border: "2px solid gray",
           maxWidth: "600px",
+          minWidth:"500px",
           boxShadow: 24,
           p: "16px 28px 20px 28px",
           borderRadius: 3,
