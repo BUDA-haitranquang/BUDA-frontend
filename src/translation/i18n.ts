@@ -20,7 +20,7 @@ i18n
     },
   });
 
-export const changeLanguageHandler = (lang) => {
+export const changeLanguageHandler = (lang: string) => {
   window.localStorage.setItem("language", lang);
   i18n.changeLanguage(lang);
 };

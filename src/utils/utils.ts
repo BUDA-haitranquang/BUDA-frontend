@@ -1,4 +1,4 @@
-export const dateToDateString = (date) => {
+export const dateToDateString = (date: any) => {
   // return date;
   if (typeof date !== "string") return date;
   return `${date.substring(11, 13)}:${date.substring(14, 16)} ${date.substring(
@@ -7,7 +7,7 @@ export const dateToDateString = (date) => {
   )}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
 };
 
-export const capitalizeFirstLetter = (str) => {
+export const capitalizeFirstLetter = (str: any) => {
   if (typeof str !== "string") return;
   return (
     str.substring(0, 1).toUpperCase() +

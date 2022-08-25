@@ -22,7 +22,6 @@ import {
   removeToken,
 } from "../src/redux/tokenSlice";
 import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
 import CreateBuyOrder from "./pages/buyorder/create/CreateBuyOrder";
 import DetailBuyOrder from "./pages/buyorder/detail/DetailBuyOrder";
 import BuyOrder from "./pages/buyorder/list/BuyOrder";
@@ -161,7 +160,7 @@ const AppRouter = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        {isAuth && <Sidebar />}
+        {/* {isAuth && <Sidebar />} */}
         <Box display="flex" flexDirection="column" width="100%">
           {isAuth && (
             <>

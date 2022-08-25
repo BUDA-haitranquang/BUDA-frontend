@@ -35,8 +35,8 @@ const useStyle = makeStyles({
     background: "rgba(45, 142, 255, 1)",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
     borderRadius: "6px",
-    paddingTop: "0.75rem",
-    paddingBottom: "0.75rem",
+    paddingTop: "0.5rem",
+    paddingBottom: "0.5rem",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -44,8 +44,8 @@ const useStyle = makeStyles({
   item: {
     cursor: "pointer",
     borderRadius: "6px",
-    paddingTop: "0.75rem",
-    paddingBottom: "0.75rem",
+    paddingTop: "0.5rem",
+    paddingBottom: "0.5rem",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -113,16 +113,16 @@ const Sidebar = () => {
   }
 
   const title = [
-    ["Dashboard", t("sidebar:dashBoard.section")],
-    ["Business", t("sidebar:business.section")],
-    ["Product", t("sidebar:product.section")],
-    ["Ingredient", t("sidebar:ingredient.section")],
-    ["Supplier", t("sidebar:supplier.section")],
-    ["Customer", t("sidebar:customer.section")],
-    ["Staff", t("sidebar:staff.section")],
-    ["Cost", t("sidebar:cost.section")],
-    ["Statistic", t("sidebar:statistic.section")],
-    ["Discount", t("sidebar:discount.section")],
+    ["dashboard", t("sidebar:dashBoard.section")],
+    ["business", t("sidebar:business.section")],
+    ["product", t("sidebar:product.section")],
+    ["ingredient", t("sidebar:ingredient.section")],
+    ["supplier", t("sidebar:supplier.section")],
+    ["customer", t("sidebar:customer.section")],
+    ["staff", t("sidebar:staff.section")],
+    ["cost", t("sidebar:cost.section")],
+    ["statistic", t("sidebar:statistic.section")],
+    ["discount", t("sidebar:discount.section")],
   ];
 
   const sidebarItems = [

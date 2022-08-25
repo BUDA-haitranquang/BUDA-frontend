@@ -1,4 +1,3 @@
-import Sidebar from "../components/Sidebar";
 import { useMutation, useQuery } from "@apollo/client";
 import { Toolbar,Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -81,7 +80,6 @@ const StaffNote = (props) => {
 
     return ( 
         <Box sx={{ display: "flex" }}>
-            <Sidebar window={window} name={"StaffNote"} id="staffNote"/>
             <Box
                 width="100%"
                 display="flex"

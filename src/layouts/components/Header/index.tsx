@@ -34,12 +34,17 @@ const Header = () => {
     <Toolbar
       sx={{
         justifyContent: "space-between",
-        background: "white",
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.2))",
+        backdropFilter: "blur(10px)",
         position: "fixed",
         top: 0,
         width: "calc(100% - 240px)",
         zIndex: 1000,
         height: 20,
+        boxShadow: "1px 2px 3px rgba(255, 255, 255,0.5)",
+        display: "flex",
+        flexDirection: "row",
       }}
     >
       <Typography
@@ -50,7 +55,7 @@ const Header = () => {
         fontFamily="'Montserrat', san-serif"
         style={{
           textTransform: "uppercase",
-          color: "black",
+          color: "#1367ba",
         }}
       >
         {names[location.pathname]}

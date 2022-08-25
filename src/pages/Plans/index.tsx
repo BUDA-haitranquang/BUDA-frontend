@@ -2,11 +2,11 @@ import PlanCard from "./PlanCard";
 import { Box } from "@mui/material";
 import { GET_PLANS } from "../../graphQl/plans/plans";
 import { useQuery } from "@apollo/client";
+import { planProps } from "./PlanCard";
 
 const Plans = () => {
   const plansData = useQuery(GET_PLANS);
   const plans = plansData?.data?.plans?.slice(0, 3);
-  console.log(plans?.map((item) => item.planType));
   return (
     <Box
       display="flex"
@@ -17,7 +17,7 @@ const Plans = () => {
       width="100%"
       height="100%"
     >
-      {plans?.map((plan) => {
+      {plans?.map((plan: planProps) => {
         return (
           plan && (
             <PlanCard
@@ -25,7 +25,7 @@ const Plans = () => {
               name={plan.name}
               price={plan.price}
               duration={plan.duration}
-              type={plan.planType}
+              planType={plan.planType}
             />
           )
         );

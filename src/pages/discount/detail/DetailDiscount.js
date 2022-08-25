@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BoxPrimaryInfo from "./components/BoxPrimaryInfo/BoxPrimaryInfo";
 import { Box, Grid, Toolbar, Typography } from "@mui/material";
 import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
-import Sidebar from "../../../components/Sidebar";
 import { LOAD_DISCOUNT } from "../../../graphQl/discounts/discountQueries";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";

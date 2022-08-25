@@ -2,7 +2,6 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Divider, Toolbar,Typography } from "@mui/material";
-import Sidebar from "../../components/Sidebar";
 import { useQuery } from "@apollo/client";
 import {LOAD_RETENTION_RATE_MOTHLY,LOAD_RETENTION_RATE_WEEKLY} from "../../graphQl/statistics/statisticQueries"
 import BudaCircularChart from "../../buda-components/charts/BudaCircularChart";
@@ -27,7 +26,6 @@ function Retention(props) {
   console.log(monthlyData);
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <Sidebar window={window} name="Retention" id="statistic"/> */}
       <Box sx={{ width: "100%" }}>
         <Toolbar />
         {/* <Box pt={1}> */}

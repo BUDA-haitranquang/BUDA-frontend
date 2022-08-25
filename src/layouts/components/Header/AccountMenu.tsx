@@ -1,17 +1,13 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import UKflag from "src/assets/UK-flag.png";
-import VIflag from "src/assets/VN-flag.png";
 import { removeToken } from "src/redux/tokenSlice";
 import Notification from "src/components/Notification";
 import ChangePassModal from "src/components/modal/ChangePassModal";
+
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openPass, setOpenPass] = React.useState<undefined | Boolean>();
@@ -44,16 +40,17 @@ export default function AccountMenu() {
   return (
     <Box
       sx={{
-        width: "300px",
+        width: "350px",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <Box
         style={{
           borderRadius: "20px",
-          border: "2px rgba(0,0,0,0.5) solid",
+          backgroundImage: "linear-gradient(to right, #1367ba, #409fff)",
           maxHeight: "40px",
           display: "flex",
           flexDirection: "row",
@@ -61,13 +58,14 @@ export default function AccountMenu() {
         }}
       >
         <Button
+          disableRipple
           id="basic-button"
           variant="text"
           aria-controls="basic-menu"
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          style={{ color: "black", fontWeight: "600" }}
+          style={{ color: "rgba(255,255,255,0.8)", fontWeight: "600" }}
         >
           <AccountCircleIcon sx={{ paddingRight: "4px", fontSize: "2rem" }} />
           Username
@@ -97,21 +95,99 @@ export default function AccountMenu() {
 
       <Box
         className="languages"
-        style={{ display: "flex", alignItems: "center" }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          background: "#a7ccfc",
+          borderRadius: "30px",
+          height: 25,
+        }}
       >
-        <Button onClick={() => changeLanguage("en")}>
-          <img
-            src={UKflag}
-            alt=""
-            style={{ width: "30px", height: "20px" }}
-          ></img>
+        <Button
+          disableRipple
+          onClick={() => changeLanguage("en")}
+          sx={{
+            display: "inline-block",
+            borderRadius: "20px",
+            padding: 0.1,
+            background:
+              window.localStorage.getItem("i18nextLng") !== "en"
+                ? "transparent"
+                : "#1367ba",
+            "&:hover": {
+              //you want this to be the same as the backgroundColor above
+              background:
+                window.localStorage.getItem("i18nextLng") !== "en"
+                  ? "transparent"
+                  : "#1367ba",
+            },
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            noWrap
+            fontWeight="bold"
+            fontFamily="'Montserrat', san-serif"
+            sx={{
+              textTransform: "uppercase",
+              color:
+                window.localStorage.getItem("i18nextLng") === "en"
+                  ? "white"
+                  : "#1367ba",
+              "&:hover": {
+                //you want this to be the same as the backgroundColor above
+                color:
+                  window.localStorage.getItem("i18nextLng") === "en"
+                    ? "white"
+                    : "#1367ba",
+              },
+            }}
+          >
+            ENG
+          </Typography>
         </Button>
-        <Button onClick={() => changeLanguage("vi")}>
-          <img
-            src={VIflag}
-            alt=""
-            style={{ width: "30px", height: "20px" }}
-          ></img>
+        <Button
+          disableRipple
+          onClick={() => changeLanguage("vi")}
+          sx={{
+            display: "inline-block",
+            borderRadius: "20px",
+            padding: 0.1,
+            background:
+              window.localStorage.getItem("i18nextLng") === "en"
+                ? "transparent"
+                : "#1367ba",
+            "&:hover": {
+              //you want this to be the same as the backgroundColor above
+              background:
+                window.localStorage.getItem("i18nextLng") === "en"
+                  ? "transparent"
+                  : "#1367ba",
+            },
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            noWrap
+            fontWeight="bold"
+            fontFamily="'Montserrat', san-serif"
+            sx={{
+              textTransform: "uppercase",
+              color:
+                window.localStorage.getItem("i18nextLng") !== "en"
+                  ? "white"
+                  : "#1367ba",
+              "&:hover": {
+                //you want this to be the same as the backgroundColor above
+                color:
+                  window.localStorage.getItem("i18nextLng") !== "en"
+                    ? "white"
+                    : "#1367ba",
+              },
+            }}
+          >
+            VIE
+          </Typography>
         </Button>
       </Box>
       <ChangePassModal

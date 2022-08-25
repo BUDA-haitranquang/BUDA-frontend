@@ -3,16 +3,16 @@ import { Badge, Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useQuery } from "@apollo/client";
 import { GET_NOTIFICATION_BY_USER } from "../graphQl/notification/notificationByUser";
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 
 export const useStyles = makeStyles((theme) => ({
   menu: {
     "& .MuiPaper-root": {
-      borderRadius: "10px"
+      borderRadius: "10px",
     },
     marginLeft: "2rem",
-    height: "350px"
-  }
+    height: "350px",
+  },
 }));
 const Notification = () => {
   const cls = useStyles();
@@ -26,7 +26,7 @@ const Notification = () => {
   };
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event: SyntheticEvent) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -37,10 +37,10 @@ const Notification = () => {
       <IconButton onClick={handleClick}>
         {unseenNoti() > 0 ? (
           <Badge badgeContent={unseenNoti()} color="secondary">
-            <NotificationsIcon style={{ color: "black" }} />
+            <NotificationsIcon style={{ color: "rgba(255,255,255,0.8)" }} />
           </Badge>
         ) : (
-          <NotificationsIcon style={{ color: "black" }} />
+          <NotificationsIcon style={{ color: "rgba(255,255,255,0.8)" }} />
         )}
       </IconButton>
       {notiData ? (
@@ -51,11 +51,11 @@ const Notification = () => {
           onClose={handleClose}
           transformOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           className={cls.menu}
         >
-          {notiData?.map((element, index) => (
+          {notiData?.map((element: any, index: number) => (
             <MenuItem key={index}>
               <Box height="30px">{element.message}</Box>
             </MenuItem>
@@ -69,7 +69,7 @@ const Notification = () => {
           onClose={handleClose}
           transformOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           style={{ marginLeft: "2rem" }}
         >

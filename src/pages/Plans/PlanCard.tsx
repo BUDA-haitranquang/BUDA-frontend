@@ -1,7 +1,21 @@
 import { Box, Typography, Button } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 
-const PlanCard = ({ description, name, price, duration, type }) => {
+export interface planProps {
+  description: string;
+  name: string;
+  price: number;
+  duration: string;
+  planType: string;
+}
+
+const PlanCard = ({
+  description,
+  name,
+  price,
+  duration,
+  planType,
+}: planProps) => {
   const basicColorSet = {
     title: "rgba(0, 111, 173, 1)",
     duration: "rgba(3, 125, 193, 1)",
@@ -39,8 +53,8 @@ const PlanCard = ({ description, name, price, duration, type }) => {
     "No ads",
     "Unlimited resource",
   ];
-  const pickColorSet = (type) => {
-    switch (type) {
+  const pickColorSet = (planType: string) => {
+    switch (planType) {
       case "BASIC":
         return basicColorSet;
       case "PRO":
@@ -54,7 +68,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
   return (
     <Box
       sx={{
-        backgroundImage: pickColorSet(type).background,
+        backgroundImage: pickColorSet(planType).background,
         backgroundSize: "300%",
         backgroundPosition: "top",
         width: 300,
@@ -78,7 +92,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
       >
         <Typography
           variant="h4"
-          sx={{ fontWeight: "bold", color: pickColorSet(type).title }}
+          sx={{ fontWeight: "bold", color: pickColorSet(planType).title }}
         >
           {name.toUpperCase()}
         </Typography>
@@ -87,7 +101,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
             variant="h3"
             sx={{
               fontWeight: "bold",
-              color: pickColorSet(type).price,
+              color: pickColorSet(planType).price,
               fontFamily: "'Montserrat', san-serif",
             }}
           >
@@ -97,7 +111,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
             variant="h3"
             sx={{
               fontWeight: "bold",
-              color: pickColorSet(type).price,
+              color: pickColorSet(planType).price,
               fontFamily: "'Montserrat', san-serif",
             }}
           >
@@ -108,7 +122,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
           variant="h4"
           sx={{
             fontWeight: "bold",
-            color: pickColorSet(type).duration,
+            color: pickColorSet(planType).duration,
           }}
         >
           {duration} DAYS
@@ -124,7 +138,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
               <CircleIcon
                 sx={{
                   mr: 1,
-                  color: pickColorSet(type).description,
+                  color: pickColorSet(planType).description,
                   width: "6px",
                 }}
               />
@@ -132,7 +146,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
                 variant="h6"
                 sx={{
                   fontStyle: "italic",
-                  color: pickColorSet(type).description,
+                  color: pickColorSet(planType).description,
                   fontFamily: "'Montserrat', san-serif",
                 }}
                 key={index}
@@ -148,7 +162,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
           disableTouchRipple
           sx={{
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            background: pickColorSet(type).button,
+            background: pickColorSet(planType).button,
             borderRadius: "100px",
             width: 190,
             height: 55,
@@ -156,7 +170,7 @@ const PlanCard = ({ description, name, price, duration, type }) => {
             "&:hover": {
               transform: "scale(1.1)",
               transition: "transform 0.7s",
-              background: pickColorSet(type).button,
+              background: pickColorSet(planType).button,
             },
           }}
         >
