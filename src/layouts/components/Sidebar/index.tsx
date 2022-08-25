@@ -24,10 +24,10 @@ import {
   Toolbar,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { setFocus } from "../redux/sidebarSlice";
+import { setFocus } from "src/redux/sidebarSlice";
 
 const useStyle = makeStyles({
   selectedItem: {
@@ -87,18 +87,18 @@ const useStyle = makeStyles({
 });
 const drawerWidth = 240;
 
-function createData(name, link, check) {
+function createData(name: String, link: String, check: String) {
   return { name: name, link: link, check: check };
 }
 
 const Sidebar = () => {
   const history = useHistory();
   console.log(history.location.pathname);
-  const focus = useSelector((state) => state.sidebar.focus);
+  const focus = useSelector((state: any) => state.sidebar.focus);
   const dispatch = useDispatch();
   console.log(history.location.pathname);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const setFocusSideBar = (val) => {
+  const setFocusSideBar = (val: any) => {
     dispatch(setFocus(val));
   };
   const handleDrawerToggle = () => {
@@ -107,7 +107,7 @@ const Sidebar = () => {
   const { t } = useTranslation(["sidebar"]);
   const classes = useStyle();
 
-  function capitalizeFirstLetter(string) {
+  function capitalizeFirstLetter(string: any) {
     if (typeof string !== "string") return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -162,7 +162,7 @@ const Sidebar = () => {
     [createData(t("sidebar:discount.section"), "discount", "")],
   ];
 
-  const itemRender = (i) => {
+  const itemRender = (i: number) => {
     switch (i) {
       case 0:
         return <AddShoppingCartIcon />;
@@ -216,7 +216,7 @@ const Sidebar = () => {
                 let value = focus === item[1] ? "" : item[1];
                 setFocusSideBar(value);
                 if (sidebarItems[idx].length === 1)
-                  history.push(`/${title[idx][0]}`);
+                  history.push(`/${title[idx][0].toLowerCase()}`);
               }}
             >
               <Box

@@ -35,7 +35,7 @@ import DetailDiscount from "./pages/discount/detail/DetailDiscount";
 import Discount from "./pages/discount/list/Discount";
 import FixCost from "./pages/FixedCost";
 import FixCostBill from "./pages/FixedCostBill";
-import IngredientDetail from "./pages/IngerdientsDetail";
+import IngredientDetail from "./pages/IngredientsDetail";
 import Ingredient from "./pages/Ingredient";
 import Login from "./pages/Login";
 import OtherCost from "./pages/OtherCost";
@@ -49,7 +49,7 @@ import Staff from "./pages/Staff";
 import StaffDetail from "./pages/StaffDetail";
 import StaffNote from "./pages/StaffNote";
 import Retention from "./pages/statistic/Retention";
-import ReveneuPage from "./pages/statistic/Reveneu";
+import RevenuePage from "./pages/statistic/Revenue";
 import SellOrderStats from "./pages/statistic/SellOrderStats";
 import Plans from "./pages/Plans/index";
 import Supplier from "./pages/Supplier";
@@ -294,8 +294,8 @@ const AppRouter = () => {
             <PrivateRoute
               authed={isAuth}
               exact
-              path="/statistic/reveneu"
-              component={ReveneuPage}
+              path="/statistic/revenue"
+              component={RevenuePage}
             />
             <PrivateRoute
               authed={isAuth}

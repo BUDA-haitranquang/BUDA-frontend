@@ -21,7 +21,7 @@ const names = {
   "/Statistic/business": "Retention",
   "/Statistic/customer": "Sell order",
   "/Statistic/product": "Dashboard",
-  "/Statistic/reveneu": "Revenue and cost",
+  "/Statistic/revenue": "Revenue and cost",
 };
 
 const Header = () => {

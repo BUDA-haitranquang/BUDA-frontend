@@ -18,7 +18,7 @@ const info = [
   // { name: "profit", color: "#00BFFF", datakey: "profit" },
 ];
 
-const Reveneu = () => {
+const Revenue = () => {
   const [chart, setChart] = useState(0);
   const [timeSelected, setTimeSelected] = useState(0);
   const [revenue, setRevenue] = useState([]);
@@ -229,4 +229,4 @@ const Reveneu = () => {
   );
 };
 
-export default Reveneu;
+export default Revenue;
