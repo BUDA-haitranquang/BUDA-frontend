@@ -1,7 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
+import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
-import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BudaTable from "../../buda-components/table/BudaTable";
@@ -10,8 +8,8 @@ import IncompletedOtherCostTableBody from "./tableBody/IncompletedOtherCostTable
 
 const IncompletedOtherCost = (props) => {
   const [otherCost, setOtherCost] = useState([]);
-  const { error, loading, data } = useQuery(INCOMPLETED_OTHER_COST);
-  const {t} = useTranslation('dashboard');
+  const { data } = useQuery(INCOMPLETED_OTHER_COST);
+  const { t } = useTranslation("dashboard");
   const toObject = (data1) => {
     let incompleted = {};
     incompleted.otherCostID = data1?.otherCostID;

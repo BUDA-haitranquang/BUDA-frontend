@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";

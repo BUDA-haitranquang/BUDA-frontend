@@ -12,6 +12,7 @@
     "@mui/material": "^5.0.1",
     "@mui/styles": "^5.0.1",
     "@reduxjs/toolkit": "^1.6.2",
+    "@types/barcode": "^0.0.30",
     "@types/react-dom": "^18.0.6",
     "@types/react-google-recaptcha": "^2.1.5",
     "@types/react-router": "^5.1.18",
@@ -75,6 +76,8 @@
     ]
   },
   "devDependencies": {
+    "@types/faker": "^6.6.9",
+    "@types/redux-logger": "^3.0.9",
     "prettier": "2.4.1",
     "react-error-overlay": "6.0.9"
   }

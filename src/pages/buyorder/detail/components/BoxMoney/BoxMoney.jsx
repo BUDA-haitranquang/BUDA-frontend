@@ -1,4 +1,3 @@
-import React, { useContext, useEffect } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import useStyles from "./BoxMoney.styles";
 import { useTranslation } from "react-i18next";

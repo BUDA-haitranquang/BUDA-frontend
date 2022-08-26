@@ -1,4 +1,3 @@
-import React from "react";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 import { dateToDateString } from "../../../utils/utils";
@@ -11,7 +10,7 @@ import {
 } from "../../../buda-components/alert/BudaNoti";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { TableCell, IconButton, Box } from "@mui/material";
+import { TableCell, IconButton } from "@mui/material";
 const IncompletedBuyOrderTableBody = (props) => {
   const { row, labelId } = props;
   return (

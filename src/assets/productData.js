@@ -1,8 +1,8 @@
 import fakerStatic from "faker";
 
-const productData = [];
+var prodData = [];
 for (let i = 0; i < 100; i++) {
-  productData.push({
+  prodData.push({
     id: i + 1,
     name: fakerStatic.commerce.productName(),
     price: fakerStatic.commerce.price(),
@@ -12,4 +12,4 @@ for (let i = 0; i < 100; i++) {
     description: fakerStatic.commerce.productDescription(),
   });
 }
-export default productData;
+export const productData = prodData;

@@ -70,7 +70,7 @@ export default [
     path: "/product/delete",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/sellorder/list/SellOrderList")
+      () => import("src/pages/SellOrder/List/SellOrderList")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,
@@ -154,21 +154,21 @@ export default [
   {
     path: "/statistic/customer",
     exact: true,
-    component: React.lazy(() => import("src/pages/statistic/SellOrderStats")),
+    component: React.lazy(() => import("src/pages/Statistic/SellOrderStats")),
     layout: LayoutOptions.MAIN,
     auth: false,
   },
   {
     path: "/statistic/business",
     exact: true,
-    component: React.lazy(() => import("src/pages/statistic/Retention")),
+    component: React.lazy(() => import("src/pages/Statistic/Retention")),
     layout: LayoutOptions.MAIN,
     auth: false,
   },
   {
     path: "/statistic/revenue",
     exact: true,
-    component: React.lazy(() => import("src/pages/statistic/Revenue")),
+    component: React.lazy(() => import("src/pages/Statistic/Revenue")),
     layout: LayoutOptions.MAIN,
     auth: false,
   },
@@ -176,7 +176,7 @@ export default [
     path: "/business/sell/:id",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/sellorder/detail/SellOrderDetail")
+      () => import("src/pages/SellOrder/Detail/SellOrderDetail")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,
@@ -206,7 +206,7 @@ export default [
     path: "/business/sell-history",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/sellorder/list/SellOrderList")
+      () => import("src/pages/SellOrder/List/SellOrderList")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,

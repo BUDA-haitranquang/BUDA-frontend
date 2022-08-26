@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { TableCell } from "@mui/material";
-import { Link, useHistory } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 import {dateToDateString} from '../../../../utils/utils'
 BuyOrderTableBody.propTypes = {
   row: PropTypes.number,
@@ -9,7 +9,7 @@ BuyOrderTableBody.propTypes = {
 };
 
 function BuyOrderTableBody(props) {
-  const { row, labelId } = props;
+  const { row } = props;
   const history = useHistory();
 
   return (

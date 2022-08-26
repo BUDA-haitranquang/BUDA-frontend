@@ -6,7 +6,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 IngredientCombinedDetail.propTypes = {};
 
 function IngredientCombinedDetail(props) {
-  const { data, Modal, Information, handleDelete , handleRetail, RetailModal } = props;
+  const { data, Modal, Information, handleDelete , RetailModal } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [ retailOpen,setRetailOpen ] = useState(false);
   const handleOpen = () => {

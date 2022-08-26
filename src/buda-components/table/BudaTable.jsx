@@ -5,11 +5,10 @@ import {
   TableContainer,
   TablePagination,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BudaTableBody from "./BudaTableBody";
 import BudaTableHead from "./BudaTableHead";
 import BudaTableToolbar from "./BudaTableToolbar";
-import { useTranslation } from "react-i18next";
 const BudaTable = (props) => {
   const {
     tableChildren,
@@ -30,11 +29,10 @@ const BudaTable = (props) => {
     toolbar = true,
     minWidth = 1000,
     maxRow = [20, 50, 100], //array
-    tableName = 'Data',
+    tableName = "Data",
     canSearch = true,
     ...remainProps
   } = props;
-  const { t } = useTranslation(["common"]);
   const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("id");
   const [selected, setSelected] = useState([]);
@@ -44,7 +42,6 @@ const BudaTable = (props) => {
   const [display, setDisplay] = useState(data);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState(headCells[0].id);
-
 
   const displayData = display.slice(
     page * rowsPerPage,
@@ -99,8 +96,8 @@ const BudaTable = (props) => {
         <TableContainer sx={{ paddingRight: "10px" }}>
           {toolbar && (
             <BudaTableToolbar
-              title = {tableName}
-              canSearch = {canSearch}
+              title={tableName}
+              canSearch={canSearch}
               numSelected={selected.length}
               handleOpen={handleOpen}
               handleSearch={(val) => setSearch(val)}

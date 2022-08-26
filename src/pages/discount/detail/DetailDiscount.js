@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next";
 
 DetailDiscount.propTypes = {};
 
-function DetailDiscount(props) {
-  const { window } = props;
+function DetailDiscount() {
   const { t } = useTranslation("discount", { keyPrefix: "detail" });
   const [discount, setDiscount] = useState(null);
   const { id } = useParams();

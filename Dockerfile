@@ -14,6 +14,6 @@ COPY package-lock.json .
 # Installs npm dependencies on container
 
 # Command container will actually run when called
-RUN yarn build
+RUN npm install
 COPY . .
 CMD ["npm", "start"]
