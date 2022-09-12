@@ -70,7 +70,7 @@ export default [
     path: "/product/delete",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/SellOrder/List/SellOrderList")
+      () => import("src/pages/sellorder/List/SellOrderList")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,
@@ -176,7 +176,7 @@ export default [
     path: "/business/sell/:id",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/SellOrder/detail/SellOrderDetail")
+      () => import("src/pages/sellorder/detail/SellOrderDetail")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,
@@ -206,7 +206,7 @@ export default [
     path: "/business/sell-history",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/SellOrder/List/SellOrderList")
+      () => import("src/pages/sellorder/List/SellOrderList")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,

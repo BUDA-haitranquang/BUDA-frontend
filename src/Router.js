@@ -41,7 +41,7 @@ import OtherCost from "./pages/OtherCost";
 import PrintDemo from "./pages/PrintDemo";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
-import SellOrderDetail from "./pages/sellorder/Detail/SellOrderDetail";
+import SellOrderDetail from "./pages/sellorder/detail/SellOrderDetail";
 import SellOrderList from "./pages/sellorder/List/SellOrderList";
 import SignUp from "./pages/SignUp";
 import Staff from "./pages/Staff";
