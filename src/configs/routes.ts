@@ -176,7 +176,7 @@ export default [
     path: "/business/sell/:id",
     exact: true,
     component: React.lazy(
-      () => import("src/pages/SellOrder/Detail/SellOrderDetail")
+      () => import("src/pages/SellOrder/detail/SellOrderDetail")
     ),
     layout: LayoutOptions.MAIN,
     auth: false,
