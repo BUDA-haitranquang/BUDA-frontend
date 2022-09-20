@@ -1,5 +1,4 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import TableSellOrderItem from "./TableSellOrderItem/TableSellOrderItem";
 import useStyles from "./BoxProduct.styles";

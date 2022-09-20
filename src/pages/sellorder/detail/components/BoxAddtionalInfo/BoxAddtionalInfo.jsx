@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import useStyles from "src/pages/sellorder/detail/components/BoxAddtionalInfo/BoxAdditionalInfo.styles";
 import PropTypes from "prop-types";
