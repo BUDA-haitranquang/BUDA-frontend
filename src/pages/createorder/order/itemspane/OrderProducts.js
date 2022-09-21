@@ -16,11 +16,9 @@ import OrderProductItem from "./OrderProductItem";
 import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
-    border: "8px solid",
-    borderImageSlice: 1,
-    borderImageSource: "linear-gradient(to right bottom, #277fd6, #80bfff)",
     // backgroundColor: `${color4}`,
     // border: "2px solid gray",
+    borderRadius: "10px",
     padding: "8px",
     overflow: "hidden",
     boxShadow: "none",

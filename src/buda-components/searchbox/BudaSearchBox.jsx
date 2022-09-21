@@ -1,9 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { InputAdornment, Paper, TextField } from "@material-ui/core";
+import {
+  InputAdornment,
+  Paper,
+  TextField,
+  makeStyles,
+} from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
+
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderRadius: "100px",
+      },
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      width: "90%",
+      height: "90%",
+    },
+    "& input[type=number]": {
+      "-moz-appearance": "textfield",
+    },
+    "& input[type=number]::-webkit-outer-spin-button": {
+      "-webkit-appearance": "none",
+      margin: 0,
+    },
+    "& input[type=number]::-webkit-inner-spin-button": {
+      "-webkit-appearance": "none",
+      margin: 0,
+    },
+  },
+}));
 
 SearchBox.propTypes = {
   placeholder: PropTypes.string,
@@ -48,16 +78,27 @@ function SearchBox(props) {
     }
   };
 
+  const cls = useStyles();
+
   return (
-    <Paper component="form" onSubmit={handleSubmit}>
+    <Paper
+      component="form"
+      style={{ background: "transparent", boxShadow: "none", height: "100%" }}
+      onSubmit={handleSubmit}
+    >
       <TextField
-        sx={{ boxShadow: "none" }}
+        className={cls.textField}
+        style={{ borderRadius: "100px" }}
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
         fullWidth
+        variant="outlined"
         autoFocus={autoFocus}
         InputProps={{
+          padding: "20px",
+          color: "primary",
+          textAlign: "center",
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon style={{ width: "24px", height: "24px" }} />
@@ -72,7 +113,6 @@ function SearchBox(props) {
           ),
         }}
         inputProps={inputProps}
-        variant="outlined"
       />
     </Paper>
   );

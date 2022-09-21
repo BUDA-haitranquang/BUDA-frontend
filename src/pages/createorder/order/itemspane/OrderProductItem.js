@@ -4,32 +4,35 @@ import { TableCell, TableRow } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeProductCartItem, deleteProductCart } from "../../../../redux/productCartSlice";
+import {
+  changeProductCartItem,
+  deleteProductCart,
+} from "../../../../redux/productCartSlice";
 
 export default function OrderProductItem({ row, serial }) {
   const [sellingPrice, setSellingPrice] = useState(row.sellingPrice);
   const [quantity, setQuantity] = useState(row.quantity);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     setSellingPrice(row.sellingPrice);
     setQuantity(row.quantity);
-  }, [row])
-  
+  }, [row]);
+
   const handlePriceChange = (e) => {
     const price = e.target.value || 0;
     setSellingPrice(price);
-    let data = {...row};
+    let data = { ...row };
     data.sellingPrice = parseFloat(price);
     dispatch(changeProductCartItem(data));
-  }
+  };
   const handleQuantityChange = (e) => {
     const quantity = e.target.value || 0;
     setQuantity(quantity);
-    let data = {...row};
+    let data = { ...row };
     data.quantity = parseInt(quantity);
     dispatch(changeProductCartItem(data));
-  }
+  };
 
   return (
     <TableRow sx={{ cursor: "pointer" }} hover key={row.productID}>
@@ -66,7 +69,6 @@ export default function OrderProductItem({ row, serial }) {
         />
       </TableCell>
       <IconButton
-        color="error"
         component="span"
         onClick={() => {
           dispatch(deleteProductCart(row));

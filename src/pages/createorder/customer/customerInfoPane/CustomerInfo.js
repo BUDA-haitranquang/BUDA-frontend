@@ -1,4 +1,4 @@
-import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Button,
   Paper,
@@ -7,6 +7,7 @@ import {
   TableCell,
   TableRow,
   Typography,
+  Box,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
@@ -15,13 +16,14 @@ import { setCustomer } from "../../../../redux/productCartSlice";
 import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
-    border: "8px solid",
-    borderImageSlice: 1,
-    borderImageSource: "linear-gradient(to right bottom, #277fd6, #80bfff)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     padding: "8px",
     boxShadow: "none",
     overflow: "hidden",
-    height: "40vh",
+    flexGrow: 1,
+    height: "calc(100%-8px)",
     "& .MuiTableCell-root": {
       padding: "4px",
     },
@@ -148,11 +150,25 @@ export default function CustomerInfo() {
             </TableRow>
           </TableBody>
         </Table>
+        <Box
+          sx={{
+            marginTop: "20px",
+            marginBottom: "5px",
+            width: "100%",
+            borderBottom: "2px rgba(0, 0, 0, 0.4)",
+            borderBottomStyle: "dashed",
+          }}
+        ></Box>
         <Button
-          variant="outlined"
-          color="error"
-          endIcon={<DeleteIcon />}
-          sx={{ marginTop: "24px", width: "100%" }}
+          endIcon={<CloseIcon />}
+          sx={{
+            color: "#ed4545",
+            // marginTop: "24px",
+            // width: "80%",
+            // alignSelf: "center",
+            // backgroundImage: "linear-gradient(to right, #ed4545, #ff6b6b)",
+            boxShadow: "none",
+          }}
           onClick={() => dispatch(setCustomer(null))}
         >
           {t("sell:remove")}

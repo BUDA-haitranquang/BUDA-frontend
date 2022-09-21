@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LiveSearch from "../../../../buda-components/livesearch/BudaLiveSearch";
@@ -126,7 +126,6 @@ export default function CostGrid() {
   return (
     <Box
       display="flex"
-      container
       className="costPane"
       justifyContent="space-between"
       alignItems="baseline"
@@ -142,6 +141,7 @@ export default function CostGrid() {
         fetchData={filterDiscount}
         handleRender={renderRowDiscount}
       />
+
       <UneditableMoneyBox
         xs={4}
         title={t("sell:total")}
@@ -160,24 +160,42 @@ export default function CostGrid() {
           <Box
             fullWidth
             style={{
+              marginTop: "5px",
               display: "flex",
+              backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+              borderRadius: "8px",
+              minHeight: "50px",
+              paddingLeft: "5px",
+              paddingRight: "5px",
               alignItems: "center",
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" color="green" style={{ width: "80%" }}>
-              # {chosenDiscount?.name || ""}
+            <Typography
+              variant="h6"
+              color="white"
+              fontFamily="'Montserrat', san-serif"
+              
+            >
+              % {chosenDiscount?.name || ""}
             </Typography>
             <IconButton
-              style={{ width: "15%" }}
-              color="error"
+              sx={{
+                borderLeft: "2px solid rgba(255, 255, 255, 0.9)",
+                borderStyle: "dashed",
+                borderRadius: "0px",
+                paddingLeft: "15px",
+              }}
               component="span"
               onClick={() => {
                 setChosenDiscount(null);
                 dispatch(deleteDiscount());
               }}
             >
-              <DeleteIcon />
+              <CloseIcon
+                fontSize="small"
+                sx={{ color: "rgba(255, 255, 255, 0.5)" }}
+              />
             </IconButton>
           </Box>
         )}

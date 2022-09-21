@@ -6,20 +6,20 @@ import UneditableMoneyBox from "../../common/moneybox/UneditableMoneyBox";
 import { useTranslation } from "react-i18next";
 export default function CustomerPayment() {
   const { totalPrice, discount } = useSelector((state) => state.productCart);
-  const {t} = useTranslation(['sell']);
+  const { t } = useTranslation(["sell"]);
   const [customerGiveAmount, setCustomerGiveAmount] = useState(
     totalPrice - discount
   );
 
-  useEffect(()=>{
+  useEffect(() => {
     setCustomerGiveAmount(totalPrice - discount);
-  }, [totalPrice, discount])
+  }, [totalPrice, discount]);
 
   const handleCustomerGiveChange = (e) => {
     // const finalPaymentTmp = totalPrice - discount;
     // const tmp = e.target.value > finalPaymentTmp ? e.target.value : finalPaymentTmp;
     setCustomerGiveAmount(e.target.value);
-  }
+  };
   return (
     <Grid
       container
@@ -29,11 +29,15 @@ export default function CustomerPayment() {
     >
       <EditableMoneyBox
         xs={4}
-        title={t('sell:customerGives')}
+        title={t("sell:customerGives")}
         value={customerGiveAmount}
         onChange={handleCustomerGiveChange}
       />
-      <UneditableMoneyBox xs={4} title={t('sell:change')} value={customerGiveAmount - (totalPrice - discount)}/>
+      <UneditableMoneyBox
+        xs={4}
+        title={t("sell:change")}
+        value={customerGiveAmount - (totalPrice - discount)}
+      />
     </Grid>
   );
 }

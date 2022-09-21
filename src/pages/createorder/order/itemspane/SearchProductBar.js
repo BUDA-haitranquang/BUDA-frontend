@@ -68,6 +68,7 @@ export default function SearchProductBar() {
           width: "15%",
           padding: "2px",
           backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+          boxShadow: "none",
         }}
         onClick={handleOpenModal}
       >
@@ -119,6 +120,7 @@ export default function SearchProductBar() {
           width: "15%",
           padding: "2px",
           backgroundImage: "linear-gradient(to right, #ed4545, #ff6b6b)",
+          boxShadow: "none",
         }}
         onClick={() => dispatch(clearProductCart())}
         loadingIndicator="Clearing..."

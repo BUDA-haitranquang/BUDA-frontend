@@ -19,7 +19,7 @@ const useStyle = makeStyles(() => ({
     display: "flex",
     justifyContent: "space-between",
     marginBottom: "12px",
-    "& .MuiOutlinedInput-input": {
+    "& .MuiTextField-input": {
       paddingTop: "10px",
       paddingBottom: "10px",
       color: "black",
@@ -30,7 +30,7 @@ const useStyle = makeStyles(() => ({
 export default function SearchCustomerBar() {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const {t} = useTranslation(['sell']);
+  const { t } = useTranslation(["sell"]);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [value, setValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -99,6 +99,7 @@ export default function SearchCustomerBar() {
           width: "37%",
           padding: "2px",
           backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+          boxShadow: "none",
         }}
         onClick={handleOpenModal}
       >

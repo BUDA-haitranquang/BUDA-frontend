@@ -84,7 +84,6 @@ export default function CreateOrder() {
   return (
     <Box
       sx={{
-        display: "flex",
         paddingTop: "60px",
       }}
     >
@@ -99,34 +98,62 @@ export default function CreateOrder() {
       >
         <Grid item xs={8} className="main-order-grid">
           <SearchProductBar />
-          <Box className="itemsPane">
+          <Box
+            className="itemsPane"
+            sx={{
+              border: "5px solid",
+              borderImageSlice: 1,
+              borderImageSource:
+                "linear-gradient(to right, #277fd6, #80bfff)",
+            }}
+          >
             <OrderProducts />
             {/* <Grid container className="others"> tạm thời chưa deploy tính năng này
               <Services /> 
               <Shipping />
             </Grid> */}
           </Box>
-          <CostGrid />
         </Grid>
         <Grid
           item
           xs={4}
           className="customer"
-          sx={{ paddingLeft: "10px", paddingRight: "10px" }}
+          sx={{
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
           <SearchCustomerBar />
-          <CustomerInfo />
-          <CustomerPayment />
           <Box
-            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+            sx={{
+              flexGrow: 1,
+              border: "5px solid",
+              borderImageSlice: 1,
+              borderImageSource:
+                "linear-gradient(to right, #80bfff, #277fd6)",
+            }}
           >
+            <CustomerInfo />
+          </Box>
+        </Grid>
+      </Grid>
+      <Grid container sx={{ paddingLeft: "10px", paddingRight: "20px" }}>
+        <Grid item xs={8}>
+          <CostGrid />
+        </Grid>
+        <Grid item xs={4}>
+          <CustomerPayment />
+          <Box width="100%" display="flex" justifyContent="center">
             <Button
               onClick={createNewOrder}
               variant="contained"
               disabled={productCart.length <= 0}
               sx={{
+                alignSelf: "center",
                 marginTop: "24px",
-                width: "100%",
+                flexGrow: 1,
                 backgroundImage: "linear-gradient(to right, #47bf65, #4abd66)",
                 boxShadow: "none",
               }}
