@@ -25,7 +25,7 @@ const MainDashBoard = () => {
   const [chart, setChart] = useState(0);
   const [revenue, setRevenue] = useState([]);
   const [tab, setTab] = useState(0);
-  const { error: dayRevenueError, data: dayRevenueData } = useQuery(
+  const { data: dayRevenueData } = useQuery(
     LOAD_BUSINESS_OVERALL_30_DAY
   );
 

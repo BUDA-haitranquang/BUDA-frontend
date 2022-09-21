@@ -21,7 +21,7 @@ const StaffNoteTableBody = (props) =>{
         <>
             <TableCell align="left">{convert(row.noteDate)}</TableCell>
             <TableCell align="left">{row.message}</TableCell>
-            <TableCell align="left">{row.seen == false ? "Uncheck" : <CheckIcon/>}</TableCell>
+            <TableCell align="left">{row.seen === false ? "Uncheck" : <CheckIcon/>}</TableCell>
             <TableCell align="left">
                 <Button variant="outlined" onClick={handleOpen}>
                     Update

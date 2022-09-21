@@ -1,6 +1,4 @@
 import { TableCell } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
 const FixedCostTableBody = (props) => {
     const { row,labelId } = props;
     return (

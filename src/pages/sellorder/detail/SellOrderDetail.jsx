@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Box, Button, Grid, Toolbar, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
 import { LOAD_SELL_ORDER_DETAILS } from "../../../graphQl/sellOrder/sellOrderQueries";
@@ -13,7 +13,7 @@ import BoxMoney from "../../buyorder/detail/components/BoxMoney/BoxMoney";
 
 SellOrderDetail.propTypes = {};
 
-function SellOrderDetail(props) {
+function SellOrderDetail(propTypes) {
   const [sellOrder, setSellOrder] = useState(null);
   const { id } = useParams();
 

@@ -10,7 +10,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { color4 } from "../../CreateOrder";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import OrderProductItem from "./OrderProductItem";
 import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
@@ -45,14 +45,14 @@ export default function OrderProducts() {
   const classes = useStyle();
   const [rows, setRows] = useState([]);
   const { productCart } = useSelector((state) => state.productCart);
-  const {t} = useTranslation(['sell']);
-  
+  const { t } = useTranslation(["sell"]);
+
   const headCells = [
     {
       id: "no",
       numeric: false,
       disablePadding: false,
-      label: t('sell:productTable.number'),
+      label: t("sell:productTable.number"),
       size: 1,
     },
     {
@@ -66,7 +66,7 @@ export default function OrderProducts() {
       id: "name",
       numeric: false,
       disablePadding: false,
-      label: t('sell:productTable.name'),
+      label: t("sell:productTable.name"),
       size: 4,
     },
     {
@@ -80,18 +80,18 @@ export default function OrderProducts() {
       id: "qty",
       numeric: true,
       disablePadding: true,
-      label: t('sell:productTable.quantity'),
+      label: t("sell:productTable.quantity"),
       size: 1,
     },
     {
       id: "total",
       numeric: true,
       disablePadding: true,
-      label: t('sell:productTable.total'),
+      label: t("sell:productTable.total"),
       size: 2,
     },
   ];
-  
+
   useEffect(() => {
     async function fetchData() {
       if (productCart) setRows(productCart);
@@ -122,10 +122,7 @@ export default function OrderProducts() {
           <TableBody>
             {rows.map((row) => {
               return (
-                <OrderProductItem
-                  row={row}
-                  serial={rows.indexOf(row) + 1}
-                />
+                <OrderProductItem row={row} serial={rows.indexOf(row) + 1} />
               );
             })}
           </TableBody>

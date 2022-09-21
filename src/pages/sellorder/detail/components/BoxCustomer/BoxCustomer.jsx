@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import CustomerDetail from "./CustomerDetail/CustomerDetail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";

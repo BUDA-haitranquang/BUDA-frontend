@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import { Box, Grid, Paper, Typography } from "@mui/material";
-import BudaTextField from "../../../../../buda-components/textfield/BudaTextField";
-import useStyles from "./BoxAdditionalInfo.styles";
+import useStyles from "src/pages/sellorder/detail/components/BoxAddtionalInfo/BoxAdditionalInfo.styles";
 import PropTypes from "prop-types";
 
 BoxAdditionalInfo.propTypes = {

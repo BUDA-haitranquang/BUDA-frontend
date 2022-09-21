@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import productData from "../assets/productData";
+import { productData } from "../assets/productData";
 
 const productCartSlice = createSlice({
   name: "productCart",
@@ -82,7 +82,6 @@ export const {
   changeProductCartItem,
   calculateTotalPrice,
   calculateFinalAmount,
-  calculateTotalDiscount,
   deleteProductCart,
   fetchData,
   addCustomer,

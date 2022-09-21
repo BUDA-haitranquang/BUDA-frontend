@@ -1,6 +1,6 @@
 import AddDiscountModal from "../../../../components/modal/AddDiscountModals";
 import Box from "@mui/material/Box";
-import React, { useState } from "react";
+import { useState } from "react";
 import DiscountByPercentageTableBody from "./components/DiscountByPercentageTableBody";
 import BudaTable from "../../../../buda-components/table/BudaTable";
 import { useSnackbar } from "notistack";

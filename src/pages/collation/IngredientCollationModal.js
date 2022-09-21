@@ -9,7 +9,6 @@ import {
   AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
-import { useTranslation } from "react-i18next";
 const IngredientCollationModal = ({
   isOpen,
   handleClose,

@@ -22,8 +22,6 @@ export default function ProductInformation({ data }) {
   const productGroup = data?.productGroup?.productGroupByProduct;
   const productComponent = data?.productComponent?.componentsByProduct;
 
-  const componentRef = useRef();
-
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleOpenModal = () => {

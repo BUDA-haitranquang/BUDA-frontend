@@ -7,7 +7,6 @@ import AddIngredientModal from "../../../../../components/modal/AddIngredientMod
 import TableBuyOrderItem from "./TableBuyOrderItems/TableBuyOrderItem";
 import useStyles from "./BoxIngredient.styles";
 import { CreateBuyOrderContext } from "../../context/CreateBuyOrderContext";
-import _ from "lodash";
 import DefaultImage from "../../../../../buda-components/SVG/DefaultImage";
 import { useTranslation } from "react-i18next";
 

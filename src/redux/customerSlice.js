@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import customerData from "../assets/customerData";
+
 const customerSlice = createSlice({
   name: "customer",
   initialState: {
