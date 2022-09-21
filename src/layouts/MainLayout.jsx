@@ -3,10 +3,6 @@ import { Fragment } from "react";
 import Header from "src/layouts/components/Header";
 import Sidebar from "src/layouts/components/Sidebar";
 
-interface Props {
-  children: React.ReactElement;
-}
-
 const MainContentWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(4, 2, 7, 2),
   marginLeft: 0,
@@ -19,7 +15,7 @@ const MainContentWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
 }));
 
-export default function MainLayout(props: Props) {
+export default function MainLayout(props) {
   const { children } = props;
   return (
     <Fragment>

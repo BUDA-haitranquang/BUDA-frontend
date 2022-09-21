@@ -20,7 +20,7 @@ export default function CostGrid() {
   const [discounts, setDiscounts] = useState([]);
   const [calculatedDiscountValue, setCalculatedDiscountValue] = useState(0);
   // const [discountValue, setDiscountValue] = useState(0);
-  const {t} = useTranslation(['sell']);
+  const { t } = useTranslation(["sell"]);
   const { error, loading, data } = useQuery(LOAD_DISCOUNTS);
 
   useEffect(() => {
@@ -50,8 +50,7 @@ export default function CostGrid() {
         default:
           break;
       }
-    }
-    else setCalculatedDiscountValue(0);
+    } else setCalculatedDiscountValue(0);
   }, [chosenDiscount, totalPrice]);
 
   dispatch(calculateTotalPrice());
@@ -125,22 +124,34 @@ export default function CostGrid() {
   };
 
   return (
-    <Grid
+    <Box
+      display="flex"
       container
       className="costPane"
-      justifyContent="space-evenly"
+      justifyContent="space-between"
+      alignItems="baseline"
       sx={{ marginTop: "10px" }}
     >
+      <LiveSearch
+        placeholder={t("sell:searchDiscount")}
+        // createable
+        // textCreate="Add new Discount"
+        // onClickCreate={() => setOpenCreateDiscount(true)}
+        maxHeight={100}
+        onChooseItem={onChooseDiscount}
+        fetchData={filterDiscount}
+        handleRender={renderRowDiscount}
+      />
       <UneditableMoneyBox
         xs={4}
-        title={t('sell:total')}
+        title={t("sell:total")}
         value={totalPrice.toLocaleString()}
       />
 
       <Box className="discount-box">
         <UneditableMoneyBox
           xs={4}
-          title={t('sell:discount')}
+          title={t("sell:discount")}
           // value={discountValue}
           value={calculatedDiscountValue.toLocaleString()}
           // onChange={changeDiscountPrice}
@@ -170,25 +181,15 @@ export default function CostGrid() {
             </IconButton>
           </Box>
         )}
-
-        <LiveSearch
-          placeholder={t("sell:searchDiscount")}
-          // createable
-          // textCreate="Add new Discount"
-          // onClickCreate={() => setOpenCreateDiscount(true)}
-          maxHeight={100}
-          onChooseItem={onChooseDiscount}
-          fetchData={filterDiscount}
-          handleRender={renderRowDiscount}
-        />
+        <Box pb={2}></Box>
       </Box>
 
       <UneditableMoneyBox
         xs={4}
-        title={t('sell:final')}
+        title={t("sell:final")}
         // value={totalPrice - discountValue}
         value={(totalPrice - (calculatedDiscountValue || 0)).toLocaleString()}
       />
-    </Grid>
+    </Box>
   );
 }

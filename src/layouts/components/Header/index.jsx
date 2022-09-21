@@ -2,11 +2,7 @@ import { Toolbar, Typography } from "@mui/material";
 import AccountMenu from "src/layouts/components/Header/AccountMenu";
 import { useLocation } from "react-router-dom";
 
-interface typeOfName {
-  [key: string]: string;
-}
-
-const names: typeOfName = {
+const names = {
   "/dashboard": "Dashboard",
   "/business/sell": "Create order",
   "/business/sell-history": "Sell Order History",

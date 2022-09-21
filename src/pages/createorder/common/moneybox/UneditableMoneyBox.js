@@ -18,10 +18,14 @@ export default function UneditableMoneyBox({ title, value }) {
         variant="h6"
         align="center"
         sx={{ textTransform: "uppercase" }}
+        fontFamily="'Montserrat', san-serif"
+        fontWeight="bold"
       >
         {title}
       </Typography>
       <TextField
+        sx={{ background: "rgb(232, 243, 255, 0.2)" }}
+        InputProps={{ disableUnderline: true }}
         inputProps={{
           style: { textAlign: "center" },
         }}

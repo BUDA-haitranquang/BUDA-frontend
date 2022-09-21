@@ -42,7 +42,7 @@ function SearchBox(props) {
   };
 
   const handleClear = (e) => {
-		setValue("");
+    setValue("");
     if (onChange) {
       onChange(e, "");
     }
@@ -51,6 +51,7 @@ function SearchBox(props) {
   return (
     <Paper component="form" onSubmit={handleSubmit}>
       <TextField
+        sx={{ boxShadow: "none" }}
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
@@ -64,7 +65,9 @@ function SearchBox(props) {
           ),
           endAdornment: removeable && value && value.length > 0 && (
             <InputAdornment position="end" onClick={handleClear}>
-              <CancelIcon style={{ width: "24px", height: "24px", cursor: "pointer" }} />
+              <CancelIcon
+                style={{ width: "24px", height: "24px", cursor: "pointer" }}
+              />
             </InputAdornment>
           ),
         }}

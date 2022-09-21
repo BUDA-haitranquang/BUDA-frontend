@@ -69,7 +69,11 @@ function LiveSearch(props) {
   };
 
   return (
-    <div className={classes.root} ref={refInput} style={{ ...style }}>
+    <div
+      className={classes.root}
+      ref={refInput}
+      style={{ width: 230, ...style}}
+    >
       <SearchBox
         query={query}
         placeholder={placeholder}

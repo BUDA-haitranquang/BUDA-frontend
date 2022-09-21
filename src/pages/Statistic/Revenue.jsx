@@ -1,6 +1,5 @@
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
-import Revenue from "src/pages/Statistic/Revenue";
 const RevenuePage = () => {
   return (
     <Box sx={{ display: "flex" }}>

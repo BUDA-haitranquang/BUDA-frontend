@@ -6,6 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
@@ -15,16 +16,20 @@ import OrderProductItem from "./OrderProductItem";
 import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
-    backgroundColor: `${color4}`,
-    border: "2px solid gray",
+    border: "8px solid",
+    borderImageSlice: 1,
+    borderImageSource: "linear-gradient(to right bottom, #277fd6, #80bfff)",
+    // backgroundColor: `${color4}`,
+    // border: "2px solid gray",
     padding: "8px",
     overflow: "hidden",
+    boxShadow: "none",
     "& .MuiTableContainer-root": {
-      height: "36vh",
+      minHeight: "36vh",
     },
-    "& .MuiTable-root": {
-      backgroundColor: "yellow",
-    },
+    // "& .MuiTable-root": {
+    //   backgroundColor: "yellow",
+    // },
     "& .MuiTableHead-root": {
       "& .MuiTableCell-root": {
         fontSize: "18px",
@@ -114,7 +119,13 @@ export default function OrderProducts() {
                     width: `calc(100% / 12 * ${headCell.size})`,
                   }}
                 >
-                  {headCell.label}
+                  <Typography
+                    noWrap
+                    fontWeight="bold"
+                    fontFamily="'Montserrat', san-serif"
+                  >
+                    {headCell.label}
+                  </Typography>
                 </TableCell>
               ))}
             </TableRow>

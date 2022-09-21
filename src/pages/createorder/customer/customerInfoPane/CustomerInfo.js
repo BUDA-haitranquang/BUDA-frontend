@@ -6,20 +6,22 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCustomer } from "../../../../redux/productCartSlice";
-import { color4 } from "../../CreateOrder";
 import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
-    backgroundColor: `${color4}`,
-    border: "2px solid gray",
+    border: "8px solid",
+    borderImageSlice: 1,
+    borderImageSource: "linear-gradient(to right bottom, #277fd6, #80bfff)",
     padding: "8px",
+    boxShadow: "none",
     overflow: "hidden",
-    height: "39vh",
+    height: "40vh",
     "& .MuiTableCell-root": {
       padding: "4px",
     },
@@ -28,7 +30,7 @@ const useStyle = makeStyles(() => ({
 
 export default function CustomerInfo() {
   const classes = useStyle();
-  const {t} = useTranslation('sell');
+  const { t } = useTranslation("sell");
   const dispatch = useDispatch();
   const { customer } = useSelector((state) => state.productCart);
   return (
@@ -37,51 +39,123 @@ export default function CustomerInfo() {
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell>{t('sell:customerInfo.name')}:</TableCell>
-              <TableCell align="right">
-                <i>{customer?.name}</i>
+              <TableCell sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontWeight="bold"
+                >
+                  {t("sell:customerInfo.name")}:
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontStyle="italic"
+                >
+                  {customer?.name}
+                </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>{t('sell:customerInfo.phone')}:</TableCell>
-              <TableCell align="right">
-                <i>{customer?.phonenumber}</i>
+              <TableCell sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontWeight="bold"
+                >
+                  {t("sell:customerInfo.phone")}:
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontStyle="italic"
+                >
+                  {customer?.phonenumber}
+                </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>{t('sell:customerInfo.totalSpend')}:</TableCell>
-              <TableCell align="right">
-                <i>{customer?.totalSpend?.toLocaleString() || 0}</i>
+              <TableCell sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontWeight="bold"
+                >
+                  {t("sell:customerInfo.totalSpend")}:
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontStyle="italic"
+                >
+                  {customer?.totalSpend?.toLocaleString() || 0}
+                </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>{t('sell:customerInfo.gender')}:</TableCell>
-              <TableCell align="right">
-                <i>{customer?.gender}</i>
+              <TableCell sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontWeight="bold"
+                >
+                  {t("sell:customerInfo.gender")}:
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontStyle="italic"
+                >
+                  {customer?.gender}
+                </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>{t('sell:customerInfo.ageGroup')}:</TableCell>
-              <TableCell align="right">
-                <i>{customer?.ageGroup}</i>
+              <TableCell sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontWeight="bold"
+                >
+                  {t("sell:customerInfo.ageGroup")}:
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontStyle="italic"
+                >
+                  {customer?.ageGroup}
+                </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>{t('sell:customerInfo.address')}:</TableCell>
-              <TableCell align="right">
-                <i>{customer?.address}</i>
+              <TableCell sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontWeight="bold"
+                >
+                  {t("sell:customerInfo.address")}:
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ borderBottom: "none" }}>
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  fontStyle="italic"
+                >
+                  {customer?.address}
+                </Typography>
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
         <Button
-          variant="contained"
+          variant="outlined"
           color="error"
           endIcon={<DeleteIcon />}
-          sx={{ marginTop: "24px" }}
+          sx={{ marginTop: "24px", width: "100%" }}
           onClick={() => dispatch(setCustomer(null))}
         >
-          {t('sell:remove')}
+          {t("sell:remove")}
         </Button>
       </Paper>
     )

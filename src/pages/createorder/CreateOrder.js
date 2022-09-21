@@ -3,7 +3,6 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
-import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
@@ -28,7 +27,7 @@ export default function CreateOrder() {
     (state) => state.productCart
   );
   const [newSellOrder] = useMutation(NEW_SELL_ORDER_MUTATION);
-  const {t} = useTranslation(['sell']);
+  const { t } = useTranslation(["sell"]);
   // hàm này xử lý khá là phức tạp
   // ai bên frontend đọc không hiểu thì hỏi Tiennd nhé
   // #tatcataiTranQuangHai
@@ -83,10 +82,20 @@ export default function CreateOrder() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+        paddingTop: "60px",
+      }}
+    >
       <Grid
         container
-        sx={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "80px" }}
+        sx={{
+          paddingTop: "20px",
+          paddingLeft: "10px",
+          paddingRight: "10px",
+          borderRadius: "10px",
+        }}
       >
         <Grid item xs={8} className="main-order-grid">
           <SearchProductBar />
@@ -114,15 +123,17 @@ export default function CreateOrder() {
             <Button
               onClick={createNewOrder}
               variant="contained"
-              color="success"
               disabled={productCart.length <= 0}
               sx={{
                 marginTop: "24px",
-                width: "40%",
-                height: "60px",
+                width: "100%",
+                backgroundImage: "linear-gradient(to right, #47bf65, #4abd66)",
+                boxShadow: "none",
               }}
             >
-              <Typography sx ={{}}variant="h6">{t('sell:done')}</Typography>
+              <Typography sx={{}} variant="h6">
+                {t("sell:done")}
+              </Typography>
             </Button>
           </Box>
         </Grid>

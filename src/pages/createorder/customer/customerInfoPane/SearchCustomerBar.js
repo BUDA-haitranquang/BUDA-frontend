@@ -68,7 +68,7 @@ export default function SearchCustomerBar() {
         options={customers}
         sx={{ width: "60%" }}
         autoHighlight
-        getOptionLabel={(option) => option.name + option.phoneNumber ||""}
+        getOptionLabel={(option) => option.name + option.phoneNumber || ""}
         inputValue={searchValue}
         onInputChange={(event, newInputValue, reason) => {
           if (reason === "reset") setSearchValue("");
@@ -88,16 +88,21 @@ export default function SearchCustomerBar() {
           </Box>
         )}
         renderInput={(params) => {
-          return <TextField {...params} label={t('sell:searchCustomer')}></TextField>;
+          return (
+            <TextField {...params} label={t("sell:searchCustomer")}></TextField>
+          );
         }}
       />
       <Button
         variant="contained"
-        color="primary"
-        sx={{ width: "35%", padding: "2px" }}
+        sx={{
+          width: "37%",
+          padding: "2px",
+          backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+        }}
         onClick={handleOpenModal}
       >
-        {t('sell:newCustomer')}
+        {t("sell:newCustomer")}
       </Button>
       <AddCustomerModal isOpen={isOpenModal} handleClose={handleCloseModal} />
     </Box>

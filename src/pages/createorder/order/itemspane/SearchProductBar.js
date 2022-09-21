@@ -36,7 +36,7 @@ export default function SearchProductBar() {
   const [searchProductValue, setSearchProductValue] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
-  const {t} = useTranslation(['sell']);
+  const { t } = useTranslation(["sell"]);
   useEffect(() => {
     async function fetchData() {
       if (data) setProducts(data.productsByUser);
@@ -64,11 +64,14 @@ export default function SearchProductBar() {
     <Box className={classes.root} display="flex" justifyContent="space-between">
       <Button
         variant="contained"
-        color="primary"
-        sx={{ width: "15%", padding: "2px" }}
+        sx={{
+          width: "15%",
+          padding: "2px",
+          backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+        }}
         onClick={handleOpenModal}
       >
-        {t('sell:newProduct')}
+        {t("sell:newProduct")}
       </Button>
       <Autocomplete
         id="product-select"
@@ -90,26 +93,37 @@ export default function SearchProductBar() {
                 {option.name}
               </Grid>
               <Grid item xs={2} sx={{ display: "flex" }}>
-                <Typography> {t('sell:left')}: {option.amountLeft} </Typography>
+                <Typography>
+                  {" "}
+                  {t("sell:left")}: {option.amountLeft}{" "}
+                </Typography>
               </Grid>
               <Grid item xs={2} sx={{ display: "flex" }}>
-                <Typography> {t('sell:price')}: {option.sellingPrice} </Typography>
+                <Typography>
+                  {" "}
+                  {t("sell:price")}: {option.sellingPrice}{" "}
+                </Typography>
               </Grid>
             </Grid>
           </Box>
         )}
         renderInput={(params) => {
-          return <TextField {...params} label={t("sell:searchProduct")}></TextField>;
+          return (
+            <TextField {...params} label={t("sell:searchProduct")}></TextField>
+          );
         }}
       />
       <Button
         variant="contained"
-        color="error"
-        sx={{ width: "15%", padding: "2px" }}
+        sx={{
+          width: "15%",
+          padding: "2px",
+          backgroundImage: "linear-gradient(to right, #ed4545, #ff6b6b)",
+        }}
         onClick={() => dispatch(clearProductCart())}
         loadingIndicator="Clearing..."
       >
-        {t('sell:clearCart')}
+        {t("sell:clearCart")}
       </Button>
 
       <AddProductModal isOpen={isOpenModal} handleClose={handleCloseModal} />
