@@ -1,8 +1,7 @@
 import React from "react";
-import { LayoutType, LayoutOptions } from "../layouts";
-import { LocationDescriptor } from "history";
+import { LayoutOptions } from "../layouts";
 
-export default [
+export const routes = [
   {
     path: "/staff",
     exact: true,

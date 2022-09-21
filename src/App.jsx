@@ -11,8 +11,8 @@ import { onError } from "@apollo/client/link/error";
 import { useDispatch, useSelector } from "react-redux";
 import { Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import routes, { RouteConfig } from "./configs/routes";
-import { Layouts, LayoutType } from "./layouts";
+import { routes} from "./configs/routes";
+import { Layouts } from "./layouts";
 import { addRefreshToken, addToken, removeToken } from "src/redux/tokenSlice";
 
 

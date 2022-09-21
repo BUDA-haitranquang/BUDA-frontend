@@ -2,15 +2,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-const BudaCircularChart = ({
+export default function BudaCircularChart({
   title,
   haveValue = true,
   value,
   size,
   thickness,
   color,
-  ...props
-}) => {
+}) {
   return (
     <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
@@ -19,15 +18,13 @@ const BudaCircularChart = ({
         size={size}
         color={color}
         thickness={thickness}
-        style={{
+        sx={{
           width: size,
           height: size,
-          borderRadius: "100%", 
-          // border:'solid',
-          boxShadow: "inset 0 0 0px 23px gray",
+          borderRadius: "100%",
+          boxShadow: "inset 0 0 0px 23px #f0f0f0",
           backgroundColor: "transparent",
         }}
-        {...props}
       />
       <Box
         sx={{
@@ -39,15 +36,11 @@ const BudaCircularChart = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexDirection:'column'
+          flexDirection: "column",
         }}
       >
         {title && (
-          <Typography
-            variant="caption"
-            component="div"
-            fontSize={20}
-          >
+          <Typography variant="caption" component="div" fontSize={20}>
             {title}
           </Typography>
         )}
@@ -66,6 +59,4 @@ const BudaCircularChart = ({
       </Box>
     </Box>
   );
-};
-
-export default BudaCircularChart;
+}

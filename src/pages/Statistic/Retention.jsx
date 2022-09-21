@@ -7,23 +7,24 @@ import {
   LOAD_RETENTION_RATE_WEEKLY,
 } from "../../graphQl/statistics/statisticQueries";
 import BudaCircularChart from "../../buda-components/charts/BudaCircularChart";
-function Retention() {
+
+const Retention = () => {
   const { data: monthlyData } = useQuery(LOAD_RETENTION_RATE_MOTHLY);
   const { data: weeklyData } = useQuery(LOAD_RETENTION_RATE_WEEKLY);
   const [monthly, setMonthly] = useState(0);
   const [weekly, setWeekly] = useState(0);
 
-  useEffect(() => {
-    async function fetchData() {
-      if (monthlyData && weeklyData) {
-        setMonthly(monthlyData.retentionRateMonthly);
-        setWeekly(weeklyData.retentionRateWeekly);
-      }
+  async function fetchData() {
+    if (monthlyData && weeklyData) {
+      setMonthly(monthlyData.retentionRateMonthly);
+      setWeekly(weeklyData.retentionRateWeekly);
     }
+  }
 
+  useEffect(() => {
     fetchData();
   }, [monthlyData, weeklyData]);
-  console.log(monthlyData);
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box sx={{ width: "100%" }}>
@@ -40,21 +41,20 @@ function Retention() {
           <BudaCircularChart
             value={weekly}
             size="200px"
-            thickness="5"
+            thickness={5}
             title="Weekly"
-            color="red"
+            color="error"
           />
           <BudaCircularChart
             value={monthly}
             size="200px"
-            thickness="5"
+            thickness={5}
             title="Monthly"
-            color="green"
+            color="success"
           />
         </Box>
         <Box py={1}></Box>
         <Divider />
-        {/* </Box> */}
         <Box
           width="100%"
           display="flex"
@@ -67,6 +67,6 @@ function Retention() {
       </Box>
     </Box>
   );
-}
+};
 
 export default Retention;
