@@ -19,7 +19,10 @@ export default function MainLayout(props) {
   const { children } = props;
   return (
     <Fragment>
-      <Box display="flex">
+      <Box
+        display="flex"
+        sx={{ backgroundImage: "linear-gradient(white, #e6f8ff)" }}
+      >
         <Sidebar />
         <Box
           display="flex"
@@ -36,7 +39,12 @@ export default function MainLayout(props) {
             <Header />
           </Hidden>
           <MainContentWrapper>
-            <Box sx={{ flexGrow: 1,  width: "100%" }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                width: "100%",
+              }}
+            >
               {children}
             </Box>
           </MainContentWrapper>

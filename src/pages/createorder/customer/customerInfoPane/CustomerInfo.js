@@ -16,6 +16,7 @@ import { setCustomer } from "../../../../redux/productCartSlice";
 import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
+    borderRadius: "10px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

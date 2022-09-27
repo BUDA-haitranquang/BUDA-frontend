@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Button, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, Grid, Typography, Box } from "@mui/material";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
@@ -101,10 +100,13 @@ export default function CreateOrder() {
           <Box
             className="itemsPane"
             sx={{
-              border: "5px solid",
-              borderImageSlice: 1,
-              borderImageSource:
-                "linear-gradient(to right, #277fd6, #80bfff)",
+              borderRadius: "10px",
+              border: "1px solid",
+              borderColor: "#aaacad",
+              // border: "5px solid",
+              // borderImageSlice: 1,
+              // borderImageSource:
+              //   "linear-gradient(to right, #277fd6, #80bfff)",
             }}
           >
             <OrderProducts />
@@ -129,10 +131,14 @@ export default function CreateOrder() {
           <Box
             sx={{
               flexGrow: 1,
-              border: "5px solid",
-              borderImageSlice: 1,
-              borderImageSource:
-                "linear-gradient(to right, #80bfff, #277fd6)",
+              borderRadius: "10px",
+              border: "1px solid",
+              borderColor: "#aaacad",
+              background: "white",
+              // border: "5px solid",
+              // borderImageSlice: 1,
+              // borderImageSource:
+              //   "linear-gradient(to right, #80bfff, #277fd6)",
             }}
           >
             <CustomerInfo />
@@ -151,10 +157,11 @@ export default function CreateOrder() {
               variant="contained"
               disabled={productCart.length <= 0}
               sx={{
+                maxWidth: "98%",
                 alignSelf: "center",
                 marginTop: "24px",
                 flexGrow: 1,
-                backgroundImage: "linear-gradient(to right, #47bf65, #4abd66)",
+                backgroundImage: "linear-gradient(to right, #0ba2d9, #3ec8fa)",
                 boxShadow: "none",
               }}
             >
