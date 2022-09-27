@@ -75,7 +75,7 @@ const useStyle = makeStyles({
     },
   },
   logo: {
-    marginTop: "1rem",
+    marginTop: "0.5rem",
     width: "100%",
     fontSize: "40px",
     fontWeight: "700",
@@ -200,6 +200,7 @@ const Sidebar = () => {
       style={{
         backgroundImage: "linear-gradient(#1367ba, #409fff)",
         flexGrow: 1,
+        overflow: "hidden",
       }}
     >
       <Toolbar children={logo} />
@@ -299,7 +300,10 @@ const Sidebar = () => {
       ></AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+        }}
       >
         <Drawer
           variant="temporary"
@@ -326,6 +330,7 @@ const Sidebar = () => {
               boxSizing: "border-box",
               width: drawerWidth,
             },
+            overflow: "hidden",
           }}
           open
         >
