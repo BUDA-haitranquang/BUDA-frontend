@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import { LOAD_STAFF_NOTES } from "../graphQl/staff/staffQueries";
 import { DELETE_STAFF_NOTE_MUTATION } from "../graphQl/staff/staffMutation";
 import { useSnackbar } from "notistack";
-import BudaModal from "../buda-components/modal/BudaModal";
 import {
   AlertErrorProp,
   AlertSuccessProp,

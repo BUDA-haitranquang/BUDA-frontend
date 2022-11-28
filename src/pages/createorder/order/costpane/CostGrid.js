@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Grid, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import React, { useEffect, useState } from "react";

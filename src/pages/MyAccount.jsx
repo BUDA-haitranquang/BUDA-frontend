@@ -1,7 +1,6 @@
 import { Toolbar, Grid, Box } from "@mui/material";
 
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React from "react";
 
 import Profile from "../components/myaccount/Profile";
 import Stores from "../components/myaccount/Store";

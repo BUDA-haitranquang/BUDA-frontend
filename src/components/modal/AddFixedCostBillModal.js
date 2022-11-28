@@ -1,7 +1,5 @@
 import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
-import { parse } from "graphql";
-import { set } from "lodash";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";

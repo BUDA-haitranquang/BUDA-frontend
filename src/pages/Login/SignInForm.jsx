@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";

@@ -1,7 +1,7 @@
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/styles";
-import React, { useState } from "react";
+import React from "react";
 import { getComparator, stableSort } from "../../utils/tableUtils";
 
 const BudaTableBody = (props) => {

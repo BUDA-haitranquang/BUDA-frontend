@@ -1,5 +1,5 @@
 import { React,useState } from "react";
-import { useMutation,useQuery } from "@apollo/client";
+import { useMutation} from "@apollo/client";
 import { UPDATE_STAFF_NOTE } from "../../graphQl/staff/staffMutation";
 import { LOAD_STAFF_NOTES } from "../../graphQl/staff/staffQueries";
 import { TextField } from "@mui/material";

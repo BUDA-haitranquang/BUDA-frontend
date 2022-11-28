@@ -3,7 +3,6 @@ import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect } from "react-router-dom";
 import BudaTable from "../buda-components/table/BudaTable";
 import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_COLATIONS } from "../graphQl/collation/collationQueries";

@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
-import { color4 } from "../../CreateOrder";
 import { useSelector } from "react-redux";
 import OrderProductItem from "./OrderProductItem";
 import { useTranslation } from "react-i18next";

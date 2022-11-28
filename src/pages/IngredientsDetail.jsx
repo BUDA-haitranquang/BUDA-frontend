@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { Redirect } from "react-router-dom";
 import { AlertErrorProp, AlertSuccessProp } from "../buda-components/alert/BudaNoti";
 import IngredientCombinedDetail from "../components/IngredientCombinedDetail";
 import IngredientInformation from "../components/detail/information/IngredientInformation";

@@ -5,7 +5,7 @@ import {
 } from "../../../buda-components/alert/BudaNoti";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { TableCell, IconButton, Box } from "@mui/material";
+import { TableCell, IconButton} from "@mui/material";
 import { dateToDateString } from "../../../utils/utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";

@@ -1,16 +1,16 @@
 import { Box, Button, Toolbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
 //@ts-ignore
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useTranslation } from "react-i18next";
-import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
-import { Redirect, useLocation } from "react-router-dom";
-import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
-import { useSnackbar } from "notistack";
 import { useMutation, useQuery } from "@apollo/client";
-import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/sellOrderQueries";
+import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
+import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
 import { DELETE_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderMutation";
+import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/sellOrderQueries";
 import { capitalizeFirstLetter } from "../../../utils/utils";
 
 const SellOrderList = (props) => {

@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import IngredientCollationTableBody from "../../components/table/body/IngredientCollationTableBody";
 import { Ingredient_Collation } from "../../graphQl/ingredients/ingredientQueries";
 import BudaTable from "../../buda-components/table/BudaTable";

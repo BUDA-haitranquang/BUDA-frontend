@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { ClickAwayListener, Paper, Popper } from "@material-ui/core";
+import { ClickAwayListener, Paper} from "@material-ui/core";
 import { useState } from "react";
-import { width } from "@mui/system";
 import { usePopper } from "react-popper"
 
 BudaPopper.propTypes = {

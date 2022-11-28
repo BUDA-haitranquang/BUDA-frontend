@@ -1,9 +1,7 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { Box, Button, Typography, TextField, IconButton } from "@mui/material";
 
-import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { GET_USER } from "../../graphQl/myaccount/queries";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { SET_USER } from "../../graphQl/myaccount/mutaion";
