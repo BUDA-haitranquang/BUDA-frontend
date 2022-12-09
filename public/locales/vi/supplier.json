@@ -1,0 +1,12 @@
+{
+    "Name":"Tên nhà cung cấp",
+    "PhoneNumber":"Số Điện Thoại",
+    "Address" : "Địa Chỉ",
+    "Email":"Email",
+    "table":{},
+    "addSupplierModal" : {
+        "title" : "Thêm nhà cung cấp"
+    },
+    "supplier":"Nhà cung cấp"
+
+}

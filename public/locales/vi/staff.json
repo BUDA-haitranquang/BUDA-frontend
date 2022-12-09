@@ -1,0 +1,12 @@
+{
+    "staff":"Nhân viên",
+    "Name":"Tên Nhân Viên",
+    "Email":"Email",
+    "PhoneNumber" : "Số Điện Thoại",
+    "Address" : "Địa Chỉ" , 
+    "Position" : "Chức Vụ",
+    "Salary" : "Lương",
+    "addStaffModal" : {
+        "title" : "Thêm nhân viên"
+    }
+}

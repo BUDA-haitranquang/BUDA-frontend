@@ -1,0 +1,25 @@
+{
+    "Name" : "Tên chi phí",
+    "message" : "Ghi chú",
+    "dueTime" : "Hạn cuối",
+    "creationTime" : "Ngày tạo",
+    "totalSpend" : "Tổng Trả",
+    "Period" :"Chu kỳ (ngày)",
+    "moneyAmount" : "Tổng lượng tiền",
+    "addCostModal":{
+        "title" : "Chi phí phát sinh"
+    },
+    "addBillCostModal" :{
+        "title" : "Đơn phát sinh"
+    },
+    "addOtherCostModal":{
+        "title":"Chi phí phát sinh khác"
+    },
+    "otherCostName" : "Chi phí khác",
+    "totalCost" : "Tổng Chi Phí",
+    "Status" : "Trạng Thái",
+    "fixedCost":"Chi phí cố định",
+    "fixedCostBill":"Hoá đơn cố định",
+    "otherCost":"Chi phí khác"
+    
+}

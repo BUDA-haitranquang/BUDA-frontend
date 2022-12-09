@@ -1,0 +1,12 @@
+{
+    "title":"Sell Order History",
+    "createSellOrder":"Create sell order",
+    "table":{
+        "textID": "Text ID",
+        "customer":"Customer",
+        "finalCost":"Final Cost",
+        "creationTime":"Creation Time",
+        "finishTime":"Finish Time",
+        "status":"Status"
+    }
+}

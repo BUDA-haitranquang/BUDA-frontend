@@ -1,0 +1,25 @@
+{
+    "Name" : "Name",
+    "message" : "Message",
+    "dueTime" : "Due Time",
+    "creationTime" : "Creation Time",
+    "totalSpend" : "Total Spend",
+    "Period" :"Period (days)",
+    "moneyAmount" : "Money Amount",
+    "addCostModal":{
+        "title" : "New Cost"
+    },
+    "addBillCostModal" :{
+        "title" : "New Fix Cost Bill"
+    },
+    "otherCostName" : "Name",
+    "totalCost" : "Total Cost",
+    "Status" : "Status",
+    "addOtherCostModal":{
+        "title":" New Other Cost"
+    },
+    "fixedCost":"Fixed Cost",
+    "fixedCostBill":"Fixed Cost Bill",
+    "otherCost":"Other Cost"
+
+}

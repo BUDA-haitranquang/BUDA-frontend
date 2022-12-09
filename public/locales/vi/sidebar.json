@@ -1,0 +1,46 @@
+{
+    "dashBoard": 
+        {
+            "section": "Bảng Chính"
+        },
+    "business":{
+        "section":"Kinh Doanh",
+        "sellHistory":"Lịch Sử Bán Hàng",
+        "buy":"Nhập Hàng",
+        "sell":"Bán hàng",
+        "buyHistory":"Lịch Sử Nhập Hàng"
+    },
+    "product":{
+        "section":"Sản Phẩm",
+        "product":"Sản Phẩm",
+        "collation":"Kiểm Kê"
+    },
+    "ingredient":{
+        "section":"Nguyên Liệu",
+        "collation":"Kiểm Kê",
+        "ingredient":"Nguyên Liệu"
+    },
+    "supplier":{
+        "section":"Nhà Cung Cấp"
+    },
+    "customer":{
+        "section":"Khách Hàng"
+    },
+    "staff":{
+        "section":"Nhân Viên"
+    },
+    "cost":{
+        "section":"Chi Phí",
+        "fixed":"Chi Phí Cố Định",
+        "fixedCostBill":"Hoá Đơn Cố Định",
+        "otherCost":"Chi Phí Khác"
+    },
+    "statistic":{
+        "section":"Thống Kê"
+    },
+    "discount": {
+        "section": "Mã giảm giá"
+    }
+    
+
+}

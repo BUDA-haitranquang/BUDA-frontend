@@ -1,0 +1,12 @@
+{
+    "Staff":"Staff",
+    "Name":"Name",
+    "Email":"Email",
+    "PhoneNumber" : "Phone Number",
+    "Address" : "Address" , 
+    "Position" : "Position",
+    "Salary" : "Salary",
+    "addStaffModal" : {
+        "title" : "Add Staff"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "Name":"Name",
+    "PhoneNumber":"Phone Number",
+    "Address" : "Address",
+    "Email":"Email",
+    "table":{},
+    "addSupplierModal" : {
+        "title" : "Add supplier"
+    },
+    "supplier":"Supplier"
+}

@@ -1,0 +1,43 @@
+{
+    "title": "Bảng Chính",
+    "overview": "Tổng quan",
+    "revenue": "doanh thu",
+    "expense": "chi phí",
+    "sellOrder": {
+      "title": "Đơn Hàng",
+      "customer": "Khách Hàng",
+      "creationTime": "Khởi Tạo",
+      "finalCost": "Tổng Tiền",
+      "status": "Trạng Thái",
+      "finish": "Hoàn Thành",
+      "cancel": "Huỷ"
+    },
+    "buyOrder": {
+      "title": "Nhập Hàng",
+      "supplier": "Nhà Cung Cấp",
+      "creationTime": "Khởi Tạo",
+      "totalCost": "Tổng Tiền",
+      "status": "Trạng Thái",
+      "finish": "Hoàn Thành",
+      "cancel": "Huỷ"
+    },
+    "fixedCost": {
+      "title": "Phí Cố Định",
+      "creationTime": "Khởi Tạo",
+      "dueTime": "Hạn Nộp",
+      "moneyAmount": "Chi Phí",
+      "status": "Trạng Thái",
+      "finish": "Hoàn Thành",
+      "cancel": "Huỷ"
+    },
+    "otherCost": {
+      "title": "Phí Khác",
+      "name": "Tên Phí",
+      "creationTime": "Khởi Tạo",
+      "totalCost": "Tổng Tiền",
+      "status": "Trạng Thái",
+      "finish": "Hoàn Thành",
+      "cancel": "Huỷ"
+    }
+  }
+  

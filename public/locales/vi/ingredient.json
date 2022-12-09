@@ -1,0 +1,16 @@
+{
+    "SKU": "Mã SKU",
+    "Name":"Tên nguyên liệu",
+    "Price":"Giá",
+    "Left" : "Còn lại",
+    "Description": "Mô tả",
+    "table": {},
+    "alert":"Báo Động",
+    "addIngredientModal":{
+        "title" : "Thêm nguyên liệu mới"
+    },
+    "editIngredientModal":{
+        "title" : "Sửa nguyên liệu"
+    },
+    "Ingredient" : "Nguyên liệu"
+}

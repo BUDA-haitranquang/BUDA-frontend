@@ -1,0 +1,19 @@
+{
+    "error": "An error happened",
+    "save": "Save",
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "print": "Print",
+    "Email":"Email",
+    "PhoneNumber" : "PhoneNumber",
+    "Address" : "Addres",
+    "Description" : "Description",
+    "Amount" : "Amount",
+    "SKU" : "SKU Code",
+    "Edit" : "Edit",
+    "Account" : "Account",
+    "Password" : "Password",
+    "search":"Search",
+    "data":"Data",
+    "rowsPerPage":"Rows per page"
+}

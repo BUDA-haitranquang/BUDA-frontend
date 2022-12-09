@@ -1,0 +1,12 @@
+{
+    "title":"Lịch Sử Bán Hàng",
+    "createSellOrder":"Tạo đơn",
+    "table":{
+        "textID": "Mã đơn hàng",
+        "customer":"Khách hàng",
+        "finalCost":"Tổng tiền",
+        "creationTime":"Khởi Tạo",
+        "finishTime":"Kết Thúc",
+        "status":"Trạng Thái"
+    }
+}
