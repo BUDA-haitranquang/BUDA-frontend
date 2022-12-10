@@ -50,6 +50,18 @@ const MainDashBoard = () => {
 
     let curDate = startDateForStatistic;
 
+    if(initialData.length === 0) {
+      let upperBound = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate());
+      while(curDate.getTime() !== upperBound.getTime())
+        result = [...result, {
+          expense: 0,
+          profit: 0,
+          revenue: 0,
+          timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
+        }]
+        curDate.setDate(curDate.getDate() + 1);
+    }
+
     let upperBoundDate = initialData[0].timePeriod.split('-')[0];
     let upperBoundMonth = initialData[0].timePeriod.split('-')[1];
     let upperBoundYear = initialData[0].timePeriod.split('-')[2];
