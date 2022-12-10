@@ -42,10 +42,74 @@ const MainDashBoard = () => {
       return object;
     });
 
+  const fillStatisticData = (initialData) => {
+    let result = [];
+
+    const lastDateForStatistic = new Date();
+    const startDateForStatistic = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate() - 30);
+
+    let curDate = startDateForStatistic;
+
+    if(initialData.length === 0) {
+      let upperBound = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate());
+      while(curDate.getTime() !== upperBound.getTime())
+        result = [...result, {
+          expense: 0,
+          profit: 0,
+          revenue: 0,
+          timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
+        }]
+        curDate.setDate(curDate.getDate() + 1);
+    }
+
+    let upperBoundDate = initialData[0].timePeriod.split('-')[0];
+    let upperBoundMonth = initialData[0].timePeriod.split('-')[1];
+    let upperBoundYear = initialData[0].timePeriod.split('-')[2];
+
+    let upperBound = new Date(upperBoundYear, upperBoundMonth - 1, upperBoundDate);
+    for(let i = 0; i < initialData.length; i++) {
+      while(curDate.getTime() !== upperBound.getTime()) {
+        result = [...result, {
+          expense: 0,
+          profit: 0,
+          revenue: 0,
+          timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
+        }];
+        curDate.setDate(curDate.getDate() + 1);
+      }
+
+      result = [...result, initialData[i]];
+      curDate.setDate(curDate.getDate() + 1);
+
+      if(i !== initialData.length - 1) {
+        let upperBoundDate = initialData[i + 1].timePeriod.split('-')[0];
+        let upperBoundMonth = initialData[i + 1].timePeriod.split('-')[1];
+        let upperBoundYear = initialData[i + 1].timePeriod.split('-')[2];
+        upperBound = new Date(upperBoundYear, upperBoundMonth - 1, upperBoundDate);
+      }
+      else {
+        upperBound = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate())
+      }
+    }
+
+    while(curDate.getTime() !== upperBound.getTime()) {
+      result = [...result, {
+        expense: 0,
+        profit: 0,
+        revenue: 0,
+        timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
+      }];
+      curDate.setDate(curDate.getDate() + 1);
+    }
+
+    return result;
+  }
+
   useEffect(() => {
     async function fetchData() {
       if (dayRevenueData) {
-        setRevenue(scaleData(dayRevenueData.businessOverallXDays));
+        let statisticData = fillStatisticData(dayRevenueData.businessOverallXDays);
+        setRevenue(scaleData(statisticData));
         return;
       }
     }
