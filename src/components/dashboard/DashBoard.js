@@ -19,7 +19,6 @@ import IncompletedBuyOrder from "./IncompletedBuyOrder";
 import IncompletedFixedCostBill from "./IncompletedFixedCostBill";
 import IncompletedOtherCost from "./IncompletedOtherCost";
 import { useTranslation } from "react-i18next";
-import { arrayInsert } from "redux-form";
 
 const MainDashBoard = () => {
   const {t} = useTranslation(['dashboard']);
@@ -77,8 +76,18 @@ const MainDashBoard = () => {
         upperBound = new Date(upperBoundYear, upperBoundMonth - 1, upperBoundDate);
       }
       else {
-        upperBound = lastDateForStatistic;
+        upperBound = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate())
       }
+    }
+
+    while(curDate.getTime() !== upperBound.getTime()) {
+      result = [...result, {
+        expense: 0,
+        profit: 0,
+        revenue: 0,
+        timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
+      }];
+      curDate.setDate(curDate.getDate() + 1);
     }
 
     return result;
