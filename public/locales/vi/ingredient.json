@@ -6,6 +6,7 @@
     "Description": "Mô tả",
     "table": {},
     "alert":"Báo Động",
+    "list": "Danh sách nguyên liệu",
     "addIngredientModal":{
         "title" : "Thêm nguyên liệu mới"
     },

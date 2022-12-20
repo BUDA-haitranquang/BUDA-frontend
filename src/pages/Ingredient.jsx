@@ -93,10 +93,9 @@ const Ingredient = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box py={3}>{}</Box>
-        <Box sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+        <Box>
           <BudaTable
+            tableName={t("ingredient:list")}
             deleteItems={handleDelete}
             data={ingredients}
             headCells={headCells}

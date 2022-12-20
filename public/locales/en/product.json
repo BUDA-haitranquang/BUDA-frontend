@@ -1,5 +1,5 @@
 {
-  "product":"product",
+  "product": "product",
   "productName": "Product Name",
   "sku": "SKU",
   "price": "Price",
@@ -8,8 +8,9 @@
   "cost": "Cost",
   "description": "Description",
   "table": {},
-  "name":"Name",
-  "productCollation":"Product Collation",
+  "name": "Name",
+  "productCollation": "Product Collation",
+  "list": "Products list",
   "addProductModal": {
     "title": "Create new Product",
     "uploadImage": "Upload Image",

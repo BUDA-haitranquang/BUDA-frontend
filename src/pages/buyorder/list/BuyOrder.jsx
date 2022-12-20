@@ -200,15 +200,6 @@ const BuyOrder = () => {
         justifyContent="center"
         m={3}
       >
-        <Toolbar />
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ alignSelf: "flex-end" }}
-          onClick={() => history.push(`/business/buy`)}
-        >
-          {t("buttonCreate")}
-        </Button>
         <BudaPaginableTable
           data={buyOrders.data}
           headCells={headCells}

@@ -78,6 +78,7 @@ const SignInForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    login();
     // if (validCaptcha === true) login();
     // else enqueueSnackbar("Wrong Captcha", AlertErrorProp);
   };

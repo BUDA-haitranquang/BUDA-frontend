@@ -93,7 +93,14 @@ const BudaTable = (props) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper>
-        <TableContainer sx={{ paddingRight: "10px" }}>
+        <TableContainer
+          sx={{
+            paddingRight: "10px",
+            paddingTop: "14px",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+            borderRadius: "6px",
+          }}
+        >
           {toolbar && (
             <BudaTableToolbar
               title={tableName}

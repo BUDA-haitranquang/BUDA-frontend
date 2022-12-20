@@ -200,17 +200,6 @@ const SellOrderList = (props) => {
         justifyContent="center"
         m={3}
       >
-        <Toolbar />
-
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ alignSelf: "flex-end" }}
-          onClick={() => history.push(`/business/sell`)}
-        >
-          {t("sellOrderHistory:createSellOrder")}
-        </Button>
-
         <BudaPaginableTable
           data={sellOrders.data}
           headCells={headCells}

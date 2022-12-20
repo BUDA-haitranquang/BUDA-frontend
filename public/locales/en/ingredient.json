@@ -6,6 +6,7 @@
     "Description": "Description",
     "alert":"Alert",
     "table": {},
+    "list": "Ingredients list",
     "addIngredientModal":{
         "title" : "Create new Ingredient"
     },
