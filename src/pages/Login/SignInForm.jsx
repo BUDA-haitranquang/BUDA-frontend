@@ -254,13 +254,13 @@ const SignInForm = () => {
             >
               LOG IN
             </Button>
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               ref={recaptchaRef}
               sitekey="6Lc7GssgAAAAANuBqTcUfs7qwjUdvjMn1QTSr7zg" //Google reCAPTCHA key
               onChange={() => setValidCaptcha(true)}
               onExpired={() => setValidCaptcha(false)}
               onErrored={() => setValidCaptcha(false)}
-            />
+            /> */}
             <Typography
               sx={{
                 display: "flex",
