@@ -10,8 +10,6 @@ const RevenuePage = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
 {/* 
         <Revenue /> */}
       </Box>

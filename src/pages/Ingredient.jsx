@@ -93,18 +93,14 @@ const Ingredient = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box py={3}>{}</Box>
-        <Box sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={ingredients}
-            headCells={headCells}
-            Modal={AddIngredientModal}
-            type="ingredientID"
-            DetailTableBody={IngredientTableBody}
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={ingredients}
+          headCells={headCells}
+          Modal={AddIngredientModal}
+          type="ingredientID"
+          DetailTableBody={IngredientTableBody}
+        />
       </Box>
     </Box>
   );

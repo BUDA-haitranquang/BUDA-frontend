@@ -39,19 +39,16 @@ const StaffDetail = (props) => {
   return (
     <Box sx={{ display: "flex" }}>
       <Box>
-        <Toolbar />
-        <Box pt={1}>
-          {staff === null ? (
-            <div></div>
-          ) : (
-            <CombinedDetail
-              data={staff}
-              Modal={EditStaffModal}
-              Information={StaffInformation}
-              handleDelete={handleDeleteStaff}
-            />
-          )}
-        </Box>
+        {staff === null ? (
+          <div></div>
+        ) : (
+          <CombinedDetail
+            data={staff}
+            Modal={EditStaffModal}
+            Information={StaffInformation}
+            handleDelete={handleDeleteStaff}
+          />
+        )}
       </Box>
     </Box>
   );

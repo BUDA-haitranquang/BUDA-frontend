@@ -86,18 +86,14 @@ const Staff = (props) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={staffs}
-            headCells={headCells}
-            Modal={AddStaffModal}
-            DetailTableBody={StaffTableBody}
-            type="staffID"
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={staffs}
+          headCells={headCells}
+          Modal={AddStaffModal}
+          DetailTableBody={StaffTableBody}
+          type="staffID"
+        />
       </Box>
     </Box>
   );

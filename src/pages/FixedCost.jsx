@@ -86,18 +86,14 @@ const FixCost = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={fixcosts}
-            headCells={headCells}
-            Modal={AddFixedCostModal}
-            type="fixedCostID"
-            DetailTableBody={FixedCostTableBody}
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={fixcosts}
+          headCells={headCells}
+          Modal={AddFixedCostModal}
+          type="fixedCostID"
+          DetailTableBody={FixedCostTableBody}
+        />
       </Box>
     </Box>
   );

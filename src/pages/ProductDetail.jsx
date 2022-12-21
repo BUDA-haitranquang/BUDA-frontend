@@ -99,21 +99,18 @@ const ProductDetail = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Box>
-        <Toolbar />
-        <Box pt={1}>
-          {product === null ? (
-            <div></div>
-          ) : (
-            <CombinedDetail
-              // @ts-ignore
-              data={{ product, productCombo, productGroup, productComponent }}
-              Modal={EditProductModal}
-              Information={ProductInformation}
-              handleDelete={handleDeleteProduct}
-            />
-          )}
-        </Box>
+      <Box pt={1}>
+        {product === null ? (
+          <div></div>
+        ) : (
+          <CombinedDetail
+            // @ts-ignore
+            data={{ product, productCombo, productGroup, productComponent }}
+            Modal={EditProductModal}
+            Information={ProductInformation}
+            handleDelete={handleDeleteProduct}
+          />
+        )}
       </Box>
     </Box>
   );

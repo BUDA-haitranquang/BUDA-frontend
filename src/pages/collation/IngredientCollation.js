@@ -63,17 +63,13 @@ const IngredientCollation = (props) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            data={ingredients}
-            headCells={headCells}
-            type="ingredientID"
-            DetailTableBody={IngredientCollationTableBody}
-            isNotShowCheckBox={true}
-          />
-        </Box>
+        <BudaTable
+          data={ingredients}
+          headCells={headCells}
+          type="ingredientID"
+          DetailTableBody={IngredientCollationTableBody}
+          isNotShowCheckBox={true}
+        />
       </Box>
     </Box>
   );

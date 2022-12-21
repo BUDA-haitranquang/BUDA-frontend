@@ -89,7 +89,6 @@ function Statistic() {
   return (
     <Box sx={{ display: "flex" }}>
       <Box sx={{ width: "100%" }}>
-        <Toolbar />
         <Box pt={1}>
           <Tabs value={currentTab} onChange={handleChange}>
             <Tab label="Daily statistic" />
