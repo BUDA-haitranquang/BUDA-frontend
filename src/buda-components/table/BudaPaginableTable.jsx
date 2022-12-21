@@ -66,7 +66,6 @@ const BudaPaginableTable = (props) => {
   };
 
   useEffect(() => {
-    debugger;
     if (selected && selected.length) {
       setSelected([]);
     }
@@ -88,6 +87,7 @@ const BudaPaginableTable = (props) => {
       <Paper>
         <TableContainer sx={{ paddingRight: "10px" }}>
           <BudaTableToolbar
+            title="Data"
             numSelected={selected.length}
             handleOpen={handleOpen}
             handleSearch={(val) => setSearch(val)}
