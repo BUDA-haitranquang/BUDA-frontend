@@ -198,10 +198,7 @@ const SellOrderList = (props) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        m={3}
       >
-        <Toolbar />
-
         <Button
           variant="contained"
           color="primary"

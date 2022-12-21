@@ -124,26 +124,21 @@ const Product = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            printable={true}
-            printItems={handlePrint}
-            data={products}
-            headCells={headCells}
-            Modal={AddProductModal}
-            type="productID"
-            DetailTableBody={ProductTableBody}
+        <BudaTable
+          deleteItems={handleDelete}
+          printable={true}
+          printItems={handlePrint}
+          data={products}
+          headCells={headCells}
+          Modal={AddProductModal}
+          type="productID"
+          DetailTableBody={ProductTableBody}
+        />
+        <Box maxWidth={150} mt={3} sx={{ position: "fixed", left: "100vw" }}>
+          <ProductBarcodeListPrintForm
+            ref={componentRef}
+            listProduct={printItem}
           />
-          <Box maxWidth={150} mt={3} sx={{ position: "fixed", left: "100vw" }}>
-            <ProductBarcodeListPrintForm
-              ref={componentRef}
-              listProduct={printItem}
-            />
-          </Box>
         </Box>
       </Box>
     </Box>

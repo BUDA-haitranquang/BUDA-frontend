@@ -93,18 +93,14 @@ const Customer = (props) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={customer}
-            headCells={headCells}
-            Modal={AddCustomerModal}
-            type="customerID"
-            DetailTableBody={CustomerTableBody}
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={customer}
+          headCells={headCells}
+          Modal={AddCustomerModal}
+          type="customerID"
+          DetailTableBody={CustomerTableBody}
+        />
       </Box>
     </Box>
   );

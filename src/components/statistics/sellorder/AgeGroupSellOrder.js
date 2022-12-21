@@ -43,8 +43,6 @@ const AgeGroupSellOrder = () => {
     >
       <Grid item xs={6} display="flex" justifyContent="center">
         <Box>
-          <Toolbar />
-          <Box>{}</Box>
           <h1> Sell order by age group</h1>
           {age.length !== 0 ? <BudaLegend
             data={age}

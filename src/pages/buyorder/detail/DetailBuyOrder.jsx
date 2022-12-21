@@ -73,7 +73,6 @@ function DetailBuyOrder(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
         <Box padding={3} width="100%" bgcolor="#f0f2f5">
           <Box
             paddingBottom={2}

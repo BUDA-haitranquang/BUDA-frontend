@@ -16,8 +16,6 @@ const MyAccount = () => {
         // alignItems="center"
         // justifyContent="center"
       >
-        <Toolbar />
-
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={4}>
             <Profile />

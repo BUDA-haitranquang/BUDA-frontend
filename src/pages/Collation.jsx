@@ -58,17 +58,13 @@ const Collation = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            data={products}
-            headCells={headCells}
-            type="productID"
-            DetailTableBody={CollationTableBody}
-            isNotShowCheckBox={true}
-          />
-        </Box>
+        <BudaTable
+          data={products}
+          headCells={headCells}
+          type="productID"
+          DetailTableBody={CollationTableBody}
+          isNotShowCheckBox={true}
+        />
       </Box>
     </Box>
   );

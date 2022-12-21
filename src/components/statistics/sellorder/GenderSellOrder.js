@@ -37,8 +37,6 @@ const GenderSellOrder = () => {
     >
       <Grid item xs={6} display="flex" justifyContent="center">
         <Box>
-          <Toolbar />
-          <Box>{}</Box>
           <h1> Sell order by gender</h1>
           <BudaLegend
             data={gender}

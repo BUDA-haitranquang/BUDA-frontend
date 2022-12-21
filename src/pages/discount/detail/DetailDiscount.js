@@ -39,8 +39,7 @@ function DetailDiscount() {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-      >
-        <Toolbar />
+      > 
         <Box padding={3} width="100%" bgcolor="#f0f2f5">
           <Typography variant="h4" paddingBottom={2}>
             {discount?.discountCode}

@@ -105,7 +105,6 @@ function CreateBuyOrder(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
         <Box
           padding={3}
           width="100%"
