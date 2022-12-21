@@ -191,7 +191,7 @@ const SellOrderList = (props) => {
   };
 
   return (
-    <Box sx={{ display: "flex", margin: "6px" }}>
+    <Box sx={{ display: "flex" }}>
       <Box
         width="100%"
         display="flex"
