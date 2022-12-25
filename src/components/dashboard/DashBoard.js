@@ -21,13 +21,11 @@ import IncompletedOtherCost from "./IncompletedOtherCost";
 import { useTranslation } from "react-i18next";
 
 const MainDashBoard = () => {
-  const {t} = useTranslation(['dashboard']);
+  const { t } = useTranslation(["dashboard"]);
   const [chart, setChart] = useState(0);
   const [revenue, setRevenue] = useState([]);
   const [tab, setTab] = useState(0);
-  const { data: dayRevenueData } = useQuery(
-    LOAD_BUSINESS_OVERALL_30_DAY
-  );
+  const { data: dayRevenueData } = useQuery(LOAD_BUSINESS_OVERALL_30_DAY);
 
   const handleChangeTab = (e, val) => {
     setTab(val);
@@ -46,69 +44,106 @@ const MainDashBoard = () => {
     let result = [];
 
     const lastDateForStatistic = new Date();
-    const startDateForStatistic = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate() - 30);
+    const startDateForStatistic = new Date(
+      lastDateForStatistic.getFullYear(),
+      lastDateForStatistic.getMonth(),
+      lastDateForStatistic.getDate() - 30
+    );
 
     let curDate = startDateForStatistic;
 
-    if(initialData.length === 0) {
-      let upperBound = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate());
-      while(curDate.getTime() !== upperBound.getTime())
-        result = [...result, {
-          expense: 0,
-          profit: 0,
-          revenue: 0,
-          timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
-        }]
+    if (initialData.length === 0) {
+      let upperBound = new Date(
+        lastDateForStatistic.getFullYear(),
+        lastDateForStatistic.getMonth(),
+        lastDateForStatistic.getDate()
+      );
+      while (curDate.getTime() !== upperBound.getTime()) {
+        result = [
+          ...result,
+          {
+            expense: 0,
+            profit: 0,
+            revenue: 0,
+            timePeriod: `${curDate.getDate()}-${
+              curDate.getMonth() + 1
+            }-${curDate.getFullYear()}`,
+          },
+        ];
         curDate.setDate(curDate.getDate() + 1);
+      }
     }
 
-    let upperBoundDate = initialData[0].timePeriod.split('-')[0];
-    let upperBoundMonth = initialData[0].timePeriod.split('-')[1];
-    let upperBoundYear = initialData[0].timePeriod.split('-')[2];
+    let upperBoundDate = initialData[0].timePeriod.split("-")[0];
+    let upperBoundMonth = initialData[0].timePeriod.split("-")[1];
+    let upperBoundYear = initialData[0].timePeriod.split("-")[2];
 
-    let upperBound = new Date(upperBoundYear, upperBoundMonth - 1, upperBoundDate);
-    for(let i = 0; i < initialData.length; i++) {
-      while(curDate.getTime() !== upperBound.getTime()) {
-        result = [...result, {
-          expense: 0,
-          profit: 0,
-          revenue: 0,
-          timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
-        }];
+    let upperBound = new Date(
+      upperBoundYear,
+      upperBoundMonth - 1,
+      upperBoundDate
+    );
+    for (let i = 0; i < initialData.length; i++) {
+      while (curDate.getTime() !== upperBound.getTime()) {
+        result = [
+          ...result,
+          {
+            expense: 0,
+            profit: 0,
+            revenue: 0,
+            timePeriod: `${curDate.getDate()}-${
+              curDate.getMonth() + 1
+            }-${curDate.getFullYear()}`,
+          },
+        ];
         curDate.setDate(curDate.getDate() + 1);
       }
 
       result = [...result, initialData[i]];
       curDate.setDate(curDate.getDate() + 1);
 
-      if(i !== initialData.length - 1) {
-        let upperBoundDate = initialData[i + 1].timePeriod.split('-')[0];
-        let upperBoundMonth = initialData[i + 1].timePeriod.split('-')[1];
-        let upperBoundYear = initialData[i + 1].timePeriod.split('-')[2];
-        upperBound = new Date(upperBoundYear, upperBoundMonth - 1, upperBoundDate);
-      }
-      else {
-        upperBound = new Date(lastDateForStatistic.getFullYear(), lastDateForStatistic.getMonth(), lastDateForStatistic.getDate())
+      if (i !== initialData.length - 1) {
+        let upperBoundDate = initialData[i + 1].timePeriod.split("-")[0];
+        let upperBoundMonth = initialData[i + 1].timePeriod.split("-")[1];
+        let upperBoundYear = initialData[i + 1].timePeriod.split("-")[2];
+        upperBound = new Date(
+          upperBoundYear,
+          upperBoundMonth - 1,
+          upperBoundDate
+        );
+      } else {
+        upperBound = new Date(
+          lastDateForStatistic.getFullYear(),
+          lastDateForStatistic.getMonth(),
+          lastDateForStatistic.getDate()
+        );
       }
     }
 
-    while(curDate.getTime() !== upperBound.getTime()) {
-      result = [...result, {
-        expense: 0,
-        profit: 0,
-        revenue: 0,
-        timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1}-${curDate.getFullYear()}`
-      }];
+    while (curDate.getTime() !== upperBound.getTime()) {
+      result = [
+        ...result,
+        {
+          expense: 0,
+          profit: 0,
+          revenue: 0,
+          timePeriod: `${curDate.getDate()}-${
+            curDate.getMonth() + 1
+          }-${curDate.getFullYear()}`,
+        },
+      ];
       curDate.setDate(curDate.getDate() + 1);
     }
 
     return result;
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
       if (dayRevenueData) {
-        let statisticData = fillStatisticData(dayRevenueData.businessOverallXDays);
+        let statisticData = fillStatisticData(
+          dayRevenueData.businessOverallXDays
+        );
         setRevenue(scaleData(statisticData));
         return;
       }
@@ -150,7 +185,9 @@ const MainDashBoard = () => {
                 justifyContent="space-between"
               >
                 <Box>
-                  <h1 style={{ margin: "10px 0 0 30px " }}>{t("dashboard:overview")}</h1>
+                  <h1 style={{ margin: "10px 0 0 30px " }}>
+                    {t("dashboard:overview")}
+                  </h1>
                 </Box>
                 <Box pt={1}>
                   <ButtonGroup sx={{ paddingRight: "30px" }}>
@@ -176,7 +213,7 @@ const MainDashBoard = () => {
                   info={info}
                   xAxis="timePeriod"
                   legend={true}
-                  legendPosition = "right"
+                  legendPosition="right"
                 />
               ) : (
                 <BudaBarChart
@@ -185,7 +222,7 @@ const MainDashBoard = () => {
                   info={info}
                   xAxis="timePeriod"
                   legend={true}
-                  legendPosition = "right"
+                  legendPosition="right"
                 />
               )}
             </>
@@ -203,7 +240,7 @@ const MainDashBoard = () => {
         </Tabs>
       </Box>
       <Divider />
-      <Box py = {2}></Box>
+      <Box py={2}></Box>
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
