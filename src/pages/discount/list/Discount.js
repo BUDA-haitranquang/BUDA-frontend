@@ -39,7 +39,6 @@ function Discount(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <Box sx={{ width: "100%" }}>
-        <Toolbar />
         <Box pt={1}>
           <Tabs value={currentTab} onChange={handleChange}>
             <Tab
@@ -57,8 +56,8 @@ function Discount(props) {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
+          py={1}
         >
-          <Box py={1}></Box>
           {currentTab === 1 && <DiscountByCash discounts={discountByCash} />}
           {currentTab === 0 && (
             <DiscountByPercentage discounts={discountByPercentage} />

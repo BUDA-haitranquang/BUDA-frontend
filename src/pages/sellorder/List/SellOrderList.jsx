@@ -191,14 +191,13 @@ const SellOrderList = (props) => {
   };
 
   return (
-    <Box sx={{ display: "flex", margin: "6px" }}>
+    <Box sx={{ display: "flex" }}>
       <Box
         width="100%"
         display="flex"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        m={3}
       >
         <BudaPaginableTable
           data={sellOrders.data}

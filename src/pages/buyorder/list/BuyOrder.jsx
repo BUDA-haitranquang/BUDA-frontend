@@ -198,7 +198,6 @@ const BuyOrder = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        m={3}
       >
         <BudaPaginableTable
           data={buyOrders.data}

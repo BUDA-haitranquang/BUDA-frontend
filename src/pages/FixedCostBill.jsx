@@ -58,17 +58,13 @@ const FixCostBill = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            data={fixcosts}
-            headCells={headCells}
-            Modal={AddFixedCostBillModal}
-            type="fixedCostBillID"
-            DetailTableBody={FixedCostBillTableBody}
-          />
-        </Box>
+        <BudaTable
+          data={fixcosts}
+          headCells={headCells}
+          Modal={AddFixedCostBillModal}
+          type="fixedCostBillID"
+          DetailTableBody={FixedCostBillTableBody}
+        />
       </Box>
     </Box>
   );

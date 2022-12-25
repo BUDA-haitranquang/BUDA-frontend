@@ -41,21 +41,18 @@ const IngredientDetail = (props) => {
   // if (error) return <Redirect to="/login" />;
   return (
     <Box sx={{ display: "flex" }}>
-      <Box>
-        <Toolbar />
-        <Box pt={1}>
-          {ingredient === null ? (
-            <div></div>
-          ) : (
-            <IngredientCombinedDetail
-              data={ingredient}
-              Modal={EditIngredientModal}
-              Information={IngredientInformation}
-              handleDelete={handleDeleteIngredient}
-              RetailModal = {RetailIngredientModal}
-            />
-          )}
-        </Box>
+      <Box pt={1}>
+        {ingredient === null ? (
+          <div></div>
+        ) : (
+          <IngredientCombinedDetail
+            data={ingredient}
+            Modal={EditIngredientModal}
+            Information={IngredientInformation}
+            handleDelete={handleDeleteIngredient}
+            RetailModal = {RetailIngredientModal}
+          />
+        )}
       </Box>
     </Box>
   );

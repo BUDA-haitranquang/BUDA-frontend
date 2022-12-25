@@ -85,18 +85,14 @@ const Supplier = (props) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={supplier}
-            headCells={headCells}
-            Modal={AddSupplierModal}
-            type="supplierID"
-            DetailTableBody={SupplierTableBody}
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={supplier}
+          headCells={headCells}
+          Modal={AddSupplierModal}
+          type="supplierID"
+          DetailTableBody={SupplierTableBody}
+        />
       </Box>
     </Box>
   );

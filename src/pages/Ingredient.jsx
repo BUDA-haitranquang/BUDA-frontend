@@ -93,17 +93,14 @@ const Ingredient = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Box>
-          <BudaTable
-            tableName={t("ingredient:list")}
-            deleteItems={handleDelete}
-            data={ingredients}
-            headCells={headCells}
-            Modal={AddIngredientModal}
-            type="ingredientID"
-            DetailTableBody={IngredientTableBody}
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={ingredients}
+          headCells={headCells}
+          Modal={AddIngredientModal}
+          type="ingredientID"
+          DetailTableBody={IngredientTableBody}
+        />
       </Box>
     </Box>
   );

@@ -90,18 +90,14 @@ const OtherCost = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar />
-        <Box>{}</Box>
-        <Box>
-          <BudaTable
-            deleteItems={handleDelete}
-            data={fixcosts}
-            headCells={headCells}
-            Modal={AddOtherCostModal}
-            type="otherCostID"
-            DetailTableBody={OtherCostTableBody}
-          />
-        </Box>
+        <BudaTable
+          deleteItems={handleDelete}
+          data={fixcosts}
+          headCells={headCells}
+          Modal={AddOtherCostModal}
+          type="otherCostID"
+          DetailTableBody={OtherCostTableBody}
+        />
       </Box>
     </Box>
   );

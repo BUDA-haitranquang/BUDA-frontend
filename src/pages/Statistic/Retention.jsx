@@ -28,7 +28,6 @@ const Retention = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <Box sx={{ width: "100%" }}>
-        <Toolbar />
         <Typography
           variant="caption"
           component="div"

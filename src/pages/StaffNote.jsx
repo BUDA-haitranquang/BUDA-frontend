@@ -86,7 +86,6 @@ const StaffNote = (props) => {
         justifyContent="center"
         m={3}
       >
-        <Toolbar />
         <Button
           variant="contained"
           color="primary"
