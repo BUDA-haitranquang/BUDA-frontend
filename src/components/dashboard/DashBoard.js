@@ -72,6 +72,7 @@ const MainDashBoard = () => {
         ];
         curDate.setDate(curDate.getDate() + 1);
       }
+      return result;
     }
 
     let upperBoundDate = initialData[0].timePeriod.split("-")[0];
