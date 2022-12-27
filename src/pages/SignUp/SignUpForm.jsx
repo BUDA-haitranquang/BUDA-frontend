@@ -7,7 +7,7 @@ import {
   OutlinedInput,
   Typography,
   CircularProgress,
-  Modal
+  Modal,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
@@ -117,6 +117,8 @@ const SignUpForm = () => {
     <>
       <Box
         sx={{
+          padding: "100px",
+          width: "45%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -141,26 +143,19 @@ const SignUpForm = () => {
               }}
             >
               <OutlinedInput
+                margin="dense"
+                notched="true"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 type="text"
-                placeholder="First Name"
-                startAdornment={
-                  <InputAdornment position="start">
-                    <PersonIcon sx={{ opacity: 0.5 }} />
-                  </InputAdornment>
-                }
+                placeholder="First Name..."
                 sx={{
                   marginBottom: "1.25rem",
                   marginRight: "0.5rem",
                   "&.MuiOutlinedInput-root": {
-                    backgroundColor: "white",
-                    borderRadius: "10px",
+                    backgroundColor: "rgba(220, 233, 247, 0.35)",
                     width: "100%",
                     height: "50px",
-                  },
-                  "&.MuiOutlinedInput-inputAdornedStart": {
-                    opacity: 0.5,
                   },
                   "& input": {
                     padding: "15px",
@@ -172,26 +167,19 @@ const SignUpForm = () => {
                 }}
               />
               <OutlinedInput
+                margin="dense"
+                notched="true"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 type="text"
-                placeholder="Last Name"
-                startAdornment={
-                  <InputAdornment position="start">
-                    <PersonIcon sx={{ opacity: 0.5 }} />
-                  </InputAdornment>
-                }
+                placeholder="Last Name..."
                 sx={{
                   marginBottom: "1.25rem",
                   marginLeft: "0.5rem",
                   "&.MuiOutlinedInput-root": {
-                    backgroundColor: "white",
-                    borderRadius: "10px",
+                    backgroundColor: "rgba(220, 233, 247, 0.35)",
                     width: "100%",
                     height: "50px",
-                  },
-                  "&.MuiOutlinedInput-inputAdornedStart": {
-                    opacity: 0.5,
                   },
                   "& input": {
                     padding: "15px",
@@ -204,25 +192,18 @@ const SignUpForm = () => {
               />
             </Box>
             <OutlinedInput
+              margin="dense"
+              notched="true"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="text"
-              placeholder="Email"
-              startAdornment={
-                <InputAdornment position="start">
-                  <EmailIcon sx={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
+              placeholder="Email..."
               sx={{
                 marginBottom: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
-                  borderRadius: "10px",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
-                },
-                "&.MuiOutlinedInput-inputAdornedStart": {
-                  opacity: 0.5,
                 },
                 "& input": {
                   padding: "15px",
@@ -234,25 +215,18 @@ const SignUpForm = () => {
               }}
             />
             <OutlinedInput
+              margin="dense"
+              notched="true"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               type="text"
-              placeholder="Phone Number"
-              startAdornment={
-                <InputAdornment position="start">
-                  <PhoneIcon sx={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
+              placeholder="Phone number..."
               sx={{
                 marginBottom: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
-                  borderRadius: "10px",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
-                },
-                "&.MuiOutlinedInput-inputAdornedStart": {
-                  opacity: 0.5,
                 },
                 "& input": {
                   padding: "15px",
@@ -264,20 +238,16 @@ const SignUpForm = () => {
               }}
             />
             <OutlinedInput
+              margin="dense"
+              notched="true"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               type="text"
-              placeholder=" Username"
-              startAdornment={
-                <InputAdornment position="start">
-                  <PersonIcon sx={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
+              placeholder=" Username..."
               sx={{
                 marginBottom: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
-                  borderRadius: "10px",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
                 },
@@ -294,33 +264,18 @@ const SignUpForm = () => {
               }}
             />
             <OutlinedInput
+              margin="dense"
+              notched="true"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type={visibility ? "text" : "password"}
               placeholder="Password"
-              startAdornment={
-                <InputAdornment position="start">
-                  <LockIcon sx={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
-              endAdornment={
-                <InputAdornment position="end">
-                  <Button onClick={handleVisibility}>
-                    {" "}
-                    <VisibilityIcon sx={{ opacity: 0.5 }} />
-                  </Button>
-                </InputAdornment>
-              }
               sx={{
                 marginBottom: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
-                  borderRadius: "10px",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
-                },
-                "&.MuiOutlinedInput-inputAdornedStart": {
-                  opacity: 0.5,
                 },
                 "& input": {
                   padding: "15px",
@@ -332,25 +287,18 @@ const SignUpForm = () => {
               }}
             />
             <OutlinedInput
+              margin="dense"
+              notched="true"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               type="password"
-              placeholder="Confirm Password"
-              startAdornment={
-                <InputAdornment position="start">
-                  <LockIcon sx={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
+              placeholder="Confirm password..."
               sx={{
                 marginBottom: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
-                  borderRadius: "10px",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
-                },
-                "&.MuiOutlinedInput-inputAdornedStart": {
-                  opacity: 0.5,
                 },
                 "& input": {
                   padding: "15px",
@@ -362,28 +310,25 @@ const SignUpForm = () => {
               }}
             />
             <Button
-              onClick={handleSubmit}
-              ref={btn}
               sx={{
-                marginBottom: "1.25rem",
+                mb: "1rem",
                 "&.MuiButton-root": {
                   width: "100%",
-                  background: "rgba(72, 149, 255, 1)",
+                  background:
+                    "linear-gradient(90deg, #86AED8 -10.29%, #C7DEF3 41.74%, #A4C2E0 98.3%)",
                   color: "white",
-                  borderRadius: 10,
                   height: 50,
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                  "&:hover": {
-                    background: "rgba(97, 163, 255, 1)",
-                    border: "none",
-                  },
                 },
                 "&.MuiButton-text": {
                   fontSize: 19,
                 },
               }}
+              onClick={handleSubmit}
+              ref={btn}
             >
-              Sign up
+              <Typography fontFamily="'Righteous', cursive" color="#2C67A3">
+                signup
+              </Typography>
             </Button>
             <Typography>
               <Link
@@ -391,15 +336,21 @@ const SignUpForm = () => {
                   history.push("/login");
                 }}
                 sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  color: "black",
                   textDecoration: "none",
                   cursor: "pointer",
                 }}
               >
-                Back to login page
+                <Typography
+                  fontFamily="'Montserrat', san-serif"
+                  sx={{
+                    color: "black",
+                    opacity: "0.9",
+                    marginTop: "0.4rem",
+                    fontWeight: 500,
+                  }}
+                >
+                  Back to login page
+                </Typography>
               </Link>
             </Typography>
           </Box>
