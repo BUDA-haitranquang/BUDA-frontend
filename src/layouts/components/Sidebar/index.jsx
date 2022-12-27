@@ -11,6 +11,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DiscountIcon from "@mui/icons-material/Discount";
 import { useTranslation } from "react-i18next";
+import { Typography } from "@mui/material";
 import {
   AppBar,
   Box,
@@ -32,7 +33,7 @@ import { setFocus } from "src/redux/sidebarSlice";
 const useStyle = makeStyles({
   selectedItem: {
     cursor: "pointer",
-    background: "rgba(45, 142, 255, 1)",
+    background: "#C1DBF2",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
     borderRadius: "6px",
     paddingTop: "0.5rem",
@@ -40,6 +41,9 @@ const useStyle = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  selectedTextItem: {
+    color: "#2C67A3",
   },
   item: {
     cursor: "pointer",
@@ -54,7 +58,7 @@ const useStyle = makeStyles({
     borderRadius: "6px",
     marginTop: "0.25rem",
     "&:hover": {
-      background: "rgba(47, 143, 255, 0.68)",
+      background: "rgba(193, 219, 242, 0.3)",
     },
   },
   itemOpen: {
@@ -189,16 +193,24 @@ const Sidebar = () => {
     }
   };
   const logo = (
-    <>
-      <Box className={classes.logo} component={Link} to="/dashboard/buy">
+    <Box width="100%" display="flex" justifyContent="center">
+      <Typography
+        variant="h2"
+        sx={{
+          mt: 2,
+          color: "rgba(255, 255, 255, 0.7)",
+        }}
+        fontFamily="'Righteous', cursive"
+      >
         BUDA
-      </Box>
-    </>
+      </Typography>
+    </Box>
   );
   const drawer = (
     <div
       style={{
-        backgroundImage: "linear-gradient(#1367ba, #409fff)",
+        background:
+          "linear-gradient(180deg, #436991 0%, #749ABB 56.77%, #96BBDD 100%)",
         flexGrow: 1,
         overflow: "hidden",
       }}
@@ -225,7 +237,13 @@ const Sidebar = () => {
                 display="flex"
                 flexDirection="row"
               >
-                <ListItemIcon sx={{ color: "rgba(255, 255, 255, 0.9)" }}>
+                <ListItemIcon
+                  sx={{
+                    color: history.location.pathname.includes(item[0])
+                      ? "#2C67A3"
+                      : "rgba(255, 255, 255, 0.9)",
+                  }}
+                >
                   {itemRender(idx)}
                 </ListItemIcon>
 
@@ -234,19 +252,33 @@ const Sidebar = () => {
                     marginLeft: "-10px",
                     fontFamily: "'Montserrat', san-serif",
                     variant: "body2",
+                    fontWeight:
+                      history.location.pathname.includes(item[0]) && "bold",
                   }}
                   primary={capitalizeFirstLetter(item[1])}
-                  sx={{ color: "rgba(255, 255, 255, 0.9)" }}
+                  sx={{
+                    color: history.location.pathname.includes(item[0])
+                      ? "#2C67A3"
+                      : "rgba(255, 255, 255, 0.9)",
+                  }}
                 />
               </Box>
               {sidebarItems[idx].length - 1 ? (
                 focus === item[1] ? (
                   <ExpandLessIcon
-                    style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                    style={{
+                      color: history.location.pathname.includes(item[0])
+                        ? "#2C67A3"
+                        : "rgba(255, 255, 255, 0.5)",
+                    }}
                   />
                 ) : (
                   <ExpandMoreIcon
-                    style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                    style={{
+                      color: history.location.pathname.includes(item[0])
+                        ? "#2C67A3"
+                        : "rgba(255, 255, 255, 0.5)",
+                    }}
                   />
                 )
               ) : (
