@@ -1,5 +1,6 @@
 import SignInForm from "./SignInForm";
-import LoginBackground from "src/assets/Background_1.png";
+import LoginIllustration from "src/assets/login_illustration.png";
+
 import { Box } from "@mui/material";
 
 const Login = () => {
@@ -10,27 +11,21 @@ const Login = () => {
           height: "100vh",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "center",
+          justifyContent: "space-evenly",
           alignItems: "center",
-          backgroundImage: `url(${LoginBackground})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
         }}
       >
         <Box
           sx={{
-            background: "rgba(255, 255, 255, 0.83)",
+            width: "70%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-            alignItems: "center",
-            padding: "2.4rem",
-            borderRadius: "20px",
           }}
         >
-          <SignInForm />
+          <img src={LoginIllustration} width="80%" alt="login" />
         </Box>
+        <SignInForm />
       </Box>
     </>
   );
