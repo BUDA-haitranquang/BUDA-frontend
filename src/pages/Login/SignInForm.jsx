@@ -1,18 +1,17 @@
 import { useMutation } from "@apollo/client";
-import LockIcon from "@mui/icons-material/Lock";
-import PersonIcon from "@mui/icons-material/Person";
+import GoogleIcon from "@mui/icons-material/Google";
+
 import {
   Box,
   Button,
   CircularProgress,
-  InputAdornment,
   Link,
   Modal,
   OutlinedInput,
   Typography,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
@@ -117,10 +116,7 @@ const SignInForm = () => {
       })
       .then(() => {
         history.push("/dashboard");
-        enqueueSnackbar(
-          "Login with Google successfully",
-          AlertSuccessProp
-        );
+        enqueueSnackbar("Login with Google successfully", AlertSuccessProp);
       })
       .catch((error) => {
         enqueueSnackbar("Google login error", AlertErrorProp);
@@ -141,11 +137,12 @@ const SignInForm = () => {
     <>
       <Box
         sx={{
+          padding: "100px",
+          width: "45%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          width: "90%",
         }}
       >
         <Box
@@ -159,27 +156,30 @@ const SignInForm = () => {
           <Typography
             variant="h1"
             sx={{
-              fontFamily: "'Montserrat', sans-serif",
-              color: "black",
               marginBottom: "2.4rem",
               fontWeight: 500,
+              background:
+                "linear-gradient(270deg, #94B4D7 -13.32%, #C1DBF2 49.93%, #6A99CC 115.88%)",
+              webkitBackgroundClip: "text",
+              webkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              textFillColor: "transparent",
             }}
+            fontFamily="'Righteous', cursive"
           >
             BUDA
           </Typography>
 
           <Box>
             <OutlinedInput
+              margin="dense"
+              notched="true"
               sx={{
                 mb: "1.25rem",
                 "&.MuiOutlinedInput-root": {
                   backgroundColor: "white",
-                  borderRadius: "10px",
                   width: "100%",
                   height: "50px",
-                },
-                "&.MuiOutlinedInput-inputAdornedStart": {
-                  opacity: 0.5,
                 },
                 "& input": {
                   padding: "15px",
@@ -193,24 +193,17 @@ const SignInForm = () => {
               onChange={(e) => setEmail(e.target.value)}
               id="email-input"
               type="text"
-              placeholder="Email"
-              startAdornment={
-                <InputAdornment position="start">
-                  <PersonIcon style={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
+              placeholder="Email..."
             />
             <OutlinedInput
+              margin="dense"
+              notched="true"
               sx={{
                 mb: "1.25rem",
                 "&.MuiOutlinedInput-root": {
                   backgroundColor: "white",
-                  borderRadius: "10px",
                   width: "100%",
                   height: "50px",
-                },
-                "&.MuiOutlinedInput-inputAdornedStart": {
-                  opacity: 0.5,
                 },
                 "& input": {
                   padding: "15px",
@@ -224,27 +217,17 @@ const SignInForm = () => {
               onChange={(e) => setPassword(e.target.value)}
               id="password-input"
               type="password"
-              placeholder="Password"
-              startAdornment={
-                <InputAdornment position="start">
-                  <LockIcon style={{ opacity: 0.5 }} />
-                </InputAdornment>
-              }
+              placeholder="Password..."
             />
             <Button
               sx={{
                 mb: "1.25rem",
                 "&.MuiButton-root": {
                   width: "100%",
-                  background: "rgba(72, 149, 255, 1)",
+                  background:
+                    "linear-gradient(90deg, #86AED8 -10.29%, #C7DEF3 41.74%, #A4C2E0 98.3%)",
                   color: "white",
-                  borderRadius: 10,
                   height: 50,
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                  "&:hover": {
-                    background: "rgba(97, 163, 255, 1)",
-                    border: "none",
-                  },
                 },
                 "&.MuiButton-text": {
                   fontSize: 19,
@@ -253,7 +236,9 @@ const SignInForm = () => {
               onClick={handleSubmit}
               ref={btn}
             >
-              LOG IN
+              <Typography fontFamily="'Righteous', cursive" color="#2C67A3">
+                LOGIN
+              </Typography>
             </Button>
             {/* <ReCAPTCHA
               ref={recaptchaRef}
@@ -263,6 +248,7 @@ const SignInForm = () => {
               onErrored={() => setValidCaptcha(false)}
             /> */}
             <Typography
+              fontFamily="'Montserrat', san-serif"
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -280,7 +266,7 @@ const SignInForm = () => {
                   history.push("/signup");
                 }}
                 sx={{
-                  color: "rgba(72, 149, 255, 1)",
+                  color: "#2C67A3",
                   textDecoration: "none",
                   cursor: "pointer",
                   fontWeight: 600,
@@ -306,9 +292,36 @@ const SignInForm = () => {
                 onSuccess={onSuccessGoogleLogin}
                 onFailure={onFailGoogleLogin}
                 cookiePolicy={"single_host_origin"}
-              >
-                <Typography variant="button">Login using Google</Typography>
-              </GoogleLogin>
+                render={(renderProps) => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      border: "2px solid black",
+                      mb: "1.25rem",
+                      "&.MuiButton-root": {
+                        width: "100%",
+                        color: "white",
+                        height: 50,
+                      },
+                      "&.MuiButton-text": {
+                        fontSize: 19,
+                      },
+                    }}
+                  >
+                    <GoogleIcon sx={{ color: "#4F3F55", mr: 2 }} />
+                    <Typography
+                      fontFamily="'Montserrat', san-serif"
+                      color="#4F3F55"
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      Login with Google
+                    </Typography>
+                  </Button>
+                )}
+              />
             </Box>
           </Box>
         </Box>
