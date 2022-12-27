@@ -177,7 +177,7 @@ const SignInForm = () => {
               sx={{
                 mb: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
                 },
@@ -201,7 +201,7 @@ const SignInForm = () => {
               sx={{
                 mb: "1.25rem",
                 "&.MuiOutlinedInput-root": {
-                  backgroundColor: "white",
+                  backgroundColor: "rgba(220, 233, 247, 0.35)",
                   width: "100%",
                   height: "50px",
                 },
