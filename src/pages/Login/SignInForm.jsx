@@ -159,7 +159,7 @@ const SignInForm = () => {
               marginBottom: "2.4rem",
               fontWeight: 500,
               background:
-                "linear-gradient(270deg, #94B4D7 -13.32%, #C1DBF2 49.93%, #6A99CC 115.88%)",
+                "linear-gradient(270deg, #496D93 -13.32%, #A8CAE9 49.93%, #4678AE 115.88%, #4678AE 115.88%)",
               webkitBackgroundClip: "text",
               webkitTextFillColor: "transparent",
               backgroundClip: "text",
