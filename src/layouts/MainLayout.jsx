@@ -21,7 +21,9 @@ export default function MainLayout(props) {
     <Fragment>
       <Box
         display="flex"
-        sx={{ backgroundImage: "linear-gradient(white, #e6f8ff)" }}
+        sx={{
+          backgroundImage: "linear-gradient(white, rgba(95, 132, 168, 0.2))",
+        }}
       >
         <Sidebar />
         <Box

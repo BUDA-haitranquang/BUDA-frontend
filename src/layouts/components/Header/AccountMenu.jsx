@@ -50,7 +50,8 @@ export default function AccountMenu() {
       <Box
         style={{
           borderRadius: "20px",
-          backgroundImage: "linear-gradient(to right, #1367ba, #409fff)",
+          backgroundImage:
+            "linear-gradient(to right, #436991 0%, #749ABB 56.77%, #96BBDD 100%)",
           maxHeight: "40px",
           display: "flex",
           flexDirection: "row",
@@ -98,7 +99,7 @@ export default function AccountMenu() {
         sx={{
           display: "flex",
           alignItems: "center",
-          background: "#a7ccfc",
+          background: "#C1DBF2",
           borderRadius: "30px",
           height: 25,
         }}
@@ -113,13 +114,13 @@ export default function AccountMenu() {
             background:
               window.localStorage.getItem("i18nextLng") !== "en"
                 ? "transparent"
-                : "#1367ba",
+                : "#456B92",
             "&:hover": {
               //you want this to be the same as the backgroundColor above
               background:
                 window.localStorage.getItem("i18nextLng") !== "en"
                   ? "transparent"
-                  : "#1367ba",
+                  : "#456B92",
             },
           }}
         >
@@ -133,13 +134,13 @@ export default function AccountMenu() {
               color:
                 window.localStorage.getItem("i18nextLng") === "en"
                   ? "white"
-                  : "#1367ba",
+                  : "#456B92",
               "&:hover": {
                 //you want this to be the same as the backgroundColor above
                 color:
                   window.localStorage.getItem("i18nextLng") === "en"
                     ? "white"
-                    : "#1367ba",
+                    : "#456B92",
               },
             }}
           >
@@ -156,13 +157,13 @@ export default function AccountMenu() {
             background:
               window.localStorage.getItem("i18nextLng") === "en"
                 ? "transparent"
-                : "#1367ba",
+                : "#456B92",
             "&:hover": {
               //you want this to be the same as the backgroundColor above
               background:
                 window.localStorage.getItem("i18nextLng") === "en"
                   ? "transparent"
-                  : "#1367ba",
+                  : "#456B92",
             },
           }}
         >
@@ -176,13 +177,13 @@ export default function AccountMenu() {
               color:
                 window.localStorage.getItem("i18nextLng") !== "en"
                   ? "white"
-                  : "#1367ba",
+                  : "#456B92",
               "&:hover": {
                 //you want this to be the same as the backgroundColor above
                 color:
                   window.localStorage.getItem("i18nextLng") !== "en"
                     ? "white"
-                    : "#1367ba",
+                    : "#456B92",
               },
             }}
           >
