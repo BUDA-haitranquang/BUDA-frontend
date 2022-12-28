@@ -51,7 +51,7 @@ const Header = () => {
         fontFamily="'Montserrat', san-serif"
         style={{
           textTransform: "uppercase",
-          color: "#1367ba",
+          color: "#456B92",
         }}
       >
         {names[location.pathname]}

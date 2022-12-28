@@ -240,7 +240,7 @@ const Sidebar = () => {
                 <ListItemIcon
                   sx={{
                     color: history.location.pathname.includes(item[0])
-                      ? "#2C67A3"
+                      ? "#456B92"
                       : "rgba(255, 255, 255, 0.9)",
                   }}
                 >
@@ -258,7 +258,7 @@ const Sidebar = () => {
                   primary={capitalizeFirstLetter(item[1])}
                   sx={{
                     color: history.location.pathname.includes(item[0])
-                      ? "#2C67A3"
+                      ? "#456B92"
                       : "rgba(255, 255, 255, 0.9)",
                   }}
                 />
@@ -268,7 +268,7 @@ const Sidebar = () => {
                   <ExpandLessIcon
                     style={{
                       color: history.location.pathname.includes(item[0])
-                        ? "#2C67A3"
+                        ? "#456B92"
                         : "rgba(255, 255, 255, 0.5)",
                     }}
                   />
@@ -276,7 +276,7 @@ const Sidebar = () => {
                   <ExpandMoreIcon
                     style={{
                       color: history.location.pathname.includes(item[0])
-                        ? "#2C67A3"
+                        ? "#456B92"
                         : "rgba(255, 255, 255, 0.5)",
                     }}
                   />
