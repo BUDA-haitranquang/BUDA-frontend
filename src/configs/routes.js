@@ -158,6 +158,13 @@ export const routes = [
     auth: false,
   },
   {
+    path: "/statistic/product",
+    exact: true,
+    component: React.lazy(() => import("src/pages/Statistic/Product")),
+    layout: LayoutOptions.MAIN,
+    auth: false,
+  },
+  {
     path: "/business/sell/:id",
     exact: true,
     component: React.lazy(() =>

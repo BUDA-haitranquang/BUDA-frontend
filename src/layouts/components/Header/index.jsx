@@ -20,7 +20,7 @@ const names = {
   "/cost/othercost": "Other Cost",
   "/statistic/business": "Retention",
   "/statistic/customer": "Sell order",
-  "/statistic/product": "Dashboard",
+  "/statistic/product": "Product statistic",
   "/statistic/revenue": "Revenue and cost",
 };
 
