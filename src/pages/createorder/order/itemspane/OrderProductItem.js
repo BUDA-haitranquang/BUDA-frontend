@@ -64,7 +64,7 @@ export default function OrderProductItem({ row, serial }) {
           inputProps={{
             style: { textAlign: "right" },
           }}
-          value={sellingPrice * quantity}
+          value={(sellingPrice * quantity).toLocaleString()}
           name="total"
         />
       </TableCell>

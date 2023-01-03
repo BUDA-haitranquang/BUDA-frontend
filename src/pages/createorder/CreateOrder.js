@@ -14,6 +14,7 @@ import CostGrid from "./order/costpane/CostGrid";
 import OrderProducts from "./order/itemspane/OrderProducts";
 import SearchProductBar from "./order/itemspane/SearchProductBar";
 import { useTranslation } from "react-i18next";
+
 export const color1 = "#FAFAFA";
 export const color2 = "#3399FF";
 export const color3 = "#D1D1D1";
@@ -46,7 +47,7 @@ export default function CreateOrder() {
       return {
         productID: item.productID,
         quantity: item.quantity,
-        pricePerUnit: item.sellingPrice,
+        pricePerUnit: item.sellingPrice
       };
     });
 
@@ -62,14 +63,19 @@ export default function CreateOrder() {
           sellOrderItemDTOs: sellOrderInfoMapped,
           status: "FINISHED",
           customerID: customer?.customerID,
-          discountID: discount?.discountID,
+          discountID: discount?.discountID
         },
-        refetchQueries: [{ query: LOAD_PRODUCTS }],
-      });
+        refetchQueries: [{ query: LOAD_PRODUCTS }]
+      }).then(res => {
+          if (res?.data?.newSellOrder?.sellOrderID)
+            window.open("/business/sell/" + res.data.newSellOrder.sellOrderID);
+        }
+      )
+      ;
 
       await enqueueSnackbar("New order created successfully", AlertSuccessProp);
       await dispatch(clearProductCart());
-      window.location.reload();
+      // window.location.reload();
     } catch (e) {
       if (e.graphQLErrors[0].extensions.response.body)
         alert(e.graphQLErrors[0].extensions.response.body);
@@ -81,18 +87,13 @@ export default function CreateOrder() {
   };
 
   return (
-    <Box
-      sx={{
-        paddingTop: "60px",
-      }}
-    >
+    <Box>
       <Grid
         container
         sx={{
-          paddingTop: "20px",
           paddingLeft: "10px",
           paddingRight: "10px",
-          borderRadius: "10px",
+          borderRadius: "10px"
         }}
       >
         <Grid item xs={8} className="main-order-grid">
@@ -102,7 +103,7 @@ export default function CreateOrder() {
             sx={{
               borderRadius: "10px",
               border: "1px solid",
-              borderColor: "#aaacad",
+              borderColor: "#aaacad"
               // border: "5px solid",
               // borderImageSlice: 1,
               // borderImageSource:
@@ -124,7 +125,7 @@ export default function CreateOrder() {
             paddingLeft: "10px",
             paddingRight: "10px",
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "column"
           }}
         >
           <SearchCustomerBar />
@@ -134,7 +135,7 @@ export default function CreateOrder() {
               borderRadius: "10px",
               border: "1px solid",
               borderColor: "#aaacad",
-              background: "white",
+              background: "white"
               // border: "5px solid",
               // borderImageSlice: 1,
               // borderImageSource:
@@ -162,7 +163,7 @@ export default function CreateOrder() {
                 marginTop: "24px",
                 flexGrow: 1,
                 backgroundImage: "linear-gradient(to right, #0ba2d9, #3ec8fa)",
-                boxShadow: "none",
+                boxShadow: "none"
               }}
             >
               <Typography sx={{}} variant="h6">

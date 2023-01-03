@@ -29,6 +29,7 @@ export default function UneditableMoneyBox({ title, value }) {
         inputProps={{
           style: { textAlign: "center" },
         }}
+        type={"number"}
         disabled
         fullWidth
         variant="outlined"
