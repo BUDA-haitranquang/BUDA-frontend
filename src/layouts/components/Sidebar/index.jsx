@@ -1,17 +1,18 @@
-import { ShoppingBasketOutlined } from "@mui/icons-material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import InventoryIcon from "@mui/icons-material/Inventory2TwoTone";
+import DashboardIcon from "@mui/icons-material/DashboardTwoTone";
+import BadgeTwoToneIcon from "@mui/icons-material/BadgeTwoTone";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import GroupsIcon from "@mui/icons-material/Groups";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StoreIcon from "@mui/icons-material/Store";
-import WorkIcon from "@mui/icons-material/Work";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import DiscountIcon from "@mui/icons-material/Discount";
+import GroupsIcon from "@mui/icons-material/GroupsTwoTone";
+import MonetizationOnIcon from "@mui/icons-material/PaidTwoTone";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCartTwoTone";
+import StoreIcon from "@mui/icons-material/StorefrontTwoTone";
+import WorkIcon from "@mui/icons-material/WorkTwoTone";
+import BarChartIcon from "@mui/icons-material/InsertChartTwoTone";
+import DiscountIcon from "@mui/icons-material/DiscountTwoTone";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@mui/material";
+import color from "src/theme/color";
 import {
   AppBar,
   Box,
@@ -33,7 +34,7 @@ import { setFocus } from "src/redux/sidebarSlice";
 const useStyle = makeStyles({
   selectedItem: {
     cursor: "pointer",
-    background: "#C1DBF2",
+    background: color.PRIMARY_LIGHT,
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
     borderRadius: "6px",
     paddingTop: "0.5rem",
@@ -43,7 +44,7 @@ const useStyle = makeStyles({
     justifyContent: "space-between",
   },
   selectedTextItem: {
-    color: "#2C67A3",
+    color: color.PRIMARY,
   },
   item: {
     cursor: "pointer",
@@ -169,11 +170,11 @@ const Sidebar = () => {
   const itemRender = (i) => {
     switch (i) {
       case 0:
-        return <AddShoppingCartIcon />;
+        return <DashboardIcon />;
       case 1:
         return <WorkIcon />;
       case 2:
-        return <ShoppingBasketOutlined />;
+        return <InventoryIcon />;
       case 3:
         return <StoreIcon />;
       case 4:
@@ -181,7 +182,7 @@ const Sidebar = () => {
       case 5:
         return <GroupsIcon />;
       case 6:
-        return <AssignmentIndIcon />;
+        return <BadgeTwoToneIcon />;
       case 7:
         return <MonetizationOnIcon />;
       case 8:
@@ -209,8 +210,7 @@ const Sidebar = () => {
   const drawer = (
     <div
       style={{
-        background:
-          "linear-gradient(180deg, #436991 0%, #749ABB 56.77%, #96BBDD 100%)",
+        backgroundColor: color.PRIMARY,
         flexGrow: 1,
         overflow: "hidden",
       }}
@@ -240,7 +240,7 @@ const Sidebar = () => {
                 <ListItemIcon
                   sx={{
                     color: history.location.pathname.includes(item[0])
-                      ? "#456B92"
+                      ? color.PRIMARY
                       : "rgba(255, 255, 255, 0.9)",
                   }}
                 >
@@ -250,7 +250,7 @@ const Sidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     marginLeft: "-10px",
-                    fontFamily: "'Montserrat', san-serif",
+                    fontFamily: "'Andika', san-serif",
                     variant: "body2",
                     fontWeight:
                       history.location.pathname.includes(item[0]) && "bold",
@@ -258,7 +258,7 @@ const Sidebar = () => {
                   primary={capitalizeFirstLetter(item[1])}
                   sx={{
                     color: history.location.pathname.includes(item[0])
-                      ? "#456B92"
+                      ? color.PRIMARY
                       : "rgba(255, 255, 255, 0.9)",
                   }}
                 />
@@ -268,7 +268,7 @@ const Sidebar = () => {
                   <ExpandLessIcon
                     style={{
                       color: history.location.pathname.includes(item[0])
-                        ? "#456B92"
+                        ? color.PRIMARY
                         : "rgba(255, 255, 255, 0.5)",
                     }}
                   />
@@ -276,7 +276,7 @@ const Sidebar = () => {
                   <ExpandMoreIcon
                     style={{
                       color: history.location.pathname.includes(item[0])
-                        ? "#456B92"
+                        ? color.PRIMARY
                         : "rgba(255, 255, 255, 0.5)",
                     }}
                   />
@@ -299,11 +299,11 @@ const Sidebar = () => {
                       >
                         <ListItemText
                           primaryTypographyProps={{
-                            fontFamily: "'Montserrat', san-serif",
+                            fontFamily: "'Andika', san-serif",
                             variant: "body2",
                           }}
                           primary={component.name}
-                          style={{ color: "white" }}
+                          sx={{ color: "white", opacity: 0.7 }}
                         />
                       </ListItem>
                     </Link>

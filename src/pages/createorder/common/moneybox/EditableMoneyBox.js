@@ -17,7 +17,7 @@ export default function EditableMoneyBox({ title, value, onChange }) {
       <Typography
         variant="h6"
         align="center"
-        fontFamily="'Montserrat', san-serif"
+        fontFamily="'Andika', san-serif"
         fontWeight="bold"
         sx={{ textTransform: "uppercase" }}
       >

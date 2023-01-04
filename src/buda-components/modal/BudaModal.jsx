@@ -24,7 +24,12 @@ const BudaModal = (props) => {
   } = props;
 
   return (
-    <Modal {...remainProps} onClose={onClose} className={`${classRoot}`}>
+    <Modal
+      {...remainProps}
+      onClose={onClose}
+      className={`${classRoot}`}
+      sx={{ backdropFilter: "blur(10px)" }}
+    >
       <Box
         sx={{
           position: "absolute",
@@ -34,7 +39,7 @@ const BudaModal = (props) => {
           bgcolor: "background.paper",
           border: "2px solid gray",
           maxWidth: "600px",
-          minWidth:"500px",
+          minWidth: "500px",
           boxShadow: 24,
           p: "16px 28px 20px 28px",
           borderRadius: 3,

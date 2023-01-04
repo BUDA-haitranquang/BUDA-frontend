@@ -94,7 +94,7 @@ const PlanCard = ({
             sx={{
               fontWeight: "bold",
               color: pickColorSet(planType).price,
-              fontFamily: "'Montserrat', san-serif",
+              fontFamily: "'Andika', san-serif",
             }}
           >
             {price}
@@ -104,7 +104,7 @@ const PlanCard = ({
             sx={{
               fontWeight: "bold",
               color: pickColorSet(planType).price,
-              fontFamily: "'Montserrat', san-serif",
+              fontFamily: "'Andika', san-serif",
             }}
           >
             VND
@@ -139,7 +139,7 @@ const PlanCard = ({
                 sx={{
                   fontStyle: "italic",
                   color: pickColorSet(planType).description,
-                  fontFamily: "'Montserrat', san-serif",
+                  fontFamily: "'Andika', san-serif",
                 }}
                 key={index}
               >

@@ -174,8 +174,7 @@ export default function CostGrid() {
             <Typography
               variant="h6"
               color="white"
-              fontFamily="'Montserrat', san-serif"
-              
+              fontFamily="'Andika', san-serif"
             >
               % {chosenDiscount?.name || ""}
             </Typography>

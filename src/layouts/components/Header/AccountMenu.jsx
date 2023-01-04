@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import { removeToken } from "src/redux/tokenSlice";
 import Notification from "src/components/Notification";
 import ChangePassModal from "src/components/modal/ChangePassModal";
+import color from "src/theme/color";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -50,8 +51,7 @@ export default function AccountMenu() {
       <Box
         style={{
           borderRadius: "20px",
-          backgroundImage:
-            "linear-gradient(to right, #436991 0%, #749ABB 56.77%, #96BBDD 100%)",
+          backgroundColor: color.PRIMARY,
           maxHeight: "40px",
           display: "flex",
           flexDirection: "row",
@@ -99,7 +99,7 @@ export default function AccountMenu() {
         sx={{
           display: "flex",
           alignItems: "center",
-          background: "#C1DBF2",
+          background: color.PRIMARY_LIGHT,
           borderRadius: "30px",
           height: 25,
         }}
@@ -114,13 +114,13 @@ export default function AccountMenu() {
             background:
               window.localStorage.getItem("i18nextLng") !== "en"
                 ? "transparent"
-                : "#456B92",
+                : color.PRIMARY,
             "&:hover": {
               //you want this to be the same as the backgroundColor above
               background:
                 window.localStorage.getItem("i18nextLng") !== "en"
                   ? "transparent"
-                  : "#456B92",
+                  : color.PRIMARY,
             },
           }}
         >
@@ -128,19 +128,19 @@ export default function AccountMenu() {
             variant="subtitle1"
             noWrap
             fontWeight="bold"
-            fontFamily="'Montserrat', san-serif"
+            fontFamily="'Andika', san-serif"
             sx={{
               textTransform: "uppercase",
               color:
                 window.localStorage.getItem("i18nextLng") === "en"
                   ? "white"
-                  : "#456B92",
+                  : color.PRIMARY,
               "&:hover": {
                 //you want this to be the same as the backgroundColor above
                 color:
                   window.localStorage.getItem("i18nextLng") === "en"
                     ? "white"
-                    : "#456B92",
+                    : color.PRIMARY,
               },
             }}
           >
@@ -157,13 +157,13 @@ export default function AccountMenu() {
             background:
               window.localStorage.getItem("i18nextLng") === "en"
                 ? "transparent"
-                : "#456B92",
+                : color.PRIMARY,
             "&:hover": {
               //you want this to be the same as the backgroundColor above
               background:
                 window.localStorage.getItem("i18nextLng") === "en"
                   ? "transparent"
-                  : "#456B92",
+                  : color.PRIMARY,
             },
           }}
         >
@@ -171,19 +171,19 @@ export default function AccountMenu() {
             variant="subtitle1"
             noWrap
             fontWeight="bold"
-            fontFamily="'Montserrat', san-serif"
+            fontFamily="'Andika', san-serif"
             sx={{
               textTransform: "uppercase",
               color:
                 window.localStorage.getItem("i18nextLng") !== "en"
                   ? "white"
-                  : "#456B92",
+                  : color.PRIMARY,
               "&:hover": {
                 //you want this to be the same as the backgroundColor above
                 color:
                   window.localStorage.getItem("i18nextLng") !== "en"
                     ? "white"
-                    : "#456B92",
+                    : color.PRIMARY,
               },
             }}
           >
