@@ -121,7 +121,7 @@ const MainDashBoard = () => {
       }
     }
 
-    while (curDate.getTime() !== upperBound.getTime()) {
+    while (curDate.getTime() < upperBound.getTime()) {
       result = [
         ...result,
         {
