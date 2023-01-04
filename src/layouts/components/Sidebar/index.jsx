@@ -37,8 +37,8 @@ const useStyle = makeStyles({
     background: color.PRIMARY_LIGHT,
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
     borderRadius: "6px",
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    paddingTop: "0.4rem",
+    paddingBottom: "0.4rem",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -49,8 +49,8 @@ const useStyle = makeStyles({
   item: {
     cursor: "pointer",
     borderRadius: "6px",
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    paddingTop: "0.4rem",
+    paddingBottom: "0.4rem",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -70,7 +70,8 @@ const useStyle = makeStyles({
     },
   },
   root: {
-    margin: "0.85rem",
+    marginLeft: "0.85rem",
+    marginRight: "0.85rem",
     "& a:link": {
       textDecoration: "none",
       color: "white",
@@ -208,11 +209,17 @@ const Sidebar = () => {
     </Box>
   );
   const drawer = (
-    <div
-      style={{
+    <Box
+      sx={{
         backgroundColor: color.PRIMARY,
+        overflow: "scroll",
         flexGrow: 1,
-        overflow: "hidden",
+        scrollbarWidth: "none", //firefox
+        msOverflowStyle: "none", //Edge
+        "&::-webkit-scrollbar": {
+          //chrome
+          display: "none",
+        },
       }}
     >
       <Toolbar children={logo} />
@@ -316,7 +323,7 @@ const Sidebar = () => {
           </>
         ))}
       </List>
-    </div>
+    </Box>
   );
 
   return (
