@@ -11,6 +11,7 @@ import {
   PRODUCT_TOP_REVENUE,
   PRODUCT_TOP_SELL_NUMBER,
 } from "src/graphQl/statistics/productQueries";
+import StatisticsCard from "./StatisticsCard";
 
 const Retention = () => {
   const { data: productsTopSellNumber } = useQuery(PRODUCT_TOP_SELL_NUMBER);
@@ -24,16 +25,44 @@ const Retention = () => {
   );
   const { data: productsMostReturnPrice } = useQuery(PRODUCT_MOST_RETURN_PRICE);
 
-  async function fetchData() {
-  }
+  async function fetchData() {}
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  return <Box sx={{ display: "flex" }}>
-    Product Statistics
-  </Box>;
+  return (
+    <Box sx={{ display: "flex" }}>
+      <StatisticsCard
+        title={"Top Sell"}
+        data={productsTopSellNumber?.productsTopSellNumber?.map(
+          ({ name, sellNumber }) => ({
+            name,
+            mainStats: sellNumber,
+          })
+        )}
+        sx={{ width: "30%" }}
+      />
+      <StatisticsCard
+        title={"Top Revenue"}
+        data={productsTopRevenue?.productsTopRevenue?.map(
+          ({ name, revenue }) => ({
+            name,
+            mainStats: revenue,
+          })
+        )}
+        sx={{ width: "30%" }}
+      />
+      <StatisticsCard
+        title={"Top Profit"}
+        data={productsTopProfit?.productsTopProfit?.map(({ name, profit }) => ({
+          name,
+          mainStats: profit,
+        }))}
+        sx={{ width: "30%" }}
+      />
+    </Box>
+  );
 };
 
 export default Retention;

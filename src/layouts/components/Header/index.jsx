@@ -20,7 +20,7 @@ const names = {
   "/cost/othercost": "Other Cost",
   "/statistic/business": "Retention",
   "/statistic/customer": "Sell order",
-  "/statistic/product": "Dashboard",
+  "/statistic/product": "Product statistic",
   "/statistic/revenue": "Revenue and cost",
 };
 
@@ -48,7 +48,7 @@ const Header = () => {
         noWrap
         component="div"
         fontWeight={850}
-        fontFamily="'Montserrat', san-serif"
+        fontFamily="'Andika', san-serif"
         style={{
           textTransform: "uppercase",
           color: "#456B92",

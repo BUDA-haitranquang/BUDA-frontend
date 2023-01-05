@@ -120,7 +120,7 @@ export default function OrderProducts() {
                   <Typography
                     noWrap
                     fontWeight="bold"
-                    fontFamily="'Montserrat', san-serif"
+                    fontFamily="'Andika', san-serif"
                   >
                     {headCell.label}
                   </Typography>
@@ -129,9 +129,13 @@ export default function OrderProducts() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
+            {rows.map((row, idx) => {
               return (
-                <OrderProductItem row={row} serial={rows.indexOf(row) + 1} />
+                <OrderProductItem
+                  row={row}
+                  serial={rows.indexOf(row) + 1}
+                  key={idx}
+                />
               );
             })}
           </TableBody>

@@ -88,7 +88,7 @@ export default function SearchProductBar() {
           else setSearchProductValue(newInputValue);
         }}
         renderOption={(props, option) => (
-          <Box {...props}>
+          <Box {...props} key={option.productID}>
             <Grid container>
               <Grid item xs={8}>
                 {option.name}
@@ -110,7 +110,7 @@ export default function SearchProductBar() {
         )}
         renderInput={(params) => {
           return (
-            <TextField {...params} label={t("sell:searchProduct")}></TextField>
+            <TextField {...params} label={t("sell:searchProduct")}/>
           );
         }}
       />

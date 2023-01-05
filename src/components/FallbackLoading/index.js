@@ -11,9 +11,7 @@ const FallbackLoading = () => {
       open={true}
     >
       <Box display="flex" flexDirection="column">
-        <Typography
-          sx={{ fontFamily: "'Montserrat', san-serif", fontSize: 69 }}
-        >
+        <Typography sx={{ fontFamily: "'Andika', san-serif", fontSize: 69 }}>
           BUDA
         </Typography>
         <LinearProgress />

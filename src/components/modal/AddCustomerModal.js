@@ -8,7 +8,7 @@ import {
   TextField
 } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,

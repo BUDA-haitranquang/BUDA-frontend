@@ -1,4 +1,3 @@
-
 import { createTheme, ThemeProvider } from "@mui/material";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -7,7 +6,7 @@ const theme = createTheme({
   "@global": {
     "*": {
       typography: {
-        fontFamily: ["'Montserrat'", "sans - serif"].join(","),
+        fontFamily: ["'Andika'", "sans - serif"].join(","),
       },
     },
   },
@@ -19,7 +18,7 @@ const Theme = ({ children }) => {
       <CssBaseline />
       <Box
         sx={{
-          fontFamily: "'Montserrat', san-serif",
+          fontFamily: "'Andika', san-serif",
         }}
       >
         {children}
