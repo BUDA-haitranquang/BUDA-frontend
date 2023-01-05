@@ -135,7 +135,11 @@ const MainDashBoard = () => {
       }
     }
 
+<<<<<<< HEAD
+    while (curDate.getTime() !== upperBound.getTime()) {
+=======
     while (curDate.getTime() < upperBound.getTime()) {
+>>>>>>> ad50e0d2db845cd43732b8afb87668c8acb09b1e
       result = [
         ...result,
         {
@@ -254,6 +258,8 @@ const MainDashBoard = () => {
         {" "}
       </Box>
       <Divider />
+<<<<<<< HEAD
+=======
       <Box width="70%">
         <Tabs
           variant="fullWidth"
@@ -315,6 +321,7 @@ const MainDashBoard = () => {
           />
         </Tabs>
       </Box>
+>>>>>>> ad50e0d2db845cd43732b8afb87668c8acb09b1e
       <Box py={2}></Box>
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
