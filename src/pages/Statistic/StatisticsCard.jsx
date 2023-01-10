@@ -1,37 +1,95 @@
 import { useEffect } from "react";
 import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import GppBadIcon from "@mui/icons-material/GppBad";
+import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 
-const StatisticsCard = ({ data, title }) => {
-  useEffect(() => {
-  }, []);
+const getColor = (idx) => {
+  if (idx === 0) return "#000000";
+  if (idx === 1) return "#404040";
+  return "#5a5a5a";
+};
 
-  return <Card sx={{padding: "14px", marginLeft: "32px", marginRight: "32px"}}>
-    <CardContent>
-      <Typography variant="h5" component="div" mb={2}>
-        {title}
-      </Typography>
-      {data && data.map(item => (
-        <>
-          <Divider />
-          <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-            <Typography variant="subtitle1" component="div" mr={4}>
-              {item.name}
-            </Typography>
-            <Box />
-            <Typography variant="h6" component="div">
-              {item.mainStats.toLocaleString()}
-            </Typography>
-            {item?.secondStats &&
-              <Typography variant="subtitle2" component="div">
-                {item.secondStats.toLocaleString()}
-              </Typography>}
+const getMedalColor = (idx, type) => {
+  if (type === "success") {
+    if (idx === 0) return "success";
+    if (idx === 1) return "action";
+  }
+  if (type === "error") {
+    if (idx === 0) return "error";
+    if (idx === 1) return "action";
+  }
+};
 
-          </Box>
-        </>
+const getTextNameStyle = (idx) => {
+  if (idx === 0) return "h5";
+  if (idx === 1) return "h6";
+  return "subtitle1";
+};
+const StatisticsCard = ({ data, title, icon, type }) => {
+  useEffect(() => {}, []);
 
-      ))}
-    </CardContent>
-  </Card>;
+  return (
+    <Card sx={{ padding: "6px 12px 12px 12px" }}>
+      <CardContent>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            variant="h5"
+            component="div"
+            mb={2}
+            color={type === "success" ? "green" : "red"}
+          >
+            {title}
+          </Typography>
+          {icon}
+        </Box>
+
+        {data &&
+          data.map((item, idx) => (
+            <Box key={idx}>
+              <Divider />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+              <Box
+                sx={{
+                  width: "90%",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: "4px",
+                }}
+              >
+                <Typography
+                  variant={getTextNameStyle(idx)}
+                  component="div"
+                  mr={4}
+                  color={getColor(idx)}
+                >
+                  {item.name}
+                </Typography>
+                <Typography variant="h6" component="div" color={getColor(idx)}>
+                  {item.mainStats.toLocaleString()}
+                </Typography>
+              </Box>
+              {idx < 2 && <LocalPoliceIcon color={getMedalColor(idx, type)} />}
+              </Box>
+            </Box>
+          ))}
+      </CardContent>
+    </Card>
+  );
 };
 
 export default StatisticsCard;
