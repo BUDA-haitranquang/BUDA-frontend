@@ -1,19 +1,16 @@
-import * as React from "react";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuItem from "@mui/material/MenuItem";
-import { useState, useRef } from "react";
 import Popover from "@mui/material/Popover";
+import * as React from "react";
+import { useRef, useState } from "react";
 
 export default function SplitButton({ options, searchBy }) {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const list = Array.from(options, (item) => item.label);
-  //   const handleClick = () => {
-  // //    console.info(`You clicked ${options[selectedIndex]}`);
-  //   };
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -67,7 +64,7 @@ export default function SplitButton({ options, searchBy }) {
             selected={index === selectedIndex}
             onClick={(event) => handleMenuItemClick(event, index)}
           >
-            {option.toUpperCase()}
+            {option?.toUpperCase() || ""}
           </MenuItem>
         ))}
       </Popover>
