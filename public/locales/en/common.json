@@ -15,5 +15,7 @@
     "Password" : "Password",
     "search":"Search",
     "data":"Data",
-    "rowsPerPage":"Rows per page"
+    "rowsPerPage":"Rows per page",
+    "sum":"Sum",
+    "detail": "Detail"
 }

@@ -33,6 +33,24 @@ export const LOAD_PRODUCT = gql`
   }
 `;
 
+export const LOAD_PRODUCT_COMBOS = gql`
+query {
+  productComboByUser {
+      productComboID,
+      name,
+    	description,
+      productComboItems{
+        product{
+          productID
+          name
+          sellingPrice,
+        }
+        quantity
+      }
+    }
+}
+`;
+
 // Find Combo by ProductId
 export const LOAD_PRODUCT_COMBO_INCLUDE_PRODUCT = gql`
   query productComboIncludeProduct($productID: Int) {
