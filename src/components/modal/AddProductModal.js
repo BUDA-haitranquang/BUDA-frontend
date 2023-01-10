@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Tabs, Tab } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSnackbar } from "notistack";
@@ -31,7 +31,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [description, setDescription] = useState("");
   const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [tabValue, setTabValue] = useState(0);
   const [preview, setPreview] = useState();
 
   // create a preview as a side effect, whenever selected file is changed
@@ -130,6 +130,10 @@ const AddProductModal = ({ isOpen, handleClose }) => {
     }
   };
 
+  const handleChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
   return (
     <BudaModal
       open={isOpen}
@@ -139,141 +143,172 @@ const AddProductModal = ({ isOpen, handleClose }) => {
       isLoading={isLoading}
       title={t("product:addProductModal.title")}
       children={
-        <Box
-          component="form"
-          autoComplete="off"
-          sx={{
-            width: "480px",
-            "& > :not(style)": { m: 1 },
-          }}
-        >
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label={t("product:sku")}
-            variant="outlined"
-            value={sku}
-            onChange={(e) => {
-              let skuText = e.target.value;
-              if (skuText && skuText.length > 0) setSku(e.target.value);
-              else setSku(null);
-            }}
-          />
-          <TextField
-            required
-            fullWidth
-            id="outlined-basic"
-            label={t("product:productName")}
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <TextField
-              required
-              type="number"
-              id="outlined-basic"
-              label={t("product:price")}
-              variant="outlined"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              style={{ width: "48%" }}
-            />
-            <TextField
-              required
-              type="number"
-              id="outlined-basic"
-              label={t("product:cost")}
-              variant="outlined"
-              value={costPerUnit}
-              onChange={(e) => setCostPerUnit(e.target.value)}
-              style={{ width: "48%" }}
-            />
-          </div>
-
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "16px",
-            }}
-          >
-            <TextField
-              fullWidth
-              required
-              type="number"
-              id="outlined-basic"
-              label={t("product:amountLeft")}
-              variant="outlined"
-              value={amountLeft}
-              onChange={(e) => setAmountLeft(e.target.value)}
-              style={{ width: "48%" }}
-            />
-            <TextField
-              fullWidth
-              required
-              type="number"
-              id="outlined-basic"
-              label={t("product:alertAmount")}
-              variant="outlined"
-              value={alertAmount}
-              onChange={(e) => setAlertAmount(e.target.value)}
-              style={{ width: "48%" }}
-            />
-          </div>
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label={t("product:description")}
-            variant="outlined"
-            multiline
-            rows={2}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <Box style={{ maxHeight: "120px" }}>
-            <>
-              <input
-                accept="image/png, image/jpeg"
-                style={{ display: "none" }}
-                id="raised-button-file"
-                multiple
-                type="file"
-                onChange={handleUpload}
-              />
-              <label htmlFor="raised-button-file">
-                <Button variant="contained" component="span">
-                  <UploadIcon />
-                  {t("product:addProductModal.uploadImage")}
-                </Button>
-              </label>
-            </>
-            {image && (
-              <img
-                alt="product-preview"
-                src={preview}
-                height="120px"
-                style={{ marginLeft: "40px" }}
-              />
-            )}
-            {image && (
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => setImage(null)}
+        <Box>
+          <Tabs value={tabValue} onChange={handleChange}>
+            <Tab label="Single Upload" />
+            <Tab label="Batch Upload" />
+          </Tabs>
+          {tabValue === 0 ? (
+            <div>
+              <Box
+                component="form"
+                autoComplete="off"
+                sx={{
+                  width: "480px",
+                  "& > :not(style)": { m: 1 },
+                }}
               >
-                <DeleteIcon />
-                {t("product:addProductModal.removeImage")}
-              </Button>
-            )}
-          </Box>
+                <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label={t("product:sku")}
+                  variant="outlined"
+                  value={sku}
+                  onChange={(e) => {
+                    let skuText = e.target.value;
+                    if (skuText && skuText.length > 0) setSku(e.target.value);
+                    else setSku(null);
+                  }}
+                />
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-basic"
+                  label={t("product:productName")}
+                  variant="outlined"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <TextField
+                    required
+                    type="number"
+                    id="outlined-basic"
+                    label={t("product:price")}
+                    variant="outlined"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    style={{ width: "48%" }}
+                  />
+                  <TextField
+                    required
+                    type="number"
+                    id="outlined-basic"
+                    label={t("product:cost")}
+                    variant="outlined"
+                    value={costPerUnit}
+                    onChange={(e) => setCostPerUnit(e.target.value)}
+                    style={{ width: "48%" }}
+                  />
+                </div>
+
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "16px",
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    required
+                    type="number"
+                    id="outlined-basic"
+                    label={t("product:amountLeft")}
+                    variant="outlined"
+                    value={amountLeft}
+                    onChange={(e) => setAmountLeft(e.target.value)}
+                    style={{ width: "48%" }}
+                  />
+                  <TextField
+                    fullWidth
+                    required
+                    type="number"
+                    id="outlined-basic"
+                    label={t("product:alertAmount")}
+                    variant="outlined"
+                    value={alertAmount}
+                    onChange={(e) => setAlertAmount(e.target.value)}
+                    style={{ width: "48%" }}
+                  />
+                </div>
+                <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label={t("product:description")}
+                  variant="outlined"
+                  multiline
+                  rows={2}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <Box style={{ maxHeight: "120px" }}>
+                  <>
+                    <input
+                      accept="image/png, image/jpeg"
+                      style={{ display: "none" }}
+                      id="raised-button-file"
+                      multiple
+                      type="file"
+                      onChange={handleUpload}
+                    />
+                    <label htmlFor="raised-button-file">
+                      <Button variant="contained" component="span">
+                        <UploadIcon />
+                        {t("product:addProductModal.uploadImage")}
+                      </Button>
+                    </label>
+                  </>
+                  {image && (
+                    <img
+                      alt="product-preview"
+                      src={preview}
+                      height="120px"
+                      style={{ marginLeft: "40px" }}
+                    />
+                  )}
+                  {image && (
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => setImage(null)}
+                    >
+                      <DeleteIcon />
+                      {t("product:addProductModal.removeImage")}
+                    </Button>
+                  )}
+                </Box>
+              </Box>
+            </div>
+          ) : (
+            <div>
+              <Box pt={2}>
+                <>
+                  <input
+                    accept=".csv"
+                    style={{ display: "none" }}
+                    id="raised-button-file"
+                    multiple
+                    type="file"
+                    onChange={handleUpload}
+                  />
+                  <label htmlFor="raised-button-file">
+                    <Button variant="contained" component="span">
+                      <UploadIcon />
+                      Upload files (.csv)
+                    </Button>
+                  </label>
+                </>
+              </Box>
+            </div>
+          )}
         </Box>
       }
     ></BudaModal>

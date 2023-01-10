@@ -1,5 +1,9 @@
 import { useQuery } from "@apollo/client";
-import Box from "@mui/material/Box";
+import PaidIcon from "@mui/icons-material/Paid";
+import SellIcon from "@mui/icons-material/Sell";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import {
   PRODUCT_LEAST_PROFIT,
@@ -12,13 +16,6 @@ import {
   PRODUCT_TOP_SELL_NUMBER,
 } from "src/graphQl/statistics/productQueries";
 import StatisticsCard from "./StatisticsCard";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import LocalAtmIcon from "@mui/icons-material/LocalAtm";
-import PaidIcon from "@mui/icons-material/Paid";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import SellIcon from "@mui/icons-material/Sell";
-import { Grid } from "@mui/material";
 
 const Retention = () => {
   const { data: productsTopSellNumber } = useQuery(PRODUCT_TOP_SELL_NUMBER);

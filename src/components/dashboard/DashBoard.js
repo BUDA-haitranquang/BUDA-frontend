@@ -6,6 +6,7 @@ import {
   Divider,
   Tab,
   Tabs,
+  Typography,
 } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -19,6 +20,18 @@ import IncompletedBuyOrder from "./IncompletedBuyOrder";
 import IncompletedFixedCostBill from "./IncompletedFixedCostBill";
 import IncompletedOtherCost from "./IncompletedOtherCost";
 import { useTranslation } from "react-i18next";
+import color from "src/theme/color";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  customStyleOnTab: {
+    fontFamily: "'Andika', san serif",
+  },
+  activeTab: {
+    fontFamily: "'Andika', san serif",
+    fontWeight: "bold",
+  },
+});
 
 const MainDashBoard = () => {
   const { t } = useTranslation(["dashboard"]);
@@ -26,6 +39,7 @@ const MainDashBoard = () => {
   const [revenue, setRevenue] = useState([]);
   const [tab, setTab] = useState(0);
   const { data: dayRevenueData } = useQuery(LOAD_BUSINESS_OVERALL_30_DAY);
+  const classes = useStyles();
 
   const handleChangeTab = (e, val) => {
     setTab(val);
@@ -121,7 +135,11 @@ const MainDashBoard = () => {
       }
     }
 
+<<<<<<< HEAD
     while (curDate.getTime() !== upperBound.getTime()) {
+=======
+    while (curDate.getTime() < upperBound.getTime()) {
+>>>>>>> ad50e0d2db845cd43732b8afb87668c8acb09b1e
       result = [
         ...result,
         {
@@ -158,7 +176,7 @@ const MainDashBoard = () => {
   ];
 
   return (
-    <Box width="100%">
+    <Box width="100%" display="flex" flexDirection="column" alignItems="center">
       <Grid container spacing={2} sx={{ width: "100%" }}>
         <Grid
           item
@@ -230,17 +248,80 @@ const MainDashBoard = () => {
           )}
         </Grid>
       </Grid>
-      <Box py={5}></Box>
-
-      <Box>
-        <Tabs value={tab} onChange={handleChangeTab}>
-          <Tab label={t("dashboard:sellOrder.title")} />
-          <Tab label={t("dashboard:buyOrder.title")} />
-          <Tab label={t("dashboard:fixedCost.title")} />
-          <Tab label={t("dashboard:otherCost.title")} />
-        </Tabs>
+      <Box
+        mt={15}
+        mb={3}
+        height="1px"
+        width="80%"
+        sx={{ backgroundColor: color.DARK_DIM, opacity: 0.3 }}
+      >
+        {" "}
       </Box>
       <Divider />
+<<<<<<< HEAD
+=======
+      <Box width="70%">
+        <Tabs
+          variant="fullWidth"
+          value={tab}
+          textColor={color.DARK_DIM}
+          onChange={handleChangeTab}
+          TabIndicatorProps={{
+            sx: {
+              backgroundColor: color.PRIMARY,
+              height: "5px",
+              borderRadius: "5px",
+              mt: "-20px",
+            },
+          }}
+        >
+          <Tab
+            label=<Typography
+              className={
+                tab === 0 ? classes.activeTab : classes.customStyleOnTab
+              }
+            >
+              {t("dashboard:sellOrder.title")}
+            </Typography>
+            disableFocusRipple
+            disableRipple
+          />
+          <Tab
+            label=<Typography
+              className={
+                tab === 1 ? classes.activeTab : classes.customStyleOnTab
+              }
+            >
+              {t("dashboard:buyOrder.title")}
+            </Typography>
+            disableFocusRipple
+            disableRipple
+          />
+          <Tab
+            label=<Typography
+              className={
+                tab === 2 ? classes.activeTab : classes.customStyleOnTab
+              }
+            >
+              {t("dashboard:fixedCost.title")}
+            </Typography>
+            disableFocusRipple
+            disableRipple
+          />
+          <Tab
+            label=<Typography
+              className={
+                tab === 3 ? classes.activeTab : classes.customStyleOnTab
+              }
+            >
+              {t("dashboard:otherCost.title")}
+            </Typography>
+            disableFocusRipple
+            disableRipple
+          />
+        </Tabs>
+      </Box>
+>>>>>>> ad50e0d2db845cd43732b8afb87668c8acb09b1e
       <Box py={2}></Box>
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}

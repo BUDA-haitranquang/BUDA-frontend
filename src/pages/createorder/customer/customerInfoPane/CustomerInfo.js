@@ -43,108 +43,72 @@ export default function CustomerInfo() {
           <TableBody>
             <TableRow>
               <TableCell sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontWeight="bold"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontWeight="bold">
                   {t("sell:customerInfo.name")}:
                 </Typography>
               </TableCell>
               <TableCell align="right" sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontStyle="italic"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontStyle="italic">
                   {customer?.name}
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontWeight="bold"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontWeight="bold">
                   {t("sell:customerInfo.phone")}:
                 </Typography>
               </TableCell>
               <TableCell align="right" sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontStyle="italic"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontStyle="italic">
                   {customer?.phonenumber}
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontWeight="bold"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontWeight="bold">
                   {t("sell:customerInfo.totalSpend")}:
                 </Typography>
               </TableCell>
               <TableCell align="right" sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontStyle="italic"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontStyle="italic">
                   {customer?.totalSpend?.toLocaleString() || 0}
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontWeight="bold"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontWeight="bold">
                   {t("sell:customerInfo.gender")}:
                 </Typography>
               </TableCell>
               <TableCell align="right" sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontStyle="italic"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontStyle="italic">
                   {customer?.gender}
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontWeight="bold"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontWeight="bold">
                   {t("sell:customerInfo.ageGroup")}:
                 </Typography>
               </TableCell>
               <TableCell align="right" sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontStyle="italic"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontStyle="italic">
                   {customer?.ageGroup}
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontWeight="bold"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontWeight="bold">
                   {t("sell:customerInfo.address")}:
                 </Typography>
               </TableCell>
               <TableCell align="right" sx={{ borderBottom: "none" }}>
-                <Typography
-                  fontFamily="'Montserrat', san-serif"
-                  fontStyle="italic"
-                >
+                <Typography fontFamily="'Andika', san-serif" fontStyle="italic">
                   {customer?.address}
                 </Typography>
               </TableCell>
