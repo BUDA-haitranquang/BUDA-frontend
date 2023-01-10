@@ -1,23 +1,16 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
-import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import ProductComboTableBody from "src/components/table/body/ProductComboTableBody";
 import { LOAD_PRODUCT_COMBOS } from "src/graphQl/products/productQueries";
-import {
-  AlertErrorProp,
-  AlertSuccessProp
-} from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
-import ProductTableBody from "../components/table/body/ProductTableBody";
 
 const Product = () => {
   const { t } = useTranslation(["common", "product"]);
   const [productCombos, setProductCombos] = useState([]);
   const { error, loading, data } = useQuery(LOAD_PRODUCT_COMBOS);
   // const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
-  const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
 
   // const handleDelete = (selected) => {
   //   if (selected === []) return;
@@ -60,6 +53,10 @@ const Product = () => {
       disablePadding: true,
       label: t("product:description"),
     },
+    {
+      id: "detail",
+      label: t("common:detail"),
+    },
   ];
   return (
     <Box sx={{ display: "flex" }}>
@@ -76,7 +73,8 @@ const Product = () => {
           headCells={headCells}
           // Modal={AddProductModal}
           type="productComboID"
-          DetailTableBody={ProductTableBody}
+          DetailTableBody={ProductComboTableBody}
+          isNotShowCheckBox={true}
         />
       </Box>
     </Box>
