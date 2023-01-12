@@ -1,5 +1,6 @@
 import { Box, Hidden, styled } from "@mui/material";
 import { Fragment } from "react";
+import Footer from "src/layouts/components/Footer";
 import Header from "src/layouts/components/Header";
 import Sidebar from "src/layouts/components/Sidebar";
 
@@ -50,7 +51,7 @@ export default function MainLayout(props) {
               {children}
             </Box>
           </MainContentWrapper>
-          <Hidden xsUp implementation="css"></Hidden>
+          <Footer />
         </Box>
       </Box>
     </Fragment>

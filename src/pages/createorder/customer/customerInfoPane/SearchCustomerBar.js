@@ -14,6 +14,8 @@ import AddCustomerModal from "../../../../components/modal/AddCustomerModal";
 import { LOAD_CUSTOMERS } from "../../../../graphQl/customers/customersQueries";
 import { addCustomer } from "../../../../redux/productCartSlice";
 import { useTranslation } from "react-i18next";
+import color from "src/theme/color";
+
 const useStyle = makeStyles(() => ({
   root: {
     display: "flex",
@@ -26,6 +28,7 @@ const useStyle = makeStyles(() => ({
     },
   },
 }));
+
 
 export default function SearchCustomerBar() {
   const classes = useStyle();
@@ -98,7 +101,10 @@ export default function SearchCustomerBar() {
         sx={{
           width: "37%",
           padding: "2px",
-          backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+          backgroundColor: color.PRIMARY,
+          "&:hover": {
+            backgroundColor: color.PRIMARY,
+          },
           boxShadow: "none",
         }}
         onClick={handleOpenModal}

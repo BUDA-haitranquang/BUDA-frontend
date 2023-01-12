@@ -3,7 +3,6 @@ import {
   Button,
   ButtonGroup,
   Grid,
-  Divider,
   Tab,
   Tabs,
   Typography,
@@ -135,11 +134,7 @@ const MainDashBoard = () => {
       }
     }
 
-<<<<<<< HEAD
-    while (curDate.getTime() !== upperBound.getTime()) {
-=======
     while (curDate.getTime() < upperBound.getTime()) {
->>>>>>> ad50e0d2db845cd43732b8afb87668c8acb09b1e
       result = [
         ...result,
         {
@@ -211,16 +206,54 @@ const MainDashBoard = () => {
                 <Box pt={1}>
                   <ButtonGroup sx={{ paddingRight: "30px" }}>
                     <Button
-                      variant={chart === 1 ? "contained" : "outlined"}
+                      disableFocusRipple
+                      disableRipple
+                      disableTouchRipple
+                      variant="contained"
                       onClick={() => setChart(1)}
+                      sx={{
+                        boxShadow: "none",
+                        borderRadius: "12px 0px 0px 12px",
+                        backgroundColor:
+                          chart === 1 ? color.PRIMARY : color.PRIMARY_LIGHT,
+                        "&:hover": {
+                          boxShadow: "none",
+                          backgroundColor:
+                            chart === 1 ? color.PRIMARY : color.PRIMARY_LIGHT,
+                        },
+                      }}
                     >
-                      <BarChartIcon />
+                      <BarChartIcon
+                        sx={{
+                          color:
+                            chart === 0 ? color.PRIMARY : color.PRIMARY_LIGHT,
+                        }}
+                      />
                     </Button>
                     <Button
-                      variant={chart === 0 ? "contained" : "outlined"}
+                      disableFocusRipple
+                      disableRipple
+                      disableTouchRipple
+                      variant="contained"
                       onClick={() => setChart(0)}
+                      sx={{
+                        boxShadow: "none",
+                        borderRadius: "0px 12px 12px 0px",
+                        backgroundColor:
+                          chart === 0 ? color.PRIMARY : color.PRIMARY_LIGHT,
+                        "&:hover": {
+                          boxShadow: "none",
+                          backgroundColor:
+                            chart === 0 ? color.PRIMARY : color.PRIMARY_LIGHT,
+                        },
+                      }}
                     >
-                      <ShowChartIcon />
+                      <ShowChartIcon
+                        sx={{
+                          color:
+                            chart === 1 ? color.PRIMARY : color.PRIMARY_LIGHT,
+                        }}
+                      />
                     </Button>
                   </ButtonGroup>
                 </Box>
@@ -257,10 +290,7 @@ const MainDashBoard = () => {
       >
         {" "}
       </Box>
-      <Divider />
-<<<<<<< HEAD
-=======
-      <Box width="70%">
+      <Box width="65%">
         <Tabs
           variant="fullWidth"
           value={tab}
@@ -321,7 +351,6 @@ const MainDashBoard = () => {
           />
         </Tabs>
       </Box>
->>>>>>> ad50e0d2db845cd43732b8afb87668c8acb09b1e
       <Box py={2}></Box>
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}

@@ -17,6 +17,8 @@ import {
   clearProductCart,
 } from "../../../../redux/productCartSlice";
 import { useTranslation } from "react-i18next";
+import color from "src/theme/color";
+
 const useStyle = makeStyles(() => ({
   root: {
     marginBottom: "12px",
@@ -67,12 +69,17 @@ export default function SearchProductBar() {
         sx={{
           width: "15%",
           padding: "2px",
-          backgroundImage: "linear-gradient(to right, #277fd6, #409fff)",
+          backgroundColor: color.PRIMARY,
+          "&:hover": {
+            backgroundColor: color.PRIMARY,
+          },
           boxShadow: "none",
         }}
         onClick={handleOpenModal}
       >
-        {t("sell:newProduct")}
+        <Typography fontFamily="'Andika', san serif">
+          {t("sell:newProduct")}
+        </Typography>
       </Button>
       <Autocomplete
         id="product-select"
@@ -109,9 +116,7 @@ export default function SearchProductBar() {
           </Box>
         )}
         renderInput={(params) => {
-          return (
-            <TextField {...params} label={t("sell:searchProduct")}/>
-          );
+          return <TextField {...params} label={t("sell:searchProduct")} />;
         }}
       />
       <Button
@@ -119,13 +124,18 @@ export default function SearchProductBar() {
         sx={{
           width: "15%",
           padding: "2px",
-          backgroundImage: "linear-gradient(to right, #ed4545, #ff6b6b)",
+          backgroundColor: color.LIGHT_RED,
           boxShadow: "none",
+          "&:hover": {
+            backgroundColor: color.LIGHT_RED,
+          },
         }}
         onClick={() => dispatch(clearProductCart())}
         loadingIndicator="Clearing..."
       >
-        {t("sell:clearCart")}
+        <Typography fontFamily="'Andika', san serif">
+          {t("sell:clearCart")}
+        </Typography>
       </Button>
 
       <AddProductModal isOpen={isOpenModal} handleClose={handleCloseModal} />
