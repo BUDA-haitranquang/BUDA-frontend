@@ -1,6 +1,5 @@
 import SignUpForm from "./SignUpForm";
 import { Box } from "@mui/material";
-import LoginBackground from "src/assets/Background_1.png";
 import LoginIllustration from "src/assets/login_illustration.png";
 
 const SignUp = () => {

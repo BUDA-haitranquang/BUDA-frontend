@@ -1,19 +1,15 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
+import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
-import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { INCOMPLETED_FIXED_COST } from "../../graphQl/dashboard/queries";
 import IncompletedFixedCostTableBody from "./tableBody/IncompletedFixedCostTableBody";
-// import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 
 const IncompletedFixedCost = (props) => {
-  //   const { t } = useTranslation(["common", "product"]);
   const [fixedCost, setFixedCost] = useState([]);
-  const { error, loading, data } = useQuery(INCOMPLETED_FIXED_COST);
-  const {t} = useTranslation('dashboard');
+  const { data } = useQuery(INCOMPLETED_FIXED_COST);
+  const { t } = useTranslation("dashboard");
   const toObject = (data1) => {
     let incompleted = {};
     incompleted.fixedCostBillID = data1?.fixedCostBillID;

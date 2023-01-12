@@ -1,19 +1,15 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
+import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
-import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BudaTable from "../../buda-components/table/BudaTable";
 import { INCOMPLETED_SELL_ORDER } from "../../graphQl/dashboard/queries";
 import IncompletedSellOrderTableBody from "./tableBody/IncompletedSellOrderTableBody";
-// import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 
 const IncompletedSellOrder = (props) => {
-  //   const { t } = useTranslation(["common", "product"]);
   const [sellOrder, setSellOrder] = useState([]);
-  const { error, loading, data } = useQuery(INCOMPLETED_SELL_ORDER);
-  const {t} = useTranslation('dashboard');
+  const { data } = useQuery(INCOMPLETED_SELL_ORDER);
+  const { t } = useTranslation("dashboard");
   const toObject = (data1) => {
     let incompletedSellOrder = {};
     incompletedSellOrder.sellOrderID = data1?.sellOrderID;
@@ -36,7 +32,7 @@ const IncompletedSellOrder = (props) => {
 
     fetchData();
   }, [data]);
-  
+
   const headCells = [
     {
       id: "textID",

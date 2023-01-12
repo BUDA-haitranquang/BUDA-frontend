@@ -1,15 +1,14 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
-import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
-import BuyOrderTableBody from "./components/BuyOrderTableBody";
-import { LOAD_BUY_ORDERS } from "../../../graphQl/buyorders/BuyOrderQueries";
-import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useHistory, useLocation } from "react-router-dom";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
 import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
+import { DELETE_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderMutations";
+import { LOAD_BUY_ORDERS } from "../../../graphQl/buyorders/BuyOrderQueries";
+import BuyOrderTableBody from "./components/BuyOrderTableBody";
 
 const BuyOrder = () => {
   const { t } = useTranslation("buyorder", { keyPrefix: "list" });
@@ -26,7 +25,7 @@ const BuyOrder = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { error, refetch } = useQuery(LOAD_BUY_ORDERS);
+  const { refetch } = useQuery(LOAD_BUY_ORDERS);
   const [deleteBuyOrder] = useMutation(DELETE_BUY_ORDER);
 
   const headCells = [
@@ -76,6 +75,7 @@ const BuyOrder = () => {
     }
 
     init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   /// init filter

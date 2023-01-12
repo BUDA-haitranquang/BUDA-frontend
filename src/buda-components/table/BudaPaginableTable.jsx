@@ -73,6 +73,7 @@ const BudaPaginableTable = (props) => {
     if (onSearch && !isNull(search)) {
       onSearch(searchBy, search);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
@@ -80,6 +81,7 @@ const BudaPaginableTable = (props) => {
       setSelected([]);
     }
     setSearch("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchBy]);
 
   return (

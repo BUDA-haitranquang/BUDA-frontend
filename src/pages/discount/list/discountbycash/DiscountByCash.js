@@ -1,22 +1,20 @@
-import Box from "@mui/material/Box";
-import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import DiscountByCashTableBody from "./components/DiscountByCashTableBody";
-import BudaTable from "../../../../buda-components/table/BudaTable";
+import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../../../../buda-components/alert/BudaNoti";
+import BudaTable from "../../../../buda-components/table/BudaTable";
 import AddDiscountModal from "../../../../components/modal/AddDiscountModals";
-import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
 import { DELETE_DISCOUNTS_MUTATION } from "../../../../graphQl/discounts/discountMutations";
-import { useTranslation } from "react-i18next";
+import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
+import DiscountByCashTableBody from "./components/DiscountByCashTableBody";
 
 const DiscountByCash = ({ discounts }) => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
   const [deleteDiscount] = useMutation(DELETE_DISCOUNTS_MUTATION);
 
   const headCells = [
@@ -66,7 +64,6 @@ const DiscountByCash = ({ discounts }) => {
 
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         deleteDiscount({
@@ -77,11 +74,8 @@ const DiscountByCash = ({ discounts }) => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
-  // if(error) return <Redirect to="/login"/>;
 
   return (
     <Box>

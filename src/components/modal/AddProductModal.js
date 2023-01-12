@@ -18,7 +18,7 @@ import imageCompression from "browser-image-compression";
 
 const AddProductModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const { jwt, isAuth, refreshJwt } = useSelector((state) => state.token);
+  const { jwt } = useSelector((state) => state.token);
   const [image, setImage] = useState();
   const { t } = useTranslation(["common", "product"]);
 
@@ -29,7 +29,7 @@ const AddProductModal = ({ isOpen, handleClose }) => {
   const [alertAmount, setAlertAmount] = useState(0);
   const [costPerUnit, setCostPerUnit] = useState(0);
   const [description, setDescription] = useState("");
-  const [newProduct, { error }] = useMutation(ADD_PRODUCT_MUTATION);
+  const [newProduct] = useMutation(ADD_PRODUCT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
   const [tabValue, setTabValue] = useState(0);
   const [preview, setPreview] = useState();

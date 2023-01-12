@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { TableCell } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { Button, Box, TextField } from "@mui/material";
@@ -45,7 +45,7 @@ const StoreTableBody = (props) => {
 export default StoreTableBody;
 
 const EditStoreModal = ({ isOpen, handleClose, row }) => {
-  const [updateStore, { error }] = useMutation(UPDATE_STORE);
+  const [updateStore] = useMutation(UPDATE_STORE);
   const { enqueueSnackbar } = useSnackbar();
   const [name, setName] = useState(row.name);
   const [address, setAddress] = useState(row.address);

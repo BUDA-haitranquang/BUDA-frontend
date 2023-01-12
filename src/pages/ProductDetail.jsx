@@ -1,8 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Redirect } from "react-router-dom";
 import {

@@ -98,6 +98,7 @@ function BoxIngredient(props) {
       ...prevBuyOrderRequest,
       buyOrderItemDTOs: buyOrderItems,
     }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buyOrderItems]);
 
   const onChooseIngredient = async (ingredient) => {

@@ -16,14 +16,7 @@ function BoxAdditionalInfo(props) {
     keyPrefix: "detail.boxAdditionalInfo",
   });
   const classes = useStyles();
-  let cTime = null;
-  let fTime = null;
-  if (creationTime) {
-    cTime = creationTime.slice(0, 10) + creationTime.slice(11, 19);
-  }
-  if (finishTime) {
-    fTime = finishTime.slice(0, 10) + finishTime.slice(11, 19);
-  }
+
   return (
     <Paper className={classes.root}>
       <Box className="BoxAdditionalInfo-header">

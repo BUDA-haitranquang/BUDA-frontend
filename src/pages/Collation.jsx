@@ -1,16 +1,14 @@
 import { useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect } from "react-router-dom";
 import BudaTable from "../buda-components/table/BudaTable";
 import CollationTableBody from "../components/table/body/CollationTableBody";
 import { LOAD_COLATIONS } from "../graphQl/collation/collationQueries";
 
 const Collation = () => {
   const [products, setProducts] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_COLATIONS);
+  const { data } = useQuery(LOAD_COLATIONS);
   const { t } = useTranslation(["common", "product"]);
   const headCells = [
     {
@@ -48,7 +46,7 @@ const Collation = () => {
   }, [data]);
 
   // if (error) return <Redirect to="/login" />;
-  
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box

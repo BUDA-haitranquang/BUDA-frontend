@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const ProductComboTableBody = (props) => {
-  const { row, labelId } = props;
+  const { row } = props;
 
   const { t } = useTranslation(["common", "product"]);
 
@@ -67,7 +67,9 @@ const ProductComboTableBody = (props) => {
                 </Box>
               </Box>
             ))}
-            <Box sx={{ display: "flex", flexDirection: "row", marginTop: "12px" }}>
+            <Box
+              sx={{ display: "flex", flexDirection: "row", marginTop: "12px" }}
+            >
               <Typography
                 sx={{ color: "gray", fontWeight: 600, marginRight: "8px" }}
               >

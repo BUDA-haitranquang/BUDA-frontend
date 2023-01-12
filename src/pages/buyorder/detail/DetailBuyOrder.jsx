@@ -1,14 +1,16 @@
-import { useQuery, useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import PrintIcon from "@mui/icons-material/Print";
-import { Box, Button, Grid, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
 import BuyOrderDetailPrintForm from "../../../components/printforms/BuyOrderDetailPrintForm";
-import { LOAD_BUY_ORDER, PRINT_BUY_ORDER } from "../../../graphQl/buyorders/BuyOrderQueries";
+import {
+  LOAD_BUY_ORDER,
+  PRINT_BUY_ORDER,
+} from "../../../graphQl/buyorders/BuyOrderQueries";
 import { dateToDateString } from "../../../utils/utils";
 import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
 import BoxIngredient from "./components/BoxIngredient/BoxIngredient";
@@ -19,7 +21,6 @@ DetailBuyOrder.propTypes = {};
 
 function DetailBuyOrder(props) {
   const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation("buyorder", { keyPrefix: "detail" });
   const [buyOrder, setBuyOrder] = useState(null);
   const [buyOrderPrintInfo, setBuyOrderPrintInfo] = useState();
   const { id } = useParams();
@@ -52,17 +53,17 @@ function DetailBuyOrder(props) {
     printBuyOrder({
       variables: {
         buyOrderID: buyOrderID,
-        storeID: storeID
-      }
+        storeID: storeID,
+      },
     })
       .then((res) => {
-        setBuyOrderPrintInfo(res.data.printBuyOrder)
+        setBuyOrderPrintInfo(res.data.printBuyOrder);
       })
       .then(() => {
         print();
       })
-      .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp))
-  }
+      .catch((e) => enqueueSnackbar("An error happened", AlertErrorProp));
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -81,7 +82,10 @@ function DetailBuyOrder(props) {
             justifyContent="space-between"
           >
             <Typography variant="h4">{buyOrder?.textID}</Typography>
-            <Button variant="contained" onClick={() => handlePrint(parseInt(id), 8)}>
+            <Button
+              variant="contained"
+              onClick={() => handlePrint(parseInt(id), 8)}
+            >
               <PrintIcon style={{ marginRight: "10px" }} />
               Print
             </Button>
@@ -116,7 +120,10 @@ function DetailBuyOrder(props) {
         </Box>
       </Box>
       <Box sx={{ position: "fixed", left: "100vw" }}>
-        <BuyOrderDetailPrintForm ref={componentRef} buyOrderPrintInfo={buyOrderPrintInfo}/>
+        <BuyOrderDetailPrintForm
+          ref={componentRef}
+          buyOrderPrintInfo={buyOrderPrintInfo}
+        />
       </Box>
     </Box>
   );

@@ -1,16 +1,12 @@
-import { Box, Grid, Toolbar } from "@mui/material";
-import BudaPieChart from "../../../buda-components/charts/BudaPieChart";
-import BudaLegend from "../../../buda-components/charts/BudaLegend";
 import { useQuery } from "@apollo/client";
+import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import BudaLegend from "../../../buda-components/charts/BudaLegend";
+import BudaPieChart from "../../../buda-components/charts/BudaPieChart";
 import { LOAD_TOTAL_SPEND_AGE_BY_USER } from "../../../graphQl/statistics/statisticQueries";
 // import { LOAD_TOTAL_SPEND_AGE_THIS_MONTH_BY_USER } from "../../../graphQl/statistics/statisticQueries";
 const AgeGroupSellOrder = () => {
-  const {
-    error: ageError,
-    loading: ageLoading,
-    data: ageData
-  } = useQuery(LOAD_TOTAL_SPEND_AGE_BY_USER);
+  const { data: ageData } = useQuery(LOAD_TOTAL_SPEND_AGE_BY_USER);
   const [age, setAge] = useState([]);
   const COLORSAGEGROUP = [
     "#8884d8",
@@ -19,7 +15,7 @@ const AgeGroupSellOrder = () => {
     "#82ca9d",
     "#a4de6c",
     "#d0ed57",
-    "#ffc658"
+    "#ffc658",
   ];
   useEffect(() => {
     async function fetchData() {
@@ -44,11 +40,19 @@ const AgeGroupSellOrder = () => {
       <Grid item xs={6} display="flex" justifyContent="center">
         <Box>
           <h1> Sell order by age group</h1>
-          {age.length !== 0 ? <BudaLegend
-            data={age}
-            colors={COLORSAGEGROUP}
-            style={{ display: "flex", flexDirection: "column", width: "100%" }}
-          /> : <h6>No data</h6>}
+          {age.length !== 0 ? (
+            <BudaLegend
+              data={age}
+              colors={COLORSAGEGROUP}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+              }}
+            />
+          ) : (
+            <h6>No data</h6>
+          )}
         </Box>
       </Grid>
 
@@ -60,14 +64,15 @@ const AgeGroupSellOrder = () => {
         alignItems="center"
         justifyContent="center"
       >
-        {age.length !== 0 &&
+        {age.length !== 0 && (
           <BudaPieChart
             legend={false}
             data={age}
             colors={COLORSAGEGROUP}
             width="100%"
             height={500}
-          />}
+          />
+        )}
       </Grid>
     </Grid>
   );

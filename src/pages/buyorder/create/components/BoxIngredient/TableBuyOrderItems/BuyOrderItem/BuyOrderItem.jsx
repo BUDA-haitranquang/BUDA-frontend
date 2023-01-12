@@ -33,6 +33,7 @@ function BuyOrderItem(props) {
       ...prevBuyOrderRequest,
       buyOrderItemDTOs: newBuyOrderItems,
     }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pricePerUnit, quantity]);
 
   const handlePriceChange = (e) => {
@@ -63,6 +64,7 @@ function BuyOrderItem(props) {
         )}
       </TableCell>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.ingredient.name, item.ingredient.picture?.link]);
 
   const CellSKU = useMemo(() => {
@@ -124,6 +126,7 @@ function BuyOrderItem(props) {
         />
       </TableCell>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

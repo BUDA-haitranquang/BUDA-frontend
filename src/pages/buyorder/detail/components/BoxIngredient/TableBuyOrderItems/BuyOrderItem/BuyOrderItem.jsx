@@ -29,6 +29,7 @@ function BuyOrderItem(props) {
         )}
       </TableCell>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.ingredient.name, item.ingredient.picture?.link]);
 
   const CellSKU = useMemo(() => {

@@ -46,6 +46,7 @@ function LiveSearch(props) {
 
   useEffect(() => {
     setOptions(fetchData(""));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleQueryChange = (e, value) => {

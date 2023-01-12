@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import { useEffect, useRef, useState } from "react";
@@ -10,25 +9,23 @@ import {
   AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
 import BudaTable from "../buda-components/table/BudaTable";
+import AddProductModal from "../components/modal/AddProductModal";
 import ProductBarcodeListPrintForm from "../components/printforms/ProductBarcodeListPrintForm";
 import ProductTableBody from "../components/table/body/ProductTableBody";
 import { HIDE_PRODUCT_MUTATION } from "../graphQl/products/productMutations";
 import { LOAD_PRODUCTS } from "../graphQl/products/productQueries";
-import AddProductModal from "../components/modal/AddProductModal";
 
 const Product = () => {
   const { t } = useTranslation(["common", "product"]);
   const [products, setProducts] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+  const { data } = useQuery(LOAD_PRODUCTS);
   const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
   const [printItem, setPrintItem] = useState([]);
   const componentRef = useRef();
 
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         hideProduct({
@@ -39,8 +36,6 @@ const Product = () => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -67,6 +62,7 @@ const Product = () => {
     if (printItem && printItem.length > 0) {
       print();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [printItem]);
 
   // if(error) return <Redirect to="/login"/>;

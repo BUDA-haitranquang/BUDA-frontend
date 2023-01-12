@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp
+  AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { NEW_STORE } from "../../graphQl/myaccount/mutaion";
@@ -13,10 +13,10 @@ import { GET_STORE } from "../../graphQl/myaccount/queries";
 const NewStoreModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [name, setName] = useState("");
- const {t} = useTranslation(['common'])
+  const { t } = useTranslation(["common"]);
   const [address, setAddress] = useState("");
 
-  const [newStore, { error }] = useMutation(NEW_STORE);
+  const [newStore] = useMutation(NEW_STORE);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
@@ -29,9 +29,9 @@ const NewStoreModal = ({ isOpen, handleClose }) => {
     newStore({
       variables: {
         name: name,
-        address:address
+        address: address,
       },
-      refetchQueries: [{ query: GET_STORE }]
+      refetchQueries: [{ query: GET_STORE }],
     })
       .then((res) => {
         handleClose();
@@ -43,9 +43,7 @@ const NewStoreModal = ({ isOpen, handleClose }) => {
   };
 
   const isFormValid = () => {
-    const isValid =
-      name !== "" &&
-      address !=="";
+    const isValid = name !== "" && address !== "";
 
     return isValid;
   };
@@ -63,26 +61,26 @@ const NewStoreModal = ({ isOpen, handleClose }) => {
       textOk={t("common:save")}
       onOk={handleSubmit}
       isLoading={isLoading}
-      title='New Store'
+      title="New Store"
       children={
         <Box
           component="form"
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 }
+            "& > :not(style)": { m: 1 },
           }}
         >
           <TextField
             required
             fullWidth
             id="outlined-basic"
-            label='Name'
+            label="Name"
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        <TextField
+          <TextField
             required
             fullWidth
             id="outlined-basic"
@@ -91,7 +89,6 @@ const NewStoreModal = ({ isOpen, handleClose }) => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-          
         </Box>
       }
     />

@@ -1,14 +1,14 @@
+import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
-import { EDIT_INGREDIENT_QUANTITY } from "../../graphQl/ingredients/ingredientMutation";
-import { Ingredient_Collation } from "../../graphQl/ingredients/ingredientQueries";
+import { useEffect, useState } from "react";
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
+import { EDIT_INGREDIENT_QUANTITY } from "../../graphQl/ingredients/ingredientMutation";
+import { Ingredient_Collation } from "../../graphQl/ingredients/ingredientQueries";
 const IngredientCollationModal = ({
   isOpen,
   handleClose,
@@ -20,8 +20,7 @@ const IngredientCollationModal = ({
   const [comment, setComment] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const [amount, setAmount] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [editIngredientQuantity, { error, data: quantityData }] = useMutation(
+  const [editIngredientQuantity, { data: quantityData }] = useMutation(
     EDIT_INGREDIENT_QUANTITY
   );
   const resetForm = () => {
@@ -35,7 +34,6 @@ const IngredientCollationModal = ({
     return true;
   };
   const editQuantity = () => {
-    setLoading(true);
     editIngredientQuantity({
       variables: {
         ingredientID: parseInt(ingredientID),
@@ -49,8 +47,7 @@ const IngredientCollationModal = ({
         enqueueSnackbar("Add successfully", AlertSuccessProp);
       })
       .then(resetForm())
-      .catch((e) => enqueueSnackbar("An error have happened", AlertErrorProp))
-      .finally(setLoading(false));
+      .catch((e) => enqueueSnackbar("An error have happened", AlertErrorProp));
   };
 
   const handleSubmit = () => {
@@ -70,6 +67,7 @@ const IngredientCollationModal = ({
     //   }
     // }
     loadAmount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantityData]);
   return (
     <BudaModal

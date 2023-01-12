@@ -1,22 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useMutation } from "@apollo/client";
 import {
   Box,
   Button,
-  InputAdornment,
+  CircularProgress,
   Link,
+  Modal,
   OutlinedInput,
   Typography,
-  CircularProgress,
-  Modal,
 } from "@mui/material";
-import LockIcon from "@mui/icons-material/Lock";
-import PersonIcon from "@mui/icons-material/Person";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useHistory } from "react-router";
-import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -33,7 +27,7 @@ const SignUpForm = () => {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [visibility, setVisibility] = useState(false);
+
   const { enqueueSnackbar } = useSnackbar();
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
 
@@ -70,9 +64,6 @@ const SignUpForm = () => {
       </Modal>
     );
 
-  const handleVisibility = (e) => {
-    setVisibility(!visibility);
-  };
   const register = () => {
     registerUser({
       variables: {
@@ -268,7 +259,6 @@ const SignUpForm = () => {
               notched="true"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type={visibility ? "text" : "password"}
               placeholder="Password"
               sx={{
                 marginBottom: "1.25rem",

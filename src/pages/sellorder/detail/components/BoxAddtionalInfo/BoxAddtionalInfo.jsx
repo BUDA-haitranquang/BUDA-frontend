@@ -12,14 +12,6 @@ BoxAdditionalInfo.propTypes = {
 function BoxAdditionalInfo(props) {
   const { textID, creationTime, finishTime, status } = props;
   const classes = useStyles();
-  let Time = null;
-  let fTime = null;
-  if (creationTime) {
-    Time = creationTime.slice(0, 5) + " " + creationTime.slice(6, 15);
-  }
-  if (finishTime) {
-    fTime = finishTime.slice(0, 5) + " " + finishTime.slice(6, 15);
-  }
 
   return (
     <Paper className={classes.root}>

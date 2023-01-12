@@ -1,20 +1,20 @@
-import { Box, Button, ButtonGroup, Grid } from "@mui/material";
+import { useQuery } from "@apollo/client";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
+import { Box, Button, ButtonGroup, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import BudaLineChart from "../../buda-components/charts/BudaLineChart";
 import BudaBarChart from "../../buda-components/charts/BudaBarChart";
-import { useQuery } from "@apollo/client";
+import BudaLineChart from "../../buda-components/charts/BudaLineChart";
+import BudaDatePicker from "../../buda-components/datepicker/BudaDatePicker";
 import {
   LOAD_BUSINESS_OVERALL_30_DAY,
   LOAD_BUSINESS_OVERALL_EVERY_MONTH,
   LOAD_BUSINESS_OVERALL_EVERY_WEEK,
-  LOAD_BUSINESS_OVERALL_EVERY_YEAR
+  LOAD_BUSINESS_OVERALL_EVERY_YEAR,
 } from "../../graphQl/revenue statistics/businessOverallStatistics";
-import BudaDatePicker from "../../buda-components/datepicker/BudaDatePicker";
 const info = [
   { name: "revenue", color: "#82ca9d", datakey: "revenue" },
-  { name: "expense", color: "#DC143C", datakey: "expense" }
+  { name: "expense", color: "#DC143C", datakey: "expense" },
   // { name: "profit", color: "#00BFFF", datakey: "profit" },
 ];
 
@@ -22,21 +22,13 @@ const Revenue = () => {
   const [chart, setChart] = useState(0);
   const [timeSelected, setTimeSelected] = useState(0);
   const [revenue, setRevenue] = useState([]);
-  const [dayBegin, setDayBegin] = useState(new Date());
-  const [dayEnd, setDayEnd] = useState(new Date());
 
-  const { error: dayRevenueError, data: dayRevenueData } = useQuery(
-    LOAD_BUSINESS_OVERALL_30_DAY
-  );
-  const { error: weekRevenueError, data: weekRevenueData } = useQuery(
-    LOAD_BUSINESS_OVERALL_EVERY_WEEK
-  );
-  const { error: monthRevenueError, data: monthRevenueData } = useQuery(
+  const { data: dayRevenueData } = useQuery(LOAD_BUSINESS_OVERALL_30_DAY);
+  const { data: weekRevenueData } = useQuery(LOAD_BUSINESS_OVERALL_EVERY_WEEK);
+  const { data: monthRevenueData } = useQuery(
     LOAD_BUSINESS_OVERALL_EVERY_MONTH
   );
-  const { error: yearRevenueError, data: yearRevenueData } = useQuery(
-    LOAD_BUSINESS_OVERALL_EVERY_YEAR
-  );
+  const { data: yearRevenueData } = useQuery(LOAD_BUSINESS_OVERALL_EVERY_YEAR);
 
   const scaleData = (data) =>
     data.map((item) => {
@@ -74,7 +66,7 @@ const Revenue = () => {
     dayRevenueData,
     weekRevenueData,
     monthRevenueData,
-    yearRevenueData
+    yearRevenueData,
   ]);
 
   const handleChooseDate = (timeSelected, callback) => {
@@ -90,7 +82,7 @@ const Revenue = () => {
         sm={14}
         md={9}
         sx={{
-          height: "80vh"
+          height: "80vh",
         }}
       >
         {revenue.length === 0 ? (
@@ -98,7 +90,7 @@ const Revenue = () => {
             sx={{
               textAlign: "center",
               paddingTop: "25%",
-              paddingBottom: "25%"
+              paddingBottom: "25%",
             }}
           >
             <h1>No data</h1>
@@ -198,7 +190,7 @@ const Revenue = () => {
             </Grid>
             <Grid item xs={12}>
               <Box sx={{ display: "flex", justifyContent: "row" }}>
-                <BudaDatePicker onlyDate={true} setValue={setDayBegin} />
+                <BudaDatePicker onlyDate={true} />
                 <Box
                   px={1}
                   sx={{
@@ -210,7 +202,7 @@ const Revenue = () => {
                 >
                   To
                 </Box>
-                <BudaDatePicker onlyDate={true} setValue={setDayEnd} />
+                <BudaDatePicker onlyDate={true} />
               </Box>
               <Box py={1}></Box>
               <Button

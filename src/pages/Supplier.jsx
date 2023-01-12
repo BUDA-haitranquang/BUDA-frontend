@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -18,7 +17,6 @@ const Supplier = (props) => {
   const [supplier, setSupplier] = useState([]);
   const { data } = useQuery(LOAD_SUPPLIERS);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
   const [hideSupplier] = useMutation(HIDE_SUPPLIER_MUTATION);
   const { t } = useTranslation(["common", "supplier"]);
   const headCells = [
@@ -49,7 +47,6 @@ const Supplier = (props) => {
   ];
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         hideSupplier({
@@ -60,8 +57,6 @@ const Supplier = (props) => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occurred", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
 

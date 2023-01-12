@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import { Divider, Toolbar, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
+import { Divider, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
+import BudaCircularChart from "../../buda-components/charts/BudaCircularChart";
 import {
   LOAD_RETENTION_RATE_MOTHLY,
-  LOAD_RETENTION_RATE_WEEKLY,
+  LOAD_RETENTION_RATE_WEEKLY
 } from "../../graphQl/statistics/statisticQueries";
-import BudaCircularChart from "../../buda-components/charts/BudaCircularChart";
 
 const Retention = () => {
   const { data: monthlyData } = useQuery(LOAD_RETENTION_RATE_MOTHLY);
@@ -23,6 +23,7 @@ const Retention = () => {
 
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [monthlyData, weeklyData]);
 
   return (

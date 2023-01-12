@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
@@ -16,9 +15,9 @@ import { LOAD_INGREDIENTS } from "../graphQl/ingredients/ingredientQueries";
 
 const Ingredient = () => {
   const [ingredients, setIngredients] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_INGREDIENTS);
+  const { data } = useQuery(LOAD_INGREDIENTS);
   const [hideIngredient] = useMutation(HIDE_INGREDIENT_MUTATION);
-  const [isLoading, setIsLoading] = useState(false);
+  const [setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(["common", "ingredient"]);
   const handleDelete = (selected) => {

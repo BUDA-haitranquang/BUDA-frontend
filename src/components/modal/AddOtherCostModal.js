@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
@@ -17,8 +17,7 @@ const AddOtherCostModal = ({ isOpen, handleClose }) => {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [totalCost, setTotalCost] = useState(0.0);
-  const [creationTime, setCreationTime] = useState("");
-  const [newOtherCost, { error }] = useMutation(ADD_OTHER_COST);
+  const [newOtherCost] = useMutation(ADD_OTHER_COST);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["common", "cost"]);
   const resetForm = () => {

@@ -1,21 +1,11 @@
-import { Toolbar, Grid, Box } from "@mui/material";
-
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Grid, Box } from "@mui/material";
 
 import Profile from "../components/myaccount/Profile";
 import Stores from "../components/myaccount/Store";
 const MyAccount = () => {
   return (
     <Box sx={{ display: "flex" }}>
-      <Box
-        width="100%"
-        sx={{ paddingLeft: "10px" }}
-        // display="flex"
-        // flexDirection="column"
-        // alignItems="center"
-        // justifyContent="center"
-      >
+      <Box width="100%" sx={{ paddingLeft: "10px" }}>
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={4}>
             <Profile />

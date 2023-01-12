@@ -16,7 +16,6 @@ import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_DISCOUNTS_MUTATION } from "../../graphQl/discounts/discountMutations";
 import { LOAD_DISCOUNTS } from "../../graphQl/discounts/discountQueries";
 import BudaDatePicker from "../../buda-components/datepicker/BudaDatePicker";
-import { ConstructionOutlined } from "@mui/icons-material";
 const DiscountType = {
   CASH_ONLY: "CASH_ONLY",
   PERCENTAGE_ONLY: "PERCENTAGE_ONLY",
@@ -35,7 +34,7 @@ const AddDiscountModal = ({ isOpen, handleClose }) => {
   const [expiryTime, setExpiryTime] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("0");
-  const [newDiscount, { error }] = useMutation(ADD_DISCOUNTS_MUTATION);
+  const [newDiscount] = useMutation(ADD_DISCOUNTS_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const dateToString = (date) => {

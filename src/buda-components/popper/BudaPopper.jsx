@@ -1,9 +1,7 @@
-import React, { Fragment } from "react";
+import { ClickAwayListener, Paper } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { ClickAwayListener, Paper, Popper } from "@material-ui/core";
-import { useState } from "react";
-import { width } from "@mui/system";
-import { usePopper } from "react-popper"
+import { Fragment, useState } from "react";
+import { usePopper } from "react-popper";
 
 BudaPopper.propTypes = {
   open: PropTypes.bool,
@@ -27,7 +25,7 @@ function BudaPopper(props) {
   } = props;
 
   const [arrowRef, setArrowRef] = useState(null);
-	const [popperElement, setPopperElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
 
   let modifiersDefault = [
     {
@@ -59,10 +57,10 @@ function BudaPopper(props) {
     },
   ];
 
-	const { styles, attributes } = usePopper(referenceElement, popperElement, {
-		placement: placement,
-		modifiers: [ ...modifiersDefault ]
-	})
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: placement,
+    modifiers: [...modifiersDefault],
+  });
 
   let widthPopper = width || referenceElement?.offsetWidth || 0;
 
@@ -75,17 +73,17 @@ function BudaPopper(props) {
       }}
       mouseEvent="onMouseDown"
     >
-			<Paper
-				elevation={3}
-				ref={setPopperElement}
-				style={{ width: widthPopper, ...styles.popper }}
-				{...attributes.popper}
-			>
-				<Fragment>
-					{arrow ? <span ref={setArrowRef} /> : null}
-					{children}
-				</Fragment>
-			</Paper>
+      <Paper
+        elevation={3}
+        ref={setPopperElement}
+        style={{ width: widthPopper, ...styles.popper }}
+        {...attributes.popper}
+      >
+        <Fragment>
+          {arrow ? <span ref={setArrowRef} /> : null}
+          {children}
+        </Fragment>
+      </Paper>
     </ClickAwayListener>
   );
 

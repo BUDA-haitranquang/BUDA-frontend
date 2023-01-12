@@ -1,6 +1,5 @@
 import AddDiscountModal from "../../../../components/modal/AddDiscountModals";
 import Box from "@mui/material/Box";
-import { useState } from "react";
 import DiscountByPercentageTableBody from "./components/DiscountByPercentageTableBody";
 import BudaTable from "../../../../buda-components/table/BudaTable";
 import { useSnackbar } from "notistack";
@@ -16,7 +15,6 @@ import { useTranslation } from "react-i18next";
 const DiscountByPercentage = ({ discounts }) => {
   const { t } = useTranslation(["discount"]);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
   const [deleteDiscount] = useMutation(DELETE_DISCOUNTS_MUTATION);
 
   const headCells = [
@@ -66,7 +64,6 @@ const DiscountByPercentage = ({ discounts }) => {
 
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         deleteDiscount({
@@ -77,8 +74,6 @@ const DiscountByPercentage = ({ discounts }) => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
 

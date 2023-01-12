@@ -9,7 +9,7 @@ import BudaTable from "../buda-components/table/BudaTable";
 const Product = () => {
   const { t } = useTranslation(["common", "product"]);
   const [productCombos, setProductCombos] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_PRODUCT_COMBOS);
+  const { data } = useQuery(LOAD_PRODUCT_COMBOS);
   // const [hideProduct] = useMutation(HIDE_PRODUCT_MUTATION);
 
   // const handleDelete = (selected) => {

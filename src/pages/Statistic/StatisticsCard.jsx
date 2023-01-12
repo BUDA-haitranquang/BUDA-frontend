@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-import GppBadIcon from "@mui/icons-material/GppBad";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 
 const getColor = (idx) => {
@@ -62,28 +60,34 @@ const StatisticsCard = ({ data, title, icon, type }) => {
                   alignItems: "center",
                 }}
               >
-              <Box
-                sx={{
-                  width: "90%",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: "4px",
-                }}
-              >
-                <Typography
-                  variant={getTextNameStyle(idx)}
-                  component="div"
-                  mr={4}
-                  color={getColor(idx)}
+                <Box
+                  sx={{
+                    width: "90%",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: "4px",
+                  }}
                 >
-                  {item.name}
-                </Typography>
-                <Typography variant="h6" component="div" color={getColor(idx)}>
-                  {item.mainStats.toLocaleString()}
-                </Typography>
-              </Box>
-              {idx < 2 && <LocalPoliceIcon color={getMedalColor(idx, type)} />}
+                  <Typography
+                    variant={getTextNameStyle(idx)}
+                    component="div"
+                    mr={4}
+                    color={getColor(idx)}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    color={getColor(idx)}
+                  >
+                    {item.mainStats.toLocaleString()}
+                  </Typography>
+                </Box>
+                {idx < 2 && (
+                  <LocalPoliceIcon color={getMedalColor(idx, type)} />
+                )}
               </Box>
             </Box>
           ))}

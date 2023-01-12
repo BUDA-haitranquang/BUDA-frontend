@@ -6,14 +6,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
+  Typography
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useEffect, useState } from "react";
-import { color4 } from "../../CreateOrder";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import OrderProductItem from "./OrderProductItem";
-import { useTranslation } from "react-i18next";
 const useStyle = makeStyles(() => ({
   root: {
     // backgroundColor: `${color4}`,

@@ -8,9 +8,7 @@ import { useEffect } from "react";
 import {
   PRODUCT_LEAST_PROFIT,
   PRODUCT_LEAST_REVENUE,
-  PRODUCT_LEAST_SELL_NUMBER,
   PRODUCT_MOST_RETURN_NUMBER,
-  PRODUCT_MOST_RETURN_PRICE,
   PRODUCT_TOP_PROFIT,
   PRODUCT_TOP_REVENUE,
   PRODUCT_TOP_SELL_NUMBER,
@@ -21,13 +19,11 @@ const Retention = () => {
   const { data: productsTopSellNumber } = useQuery(PRODUCT_TOP_SELL_NUMBER);
   const { data: productsTopProfit } = useQuery(PRODUCT_TOP_PROFIT);
   const { data: productsTopRevenue } = useQuery(PRODUCT_TOP_REVENUE);
-  const { data: productsLeastSellNumber } = useQuery(PRODUCT_LEAST_SELL_NUMBER);
   const { data: productsLeastRevenue } = useQuery(PRODUCT_LEAST_REVENUE);
   const { data: productsLeastProfit } = useQuery(PRODUCT_LEAST_PROFIT);
   const { data: productsMostReturnNumber } = useQuery(
     PRODUCT_MOST_RETURN_NUMBER
   );
-  const { data: productsMostReturnPrice } = useQuery(PRODUCT_MOST_RETURN_PRICE);
 
   async function fetchData() {}
 

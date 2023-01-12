@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Box, Toolbar } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import CombinedDetail from "../components/CombinedDetail";
@@ -9,13 +9,12 @@ import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFF, LOAD_STAFFS } from "../graphQl/staff/staffQueries";
 
 const StaffDetail = (props) => {
-  //@ts-ignore
   const { id } = useParams();
   const history = useHistory();
 
   const [staff, setStaff] = useState(null);
 
-  const { error, loading, data, refetch } = useQuery(LOAD_STAFF, {
+  const { data } = useQuery(LOAD_STAFF, {
     variables: { staffID: parseInt(id) },
   });
 

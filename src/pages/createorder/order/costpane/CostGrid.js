@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { Grid, IconButton, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { useEffect, useState } from "react";
+import { IconButton, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import LiveSearch from "../../../../buda-components/livesearch/BudaLiveSearch";
 import { LOAD_DISCOUNTS } from "../../../../graphQl/discounts/discountQueries";
@@ -12,16 +13,15 @@ import {
   deleteDiscount,
 } from "../../../../redux/productCartSlice";
 import UneditableMoneyBox from "../../common/moneybox/UneditableMoneyBox";
-import { useTranslation } from "react-i18next";
+
 export default function CostGrid() {
   const dispatch = useDispatch();
   const { totalPrice } = useSelector((state) => state.productCart);
   const [chosenDiscount, setChosenDiscount] = useState(null);
   const [discounts, setDiscounts] = useState([]);
   const [calculatedDiscountValue, setCalculatedDiscountValue] = useState(0);
-  // const [discountValue, setDiscountValue] = useState(0);
   const { t } = useTranslation(["sell"]);
-  const { error, loading, data } = useQuery(LOAD_DISCOUNTS);
+  const { data } = useQuery(LOAD_DISCOUNTS);
 
   useEffect(() => {
     async function fetchData() {

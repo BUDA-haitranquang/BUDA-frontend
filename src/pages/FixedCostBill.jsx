@@ -1,11 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import { LOAD_FIXED_COST_BILL } from "../graphQl/cost/fixedCostBill/fixedCostBillQueries";
-import BudaTable from "../buda-components/table/BudaTable";
 import { useTranslation } from "react-i18next";
-// import BillTable  from "../buda-components/table/FixedCostBillTable";
+import BudaTable from "../buda-components/table/BudaTable";
+import { LOAD_FIXED_COST_BILL } from "../graphQl/cost/fixedCostBill/fixedCostBillQueries";
 import AddFixedCostBillModal from "../components/modal/AddFixedCostBillModal";
 import FixedCostBillTableBody from "../components/table/body/FixedCostBIllTableBody";
 

@@ -21,7 +21,7 @@ const AddStaffModal = (props) => {
   const [staffPosition, setStaffPosition] = useState("BASIC");
   const [salary, setSalary] = useState(0.0);
 
-  const [newStaff, { error }] = useMutation(ADD_STAFF_MUTATION);
+  const [newStaff] = useMutation(ADD_STAFF_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {

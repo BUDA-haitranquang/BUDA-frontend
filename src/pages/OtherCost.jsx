@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -16,9 +15,8 @@ import { LOAD_OTHER_COST } from "../graphQl/cost/otherCost/otherCostQueries";
 
 const OtherCost = () => {
   const [fixcosts, setFixCosts] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_OTHER_COST);
+  const { data } = useQuery(LOAD_OTHER_COST);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
   const [hideOtherCost] = useMutation(HIDE_OTHER_COST);
   const { t } = useTranslation(["common", "cost"]);
   const headCells = [
@@ -55,7 +53,6 @@ const OtherCost = () => {
   ];
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         hideOtherCost({
@@ -66,8 +63,6 @@ const OtherCost = () => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occurred", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
 

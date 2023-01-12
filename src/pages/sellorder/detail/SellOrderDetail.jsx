@@ -1,15 +1,14 @@
 import { useQuery } from "@apollo/client";
-import { Box, Button, Grid, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { LOAD_SELL_ORDER } from "../../../graphQl/sellOrder/SellOrderQueries"
 import { LOAD_SELL_ORDER_DETAILS } from "../../../graphQl/sellOrder/sellOrderQueries";
 import { dateToDateString } from "../../../utils/utils";
+import BoxMoney from "../../buyorder/detail/components/BoxMoney/BoxMoney";
 import BoxAdditionalInfo from "./components/BoxAddtionalInfo/BoxAddtionalInfo";
 import BoxCustomer from "./components/BoxCustomer/BoxCustomer";
 import BoxProduct from "./components/BoxProduct/BoxProduct";
 import PrintSellOrderModal from "./PrintSellOrderModal";
-import BoxMoney from "../../buyorder/detail/components/BoxMoney/BoxMoney";
 
 SellOrderDetail.propTypes = {};
 

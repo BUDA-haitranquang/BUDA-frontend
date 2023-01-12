@@ -6,7 +6,7 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import viLocale from "date-fns/locale/vi";
 import { isNull } from "lodash";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useStyles = makeStyles({
   timeInput: {
@@ -33,6 +33,7 @@ const BudaDatePicker = ({
 
   useEffect(() => {
     setValue(timeValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeValue]);
 
   return (
@@ -88,8 +89,9 @@ const CustomizeDatePicker = ({ setTimeValue, timeValue, label }) => {
     day.setMinutes(timeValue.getMinutes());
     day.setSeconds(0);
     setTimeValue(day);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
-  
+
   return (
     <StyledEngineProvider injectFirst>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={viLocale}>
@@ -167,6 +169,7 @@ const CustomizeTimePicker = ({ setTimeValue, timeValue }) => {
     day.setMinutes(time.slice(3, 5));
     day.setSeconds(0);
     setTimeValue(day);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   return (

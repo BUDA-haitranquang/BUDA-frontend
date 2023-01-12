@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
@@ -18,7 +18,7 @@ const AddSupplierModal = ({ isOpen, handleClose }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [newSupplier, { error }] = useMutation(ADD_SUPPLIER_MUTATION);
+  const [newSupplier] = useMutation(ADD_SUPPLIER_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {

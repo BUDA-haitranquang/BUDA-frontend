@@ -1,28 +1,24 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import StaffNoteTableBody from "../components/table/body/StaffNoteTableBody";
-import BudaTable from "../buda-components/table/BudaTable";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
-import { LOAD_STAFF_NOTES } from "../graphQl/staff/staffQueries";
-import { DELETE_STAFF_NOTE_MUTATION } from "../graphQl/staff/staffMutation";
 import { useSnackbar } from "notistack";
-import BudaModal from "../buda-components/modal/BudaModal";
+import { useEffect, useState } from "react";
 import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../buda-components/alert/BudaNoti";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import BudaTable from "../buda-components/table/BudaTable";
 import AddStaffNoteModal from "../components/modal/AddStaffNoteModal";
+import StaffNoteTableBody from "../components/table/body/StaffNoteTableBody";
+import { DELETE_STAFF_NOTE_MUTATION } from "../graphQl/staff/staffMutation";
+import { LOAD_STAFF_NOTES } from "../graphQl/staff/staffQueries";
 const StaffNote = (props) => {
   const [open, setOpen] = useState(false);
-  const [addOpen, setAddOpen] = useState(false);
-  const { err, loading, data } = useQuery(LOAD_STAFF_NOTES);
+  const { data } = useQuery(LOAD_STAFF_NOTES);
   const [staffNote, setStaffNote] = useState([]);
   const [delStaffNote] = useMutation(DELETE_STAFF_NOTE_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory();
+
   useEffect(() => {
     async function fetchData() {
       if (data) setStaffNote(data.staffNotesByUser.map((item) => item));
@@ -34,7 +30,6 @@ const StaffNote = (props) => {
   };
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         delStaffNote({
@@ -45,10 +40,9 @@ const StaffNote = (props) => {
       enqueueSnackbar("Delete Successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("Error occurred", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
+
   const headCells = [
     {
       id: "noteDate",

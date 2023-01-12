@@ -1,11 +1,10 @@
-import { Box, Button, Toolbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
 import SellOrderTableBody from "../../../components/table/body/SellOrderTableBody";
-//@ts-ignore
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useTranslation } from "react-i18next";
 import { AlertErrorProp } from "../../../buda-components/alert/BudaNoti";
-import { Redirect, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import BudaPaginableTable from "../../../buda-components/table/BudaPaginableTable";
 import { useSnackbar } from "notistack";
 import { useMutation, useQuery } from "@apollo/client";
@@ -26,7 +25,7 @@ const SellOrderList = (props) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { error, refetch } = useQuery(LOAD_SELL_ORDER);
+  const { refetch } = useQuery(LOAD_SELL_ORDER);
   const [deleteSellOrder] = useMutation(DELETE_SELL_ORDER);
 
   const { t } = useTranslation("sellOrderHistory");
@@ -78,6 +77,7 @@ const SellOrderList = (props) => {
     }
 
     init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   /// init filter

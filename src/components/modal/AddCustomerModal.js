@@ -5,14 +5,14 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField
+  TextField,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp
+  AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_CUSTOMER_MUTATION } from "../../graphQl/customers/customersMutations";
@@ -20,15 +20,15 @@ import { LOAD_CUSTOMERS } from "../../graphQl/customers/customersQueries";
 
 const AddCustomerModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const { t }  = useTranslation(["common","customer"]);
-  
+  const { t } = useTranslation(["common", "customer"]);
+
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [totalSpend, setTotalSpend] = useState(0.0);
   const [gender, setGender] = useState("UNKNOWN");
   const [ageGroup, setAgeGroup] = useState("UNKNOWN");
-  const [newCustomer, { error }] = useMutation(ADD_CUSTOMER_MUTATION);
+  const [newCustomer] = useMutation(ADD_CUSTOMER_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
@@ -37,7 +37,7 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
     setTotalSpend(0);
     setAddress("");
   };
-  
+
   const addCustomer = () => {
     setIsLoading(true);
     newCustomer({
@@ -146,9 +146,15 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
                 onChange={(e) => setGender(e.target.value)}
                 fullWidth
               >
-                <MenuItem value={"UNKNOWN"}>{t("customer:Modal.gender.unknown")}</MenuItem>
-                <MenuItem value={"MALE"}>{t("customer:Modal.gender.male")}</MenuItem>
-                <MenuItem value={"FEMALE"}>{t("customer:Modal.gender.female")}</MenuItem>
+                <MenuItem value={"UNKNOWN"}>
+                  {t("customer:Modal.gender.unknown")}
+                </MenuItem>
+                <MenuItem value={"MALE"}>
+                  {t("customer:Modal.gender.male")}
+                </MenuItem>
+                <MenuItem value={"FEMALE"}>
+                  {t("customer:Modal.gender.female")}
+                </MenuItem>
               </Select>
             </FormControl>
             <FormControl style={{ width: "48%" }}>
@@ -159,16 +165,32 @@ const AddCustomerModal = ({ isOpen, handleClose }) => {
                 onChange={(e) => setAgeGroup(e.target.value)}
                 fullWidth
               >
-                <MenuItem value={"UNKNOWN"}>{t("customer:Modal.ageGroup.unknown")}</MenuItem>
-                <MenuItem value={"FROM_0_TO_12"}>{t("customer:Modal.ageGroup.group1")}</MenuItem>
-                <MenuItem value={"FROM_12_TO_18"}>{t("customer:Modal.ageGroup.group2")}</MenuItem>
-                <MenuItem value={"FROM_18_TO_24"}>{t("customer:Modal.ageGroup.group3")}</MenuItem>
-                <MenuItem value={"FROM_24_TO_30"}>{t("customer:Modal.ageGroup.group4")}</MenuItem>
-                <MenuItem value={"FROM_30_TO_40"}>{t("customer:Modal.ageGroup.group5")}</MenuItem>
-                <MenuItem value={"FROM_40_TO_50"}>{t("customer:Modal.ageGroup.group6")}</MenuItem>
-                <MenuItem value={"FROM_50_TO_65"}>{t("customer:Modal.ageGroup.group7")}</MenuItem>
+                <MenuItem value={"UNKNOWN"}>
+                  {t("customer:Modal.ageGroup.unknown")}
+                </MenuItem>
+                <MenuItem value={"FROM_0_TO_12"}>
+                  {t("customer:Modal.ageGroup.group1")}
+                </MenuItem>
+                <MenuItem value={"FROM_12_TO_18"}>
+                  {t("customer:Modal.ageGroup.group2")}
+                </MenuItem>
+                <MenuItem value={"FROM_18_TO_24"}>
+                  {t("customer:Modal.ageGroup.group3")}
+                </MenuItem>
+                <MenuItem value={"FROM_24_TO_30"}>
+                  {t("customer:Modal.ageGroup.group4")}
+                </MenuItem>
+                <MenuItem value={"FROM_30_TO_40"}>
+                  {t("customer:Modal.ageGroup.group5")}
+                </MenuItem>
+                <MenuItem value={"FROM_40_TO_50"}>
+                  {t("customer:Modal.ageGroup.group6")}
+                </MenuItem>
+                <MenuItem value={"FROM_50_TO_65"}>
+                  {t("customer:Modal.ageGroup.group7")}
+                </MenuItem>
                 <MenuItem value={"FROM_65_AND_ABOVE"}>
-                {t("customer:Modal.ageGroup.group8")}
+                  {t("customer:Modal.ageGroup.group8")}
                 </MenuItem>
               </Select>
             </FormControl>

@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import BoxPrimaryInfo from "./components/BoxPrimaryInfo/BoxPrimaryInfo";
-import { Box, Grid, Toolbar, Typography } from "@mui/material";
-import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
-import { LOAD_DISCOUNT } from "../../../graphQl/discounts/discountQueries";
-import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import { Box, Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { LOAD_DISCOUNT } from "../../../graphQl/discounts/discountQueries";
 import { dateToDateString } from "../../../utils/utils";
-import { useTranslation } from "react-i18next";
+import BoxAdditionalInfo from "./components/BoxAdditionalInfo/BoxAdditionalInfo";
+import BoxPrimaryInfo from "./components/BoxPrimaryInfo/BoxPrimaryInfo";
 
 DetailDiscount.propTypes = {};
 
 function DetailDiscount() {
-  const { t } = useTranslation("discount", { keyPrefix: "detail" });
   const [discount, setDiscount] = useState(null);
   const { id } = useParams();
 
@@ -39,7 +37,7 @@ function DetailDiscount() {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-      > 
+      >
         <Box padding={3} width="100%" bgcolor="#f0f2f5">
           <Typography variant="h4" paddingBottom={2}>
             {discount?.discountCode}

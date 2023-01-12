@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
 import { Box, TableCell, TableRow } from "@mui/material";
+import PropTypes from "prop-types";
+import { useMemo } from "react";
 import DefaultImage from "../../../../../../../buda-components/SVG/DefaultImage";
 
 SellOrderItem.propTypes = {
@@ -29,6 +29,7 @@ function SellOrderItem(props) {
         )}
       </TableCell>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.product.name, item.product.picture?.link]);
 
   const CellSKU = useMemo(() => {

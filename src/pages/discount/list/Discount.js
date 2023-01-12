@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Divider, Tab, Tabs, Toolbar } from "@mui/material";
+import { Divider, Tab, Tabs } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { LOAD_DISCOUNTS } from "../../../graphQl/discounts/discountQueries";
 import DiscountByPercentage from "./discountbypercentage/DiscountByPercentage";

@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -16,15 +15,13 @@ import { LOAD_CUSTOMERS } from "../graphQl/customers/customersQueries";
 
 const Customer = (props) => {
   const [customer, setCustomer] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_CUSTOMERS);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data } = useQuery(LOAD_CUSTOMERS);
   const [hideCustomer] = useMutation(HIDE_CUSTOMER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(["common", "customer"]);
 
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         hideCustomer({
@@ -35,8 +32,6 @@ const Customer = (props) => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
 

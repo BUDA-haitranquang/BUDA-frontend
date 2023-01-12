@@ -1,10 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect } from "react-router-dom";
 import {
   AlertErrorProp,
   AlertSuccessProp,
@@ -17,9 +15,8 @@ import { LOAD_FIXED_COST } from "../graphQl/cost/fixedCost/fixedCostQueries";
 
 const FixCost = () => {
   const [fixcosts, setFixCosts] = useState([]);
-  const { error, loading, data } = useQuery(LOAD_FIXED_COST);
+  const { data } = useQuery(LOAD_FIXED_COST);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState(false);
   const [hideFixedCost] = useMutation(HIDE_FIXED_COST_MUTATION);
   const { t } = useTranslation(["common", "cost"]);
   const headCells = [
@@ -50,7 +47,6 @@ const FixCost = () => {
   ];
   const handleDelete = (selected) => {
     if (selected === []) return;
-    setIsLoading(true);
     try {
       selected.forEach((item) => {
         hideFixedCost({
@@ -61,8 +57,6 @@ const FixCost = () => {
       enqueueSnackbar("Delete item(s) successfully", AlertSuccessProp);
     } catch (e) {
       enqueueSnackbar("An error occured", AlertErrorProp);
-    } finally {
-      setIsLoading(false);
     }
   };
 

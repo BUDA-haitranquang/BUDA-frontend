@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AddProductModal from "../../../../components/modal/AddProductModal";
 import { LOAD_PRODUCTS } from "../../../../graphQl/products/productQueries";
@@ -32,7 +32,7 @@ const useStyle = makeStyles(() => ({
 
 export default function SearchProductBar() {
   const classes = useStyle();
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+  const { data } = useQuery(LOAD_PRODUCTS);
   const [products, setProducts] = useState([]);
   const [chosenProductValue, setChosenProductValue] = useState("");
   const [searchProductValue, setSearchProductValue] = useState("");

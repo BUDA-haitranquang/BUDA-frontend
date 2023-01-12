@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
@@ -17,7 +17,7 @@ const AddFixedCostModal = ({ isOpen, handleClose }) => {
   const [description, setDescription] = useState("");
   const [period, setPeriod] = useState(0);
   const [moneyAmount, setMoneyAmount] = useState(0.0);
-  const [newFixedCost, { error }] = useMutation(ADD_FIXED_COST_MUTATION);
+  const [newFixedCost] = useMutation(ADD_FIXED_COST_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["common", "cost"]);
   const resetForm = () => {

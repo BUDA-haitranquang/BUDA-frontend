@@ -1,11 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { Box, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   AlertErrorProp,
-  AlertSuccessProp
+  AlertSuccessProp,
 } from "../../buda-components/alert/BudaNoti";
 import BudaModal from "../../buda-components/modal/BudaModal";
 import { ADD_INGREDIENT_MUTATION } from "../../graphQl/ingredients/ingredientMutation";
@@ -13,14 +13,13 @@ import { LOAD_INGREDIENTS } from "../../graphQl/ingredients/ingredientQueries";
 
 const AddIngredientModal = ({ isOpen, handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation(["common","ingredient"]);
+  const { t } = useTranslation(["common", "ingredient"]);
   const [name, setName] = useState("");
   const [sku, setSku] = useState(null);
   const [price, setPrice] = useState(0);
   const [amountLeft, setAmountLeft] = useState(0);
-  // const [cost, setCost] = useState(0);
   const [description, setDescription] = useState("");
-  const [newIngredient, { error }] = useMutation(ADD_INGREDIENT_MUTATION);
+  const [newIngredient] = useMutation(ADD_INGREDIENT_MUTATION);
   const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
@@ -39,9 +38,9 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
         ingredientSKU: sku,
         description: description,
         price: parseFloat(price),
-        amountLeft: parseInt(amountLeft)
+        amountLeft: parseInt(amountLeft),
       },
-      refetchQueries: [{ query: LOAD_INGREDIENTS }]
+      refetchQueries: [{ query: LOAD_INGREDIENTS }],
     })
       .then((res) => {
         handleClose();
@@ -83,7 +82,7 @@ const AddIngredientModal = ({ isOpen, handleClose }) => {
           autoComplete="off"
           sx={{
             width: "480px",
-            "& > :not(style)": { m: 1 }
+            "& > :not(style)": { m: 1 },
           }}
         >
           <TextField

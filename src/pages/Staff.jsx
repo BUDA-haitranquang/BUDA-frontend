@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BudaTable from "../buda-components/table/BudaTable";
 import AddStaffModal from "../components/modal/AddStaffModal";
@@ -9,10 +8,10 @@ import StaffTableBody from "../components/table/body/StaffTableBody";
 import { DELETE_STAFF_MUTATION } from "../graphQl/staff/staffMutation";
 import { LOAD_STAFFS } from "../graphQl/staff/staffQueries";
 
-const Staff = (props) => {
+const Staff = () => {
   const [staffs, setStaffs] = useState([]);
   const { t } = useTranslation(["common", "staff"]);
-  const { error, loading, data } = useQuery(LOAD_STAFFS);
+  const { data } = useQuery(LOAD_STAFFS);
   const [deleteStaff] = useMutation(DELETE_STAFF_MUTATION);
   const headCells = [
     // {
@@ -66,9 +65,7 @@ const Staff = (props) => {
     async function fetchData() {
       if (data)
         setStaffs(
-          data.staffsByUser
-            .slice()
-            .sort((a, b) => b.staffID - a.staffID)
+          data.staffsByUser.slice().sort((a, b) => b.staffID - a.staffID)
         );
     }
 

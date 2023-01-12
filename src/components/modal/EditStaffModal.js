@@ -1,6 +1,13 @@
 import { useMutation } from "@apollo/client";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { UPDATE_STAFF_MUTATION } from "../../graphQl/staff/staffMutation";
 import { LOAD_STAFF, LOAD_STAFFS } from "../../graphQl/staff/staffQueries";
@@ -8,7 +15,6 @@ import { LOAD_STAFF, LOAD_STAFFS } from "../../graphQl/staff/staffQueries";
 const EditStaffModal = ({ data, isOpen, handleClose }) => {
   const staff = data.staff;
   const [name, setName] = useState(staff.name);
-  const [password, setPassword] = useState(staff.password);
   const [email, setEmail] = useState(staff.email);
   const [phoneNumber, setPhoneNumber] = useState(staff.phoneNumber);
   const [address, setAddress] = useState(staff.address);
@@ -22,26 +28,28 @@ const EditStaffModal = ({ data, isOpen, handleClose }) => {
       variables: {
         staffID: staff.staffID,
         name: name,
-        password: password,
         email: email,
         phoneNumber: phoneNumber,
         address: address,
         staffPosition: staffPosition,
-        salary: parseFloat(salary)
+        salary: parseFloat(salary),
       },
-      refetchQueries: [{
-        query: LOAD_STAFF,
-        variables: {
-          staffID: staff.staffID
-        }
-      }, {
-        query: LOAD_STAFFS
-      }]
+      refetchQueries: [
+        {
+          query: LOAD_STAFF,
+          variables: {
+            staffID: staff.staffID,
+          },
+        },
+        {
+          query: LOAD_STAFFS,
+        },
+      ],
     });
   };
 
   const isFormValid = () => {
-    const isValid = (name !== "") && (salary >= 0);
+    const isValid = name !== "" && salary >= 0;
     return isValid;
   };
 
@@ -73,14 +81,10 @@ const EditStaffModal = ({ data, isOpen, handleClose }) => {
           boxShadow: 24,
           p: 5,
           outline: 0,
-          "& > :not(style)": { m: 1 }
+          "& > :not(style)": { m: 1 },
         }}
       >
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-        >
+        <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box mt={1}>
             <Typography align="center">Edit</Typography>
           </Box>
@@ -150,13 +154,9 @@ const EditStaffModal = ({ data, isOpen, handleClose }) => {
           onChange={(e) => setSalary(e.target.value)}
         />
 
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-        >
+        <Button variant="contained" onClick={handleSubmit}>
           Edit Staff
         </Button>
-
       </Box>
     </Modal>
   );

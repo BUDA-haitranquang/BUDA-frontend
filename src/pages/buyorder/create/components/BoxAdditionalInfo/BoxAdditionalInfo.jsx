@@ -27,6 +27,7 @@ function BoxAdditionalInfo(props) {
       // description: description,
       status: status,
     }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [textId, description, status]);
 
   const handleTextIdChange = (value) => {

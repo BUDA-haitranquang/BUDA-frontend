@@ -13,7 +13,6 @@ import {
 import { useSnackbar } from "notistack";
 import React, { useEffect, useRef, useState } from "react";
 import { GoogleLogin } from "react-google-login";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import {
@@ -35,12 +34,9 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const btn = useRef(null);
-  const [userLogin, { loading, error }] = useMutation(LOGIN_USER);
+  const [userLogin, { loading }] = useMutation(LOGIN_USER);
   const [loginGoogle] = useMutation(LOGIN_GOOGLE);
   const { enqueueSnackbar } = useSnackbar();
-  const [validCaptcha, setValidCaptcha] = useState(false);
-
-  const recaptchaRef = React.createRef();
 
   useEffect(() => {
     const listener = (event) => {
