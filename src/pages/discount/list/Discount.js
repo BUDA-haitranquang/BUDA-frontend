@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { LOAD_DISCOUNTS } from "../../../graphQl/discounts/discountQueries";
 import DiscountByPercentage from "./discountbypercentage/DiscountByPercentage";
 import DiscountByCash from "./discountbycash/DiscountByCash";
+import { useTranslation } from "react-i18next";
 
 function Discount(props) {
   const [currentTab, setCurrentTab] = useState(0);
@@ -15,6 +16,7 @@ function Discount(props) {
   const handleChange = (e, newValue) => {
     setCurrentTab(newValue);
   };
+  const { t } = useTranslation(["discount"]);
   useEffect(() => {
     async function fetchData() {
       if (data) {
@@ -42,11 +44,13 @@ function Discount(props) {
         <Box pt={1}>
           <Tabs value={currentTab} onChange={handleChange}>
             <Tab
-              label="Discount by percentage"
+              label={t("discount:discountByPercentage")}
               // component={Link}
               // to="/dashboard/unfinishedOrder"
             />
-            <Tab label="Discount by cash" />
+            <Tab 
+              label={t("discount:discountByCash")}
+            />
           </Tabs>
           <Divider />
         </Box>

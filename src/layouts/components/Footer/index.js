@@ -17,14 +17,14 @@ export default function Footer() {
         alignItems="center"
       >
         <Typography
-          variant="h2"
+          variant="h5"
           sx={{
             color: color.PRIMARY,
             textAlign: "center",
           }}
           fontFamily="'Righteous', cursive"
         >
-          BUDA
+          BUDA - A solution for bussiness management
         </Typography>
         <Typography
           sx={{
@@ -40,80 +40,94 @@ export default function Footer() {
         width="50%"
         height="350px"
         display="flex"
-        flexDirection="column"
-        justifyContent="center"
+        flexDirection="row"
+        justifyContent="space-evenly"
       >
-        <Typography
-          variant="h5"
-          sx={{
-            color: color.PRIMARY,
-            fontWeight: 900,
-            mb: 1,
-          }}
+        <Box
+          height="350px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
         >
-          CONTACT US
-        </Typography>
-        <Box display="flex" alignItems="center" mb={1}>
-          <LocalPhoneTwoToneIcon
-            sx={{
-              color: color.PRIMARY,
-              mr: 1,
-            }}
-            fontSize="large"
-          />
           <Typography
             variant="h6"
             sx={{
               color: color.PRIMARY,
+              fontWeight: 900,
+              mb: 1,
             }}
           >
-            0123456789
+            CONTACT US
           </Typography>
-        </Box>
+          <Box display="flex" alignItems="center" mb={1}>
+            <LocalPhoneTwoToneIcon
+              sx={{
+                color: color.PRIMARY,
+                mr: 1,
+              }}
+              fontSize="medium"
+            />
+            <Typography
+              // variant="h6"
+              sx={{
+                color: color.PRIMARY,
+              }}
+            >
+              0123456789
+            </Typography>
+          </Box>
 
-        <Box display="flex" alignItems="center">
-          <EmailTwoToneIcon
-            sx={{
-              color: color.PRIMARY,
-              mr: 1,
-            }}
-            fontSize="large"
-          />
+          <Box display="flex" alignItems="center">
+            <EmailTwoToneIcon
+              sx={{
+                color: color.PRIMARY,
+                mr: 1,
+              }}
+              fontSize="medium"
+            />
+            <Typography
+              // variant="h6"
+              sx={{
+                color: color.PRIMARY,
+              }}
+            >
+              budatester@gmail.com
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          marginTop="-20px"
+          height="350px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
           <Typography
             variant="h6"
             sx={{
               color: color.PRIMARY,
+              fontWeight: 900,
+              mt: 2,
+              mb: 1,
             }}
           >
-            budatester@gmail.com
+            FOLLOW US
           </Typography>
-        </Box>
-
-        <Typography
-          variant="h5"
-          sx={{
-            color: color.PRIMARY,
-            fontWeight: 900,
-            mt: 2,
-            mb: 1,
-          }}
-        >
-          FOLLOW US
-        </Typography>
-        <Box display="flex" alignItems="baseline">
-          <FacebookTwoToneIcon
-            fontSize="large"
-            sx={{
-              color: color.PRIMARY,
-              mr: 2,
-            }}
-          />
-          <TwitterIcon
-            fontSize="large"
-            sx={{
-              color: color.PRIMARY,
-            }}
-          />
+          <Box display="flex" alignItems="baseline">
+            <FacebookTwoToneIcon
+              fontSize="large"
+              sx={{
+                color: color.PRIMARY,
+                mr: 2,
+              }}
+            />
+            <TwitterIcon
+              fontSize="large"
+              sx={{
+                color: color.PRIMARY,
+              }}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>

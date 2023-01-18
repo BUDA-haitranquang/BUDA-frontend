@@ -3,6 +3,7 @@ import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import Barcode from "react-barcode";
+import { Link } from "react-router-dom";
 import PrintProductBarcodeModal from "../../modal/print/PrintProductBarcodeModal";
 import MainImage from "../MainImage";
 
@@ -105,8 +106,9 @@ export default function ProductInformation({ data }) {
           </Typography>
           <Divider />
           <Box
-            style={{
-              marginTop: "40px",
+            sx={{
+              marginTop: "16px",
+              marginBottom: "12px",
               display: "flex",
               justifyContent: "space-between",
             }}
@@ -124,32 +126,55 @@ export default function ProductInformation({ data }) {
         </Box>
         <Divider />
 
-        <Box>
-          {productCombo?.map((combo) => (
-            <Box
-              style={{ flexDirection: "row", justifyContent: "space-around" }}
+        <Box
+          sx={{
+            marginTop: "12px",
+            marginBottom: "12px",
+          }}
+        >
+          <Box style={{ flexDirection: "row", justifyContent: "space-around" }}>
+            <Link
+              to={{ pathname: `/product/combo` }}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <Typography width="50%">Combo: {combo?.name}</Typography>
-              <Typography width="50%">
-                Description: {combo?.description}
-              </Typography>
-            </Box>
-          ))}
+              Combo:
+              {productCombo?.map((combo) => (
+                <Typography sx={{ color: "blue" }}>{combo?.name}</Typography>
+              ))}
+            </Link>
+          </Box>
         </Box>
         <Divider />
 
-        <Box>
+        <Box
+          sx={{
+            marginTop: "12px",
+            marginBottom: "12px",
+          }}
+        >
+          <Typography>Group: </Typography>
           {productGroup?.map((group) => (
-            <Typography width="50%">Group: {group?.name}</Typography>
+            <Typography>{group?.name}</Typography>
           ))}
         </Box>
         <Divider />
 
-        <Box>
+        <Box
+          sx={{
+            marginTop: "12px",
+            marginBottom: "12px",
+          }}
+        >
+          <Typography>Ingredients:</Typography>
           {productComponent?.map((component) => (
-            <Typography width="50%">
-              Ingredient: {component?.ingredient.name}
-            </Typography>
+            <Link
+              to={{
+                pathname: `/ingredient/${component?.ingredient.ingredientID}`,
+              }}
+              style={{ textDecoration: "none", color: "blue" }}
+            >
+              {component?.ingredient.name}
+            </Link>
           ))}
         </Box>
         <Divider />

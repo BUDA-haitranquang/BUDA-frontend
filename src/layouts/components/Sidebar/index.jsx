@@ -150,6 +150,7 @@ const Sidebar = () => {
     ],
     [
       createData(t("sidebar:product.product"), "", ""),
+      createData(t("sidebar:product.combo"), "combo", ""),
       createData(t("sidebar:product.collation"), "collation", ""),
     ],
     [
@@ -311,6 +312,7 @@ const Sidebar = () => {
                         <ListItemText
                           primaryTypographyProps={{
                             variant: "body2",
+                            marginLeft: "25%",
                           }}
                           primary={component.name}
                           sx={{ color: "white", opacity: 0.7 }}
