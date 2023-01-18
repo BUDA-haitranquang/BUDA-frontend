@@ -9,17 +9,16 @@
     "createdAt": "Ngày bắt đầu",
     "finishedAt": "Ngày kết thúc"
   },
-
+  "discountByPercentage": "Discount by percentage",
+  "discountByCash": "Discount by cash",
   "detail": {
     "title": "Chi tiết mã giảm giá",
-
     "boxPrimaryInfo": {
       "title": "Thông tin chung",
       "percentage": "Chiết khấu (%)",
       "cashLimit": "Giá trị giảm tối đa",
       "orderCount": "Số đơn hàng áp dụng"
     },
-
     "boxAdditionalInfo": {
       "title": "Thông tin thêm",
       "createdAt": "Ngày bắt đầu",

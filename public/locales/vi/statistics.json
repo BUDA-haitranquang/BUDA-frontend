@@ -1,0 +1,19 @@
+{
+    "retention": {
+        "weekly": "Hàng tuần",
+        "monthly": "Hàng tháng",
+        "title": "Tỷ lệ giữ chân khách hàng"
+    },
+    "sellOrder": {
+        "genderTitle": "Doanh số bán hàng theo giới tính",
+        "ageGroupTitle": "Doanh số bán hàng theo nhóm tuổi"
+    },
+    "product": {
+        "topSell": "Bán chạy nhất",
+        "topRevenue": "Nguồn thu cao nhất",
+        "topProfit": "Lợi nhuận cao nhất",
+        "mostReturned": "Trả lại nhiều nhất",
+        "leastReturned": "Trả lại ít nhất",
+        "leastProfit": "Lợi nhuận ít nhất"
+    }
+}

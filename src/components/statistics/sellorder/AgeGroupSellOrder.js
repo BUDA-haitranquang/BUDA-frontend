@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import BudaLegend from "../../../buda-components/charts/BudaLegend";
 import BudaPieChart from "../../../buda-components/charts/BudaPieChart";
 import { LOAD_TOTAL_SPEND_AGE_BY_USER } from "../../../graphQl/statistics/statisticQueries";
+import { useTranslation } from "react-i18next";
 // import { LOAD_TOTAL_SPEND_AGE_THIS_MONTH_BY_USER } from "../../../graphQl/statistics/statisticQueries";
 const AgeGroupSellOrder = () => {
   const { data: ageData } = useQuery(LOAD_TOTAL_SPEND_AGE_BY_USER);
   const [age, setAge] = useState([]);
+  const { t } = useTranslation(["statistics"]);
   const COLORSAGEGROUP = [
     "#8884d8",
     "#83a6ed",
@@ -39,7 +41,7 @@ const AgeGroupSellOrder = () => {
     >
       <Grid item xs={6} display="flex" justifyContent="center">
         <Box>
-          <h1> Sell order by age group</h1>
+          <h1>{t("statistics:sellOrder.ageGroupTitle")}</h1>
           {age.length !== 0 ? (
             <BudaLegend
               data={age}
