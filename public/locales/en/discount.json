@@ -9,17 +9,16 @@
     "createdAt": "Created at",
     "finishedAt": "Finished at"
   },
-
+  "discountByPercentage": "Giảm giá theo phần trăm",
+  "discountByCash": "Giảm giá theo tiền mặt",
   "detail": {
     "title": "Discount detail",
-
     "boxPrimaryInfo": {
       "title": "Discount detail information",
       "percentage": "Discount (%)",
       "cashLimit": "Maximum discount value",
       "orderCount": "Maximum orders"
     },
-
     "boxAdditionalInfo": {
       "title": "Additional information",
       "createdAt": "Created at",

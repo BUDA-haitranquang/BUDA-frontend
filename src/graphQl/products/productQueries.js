@@ -73,6 +73,7 @@ export const LOAD_COMPONENTS_BY_PRODUCT = gql`
     componentsByProduct(productID: $productID) {
       productComponentID
       ingredient {
+        ingredientID
         ingredientSKU
         name
       }
