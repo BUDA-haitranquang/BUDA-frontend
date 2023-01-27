@@ -32,7 +32,7 @@ const Header = () => {
         justifyContent: "space-between",
         backgroundImage:
           "linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.2))",
-        backdropFilter: "blur(10px)",
+        backdropFilter: "blur(20px)",
         position: "fixed",
         top: 0,
         width: "calc(100% - 240px)",

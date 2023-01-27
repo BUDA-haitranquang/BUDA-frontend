@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Popover from "@mui/material/Popover";
 import * as React from "react";
 import { useRef, useState } from "react";
+import color from "src/theme/color";
 
 export default function SplitButton({ options, searchBy }) {
   const [open, setOpen] = useState(false);
@@ -31,8 +32,15 @@ export default function SplitButton({ options, searchBy }) {
 
   return (
     <React.Fragment>
-      <ButtonGroup variant="text" ref={anchorRef} aria-label="split button">
-        <Button>{list[selectedIndex]}</Button>
+      <ButtonGroup
+        variant="text"
+        ref={anchorRef}
+        aria-label="split button"
+        sx={{ color: color.PRIMARY_LIGHT }}
+      >
+        <Button sx={{ color: color.PRIMARY_LIGHT }}>
+          {list[selectedIndex]}
+        </Button>
         <Button
           size="small"
           aria-controls={open ? "split-button-menu" : undefined}
@@ -41,7 +49,7 @@ export default function SplitButton({ options, searchBy }) {
           aria-haspopup="menu"
           onClick={handleToggle}
         >
-          <ArrowDropDownIcon />
+          <ArrowDropDownIcon sx={{ color: color.PRIMARY_LIGHT }} />
         </Button>
       </ButtonGroup>
       <Popover

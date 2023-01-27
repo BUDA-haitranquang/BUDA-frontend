@@ -7,7 +7,6 @@ import {
   FormControl,
   IconButton,
   InputAdornment,
-  InputLabel,
   OutlinedInput,
   Toolbar,
   Tooltip,
@@ -15,10 +14,10 @@ import {
 } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { alpha } from "@mui/material/styles";
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import SplitButton from "./SplitButton";
+import color from "src/theme/color";
+
 const BudaTableToolbar = ({
   headCells,
   numSelected,
@@ -30,10 +29,9 @@ const BudaTableToolbar = ({
   printable = false,
   checkModal,
   canSearch,
-  title
+  title,
 }) => {
   const [value, setValue] = useState("");
-  const { t } = useTranslation(["common"]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -49,21 +47,16 @@ const BudaTableToolbar = ({
   return (
     <Toolbar
       sx={{
+        pt: 3,
+        backgroundColor: color.PRIMARY,
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
       }}
     >
       {numSelected > 0 ? (
         <Typography
-          sx={{ flex: "1 1 100%" }}
-          color="inherit"
+          fontFamily="'Andika', san serif"
+          sx={{ flex: "1 1 100%", color: color.PRIMARY_LIGHT }}
           variant="subtitle1"
           component="div"
         >
@@ -71,8 +64,13 @@ const BudaTableToolbar = ({
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 60%", fontWeight: "600", color: "#1c6cb3" }}
-          variant="h6"
+          fontFamily="'Andika', san serif"
+          sx={{
+            flex: "1 1 60%",
+            fontWeight: "600",
+            color: color.PRIMARY_LIGHT,
+          }}
+          variant="h5"
           id="tableTitle"
           component="div"
         >
@@ -80,16 +78,42 @@ const BudaTableToolbar = ({
         </Typography>
       )}
 
-      {numSelected === 0 && (
-        canSearch && (<FormControl variant="outlined">
-          <InputLabel>{t("common:search")}</InputLabel>
+      {numSelected === 0 && canSearch && (
+        <FormControl
+          variant="standard"
+          sx={{ backgroundColor: color.PRIMARY_MEDIUM, borderRadius: "15px" }}
+        >
           <OutlinedInput
-            label={t("common:search")}
+            sx={{
+              borderRadius: "15px",
+              borderWidth: "1px",
+              input: {
+                color: color.PRIMARY_LIGHT,
+                fontFamily: "'Andika', san serif",
+              },
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none",
+              },
+              "&.Mui-focused": {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: `0.2px solid ${color.PRIMARY_LIGHT}`,
+                },
+              },
+              "&:hover": {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: `0.2px solid ${color.PRIMARY_LIGHT}`,
+                },
+              },
+            }}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             endAdornment={
               <InputAdornment position="end">
-                <IconButton type="submit" onClick={(e) => handleSearch(value)}>
+                <IconButton
+                  type="submit"
+                  onClick={(e) => handleSearch(value)}
+                  sx={{ color: color.PRIMARY_LIGHT }}
+                >
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>
@@ -107,10 +131,17 @@ const BudaTableToolbar = ({
             }}
           />
         </FormControl>
-      ))}
+      )}
 
       {numSelected > 0 ? (
-        <Box>
+        <Box
+          sx={{
+            pt: 3,
+            backgroundColor: color.PRIMARY,
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+          }}
+        >
           <Button
             id="basic-button"
             variant="contained"
@@ -118,10 +149,25 @@ const BudaTableToolbar = ({
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClickBulkAction}
-            style={{ width: "200px", fontWeight: "600", marginRight: "20px" }}
+            sx={{
+              width: "200px",
+              fontWeight: "600",
+              marginRight: "20px",
+              backgroundColor: color.PRIMARY_LIGHT,
+              "&:hover": {
+                backgroundColor: color.PRIMARY_LIGHT,
+              },
+            }}
           >
-            Choose Action
-            <ArrowDropDownIcon sx={{ marginLeft: "10px" }} />
+            <Typography
+              fontFamily="'Andika', san serif"
+              sx={{ color: color.PRIMARY }}
+            >
+              Choose Action
+            </Typography>
+            <ArrowDropDownIcon
+              sx={{ marginLeft: "10px", color: color.PRIMARY }}
+            />
           </Button>
           <Menu
             id="basic-menu"
@@ -157,7 +203,7 @@ const BudaTableToolbar = ({
           <Box display="flex" flexDirection="row">
             <Tooltip title="Add">
               <IconButton onClick={handleOpen}>
-                <AddIcon />
+                <AddIcon sx={{ color: color.PRIMARY_LIGHT }} />
               </IconButton>
             </Tooltip>
           </Box>

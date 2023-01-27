@@ -16,7 +16,9 @@ import {
   AlertErrorProp,
   AlertSuccessProp,
 } from "../../../buda-components/alert/BudaNoti";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import color from "src/theme/color";
+
 const IncompletedSellOrderTableBody = (props) => {
   const { row, labelId } = props;
   return (
@@ -24,9 +26,9 @@ const IncompletedSellOrderTableBody = (props) => {
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{ pathname: `/business/sell/${row.sellOrderID}` }}
-          style={{ textDecoration: "none", color: "blue" }}
+          style={{ textDecoration: "none", color: color.PRIMARY }}
         >
-          {row.textID}
+          <Typography fontFamily="'Andika', san serif">{row.textID}</Typography>
         </Link>
       </TableCell>
       <TableCell align="left">{row.customerName}</TableCell>

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import BudaTableBody from "./BudaTableBody";
 import BudaTableHead from "./BudaTableHead";
 import BudaTableToolbar from "./BudaTableToolbar";
+
 const BudaTable = (props) => {
   const {
     tableChildren,
@@ -92,13 +93,10 @@ const BudaTable = (props) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper>
+      <Paper sx={{ borderRadius: "10px" }}>
         <TableContainer
           sx={{
-            paddingRight: "10px",
-            paddingTop: "14px",
-            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-            borderRadius: "6px",
+            borderRadius: "10px",
           }}
         >
           {toolbar && (

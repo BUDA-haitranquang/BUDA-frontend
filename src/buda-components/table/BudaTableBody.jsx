@@ -1,7 +1,6 @@
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/styles";
-import React from "react";
 import { getComparator, stableSort } from "../../utils/tableUtils";
 
 const BudaTableBody = (props) => {
@@ -45,7 +44,7 @@ const BudaTableBody = (props) => {
     },
   });
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  
+
   return (
     <TableBody {...remainProps}>
       {stableSort(data, getComparator(order, orderBy)).map((row, idx) => {
@@ -54,8 +53,7 @@ const BudaTableBody = (props) => {
         return (
           <CustomWidthTooltip title={row.description || ""} key={row.id}>
             <TableRow
-              sx={{ cursor: "pointer" }}
-              hover
+              sx={{ cursor: "pointer", backgroundColor: "white" }}
               onClick={(e) => {
                 if (isNotShowCheckbox) return;
                 return handleClick(e, row[type]);

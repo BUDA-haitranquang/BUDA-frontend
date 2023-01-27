@@ -10,7 +10,9 @@ import {
 } from "../../../buda-components/alert/BudaNoti";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { TableCell, IconButton } from "@mui/material";
+import { TableCell, IconButton, Typography } from "@mui/material";
+import color from "src/theme/color";
+
 const IncompletedBuyOrderTableBody = (props) => {
   const { row, labelId } = props;
   return (
@@ -19,9 +21,9 @@ const IncompletedBuyOrderTableBody = (props) => {
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{ pathname: `/business/buy/${row.buyOrderID}` }}
-          style={{ textDecoration: "none", color: "blue" }}
+          style={{ textDecoration: "none", color: color.PRIMARY }}
         >
-          {row.textID}
+          <Typography fontFamily="'Andika', san serif">{row.textID}</Typography>
         </Link>
       </TableCell>
       <TableCell align="left">{row.supplierName}</TableCell>
