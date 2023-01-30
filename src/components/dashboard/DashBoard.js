@@ -78,9 +78,8 @@ const MainDashBoard = () => {
             expense: 0,
             profit: 0,
             revenue: 0,
-            timePeriod: `${curDate.getDate()}-${
-              curDate.getMonth() + 1
-            }-${curDate.getFullYear()}`,
+            timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1
+              }-${curDate.getFullYear()}`,
           },
         ];
         curDate.setDate(curDate.getDate() + 1);
@@ -105,9 +104,8 @@ const MainDashBoard = () => {
             expense: 0,
             profit: 0,
             revenue: 0,
-            timePeriod: `${curDate.getDate()}-${
-              curDate.getMonth() + 1
-            }-${curDate.getFullYear()}`,
+            timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1
+              }-${curDate.getFullYear()}`,
           },
         ];
         curDate.setDate(curDate.getDate() + 1);
@@ -141,9 +139,8 @@ const MainDashBoard = () => {
           expense: 0,
           profit: 0,
           revenue: 0,
-          timePeriod: `${curDate.getDate()}-${
-            curDate.getMonth() + 1
-          }-${curDate.getFullYear()}`,
+          timePeriod: `${curDate.getDate()}-${curDate.getMonth() + 1
+            }-${curDate.getFullYear()}`,
         },
       ];
       curDate.setDate(curDate.getDate() + 1);
@@ -168,8 +165,7 @@ const MainDashBoard = () => {
   const info = [
     { name: t("dashboard:revenue"), color: "#82ca9d", datakey: "revenue" },
     { name: t("dashboard:expense"), color: "#DC143C", datakey: "expense" },
-  ];
-
+  ];  
   return (
     <Box width="100%" display="flex" flexDirection="column" alignItems="center">
       <Grid container spacing={2} sx={{ width: "100%" }}>
@@ -311,10 +307,10 @@ const MainDashBoard = () => {
                 tab === 0 ? classes.activeTab : classes.customStyleOnTab
               }
             >
-              {t("dashboard:sellOrder.title")}
-            </Typography>
-            disableFocusRipple
-            disableRipple
+            {t("dashboard:sellOrder.title")}
+          </Typography>
+          disableFocusRipple
+          disableRipple
           />
           <Tab
             label=<Typography
@@ -322,10 +318,10 @@ const MainDashBoard = () => {
                 tab === 1 ? classes.activeTab : classes.customStyleOnTab
               }
             >
-              {t("dashboard:buyOrder.title")}
-            </Typography>
-            disableFocusRipple
-            disableRipple
+            {t("dashboard:buyOrder.title")}
+          </Typography>
+          disableFocusRipple
+          disableRipple
           />
           <Tab
             label=<Typography
@@ -333,10 +329,10 @@ const MainDashBoard = () => {
                 tab === 2 ? classes.activeTab : classes.customStyleOnTab
               }
             >
-              {t("dashboard:fixedCost.title")}
-            </Typography>
-            disableFocusRipple
-            disableRipple
+            {t("dashboard:fixedCost.title")}
+          </Typography>
+          disableFocusRipple
+          disableRipple
           />
           <Tab
             label=<Typography
@@ -344,10 +340,10 @@ const MainDashBoard = () => {
                 tab === 3 ? classes.activeTab : classes.customStyleOnTab
               }
             >
-              {t("dashboard:otherCost.title")}
-            </Typography>
-            disableFocusRipple
-            disableRipple
+            {t("dashboard:otherCost.title")}
+          </Typography>
+          disableFocusRipple
+          disableRipple
           />
         </Tabs>
       </Box>

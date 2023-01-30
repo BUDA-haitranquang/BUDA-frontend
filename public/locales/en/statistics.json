@@ -1,0 +1,19 @@
+{
+    "retention": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "title": "Retention rate"
+    },
+    "sellOrder": {
+        "genderTitle": "Sell order by gender",
+        "ageGroupTitle": "Sell order by age group"
+    },
+    "product": {
+        "topSell": "Top Sell",
+        "topRevenue": "Top Revenue",
+        "topProfit": "Top Profit",
+        "mostReturned": "Most Returned",
+        "leastReturned": "Least Returned",
+        "leastProfit": "Least Profit"
+    }
+}
