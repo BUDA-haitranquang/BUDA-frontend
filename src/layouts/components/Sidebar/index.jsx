@@ -97,6 +97,12 @@ function createData(name, link, check) {
   return { name: name, link: link, check: check };
 }
 
+function CheckRoute(item, history) {
+  var path = history.location.pathname;
+  if (path.includes("statistic")) path = "statistic";
+  return path.includes(item);
+}
+
 const Sidebar = () => {
   const history = useHistory();
   console.log(history.location.pathname);
@@ -155,9 +161,9 @@ const Sidebar = () => {
 
     [createData("Note", "note", "")],
     [
-      createData(t("sidebar:cost.fixed"), "fixed-cost", ""),
-      createData(t("sidebar:cost.fixedCostBill"), "fixed-cost-bill", ""),
-      createData(t("sidebar:cost.otherCost"), "other-cost", ""),
+      createData(t("sidebar:cost.fixed"), "fixedcost", ""),
+      createData(t("sidebar:cost.fixedCostBill"), "fixedcostBill", ""),
+      createData(t("sidebar:cost.otherCost"), "othercost", ""),
     ],
     [
       createData("Business", "business", ""),
@@ -228,7 +234,7 @@ const Sidebar = () => {
           <>
             <ListItem
               className={
-                history.location.pathname.includes(item[0])
+                CheckRoute(item[0], history)
                   ? classes.selectedItem
                   : classes.item
               }
@@ -246,7 +252,7 @@ const Sidebar = () => {
               >
                 <ListItemIcon
                   sx={{
-                    color: history.location.pathname.includes(item[0])
+                    color: CheckRoute(item[0], history)
                       ? color.PRIMARY
                       : "rgba(255, 255, 255, 0.9)",
                   }}
@@ -259,12 +265,11 @@ const Sidebar = () => {
                     marginLeft: "-10px",
                     fontFamily: "'Andika', san-serif",
                     variant: "body2",
-                    fontWeight:
-                      history.location.pathname.includes(item[0]) && "bold",
+                    fontWeight: CheckRoute(item[0], history) && "bold",
                   }}
                   primary={capitalizeFirstLetter(item[1])}
                   sx={{
-                    color: history.location.pathname.includes(item[0])
+                    color: CheckRoute(item[0], history)
                       ? color.PRIMARY
                       : "rgba(255, 255, 255, 0.9)",
                   }}
@@ -274,7 +279,7 @@ const Sidebar = () => {
                 focus === item[1] ? (
                   <ExpandLessIcon
                     style={{
-                      color: history.location.pathname.includes(item[0])
+                      color: CheckRoute(item[0], history)
                         ? color.PRIMARY
                         : "rgba(255, 255, 255, 0.5)",
                     }}
@@ -282,7 +287,7 @@ const Sidebar = () => {
                 ) : (
                   <ExpandMoreIcon
                     style={{
-                      color: history.location.pathname.includes(item[0])
+                      color: CheckRoute(item[0], history)
                         ? color.PRIMARY
                         : "rgba(255, 255, 255, 0.5)",
                     }}

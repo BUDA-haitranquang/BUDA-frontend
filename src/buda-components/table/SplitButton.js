@@ -36,9 +36,18 @@ export default function SplitButton({ options, searchBy }) {
         variant="text"
         ref={anchorRef}
         aria-label="split button"
-        sx={{ color: color.PRIMARY_LIGHT }}
+        sx={{
+          color: color.PRIMARY_LIGHT,
+          "& .MuiButtonGroup-grouped:not(:last-of-type)": {
+            borderColor: color.PRIMARY_LIGHT,
+          },
+        }}
       >
-        <Button sx={{ color: color.PRIMARY_LIGHT }}>
+        <Button
+          sx={{
+            color: color.PRIMARY_LIGHT,
+          }}
+        >
           {list[selectedIndex]}
         </Button>
         <Button
