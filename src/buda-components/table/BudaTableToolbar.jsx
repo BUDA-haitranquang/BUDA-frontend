@@ -47,6 +47,8 @@ const BudaTableToolbar = ({
   return (
     <Toolbar
       sx={{
+        borderTopLeftRadius: "10px",
+        borderTopRightRadius: "10px",
         pt: 3,
         backgroundColor: color.PRIMARY,
         pl: { sm: 2 },

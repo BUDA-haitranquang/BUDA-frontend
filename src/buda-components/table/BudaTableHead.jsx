@@ -45,14 +45,6 @@ const EnhancedTableHead = ({
             align={headCell.numeric ? "right" : "left"}
             sx={{
               backgroundColor: color.PRIMARY,
-              borderRadius:
-                isNotShowCheckbox === true
-                  ? index === 0
-                    ? "10px 0px 0px 0px"
-                    : index === headCells.length - 1
-                    ? "0px 10px 0px 0px"
-                    : "0px"
-                  : "0px",
             }}
           >
             <TableSortLabel
