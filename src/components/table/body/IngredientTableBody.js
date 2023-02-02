@@ -1,6 +1,6 @@
 import { TableCell } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
+import color from "src/theme/color";
 const IngredientTableBody = (props) => {
   const { row, labelId } = props;
   return (
@@ -12,7 +12,7 @@ const IngredientTableBody = (props) => {
             pathname: `${row.ingredientID}`,
             // state: { data: row },
           }}
-          style={{ textDecoration: "none", color: "blue" }}
+          style={{ textDecoration: "none", color: color.PRIMARY }}
         >
           {row.sku}
         </Link>

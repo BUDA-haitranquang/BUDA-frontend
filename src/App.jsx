@@ -11,10 +11,10 @@ import { onError } from "@apollo/client/link/error";
 import { useDispatch, useSelector } from "react-redux";
 import { Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { routes} from "./configs/routes";
+import { routes } from "./configs/routes";
 import { Layouts } from "./layouts";
 import { addRefreshToken, addToken, removeToken } from "src/redux/tokenSlice";
-
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function App() {
   const filterRoutesAndPathsByLayout = (layout) => {
@@ -148,53 +148,60 @@ function App() {
     );
   };
 
+  const THEME = createTheme({
+    typography: {
+      fontFamily: `"Andika", sans-serif`,
+    },
+  });
+
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Switch>
-          {Object.keys(Layouts).map((layout, idx) => {
-            const LayoutTag = Layouts[layout];
-            const { layoutRoutes, layoutPaths } = filterRoutesAndPathsByLayout(
-              layout
-            );
+    <ThemeProvider theme={THEME}>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <Switch>
+            {Object.keys(Layouts).map((layout, idx) => {
+              const LayoutTag = Layouts[layout];
+              const { layoutRoutes, layoutPaths } =
+                filterRoutesAndPathsByLayout(layout);
 
-            return (
-              <Route key={idx} path={[...layoutPaths]}>
-                <LayoutTag>
-                  <Switch>
-                    {layoutRoutes.map((route) => (
-                      <CustomRoute
-                        key={route.path}
-                        path={route.path}
-                        exact={route.exact === true}
-                        auth={route.auth || isAuth}
-                        render={(props) => {
-                          const Component = route.component;
-                          return (
-                            <Suspense fallback={null}>
-                              <Component {...props} />
-                            </Suspense>
-                          );
-                        }}
-                      />
-                    ))}
-                  </Switch>
-                </LayoutTag>
-              </Route>
-            );
-          })}
+              return (
+                <Route key={idx} path={[...layoutPaths]}>
+                  <LayoutTag>
+                    <Switch>
+                      {layoutRoutes.map((route) => (
+                        <CustomRoute
+                          key={route.path}
+                          path={route.path}
+                          exact={route.exact === true}
+                          auth={route.auth || isAuth}
+                          render={(props) => {
+                            const Component = route.component;
+                            return (
+                              <Suspense fallback={null}>
+                                <Component {...props} />
+                              </Suspense>
+                            );
+                          }}
+                        />
+                      ))}
+                    </Switch>
+                  </LayoutTag>
+                </Route>
+              );
+            })}
 
-          {redirectRoutes.map((route) => (
-            <Redirect
-              from={route.path}
-              key={route.path}
-              to={route.to}
-              exact={route.exact}
-            />
-          ))}
-        </Switch>
-      </BrowserRouter>
-    </ApolloProvider>
+            {redirectRoutes.map((route) => (
+              <Redirect
+                from={route.path}
+                key={route.path}
+                to={route.to}
+                exact={route.exact}
+              />
+            ))}
+          </Switch>
+        </BrowserRouter>
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }
 

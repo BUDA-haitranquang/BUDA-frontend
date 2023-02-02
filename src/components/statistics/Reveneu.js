@@ -3,6 +3,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import { Box, Button, ButtonGroup, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import color from "src/theme/color";
 import BudaBarChart from "../../buda-components/charts/BudaBarChart";
 import BudaLineChart from "../../buda-components/charts/BudaLineChart";
 import BudaDatePicker from "../../buda-components/datepicker/BudaDatePicker";
@@ -197,7 +198,7 @@ const Revenue = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    color: "blue",
+                    color: color.PRIMARY,
                   }}
                 >
                   To

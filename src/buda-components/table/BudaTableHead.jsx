@@ -57,7 +57,6 @@ const EnhancedTableHead = ({
               onClick={createSortHandler(headCell.id)}
             >
               <Typography
-                fontFamily="'Andika', san serif"
                 sx={{ color: color.PRIMARY_LIGHT }}
               >
                 {headCell.label}

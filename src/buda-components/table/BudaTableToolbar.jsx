@@ -57,7 +57,6 @@ const BudaTableToolbar = ({
     >
       {numSelected > 0 ? (
         <Typography
-          fontFamily="'Andika', san serif"
           sx={{ flex: "1 1 100%", color: color.PRIMARY_LIGHT }}
           variant="subtitle1"
           component="div"
@@ -66,7 +65,6 @@ const BudaTableToolbar = ({
         </Typography>
       ) : (
         <Typography
-          fontFamily="'Andika', san serif"
           sx={{
             flex: "1 1 60%",
             fontWeight: "600",
@@ -91,7 +89,6 @@ const BudaTableToolbar = ({
               borderWidth: "1px",
               input: {
                 color: color.PRIMARY_LIGHT,
-                fontFamily: "'Andika', san serif",
               },
               "& .MuiOutlinedInput-notchedOutline": {
                 border: "none",
@@ -162,7 +159,6 @@ const BudaTableToolbar = ({
             }}
           >
             <Typography
-              fontFamily="'Andika', san serif"
               sx={{ color: color.PRIMARY }}
             >
               Choose Action

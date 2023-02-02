@@ -2,7 +2,9 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { TableCell } from "@mui/material";
 import {useHistory } from "react-router-dom";
-import {dateToDateString} from '../../../../utils/utils'
+import { dateToDateString } from '../../../../utils/utils'
+import color from "src/theme/color";
+
 BuyOrderTableBody.propTypes = {
   row: PropTypes.number,
   labelId: PropTypes.any,
@@ -16,7 +18,7 @@ function BuyOrderTableBody(props) {
     <Fragment>
       <TableCell
         align="left"
-        style={{ textDecoration: "none", color: "blue" }}
+        style={{ textDecoration: "none", color: color.PRIMARY }}
         onClick={() => history.push(`buy/${row.buyOrderID}`)}
       >
         {row.textID}

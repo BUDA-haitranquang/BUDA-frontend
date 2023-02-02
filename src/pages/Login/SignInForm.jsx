@@ -244,7 +244,6 @@ const SignInForm = () => {
               onErrored={() => setValidCaptcha(false)}
             /> */}
             <Typography
-              fontFamily="'Andika', san-serif"
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -309,7 +308,6 @@ const SignInForm = () => {
                   >
                     <GoogleIcon sx={{ color: "#4F3F55", mr: 2 }} />
                     <Typography
-                      fontFamily="'Andika', san-serif"
                       color="#4F3F55"
                       sx={{ fontWeight: "bold" }}
                     >

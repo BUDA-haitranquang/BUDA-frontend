@@ -32,7 +32,6 @@ export default function Footer() {
             mb: 1,
             textAlign: "center",
           }}
-          fontFamily="'Andika', san serif"
         >
           COPYRIGHT © 2023 BUDA. All right reserved
         </Typography>
@@ -51,7 +50,6 @@ export default function Footer() {
             fontWeight: 900,
             mb: 1,
           }}
-          fontFamily="'Andika', san serif"
         >
           CONTACT US
         </Typography>
@@ -68,7 +66,6 @@ export default function Footer() {
             sx={{
               color: color.PRIMARY,
             }}
-            fontFamily="'Andika', san serif"
           >
             0123456789
           </Typography>
@@ -87,7 +84,6 @@ export default function Footer() {
             sx={{
               color: color.PRIMARY,
             }}
-            fontFamily="'Andika', san serif"
           >
             budatester@gmail.com
           </Typography>
@@ -101,7 +97,6 @@ export default function Footer() {
             mt: 2,
             mb: 1,
           }}
-          fontFamily="'Andika', san serif"
         >
           FOLLOW US
         </Typography>

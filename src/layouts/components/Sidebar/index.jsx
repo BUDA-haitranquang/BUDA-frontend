@@ -263,7 +263,6 @@ const Sidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     marginLeft: "-10px",
-                    fontFamily: "'Andika', san-serif",
                     variant: "body2",
                     fontWeight: CheckRoute(item[0], history) && "bold",
                   }}
@@ -311,7 +310,6 @@ const Sidebar = () => {
                       >
                         <ListItemText
                           primaryTypographyProps={{
-                            fontFamily: "'Andika', san-serif",
                             variant: "body2",
                           }}
                           primary={component.name}

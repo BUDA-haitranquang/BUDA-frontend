@@ -18,7 +18,6 @@ export default function UneditableMoneyBox({ title, value }) {
         variant="h6"
         align="center"
         sx={{ textTransform: "uppercase" }}
-        fontFamily="'Andika', san-serif"
         fontWeight="bold"
       >
         {title}

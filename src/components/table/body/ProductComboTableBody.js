@@ -4,6 +4,7 @@ import { Box, IconButton, TableCell, Typography } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import color from "src/theme/color";
 
 const ProductComboTableBody = (props) => {
   const { row } = props;
@@ -35,7 +36,7 @@ const ProductComboTableBody = (props) => {
                     variant="h6"
                     sx={{
                       textDecoration: "none",
-                      color: "blue",
+                      color: color.PRIMARY,
                       marginTop: "8px",
                       marginBottom: "4px",
                     }}

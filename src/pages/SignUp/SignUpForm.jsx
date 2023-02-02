@@ -331,7 +331,6 @@ const SignUpForm = () => {
                 }}
               >
                 <Typography
-                  fontFamily="'Andika', san-serif"
                   sx={{
                     color: "black",
                     opacity: "0.9",

@@ -77,9 +77,7 @@ export default function SearchProductBar() {
         }}
         onClick={handleOpenModal}
       >
-        <Typography fontFamily="'Andika', san serif">
-          {t("sell:newProduct")}
-        </Typography>
+        <Typography>{t("sell:newProduct")}</Typography>
       </Button>
       <Autocomplete
         id="product-select"
@@ -133,9 +131,7 @@ export default function SearchProductBar() {
         onClick={() => dispatch(clearProductCart())}
         loadingIndicator="Clearing..."
       >
-        <Typography fontFamily="'Andika', san serif">
-          {t("sell:clearCart")}
-        </Typography>
+        <Typography>{t("sell:clearCart")}</Typography>
       </Button>
 
       <AddProductModal isOpen={isOpenModal} handleClose={handleCloseModal} />

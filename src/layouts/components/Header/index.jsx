@@ -48,7 +48,6 @@ const Header = () => {
         noWrap
         component="div"
         fontWeight={850}
-        fontFamily="'Andika', san-serif"
         style={{
           textTransform: "uppercase",
           color: "#456B92",
