@@ -6,7 +6,7 @@ import ProductComboTableBody from "src/components/table/body/ProductComboTableBo
 import { LOAD_PRODUCT_COMBOS } from "src/graphQl/products/productQueries";
 import BudaTable from "../buda-components/table/BudaTable";
 
-const Product = () => {
+const ProductCombo = () => {
   const { t } = useTranslation(["common", "product"]);
   const [productCombos, setProductCombos] = useState([]);
   const { data } = useQuery(LOAD_PRODUCT_COMBOS);
@@ -81,4 +81,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductCombo;

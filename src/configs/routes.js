@@ -45,7 +45,7 @@ export const routes = [
     auth: false,
   },
   {
-    path: "/product-combo",
+    path: "/product/combo",
     exact: true,
     component: React.lazy(() => import("src/pages/ProductCombo")),
     layout: LayoutOptions.MAIN,

@@ -150,6 +150,7 @@ const Sidebar = () => {
     ],
     [
       createData(t("sidebar:product.product"), "", ""),
+      createData(t("sidebar:product.combo"), "combo", ""),
       createData(t("sidebar:product.collation"), "collation", ""),
     ],
     [

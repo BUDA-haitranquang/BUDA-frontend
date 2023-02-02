@@ -14,6 +14,7 @@ import {
   PRODUCT_TOP_SELL_NUMBER,
 } from "src/graphQl/statistics/productQueries";
 import StatisticsCard from "./StatisticsCard";
+import { useTranslation } from "react-i18next";
 
 const Retention = () => {
   const { data: productsTopSellNumber } = useQuery(PRODUCT_TOP_SELL_NUMBER);
@@ -24,8 +25,8 @@ const Retention = () => {
   const { data: productsMostReturnNumber } = useQuery(
     PRODUCT_MOST_RETURN_NUMBER
   );
-
-  async function fetchData() {}
+  const { t } = useTranslation(["statistics"]);
+  async function fetchData() { }
 
   useEffect(() => {
     fetchData();
@@ -35,7 +36,7 @@ const Retention = () => {
     <Grid container spacing={1}>
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={"Top Sell"}
+          title={t("statistics:product.topSell")}
           data={productsTopSellNumber?.productsTopSellNumber?.map(
             ({ name, sellNumber }) => ({
               name,
@@ -49,7 +50,7 @@ const Retention = () => {
       </Grid>
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={"Top Revenue"}
+          title={t("statistics:product.topRevenue")}
           data={productsTopRevenue?.productsTopRevenue?.map(
             ({ name, revenue }) => ({
               name,
@@ -64,7 +65,7 @@ const Retention = () => {
 
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={"Top Profit"}
+          title={t("statistics:product.topProfit")}
           data={productsTopProfit?.productsTopProfit?.map(
             ({ name, profit }) => ({
               name,
@@ -79,7 +80,7 @@ const Retention = () => {
 
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={"Most Returned"}
+          title={t("statistics:product.mostReturned")}
           data={productsMostReturnNumber?.productsMostReturnNumber?.map(
             ({ name, returnNumber }) => ({
               name,
@@ -93,7 +94,7 @@ const Retention = () => {
       </Grid>
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={"Least Revenue"}
+          title={t("statistics:product.leastReturned")}
           data={productsLeastRevenue?.productsLeastRevenue?.map(
             ({ name, revenue }) => ({
               name,
@@ -108,7 +109,7 @@ const Retention = () => {
 
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={"Least Profit"}
+          title={t("statistics:product.leastProfit")}
           data={productsLeastProfit?.productsTopProfit?.map(
             ({ name, profit }) => ({
               name,

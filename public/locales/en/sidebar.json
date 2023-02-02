@@ -13,6 +13,7 @@
     "product":{
         "section":"Product",
         "product":"Product",
+        "combo": "Product Combo",
         "collation":"Collation"
     },
     "ingredient":{
