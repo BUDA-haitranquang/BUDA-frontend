@@ -14,7 +14,7 @@ const ProductComboTableBody = (props) => {
 
   return (
     <>
-      <TableCell align="left">{row.name}</TableCell>
+      <TableCell align="left" sx={{color: "#456B92", fontWeight: 500}}>{row.name}</TableCell>
       <TableCell align="left">{row.description}</TableCell>
       <TableCell sx={{ width: "50%" }}>
         <Box>
@@ -77,7 +77,7 @@ const ProductComboTableBody = (props) => {
               </Typography>
               <Typography>
                 {row.productComboItems
-                  .reduce((a, b) => a + parseInt(b.product.sellingPrice), 0)
+                  .reduce((a, b) => a + parseInt(b.product.sellingPrice) * b.quantity, 0)
                   .toLocaleString()}
               </Typography>
             </Box>

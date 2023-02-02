@@ -13,6 +13,7 @@
     "product":{
         "section":"Sản Phẩm",
         "product":"Sản Phẩm",
+        "combo": "Sản Phẩm Combo",
         "collation":"Kiểm Kê"
     },
     "ingredient":{
