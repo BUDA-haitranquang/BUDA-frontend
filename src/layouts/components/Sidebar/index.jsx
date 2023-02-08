@@ -312,6 +312,7 @@ const Sidebar = () => {
                         <ListItemText
                           primaryTypographyProps={{
                             variant: "body2",
+                            marginLeft: "25%",
                           }}
                           primary={component.name}
                           sx={{ color: "white", opacity: 0.7 }}
