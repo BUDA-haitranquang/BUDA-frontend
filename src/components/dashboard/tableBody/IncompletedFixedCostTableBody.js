@@ -11,6 +11,7 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { INCOMPLETED_FIXED_COST } from "../../../graphQl/dashboard/queries";
 import { UPDATE_FIXED_COST_STATUS } from "../../../graphQl/dashboard/mutation";
+
 const IncompletedFixedCostTableBody = (props) => {
   const { row, labelId } = props;
   return (

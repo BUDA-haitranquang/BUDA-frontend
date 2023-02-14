@@ -1,7 +1,7 @@
 import { TableCell } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
 import { dateToDateString } from "../../../utils/utils";
+import color from "src/theme/color";
 
 const SellOrderTableBody = (props) => {
   const { row, labelId } = props;
@@ -11,7 +11,7 @@ const SellOrderTableBody = (props) => {
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{ pathname: `sell/${row.id}` }}
-          style={{ textDecoration: "none", color: "blue" }}
+          style={{ textDecoration: "none", color: color.PRIMARY }}
         >
           {row.sellOrderID}
         </Link>

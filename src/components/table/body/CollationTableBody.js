@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CollationModal from "../../modal/CollationModal";
 import { makeStyles } from "@mui/styles";
+import color from "src/theme/color";
 
 const useStyle = makeStyles({
   button: {
-    "&.MuiButton-root": { textTransform: "none" }
-  }
+    "&.MuiButton-root": { textTransform: "none" },
+  },
 });
 
 const CollationTableBody = (props) => {
@@ -28,7 +29,7 @@ const CollationTableBody = (props) => {
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{ pathname: `${row.productID}` }}
-          style={{ textDecoration: "none", color: "blue" }}
+          style={{ textDecoration: "none", color: color.PRIMARY }}
         >
           {row.productSKU}
         </Link>

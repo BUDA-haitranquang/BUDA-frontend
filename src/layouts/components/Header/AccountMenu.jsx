@@ -128,7 +128,6 @@ export default function AccountMenu() {
             variant="subtitle1"
             noWrap
             fontWeight="bold"
-            fontFamily="'Andika', san-serif"
             sx={{
               textTransform: "uppercase",
               color:
@@ -171,7 +170,6 @@ export default function AccountMenu() {
             variant="subtitle1"
             noWrap
             fontWeight="bold"
-            fontFamily="'Andika', san-serif"
             sx={{
               textTransform: "uppercase",
               color:

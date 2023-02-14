@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { TableCell } from "@mui/material";
 import { Link } from "react-router-dom";
+import color from "src/theme/color";
 
 const StaffTableBody = (props) => {
   const { row, labelId } = props;
@@ -10,9 +11,9 @@ const StaffTableBody = (props) => {
       <TableCell component="th" id={labelId} scope="row">
         <Link
           to={{
-            pathname: `staff/${row.staffID}`
+            pathname: `staff/${row.staffID}`,
           }}
-          style={{ textDecoration: "none", color: "blue" }}
+          style={{ textDecoration: "none", color: color.PRIMARY }}
         >
           {row.name}
         </Link>

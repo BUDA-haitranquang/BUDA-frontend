@@ -168,7 +168,7 @@ export default function CreateOrder() {
                 boxShadow: "none",
               }}
             >
-              <Typography fontFamily="'Andika', san serif" variant="h6">
+              <Typography variant="h6">
                 {t("sell:done")}
               </Typography>
             </Button>

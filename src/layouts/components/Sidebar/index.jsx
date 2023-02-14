@@ -162,9 +162,9 @@ const Sidebar = () => {
 
     [createData("Note", "note", "")],
     [
-      createData(t("sidebar:cost.fixed"), "fixedcost", ""),
-      createData(t("sidebar:cost.fixedCostBill"), "fixedcostBill", ""),
-      createData(t("sidebar:cost.otherCost"), "othercost", ""),
+      createData(t("sidebar:cost.fixed"), "fixed-cost", ""),
+      createData(t("sidebar:cost.fixedCostBill"), "fixed-cost-bill", ""),
+      createData(t("sidebar:cost.otherCost"), "other-cost", ""),
     ],
     [
       createData("Business", "business", ""),
@@ -264,7 +264,6 @@ const Sidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     marginLeft: "-10px",
-                    fontFamily: "'Andika', san-serif",
                     variant: "body2",
                     fontWeight: CheckRoute(item[0], history) && "bold",
                   }}
@@ -312,8 +311,8 @@ const Sidebar = () => {
                       >
                         <ListItemText
                           primaryTypographyProps={{
-                            fontFamily: "'Andika', san-serif",
                             variant: "body2",
+                            marginLeft: "25%",
                           }}
                           primary={component.name}
                           sx={{ color: "white", opacity: 0.7 }}

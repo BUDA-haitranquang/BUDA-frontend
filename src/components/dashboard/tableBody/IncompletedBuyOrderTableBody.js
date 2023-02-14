@@ -23,7 +23,7 @@ const IncompletedBuyOrderTableBody = (props) => {
           to={{ pathname: `/business/buy/${row.buyOrderID}` }}
           style={{ textDecoration: "none", color: color.PRIMARY }}
         >
-          <Typography fontFamily="'Andika', san serif">{row.textID}</Typography>
+          <Typography>{row.textID}</Typography>
         </Link>
       </TableCell>
       <TableCell align="left">{row.supplierName}</TableCell>

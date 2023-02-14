@@ -119,7 +119,6 @@ export default function OrderProducts() {
                   <Typography
                     noWrap
                     fontWeight="bold"
-                    fontFamily="'Andika', san-serif"
                   >
                     {headCell.label}
                   </Typography>

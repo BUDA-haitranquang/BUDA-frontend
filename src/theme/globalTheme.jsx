@@ -16,13 +16,7 @@ const Theme = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        sx={{
-          fontFamily: "'Andika', san-serif",
-        }}
-      >
-        {children}
-      </Box>
+      <Box>{children}</Box>
     </ThemeProvider>
   );
 };

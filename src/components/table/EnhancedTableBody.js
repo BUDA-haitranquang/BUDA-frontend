@@ -1,18 +1,9 @@
-// REDUNDANT FILE, JUST KEEP FOR BACKUP LATER
-import React from "react";
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import { getComparator, stableSort } from "../../utils/tableUtils";
 import { Link } from "react-router-dom";
+import color from "src/theme/color";
 
-const EnhancedTableBody = ({
-                             order,
-                             orderBy,
-                             selected,
-                             page,
-                             rowPerPage,
-                             setSelected,
-                             data
-                           }) => {
+const EnhancedTableBody = ({ order, orderBy, selected, setSelected, data }) => {
   const handleClick = (e, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -59,13 +50,15 @@ const EnhancedTableBody = ({
             <TableCell component="th" id={labelId} scope="row" padding="none">
               <Link
                 to={{ pathname: `product/${row.id}` }}
-                style={{ textDecoration: "none", color: "blue" }}
+                style={{ textDecoration: "none", color: color.PRIMARY }}
               >
                 {row.name}
               </Link>
             </TableCell>
 
-            <TableCell align="right" sx={{ padding: 0 }}>{row.price}</TableCell>
+            <TableCell align="right" sx={{ padding: 0 }}>
+              {row.price}
+            </TableCell>
             <TableCell align="right">{row.amount}</TableCell>
             <TableCell align="right">{row.cost}</TableCell>
             <TableCell align="left">{row.group}</TableCell>

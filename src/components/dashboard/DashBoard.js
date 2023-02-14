@@ -24,10 +24,8 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   customStyleOnTab: {
-    fontFamily: "'Andika', san serif",
   },
   activeTab: {
-    fontFamily: "'Andika', san serif",
     fontWeight: "bold",
   },
 });

@@ -1,13 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 
-const PlanCard = ({
-  description,
-  name,
-  price,
-  duration,
-  planType,
-}) => {
+const PlanCard = ({ description, name, price, duration, planType }) => {
   const basicColorSet = {
     title: "rgba(0, 111, 173, 1)",
     duration: "rgba(3, 125, 193, 1)",
@@ -94,7 +88,6 @@ const PlanCard = ({
             sx={{
               fontWeight: "bold",
               color: pickColorSet(planType).price,
-              fontFamily: "'Andika', san-serif",
             }}
           >
             {price}
@@ -104,7 +97,6 @@ const PlanCard = ({
             sx={{
               fontWeight: "bold",
               color: pickColorSet(planType).price,
-              fontFamily: "'Andika', san-serif",
             }}
           >
             VND
@@ -139,7 +131,6 @@ const PlanCard = ({
                 sx={{
                   fontStyle: "italic",
                   color: pickColorSet(planType).description,
-                  fontFamily: "'Andika', san-serif",
                 }}
                 key={index}
               >
