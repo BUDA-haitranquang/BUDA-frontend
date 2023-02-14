@@ -102,7 +102,8 @@ function App() {
   const link = from([
     errorLink,
     new HttpLink({
-      uri: "http://103.173.228.124:4000/",
+      uri: "https://www.dastoma.me/",
+      // uri: "http://103.173.228.124:4000/",
       // uri: "http://159.89.203.89:4000/",
     }),
   ]);

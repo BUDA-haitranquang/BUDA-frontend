@@ -9,8 +9,8 @@
     "createdAt": "Ngày bắt đầu",
     "finishedAt": "Ngày kết thúc"
   },
-  "discountByPercentage": "Discount by percentage",
-  "discountByCash": "Discount by cash",
+  "discountByPercentage": "Giảm giá theo phần trăm",
+  "discountByCash": "Giảm giá theo tiền mặt",
   "detail": {
     "title": "Chi tiết mã giảm giá",
     "boxPrimaryInfo": {

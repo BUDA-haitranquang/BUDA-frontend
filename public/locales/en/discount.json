@@ -9,8 +9,8 @@
     "createdAt": "Created at",
     "finishedAt": "Finished at"
   },
-  "discountByPercentage": "Giảm giá theo phần trăm",
-  "discountByCash": "Giảm giá theo tiền mặt",
+  "discountByPercentage": "Discount by percentage",
+  "discountByCash": "Discount by cash",
   "detail": {
     "title": "Discount detail",
     "boxPrimaryInfo": {
