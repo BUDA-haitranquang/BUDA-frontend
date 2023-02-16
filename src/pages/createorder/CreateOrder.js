@@ -161,9 +161,9 @@ export default function CreateOrder() {
                 alignSelf: "center",
                 marginTop: "24px",
                 flexGrow: 1,
-                backgroundColor: color.PRIMARY_LIGHT,
+                backgroundColor: color.PRIMARY_MEDIUM,
                 "&:hover": {
-                  backgroundColor: color.PRIMARY_LIGHT,
+                  backgroundColor: color.PRIMARY,
                 },
                 boxShadow: "none",
               }}

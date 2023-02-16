@@ -200,7 +200,9 @@ const SellOrderList = (props) => {
         justifyContent="center"
       >
         <BudaPaginableTable
-          data={sellOrders.data}
+          data={sellOrders.data.reverse()}
+          orderType={"desc"}
+          orderByType={"creationTime"}
           headCells={headCells}
           onSearch={handleSearch}
           //@ts-ignore

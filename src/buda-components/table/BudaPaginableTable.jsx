@@ -33,11 +33,13 @@ const BudaPaginableTable = (props) => {
     padding,
     size,
     isNotShowCheckBox = false,
+    orderType = "asc",
+    orderByType = "id",
     ...remainProps
   } = props;
 
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("id");
+  const [order, setOrder] = useState(orderType);
+  const [orderBy, setOrderBy] = useState(orderByType);
   const [selected, setSelected] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState(null);
