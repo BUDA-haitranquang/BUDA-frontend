@@ -44,6 +44,7 @@ export default function OrderProductItem({ row, serial }) {
           inputProps={{
             style: { textAlign: "right" },
           }}
+          type={"number"}
           value={sellingPrice}
           onChange={(e) => handlePriceChange(e)}
           name="selling-price"
@@ -54,6 +55,7 @@ export default function OrderProductItem({ row, serial }) {
           inputProps={{
             style: { textAlign: "right" },
           }}
+          type={"number"}
           value={quantity}
           onChange={(e) => handleQuantityChange(e)}
           name="quantity"
