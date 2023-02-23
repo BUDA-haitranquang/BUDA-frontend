@@ -8,11 +8,11 @@ export default function CustomerPayment() {
   const { totalPrice, discount } = useSelector((state) => state.productCart);
   const { t } = useTranslation(["sell"]);
   const [customerGiveAmount, setCustomerGiveAmount] = useState(
-    totalPrice - discount.cash
+    totalPrice - (discount?.cash || 0)
   );
 
   useEffect(() => {
-    setCustomerGiveAmount(totalPrice - discount.cash);
+    setCustomerGiveAmount(totalPrice - (discount?.cash || 0));
   }, [totalPrice, discount]);
 
   const handleCustomerGiveChange = (e) => {
@@ -36,7 +36,7 @@ export default function CustomerPayment() {
       <UneditableMoneyBox
         xs={4}
         title={t("sell:change")}
-        value={customerGiveAmount - (totalPrice - discount.cash)}
+        value={customerGiveAmount - (totalPrice - (discount?.cash || 0))}
       />
     </Grid>
   );
