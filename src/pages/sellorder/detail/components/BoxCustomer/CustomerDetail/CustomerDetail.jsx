@@ -22,7 +22,12 @@ function CustomerDetail(props) {
   
           <Box className="CustomerDetail-info">
             <Typography className="CustomerDetail-info-field">Total Spend</Typography>
-            <Typography>{customer.totalSpend || ""}</Typography>
+            <Typography>{customer?.totalSpend.toLocaleString() || ""}</Typography>
+          </Box>
+
+          <Box className="CustomerDetail-info">
+            <Typography className="CustomerDetail-info-field">Gender</Typography>
+            <Typography>{customer?.gender.toLocaleString() || ""}</Typography>
           </Box>
         </Grid>
       </Grid>

@@ -28,6 +28,7 @@ export const LOAD_SELL_ORDER = gql`
           name
           address
           phoneNumber
+          gender
         }
         discount {
           percentage
@@ -61,6 +62,7 @@ export const LOAD_SELL_ORDER_DETAILS = gql`
         address
         phoneNumber
         totalSpend
+        gender
       }
       discount {
         percentage
