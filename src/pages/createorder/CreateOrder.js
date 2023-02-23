@@ -3,7 +3,7 @@ import { Button, Grid, Typography, Box } from "@mui/material";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
-import { AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
+import { AlertErrorProp, AlertSuccessProp } from "../../buda-components/alert/BudaNoti";
 import { LOAD_PRODUCTS } from "../../graphQl/products/productQueries";
 import { NEW_SELL_ORDER_MUTATION } from "../../graphQl/sellOrder/newSellOrderMutation";
 import { clearProductCart } from "../../redux/productCartSlice";
@@ -77,8 +77,8 @@ export default function CreateOrder() {
       // window.location.reload();
     } catch (e) {
       if (e.graphQLErrors[0].extensions.response.body)
-        alert(e.graphQLErrors[0].extensions.response.body);
-      else alert(e.message);
+        enqueueSnackbar(e.graphQLErrors[0].extensions.response.body, AlertErrorProp)
+      else enqueueSnackbar(e.message, AlertErrorProp)
       // setTimeout(1000);
     } finally {
       // window.location.reload();

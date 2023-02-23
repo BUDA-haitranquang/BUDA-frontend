@@ -12,7 +12,7 @@ const ProductBarcodeListPrintForm = React.forwardRef(({ listProduct }, ref) => {
           height={50}
           fontSize={14}
           value={"PROD" + product.sku} // add store identity ?
-          text={"PRODUCT: " + product.sku}
+          text={product.sku + " - " + product.sellingPrice.toLocaleString()}
         />
       ))}
     </Box>
