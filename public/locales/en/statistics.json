@@ -13,7 +13,7 @@
         "topRevenue": "Top Revenue",
         "topProfit": "Top Profit",
         "mostReturned": "Most Returned",
-        "leastReturned": "Least Returned",
+        "leastRevenue": "Least Revenue",
         "leastProfit": "Least Profit"
     }
 }

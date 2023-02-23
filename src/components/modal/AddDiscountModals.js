@@ -60,7 +60,8 @@ const AddDiscountModal = ({ isOpen, handleClose }) => {
         name: name,
         cashLimit: parseFloat(cashLimit),
         orderCount: parseInt(orderCount),
-        expiryTime: dateToString(expiryTime),
+        // expiryTime: dateToString(expiryTime),
+        expiryTime: "2023-12-31T00:00:00Z",
         createdTime: dateToString(createdTime),
         discountType:
           type === "0" ? DiscountType.PERCENTAGE_ONLY : DiscountType.CASH_ONLY,
@@ -99,153 +100,139 @@ const AddDiscountModal = ({ isOpen, handleClose }) => {
   };
   return (
     <BudaModal
-      title="Add discount"
-      open={isOpen}
-      onClose={handleClose}
-      textOk="Save"
-      onOk={handleSubmit}
-      isLoading={isLoading}
-      children={
-        <Box
-          component="form"
-          autoComplete="off"
-          sx={{
-            width: "480px",
-            "& > :not(style)": { m: 1 },
+  title="Add discount"
+  open={isOpen}
+  onClose={handleClose}
+  textOk="Save"
+  onOk={handleSubmit}
+  isLoading={isLoading}
+  children={
+    <Box
+      component="form"
+      autoComplete="off"
+      sx={{
+        width: "480px",
+        "& > :not(style)": { m: 1 }
+      }}
+    >
+      <TextField
+        required
+        fullWidth
+        id="outlined-basic"
+        label="Name"
+        variant="outlined"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <RadioGroup
+        aria-labelledby="demo-controlled-radio-buttons-group"
+        name="controlled-radio-buttons-group"
+        value={type}
+        onChange={(e) => {
+          setType(e.target.value);
+          type === 0 ? setCash(0) : setPercentage(0);
+        }}
+        row
+      >
+        <FormControlLabel
+          value={0}
+          control={<Radio />}
+          label="Discount by percentage"
+        />
+        <FormControlLabel
+          value={1}
+          control={<Radio />}
+          label="Discount by cash"
+        />
+      </RadioGroup>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          paddingBottom: "10px"
+        }}
+      >
+        <TextField
+          required
+          disabled={type === "1"}
+          type="number"
+          id="outlined-basic"
+          label="Percentage"
+          variant="outlined"
+          value={percentage}
+          onChange={(e) => {
+            setPercentage(e.target.value);
           }}
-        >
-          <TextField
-            required
-            fullWidth
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {/* <Radio
-            checked={type === 0}
-            onChange={()=>{setType(0)}}
-            name="radio-buttons"
-            label='Discount by Percentage'
-            inputProps={{ "aria-label": "A" }}
-          />
-          <Radio
-            checked={type === 1}
-            onChange={()=>{setType(1)}}
-            name="radio-buttons"
-            label='Discount by cash'
-            inputProps={{ "aria-label": "B" }}
-          /> */}
-          <RadioGroup
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="controlled-radio-buttons-group"
-            value={type}
-            onChange={(e) => {
-              setType(e.target.value);
-              type === 0 ? setCash(0) : setPercentage(0);
-            }}
-            row
-          >
-            <FormControlLabel
-              value={0}
-              control={<Radio />}
-              label="Discount by percentage"
-            />
-            <FormControlLabel
-              value={1}
-              control={<Radio />}
-              label="Discount by cash"
-            />
-          </RadioGroup>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              paddingBottom: "10px",
-            }}
-          >
-            <TextField
-              required
-              disabled={type === "1"}
-              type="number"
-              id="outlined-basic"
-              label="Percentage"
-              variant="outlined"
-              value={percentage}
-              onChange={(e) => {
-                setPercentage(e.target.value);
-              }}
-              style={{ width: "48%" }}
-            />
-            <TextField
-              required
-              disabled={type === "0"}
-              type="number"
-              id="outlined-basic"
-              label="Cash"
-              variant="outlined"
-              value={cash}
-              onChange={(e) => setCash(e.target.value)}
-              style={{ width: "48%" }}
-            />
-          </div>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              paddingBottom: "10px",
-            }}
-          >
-            <TextField
-              required
-              type="number"
-              id="outlined-basic"
-              label="Cash limit"
-              variant="outlined"
-              value={cashLimit}
-              onChange={(e) => setCashLimit(e.target.value)}
-              style={{ width: "48%" }}
-            />
-            <TextField
-              required
-              type="number"
-              id="outlined-basic"
-              label="Order count"
-              variant="outlined"
-              value={orderCount}
-              onChange={(e) => setOrderCount(e.target.value)}
-              style={{ width: "48%" }}
-            />
-          </div>
+          style={{ width: "48%" }}
+        />
+        <TextField
+          required
+          disabled={type === "0"}
+          type="number"
+          id="outlined-basic"
+          label="Cash"
+          variant="outlined"
+          value={cash}
+          onChange={(e) => setCash(e.target.value)}
+          style={{ width: "48%" }}
+        />
+      </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          paddingBottom: "10px"
+        }}
+      >
+        <TextField
+          required
+          type="number"
+          id="outlined-basic"
+          label="Cash limit"
+          variant="outlined"
+          value={cashLimit}
+          onChange={(e) => setCashLimit(e.target.value)}
+          style={{ width: "48%" }}
+        />
+        <TextField
+          required
+          type="number"
+          id="outlined-basic"
+          label="Order count"
+          variant="outlined"
+          value={orderCount}
+          onChange={(e) => setOrderCount(e.target.value)}
+          style={{ width: "48%" }}
+        />
+      </div>
 
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "16px",
-            }}
-          >
-            <BudaDatePicker
-              onlyDate={true}
-              label="Created date"
-              setValue={(val) => {
-                setCreatedTime(val);
-              }}
-            />
-            <Box px={1}></Box>
-            <BudaDatePicker
-              onlyDate={true}
-              label="Expiry date"
-              setValue={(val) => {
-                setExpiryTime(val);
-              }}
-            />
-          </div>
-          {/* <TextField
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "16px"
+        }}
+      >
+        <BudaDatePicker
+          onlyDate={true}
+          label="Created date"
+          setValue={(val) => {
+            setCreatedTime(val);
+          }}
+        />
+        <Box px={1}></Box>
+        <BudaDatePicker
+          onlyDate={true}
+          label="Expiry date"
+          setValue={(val) => {
+            setExpiryTime(val);
+          }}
+        />
+      </div>
+      {/* <TextField
             fullWidth
             id="outlined-basic"
             label="Group"
@@ -253,19 +240,19 @@ const AddDiscountModal = ({ isOpen, handleClose }) => {
             value={group}
             onChange={(e) => setGroup(e.target.value)}
           /> */}
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Description"
-            variant="outlined"
-            multiline
-            rows={3}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Box>
-      }
-    ></BudaModal>
+      <TextField
+        fullWidth
+        id="outlined-basic"
+        label="Description"
+        variant="outlined"
+        multiline
+        rows={3}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+    </Box>
+  }
+  />
   );
 };
 

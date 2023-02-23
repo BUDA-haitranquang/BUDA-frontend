@@ -94,7 +94,7 @@ const Retention = () => {
       </Grid>
       <Grid item xs={8} md={4}>
         <StatisticsCard
-          title={t("statistics:product.leastReturned")}
+          title={t("statistics:product.leastRevenue")}
           data={productsLeastRevenue?.productsLeastRevenue?.map(
             ({ name, revenue }) => ({
               name,

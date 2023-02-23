@@ -10,24 +10,25 @@ import { useEffect, useState } from "react";
 
 const useStyles = makeStyles({
   timeInput: {
-    width: "100%",
+    width: "100%"
   },
   dateTimeContainer: {
     width: "100%",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   timePickerStyle: {
-    "&.MuiOutlinedInput-root": { paddingRight: "0" },
-  },
+    "&.MuiOutlinedInput-root": { paddingRight: "0" }
+  }
 });
 
 const BudaDatePicker = ({
-  onlyDate,
-  label,
-  initialDate = new Date(0, 0, 0, 0, 0, 0),
-  setValue = () => {},
-}) => {
+                          onlyDate,
+                          label,
+                          initialDate = new Date(0, 0, 0, 0, 0, 0),
+                          setValue = () => {
+                          }
+                        }) => {
   const classes = useStyles();
   const [timeValue, setTimeValue] = useState(initialDate);
 
@@ -37,31 +38,29 @@ const BudaDatePicker = ({
   }, [timeValue]);
 
   return (
-    <>
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        <Box className={classes.dateTimeContainer}>
-          <Box width={onlyDate ? "100%" : "80px"}>
-            <CustomizeDatePicker
-              setTimeValue={(val) => setTimeValue(val)}
-              timeValue={timeValue}
-              label={label}
-            />
-          </Box>
-          {!onlyDate && (
-            <>
-              <Box px={1}></Box>
-
-              <Box width="120px">
-                <CustomizeTimePicker
-                  setTimeValue={(val) => setTimeValue(val)}
-                  timeValue={timeValue}
-                />
-              </Box>
-            </>
-          )}
+    <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
+      <Box className={classes.dateTimeContainer}>
+        <Box width={onlyDate ? "100%" : "80px"}>
+          <CustomizeDatePicker
+            setTimeValue={(val) => setTimeValue(val)}
+            timeValue={timeValue}
+            label={label}
+          />
         </Box>
+        {!onlyDate && (
+          <>
+            <Box px={1}></Box>
+
+            <Box width="120px">
+              <CustomizeTimePicker
+                setTimeValue={(val) => setTimeValue(val)}
+                timeValue={timeValue}
+              />
+            </Box>
+          </>
+        )}
       </Box>
-    </>
+    </Box>
   );
 };
 
@@ -71,8 +70,8 @@ const initializeDate = (timeValue) => {
   const INITIALDATE = new Date(0, 0, 0, 0, 0, 0);
   if (!(timeValue instanceof Date) || isNaN(timeValue)) return null;
   return timeValue.getFullYear() !== INITIALDATE.getFullYear() ||
-    timeValue.getMonth() !== INITIALDATE.getMonth() ||
-    timeValue.getDate() !== INITIALDATE.getDate()
+  timeValue.getMonth() !== INITIALDATE.getMonth() ||
+  timeValue.getDate() !== INITIALDATE.getDate()
     ? timeValue
     : null;
 };
@@ -108,7 +107,7 @@ const CustomizeDatePicker = ({ setTimeValue, timeValue, label }) => {
               InputLabelProps={{
                 ...params.InputProps,
                 shrink: true,
-                placeholder: "dd/mm/yyyy",
+                placeholder: "dd/mm/yyyy"
               }}
               className={classes.timeInput}
             />
@@ -178,7 +177,7 @@ const CustomizeTimePicker = ({ setTimeValue, timeValue }) => {
       label="Time"
       type="time"
       InputLabelProps={{
-        shrink: true,
+        shrink: true
       }}
       value={time}
       onChange={(e) => setTime(e.target.value)}

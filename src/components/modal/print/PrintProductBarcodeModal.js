@@ -26,7 +26,7 @@ const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
           sx={{
             width: "300px",
             height: "90px",
-            "& > :not(style)": { m: 1 },
+            "& > :not(style)": { m: 1 }
           }}
         >
           <TextField
@@ -61,7 +61,7 @@ const PrintProductBarcodeModal = ({ isOpen, handleClose, sku }) => {
           </Box>
         </Box>
       }
-    ></BudaModal>
+    />
   );
 };
 export default PrintProductBarcodeModal;

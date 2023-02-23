@@ -52,7 +52,7 @@ function SellOrderDetail(propTypes) {
           <Typography variant="h4" paddingBottom={2}>
             {sellOrder?.textID}
           </Typography>
-          <Button onClick={() => setOpenPrintModal(true)}>bam de in</Button>
+          {/*<Button onClick={() => setOpenPrintModal(true)}>bam de in</Button>*/}
           <PrintSellOrderModal
             open={openPrintModal}
             handleClose={handleClosePrintModal}
