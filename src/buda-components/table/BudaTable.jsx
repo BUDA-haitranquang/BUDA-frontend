@@ -30,7 +30,7 @@ const BudaTable = (props) => {
     toolbar = true,
     minWidth = 1000,
     maxRow = [20, 50, 100], //array
-    tableName = "",
+    tableName = "Data",
     canSearch = true,
     ...remainProps
   } = props;

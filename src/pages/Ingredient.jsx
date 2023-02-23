@@ -93,6 +93,7 @@ const Ingredient = () => {
         justifyContent="center"
       >
         <BudaTable
+          tableName={t("ingredient:Ingredient")}
           deleteItems={handleDelete}
           data={ingredients}
           headCells={headCells}

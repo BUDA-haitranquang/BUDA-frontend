@@ -121,6 +121,7 @@ const Product = () => {
         justifyContent="center"
       >
         <BudaTable
+          tableName={t("product:product")}
           deleteItems={handleDelete}
           printable={true}
           printItems={handlePrint}
