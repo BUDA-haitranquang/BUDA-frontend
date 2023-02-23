@@ -13,3 +13,9 @@
 - Ngoài comment, chỉ được phép sử dụng tiếng Anh
 - Nếu có bug level thấp chưa tìm được cách giải quyết / tính năng có thể làm sau => Tạo comment //TODO: 
 - Đặt tên biến có ý nghĩa cho người khác hiểu
+
+**Khởi chạy app:**
+- Cần NodeJS (16+)
+- Chạy 2 lệnh dưới đây để chạy trên local:
+``npm install &&
+npm start``
