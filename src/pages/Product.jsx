@@ -47,7 +47,7 @@ const Product = () => {
   useEffect(() => {
     async function fetchData() {
       if (data) {
-        setProducts(data.productsByUser.map((item) => item));
+        setProducts(data.productsByUser.map((item) => item).reverse());
       }
     }
 
