@@ -20,6 +20,7 @@ LiveSearch.propTypes = {
   inputProps: PropTypes.object,
   height: PropTypes.number,
   maxHeight: PropTypes.number,
+  width: PropTypes.number,
 };
 
 function LiveSearch(props) {
@@ -35,6 +36,7 @@ function LiveSearch(props) {
     height,
     maxHeight,
     style,
+    width = 240,
   } = props;
 
   const classes = useStyles();
@@ -73,7 +75,7 @@ function LiveSearch(props) {
     <div
       className={classes.root}
       ref={refInput}
-      style={{ width: 230, ...style}}
+      style={{ width: width, ...style}}
     >
       <SearchBox
         query={query}

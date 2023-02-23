@@ -10,7 +10,6 @@ CustomerDetail.propTypes = {
 function CustomerDetail(props) {
     const { customer } = props;
     const classes = useStyles()
-    // { console.log(customer)};
   
     return customer ? (
       <Grid container spacing={2} style={{width: 300}}>
@@ -27,7 +26,7 @@ function CustomerDetail(props) {
 
           <Box className="CustomerDetail-info">
             <Typography className="CustomerDetail-info-field">Gender</Typography>
-            <Typography>{customer?.gender.toLocaleString() || ""}</Typography>
+            <Typography>{customer?.gender || ""}</Typography>
           </Box>
         </Grid>
       </Grid>

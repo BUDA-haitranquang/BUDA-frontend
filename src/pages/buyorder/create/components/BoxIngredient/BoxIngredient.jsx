@@ -155,6 +155,7 @@ function BoxIngredient(props) {
             onChooseItem={onChooseIngredient}
             fetchData={filterIngredient}
             handleRender={renderRowIngredient}
+            width={650}
           />
         </Box>
 

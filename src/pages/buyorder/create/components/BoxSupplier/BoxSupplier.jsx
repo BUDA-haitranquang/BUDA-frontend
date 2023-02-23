@@ -81,6 +81,7 @@ function BoxSupplier(props) {
               onChooseItem={onChooseSupplier}
               fetchData={filterSupplier}
               handleRender={renderRowSupplier}
+              width={650}
             />
           ) : (
             <Box className="BoxSupplier-header-chosen-supplier">

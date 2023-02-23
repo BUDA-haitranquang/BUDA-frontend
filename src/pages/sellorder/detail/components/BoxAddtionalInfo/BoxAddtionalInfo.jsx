@@ -36,14 +36,14 @@ function BoxAdditionalInfo(props) {
 
         <Grid className="BoxAdditionalInfo-info" item xs={12}>
           <Typography className="BoxAdditionalInfo-info-field">
-            Creation time
+            Created at
           </Typography>
           <Typography>{creationTime ? creationTime : "--/--/----"}</Typography>
         </Grid>
 
         <Grid className="BoxAdditionalInfo-info" item xs={12}>
           <Typography className="BoxAdditionalInfo-info-field">
-            Finish time
+            Finished at
           </Typography>
           <Typography>{finishTime ? finishTime : "--/--/----"}</Typography>
         </Grid>
