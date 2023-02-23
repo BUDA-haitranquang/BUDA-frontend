@@ -17,5 +17,5 @@
 **Khởi chạy app:**
 - Cần NodeJS (16+)
 - Chạy 2 lệnh dưới đây để chạy trên local:
-``npm install
+``npm install &&
 npm start``
